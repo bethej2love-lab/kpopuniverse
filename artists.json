@@ -1,0 +1,6581 @@
+[
+  {
+    "name": {
+      "ko": "카리나",
+      "en": "Karina"
+    },
+    "group": {
+      "ko": "에스파",
+      "en": "aespa"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 6988,
+    "y": 5330,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      188,
+      218
+    ],
+    "bday": "2000.04.11",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "도깨비불",
+        "u": "https://www.youtube.com/watch?v=tZixREYOIZQ"
+      },
+      {
+        "t": "Drama",
+        "u": "https://www.youtube.com/watch?v=tbg3QAu-GnI"
+      },
+      {
+        "t": "UP",
+        "u": "https://www.youtube.com/watch?v=5EYYp59TMzE"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "지젤",
+      "en": "Giselle"
+    },
+    "group": {
+      "ko": "에스파",
+      "en": "aespa"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7228,
+    "y": 5290,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      188,
+      218
+    ],
+    "bday": "2000.10.30",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Girls",
+        "u": "https://www.youtube.com/watch?v=kY-LVTbLYDI"
+      },
+      {
+        "t": "Whiplash",
+        "u": "https://www.youtube.com/watch?v=RFz5XIEXxag"
+      },
+      {
+        "t": "Black Mamba",
+        "u": "https://www.youtube.com/watch?v=M9wR7cwwgvQ"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "윈터",
+      "en": "Winter"
+    },
+    "group": {
+      "ko": "에스파",
+      "en": "aespa"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7308,
+    "y": 5450,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      188,
+      218
+    ],
+    "bday": "2001.01.01",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Step Back",
+        "u": "https://www.youtube.com/watch?v=UAQT5Hgrm1Q"
+      },
+      {
+        "t": "Savage",
+        "u": "https://www.youtube.com/watch?v=S7f_LlxdgI0"
+      },
+      {
+        "t": "Black Mamba",
+        "u": "https://www.youtube.com/watch?v=MVtNkTF4Gvs"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "닝닝",
+      "en": "Ningning"
+    },
+    "group": {
+      "ko": "에스파",
+      "en": "aespa"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7068,
+    "y": 5550,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      188,
+      218
+    ],
+    "bday": "2002.10.23",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Drama",
+        "u": "https://www.youtube.com/watch?v=Dvt7ZPL15xU"
+      },
+      {
+        "t": "Black Mamba",
+        "u": "https://www.youtube.com/watch?v=UMMtPB3PdYI"
+      },
+      {
+        "t": "Thirsty",
+        "u": "https://www.youtube.com/watch?v=RQwT1-NiO6Q"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "지우",
+      "en": "Jiwoo"
+    },
+    "group": {
+      "ko": "하츠투하츠",
+      "en": "Hearts2Hearts"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 6980,
+    "y": 4940,
+    "sat": 0.8,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      162,
+      205
+    ],
+    "bday": "2006.09.07",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "카르멘",
+      "en": "Carmen"
+    },
+    "group": {
+      "ko": "하츠투하츠",
+      "en": "Hearts2Hearts"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7180,
+    "y": 4910,
+    "sat": 0.8,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      162,
+      205
+    ],
+    "bday": "2006.03.28",
+    "nat": {
+      "ko": "인도네시아",
+      "en": "ID"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "유하",
+      "en": "Yuha"
+    },
+    "group": {
+      "ko": "하츠투하츠",
+      "en": "Hearts2Hearts"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7380,
+    "y": 4936,
+    "sat": 0.8,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      162,
+      205
+    ],
+    "bday": "2007.04.12",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "스텔라",
+      "en": "Stella"
+    },
+    "group": {
+      "ko": "하츠투하츠",
+      "en": "Hearts2Hearts"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7580,
+    "y": 4910,
+    "sat": 0.8,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      162,
+      205
+    ],
+    "bday": "2007.06.18",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "주은",
+      "en": "Juun"
+    },
+    "group": {
+      "ko": "하츠투하츠",
+      "en": "Hearts2Hearts"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7060,
+    "y": 5110,
+    "sat": 0.8,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      162,
+      205
+    ],
+    "bday": "2008.12.03",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "에이나",
+      "en": "A-na"
+    },
+    "group": {
+      "ko": "하츠투하츠",
+      "en": "Hearts2Hearts"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7260,
+    "y": 5080,
+    "sat": 0.8,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      162,
+      205
+    ],
+    "bday": "2008.12.20",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "이안",
+      "en": "Ian"
+    },
+    "group": {
+      "ko": "하츠투하츠",
+      "en": "Hearts2Hearts"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7460,
+    "y": 5100,
+    "sat": 0.8,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      162,
+      205
+    ],
+    "bday": "2009.10.09",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "예온",
+      "en": "Ye-on"
+    },
+    "group": {
+      "ko": "하츠투하츠",
+      "en": "Hearts2Hearts"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7680,
+    "y": 5080,
+    "sat": 0.8,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      162,
+      205
+    ],
+    "bday": "2010.04.19",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "시온",
+      "en": "Sion"
+    },
+    "group": {
+      "ko": "NCT WISH",
+      "en": "NCT WISH"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8752,
+    "y": 6246,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      158,
+      148
+    ],
+    "bday": "2002.05.11",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Steady",
+        "u": "https://www.youtube.com/watch?v=opnfgNPg1xI"
+      },
+      {
+        "t": "WISH (Korean Ver.)",
+        "u": "https://www.youtube.com/watch?v=hIqnEd16v04"
+      },
+      {
+        "t": "SODA POP",
+        "u": "https://www.youtube.com/watch?v=qk3qxZ9IcmQ"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "리쿠",
+      "en": "Riku"
+    },
+    "group": {
+      "ko": "NCT WISH",
+      "en": "NCT WISH"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8932,
+    "y": 6206,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      158,
+      148
+    ],
+    "bday": "2003.06.28",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "NASA",
+        "u": "https://www.youtube.com/watch?v=TUqZLkjgyVA"
+      },
+      {
+        "t": "으쌰! 으쌰!",
+        "u": "https://www.youtube.com/watch?v=ooq0MXgSjmU"
+      },
+      {
+        "t": "내 얘길 들어봐",
+        "u": "https://www.youtube.com/watch?v=WF4611kq1GQ"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "유우시",
+      "en": "Yuushi"
+    },
+    "group": {
+      "ko": "NCT WISH",
+      "en": "NCT WISH"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 9112,
+    "y": 6266,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      158,
+      148
+    ],
+    "bday": "2004.04.05",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "NASA",
+        "u": "https://www.youtube.com/watch?v=Qe8Kp5qY9Vk"
+      },
+      {
+        "t": "Medley",
+        "u": "https://www.youtube.com/watch?v=UVf7PVf9kuY"
+      },
+      {
+        "t": "Steady",
+        "u": "https://www.youtube.com/watch?v=n3FM40NaPAg"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "재희",
+      "en": "Jaehee"
+    },
+    "group": {
+      "ko": "NCT WISH",
+      "en": "NCT WISH"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8812,
+    "y": 6446,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      158,
+      148
+    ],
+    "bday": "2005.06.21",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "료",
+      "en": "Ryo"
+    },
+    "group": {
+      "ko": "NCT WISH",
+      "en": "NCT WISH"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 9012,
+    "y": 6446,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      158,
+      148
+    ],
+    "bday": "2007.08.04",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "사쿠야",
+      "en": "Sakuya"
+    },
+    "group": {
+      "ko": "NCT WISH",
+      "en": "NCT WISH"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 9152,
+    "y": 6366,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      158,
+      148
+    ],
+    "bday": "2007.11.18",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "쟈니",
+      "en": "Johnny"
+    },
+    "group": {
+      "ko": "NCT 127",
+      "en": "NCT 127"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8130,
+    "y": 5510,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      215,
+      135,
+      135
+    ],
+    "bday": "1995.02.09",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "태용",
+      "en": "Taeyong"
+    },
+    "group": {
+      "ko": "NCT 127",
+      "en": "NCT 127"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8310,
+    "y": 5470,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      215,
+      135,
+      135
+    ],
+    "bday": "1995.07.01",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "질주",
+        "u": "https://www.youtube.com/watch?v=fXd-uJUrjK4"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "유타",
+      "en": "Yuta"
+    },
+    "group": {
+      "ko": "NCT 127",
+      "en": "NCT 127"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8510,
+    "y": 5490,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      215,
+      135,
+      135
+    ],
+    "bday": "1995.10.26",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "도영",
+      "en": "Doyoung"
+    },
+    "group": {
+      "ko": "NCT 127",
+      "en": "NCT 127"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8630,
+    "y": 5550,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      215,
+      135,
+      135
+    ],
+    "bday": "1996.02.01",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "재현",
+      "en": "Jaehyun"
+    },
+    "group": {
+      "ko": "NCT 127",
+      "en": "NCT 127"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8170,
+    "y": 5710,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      215,
+      135,
+      135
+    ],
+    "bday": "1997.02.14",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "정우",
+      "en": "Jungwoo"
+    },
+    "group": {
+      "ko": "NCT 127",
+      "en": "NCT 127"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8390,
+    "y": 5670,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      215,
+      135,
+      135
+    ],
+    "bday": "1998.02.19",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "마크",
+      "en": "Mark"
+    },
+    "group": {
+      "ko": "NCT 127·NCT Dream",
+      "en": "NCT 127·NCT Dream"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8500,
+    "y": 5930,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": false,
+    "color": [
+      215,
+      135,
+      135
+    ],
+    "bday": "1999.08.02",
+    "nat": {
+      "ko": "한국·캐나다",
+      "en": "KR·CA"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "해찬",
+      "en": "Haechan"
+    },
+    "group": {
+      "ko": "NCT 127·NCT Dream",
+      "en": "NCT 127·NCT Dream"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8300,
+    "y": 5930,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      215,
+      135,
+      135
+    ],
+    "bday": "2000.06.06",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "런쥔",
+      "en": "Renjun"
+    },
+    "group": {
+      "ko": "NCT Dream",
+      "en": "NCT Dream"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8320,
+    "y": 6040,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      135,
+      215,
+      185
+    ],
+    "bday": "2000.03.23",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "제노",
+      "en": "Jeno"
+    },
+    "group": {
+      "ko": "NCT Dream",
+      "en": "NCT Dream"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8520,
+    "y": 6000,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      135,
+      215,
+      185
+    ],
+    "bday": "2000.04.23",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "재민",
+      "en": "Jaemin"
+    },
+    "group": {
+      "ko": "NCT Dream",
+      "en": "NCT Dream"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8640,
+    "y": 6060,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      135,
+      215,
+      185
+    ],
+    "bday": "2000.08.13",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "천러",
+      "en": "Chenle"
+    },
+    "group": {
+      "ko": "NCT Dream",
+      "en": "NCT Dream"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8380,
+    "y": 6260,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      135,
+      215,
+      185
+    ],
+    "bday": "2001.11.22",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "지성",
+      "en": "Jisung"
+    },
+    "group": {
+      "ko": "NCT Dream",
+      "en": "NCT Dream"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8580,
+    "y": 6260,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      135,
+      215,
+      185
+    ],
+    "bday": "2002.02.05",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "쿤",
+      "en": "Kun"
+    },
+    "group": {
+      "ko": "WayV",
+      "en": "WayV"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8524,
+    "y": 7310,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      185,
+      168,
+      222
+    ],
+    "bday": "1996.01.01",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "텐",
+      "en": "Ten"
+    },
+    "group": {
+      "ko": "WayV",
+      "en": "WayV"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8684,
+    "y": 7270,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      185,
+      168,
+      222
+    ],
+    "bday": "1996.02.27",
+    "nat": {
+      "ko": "태국",
+      "en": "TH"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "윈윈",
+      "en": "WinWin"
+    },
+    "group": {
+      "ko": "WayV",
+      "en": "WayV"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8844,
+    "y": 7350,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      185,
+      168,
+      222
+    ],
+    "bday": "1997.10.28",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "샤오쥔",
+      "en": "Xiaojun"
+    },
+    "group": {
+      "ko": "WayV",
+      "en": "WayV"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8564,
+    "y": 7510,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      185,
+      168,
+      222
+    ],
+    "bday": "1999.08.08",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "헨드리",
+      "en": "Hendery"
+    },
+    "group": {
+      "ko": "WayV",
+      "en": "WayV"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8764,
+    "y": 7510,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      185,
+      168,
+      222
+    ],
+    "bday": "1999.09.28",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "양양",
+      "en": "Yangyang"
+    },
+    "group": {
+      "ko": "WayV",
+      "en": "WayV"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 8904,
+    "y": 7430,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      185,
+      168,
+      222
+    ],
+    "bday": "2000.10.10",
+    "nat": {
+      "ko": "중국·독일",
+      "en": "CN·DE"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "방찬",
+      "en": "Bang Chan"
+    },
+    "group": {
+      "ko": "스트레이키즈",
+      "en": "Stray Kids"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 5072,
+    "y": 7274,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      192,
+      118
+    ],
+    "bday": "2000.10.03",
+    "nat": {
+      "ko": "한국·호주",
+      "en": "KR·AU"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "이노",
+      "en": "Lee Know"
+    },
+    "group": {
+      "ko": "스트레이키즈",
+      "en": "Stray Kids"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 5232,
+    "y": 7234,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      192,
+      118
+    ],
+    "bday": "2000.10.25",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "창빈",
+      "en": "Changbin"
+    },
+    "group": {
+      "ko": "스트레이키즈",
+      "en": "Stray Kids"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 5432,
+    "y": 7274,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      192,
+      118
+    ],
+    "bday": "2000.08.11",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "현진",
+      "en": "Hyunjin"
+    },
+    "group": {
+      "ko": "스트레이키즈",
+      "en": "Stray Kids"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 5532,
+    "y": 7354,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      192,
+      118
+    ],
+    "bday": "2000.03.20",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "JJAM",
+        "u": "https://www.youtube.com/watch?v=IgrDN1yOIKY"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "한",
+      "en": "Han"
+    },
+    "group": {
+      "ko": "스트레이키즈",
+      "en": "Stray Kids"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 5112,
+    "y": 7514,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      192,
+      118
+    ],
+    "bday": "2000.09.14",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "필릭스",
+      "en": "Felix"
+    },
+    "group": {
+      "ko": "스트레이키즈",
+      "en": "Stray Kids"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 5332,
+    "y": 7554,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      192,
+      118
+    ],
+    "bday": "2000.09.15",
+    "nat": {
+      "ko": "한국·호주",
+      "en": "KR·AU"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "승민",
+      "en": "Seungmin"
+    },
+    "group": {
+      "ko": "스트레이키즈",
+      "en": "Stray Kids"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 5512,
+    "y": 7474,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      192,
+      118
+    ],
+    "bday": "2000.09.22",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "아이엔",
+      "en": "I.N"
+    },
+    "group": {
+      "ko": "스트레이키즈",
+      "en": "Stray Kids"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 5252,
+    "y": 7614,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      192,
+      118
+    ],
+    "bday": "2001.02.08",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "예지",
+      "en": "Yeji"
+    },
+    "group": {
+      "ko": "있지",
+      "en": "ITZY"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4560,
+    "y": 7496,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      175,
+      145,
+      218
+    ],
+    "bday": "2000.05.26",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "River",
+        "u": "https://www.youtube.com/watch?v=tnMFp53wrRg"
+      },
+      {
+        "t": "WANNABE",
+        "u": "https://www.youtube.com/watch?v=pmTjOXIu71Q"
+      },
+      {
+        "t": "달라달라",
+        "u": "https://www.youtube.com/watch?v=fSAUQ37xbho"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "리아",
+      "en": "Lia"
+    },
+    "group": {
+      "ko": "있지",
+      "en": "ITZY"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4720,
+    "y": 7456,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      175,
+      145,
+      218
+    ],
+    "bday": "2000.07.21",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Price Tag",
+        "u": "https://www.youtube.com/watch?v=zahgAha5D9Q"
+      },
+      {
+        "t": "WANNABE",
+        "u": "https://www.youtube.com/watch?v=c3jCty-g5x0"
+      },
+      {
+        "t": "달라달라",
+        "u": "https://www.youtube.com/watch?v=5QGp7KkfZ0Y"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "류진",
+      "en": "Ryujin"
+    },
+    "group": {
+      "ko": "있지",
+      "en": "ITZY"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4880,
+    "y": 7536,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      175,
+      145,
+      218
+    ],
+    "bday": "2001.04.17",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "WANNABE",
+        "u": "https://www.youtube.com/watch?v=KPUZjvAKmKM"
+      },
+      {
+        "t": "ICY",
+        "u": "https://www.youtube.com/watch?v=syoATmUcmL4"
+      },
+      {
+        "t": "마.피.아. In the morning",
+        "u": "https://www.youtube.com/watch?v=L1f8K9sYAgk"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "채령",
+      "en": "Chaeryeong"
+    },
+    "group": {
+      "ko": "있지",
+      "en": "ITZY"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4640,
+    "y": 7696,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      175,
+      145,
+      218
+    ],
+    "bday": "2001.06.05",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "WANNABE",
+        "u": "https://www.youtube.com/watch?v=s2Y5lscQVSQ"
+      },
+      {
+        "t": "Not Shy",
+        "u": "https://www.youtube.com/watch?v=Ifm6elFyYxQ"
+      },
+      {
+        "t": "SNEAKERS",
+        "u": "https://www.youtube.com/watch?v=fGTW6zI0rC8"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "유나",
+      "en": "Yuna"
+    },
+    "group": {
+      "ko": "있지",
+      "en": "ITZY"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4840,
+    "y": 7696,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      175,
+      145,
+      218
+    ],
+    "bday": "2003.12.09",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "달라달라",
+        "u": "https://www.youtube.com/watch?v=8f2IDOUrzkI"
+      },
+      {
+        "t": "U-Go-Girl",
+        "u": "https://www.youtube.com/watch?v=XxLigZQFc14"
+      },
+      {
+        "t": "WANNABE",
+        "u": "https://www.youtube.com/watch?v=eQl-5S35WGI"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "릴리",
+      "en": "Lily"
+    },
+    "group": {
+      "ko": "엔믹스",
+      "en": "NMIXX"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4038,
+    "y": 7250,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      132,
+      185
+    ],
+    "bday": "2003.08.04",
+    "nat": {
+      "ko": "캐나다",
+      "en": "CA"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "해원",
+      "en": "Haewon"
+    },
+    "group": {
+      "ko": "엔믹스",
+      "en": "NMIXX"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4218,
+    "y": 7210,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      132,
+      185
+    ],
+    "bday": "2003.08.06",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "설윤",
+      "en": "Sullyoon"
+    },
+    "group": {
+      "ko": "엔믹스",
+      "en": "NMIXX"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4398,
+    "y": 7260,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      132,
+      185
+    ],
+    "bday": "2004.11.15",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "배이",
+      "en": "Bae"
+    },
+    "group": {
+      "ko": "엔믹스",
+      "en": "NMIXX"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4098,
+    "y": 7430,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      132,
+      185
+    ],
+    "bday": "2005.08.22",
+    "nat": {
+      "ko": "한국·호주",
+      "en": "KR·AU"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "지우",
+      "en": "Jiwoo"
+    },
+    "group": {
+      "ko": "엔믹스",
+      "en": "NMIXX"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4278,
+    "y": 7430,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      132,
+      185
+    ],
+    "bday": "2006.10.26",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "규진",
+      "en": "Kyujin"
+    },
+    "group": {
+      "ko": "엔믹스",
+      "en": "NMIXX"
+    },
+    "co": "jyp",
+    "planet": "main",
+    "x": 4418,
+    "y": 7360,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      132,
+      185
+    ],
+    "bday": "2006.11.07",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "S.COUPS",
+      "en": "S.COUPS"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6090,
+    "y": 7278,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1995.08.08",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "정한",
+      "en": "Jeonghan"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6250,
+    "y": 7238,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1995.10.04",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "조슈아",
+      "en": "Joshua"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6410,
+    "y": 7238,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1995.12.30",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "준",
+      "en": "Jun"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6570,
+    "y": 7278,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1996.06.10",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "호시",
+      "en": "Hoshi"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6730,
+    "y": 7338,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1996.06.15",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "MAESTRO",
+        "u": "https://www.youtube.com/watch?v=4r00ps3AtaU"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "원우",
+      "en": "Wonwoo"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6850,
+    "y": 7398,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1996.07.17",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "우지",
+      "en": "Woozi"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6090,
+    "y": 7478,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1996.11.22",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "도겸",
+      "en": "DK"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6250,
+    "y": 7458,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1997.02.18",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "민규",
+      "en": "Mingyu"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6410,
+    "y": 7458,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1997.04.06",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "승관",
+      "en": "Seungkwan"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6570,
+    "y": 7498,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1998.01.16",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "버논",
+      "en": "Vernon"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6730,
+    "y": 7538,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1998.02.18",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "디노",
+      "en": "Dino"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6290,
+    "y": 7618,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1999.02.11",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "신유",
+      "en": "Shinyu"
+    },
+    "group": {
+      "ko": "투어스",
+      "en": "TWS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5600,
+    "y": 7720,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      165,
+      218
+    ],
+    "bday": "2003.11.07",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "첫 만남은 계획대로 되지 않아",
+        "u": "https://www.youtube.com/watch?v=BtFPgl0tC0k"
+      },
+      {
+        "t": "Oh Mymy : 7s",
+        "u": "https://www.youtube.com/watch?v=jTQyctuLb_4"
+      },
+      {
+        "t": "Rock with you",
+        "u": "https://www.youtube.com/watch?v=kQem0PeYcvs"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "도훈",
+      "en": "Dohoon"
+    },
+    "group": {
+      "ko": "투어스",
+      "en": "TWS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5760,
+    "y": 7680,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      165,
+      218
+    ],
+    "bday": "2005.01.30",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Run Run",
+        "u": "https://www.youtube.com/watch?v=EhDIY4FjCeU"
+      },
+      {
+        "t": "첫 만남은 계획대로 되지 않아",
+        "u": "https://www.youtube.com/watch?v=KPd460eDrWs"
+      },
+      {
+        "t": "OVERDRIVE",
+        "u": "https://www.youtube.com/watch?v=XpadVtyPogs"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "영재",
+      "en": "Youngjae"
+    },
+    "group": {
+      "ko": "투어스",
+      "en": "TWS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5920,
+    "y": 7740,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      165,
+      218
+    ],
+    "bday": "2005.05.31",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "너의 모든 가능성이 되어줄게",
+        "u": "https://www.youtube.com/watch?v=U5QNHCyKvXI"
+      },
+      {
+        "t": "다시 만난 오늘",
+        "u": "https://www.youtube.com/watch?v=Y_1mhDE_fX0"
+      },
+      {
+        "t": "첫 만남은 계획대로 되지 않아",
+        "u": "https://www.youtube.com/watch?v=OYK9DHYPXDw"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "한진",
+      "en": "Hanjin"
+    },
+    "group": {
+      "ko": "투어스",
+      "en": "TWS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5620,
+    "y": 7920,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      165,
+      218
+    ],
+    "bday": "2006.01.05",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "첫 만남은 계획대로 되지 않아",
+        "u": "https://www.youtube.com/watch?v=WxDm3oin7lk"
+      },
+      {
+        "t": "Oh Mymy : 7s",
+        "u": "https://www.youtube.com/watch?v=m9J7C7yrA9w"
+      },
+      {
+        "t": "내가 S면 넌 나의 N이 되어줘",
+        "u": "https://www.youtube.com/watch?v=X-DLqSIv3YA"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "지훈",
+      "en": "Jihoon"
+    },
+    "group": {
+      "ko": "투어스",
+      "en": "TWS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5820,
+    "y": 7920,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      165,
+      218
+    ],
+    "bday": "2006.04.23",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "마음 따라 뛰는 건 멋지지 않아?",
+        "u": "https://www.youtube.com/watch?v=Ma_JErDCfBM"
+      },
+      {
+        "t": "첫 만남은 계획대로 되지 않아",
+        "u": "https://www.youtube.com/watch?v=uJnPpGXEEf4"
+      },
+      {
+        "t": "내가 S면 넌 나의 N이 되어줘",
+        "u": "https://www.youtube.com/watch?v=BzSV1_K-P7A"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "경민",
+      "en": "Kyungmin"
+    },
+    "group": {
+      "ko": "투어스",
+      "en": "TWS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5960,
+    "y": 7840,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      165,
+      218
+    ],
+    "bday": "2007.09.07",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "첫 만남은 계획대로 되지 않아",
+        "u": "https://www.youtube.com/watch?v=TJxdabTKRQc"
+      },
+      {
+        "t": "はじめまして",
+        "u": "https://www.youtube.com/watch?v=zVjxDvjt36A"
+      },
+      {
+        "t": "BFF",
+        "u": "https://www.youtube.com/watch?v=UMcSD3KHeLQ"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "민지",
+      "en": "Minji"
+    },
+    "group": {
+      "ko": "뉴진스",
+      "en": "NewJeans"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5082,
+    "y": 8294,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      120,
+      162,
+      215
+    ],
+    "bday": "2004.05.07",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Odoriko (踊り子)",
+        "u": "https://www.youtube.com/watch?v=9ninWlkEthY"
+      },
+      {
+        "t": "Attention",
+        "u": "https://www.youtube.com/watch?v=ZzU1TNHWWhM"
+      },
+      {
+        "t": "Hype Boy",
+        "u": "https://www.youtube.com/watch?v=p1cE9T0CFCQ"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "하니",
+      "en": "Hanni"
+    },
+    "group": {
+      "ko": "뉴진스",
+      "en": "NewJeans"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5282,
+    "y": 8274,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      120,
+      162,
+      215
+    ],
+    "bday": "2004.10.06",
+    "nat": {
+      "ko": "베트남",
+      "en": "VN"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "푸른 산호초 (青い珊瑚礁)",
+        "u": "https://www.youtube.com/watch?v=Rj7N4ThLGQY"
+      },
+      {
+        "t": "Hype Boy",
+        "u": "https://www.youtube.com/watch?v=lmJPeFW75qQ"
+      },
+      {
+        "t": "New Jeans",
+        "u": "https://www.youtube.com/watch?v=tQ8YtKBqaMc"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "해린",
+      "en": "Haerin"
+    },
+    "group": {
+      "ko": "뉴진스",
+      "en": "NewJeans"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5062,
+    "y": 8474,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      120,
+      162,
+      215
+    ],
+    "bday": "2006.05.15",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Hype Boy",
+        "u": "https://www.youtube.com/watch?v=zbyet4HK4ko"
+      },
+      {
+        "t": "Tell Me",
+        "u": "https://www.youtube.com/watch?v=g6gM8x9H65Q"
+      },
+      {
+        "t": "Cookie",
+        "u": "https://www.youtube.com/watch?v=GyqqpCOyBos"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "혜인",
+      "en": "Hyein"
+    },
+    "group": {
+      "ko": "뉴진스",
+      "en": "NewJeans"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5302,
+    "y": 8474,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      120,
+      162,
+      215
+    ],
+    "bday": "2008.04.21",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Hype Boy",
+        "u": "https://www.youtube.com/watch?v=lg6O00c0dGU"
+      },
+      {
+        "t": "New Jeans",
+        "u": "https://www.youtube.com/watch?v=Wz_mVys9Z4w"
+      },
+      {
+        "t": "Attention",
+        "u": "https://www.youtube.com/watch?v=gwXFWPZAxME"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "다니엘",
+      "en": "Danielle"
+    },
+    "group": {
+      "ko": "뉴진스",
+      "en": "NewJeans"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5462,
+    "y": 8374,
+    "sat": 0.7,
+    "op": 0.42,
+    "active": false,
+    "color": [
+      120,
+      162,
+      215
+    ],
+    "bday": "2005.04.11",
+    "nat": {
+      "ko": "한국·호주",
+      "en": "KR·AU"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Hype Boy",
+        "u": "https://www.youtube.com/watch?v=v5UH3wTPbzw"
+      },
+      {
+        "t": "OMG",
+        "u": "https://www.youtube.com/watch?v=NDTuPvEvVRI"
+      },
+      {
+        "t": "Ditto",
+        "u": "https://www.youtube.com/watch?v=tPKmJMEg2do"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "마틴",
+      "en": "Martin"
+    },
+    "group": {
+      "ko": "코르티스",
+      "en": "CORTIS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7134,
+    "y": 8294,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      130,
+      192,
+      148
+    ],
+    "bday": "2008.03.20",
+    "nat": {
+      "ko": "한국·캐나다",
+      "en": "KR·CA"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "GO!",
+        "u": "https://www.youtube.com/watch?v=tWOItSAfA4M"
+      },
+      {
+        "t": "REDRED",
+        "u": "https://www.youtube.com/watch?v=2LDdWZOK34c"
+      },
+      {
+        "t": "What You Want",
+        "u": "https://www.youtube.com/watch?v=2azvJj4u5D4"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "제임스",
+      "en": "James"
+    },
+    "group": {
+      "ko": "코르티스",
+      "en": "CORTIS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7394,
+    "y": 8254,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      130,
+      192,
+      148
+    ],
+    "bday": "2005.10.14",
+    "nat": {
+      "ko": "대만",
+      "en": "TW"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "FaSHioN",
+        "u": "https://www.youtube.com/watch?v=twqghto0qZs"
+      },
+      {
+        "t": "REDRED",
+        "u": "https://www.youtube.com/watch?v=xZBxf0BhMV8"
+      },
+      {
+        "t": "ACAI",
+        "u": "https://www.youtube.com/watch?v=JlTb7tJbA8U"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "주훈",
+      "en": "Juhoon"
+    },
+    "group": {
+      "ko": "코르티스",
+      "en": "CORTIS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7214,
+    "y": 8454,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      130,
+      192,
+      148
+    ],
+    "bday": "2008.01.03",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "REDRED",
+        "u": "https://www.youtube.com/watch?v=a8PVi1KsIoc"
+      },
+      {
+        "t": "FaSHioN",
+        "u": "https://www.youtube.com/watch?v=vVPM4nZvGWg"
+      },
+      {
+        "t": "GO!",
+        "u": "https://www.youtube.com/watch?v=yYUTq-7Ttb4"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "성현",
+      "en": "Seonghyeon"
+    },
+    "group": {
+      "ko": "코르티스",
+      "en": "CORTIS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7414,
+    "y": 8414,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      130,
+      192,
+      148
+    ],
+    "bday": "2009.01.13",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": true,
+    "songs": [
+      {
+        "t": "REDRED",
+        "u": "https://www.youtube.com/watch?v=pXbO-QQJsxM"
+      },
+      {
+        "t": "FaSHioN",
+        "u": "https://www.youtube.com/watch?v=A7CRAA9Ztkw"
+      },
+      {
+        "t": "GO!",
+        "u": "https://www.youtube.com/watch?v=2Li7-6iraJE"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "건호",
+      "en": "Geonho"
+    },
+    "group": {
+      "ko": "코르티스",
+      "en": "CORTIS"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7294,
+    "y": 8514,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      130,
+      192,
+      148
+    ],
+    "bday": "2009.02.14",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "GO!",
+        "u": "https://www.youtube.com/watch?v=93iJLm0kUAU"
+      },
+      {
+        "t": "REDRED",
+        "u": "https://www.youtube.com/watch?v=cxcxx0f6caM"
+      },
+      {
+        "t": "FaSHioN",
+        "u": "https://www.youtube.com/watch?v=kPjbIP7kaqs"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "안유진",
+      "en": "Yujin"
+    },
+    "group": {
+      "ko": "아이브",
+      "en": "IVE"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6140,
+    "y": 4560,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      132,
+      152,
+      218
+    ],
+    "bday": "2003.09.01",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "ELEVEN",
+        "u": "https://www.youtube.com/watch?v=0Ar9bq1yjP0"
+      },
+      {
+        "t": "Lion Heart",
+        "u": "https://www.youtube.com/watch?v=zs7VgEMbpUg"
+      },
+      {
+        "t": "Kitsch",
+        "u": "https://www.youtube.com/watch?v=kYdWmnu4Qdo"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "가을",
+      "en": "Gaeul"
+    },
+    "group": {
+      "ko": "아이브",
+      "en": "IVE"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6340,
+    "y": 4520,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      132,
+      152,
+      218
+    ],
+    "bday": "2002.09.24",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "After LIKE",
+        "u": "https://www.youtube.com/watch?v=-9RMTYZ2Etw"
+      },
+      {
+        "t": "Odd",
+        "u": "https://www.youtube.com/watch?v=UiYUVhsBraM"
+      },
+      {
+        "t": "LOVE DIVE",
+        "u": "https://www.youtube.com/watch?v=jlVi_OlLkAU"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "레이",
+      "en": "Rei"
+    },
+    "group": {
+      "ko": "아이브",
+      "en": "IVE"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6540,
+    "y": 4580,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      132,
+      152,
+      218
+    ],
+    "bday": "2004.02.03",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "After LIKE",
+        "u": "https://www.youtube.com/watch?v=mKLLdYSl3Lk"
+      },
+      {
+        "t": "ELEVEN",
+        "u": "https://www.youtube.com/watch?v=bD5vB0Yc_O4"
+      },
+      {
+        "t": "LOVE DIVE",
+        "u": "https://www.youtube.com/watch?v=vWOPzl5iLIc"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "장원영",
+      "en": "Wonyoung"
+    },
+    "group": {
+      "ko": "아이브",
+      "en": "IVE"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6220,
+    "y": 4770,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      132,
+      152,
+      218
+    ],
+    "bday": "2004.08.31",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "LOVE DIVE",
+        "u": "https://www.youtube.com/watch?v=DqvMi7J_juM"
+      },
+      {
+        "t": "ELEVEN",
+        "u": "https://www.youtube.com/watch?v=ERGrC1s5_3k"
+      },
+      {
+        "t": "After LIKE",
+        "u": "https://www.youtube.com/watch?v=A0vgoyTmkgQ"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "리즈",
+      "en": "Liz"
+    },
+    "group": {
+      "ko": "아이브",
+      "en": "IVE"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6420,
+    "y": 4770,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      132,
+      152,
+      218
+    ],
+    "bday": "2004.11.21",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "바람아 멈추어다오",
+        "u": "https://www.youtube.com/watch?v=FkmdvsEqW9k"
+      },
+      {
+        "t": "ELEVEN",
+        "u": "https://www.youtube.com/watch?v=d9v1UAN4tw0"
+      },
+      {
+        "t": "REBEL HEART",
+        "u": "https://www.youtube.com/watch?v=h7OmJZS7sxY"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "이서",
+      "en": "Leeseo"
+    },
+    "group": {
+      "ko": "아이브",
+      "en": "IVE"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6600,
+    "y": 4700,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      132,
+      152,
+      218
+    ],
+    "bday": "2007.02.21",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "ELEVEN",
+        "u": "https://www.youtube.com/watch?v=D0lmEcdgO1M"
+      },
+      {
+        "t": "LOVE DIVE",
+        "u": "https://www.youtube.com/watch?v=aHGZGBY-Koc"
+      },
+      {
+        "t": "After LIKE",
+        "u": "https://www.youtube.com/watch?v=NOVaFSRBZrk"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "이솔",
+      "en": "Leesol"
+    },
+    "group": {
+      "ko": "키키",
+      "en": "KiiiKiii"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6180,
+    "y": 3700,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      152,
+      215,
+      192
+    ],
+    "bday": "2005.09.18",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "지유",
+      "en": "Jiyu"
+    },
+    "group": {
+      "ko": "키키",
+      "en": "KiiiKiii"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6350,
+    "y": 3670,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      152,
+      215,
+      192
+    ],
+    "bday": "2006.05.14",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "수이",
+      "en": "Sui"
+    },
+    "group": {
+      "ko": "키키",
+      "en": "KiiiKiii"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6500,
+    "y": 3710,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      152,
+      215,
+      192
+    ],
+    "bday": "2006.04.10",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "하음",
+      "en": "Haum"
+    },
+    "group": {
+      "ko": "키키",
+      "en": "KiiiKiii"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6240,
+    "y": 3880,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      152,
+      215,
+      192
+    ],
+    "bday": "2006.11.14",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "키야",
+      "en": "Kya"
+    },
+    "group": {
+      "ko": "키키",
+      "en": "KiiiKiii"
+    },
+    "co": "starship",
+    "planet": "main",
+    "x": 6420,
+    "y": 3870,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      152,
+      215,
+      192
+    ],
+    "bday": "2010.12.18",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "원이",
+      "en": "Woni"
+    },
+    "group": {
+      "ko": "리센느",
+      "en": "RESCENE"
+    },
+    "co": "themuse",
+    "planet": "main",
+    "x": 3592,
+    "y": 4018,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      180,
+      158
+    ],
+    "bday": "2004.05.25",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "LOVE ATTACK",
+        "u": "https://www.youtube.com/watch?v=geAne2rrf7Q"
+      },
+      {
+        "t": "Deja Vu",
+        "u": "https://www.youtube.com/watch?v=a2OHT0Bi5lE"
+      },
+      {
+        "t": "Pinball",
+        "u": "https://www.youtube.com/watch?v=YAmTgcLa-80"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "리브",
+      "en": "Liv"
+    },
+    "group": {
+      "ko": "리센느",
+      "en": "RESCENE"
+    },
+    "co": "themuse",
+    "planet": "main",
+    "x": 3812,
+    "y": 3998,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      180,
+      158
+    ],
+    "bday": "2006.10.11",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "LOVE ATTACK",
+        "u": "https://www.youtube.com/watch?v=Xc8zNkCwGC0"
+      },
+      {
+        "t": "Glow Up",
+        "u": "https://www.youtube.com/watch?v=Lo1CTBTXda8"
+      },
+      {
+        "t": "Deja Vu",
+        "u": "https://www.youtube.com/watch?v=dwGvBIkURR0"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "미나미",
+      "en": "Minami"
+    },
+    "group": {
+      "ko": "리센느",
+      "en": "RESCENE"
+    },
+    "co": "themuse",
+    "planet": "main",
+    "x": 3892,
+    "y": 4138,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      180,
+      158
+    ],
+    "bday": "2006.11.29",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": true,
+    "songs": [
+      {
+        "t": "LOVE ATTACK",
+        "u": "https://www.youtube.com/watch?v=3lONVqtRXAI"
+      },
+      {
+        "t": "다시 만난 세계",
+        "u": "https://www.youtube.com/watch?v=XA1cVAlrid4"
+      },
+      {
+        "t": "Runaway",
+        "u": "https://www.youtube.com/watch?v=ZJGzCkV_RGg"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "메이",
+      "en": "May"
+    },
+    "group": {
+      "ko": "리센느",
+      "en": "RESCENE"
+    },
+    "co": "themuse",
+    "planet": "main",
+    "x": 3652,
+    "y": 4218,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      180,
+      158
+    ],
+    "bday": "2008.08.19",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "다시 만난 세계",
+        "u": "https://www.youtube.com/watch?v=GX4I0MyI6I0"
+      },
+      {
+        "t": "Glow Up",
+        "u": "https://www.youtube.com/watch?v=hlyhddaC6qg"
+      },
+      {
+        "t": "LOVE ATTACK",
+        "u": "https://www.youtube.com/watch?v=h7zcNExoSKM"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "제나",
+      "en": "Zena"
+    },
+    "group": {
+      "ko": "리센느",
+      "en": "RESCENE"
+    },
+    "co": "themuse",
+    "planet": "main",
+    "x": 3852,
+    "y": 4218,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      180,
+      158
+    ],
+    "bday": "2008.11.27",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Deja Vu",
+        "u": "https://www.youtube.com/watch?v=maQWa95XlLE"
+      },
+      {
+        "t": "LOVE ATTACK",
+        "u": "https://www.youtube.com/watch?v=vJkC_NveL08"
+      },
+      {
+        "t": "Glow Up",
+        "u": "https://www.youtube.com/watch?v=jRfTKjK-mmY"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "쥴리",
+      "en": "Julie"
+    },
+    "group": {
+      "ko": "키스오브라이프",
+      "en": "KISS OF LIFE"
+    },
+    "co": "s2",
+    "planet": "main",
+    "x": 3350,
+    "y": 7088,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      228,
+      182,
+      125
+    ],
+    "bday": "2000.03.29",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "나띠",
+      "en": "Natty"
+    },
+    "group": {
+      "ko": "키스오브라이프",
+      "en": "KISS OF LIFE"
+    },
+    "co": "s2",
+    "planet": "main",
+    "x": 3590,
+    "y": 7068,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      228,
+      182,
+      125
+    ],
+    "bday": "2002.05.30",
+    "nat": {
+      "ko": "태국",
+      "en": "TH"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Who is she",
+        "u": "https://www.youtube.com/watch?v=Z9rYx1b4yjU"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "벨",
+      "en": "Belle"
+    },
+    "group": {
+      "ko": "키스오브라이프",
+      "en": "KISS OF LIFE"
+    },
+    "co": "s2",
+    "planet": "main",
+    "x": 3630,
+    "y": 7248,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      228,
+      182,
+      125
+    ],
+    "bday": "2004.03.20",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "하늘",
+      "en": "Haneul"
+    },
+    "group": {
+      "ko": "키스오브라이프",
+      "en": "KISS OF LIFE"
+    },
+    "co": "s2",
+    "planet": "main",
+    "x": 3390,
+    "y": 7288,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      228,
+      182,
+      125
+    ],
+    "bday": "2005.05.25",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "홍중",
+      "en": "Hongjoong"
+    },
+    "group": {
+      "ko": "에이티즈",
+      "en": "ATEEZ"
+    },
+    "co": "kq",
+    "planet": "main",
+    "x": 4360,
+    "y": 6264,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      120
+    ],
+    "bday": "1998.11.07",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "성화",
+      "en": "Seonghwa"
+    },
+    "group": {
+      "ko": "에이티즈",
+      "en": "ATEEZ"
+    },
+    "co": "kq",
+    "planet": "main",
+    "x": 4540,
+    "y": 6224,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      120
+    ],
+    "bday": "1998.04.03",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "윤호",
+      "en": "Yunho"
+    },
+    "group": {
+      "ko": "에이티즈",
+      "en": "ATEEZ"
+    },
+    "co": "kq",
+    "planet": "main",
+    "x": 4720,
+    "y": 6264,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      120
+    ],
+    "bday": "1999.03.23",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "여상",
+      "en": "Yeosang"
+    },
+    "group": {
+      "ko": "에이티즈",
+      "en": "ATEEZ"
+    },
+    "co": "kq",
+    "planet": "main",
+    "x": 4890,
+    "y": 6304,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      120
+    ],
+    "bday": "1999.06.15",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "산",
+      "en": "San"
+    },
+    "group": {
+      "ko": "에이티즈",
+      "en": "ATEEZ"
+    },
+    "co": "kq",
+    "planet": "main",
+    "x": 4390,
+    "y": 6484,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      120
+    ],
+    "bday": "1999.07.10",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "민기",
+      "en": "Mingi"
+    },
+    "group": {
+      "ko": "에이티즈",
+      "en": "ATEEZ"
+    },
+    "co": "kq",
+    "planet": "main",
+    "x": 4570,
+    "y": 6464,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      120
+    ],
+    "bday": "1999.08.09",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "우영",
+      "en": "Wooyoung"
+    },
+    "group": {
+      "ko": "에이티즈",
+      "en": "ATEEZ"
+    },
+    "co": "kq",
+    "planet": "main",
+    "x": 4750,
+    "y": 6494,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      120
+    ],
+    "bday": "1999.11.26",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "종호",
+      "en": "Jongho"
+    },
+    "group": {
+      "ko": "에이티즈",
+      "en": "ATEEZ"
+    },
+    "co": "kq",
+    "planet": "main",
+    "x": 4910,
+    "y": 6444,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      120
+    ],
+    "bday": "2000.09.12",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "소연",
+      "en": "Soyeon"
+    },
+    "group": {
+      "ko": "아이들",
+      "en": "(G)I-DLE"
+    },
+    "co": "cube",
+    "planet": "main",
+    "x": 4646,
+    "y": 4796,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      142,
+      218
+    ],
+    "bday": "1998.08.26",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "미연",
+      "en": "Miyeon"
+    },
+    "group": {
+      "ko": "아이들",
+      "en": "(G)I-DLE"
+    },
+    "co": "cube",
+    "planet": "main",
+    "x": 4826,
+    "y": 4756,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      142,
+      218
+    ],
+    "bday": "1997.01.31",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "민니",
+      "en": "Minnie"
+    },
+    "group": {
+      "ko": "아이들",
+      "en": "(G)I-DLE"
+    },
+    "co": "cube",
+    "planet": "main",
+    "x": 4996,
+    "y": 4816,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      142,
+      218
+    ],
+    "bday": "1997.10.23",
+    "nat": {
+      "ko": "태국",
+      "en": "TH"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "수진",
+      "en": "Soojin"
+    },
+    "group": {
+      "ko": "아이들",
+      "en": "(G)I-DLE"
+    },
+    "co": "cube",
+    "planet": "main",
+    "x": 4716,
+    "y": 4996,
+    "sat": 0.7,
+    "op": 0.45,
+    "active": false,
+    "color": [
+      178,
+      142,
+      218
+    ],
+    "bday": "1998.03.26",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "우기",
+      "en": "Yuqi"
+    },
+    "group": {
+      "ko": "아이들",
+      "en": "(G)I-DLE"
+    },
+    "co": "cube",
+    "planet": "main",
+    "x": 4886,
+    "y": 5026,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      142,
+      218
+    ],
+    "bday": "1999.09.23",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "슈화",
+      "en": "Shuhua"
+    },
+    "group": {
+      "ko": "아이들",
+      "en": "(G)I-DLE"
+    },
+    "co": "cube",
+    "planet": "main",
+    "x": 5056,
+    "y": 5006,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      178,
+      142,
+      218
+    ],
+    "bday": "2000.10.10",
+    "nat": {
+      "ko": "대만",
+      "en": "TW"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "성찬",
+      "en": "Sungchan"
+    },
+    "group": {
+      "ko": "라이즈",
+      "en": "RIIZE"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7860,
+    "y": 4920,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      158
+    ],
+    "bday": "2001.09.13",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "은석",
+      "en": "Eunseok"
+    },
+    "group": {
+      "ko": "라이즈",
+      "en": "RIIZE"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7420,
+    "y": 4900,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      158
+    ],
+    "bday": "2001.01.22",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "쇼타로",
+      "en": "Shotaro"
+    },
+    "group": {
+      "ko": "라이즈",
+      "en": "RIIZE"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7900,
+    "y": 5070,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      158
+    ],
+    "bday": "2000.11.25",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "원빈",
+      "en": "Wonbin"
+    },
+    "group": {
+      "ko": "라이즈",
+      "en": "RIIZE"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7620,
+    "y": 4860,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      158
+    ],
+    "bday": "2002.02.21",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "승한",
+      "en": "Seunghan"
+    },
+    "group": {
+      "ko": "라이즈",
+      "en": "RIIZE"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7760,
+    "y": 4900,
+    "sat": 0.78,
+    "op": 0.42,
+    "active": false,
+    "color": [
+      218,
+      148,
+      158
+    ],
+    "bday": "2003.04.02",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "소희",
+      "en": "Sohee"
+    },
+    "group": {
+      "ko": "라이즈",
+      "en": "RIIZE"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7500,
+    "y": 5080,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      158
+    ],
+    "bday": "2003.04.17",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "앤톤",
+      "en": "Anton"
+    },
+    "group": {
+      "ko": "라이즈",
+      "en": "RIIZE"
+    },
+    "co": "sm",
+    "planet": "main",
+    "x": 7710,
+    "y": 5050,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      158
+    ],
+    "bday": "2004.11.21",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "연준",
+      "en": "Yeonjun"
+    },
+    "group": {
+      "ko": "TXT",
+      "en": "TXT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7250,
+    "y": 7880,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      210,
+      198
+    ],
+    "bday": "1999.09.13",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "GGUM",
+        "u": "https://www.youtube.com/watch?v=x3Y2-mQRWFw"
+      },
+      {
+        "t": "Run Away",
+        "u": "https://www.youtube.com/watch?v=sx4hPjppi6E"
+      },
+      {
+        "t": "교환일기 (두밧두 와리와리)",
+        "u": "https://www.youtube.com/watch?v=o3WX9FRTIUI"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "수빈",
+      "en": "Soobin"
+    },
+    "group": {
+      "ko": "TXT",
+      "en": "TXT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7410,
+    "y": 7840,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      210,
+      198
+    ],
+    "bday": "2000.12.05",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Dolphin",
+        "u": "https://www.youtube.com/watch?v=NTDTHIyNWLk"
+      },
+      {
+        "t": "Run Away",
+        "u": "https://www.youtube.com/watch?v=ibnQ1bH8fIM"
+      },
+      {
+        "t": "어느날 머리에서 뿔이 자랐다 (CROWN)",
+        "u": "https://www.youtube.com/watch?v=CrYbcz9ONYY"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "범규",
+      "en": "Beomgyu"
+    },
+    "group": {
+      "ko": "TXT",
+      "en": "TXT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7570,
+    "y": 7900,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      210,
+      198
+    ],
+    "bday": "2001.03.13",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Panic",
+        "u": "https://www.youtube.com/watch?v=-oJ_uuwNMgk"
+      },
+      {
+        "t": "0X1=LOVESONG (I Know I Love You)",
+        "u": "https://www.youtube.com/watch?v=rDnPaRFDnUk"
+      },
+      {
+        "t": "LO$ER=LO♥ER",
+        "u": "https://www.youtube.com/watch?v=OPdaubrjGqk"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "태현",
+      "en": "Taehyun"
+    },
+    "group": {
+      "ko": "TXT",
+      "en": "TXT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7330,
+    "y": 8100,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      210,
+      198
+    ],
+    "bday": "2002.02.05",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Angel Or Devil",
+        "u": "https://www.youtube.com/watch?v=L7rEIensKMo"
+      },
+      {
+        "t": "0X1=LOVESONG (I Know I Love You)",
+        "u": "https://www.youtube.com/watch?v=A7nimn-8ZA8"
+      },
+      {
+        "t": "거리에서",
+        "u": "https://www.youtube.com/watch?v=wYMeibz-Uqc"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "휴닝카이",
+      "en": "Huening Kai"
+    },
+    "group": {
+      "ko": "TXT",
+      "en": "TXT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7530,
+    "y": 8100,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      210,
+      198
+    ],
+    "bday": "2002.08.14",
+    "nat": {
+      "ko": "한국·독일·미국",
+      "en": "KR·DE·US"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "Run Away",
+        "u": "https://www.youtube.com/watch?v=GINn6TxkNCU"
+      },
+      {
+        "t": "어느날 머리에서 뿔이 자랐다 (CROWN)",
+        "u": "https://www.youtube.com/watch?v=OJhk0vWphdQ"
+      },
+      {
+        "t": "Upside Down Kiss",
+        "u": "https://www.youtube.com/watch?v=umDN066o6-Y"
+      }
+    ]
+  },
+  {
+    "name": {
+      "ko": "희승",
+      "en": "Heeseung"
+    },
+    "group": {
+      "ko": "엔하이픈",
+      "en": "ENHYPEN"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6298,
+    "y": 8212,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": false,
+    "color": [
+      148,
+      138,
+      218
+    ],
+    "bday": "2001.10.15",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "제이",
+      "en": "Jay"
+    },
+    "group": {
+      "ko": "엔하이픈",
+      "en": "ENHYPEN"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6438,
+    "y": 8172,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      138,
+      218
+    ],
+    "bday": "2002.04.20",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "제이크",
+      "en": "Jake"
+    },
+    "group": {
+      "ko": "엔하이픈",
+      "en": "ENHYPEN"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6598,
+    "y": 8212,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      138,
+      218
+    ],
+    "bday": "2002.11.15",
+    "nat": {
+      "ko": "호주",
+      "en": "AU"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "성훈",
+      "en": "Sunghoon"
+    },
+    "group": {
+      "ko": "엔하이픈",
+      "en": "ENHYPEN"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6718,
+    "y": 8272,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      138,
+      218
+    ],
+    "bday": "2002.12.08",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "선우",
+      "en": "Sunoo"
+    },
+    "group": {
+      "ko": "엔하이픈",
+      "en": "ENHYPEN"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6338,
+    "y": 8452,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      138,
+      218
+    ],
+    "bday": "2003.06.24",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "정원",
+      "en": "Jungwon"
+    },
+    "group": {
+      "ko": "엔하이픈",
+      "en": "ENHYPEN"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6558,
+    "y": 8472,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      138,
+      218
+    ],
+    "bday": "2004.02.09",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "니키",
+      "en": "Ni-Ki"
+    },
+    "group": {
+      "ko": "엔하이픈",
+      "en": "ENHYPEN"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6698,
+    "y": 8412,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      138,
+      218
+    ],
+    "bday": "2005.12.09",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "윤아",
+      "en": "Yunah"
+    },
+    "group": {
+      "ko": "아일릿",
+      "en": "ILLIT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5800,
+    "y": 8300,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      205,
+      162,
+      215
+    ],
+    "bday": "2004.01.15",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "민주",
+      "en": "Minju"
+    },
+    "group": {
+      "ko": "아일릿",
+      "en": "ILLIT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5960,
+    "y": 8260,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      205,
+      162,
+      215
+    ],
+    "bday": "2004.05.11",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "모카",
+      "en": "Moka"
+    },
+    "group": {
+      "ko": "아일릿",
+      "en": "ILLIT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6120,
+    "y": 8310,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      205,
+      162,
+      215
+    ],
+    "bday": "2004.10.08",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "원희",
+      "en": "Wonhee"
+    },
+    "group": {
+      "ko": "아일릿",
+      "en": "ILLIT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 5840,
+    "y": 8500,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      205,
+      162,
+      215
+    ],
+    "bday": "2007.06.26",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "이로하",
+      "en": "Iroha"
+    },
+    "group": {
+      "ko": "아일릿",
+      "en": "ILLIT"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6040,
+    "y": 8500,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      205,
+      162,
+      215
+    ],
+    "bday": "2008.12.21",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "사쿠라",
+      "en": "Sakura"
+    },
+    "group": {
+      "ko": "르세라핌",
+      "en": "LE SSERAFIM"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6810,
+    "y": 7940,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      155,
+      208,
+      185
+    ],
+    "bday": "1998.03.19",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "김채원",
+      "en": "Chaewon"
+    },
+    "group": {
+      "ko": "르세라핌",
+      "en": "LE SSERAFIM"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6990,
+    "y": 7904,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      155,
+      208,
+      185
+    ],
+    "bday": "2000.08.08",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "허윤진",
+      "en": "Yunjin"
+    },
+    "group": {
+      "ko": "르세라핌",
+      "en": "LE SSERAFIM"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7144,
+    "y": 7956,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      155,
+      208,
+      185
+    ],
+    "bday": "2001.10.08",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "카즈하",
+      "en": "Kazuha"
+    },
+    "group": {
+      "ko": "르세라핌",
+      "en": "LE SSERAFIM"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6844,
+    "y": 8136,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      155,
+      208,
+      185
+    ],
+    "bday": "2003.08.09",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "홍은채",
+      "en": "Eunchae"
+    },
+    "group": {
+      "ko": "르세라핌",
+      "en": "LE SSERAFIM"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 7054,
+    "y": 8146,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      155,
+      208,
+      185
+    ],
+    "bday": "2006.11.16",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "김가람",
+      "en": "Garam"
+    },
+    "group": {
+      "ko": "르세라핌",
+      "en": "LE SSERAFIM"
+    },
+    "co": "hybe",
+    "planet": "main",
+    "x": 6936,
+    "y": 8044,
+    "sat": 0.7,
+    "op": 0.42,
+    "active": false,
+    "color": [
+      155,
+      208,
+      185
+    ],
+    "bday": "2004.10.04",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "루카",
+      "en": "Ruka"
+    },
+    "group": {
+      "ko": "베이비몬스터",
+      "en": "BABYMONSTER"
+    },
+    "co": "yg",
+    "planet": "main",
+    "x": 4198,
+    "y": 4104,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      148,
+      185
+    ],
+    "bday": "2004.11.25",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "파리타",
+      "en": "Pharita"
+    },
+    "group": {
+      "ko": "베이비몬스터",
+      "en": "BABYMONSTER"
+    },
+    "co": "yg",
+    "planet": "main",
+    "x": 4378,
+    "y": 4064,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      148,
+      185
+    ],
+    "bday": "2004.03.03",
+    "nat": {
+      "ko": "태국",
+      "en": "TH"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "아사",
+      "en": "Ahyeon"
+    },
+    "group": {
+      "ko": "베이비몬스터",
+      "en": "BABYMONSTER"
+    },
+    "co": "yg",
+    "planet": "main",
+    "x": 4558,
+    "y": 4116,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      148,
+      185
+    ],
+    "bday": "2006.04.03",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "치키타",
+      "en": "Chiquita"
+    },
+    "group": {
+      "ko": "베이비몬스터",
+      "en": "BABYMONSTER"
+    },
+    "co": "yg",
+    "planet": "main",
+    "x": 4222,
+    "y": 4294,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      148,
+      185
+    ],
+    "bday": "2005.01.06",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "라미",
+      "en": "Rami"
+    },
+    "group": {
+      "ko": "베이비몬스터",
+      "en": "BABYMONSTER"
+    },
+    "co": "yg",
+    "planet": "main",
+    "x": 4414,
+    "y": 4324,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      148,
+      185
+    ],
+    "bday": "2004.09.28",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "로라",
+      "en": "Rora"
+    },
+    "group": {
+      "ko": "베이비몬스터",
+      "en": "BABYMONSTER"
+    },
+    "co": "yg",
+    "planet": "main",
+    "x": 4582,
+    "y": 4284,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      148,
+      185
+    ],
+    "bday": "2007.04.22",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "하나",
+      "en": "Hana"
+    },
+    "group": {
+      "ko": "베이비몬스터",
+      "en": "BABYMONSTER"
+    },
+    "co": "yg",
+    "planet": "main",
+    "x": 4454,
+    "y": 4220,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      148,
+      185
+    ],
+    "bday": "2007.04.06",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "수인",
+      "en": "Sooin"
+    },
+    "group": {
+      "ko": "미야오",
+      "en": "MEOVV"
+    },
+    "co": "blacklabel",
+    "planet": "main",
+    "x": 4180,
+    "y": 4530,
+    "sat": 0.82,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      155,
+      218
+    ],
+    "bday": "2005.04.12",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "가원",
+      "en": "Gawon"
+    },
+    "group": {
+      "ko": "미야오",
+      "en": "MEOVV"
+    },
+    "co": "blacklabel",
+    "planet": "main",
+    "x": 4360,
+    "y": 4496,
+    "sat": 0.82,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      155,
+      218
+    ],
+    "bday": "2005.04.27",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "안나",
+      "en": "Anna"
+    },
+    "group": {
+      "ko": "미야오",
+      "en": "MEOVV"
+    },
+    "co": "blacklabel",
+    "planet": "main",
+    "x": 4536,
+    "y": 4524,
+    "sat": 0.82,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      155,
+      218
+    ],
+    "bday": "2005.11.17",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "나린",
+      "en": "Narin"
+    },
+    "group": {
+      "ko": "미야오",
+      "en": "MEOVV"
+    },
+    "co": "blacklabel",
+    "planet": "main",
+    "x": 4270,
+    "y": 4684,
+    "sat": 0.82,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      155,
+      218
+    ],
+    "bday": "2007.08.15",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "엘라",
+      "en": "Ella"
+    },
+    "group": {
+      "ko": "미야오",
+      "en": "MEOVV"
+    },
+    "co": "blacklabel",
+    "planet": "main",
+    "x": 4444,
+    "y": 4656,
+    "sat": 0.82,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      210,
+      155,
+      218
+    ],
+    "bday": "2008.12.01",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "아이린",
+      "en": "Irene"
+    },
+    "group": {
+      "ko": "레드벨벳",
+      "en": "Red Velvet"
+    },
+    "co": "sm",
+    "planet": "redvelvet",
+    "x": 10640,
+    "y": 6000,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      168
+    ],
+    "bday": "1991.03.29",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "슬기",
+      "en": "Seulgi"
+    },
+    "group": {
+      "ko": "레드벨벳",
+      "en": "Red Velvet"
+    },
+    "co": "sm",
+    "planet": "redvelvet",
+    "x": 10800,
+    "y": 5960,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      168
+    ],
+    "bday": "1994.02.10",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "웬디",
+      "en": "Wendy"
+    },
+    "group": {
+      "ko": "레드벨벳",
+      "en": "Red Velvet"
+    },
+    "co": "sm",
+    "planet": "redvelvet",
+    "x": 10960,
+    "y": 6020,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      168
+    ],
+    "bday": "1994.02.21",
+    "nat": {
+      "ko": "한국·캐나다",
+      "en": "KR·CA"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "조이",
+      "en": "Joy"
+    },
+    "group": {
+      "ko": "레드벨벳",
+      "en": "Red Velvet"
+    },
+    "co": "sm",
+    "planet": "redvelvet",
+    "x": 10720,
+    "y": 6240,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      168
+    ],
+    "bday": "1996.09.03",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "예리",
+      "en": "Yeri"
+    },
+    "group": {
+      "ko": "레드벨벳",
+      "en": "Red Velvet"
+    },
+    "co": "sm",
+    "planet": "redvelvet",
+    "x": 10920,
+    "y": 6240,
+    "sat": 0.78,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      148,
+      168
+    ],
+    "bday": "1999.03.05",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "태연",
+      "en": "Taeyeon"
+    },
+    "group": {
+      "ko": "소녀시대",
+      "en": "SNSD"
+    },
+    "co": "sm",
+    "planet": "snsd",
+    "x": 10120,
+    "y": 880,
+    "sat": 0.92,
+    "op": 0.82,
+    "active": true,
+    "color": [
+      218,
+      175,
+      188
+    ],
+    "bday": "1989.03.09",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "써니",
+      "en": "Sunny"
+    },
+    "group": {
+      "ko": "소녀시대",
+      "en": "SNSD"
+    },
+    "co": "sm",
+    "planet": "snsd",
+    "x": 10320,
+    "y": 840,
+    "sat": 0.72,
+    "op": 0.7,
+    "active": true,
+    "color": [
+      218,
+      175,
+      188
+    ],
+    "bday": "1989.05.15",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "효연",
+      "en": "Hyoyeon"
+    },
+    "group": {
+      "ko": "소녀시대",
+      "en": "SNSD"
+    },
+    "co": "sm",
+    "planet": "snsd",
+    "x": 10520,
+    "y": 880,
+    "sat": 0.7,
+    "op": 0.68,
+    "active": true,
+    "color": [
+      218,
+      175,
+      188
+    ],
+    "bday": "1989.09.22",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "유리",
+      "en": "Yuri"
+    },
+    "group": {
+      "ko": "소녀시대",
+      "en": "SNSD"
+    },
+    "co": "sm",
+    "planet": "snsd",
+    "x": 10600,
+    "y": 1000,
+    "sat": 0.74,
+    "op": 0.7,
+    "active": true,
+    "color": [
+      218,
+      175,
+      188
+    ],
+    "bday": "1989.12.05",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "수영",
+      "en": "Sooyoung"
+    },
+    "group": {
+      "ko": "소녀시대",
+      "en": "SNSD"
+    },
+    "co": "sm",
+    "planet": "snsd",
+    "x": 10400,
+    "y": 1080,
+    "sat": 0.72,
+    "op": 0.7,
+    "active": true,
+    "color": [
+      218,
+      175,
+      188
+    ],
+    "bday": "1990.02.10",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "윤아",
+      "en": "Yoona"
+    },
+    "group": {
+      "ko": "소녀시대",
+      "en": "SNSD"
+    },
+    "co": "sm",
+    "planet": "snsd",
+    "x": 10160,
+    "y": 1040,
+    "sat": 0.8,
+    "op": 0.75,
+    "active": true,
+    "color": [
+      218,
+      175,
+      188
+    ],
+    "bday": "1990.05.30",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "서현",
+      "en": "Seohyun"
+    },
+    "group": {
+      "ko": "소녀시대",
+      "en": "SNSD"
+    },
+    "co": "sm",
+    "planet": "snsd",
+    "x": 10480,
+    "y": 1160,
+    "sat": 0.7,
+    "op": 0.68,
+    "active": true,
+    "color": [
+      218,
+      175,
+      188
+    ],
+    "bday": "1991.06.28",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "온유",
+      "en": "Onew"
+    },
+    "group": {
+      "ko": "샤이니",
+      "en": "SHINee"
+    },
+    "co": "sm",
+    "planet": "shinee",
+    "x": 11000,
+    "y": 4280,
+    "sat": 0.88,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      148,
+      188,
+      222
+    ],
+    "bday": "1989.12.14",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "키",
+      "en": "Key"
+    },
+    "group": {
+      "ko": "샤이니",
+      "en": "SHINee"
+    },
+    "co": "sm",
+    "planet": "shinee",
+    "x": 11240,
+    "y": 4240,
+    "sat": 0.85,
+    "op": 0.78,
+    "active": true,
+    "color": [
+      148,
+      188,
+      222
+    ],
+    "bday": "1991.09.23",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "민호",
+      "en": "Minho"
+    },
+    "group": {
+      "ko": "샤이니",
+      "en": "SHINee"
+    },
+    "co": "sm",
+    "planet": "shinee",
+    "x": 11440,
+    "y": 4360,
+    "sat": 0.8,
+    "op": 0.76,
+    "active": true,
+    "color": [
+      148,
+      188,
+      222
+    ],
+    "bday": "1991.12.09",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "태민",
+      "en": "Taemin"
+    },
+    "group": {
+      "ko": "샤이니",
+      "en": "SHINee"
+    },
+    "co": "sm",
+    "planet": "shinee",
+    "x": 11320,
+    "y": 4560,
+    "sat": 0.95,
+    "op": 0.85,
+    "active": true,
+    "color": [
+      148,
+      188,
+      222
+    ],
+    "bday": "1993.07.18",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "종현",
+      "en": "Jonghyun"
+    },
+    "group": {
+      "ko": "샤이니",
+      "en": "SHINee"
+    },
+    "co": "sm",
+    "planet": "shinee",
+    "x": 11040,
+    "y": 4520,
+    "sat": 0.92,
+    "op": 0.35,
+    "active": false,
+    "color": [
+      148,
+      188,
+      222
+    ],
+    "bday": "1990.04.08",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "빅토리아",
+      "en": "Victoria"
+    },
+    "group": {
+      "ko": "f(x)",
+      "en": "f(x)"
+    },
+    "co": "sm",
+    "planet": "fx",
+    "x": 10960,
+    "y": 7480,
+    "sat": 0.75,
+    "op": 0.5,
+    "active": false,
+    "color": [
+      162,
+      218,
+      175
+    ],
+    "bday": "1987.02.02",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "앰버",
+      "en": "Amber"
+    },
+    "group": {
+      "ko": "f(x)",
+      "en": "f(x)"
+    },
+    "co": "sm",
+    "planet": "fx",
+    "x": 11240,
+    "y": 7440,
+    "sat": 0.78,
+    "op": 0.55,
+    "active": false,
+    "color": [
+      162,
+      218,
+      175
+    ],
+    "bday": "1992.09.18",
+    "nat": {
+      "ko": "미국",
+      "en": "US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "루나",
+      "en": "Luna"
+    },
+    "group": {
+      "ko": "f(x)",
+      "en": "f(x)"
+    },
+    "co": "sm",
+    "planet": "fx",
+    "x": 11280,
+    "y": 7680,
+    "sat": 0.72,
+    "op": 0.5,
+    "active": false,
+    "color": [
+      162,
+      218,
+      175
+    ],
+    "bday": "1993.08.12",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "크리스탈",
+      "en": "Krystal"
+    },
+    "group": {
+      "ko": "f(x)",
+      "en": "f(x)"
+    },
+    "co": "sm",
+    "planet": "fx",
+    "x": 11000,
+    "y": 7720,
+    "sat": 0.8,
+    "op": 0.55,
+    "active": false,
+    "color": [
+      162,
+      218,
+      175
+    ],
+    "bday": "1994.10.24",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "RM",
+      "en": "RM"
+    },
+    "group": {
+      "ko": "BTS",
+      "en": "BTS"
+    },
+    "co": "hybe",
+    "planet": "bts",
+    "x": 9720,
+    "y": 10640,
+    "sat": 0.85,
+    "op": 0.78,
+    "active": true,
+    "color": [
+      182,
+      152,
+      218
+    ],
+    "bday": "1994.09.12",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "진",
+      "en": "Jin"
+    },
+    "group": {
+      "ko": "BTS",
+      "en": "BTS"
+    },
+    "co": "hybe",
+    "planet": "bts",
+    "x": 9960,
+    "y": 10560,
+    "sat": 0.75,
+    "op": 0.76,
+    "active": true,
+    "color": [
+      182,
+      152,
+      218
+    ],
+    "bday": "1992.12.04",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "슈가",
+      "en": "Suga"
+    },
+    "group": {
+      "ko": "BTS",
+      "en": "BTS"
+    },
+    "co": "hybe",
+    "planet": "bts",
+    "x": 10200,
+    "y": 10600,
+    "sat": 0.8,
+    "op": 0.78,
+    "active": true,
+    "color": [
+      182,
+      152,
+      218
+    ],
+    "bday": "1993.03.09",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "제이홉",
+      "en": "J-Hope"
+    },
+    "group": {
+      "ko": "BTS",
+      "en": "BTS"
+    },
+    "co": "hybe",
+    "planet": "bts",
+    "x": 10320,
+    "y": 10800,
+    "sat": 0.78,
+    "op": 0.76,
+    "active": true,
+    "color": [
+      182,
+      152,
+      218
+    ],
+    "bday": "1994.02.18",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "지민",
+      "en": "Jimin"
+    },
+    "group": {
+      "ko": "BTS",
+      "en": "BTS"
+    },
+    "co": "hybe",
+    "planet": "bts",
+    "x": 10040,
+    "y": 10960,
+    "sat": 0.72,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      182,
+      152,
+      218
+    ],
+    "bday": "1995.10.13",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "뷔",
+      "en": "V"
+    },
+    "group": {
+      "ko": "BTS",
+      "en": "BTS"
+    },
+    "co": "hybe",
+    "planet": "bts",
+    "x": 9760,
+    "y": 10920,
+    "sat": 0.76,
+    "op": 0.78,
+    "active": true,
+    "color": [
+      182,
+      152,
+      218
+    ],
+    "bday": "1995.12.30",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "정국",
+      "en": "Jungkook"
+    },
+    "group": {
+      "ko": "BTS",
+      "en": "BTS"
+    },
+    "co": "hybe",
+    "planet": "bts",
+    "x": 9920,
+    "y": 11080,
+    "sat": 0.7,
+    "op": 0.82,
+    "active": true,
+    "color": [
+      182,
+      152,
+      218
+    ],
+    "bday": "1997.09.01",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "나연",
+      "en": "Nayeon"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1120,
+    "y": 10200,
+    "sat": 0.8,
+    "op": 0.78,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "1995.09.22",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "정연",
+      "en": "Jeongyeon"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1360,
+    "y": 10120,
+    "sat": 0.75,
+    "op": 0.75,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "1996.09.01",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "모모",
+      "en": "Momo"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1600,
+    "y": 10200,
+    "sat": 0.78,
+    "op": 0.76,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "1996.11.09",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "사나",
+      "en": "Sana"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1720,
+    "y": 10400,
+    "sat": 0.76,
+    "op": 0.76,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "1996.12.29",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "지효",
+      "en": "Jihyo"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1400,
+    "y": 10520,
+    "sat": 0.82,
+    "op": 0.78,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "1997.02.01",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "미나",
+      "en": "Mina"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1160,
+    "y": 10400,
+    "sat": 0.78,
+    "op": 0.74,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "1997.03.24",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "다현",
+      "en": "Dahyun"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1240,
+    "y": 10640,
+    "sat": 0.72,
+    "op": 0.72,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "1998.05.28",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "채영",
+      "en": "Chaeyoung"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1560,
+    "y": 10640,
+    "sat": 0.75,
+    "op": 0.73,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "1999.04.23",
+    "nat": {
+      "ko": "한국·미국",
+      "en": "KR·US"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "쯔위",
+      "en": "Tzuyu"
+    },
+    "group": {
+      "ko": "트와이스",
+      "en": "TWICE"
+    },
+    "co": "jyp",
+    "planet": "twice",
+    "x": 1440,
+    "y": 10800,
+    "sat": 0.8,
+    "op": 0.76,
+    "active": true,
+    "color": [
+      218,
+      175,
+      165
+    ],
+    "bday": "2000.06.14",
+    "nat": {
+      "ko": "대만",
+      "en": "TW"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "GD",
+      "en": "G-Dragon"
+    },
+    "group": {
+      "ko": "빅뱅",
+      "en": "BIGBANG"
+    },
+    "co": "yg",
+    "planet": "bigbang",
+    "x": 800,
+    "y": 840,
+    "sat": 0.92,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      218,
+      192,
+      135
+    ],
+    "bday": "1988.08.18",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "태양",
+      "en": "Taeyang"
+    },
+    "group": {
+      "ko": "빅뱅",
+      "en": "BIGBANG"
+    },
+    "co": "yg",
+    "planet": "bigbang",
+    "x": 1080,
+    "y": 800,
+    "sat": 0.78,
+    "op": 0.5,
+    "active": false,
+    "color": [
+      218,
+      192,
+      135
+    ],
+    "bday": "1988.05.18",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "탑",
+      "en": "T.O.P"
+    },
+    "group": {
+      "ko": "빅뱅",
+      "en": "BIGBANG"
+    },
+    "co": "yg",
+    "planet": "bigbang",
+    "x": 1200,
+    "y": 1000,
+    "sat": 0.6,
+    "op": 0.35,
+    "active": false,
+    "color": [
+      218,
+      192,
+      135
+    ],
+    "bday": "1987.11.04",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "대성",
+      "en": "Daesung"
+    },
+    "group": {
+      "ko": "빅뱅",
+      "en": "BIGBANG"
+    },
+    "co": "yg",
+    "planet": "bigbang",
+    "x": 880,
+    "y": 1160,
+    "sat": 0.68,
+    "op": 0.5,
+    "active": false,
+    "color": [
+      218,
+      192,
+      135
+    ],
+    "bday": "1989.04.26",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "지수",
+      "en": "Jisoo"
+    },
+    "group": {
+      "ko": "블랙핑크",
+      "en": "BLACKPINK"
+    },
+    "co": "yg",
+    "planet": "blackpink",
+    "x": 1200,
+    "y": 2840,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      132,
+      172
+    ],
+    "bday": "1995.01.03",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "제니",
+      "en": "Jennie"
+    },
+    "group": {
+      "ko": "블랙핑크",
+      "en": "BLACKPINK"
+    },
+    "co": "yg",
+    "planet": "blackpink",
+    "x": 1480,
+    "y": 2800,
+    "sat": 0.88,
+    "op": 0.82,
+    "active": true,
+    "color": [
+      222,
+      132,
+      172
+    ],
+    "bday": "1996.01.16",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "로제",
+      "en": "Rosé"
+    },
+    "group": {
+      "ko": "블랙핑크",
+      "en": "BLACKPINK"
+    },
+    "co": "yg",
+    "planet": "blackpink",
+    "x": 1560,
+    "y": 3080,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      222,
+      132,
+      172
+    ],
+    "bday": "1997.02.11",
+    "nat": {
+      "ko": "한국·NZ",
+      "en": "KR·NZ"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "리사",
+      "en": "Lisa"
+    },
+    "group": {
+      "ko": "블랙핑크",
+      "en": "BLACKPINK"
+    },
+    "co": "yg",
+    "planet": "blackpink",
+    "x": 1240,
+    "y": 3160,
+    "sat": 0.9,
+    "op": 0.82,
+    "active": true,
+    "color": [
+      222,
+      132,
+      172
+    ],
+    "bday": "1997.03.27",
+    "nat": {
+      "ko": "태국",
+      "en": "TH"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "아이유",
+      "en": "IU"
+    },
+    "group": {
+      "ko": "솔로",
+      "en": "Solo"
+    },
+    "co": "edam",
+    "planet": "iu",
+    "x": 6000,
+    "y": 400,
+    "sat": 0.95,
+    "op": 0.85,
+    "active": true,
+    "color": [
+      208,
+      155,
+      198
+    ],
+    "bday": "1993.05.16",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": [
+      {
+        "t": "LILAC",
+        "u": "https://www.youtube.com/watch?v=A-Bd5NnUMNk"
+      },
+      {
+        "t": "Celebrity",
+        "u": "https://www.youtube.com/watch?v=6oanIo_9Z4M"
+      },
+      {
+        "t": "Strawberry Moon",
+        "u": "https://www.youtube.com/watch?v=UY4ZCgkTHpQ"
+      }
+    ]
+  }
+]
