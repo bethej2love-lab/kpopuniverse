@@ -552,10 +552,9 @@ scene.add(dirLight);
 
 // ── Glow texture ──────────────────────────────────
 function makeGlowTex(){
-  const c=document.createElement('canvas');c.width=128;c.height=128;
+  const c=document.createElement('canvas');c.width=64;c.height=64;
   const cx=c.getContext('2d');
-  // 레이어 1: 넓은 소프트 헤일로 — 완만하게 퍼지도록
-  const glow=cx.createRadialGradient(64,64,0,64,64,64);
+  const glow=cx.createRadialGradient(32,32,0,32,32,32);
   glow.addColorStop(0,    'rgba(255,255,255,0.65)');
   glow.addColorStop(0.15, 'rgba(255,255,255,0.38)');
   glow.addColorStop(0.35, 'rgba(255,255,255,0.15)');
@@ -563,14 +562,13 @@ function makeGlowTex(){
   glow.addColorStop(0.78, 'rgba(255,255,255,0.01)');
   glow.addColorStop(1,    'rgba(255,255,255,0)');
   cx.fillStyle=glow;
-  cx.fillRect(0,0,128,128);
-  // 레이어 2: 아주 작은 코어 (반경 6px) — 별 중심처럼
-  const core=cx.createRadialGradient(64,64,0,64,64,6);
+  cx.fillRect(0,0,64,64);
+  const core=cx.createRadialGradient(32,32,0,32,32,3);
   core.addColorStop(0,   'rgba(255,255,255,1.0)');
   core.addColorStop(0.55,'rgba(255,255,255,0.7)');
   core.addColorStop(1,   'rgba(255,255,255,0)');
   cx.fillStyle=core;
-  cx.fillRect(0,0,128,128);
+  cx.fillRect(0,0,64,64);
   return new THREE.CanvasTexture(c);
 }
 const glowTex=makeGlowTex();
@@ -687,7 +685,6 @@ async function buildUniverse(){
   });
 
   const isMobile=window.innerWidth<=768;
-  const sizeScale=isMobile?0.8:1.0;
   const opScale=isMobile?0.8:1.0;
   const regularPos=[],regularColors=[];
   const sparklePos=[],sparkleColors=[];
@@ -841,7 +838,7 @@ async function buildUniverse(){
     geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(positions),3));
     geo.setAttribute('color',new THREE.BufferAttribute(new Float32Array(colors),3));
     const mat=new THREE.PointsMaterial({
-      size:sizeW,map:glowTex,vertexColors:true,
+      size:sizeW/Math.min(window.devicePixelRatio,2),map:glowTex,vertexColors:true,
       transparent:true,opacity,
       depthWrite:false,blending:THREE.AdditiveBlending,
       sizeAttenuation:true
@@ -850,8 +847,8 @@ async function buildUniverse(){
     scene.add(pts);
     return pts;
   }
-  regularPts=makePoints(regularPos,regularColors,5.6*sizeScale,0.55*opScale);
-  sparklePts=makePoints(sparklePos,sparkleColors,12.8*sizeScale,0.9*opScale);
+  regularPts=makePoints(regularPos,regularColors,isMobile?3.5:5.6,0.55*opScale);
+  sparklePts=makePoints(sparklePos,sparkleColors,isMobile?7:12.8,0.9*opScale);
   if(regularPts)regColorAttr=regularPts.geometry.attributes.color;
   if(sparklePts)spkColorAttr=sparklePts.geometry.attributes.color;
 }
