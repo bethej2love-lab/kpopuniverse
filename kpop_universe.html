@@ -66,6 +66,42 @@
   #tab-lang{font-size:10px;font-weight:700;letter-spacing:.1em;padding:6px 11px;}
   .tab-sep{width:0.5px;height:14px;background:rgba(255,255,255,0.1);margin:0 1px;flex-shrink:0;}
   body.day .tab-sep{background:rgba(0,0,0,0.1);}
+  /* ── Desktop header ──────────────────────────────── */
+  #desktop-header{
+    position:fixed;top:16px;left:0;right:0;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 16px;z-index:40;pointer-events:none;
+  }
+  @media(max-width:768px){#desktop-header{display:none;}}
+  #dh-left,#dh-right{pointer-events:all;}
+  #dh-left{
+    background:rgba(14,18,34,0.75);
+    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    border:0.5px solid rgba(255,255,255,0.10);border-radius:18px;
+    padding:4px 6px;
+  }
+  #dh-right{
+    background:rgba(14,18,34,0.75);
+    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    border:0.5px solid rgba(255,255,255,0.10);border-radius:22px;
+    padding:4px 6px;display:flex;align-items:center;gap:2px;
+  }
+  body.day #dh-left,body.day #dh-right{
+    background:rgba(245,240,230,0.80);border-color:rgba(0,0,0,0.09);
+  }
+  .dh-btn{
+    background:none;border:none;cursor:pointer;
+    color:rgba(150,165,210,0.55);
+    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
+    font-size:15px;padding:6px 12px;border-radius:16px;
+    transition:background .15s,color .15s;line-height:1;
+  }
+  .dh-btn:hover{background:rgba(255,255,255,0.09);color:rgba(200,215,255,0.92);}
+  .dh-btn.active{background:rgba(255,255,255,0.13);color:rgba(225,232,255,0.98);}
+  body.day .dh-btn{color:rgba(90,75,58,0.5);}
+  body.day .dh-btn:hover{background:rgba(0,0,0,0.06);color:rgba(55,42,28,0.85);}
+  body.day .dh-btn.active{background:rgba(0,0,0,0.09);color:rgba(38,26,14,0.9);}
+  #dh-lang-btn{font-size:10px;font-weight:700;letter-spacing:.1em;padding:6px 11px;}
   /* ── Settings panel ─────────────────────────────── */
   #settings-panel{
     position:fixed;bottom:78px;right:16px;width:252px;
@@ -133,14 +169,37 @@
   body.day .sp-type{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.1);color:rgba(100,85,68,0.65);}
   body.day .sp-type.active{background:rgba(55,80,205,0.13);border-color:rgba(55,80,205,0.22);color:rgba(38,58,162,0.9);}
   .sp-reset{
-    width:100%;padding:7px;background:rgba(255,255,255,0.05);
-    border:0.5px solid rgba(255,255,255,0.1);border-radius:10px;
-    color:rgba(130,148,190,0.65);font-size:10px;letter-spacing:.1em;
-    font-family:inherit;cursor:pointer;transition:all .15s;
+    background:none;border:none;cursor:pointer;padding:1px 0;
+    font-size:9px;letter-spacing:.10em;font-family:inherit;
+    color:rgba(120,138,182,0.30);transition:color .15s;
   }
-  .sp-reset:hover{background:rgba(255,255,255,0.09);color:rgba(175,190,235,0.9);}
-  body.day .sp-reset{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.1);color:rgba(100,88,72,0.65);}
-  body.day .sp-reset:hover{background:rgba(0,0,0,0.08);}
+  .sp-reset:hover{color:rgba(170,188,232,0.68);}
+  body.day .sp-reset{color:rgba(130,115,95,0.28);}
+  body.day .sp-reset:hover{color:rgba(70,55,38,0.60);}
+  /* ── Toggle switch ───────────────────────────────── */
+  .sw{display:inline-flex;align-items:center;cursor:pointer;flex-shrink:0;}
+  .sw input{display:none;}
+  .sw-track{
+    width:28px;height:16px;border-radius:8px;position:relative;
+    background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.11);
+    transition:background .22s,border-color .22s;
+  }
+  .sw input:checked+.sw-track{
+    background:rgba(125,150,255,0.26);border-color:rgba(125,150,255,0.36);
+  }
+  .sw-thumb{
+    position:absolute;top:2.5px;left:2.5px;
+    width:9px;height:9px;border-radius:50%;
+    background:rgba(148,165,218,0.48);
+    transition:transform .22s,background .22s;pointer-events:none;
+  }
+  .sw input:checked+.sw-track .sw-thumb{
+    transform:translateX(12px);background:rgba(185,202,255,0.88);
+  }
+  body.day .sw-track{background:rgba(0,0,0,0.07);border-color:rgba(0,0,0,0.11);}
+  body.day .sw input:checked+.sw-track{background:rgba(55,85,215,0.15);border-color:rgba(55,85,215,0.26);}
+  body.day .sw-thumb{background:rgba(108,94,76,0.46);}
+  body.day .sw input:checked+.sw-track .sw-thumb{background:rgba(48,72,205,0.80);}
   .group-label{
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
     font-size:11px;font-weight:500;letter-spacing:0.1em;
@@ -195,6 +254,20 @@
   body.day .tv-sm{background:rgba(0,0,0,0.05);}
   body.day .tv-sm-title,body.day #tv-big-title{color:#7a6858;}
   body.day .tv-empty{color:#c8b8a8;}
+  /* ── Member card nav ─────────────────────────────── */
+  #tt-nav{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-top:4px;
+  }
+  .tt-nav-btn{
+    background:none;border:none;padding:2px 6px;
+    font-size:13px;line-height:1;cursor:pointer;font-family:inherit;
+    color:rgba(150,170,210,0.22);transition:color .18s;
+  }
+  .tt-nav-btn:hover{color:rgba(190,210,250,0.58);}
+  body.day .tt-nav-btn{color:rgba(110,95,78,0.22);}
+  body.day .tt-nav-btn:hover{color:rgba(60,46,32,0.52);}
+  #tt-counter{display:none;}
   #gc{position:fixed;display:none;max-width:234px;z-index:30;overflow:hidden;pointer-events:all;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
     transition:opacity 0.22s ease,transform 0.22s ease;}
   #gc.gc-enter{opacity:0;transform:translateY(6px) scale(0.97);}
@@ -214,9 +287,23 @@
   #gc-grid .val{font-size:10.5px;color:#9aaece;font-weight:500;}
   body.day #gc-grid .val{color:#5a4c3e;}
   #gc-mem-row{align-items:flex-start;}
-  .gc-mem-name{cursor:pointer;transition:color .12s;}
-  .gc-mem-name:hover{color:#d8eaff;}
-  body.day .gc-mem-name:hover{color:#2a1c10;text-decoration:underline;}
+  #gc-mem-list{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px;}
+  .gc-mem-name{
+    cursor:pointer;padding:2px 8px;border-radius:20px;font-size:10px;
+    background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.13);
+    color:rgba(158,182,218,0.82);letter-spacing:.02em;
+    transition:background .15s,border-color .15s,color .15s;
+  }
+  .gc-mem-name:hover{
+    background:rgba(150,175,255,0.15);border-color:rgba(150,175,255,0.32);
+    color:rgba(210,225,255,0.98);
+  }
+  body.day .gc-mem-name{
+    background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.11);color:rgba(82,67,52,0.82);
+  }
+  body.day .gc-mem-name:hover{
+    background:rgba(55,80,205,0.10);border-color:rgba(55,80,205,0.22);color:rgba(36,54,158,0.95);
+  }
   #gc-tv{margin-top:12px;}
   /* ── Search ──────────────────────────────────── */
   #search-wrap{
@@ -256,12 +343,84 @@
   body.day .sr-item:hover{background:rgba(0,0,0,0.05);}
   .sr-tag{font-size:9px;color:#4a6090;letter-spacing:.07em;text-transform:uppercase;flex-shrink:0;margin-left:8px;}
   body.day .sr-tag{color:#a09078;}
+  /* ── Responsive: desktop panel positions ────────── */
+  @media(min-width:769px){
+    #tabbar{display:none;}
+    #settings-panel{top:58px;bottom:auto;}
+    #search-wrap{top:58px;bottom:auto;left:auto;right:16px;transform:none;width:260px;}
+  }
+  /* ── Journal sidebar ─────────────────────────────── */
+  #journal-sidebar{
+    position:fixed;top:0;left:0;height:100%;width:260px;
+    background:rgba(14,18,34,0.82);
+    backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+    border-right:0.5px solid rgba(255,255,255,0.10);
+    box-shadow:4px 0 24px rgba(0,0,0,0.35);
+    z-index:35;
+    transform:translateX(-260px);
+    transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  }
+  #journal-sidebar.open{transform:translateX(0);}
+  body.day #journal-sidebar{
+    background:rgba(246,241,232,0.92);
+    border-right-color:rgba(0,0,0,0.08);
+    box-shadow:4px 0 24px rgba(80,58,38,0.12);
+  }
+  #journal-toggle{
+    position:absolute;top:50%;right:-26px;transform:translateY(-50%);
+    width:26px;
+    background:rgba(14,18,34,0.75);
+    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    border:0.5px solid rgba(255,255,255,0.10);border-left:none;
+    border-radius:0 10px 10px 0;
+    padding:16px 5px;cursor:pointer;
+    color:rgba(150,165,210,0.65);font-size:11px;line-height:1;
+    transition:background .15s,color .15s;
+    display:flex;align-items:center;justify-content:center;
+  }
+  #journal-toggle:hover{background:rgba(255,255,255,0.09);color:rgba(200,215,255,0.92);}
+  body.day #journal-toggle{
+    background:rgba(245,240,230,0.82);
+    border-color:rgba(0,0,0,0.08);border-left:none;
+    color:rgba(90,75,58,0.6);
+  }
+  body.day #journal-toggle:hover{background:rgba(0,0,0,0.06);color:rgba(55,42,28,0.85);}
+  #journal-toggle-icon{
+    display:inline-block;
+    transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  }
+  #journal-sidebar.open #journal-toggle-icon{transform:rotate(180deg);}
+  #journal-inner{
+    height:100%;padding:56px 16px 20px;
+    display:flex;flex-direction:column;gap:0;
+    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
+    overflow-y:auto;
+  }
 </style>
 </head>
 <body>
 <div id="loading">Loading universe…</div>
-<div id="mobile-title">K-POP UNIVERSE</div>
-<div id="tt"><span id="ttx">×</span><div class="tn" id="tn"></div><div class="tg" id="tg"></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tv"></div></div>
+<div id="mobile-title">케이팝 아이돌 지형도</div>
+<div id="journal-sidebar">
+  <button id="journal-toggle" aria-label="저널 열기/닫기">
+    <span id="journal-toggle-icon">›</span>
+  </button>
+  <div id="journal-inner">
+    <div class="sp-hd">JOURNAL</div>
+  </div>
+</div>
+<div id="desktop-header">
+  <div id="dh-left">
+    <button class="dh-btn" id="dh-lang-btn">KO</button>
+  </div>
+  <div id="dh-right">
+    <button class="dh-btn" id="dh-home-btn">⌂</button>
+    <button class="dh-btn" id="dh-explore-btn">✦</button>
+    <button class="dh-btn" id="dh-search-btn">🔍</button>
+    <button class="dh-btn" id="dh-settings-btn">⚙</button>
+  </div>
+</div>
+<div id="tt"><span id="ttx">×</span><div class="tn" id="tn"></div><div class="tg" id="tg"></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tv"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
@@ -269,9 +428,9 @@
     <div id="gc-name"></div>
     <div id="gc-en"></div>
     <div id="gc-grid">
-      <div class="row"><span class="lbl">소속</span><span class="val" id="gc-co"></span></div>
-      <div class="row"><span class="lbl">데뷔</span><span class="val" id="gc-debut"></span></div>
-      <div class="row" id="gc-mem-row"><span class="lbl">멤버</span><span class="val" id="gc-mem-list"></span></div>
+      <div class="row"><span class="lbl" data-i18n="gcAgency">소속</span><span class="val" id="gc-co"></span></div>
+      <div class="row"><span class="lbl" data-i18n="gcDebut">데뷔</span><span class="val" id="gc-debut"></span></div>
+      <div class="row" id="gc-mem-row"><span class="lbl" data-i18n="gcMember">멤버</span><span class="val" id="gc-mem-list"></span></div>
     </div>
     <div id="gc-tv"></div>
   </div>
@@ -281,17 +440,17 @@
   <div id="search-results"></div>
 </div>
 <div id="settings-panel">
-  <div class="sp-hd">설정</div>
+  <div class="sp-hd" data-i18n="sp_title">설정</div>
   <div class="sp-row">
     <span class="sp-lbl">DAY / NIGHT</span>
-    <button class="sp-tog" id="sp-daynight">NIGHT</button>
+    <label class="sw"><input type="checkbox" id="sp-daynight-chk"><span class="sw-track"><span class="sw-thumb"></span></span></label>
   </div>
   <div class="sp-row">
-    <span class="sp-lbl">연결선</span>
-    <button class="sp-tog on" id="sp-conn">ON</button>
+    <span class="sp-lbl" data-i18n="conn">연결선</span>
+    <label class="sw"><input type="checkbox" id="sp-conn-chk" checked><span class="sw-track"><span class="sw-thumb"></span></span></label>
   </div>
   <div class="sp-sec">
-    <div class="sp-sec-lbl">데뷔 연도</div>
+    <div class="sp-sec-lbl" data-i18n="debutYr">데뷔 연도</div>
     <div class="sp-dual">
       <input type="range" id="sp-dlo" min="2000" max="2026" value="2000">
       <input type="range" id="sp-dhi" min="2000" max="2026" value="2026">
@@ -299,7 +458,7 @@
     <div class="sp-rng-vals"><span id="sp-dlo-v">2000</span><span id="sp-dhi-v">2026</span></div>
   </div>
   <div class="sp-sec">
-    <div class="sp-sec-lbl">멤버 생년</div>
+    <div class="sp-sec-lbl" data-i18n="birthYr">멤버 생년</div>
     <div class="sp-dual">
       <input type="range" id="sp-blo" min="1985" max="2012" value="1985">
       <input type="range" id="sp-bhi" min="1985" max="2012" value="2012">
@@ -307,24 +466,25 @@
     <div class="sp-rng-vals"><span id="sp-blo-v">1985</span><span id="sp-bhi-v">2012</span></div>
   </div>
   <div class="sp-sec">
-    <div class="sp-sec-lbl">그룹 유형</div>
+    <div class="sp-sec-lbl" data-i18n="grpType">그룹 유형</div>
     <div class="sp-types">
-      <button class="sp-type active" data-gender="all">전체</button>
-      <button class="sp-type" data-gender="f">걸그룹</button>
-      <button class="sp-type" data-gender="m">보이그룹</button>
+      <button class="sp-type active" data-gender="all" data-i18n="all">전체</button>
+      <button class="sp-type" data-gender="f" data-i18n="girl">걸그룹</button>
+      <button class="sp-type" data-gender="m" data-i18n="boy">보이그룹</button>
     </div>
   </div>
   <div class="sp-row">
-    <span class="sp-lbl">비활동 멤버</span>
-    <button class="sp-tog on" id="sp-inactive">표시</button>
+    <span class="sp-lbl" data-i18n="inactive">비활동/탈퇴 멤버</span>
+    <label class="sw"><input type="checkbox" id="sp-inactive-chk" checked><span class="sw-track"><span class="sw-thumb"></span></span></label>
   </div>
   <div class="sp-row">
-    <button class="sp-reset" id="sp-reset">↺  초기화</button>
+    <button class="sp-reset" id="sp-reset" data-i18n="reset">↺ 초기화</button>
   </div>
 </div>
 <div id="tabbar">
   <button class="tab-btn" id="tab-lang">KO</button>
   <div class="tab-sep"></div>
+  <button class="tab-btn" id="tab-home">⌂</button>
   <button class="tab-btn" id="tab-explore">✦</button>
   <button class="tab-btn" id="tab-search">🔍</button>
   <button class="tab-btn" id="tab-settings">⚙</button>
@@ -433,7 +593,39 @@ let regularPts=null,sparklePts=null;
 const connLines=[];
 let regColorAttr=null,spkColorAttr=null;
 let currentLang='ko';
+const T={
+  ko:{sp_title:'설정',conn:'연결선',debutYr:'데뷔 연도',birthYr:'멤버 생년',grpType:'그룹 유형',
+      all:'전체',girl:'걸그룹',boy:'보이그룹',inactive:'비활동/탈퇴 멤버',reset:'↺ 초기화',
+      searchPH:'그룹 · 멤버 검색…',mobileTitle:'케이팝 아이돌 지형도',srGroup:'그룹',
+      preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcMember:'멤버'},
+  en:{sp_title:'Settings',conn:'Lines',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
+      all:'All',girl:'Girl Groups',boy:'Boy Groups',inactive:'Inactive / Left',reset:'↺ Reset',
+      searchPH:'Search groups · members…',mobileTitle:'K-pop Idol Map',srGroup:'Group',
+      preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcMember:'Members'}
+};
+function applyLang(){
+  const t=T[currentLang];
+  groupLabels.forEach(({el,ko,en})=>{el.textContent=currentLang==='ko'?ko:(en||ko);});
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k];});
+  const si=document.getElementById('search-input');if(si)si.placeholder=t.searchPH;
+  const mt=document.getElementById('mobile-title');if(mt)mt.textContent=t.mobileTitle;
+  // 열린 카드 즉시 재렌더링
+  const gcEl=document.getElementById('gc');
+  if(gcEl.style.display!=='none'&&_openGCko){
+    const sl=gcEl.style.left,st=gcEl.style.top;
+    showGC(_openGCko,parseInt(sl)||0,parseInt(st)||0);
+    gcEl.style.left=sl;gcEl.style.top=st;
+  }
+  const ttEl=document.getElementById('tt');
+  if(ttEl.style.display!=='none'&&_openTArtist){
+    const sl=ttEl.style.left,st=ttEl.style.top;
+    showT(_openTArtist,0,0);
+    ttEl.style.left=sl;ttEl.style.top=st;
+  }
+}
 const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',showInactive:true,connLines:true};
+const FOCUS_DIM=0.06;
+let focusGroupKo=null;
 const flyState={
   active:false,
   t0:0,dur:800,
@@ -521,7 +713,10 @@ async function buildUniverse(){
         uBaseOp:{value:0.0},
         uFillOp:{value:0.0},
         uSunDir:{value:new THREE.Vector3(0.6,0.8,0.4).normalize()},
-        uFilterOp:{value:1.0}
+        uFilterOp:{value:1.0},
+        uSpecMult:{value:1.0},
+        uSpecPow:{value:52.0},
+        uAmbient:{value:0.18}
       },
       vertexShader:`
         varying vec3 vNormal;
@@ -539,6 +734,9 @@ async function buildUniverse(){
         uniform float uFillOp;
         uniform vec3 uSunDir;
         uniform float uFilterOp;
+        uniform float uSpecMult;
+        uniform float uSpecPow;
+        uniform float uAmbient;
         varying vec3 vNormal;
         varying vec3 vViewDir;
         void main(){
@@ -548,11 +746,14 @@ async function buildUniverse(){
           float fresnel=pow(1.0-vd,1.8);
           vec3 l=normalize(uSunDir);
           float lambert=max(0.0,dot(n,l));
-          float diffuse=0.18+0.82*lambert;
+          float diffuse=uAmbient+(1.0-uAmbient)*lambert;
           vec3 h=normalize(l+v);
-          float spec=pow(max(0.0,dot(n,h)),52.0)*0.22;
-          float fill=uFillOp*(diffuse+spec);
-          gl_FragColor=vec4(uColor,(fresnel*uFresnelMult+uBaseOp+fill)*uFilterOp);
+          float spec=pow(max(0.0,dot(n,h)),uSpecPow)*uSpecMult;
+          // 색으로 명암 표현 (alpha를 낮추지 않으므로 검은 고리 없음)
+          vec3 col=uColor*(diffuse+0.10)+vec3(spec*0.20);
+          // alpha: close-up에서만 투명, 줌아웃 시 불투명
+          float alpha=(uBaseOp+uFillOp+fresnel*uFresnelMult)*uFilterOp;
+          gl_FragColor=vec4(clamp(col,0.0,1.0),clamp(alpha,0.0,1.0));
         }`,
       transparent:true,side:THREE.DoubleSide,depthWrite:false
     });
@@ -565,6 +766,15 @@ async function buildUniverse(){
     div.className='group-label';
     div.textContent=ko;
     div.style.color=`rgb(${Math.min(255,r*1.5|0)},${Math.min(255,g*1.5|0)},${Math.min(255,b*1.5|0)})`;
+    div.style.cursor='pointer';
+    div.addEventListener('click',e=>{
+      e.stopPropagation();
+      const bm=bubbleMeshes.find(b=>b.ko===ko);
+      closeCards();
+      if(bm)flyToBubble(bm.mesh.position,bm.radius);
+      showGC(ko,window.innerWidth/2,window.innerHeight*0.4);
+      pulseGroup(ko);
+    });
     const label=new THREE.CSS2DObject(div);
     label.position.set(0,radius+1.0,0);
     bubble.add(label);
@@ -603,6 +813,7 @@ async function buildUniverse(){
 
   // ── Connection lines ──────────────────────────────
   connData.forEach(conn=>{
+    if(conn.type!=='member')return;
     const artA=artistByName[conn.a], artB=artistByName[conn.b];
     if(!artA||!artB||!artA._worldPos||!artB._worldPos)return;
     const geo=new THREE.BufferGeometry().setFromPoints([artA._worldPos,artB._worldPos]);
@@ -675,8 +886,8 @@ function toggleDay(){
     m.uniforms.uFresnelMult.value=dayMode?0.22:0.15;
     m.uniforms.uBaseOp.value=dayMode?0.06:0.0;
   });
-  const spDN=document.getElementById('sp-daynight');
-  if(spDN){spDN.textContent=dayMode?'DAY':'NIGHT';spDN.classList.toggle('on',dayMode);}
+  const spDN=document.getElementById('sp-daynight-chk');
+  if(spDN)spDN.checked=dayMode;
 }
 
 // ── Animate ───────────────────────────────────────
@@ -697,24 +908,39 @@ function animate(){
   connLines.forEach(({line,mid})=>{
     line.visible=filterCfg.connLines&&camera.position.distanceTo(mid)<20;
   });
+  // 줌 레벨: 카메라~원점 거리 기반 (홈≈120, 최대≈300)
+  const camDist=camera.position.length();
+  const zoomT=Math.max(0,Math.min(1,(camDist-90)/190));
+  const zoomBoost=-(Math.cos(Math.PI*zoomT)-1)/2;
   let colorsDirty=false;
   bubbleMeshes.forEach(({mesh,labelEl})=>{
     const dist=camera.position.distanceTo(mesh.position);
     const t=Math.max(0,Math.min(1,(dist-15)/100));
     const f=-(Math.cos(Math.PI*t)-1)/2;
-    mesh.material.uniforms.uFillOp.value=f*0.88;
+    mesh.material.uniforms.uFillOp.value=f*(0.44+zoomBoost*0.24);
+    mesh.material.uniforms.uBaseOp.value=dayMode?0.06:0;
+    mesh.material.uniforms.uFresnelMult.value=(dayMode?0.22:0.18)+zoomBoost*0.28;
+    mesh.material.uniforms.uSpecMult.value=1.2+zoomBoost*7.0;
+    mesh.material.uniforms.uSpecPow.value=60.0+zoomBoost*250.0;
+    mesh.material.uniforms.uAmbient.value=0.38-zoomBoost*0.10;
     const ftgt=mesh._filterTarget??1;
     mesh._filterAlpha=mesh._filterAlpha??1;
     mesh._filterAlpha+=(ftgt-mesh._filterAlpha)*0.22;
-    mesh.material.uniforms.uFilterOp.value=mesh._filterAlpha;
-    if(labelEl)labelEl.style.opacity=mesh._filterAlpha;
+    mesh._focusTarget=mesh._focusTarget??1;
+    mesh._focusAlpha=mesh._focusAlpha??1;
+    mesh._focusAlpha+=(mesh._focusTarget-mesh._focusAlpha)*0.10;
+    mesh.material.uniforms.uFilterOp.value=mesh._filterAlpha*mesh._focusAlpha;
   });
   ARTISTS.forEach(a=>{
     if(a._ptsType===undefined)return;
     const prev=a._filterAlpha;
     a._filterAlpha+=(a._filterTarget-prev)*0.22;
-    if(Math.abs(a._filterAlpha-prev)<0.0005)return;
-    const fa=a._filterAlpha;
+    a._focusTarget=a._focusTarget??1;
+    a._focusAlpha=a._focusAlpha??1;
+    const prevF=a._focusAlpha;
+    a._focusAlpha+=(a._focusTarget-prevF)*0.10;
+    if(Math.abs(a._filterAlpha-prev)<0.0005&&Math.abs(a._focusAlpha-prevF)<0.0005)return;
+    const fa=a._filterAlpha*a._focusAlpha;
     const attr=a._ptsType==='sparkle'?spkColorAttr:regColorAttr;
     if(!attr)return;
     const i=a._ptsIdx*3;
@@ -722,9 +948,14 @@ function animate(){
     colorsDirty=true;
   });
   if(colorsDirty){if(regColorAttr)regColorAttr.needsUpdate=true;if(spkColorAttr)spkColorAttr.needsUpdate=true;}
-  groupLabels.forEach(({el,worldPos})=>{
+  groupLabels.forEach(({el,worldPos,ko})=>{
     const d=camera.position.distanceTo(worldPos);
-    el.style.opacity=d<40?'1':d<70?String(((70-d)/30).toFixed(2)):'0';
+    const distFade=d<40?1:d<70?(70-d)/30:0;
+    const bm=bubbleMeshes.find(b=>b.ko===ko);
+    const fa=(bm?bm.mesh._filterAlpha??1:1)*(bm?bm.mesh._focusAlpha??1:1);
+    const op=distFade*fa;
+    el.style.opacity=op.toFixed(3);
+    el.style.pointerEvents=op>0.15?'auto':'none';
   });
   renderer.render(scene,camera);
   labelRenderer.render(scene,camera);
@@ -783,7 +1014,7 @@ function doSearch(q){
       const bm=bubbleMeshes.find(b=>b.ko===ko);
       if(bm){
         const s=Math.min(_mScore(ko,q,ql),_mScore(enN,q,ql));
-        hits.push({type:'group',name:ko,pos:bm.mesh.position.clone(),data:ko,score:s+0.5});
+        hits.push({type:'group',name:currentLang==='ko'?ko:(info.en||ko),pos:bm.mesh.position.clone(),data:ko,score:s+0.5});
       }
     }
   });
@@ -791,7 +1022,7 @@ function doSearch(q){
     const koN=a.name.ko,enN=a.name.en||'';
     if(koN.includes(q)||enN.toLowerCase().includes(ql)){
       const s=Math.min(_mScore(koN,q,ql),_mScore(enN,q,ql));
-      hits.push({type:'member',name:koN,sub:a.group.ko,pos:a._worldPos,data:a,score:s});
+      hits.push({type:'member',name:currentLang==='ko'?koN:(a.name.en||koN),sub:currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko),pos:a._worldPos,data:a,score:s});
     }
   });
   hits.sort((a,b)=>a.score-b.score);
@@ -799,7 +1030,7 @@ function doSearch(q){
   hits.slice(0,8).forEach(h=>{
     const div=document.createElement('div');
     div.className='sr-item';
-    div.innerHTML=`<span>${h.name}</span><span class="sr-tag">${h.type==='group'?'그룹':h.sub}</span>`;
+    div.innerHTML=`<span>${h.name}</span><span class="sr-tag">${h.type==='group'?T[currentLang].srGroup:h.sub}</span>`;
     div.addEventListener('click',e=>{
       e.stopPropagation();
       closeCards();
@@ -826,6 +1057,23 @@ _si.addEventListener('click',e=>e.stopPropagation());
 _sr.addEventListener('click',e=>e.stopPropagation());
 document.getElementById('search-wrap').addEventListener('click',e=>e.stopPropagation());
 
+// ── Member card nav state ─────────────────────────
+let ttGroupMembers=[];
+let ttMemberIdx=0;
+let _openGCko=null;
+let _openTArtist=null;
+function navigateMember(dir){
+  if(ttGroupMembers.length<=1)return;
+  ttMemberIdx=(ttMemberIdx+dir+ttGroupMembers.length)%ttGroupMembers.length;
+  const m=ttGroupMembers[ttMemberIdx];
+  const ttEl=document.getElementById('tt');
+  const savedLeft=ttEl.style.left;
+  const savedTop=ttEl.style.top;
+  showT(m,0,0);
+  ttEl.style.left=savedLeft;
+  ttEl.style.top=savedTop;
+  if(m._worldPos)pulseMember(m);
+}
 // ── Card helpers ──────────────────────────────────
 function ytId(u){
   if(!u)return'';
@@ -835,6 +1083,7 @@ function ytId(u){
 function closeCards(){
   document.getElementById('tt').style.display='none';
   document.getElementById('gc').style.display='none';
+  clearFocus();_openGCko=null;_openTArtist=null;
 }
 
 function pulseGroup(ko){
@@ -882,7 +1131,16 @@ function pulseMember(artist){
   makeRipple(0);
   makeRipple(700); // 두 번째 파문
 }
-document.getElementById('ttx').addEventListener('click',e=>{e.stopPropagation();document.getElementById('tt').style.display='none';});
+document.getElementById('ttx').addEventListener('click',e=>{e.stopPropagation();closeCards();});
+document.getElementById('tt-prev').addEventListener('click',e=>{e.stopPropagation();navigateMember(-1);});
+document.getElementById('tt-next').addEventListener('click',e=>{e.stopPropagation();navigateMember(1);});
+// 스와이프
+let _ttSX=0;
+document.getElementById('tt').addEventListener('pointerdown',e=>{_ttSX=e.clientX;},{passive:true});
+document.getElementById('tt').addEventListener('pointerup',e=>{
+  const dx=e.clientX-_ttSX;
+  if(Math.abs(dx)>44)navigateMember(dx<0?1:-1);
+},{passive:true});
 document.getElementById('gcx').addEventListener('click',e=>{e.stopPropagation();document.getElementById('gc').style.display='none';});
 
 function positionCard(el,cx,cy,cardW,estH){
@@ -896,15 +1154,22 @@ function positionCard(el,cx,cy,cardW,estH){
 }
 
 function showT(a,cx,cy){
+  setFocus(a.group.ko);_openTArtist=a;
   const el=document.getElementById('tt');
   el.style.display='block';
-  document.getElementById('tn').textContent=a.name.ko;
+  document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
   const tgEl=document.getElementById('tg');
-  tgEl.textContent=a.group.ko;
-  tgEl.onclick=e=>{e.stopPropagation();closeCards();showGC(a.group.ko,cx,cy);};
+  tgEl.textContent=currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko);
+  tgEl.onclick=e=>{
+    e.stopPropagation();
+    const ttEl=document.getElementById('tt');
+    const gx=parseInt(ttEl.style.left)||cx;
+    const gy=parseInt(ttEl.style.top)||cy;
+    closeCards();showGC(a.group.ko,gx,gy);
+  };
   document.getElementById('tco').textContent=a.co||'';
   const meta=[];
-  if(a.nat)meta.push(typeof a.nat==='object'?a.nat.ko:a.nat);
+  if(a.nat){const n=a.nat;meta.push(typeof n==='object'?(currentLang==='ko'?(n.ko||n.en):(n.en||n.ko)):n);}
   if(a.bday){
     const[by,bm,bd]=a.bday.split('.').map(Number);
     const now=new Date();
@@ -917,7 +1182,7 @@ function showT(a,cx,cy){
   tv.innerHTML='';
   const songs=(a.songs||[]).slice(0,3);
   if(!songs.length){
-    const p=document.createElement('div');p.className='tv-empty';p.textContent='준비 중';
+    const p=document.createElement('div');p.className='tv-empty';p.textContent=T[currentLang].preparing;
     tv.appendChild(p);
   }else{
     const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
@@ -943,12 +1208,21 @@ function showT(a,cx,cy){
   }
   const cardW=songs.length?264:210;
   el.style.maxWidth=cardW+'px';
-  const estH=130+(songs.length?120+(songs.length>1?78:0):20);
+  const estH=130+(songs.length?120+(songs.length>1?78:0):20)+36;
   positionCard(el,cx,cy,cardW,estH);
+  // nav
+  ttGroupMembers=ARTISTS.filter(m=>m.group.ko===a.group.ko);
+  ttMemberIdx=ttGroupMembers.findIndex(m=>m===a);
+  if(ttMemberIdx<0)ttMemberIdx=0;
+  const navEl=document.getElementById('tt-nav');
+  const ctrEl=document.getElementById('tt-counter');
+  navEl.style.display=ttGroupMembers.length>1?'flex':'none';
+  ctrEl.textContent=ttGroupMembers.length>1?`${ttMemberIdx+1} / ${ttGroupMembers.length}`:'';
 }
 
 function showGC(ko,cx,cy){
   const info=GROUPS[ko];if(!info)return;
+  setFocus(ko);_openGCko=ko;
   const el=document.getElementById('gc');
   el.classList.add('gc-enter');
   el.style.display='block';
@@ -957,17 +1231,16 @@ function showGC(ko,cx,cy){
   document.getElementById('gc-bar').style.background=
     `linear-gradient(90deg,rgba(${r},${g},${b},0.75),rgba(${r},${g},${b},0.35))`;
   const nameEl=document.getElementById('gc-name');
-  nameEl.textContent=ko;
+  nameEl.textContent=currentLang==='ko'?ko:(info.en||ko);
   nameEl.style.color=dayMode?`rgb(${Math.max(0,r-30)},${Math.max(0,g-30)},${Math.max(0,b-30)})`:'';
-  document.getElementById('gc-en').textContent=info.en||'';
+  document.getElementById('gc-en').textContent=currentLang==='ko'?(info.en||''):'';
   document.getElementById('gc-co').textContent=info.co||'';
   document.getElementById('gc-debut').textContent=info.debut||'';
   const memListEl=document.getElementById('gc-mem-list');
   memListEl.innerHTML='';
-  ARTISTS.filter(a=>a.group.ko===ko&&a.active).forEach((m,i)=>{
-    if(i>0)memListEl.appendChild(document.createTextNode(' · '));
+  ARTISTS.filter(a=>a.group.ko===ko&&a.active).forEach(m=>{
     const sp=document.createElement('span');sp.className='gc-mem-name';
-    sp.textContent=m.name.ko;
+    sp.textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
     sp.addEventListener('click',e=>{e.stopPropagation();closeCards();showT(m,cx,cy);});
     memListEl.appendChild(sp);
   });
@@ -1062,18 +1335,32 @@ function applyFilter(){
   });
 }
 
+// ── Focus mode ────────────────────────────────────
+function setFocus(groupKo){
+  focusGroupKo=groupKo;
+  bubbleMeshes.forEach(({mesh,ko})=>{mesh._focusTarget=(ko===groupKo)?1:FOCUS_DIM;});
+  ARTISTS.forEach(a=>{a._focusTarget=(a.group.ko===groupKo)?1:FOCUS_DIM;});
+}
+function clearFocus(){
+  focusGroupKo=null;
+  bubbleMeshes.forEach(({mesh})=>{mesh._focusTarget=1;});
+  ARTISTS.forEach(a=>{a._focusTarget=1;});
+}
 // ── Tab bar ───────────────────────────────────────
 function closePanels(){
   document.getElementById('search-wrap').classList.remove('open');
   document.getElementById('settings-panel').classList.remove('open');
-  document.getElementById('tab-search').classList.remove('active');
-  document.getElementById('tab-settings').classList.remove('active');
+  ['tab-search','tab-settings','dh-search-btn','dh-settings-btn'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.classList.remove('active');
+  });
 }
 document.getElementById('tab-lang').addEventListener('click',e=>{
   e.stopPropagation();
   currentLang=currentLang==='ko'?'en':'ko';
-  document.getElementById('tab-lang').textContent=currentLang.toUpperCase();
-  groupLabels.forEach(({el,ko,en})=>{el.textContent=currentLang==='ko'?ko:(en||ko);});
+  const t=currentLang.toUpperCase();
+  document.getElementById('tab-lang').textContent=t;
+  const dhl=document.getElementById('dh-lang-btn');if(dhl)dhl.textContent=t;
+  applyLang();
 });
 document.getElementById('tab-explore').addEventListener('click',e=>{
   e.stopPropagation();
@@ -1093,9 +1380,10 @@ document.getElementById('tab-search').addEventListener('click',e=>{
   const sw=document.getElementById('search-wrap');
   const sp=document.getElementById('settings-panel');
   const open=sw.classList.contains('open');
-  sp.classList.remove('open');document.getElementById('tab-settings').classList.remove('active');
+  sp.classList.remove('open');
+  ['tab-settings','dh-settings-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
   sw.classList.toggle('open',!open);
-  document.getElementById('tab-search').classList.toggle('active',!open);
+  ['tab-search','dh-search-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',!open);});
   if(!open)setTimeout(()=>document.getElementById('search-input').focus(),50);
 });
 document.getElementById('tab-settings').addEventListener('click',e=>{
@@ -1103,18 +1391,16 @@ document.getElementById('tab-settings').addEventListener('click',e=>{
   const sp=document.getElementById('settings-panel');
   const sw=document.getElementById('search-wrap');
   const open=sp.classList.contains('open');
-  sw.classList.remove('open');document.getElementById('tab-search').classList.remove('active');
+  sw.classList.remove('open');
+  ['tab-search','dh-search-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
   sp.classList.toggle('open',!open);
-  document.getElementById('tab-settings').classList.toggle('active',!open);
+  ['tab-settings','dh-settings-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',!open);});
 });
 
 // ── Settings panel controls ───────────────────────
-document.getElementById('sp-daynight').addEventListener('click',e=>{e.stopPropagation();toggleDay();});
-document.getElementById('sp-conn').addEventListener('click',e=>{
-  e.stopPropagation();
-  filterCfg.connLines=!filterCfg.connLines;
-  const b=document.getElementById('sp-conn');
-  b.textContent=filterCfg.connLines?'ON':'OFF';b.classList.toggle('on',filterCfg.connLines);
+document.getElementById('sp-daynight-chk').addEventListener('change',e=>{e.stopPropagation();toggleDay();});
+document.getElementById('sp-conn-chk').addEventListener('change',e=>{
+  e.stopPropagation();filterCfg.connLines=e.target.checked;
 });
 function syncDualZ(loId,hiId,activeId){
   document.getElementById(loId).style.zIndex=activeId===loId?3:2;
@@ -1149,12 +1435,8 @@ document.querySelectorAll('.sp-type').forEach(btn=>{
     btn.classList.add('active');filterCfg.gender=btn.dataset.gender;applyFilter();
   });
 });
-document.getElementById('sp-inactive').addEventListener('click',e=>{
-  e.stopPropagation();
-  filterCfg.showInactive=!filterCfg.showInactive;
-  const b=document.getElementById('sp-inactive');
-  b.textContent=filterCfg.showInactive?'표시':'숨김';b.classList.toggle('on',filterCfg.showInactive);
-  applyFilter();
+document.getElementById('sp-inactive-chk').addEventListener('change',e=>{
+  e.stopPropagation();filterCfg.showInactive=e.target.checked;applyFilter();
 });
 document.getElementById('sp-reset').addEventListener('click',e=>{
   e.stopPropagation();
@@ -1169,11 +1451,63 @@ document.getElementById('sp-reset').addEventListener('click',e=>{
   document.getElementById('sp-blo-v').textContent='1985';document.getElementById('sp-bhi-v').textContent='2012';
   syncDualZ('sp-dlo','sp-dhi','sp-dhi');syncDualZ('sp-blo','sp-bhi','sp-bhi');
   document.querySelectorAll('.sp-type').forEach((b,i)=>b.classList.toggle('active',i===0));
-  const ib=document.getElementById('sp-inactive');ib.textContent='표시';ib.classList.add('on');
-  const cb=document.getElementById('sp-conn');cb.textContent='ON';cb.classList.add('on');
+  document.getElementById('sp-inactive-chk').checked=true;
+  document.getElementById('sp-conn-chk').checked=true;
   applyFilter();
 });
 
+// ── Desktop header buttons ─────────────────────────
+document.getElementById('dh-lang-btn').addEventListener('click',e=>{
+  e.stopPropagation();
+  currentLang=currentLang==='ko'?'en':'ko';
+  const t=currentLang.toUpperCase();
+  document.getElementById('tab-lang').textContent=t;
+  document.getElementById('dh-lang-btn').textContent=t;
+  applyLang();
+});
+function flyHome(){
+  closeCards();closePanels();
+  _startFly(new THREE.Vector3(0,0,0),new THREE.Vector3(0,8,120),1000);
+  flyState.onComplete=()=>{controls.autoRotate=true;};
+}
+document.getElementById('dh-home-btn').addEventListener('click',e=>{e.stopPropagation();flyHome();});
+document.getElementById('tab-home').addEventListener('click',e=>{e.stopPropagation();flyHome();});
+document.getElementById('dh-explore-btn').addEventListener('click',e=>{
+  e.stopPropagation();
+  if(!bubbleMeshes.length)return;
+  const bm=bubbleMeshes[Math.floor(Math.random()*bubbleMeshes.length)];
+  closePanels();closeCards();
+  flyToBubble(bm.mesh.position,bm.radius);
+  flyState.onComplete=()=>{
+    setTimeout(()=>{
+      showGC(bm.ko,window.innerWidth/2,window.innerHeight*0.38);
+      pulseGroup(bm.ko);
+    },150);
+  };
+});
+document.getElementById('dh-search-btn').addEventListener('click',e=>{
+  e.stopPropagation();
+  const sw=document.getElementById('search-wrap');
+  const sp=document.getElementById('settings-panel');
+  const open=sw.classList.contains('open');
+  sp.classList.remove('open');
+  ['tab-settings','dh-settings-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
+  sw.classList.toggle('open',!open);
+  ['tab-search','dh-search-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',!open);});
+  if(!open)setTimeout(()=>document.getElementById('search-input').focus(),50);
+});
+document.getElementById('dh-settings-btn').addEventListener('click',e=>{
+  e.stopPropagation();
+  const sp=document.getElementById('settings-panel');
+  const sw=document.getElementById('search-wrap');
+  const open=sp.classList.contains('open');
+  sw.classList.remove('open');
+  ['tab-search','dh-search-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
+  sp.classList.toggle('open',!open);
+  ['tab-settings','dh-settings-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',!open);});
+});
+document.getElementById('desktop-header').addEventListener('click',e=>e.stopPropagation());
+document.getElementById('desktop-header').addEventListener('pointerdown',e=>e.stopPropagation());
 ['settings-panel','search-wrap','tabbar'].forEach(id=>{
   document.getElementById(id).addEventListener('pointerdown',e=>e.stopPropagation());
 });
@@ -1223,6 +1557,14 @@ window.addEventListener('click',e=>{
   if(a){closeCards();showT(a,e.clientX,e.clientY);return;}
   closeCards();
 });
+
+// ── Journal sidebar ───────────────────────────────
+document.getElementById('journal-toggle').addEventListener('click',e=>{
+  e.stopPropagation();
+  document.getElementById('journal-sidebar').classList.toggle('open');
+});
+document.getElementById('journal-sidebar').addEventListener('click',e=>e.stopPropagation());
+document.getElementById('journal-sidebar').addEventListener('pointerdown',e=>e.stopPropagation());
 
 buildUniverse().catch(err=>{
   document.getElementById('loading').textContent='Error: '+err.message;
