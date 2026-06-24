@@ -69,24 +69,18 @@
   /* ── Desktop header ──────────────────────────────── */
   #desktop-header{
     position:fixed;top:16px;left:0;right:0;
-    display:flex;align-items:center;justify-content:space-between;
+    display:flex;align-items:center;justify-content:flex-end;
     padding:0 16px;z-index:40;pointer-events:none;
   }
   @media(max-width:768px){#desktop-header{display:none;}}
-  #dh-left,#dh-right{pointer-events:all;}
-  #dh-left{
-    background:rgba(18,22,40,0.82);
-    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-    box-shadow:0 4px 24px rgba(0,0,0,0.45);
-    border-radius:18px;padding:4px 6px;
-  }
+  #dh-right{pointer-events:all;}
   #dh-right{
     background:rgba(18,22,40,0.82);
     backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
     box-shadow:0 4px 24px rgba(0,0,0,0.45);
     border-radius:22px;padding:4px 6px;display:flex;align-items:center;gap:2px;
   }
-  body.day #dh-left,body.day #dh-right{
+  body.day #dh-right{
     background:rgba(245,240,230,0.88);box-shadow:0 4px 20px rgba(80,60,40,0.13);
   }
   .dh-btn{
@@ -224,6 +218,7 @@
   body.day #tt{color:#4a3c32;}
   #ttx{position:absolute;top:9px;right:11px;font-size:15px;color:rgba(150,170,215,0.65);cursor:pointer;line-height:1;}
   body.day #ttx{color:rgba(158,142,128,0.5);}
+  #tt-bar{height:2px;width:100%;margin-bottom:12px;}
   .tn{font-size:14px;font-weight:700;color:#d8e4f6;margin-bottom:3px;padding-right:18px;letter-spacing:-.02em;}
   body.day .tn{color:#241c14;}
   .tg{font-size:10px;color:#aec8e8;margin-bottom:1px;letter-spacing:.05em;font-weight:500;text-transform:uppercase;cursor:pointer;transition:color .12s;}
@@ -252,10 +247,8 @@
   #tv-big-wrap.is-shorts #tv-big{aspect-ratio:9/16;width:40%;margin:0 auto;}
   #tv-small-row .tv-sm.is-shorts,.tv-more-wrap .tv-sm.is-shorts{flex:0 0 52px;width:52px;}
   .tv-sm.is-shorts img{aspect-ratio:9/16;}
-  #tv-grid .tv-sm.is-shorts{width:100%;}
-  #tv-grid .tv-sm.is-shorts img{width:55%;margin:0 auto;}
-  /* 웹 3열 그리드 */
-  #tv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:5px;}
+  /* 웹 2열 그리드 (가로 영상 먼저, 쇼츠 짝수로 뒤에) */
+  #tv-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px;}
   /* 더보기 버튼 */
   .tv-more-btn{width:100%;margin-top:5px;padding:5px 8px;border:none;border-radius:8px;background:rgba(255,255,255,0.08);color:rgba(160,180,225,0.80);font-family:inherit;font-size:10px;font-weight:600;cursor:pointer;letter-spacing:.02em;transition:background .13s,color .13s;}
   .tv-more-btn:hover{background:rgba(255,255,255,0.13);color:rgba(205,220,255,0.95);}
@@ -339,10 +332,49 @@
   body.day .gc-sns-link{background:rgba(55,80,200,0.07);border-color:rgba(55,80,200,0.18);color:rgba(45,65,180,0.75);}
   body.day .gc-sns-link:hover{background:rgba(55,80,200,0.14);color:rgba(30,50,160,0.95);}
   @media(max-width:768px){#side-panel{display:none;}}
+  /* ── Member panel (그룹 카드 왼쪽 확장) ───────────── */
+  #member-panel{
+    position:fixed;right:320px;top:0;bottom:0;width:320px;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+    z-index:34;pointer-events:none;
+    transform:translateX(100%);transition:transform 0.26s cubic-bezier(0.32,0,0.15,1);
+    background:rgba(16,20,36,0.84);
+    backdrop-filter:blur(40px) saturate(190%);-webkit-backdrop-filter:blur(40px) saturate(190%);
+    box-shadow:-8px 0 40px rgba(0,0,0,0.45);
+  }
+  #member-panel.open{transform:translateX(0);pointer-events:all;}
+  body.day #member-panel{
+    background:rgba(250,246,240,0.92);
+    box-shadow:-8px 0 36px rgba(80,58,38,0.10);
+  }
+  #member-panel>#tt{
+    position:relative!important;display:block!important;max-width:100%!important;
+    width:100%!important;border-radius:0!important;border:none!important;
+    box-shadow:none!important;background:none!important;
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+    padding-top:120px;
+  }
+  #member-panel>#tt #ttx{display:none!important;}
+  /* 접기 탭: member-panel 왼쪽 중간 */
+  #tt-collapse{
+    position:fixed;right:640px;top:50%;transform:translateY(-50%);
+    width:26px;height:52px;border:none;border-radius:8px 0 0 8px;
+    background:rgba(20,24,44,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    color:rgba(160,185,230,0.80);font-size:18px;line-height:1;
+    cursor:pointer;padding:0;z-index:34;
+    opacity:0;pointer-events:none;
+    transition:opacity 0.22s,background 0.15s,color 0.15s;
+    display:flex;align-items:center;justify-content:center;
+  }
+  #member-panel.open~#tt-collapse{opacity:1;pointer-events:all;}
+  #tt-collapse:hover{background:rgba(40,50,80,0.96);color:rgba(200,220,255,0.95);}
+  body.day #tt-collapse{background:rgba(242,237,230,0.94);color:rgba(100,80,60,0.70);}
+  body.day #tt-collapse:hover{background:rgba(220,210,195,0.98);color:rgba(70,50,30,0.90);}
+  @media(max-width:768px){#member-panel{display:none;}#tt-collapse{display:none;}}
   /* ── Member card nav ──────────────────────────────── */
   #tt-nav{
     display:flex;align-items:center;justify-content:space-between;
-    margin-top:4px;
+    margin-top:2px;margin-bottom:8px;
   }
   .tt-nav-btn{
     background:none;border:none;padding:2px 6px;
@@ -360,12 +392,15 @@
   #gc-inner{padding:12px 16px 14px;}
   #gcx{position:absolute;top:11px;right:11px;font-size:15px;color:rgba(150,170,215,0.70);cursor:pointer;line-height:1;}
   body.day #gcx{color:rgba(158,142,128,0.5);}
-  #gc-logo-wrap{margin-bottom:10px;}
-  #gc-logo{height:44px;max-width:80%;object-fit:contain;display:block;filter:brightness(0) invert(1);}
-  body.day #gc-logo{filter:none;}
-  #gc-name{font-size:15px;font-weight:700;margin-bottom:1px;padding-right:16px;letter-spacing:-.02em;color:#d8e4f6;}
+  #gc-header{display:flex;align-items:center;gap:10px;padding-right:20px;margin-bottom:10px;}
+  #gc-header-text{flex:1;min-width:0;}
+  #gc-logo-wrap{flex-shrink:0;}
+  #gc-logo-wrap svg{height:28px;width:auto;display:block;}
+  #gc-logo-wrap svg,#gc-logo-wrap svg g{fill:rgba(225,235,255,0.90);}
+  body.day #gc-logo-wrap svg,body.day #gc-logo-wrap svg g{fill:#38302E;}
+  #gc-name{font-size:15px;font-weight:700;margin-bottom:2px;padding-right:0;letter-spacing:-.02em;color:#d8e4f6;}
   body.day #gc-name{color:inherit;}
-  #gc-en{font-size:9px;letter-spacing:.1em;color:#7898b8;margin-bottom:10px;text-transform:uppercase;font-weight:500;}
+  #gc-en{font-size:9px;letter-spacing:.1em;color:#7898b8;margin-bottom:0;text-transform:uppercase;font-weight:500;}
   body.day #gc-en{color:#b8a894;}
   #gc-grid{display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-top:11px;border-top:0.5px solid rgba(255,255,255,0.10);}
   body.day #gc-grid{border-top-color:rgba(150,130,110,0.14);}
@@ -501,24 +536,26 @@
   </div>
 </div>
 <div id="desktop-header">
-  <div id="dh-left">
-    <button class="dh-btn" id="dh-lang-btn">KO</button>
-  </div>
   <div id="dh-right">
     <button class="dh-btn" id="dh-home-btn">⌂</button>
+    <button class="dh-btn" id="dh-lang-btn">KO</button>
     <button class="dh-btn" id="dh-explore-btn">✦</button>
     <button class="dh-btn" id="dh-search-btn"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="display:block"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
     <button class="dh-btn" id="dh-settings-btn">⚙</button>
   </div>
 </div>
-<div id="tt"><span id="ttx">×</span><div class="tn" id="tn"></div><div class="tg" id="tg"></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tv"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div></div>
+<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div class="tn" id="tn"></div><div class="tg" id="tg"></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
     <span id="gcx">×</span>
-    <div id="gc-logo-wrap" style="display:none"><img id="gc-logo" alt=""></div>
-    <div id="gc-name"></div>
-    <div id="gc-en"></div>
+    <div id="gc-header">
+      <div id="gc-header-text">
+        <div id="gc-name"></div>
+        <div id="gc-en"></div>
+      </div>
+      <div id="gc-logo-wrap" style="display:none"></div>
+    </div>
     <div id="gc-grid">
       <div class="row"><span class="lbl" data-i18n="gcAgency">소속</span><span class="val" id="gc-co"></span></div>
       <div class="row"><span class="lbl" data-i18n="gcDebut">데뷔</span><span class="val" id="gc-debut"></span></div>
@@ -581,6 +618,8 @@
   <div id="mob-sheet-inner"></div>
 </div>
 <div id="side-panel"></div>
+<div id="member-panel"></div>
+<button id="tt-collapse" aria-label="멤버 카드 접기">‹</button>
 <div id="yt-lightbox">
   <div id="yt-lb-wrap">
     <button id="yt-lb-close">✕</button>
@@ -588,9 +627,8 @@
   </div>
 </div>
 <div id="tabbar">
-  <button class="tab-btn" id="tab-lang">KO</button>
-  <div class="tab-sep"></div>
   <button class="tab-btn" id="tab-home">⌂</button>
+  <button class="tab-btn" id="tab-lang">KO</button>
   <button class="tab-btn" id="tab-explore">✦</button>
   <button class="tab-btn" id="tab-search" style="display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
   <button class="tab-btn" id="tab-settings">⚙</button>
@@ -1239,7 +1277,7 @@ function makeSmallThumb(s,allSongs,idx){
 
 function buildVideoSection(songs,containerEl){
   containerEl.innerHTML='';
-  const all=(songs||[]).slice(0,10);
+  const all=(songs||[]).slice(0,11);
   if(!all.length){
     const p=document.createElement('div');p.className='tv-empty';
     p.textContent=T[currentLang].preparing;containerEl.appendChild(p);return;
@@ -1269,8 +1307,24 @@ function buildVideoSection(songs,containerEl){
       containerEl.appendChild(moreBtn);containerEl.appendChild(moreWrap);
     }
   }else{
+    const sArr=rest.filter(s=>isShorts(s.u));
+    const lArr=rest.filter(s=>!isShorts(s.u));
+    if(sArr.length%2!==0)sArr.pop();
+    // 각각 2개 페어로 묶기
+    const lPairs=[],sPairs=[];
+    for(let i=0;i<lArr.length;i+=2)lPairs.push(lArr.slice(i,i+2));
+    for(let i=0;i<sArr.length;i+=2)sPairs.push(sArr.slice(i,i+2));
+    // 쇼츠 페어를 가로 페어 사이에 균등 배포
+    const ordered=[];
+    const step=sPairs.length>0?lPairs.length/(sPairs.length+1):Infinity;
+    let si=0,next=step;
+    lPairs.forEach((lp,i)=>{
+      ordered.push(...lp);
+      if(si<sPairs.length&&i+1>=next){ordered.push(...sPairs[si++]);next+=step;}
+    });
+    while(si<sPairs.length)ordered.push(...sPairs[si++]);
     const grid=document.createElement('div');grid.id='tv-grid';
-    rest.forEach((s,i)=>grid.appendChild(makeSmallThumb(s,all,i+1)));
+    ordered.forEach(s=>grid.appendChild(makeSmallThumb(s,all,0)));
     containerEl.appendChild(grid);
   }
 }
@@ -1280,6 +1334,37 @@ const mobSheetEl=document.getElementById('mob-sheet');
 const mobSheetInner=document.getElementById('mob-sheet-inner');
 let _mobCloseTimer=null;
 const sidePanelEl=document.getElementById('side-panel');
+const memberPanelEl=document.getElementById('member-panel');
+let _memberPanelShifted=false;
+
+function _panWorld(dx,dur){
+  const right=new THREE.Vector3().setFromMatrixColumn(camera.matrix,0);
+  _startFly(
+    controls.target.clone().addScaledVector(right,dx),
+    camera.position.clone().addScaledVector(right,dx),
+    dur||400
+  );
+}
+
+function openMemberPanel(cardEl){
+  const tt=document.getElementById('tt');
+  if(tt.parentElement===memberPanelEl)document.body.appendChild(tt);
+  tt.style.display='none';
+  cardEl.style.display='block';
+  memberPanelEl.scrollTop=0;
+  memberPanelEl.appendChild(cardEl);
+  memberPanelEl.classList.add('open');
+  if(!_memberPanelShifted){_memberPanelShifted=true;_panWorld(3,400);}
+}
+function closeMemberPanel(panBack){
+  memberPanelEl.classList.remove('open');
+  const tt=document.getElementById('tt');
+  if(tt.parentElement===memberPanelEl)document.body.appendChild(tt);
+  tt.style.display='none';
+  _openTArtist=null;
+  if(panBack&&_memberPanelShifted){_memberPanelShifted=false;_panWorld(-3,400);}
+  else _memberPanelShifted=false;
+}
 
 function openSidePanel(cardEl){
   [document.getElementById('tt'),document.getElementById('gc')].forEach(el=>{
@@ -1352,7 +1437,7 @@ mobSheetEl.addEventListener('touchend',e=>{
 },{passive:true});
 function closeCards(){
   if(isMob())closeMobSheet();
-  else closeSidePanel();
+  else{closeMemberPanel(false);closeSidePanel();}
   document.getElementById('tt').style.display='none';
   document.getElementById('gc').style.display='none';
   clearFocus();_openGCko=null;_openTArtist=null;
@@ -1403,7 +1488,15 @@ function pulseMember(artist){
   makeRipple(0);
   makeRipple(700); // 두 번째 파문
 }
-document.getElementById('ttx').addEventListener('click',e=>{e.stopPropagation();if(isMob())closeMobSheet();else closeCards();});
+document.getElementById('ttx').addEventListener('click',e=>{
+  e.stopPropagation();
+  if(isMob())closeMobSheet();
+  else closeCards();
+});
+document.getElementById('tt-collapse').addEventListener('click',e=>{
+  e.stopPropagation();
+  closeMemberPanel(true);
+});
 window.addEventListener('keydown',e=>{
   const ttEl=document.getElementById('tt');
   if(isMob()||ttEl.style.display==='none'||!_openTArtist)return;
@@ -1440,11 +1533,19 @@ function showT(a,cx,cy){
   setFocus(a.group.ko);_openTArtist=a;
   const el=document.getElementById('tt');
   el.style.display='block';
+  // 그룹 컬러라인 (같은 색, 낮은 투명도)
+  const gInfo=GROUPS[a.group.ko];
+  const ttBar=document.getElementById('tt-bar');
+  if(gInfo&&gInfo.color){const[cr,cg,cb]=gInfo.color;ttBar.style.background=`linear-gradient(90deg,rgba(${cr},${cg},${cb},0.50),rgba(${cr},${cg},${cb},0.18))`;}
+  else ttBar.style.background='rgba(160,180,220,0.22)';
   document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
   const tgEl=document.getElementById('tg');
   tgEl.textContent=currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko);
   tgEl.onclick=e=>{
     e.stopPropagation();
+    if(!isMob()&&memberPanelEl.classList.contains('open')){
+      closeMemberPanel(true);return; // 그룹 카드는 이미 왼쪽에 표시 중
+    }
     const ttEl=document.getElementById('tt');
     const gx=parseInt(ttEl.style.left)||cx;
     const gy=parseInt(ttEl.style.top)||cy;
@@ -1466,7 +1567,10 @@ function showT(a,cx,cy){
   const hasSongs=(a.songs||[]).length>0;
   const cardW=hasSongs?264:210;
   el.style.maxWidth=cardW+'px';
-  if(isMob()){openMobSheet(el);}else{openSidePanel(el);}
+  if(isMob()){openMobSheet(el);}
+  else if(sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl){
+    openMemberPanel(el);
+  }else{openSidePanel(el);}
   // nav
   ttGroupMembers=ARTISTS.filter(m=>m.group.ko===a.group.ko);
   ttMemberIdx=ttGroupMembers.findIndex(m=>m===a);
@@ -1492,9 +1596,13 @@ function showGC(ko,cx,cy){
   nameEl.style.color=dayMode?`rgb(${Math.max(0,r-30)},${Math.max(0,g-30)},${Math.max(0,b-30)})`:'';
   document.getElementById('gc-en').textContent=currentLang==='ko'?(info.en||''):'';
   const logoWrap=document.getElementById('gc-logo-wrap');
-  const logoImg=document.getElementById('gc-logo');
-  if(info.logo){logoImg.src=info.logo;logoWrap.style.display='';}
-  else logoWrap.style.display='none';
+  logoWrap.innerHTML='';
+  if(info.logo){
+    fetch(info.logo).then(r=>r.text()).then(svg=>{
+      logoWrap.innerHTML=svg;
+      logoWrap.style.display='';
+    }).catch(()=>{logoWrap.style.display='none';});
+  }else{logoWrap.style.display='none';}
   document.getElementById('gc-co').textContent=info.co||'';
   document.getElementById('gc-debut').textContent=info.debut||'';
   const fandomRow=document.getElementById('gc-fandom-row');
@@ -1525,7 +1633,7 @@ function showGC(ko,cx,cy){
     .forEach(m=>{
     const sp=document.createElement('span');sp.className='gc-mem-name';
     sp.textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
-    sp.addEventListener('click',e=>{e.stopPropagation();closeCards();showT(m,cx,cy);});
+    sp.addEventListener('click',e=>{e.stopPropagation();if(isMob())closeCards();showT(m,cx,cy);});
     memListEl.appendChild(sp);
   });
   const gcTv=document.getElementById('gc-tv');
@@ -1533,7 +1641,7 @@ function showGC(ko,cx,cy){
   const hasSongs=(info.songs||[]).length>0;
   const cardW=hasSongs?264:234;
   el.style.maxWidth=cardW+'px';
-  if(isMob()){openMobSheet(el);}else{openSidePanel(el);}
+  if(isMob()){openMobSheet(el);}else{closeMemberPanel(false);openSidePanel(el);}
 }
 
 // ── Raycaster / click ─────────────────────────────
