@@ -43,19 +43,19 @@
   @media(max-width:768px){#mobile-title{display:block;}}
   /* ── Tab bar ────────────────────────────────────── */
   #tabbar{
-    position:fixed;bottom:22px;left:0;right:0;margin:0 auto;width:fit-content;
+    position:fixed;bottom:10px;left:0;right:0;margin:0 auto;width:fit-content;
     display:flex;align-items:center;gap:2px;
     background:rgba(18,22,40,0.82);
     backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
     box-shadow:0 4px 24px rgba(0,0,0,0.45);
-    border-radius:22px;padding:4px 6px;z-index:40;
+    border-radius:18px;padding:3px 5px;z-index:40;
   }
   body.day #tabbar{background:rgba(245,240,230,0.88);box-shadow:0 4px 20px rgba(80,60,40,0.13);}
   .tab-btn{
     background:none;border:none;cursor:pointer;
     color:rgba(190,205,240,0.55);
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
-    font-size:15px;padding:6px 12px;border-radius:16px;
+    font-size:14px;padding:5px 10px;border-radius:14px;
     transition:background .15s,color .15s;line-height:1;
   }
   .tab-btn:hover{background:rgba(255,255,255,0.08);color:rgba(210,225,255,0.85);}
@@ -63,7 +63,7 @@
   body.day .tab-btn{color:rgba(90,75,58,0.42);}
   body.day .tab-btn:hover{background:rgba(0,0,0,0.05);color:rgba(55,42,28,0.75);}
   body.day .tab-btn.active{background:rgba(0,0,0,0.07);color:rgba(38,26,14,0.85);}
-  #tab-lang{font-size:10px;font-weight:700;letter-spacing:.1em;padding:6px 11px;}
+  #tab-lang{font-size:10px;font-weight:700;letter-spacing:.1em;padding:5px 9px;}
   .tab-sep{width:0.5px;height:14px;background:rgba(255,255,255,0.08);margin:0 1px;flex-shrink:0;}
   body.day .tab-sep{background:rgba(0,0,0,0.08);}
   /* ── Tabbar search mode (mobile) ────────────────── */
@@ -299,7 +299,7 @@
   #mob-sheet{
     display:none;position:fixed;left:0;right:0;width:100%;
     bottom:var(--sheet-bottom,73px);
-    max-height:60vh;
+    max-height:44vh;
     border-radius:20px 20px 0 0;
     background:rgba(16,20,36,0.96);
     backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);
@@ -325,7 +325,7 @@
   #yt-lb-close:hover{opacity:1;}
   #mob-sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.14);border-radius:2px;margin:10px auto 6px;display:block;}
   body.day #mob-sheet-handle{background:rgba(150,130,110,0.25);}
-  #mob-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(60vh - 24px);overscroll-behavior:contain;width:100%;box-sizing:border-box;}
+  #mob-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(44vh - 24px);overscroll-behavior:contain;width:100%;box-sizing:border-box;}
   #mob-sheet-inner>#tt,#mob-sheet-inner>#gc{
     position:static!important;display:block!important;
     max-width:100%!important;width:100%!important;
@@ -1446,19 +1446,15 @@ function buildVideoSection(songs,containerEl){
       addHoverPreview(bigWrap,big,ytId(first.u),false);
       bigWrap.addEventListener('click',e=>{e.stopPropagation();window.open(first.u,'_blank');});
       containerEl.appendChild(bigWrap);
+      // 모바일: 메인 영상 1개만 보이고 나머지는 더보기 뒤로
       const normRest=normSongs.slice(1);
       if(normRest.length>0){
-        const row=document.createElement('div');row.id='tv-small-row';
-        normRest.slice(0,2).forEach(s=>row.appendChild(makeSmallThumb(s,all,0)));
-        containerEl.appendChild(row);
-        if(normRest.length>2){
-          const moreBtn=document.createElement('button');moreBtn.className='tv-more-btn';
-          moreBtn.textContent=(currentLang==='ko'?'더보기':'more')+' + '+(normRest.length-2);
-          const moreWrap=document.createElement('div');moreWrap.className='tv-more-wrap';
-          normRest.slice(2).forEach(s=>moreWrap.appendChild(makeSmallThumb(s,all,0)));
-          moreBtn.addEventListener('click',e=>{e.stopPropagation();moreWrap.classList.add('open');moreBtn.style.display='none';});
-          containerEl.appendChild(moreBtn);containerEl.appendChild(moreWrap);
-        }
+        const moreBtn=document.createElement('button');moreBtn.className='tv-more-btn';
+        moreBtn.textContent=(currentLang==='ko'?'더보기':'more')+' + '+normRest.length;
+        const moreWrap=document.createElement('div');moreWrap.className='tv-more-wrap';
+        normRest.forEach(s=>moreWrap.appendChild(makeSmallThumb(s,all,0)));
+        moreBtn.addEventListener('click',e=>{e.stopPropagation();moreWrap.classList.add('open');moreBtn.style.display='none';});
+        containerEl.appendChild(moreBtn);containerEl.appendChild(moreWrap);
       }
     }
     // 쇼츠: 2열 그리드
