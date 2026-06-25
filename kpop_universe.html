@@ -66,6 +66,34 @@
   #tab-lang{font-size:10px;font-weight:700;letter-spacing:.1em;padding:6px 11px;}
   .tab-sep{width:0.5px;height:14px;background:rgba(255,255,255,0.08);margin:0 1px;flex-shrink:0;}
   body.day .tab-sep{background:rgba(0,0,0,0.08);}
+  /* ── Tabbar search mode (mobile) ────────────────── */
+  #tabbar{transition:width .22s cubic-bezier(0.4,0,0.2,1),border-radius .22s;}
+  #tabbar.search-mode{width:calc(100vw - 32px);max-width:440px;border-radius:16px;padding:5px 10px;gap:0;}
+  #tabbar.search-mode .tab-btn,#tabbar.search-mode .tab-sep{display:none;}
+  #tab-sb-icon{display:none;flex-shrink:0;color:rgba(190,205,240,0.65);align-items:center;padding-right:8px;}
+  #tab-sb-input{display:none;flex:1;background:none;border:none;color:#c8d8f0;
+    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:13px;
+    outline:none;padding:4px 0;min-width:0;letter-spacing:.03em;}
+  #tab-sb-input::placeholder{color:rgba(140,160,200,0.32);}
+  #tab-sb-clear{display:none;flex-shrink:0;background:none;border:none;
+    color:rgba(190,205,240,0.55);font-size:16px;cursor:pointer;padding:4px 6px;line-height:1;align-items:center;}
+  #tabbar.search-mode #tab-sb-icon{display:flex;}
+  #tabbar.search-mode #tab-sb-input{display:block;}
+  #tabbar.search-mode #tab-sb-clear{display:flex;}
+  body.day #tab-sb-icon,body.day #tab-sb-clear{color:rgba(90,75,58,0.60);}
+  body.day #tab-sb-input{color:#3a2c20;}
+  body.day #tab-sb-input::placeholder{color:rgba(120,100,80,0.28);}
+  /* ── Mobile search results ───────────────────────── */
+  #mob-sr{
+    position:fixed;left:12px;right:12px;
+    bottom:var(--sheet-bottom,73px);
+    background:rgba(18,22,40,0.96);border-radius:14px;
+    backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+    box-shadow:0 -2px 28px rgba(0,0,0,0.50);z-index:42;
+    max-height:260px;overflow-y:auto;display:none;
+  }
+  #mob-sr.open{display:block;}
+  body.day #mob-sr{background:rgba(246,242,234,0.97);box-shadow:0 -2px 24px rgba(80,60,40,0.14);}
   /* ── Desktop header ──────────────────────────────── */
   #desktop-header{
     position:fixed;top:16px;left:0;right:0;
@@ -257,18 +285,25 @@
   .tv-more-wrap{flex-wrap:wrap;gap:5px;margin-top:5px;display:none;}
   .tv-more-wrap.open{display:flex;}
   .tv-more-wrap .tv-sm{flex:0 0 calc(50% - 2.5px);}
+  /* 모바일 쇼츠 2열 그리드 */
+  .mob-shorts-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px;}
+  .mob-shorts-grid .tv-sm{width:100%;flex:none;}
+  .mob-shorts-grid .tv-sm.is-shorts{flex:none;width:100%;}
+  .mob-shorts-grid .tv-sm img{width:100%;aspect-ratio:9/16;object-fit:cover;}
+  .mob-shorts-grid.tv-more-wrap{display:none;}
+  .mob-shorts-grid.tv-more-wrap.open{display:grid;}
   /* ── Mobile bottom sheet ─────────────────────────── */
   #mob-sheet{
     display:none;position:fixed;left:0;right:0;
-    bottom:65px;  /* tabbar(bottom:22px + ~35px height) + 8px gap */
-    max-height:70vh;
+    bottom:var(--sheet-bottom,73px);
+    max-height:75vh;
     border-radius:20px 20px 0 0;
     background:rgba(16,20,36,0.96);
     backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);
     border:0.5px solid rgba(255,255,255,0.10);
     box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 -8px 32px rgba(0,0,0,0.55);
     z-index:35;pointer-events:all;
-    transform:translateY(calc(100% + 65px));
+    transform:translateY(calc(100% + var(--sheet-bottom,73px)));
     transition:transform .32s cubic-bezier(0.32,0.72,0,1);
   }
   #mob-sheet.bs-open{transform:translateY(0);}
@@ -286,7 +321,7 @@
   #yt-lb-close:hover{opacity:1;}
   #mob-sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.14);border-radius:2px;margin:10px auto 6px;display:block;}
   body.day #mob-sheet-handle{background:rgba(150,130,110,0.25);}
-  #mob-sheet-inner{overflow-y:auto;-webkit-overflow-scrolling:touch;max-height:calc(70vh - 24px);overscroll-behavior:contain;}
+  #mob-sheet-inner{overflow-y:auto;-webkit-overflow-scrolling:touch;max-height:calc(75vh - 24px);overscroll-behavior:contain;}
   #mob-sheet-inner>#tt,#mob-sheet-inner>#gc{
     position:static!important;display:block!important;max-width:100%!important;
     width:100%!important;border-radius:0!important;box-shadow:none!important;
@@ -632,7 +667,11 @@
   <button class="tab-btn" id="tab-explore">✦</button>
   <button class="tab-btn" id="tab-search" style="display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
   <button class="tab-btn" id="tab-settings">⚙</button>
+  <span id="tab-sb-icon"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+  <input id="tab-sb-input" type="text" placeholder="그룹 · 멤버 검색…" autocomplete="off" inputmode="search">
+  <button id="tab-sb-clear">✕</button>
 </div>
+<div id="mob-sr"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS2DRenderer.js"></script>
@@ -750,6 +789,7 @@ function applyLang(){
   groupLabels.forEach(({el,ko,en})=>{el.textContent=currentLang==='ko'?ko:(en||ko);});
   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k];});
   const si=document.getElementById('search-input');if(si)si.placeholder=t.searchPH;
+  const msi=document.getElementById('tab-sb-input');if(msi)msi.placeholder=t.searchPH;
   const mt=document.getElementById('mobile-title');if(mt)mt.textContent=t.mobileTitle;
   // 열린 카드 즉시 재렌더링
   const gcEl=document.getElementById('gc');
@@ -1143,9 +1183,14 @@ function _mScore(name,q,ql){
   return 2;
 }
 function doSearch(q){
-  const res=document.getElementById('search-results');
+  const mobSearch=isMob()&&document.getElementById('tabbar').classList.contains('search-mode');
+  const res=mobSearch?document.getElementById('mob-sr'):document.getElementById('search-results');
   q=q.trim();
-  if(!q){res.style.display='none';return;}
+  if(!q){
+    if(mobSearch){res.classList.remove('open');res.innerHTML='';}
+    else{res.style.display='none';}
+    return;
+  }
   const ql=q.toLowerCase();
   const hits=[];
   Object.keys(GROUPS).forEach(ko=>{
@@ -1176,16 +1221,21 @@ function doSearch(q){
       e.stopPropagation();
       closeCards();
       flyTo(h.pos);
-      document.getElementById('search-input').value='';
-      res.style.display='none';
-      closePanels();
+      if(mobSearch){
+        exitMobSearch();
+      }else{
+        document.getElementById('search-input').value='';
+        res.style.display='none';
+        closePanels();
+      }
       const cx=window.innerWidth/2,cy=window.innerHeight*0.38;
       if(h.type==='group'){showGC(h.data,cx,cy);pulseGroup(h.data);}
       else{showT(h.data,cx,cy);pulseMember(h.data);pulseGroup(h.data.group.ko);}
     });
     res.appendChild(div);
   });
-  res.style.display=hits.length?'block':'none';
+  if(mobSearch){res.classList.toggle('open',hits.length>0);}
+  else{res.style.display=hits.length?'block':'none';}
 }
 
 const _si=document.getElementById('search-input');
@@ -1198,6 +1248,21 @@ _si.addEventListener('keydown',e=>{
 _si.addEventListener('click',e=>e.stopPropagation());
 _sr.addEventListener('click',e=>e.stopPropagation());
 document.getElementById('search-wrap').addEventListener('click',e=>e.stopPropagation());
+// 모바일 탭바 검색 입력
+const _mobSi=document.getElementById('tab-sb-input');
+const _mobSrEl=document.getElementById('mob-sr');
+_mobSi.addEventListener('input',e=>{
+  const q=e.target.value;
+  if(!q.trim()){_mobSrEl.classList.remove('open');_mobSrEl.innerHTML='';return;}
+  doSearch(q);
+});
+_mobSi.addEventListener('keydown',e=>{
+  if(e.key==='Escape')exitMobSearch();
+  if(e.key==='Enter'){const first=_mobSrEl.querySelector('.sr-item');if(first)first.click();}
+});
+_mobSi.addEventListener('click',e=>e.stopPropagation());
+_mobSrEl.addEventListener('click',e=>e.stopPropagation());
+document.getElementById('tab-sb-clear').addEventListener('click',e=>{e.stopPropagation();exitMobSearch();});
 
 // ── Member card nav state ─────────────────────────
 let ttGroupMembers=[];
@@ -1282,6 +1347,57 @@ function buildVideoSection(songs,containerEl){
     const p=document.createElement('div');p.className='tv-empty';
     p.textContent=T[currentLang].preparing;containerEl.appendChild(p);return;
   }
+  if(isMob()){
+    const normSongs=all.filter(s=>!isShorts(s.u));
+    const shortSongs=all.filter(s=>isShorts(s.u));
+    // 일반 직캠: big 썸네일 + small row
+    if(normSongs.length>0){
+      const first=normSongs[0];
+      const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
+      const big=document.createElement('img');big.id='tv-big';
+      big.src=`https://img.youtube.com/vi/${ytId(first.u)}/mqdefault.jpg`;big.alt=first.t;
+      const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
+      bigWrap.appendChild(big);bigWrap.appendChild(bigTitle);
+      addHoverPreview(bigWrap,big,ytId(first.u),false);
+      bigWrap.addEventListener('click',e=>{e.stopPropagation();window.open(first.u,'_blank');});
+      containerEl.appendChild(bigWrap);
+      const normRest=normSongs.slice(1);
+      if(normRest.length>0){
+        const row=document.createElement('div');row.id='tv-small-row';
+        normRest.slice(0,2).forEach(s=>row.appendChild(makeSmallThumb(s,all,0)));
+        containerEl.appendChild(row);
+        if(normRest.length>2){
+          const moreBtn=document.createElement('button');moreBtn.className='tv-more-btn';
+          moreBtn.textContent=(currentLang==='ko'?'더보기':'more')+' + '+(normRest.length-2);
+          const moreWrap=document.createElement('div');moreWrap.className='tv-more-wrap';
+          normRest.slice(2).forEach(s=>moreWrap.appendChild(makeSmallThumb(s,all,0)));
+          moreBtn.addEventListener('click',e=>{e.stopPropagation();moreWrap.classList.add('open');moreBtn.style.display='none';});
+          containerEl.appendChild(moreBtn);containerEl.appendChild(moreWrap);
+        }
+      }
+    }
+    // 쇼츠: 2열 그리드
+    if(shortSongs.length>0){
+      const grid=document.createElement('div');grid.className='mob-shorts-grid';
+      shortSongs.slice(0,2).forEach(s=>grid.appendChild(makeSmallThumb(s,all,0)));
+      containerEl.appendChild(grid);
+      if(shortSongs.length>2){
+        const moreBtn=document.createElement('button');moreBtn.className='tv-more-btn';
+        moreBtn.textContent=(currentLang==='ko'?'더보기':'more')+' + '+(shortSongs.length-2);
+        const moreGrid=document.createElement('div');moreGrid.className='mob-shorts-grid tv-more-wrap';
+        shortSongs.slice(2).forEach(s=>moreGrid.appendChild(makeSmallThumb(s,all,0)));
+        moreBtn.addEventListener('click',e=>{
+          e.stopPropagation();
+          moreGrid.classList.add('open');
+          moreGrid.style.display='grid';
+          moreBtn.style.display='none';
+        });
+        containerEl.appendChild(moreBtn);containerEl.appendChild(moreGrid);
+      }
+    }
+    return;
+  }
+  // ── 데스크탑 ─────────────────────────────────────
   const first=all[0];
   const firstShorts=isShorts(first.u);
   const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
@@ -1291,42 +1407,26 @@ function buildVideoSection(songs,containerEl){
   const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
   bigWrap.appendChild(big);bigWrap.appendChild(bigTitle);
   addHoverPreview(bigWrap,big,ytId(first.u),firstShorts);
-  bigWrap.addEventListener('click',e=>{e.stopPropagation();if(isMob())window.open(first.u,'_blank');else openLightbox(first.u,firstShorts);});
+  bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,firstShorts);});
   containerEl.appendChild(bigWrap);
   const rest=all.slice(1);if(!rest.length)return;
-  if(isMob()){
-    const row=document.createElement('div');row.id='tv-small-row';
-    rest.slice(0,2).forEach((s,i)=>row.appendChild(makeSmallThumb(s,all,i+1)));
-    containerEl.appendChild(row);
-    if(rest.length>2){
-      const moreBtn=document.createElement('button');moreBtn.className='tv-more-btn';
-      moreBtn.textContent=(currentLang==='ko'?'더보기':'more')+' + '+(rest.length-2);
-      const moreWrap=document.createElement('div');moreWrap.className='tv-more-wrap';
-      rest.slice(2).forEach((s,i)=>moreWrap.appendChild(makeSmallThumb(s,all,i+3)));
-      moreBtn.addEventListener('click',e=>{e.stopPropagation();moreWrap.classList.add('open');moreBtn.style.display='none';});
-      containerEl.appendChild(moreBtn);containerEl.appendChild(moreWrap);
-    }
-  }else{
-    const sArr=rest.filter(s=>isShorts(s.u));
-    const lArr=rest.filter(s=>!isShorts(s.u));
-    if(sArr.length%2!==0)sArr.pop();
-    // 각각 2개 페어로 묶기
-    const lPairs=[],sPairs=[];
-    for(let i=0;i<lArr.length;i+=2)lPairs.push(lArr.slice(i,i+2));
-    for(let i=0;i<sArr.length;i+=2)sPairs.push(sArr.slice(i,i+2));
-    // 쇼츠 페어를 가로 페어 사이에 균등 배포
-    const ordered=[];
-    const step=sPairs.length>0?lPairs.length/(sPairs.length+1):Infinity;
-    let si=0,next=step;
-    lPairs.forEach((lp,i)=>{
-      ordered.push(...lp);
-      if(si<sPairs.length&&i+1>=next){ordered.push(...sPairs[si++]);next+=step;}
-    });
-    while(si<sPairs.length)ordered.push(...sPairs[si++]);
-    const grid=document.createElement('div');grid.id='tv-grid';
-    ordered.forEach(s=>grid.appendChild(makeSmallThumb(s,all,0)));
-    containerEl.appendChild(grid);
-  }
+  const sArr=rest.filter(s=>isShorts(s.u));
+  const lArr=rest.filter(s=>!isShorts(s.u));
+  if(sArr.length%2!==0)sArr.pop();
+  const lPairs=[],sPairs=[];
+  for(let i=0;i<lArr.length;i+=2)lPairs.push(lArr.slice(i,i+2));
+  for(let i=0;i<sArr.length;i+=2)sPairs.push(sArr.slice(i,i+2));
+  const ordered=[];
+  const step=sPairs.length>0?lPairs.length/(sPairs.length+1):Infinity;
+  let si=0,next=step;
+  lPairs.forEach((lp,i)=>{
+    ordered.push(...lp);
+    if(si<sPairs.length&&i+1>=next){ordered.push(...sPairs[si++]);next+=step;}
+  });
+  while(si<sPairs.length)ordered.push(...sPairs[si++]);
+  const grid=document.createElement('div');grid.id='tv-grid';
+  ordered.forEach(s=>grid.appendChild(makeSmallThumb(s,all,0)));
+  containerEl.appendChild(grid);
 }
 
 // ── Mobile bottom sheet ──────────────────────────────
@@ -1694,12 +1794,27 @@ function clearFocus(){
   ARTISTS.forEach(a=>{a._focusTarget=1;});
 }
 // ── Tab bar ───────────────────────────────────────
+function updateSheetBottom(){
+  if(window.innerWidth>768)return;
+  const tb=document.getElementById('tabbar');if(!tb)return;
+  const rect=tb.getBoundingClientRect();
+  const h=Math.round(window.innerHeight-rect.top)+8;
+  document.documentElement.style.setProperty('--sheet-bottom',h+'px');
+}
+function exitMobSearch(){
+  document.getElementById('tabbar').classList.remove('search-mode');
+  const inp=document.getElementById('tab-sb-input');if(inp)inp.value='';
+  const sr=document.getElementById('mob-sr');if(sr){sr.classList.remove('open');sr.innerHTML='';}
+}
+window.addEventListener('resize',updateSheetBottom);
+requestAnimationFrame(updateSheetBottom);
 function closePanels(){
   document.getElementById('search-wrap').classList.remove('open');
   document.getElementById('settings-panel').classList.remove('open');
   ['tab-search','tab-settings','dh-search-btn','dh-settings-btn'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.classList.remove('active');
   });
+  if(isMob())exitMobSearch();
 }
 document.getElementById('tab-lang').addEventListener('click',e=>{
   e.stopPropagation();
@@ -1724,6 +1839,16 @@ document.getElementById('tab-explore').addEventListener('click',e=>{
 });
 document.getElementById('tab-search').addEventListener('click',e=>{
   e.stopPropagation();
+  if(isMob()){
+    const tb=document.getElementById('tabbar');
+    const entering=!tb.classList.contains('search-mode');
+    if(entering){
+      document.getElementById('settings-panel').classList.remove('open');
+      tb.classList.add('search-mode');
+      setTimeout(()=>{document.getElementById('tab-sb-input').focus();updateSheetBottom();},60);
+    }else{exitMobSearch();}
+    return;
+  }
   const sw=document.getElementById('search-wrap');
   const sp=document.getElementById('settings-panel');
   const open=sw.classList.contains('open');
