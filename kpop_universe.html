@@ -299,7 +299,7 @@
   #mob-sheet{
     display:none;position:fixed;left:0;right:0;width:100%;
     bottom:var(--sheet-bottom,73px);
-    max-height:44vh;
+    max-height:48vh;
     border-radius:20px 20px 0 0;
     background:rgba(16,20,36,0.96);
     backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);
@@ -325,7 +325,7 @@
   #yt-lb-close:hover{opacity:1;}
   #mob-sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.14);border-radius:2px;margin:10px auto 6px;display:block;}
   body.day #mob-sheet-handle{background:rgba(150,130,110,0.25);}
-  #mob-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(44vh - 24px);overscroll-behavior:contain;width:100%;box-sizing:border-box;}
+  #mob-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(48vh - 24px);overscroll-behavior:contain;width:100%;box-sizing:border-box;}
   #mob-sheet-inner>#tt,#mob-sheet-inner>#gc{
     position:static!important;display:block!important;
     max-width:100%!important;width:100%!important;
@@ -1527,6 +1527,24 @@ function _panWorld(dx,dur){
   );
 }
 
+// 모바일 바텀시트용: camera.setViewOffset로 3D 뷰를 수직 이동 (행성이 카드 위 영역 중앙에 오도록)
+let _mobViewShift=0,_mobViewShiftRaf=null;
+function _animMobViewShift(target,dur){
+  const start=_mobViewShift;
+  const t0=performance.now();
+  cancelAnimationFrame(_mobViewShiftRaf);
+  function tick(){
+    const raw=Math.min((performance.now()-t0)/(dur||340),1);
+    const k=easeInOut(raw);
+    _mobViewShift=start+(target-start)*k;
+    const W=window.innerWidth,H=window.innerHeight;
+    if(Math.abs(_mobViewShift)<0.5){camera.clearViewOffset();_mobViewShift=0;}
+    else{camera.setViewOffset(W,H,0,Math.round(_mobViewShift),W,H);}
+    if(raw<1)_mobViewShiftRaf=requestAnimationFrame(tick);
+  }
+  _mobViewShiftRaf=requestAnimationFrame(tick);
+}
+
 function openMemberPanel(cardEl){
   const tt=document.getElementById('tt');
   if(tt.parentElement===memberPanelEl)document.body.appendChild(tt);
@@ -1588,12 +1606,19 @@ function openMobSheet(cardEl){
   }else{
     mobSheetEl.style.display='block';
     requestAnimationFrame(()=>mobSheetEl.classList.add('bs-open'));
+    // 처음 열릴 때만 뷰 위로 이동 (카드 위 공간에 행성이 오도록)
+    if(_mobViewShift===0){
+      const shiftPx=Math.round(window.innerHeight*0.22);
+      _animMobViewShift(shiftPx,340);
+    }
   }
 }
 function closeMobSheet(){
   clearTimeout(_mobCloseTimer);
   mobSheetEl.style.transition='';
   mobSheetEl.classList.remove('bs-open');
+  // 뷰 원위치
+  if(_mobViewShift!==0)_animMobViewShift(0,320);
   _mobCloseTimer=setTimeout(()=>{
     if(!mobSheetEl.classList.contains('bs-open')){
       mobSheetEl.style.display='none';
