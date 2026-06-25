@@ -43,7 +43,7 @@
   @media(max-width:768px){#mobile-title{display:block;}}
   /* ── Tab bar ────────────────────────────────────── */
   #tabbar{
-    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+    position:fixed;bottom:22px;left:0;right:0;margin:0 auto;width:fit-content;
     display:flex;align-items:center;gap:2px;
     background:rgba(18,22,40,0.82);
     backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
@@ -69,7 +69,7 @@
   /* ── Tabbar search mode (mobile) ────────────────── */
   #tabbar{transition:width .22s cubic-bezier(0.4,0,0.2,1),border-radius .22s;}
   #tabbar.search-mode{width:calc(100vw - 32px);max-width:440px;border-radius:16px;padding:5px 10px;gap:0;}
-  #tabbar.search-mode .tab-btn,#tabbar.search-mode .tab-sep{display:none;}
+  #tabbar.search-mode .tab-btn,#tabbar.search-mode .tab-sep{display:none!important;}
   #tab-sb-icon{display:none;flex-shrink:0;color:rgba(190,205,240,0.65);align-items:center;padding-right:8px;}
   #tab-sb-input{display:none;flex:1;background:none;border:none;color:#c8d8f0;
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:13px;
@@ -85,12 +85,13 @@
   body.day #tab-sb-input::placeholder{color:rgba(120,100,80,0.28);}
   /* ── Mobile search results ───────────────────────── */
   #mob-sr{
-    position:fixed;left:12px;right:12px;width:auto;
+    position:fixed;left:12px;right:12px;
+    width:calc(100vw - 24px);max-width:calc(100vw - 24px);
     bottom:var(--sheet-bottom,73px);
     background:rgba(18,22,40,0.96);border-radius:14px;
     backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
     box-shadow:0 -2px 28px rgba(0,0,0,0.50);z-index:42;
-    max-height:260px;overflow-y:auto;display:none;
+    max-height:260px;overflow-y:auto;overflow-x:hidden;display:none;
     box-sizing:border-box;
   }
   #mob-sr.open{display:block;}
@@ -362,6 +363,7 @@
     width:100%!important;border-radius:0!important;border:none!important;
     box-shadow:none!important;background:none!important;
     backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+    left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
   }
   #side-panel>#gc{padding-top:108px;}
   #side-panel>#tt{padding-top:104px;}
@@ -397,6 +399,7 @@
     width:100%!important;border-radius:0!important;border:none!important;
     box-shadow:none!important;background:none!important;
     backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+    left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
     padding-top:120px;
   }
   #member-panel>#tt #ttx{display:none!important;}
@@ -884,15 +887,11 @@ function applyLang(){
   // 열린 카드 즉시 재렌더링
   const gcEl=document.getElementById('gc');
   if(gcEl.style.display!=='none'&&_openGCko){
-    const sl=gcEl.style.left,st=gcEl.style.top;
-    showGC(_openGCko,parseInt(sl)||0,parseInt(st)||0);
-    gcEl.style.left=sl;gcEl.style.top=st;
+    showGC(_openGCko,0,0);
   }
   const ttEl=document.getElementById('tt');
   if(ttEl.style.display!=='none'&&_openTArtist){
-    const sl=ttEl.style.left,st=ttEl.style.top;
     showT(_openTArtist,0,0);
-    ttEl.style.left=sl;ttEl.style.top=st;
   }
 }
 const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',showInactive:true,connLines:true};
@@ -1363,12 +1362,7 @@ function navigateMember(dir){
   if(ttGroupMembers.length<=1)return;
   ttMemberIdx=(ttMemberIdx+dir+ttGroupMembers.length)%ttGroupMembers.length;
   const m=ttGroupMembers[ttMemberIdx];
-  const ttEl=document.getElementById('tt');
-  const savedLeft=ttEl.style.left;
-  const savedTop=ttEl.style.top;
   showT(m,0,0);
-  ttEl.style.left=savedLeft;
-  ttEl.style.top=savedTop;
   if(m._worldPos)pulseMember(m);
 }
 // ── Card helpers ──────────────────────────────────
