@@ -72,8 +72,9 @@
   #tabbar.search-mode .tab-btn,#tabbar.search-mode .tab-sep{display:none!important;}
   #tab-sb-icon{display:none;flex-shrink:0;color:rgba(190,205,240,0.65);align-items:center;padding-right:8px;}
   #tab-sb-input{display:none;flex:1;background:none;border:none;color:#c8d8f0;
-    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:13px;
-    outline:none;padding:4px 0;min-width:0;letter-spacing:.03em;}
+    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:16px;
+    outline:none;padding:4px 0;min-width:0;letter-spacing:.03em;
+    -webkit-text-size-adjust:none;}
   #tab-sb-input::placeholder{color:rgba(140,160,200,0.32);}
   #tab-sb-clear{display:none;flex-shrink:0;background:none;border:none;
     color:rgba(190,205,240,0.55);font-size:16px;cursor:pointer;padding:4px 6px;line-height:1;align-items:center;}
@@ -1594,6 +1595,7 @@ function openMobSheet(cardEl){
   }
 }
 function closeMobSheet(){
+  clearTimeout(_mobCloseTimer);
   mobSheetEl.style.transition='';
   mobSheetEl.classList.remove('bs-open');
   _mobCloseTimer=setTimeout(()=>{
@@ -2080,7 +2082,23 @@ document.getElementById('tab-explore').addEventListener('click',e=>{
   e.stopPropagation();
   if(!bubbleMeshes.length)return;
   const bm=bubbleMeshes[Math.floor(Math.random()*bubbleMeshes.length)];
-  closePanels();closeCards();
+  closePanels();
+  // 모바일: closeMobSheet의 330ms 타이머 없이 즉시 시트 초기화 (타이머가 fly 완료 후 display를 재조작하는 충돌 방지)
+  if(isMob()){
+    clearTimeout(_mobCloseTimer);
+    mobSheetEl.classList.remove('bs-open');
+    mobSheetEl.style.transition='none';
+    mobSheetEl.style.display='none';
+    requestAnimationFrame(()=>{mobSheetEl.style.transition='';});
+    [document.getElementById('tt'),document.getElementById('gc')].forEach(el=>{
+      if(el.parentElement===mobSheetInner)document.body.appendChild(el);
+      el.style.display='none';
+    });
+    closeConnCard();clearFocus();_openGCko=null;_openTArtist=null;
+    controls.enabled=false;
+  }else{
+    closeCards();
+  }
   flyToBubble(bm.mesh.position,bm.radius);
   flyState.onComplete=()=>{
     setTimeout(()=>{
