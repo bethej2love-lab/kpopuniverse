@@ -565,6 +565,81 @@
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
     overflow-y:auto;
   }
+  /* ── Connection Card ─────────────────────────────── */
+  #conn-panel{
+    position:fixed;right:320px;top:0;bottom:0;width:280px;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+    z-index:34;pointer-events:none;
+    transform:translateX(calc(100% + 320px));transition:transform 0.26s cubic-bezier(0.32,0,0.15,1);
+    background:rgba(16,20,36,0.88);
+    backdrop-filter:blur(40px) saturate(190%);-webkit-backdrop-filter:blur(40px) saturate(190%);
+    box-shadow:-6px 0 32px rgba(0,0,0,0.45);font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
+  }
+  #conn-panel.open{transform:translateX(0);pointer-events:all;}
+  body.day #conn-panel{background:rgba(248,244,238,0.93);box-shadow:-6px 0 32px rgba(80,58,38,0.11);}
+  @media(max-width:768px){#conn-panel{display:none;}}
+  #conn-panel .conn-inner{padding:108px 16px 20px;}
+  #conn-sheet{
+    display:none;position:fixed;left:0;right:0;
+    bottom:var(--sheet-bottom,73px);max-height:68vh;
+    border-radius:20px 20px 0 0;overflow:hidden;
+    background:rgba(14,18,36,0.97);
+    backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);
+    border:0.5px solid rgba(255,255,255,0.10);
+    box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 -8px 32px rgba(0,0,0,0.60);
+    z-index:37;pointer-events:all;
+    transform:translateY(calc(100% + var(--sheet-bottom,73px)));
+    transition:transform .32s cubic-bezier(0.32,0.72,0,1);
+    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
+  }
+  #conn-sheet.bs-open{transform:translateY(0);}
+  body.day #conn-sheet{background:rgba(250,247,242,0.98);border-color:rgba(255,255,255,0.82);}
+  @media(min-width:769px){#conn-sheet{display:none!important;}}
+  #conn-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(68vh - 24px);overscroll-behavior:contain;}
+  #conn-sheet .conn-inner{padding:6px 16px 16px;}
+  .conn-handle{width:36px;height:4px;background:rgba(255,255,255,0.14);border-radius:2px;margin:10px auto 6px;display:block;}
+  body.day .conn-handle{background:rgba(150,130,110,0.25);}
+  .conn-hd{display:flex;align-items:center;gap:8px;margin-bottom:13px;}
+  .conn-back-btn{background:none;border:none;cursor:pointer;padding:2px 5px;color:rgba(155,178,228,0.65);font-size:19px;line-height:1;font-family:inherit;transition:color .15s;}
+  .conn-back-btn:hover{color:rgba(200,220,255,0.90);}
+  body.day .conn-back-btn{color:rgba(100,80,60,0.55);}
+  body.day .conn-back-btn:hover{color:rgba(55,40,25,0.80);}
+  .conn-anchor-chip{padding:3px 11px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(160,200,255,0.13);border:0.5px solid rgba(160,200,255,0.32);color:rgba(205,225,255,0.96);letter-spacing:.02em;}
+  body.day .conn-anchor-chip{background:rgba(55,80,200,0.09);border-color:rgba(55,80,200,0.24);color:rgba(36,54,158,0.96);}
+  .conn-lbl{font-size:8.5px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(110,135,185,0.50);margin-bottom:8px;}
+  body.day .conn-lbl{color:rgba(130,110,88,0.50);}
+  .conn-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+  .conn-chip{
+    padding:3px 11px;border-radius:20px;font-size:10.5px;cursor:pointer;
+    background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.13);
+    color:rgba(175,198,238,0.80);letter-spacing:.02em;font-family:inherit;
+    transition:background .14s,border-color .14s,color .14s;
+  }
+  .conn-chip:hover{background:rgba(155,195,255,0.14);border-color:rgba(155,195,255,0.30);color:rgba(210,230,255,0.98);}
+  .conn-chip.sel{background:rgba(130,175,255,0.22);border-color:rgba(130,175,255,0.52);color:rgba(210,230,255,1.0);font-weight:600;}
+  .conn-chip.disabled{opacity:0.28;cursor:default;pointer-events:none;}
+  body.day .conn-chip{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.10);color:rgba(80,65,50,0.75);}
+  body.day .conn-chip:hover{background:rgba(55,80,200,0.09);border-color:rgba(55,80,200,0.20);color:rgba(36,54,158,0.90);}
+  body.day .conn-chip.sel{background:rgba(55,80,200,0.16);border-color:rgba(55,80,200,0.38);color:rgba(28,48,158,0.98);}
+  .conn-selected-strip{display:flex;flex-wrap:wrap;gap:5px;padding:9px 0;margin-bottom:12px;border-top:0.5px solid rgba(255,255,255,0.07);border-bottom:0.5px solid rgba(255,255,255,0.07);}
+  body.day .conn-selected-strip{border-color:rgba(0,0,0,0.07);}
+  .conn-sel-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px 3px 11px;border-radius:20px;font-size:10.5px;font-weight:600;background:rgba(140,175,255,0.22);border:0.5px solid rgba(140,175,255,0.48);color:rgba(210,228,255,1.0);letter-spacing:.02em;font-family:inherit;}
+  .conn-sel-chip .rm{font-size:12px;cursor:pointer;opacity:0.65;line-height:1;transition:opacity .12s;background:none;border:none;color:inherit;padding:0 1px;}
+  .conn-sel-chip .rm:hover{opacity:1;}
+  body.day .conn-sel-chip{background:rgba(55,80,200,0.13);border-color:rgba(55,80,200,0.32);color:rgba(28,48,158,0.98);}
+  .conn-no-video{font-size:11px;color:#5878a0;padding:4px 0;}
+  body.day .conn-no-video{color:#b0a080;}
+  /* ✦ 연결 버튼 */
+  #tt-conn-row{margin-top:6px;}
+  .tt-conn-btn{
+    display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;
+    font-size:9.5px;font-weight:600;letter-spacing:.05em;cursor:pointer;font-family:inherit;
+    background:rgba(130,160,255,0.10);border:0.5px solid rgba(130,160,255,0.28);color:rgba(180,205,255,0.85);
+    transition:background .14s,border-color .14s,color .14s;
+  }
+  .tt-conn-btn:hover{background:rgba(130,160,255,0.20);border-color:rgba(130,160,255,0.46);color:rgba(210,225,255,0.98);}
+  body.day .tt-conn-btn{background:rgba(55,80,200,0.07);border-color:rgba(55,80,200,0.20);color:rgba(45,65,180,0.82);}
+  body.day .tt-conn-btn:hover{background:rgba(55,80,200,0.15);color:rgba(28,48,158,0.98);}
 </style>
 </head>
 <body>
@@ -587,7 +662,7 @@
     <button class="dh-btn" id="dh-settings-btn">⚙</button>
   </div>
 </div>
-<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div class="tn" id="tn"></div><div class="tg" id="tg"></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div class="tn" id="tn"></div><div class="tg" id="tg"></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div><div id="tt-conn-row"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
@@ -680,6 +755,11 @@
   <button id="tab-sb-clear">✕</button>
 </div>
 <div id="mob-sr"></div>
+<div id="conn-panel"><div class="conn-inner" id="conn-panel-inner"></div></div>
+<div id="conn-sheet">
+  <div class="conn-handle"></div>
+  <div id="conn-sheet-inner"><div class="conn-inner" id="conn-sheet-body"></div></div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS2DRenderer.js"></script>
@@ -1532,6 +1612,144 @@ function closeMobSheet(){
     }
   },330);
 }
+// ── Connection Card ────────────────────────────────
+let _connAnchor=null,_connSelected=[],_connLines3d=[];
+const connPanelEl=document.getElementById('conn-panel');
+const connPanelInner=document.getElementById('conn-panel-inner');
+const connSheetEl=document.getElementById('conn-sheet');
+const connSheetBody=document.getElementById('conn-sheet-body');
+const connSheetInner=document.getElementById('conn-sheet-inner');
+
+function _getCollabMembers(artist){
+  const s=new Set();
+  (artist.songs||[]).forEach(sg=>{(sg.with||[]).forEach(n=>s.add(n));});
+  return[...s];
+}
+function _getCollabSongs(artist,sel){
+  if(!sel.length)return[];
+  return(artist.songs||[]).filter(sg=>{
+    const w=sg.with||[];
+    return sel.every(n=>w.includes(n));
+  });
+}
+function _clearConnLines3d(){
+  _connLines3d.forEach(l=>scene.remove(l));_connLines3d=[];
+}
+function _updateConnLines3d(){
+  _clearConnLines3d();
+  if(!_connAnchor||!_connAnchor._worldPos)return;
+  const byName={};
+  ARTISTS.forEach(a=>{byName[a.name.ko]=a;if(a.name.en)byName[a.name.en]=a;});
+  const col=_connAnchor.color||[140,180,255];
+  const hexCol=new THREE.Color(col[0]/255,col[1]/255,col[2]/255).multiplyScalar(1.6);
+  _connSelected.forEach(name=>{
+    const other=byName[name];if(!other||!other._worldPos)return;
+    const geo=new THREE.BufferGeometry().setFromPoints([_connAnchor._worldPos,other._worldPos]);
+    const mat=new THREE.LineBasicMaterial({color:hexCol,transparent:true,opacity:0.72,depthWrite:false});
+    const line=new THREE.Line(geo,mat);scene.add(line);_connLines3d.push(line);
+  });
+}
+
+function _buildConnContent(container){
+  container.innerHTML='';
+  const hd=document.createElement('div');hd.className='conn-hd';
+  const backBtn=document.createElement('button');backBtn.className='conn-back-btn';backBtn.textContent='‹';
+  backBtn.addEventListener('click',e=>{e.stopPropagation();closeConnCard();});
+  const anchor=document.createElement('div');anchor.className='conn-anchor-chip';
+  anchor.textContent=currentLang==='ko'?_connAnchor.name.ko:(_connAnchor.name.en||_connAnchor.name.ko);
+  hd.appendChild(backBtn);hd.appendChild(anchor);container.appendChild(hd);
+
+  const collabNames=_getCollabMembers(_connAnchor);
+  const membersLbl=document.createElement('div');membersLbl.className='conn-lbl';
+  membersLbl.textContent=currentLang==='ko'?'함께한 멤버':'collaborated with';
+  container.appendChild(membersLbl);
+  const chipsDiv=document.createElement('div');chipsDiv.className='conn-chips';
+  collabNames.forEach(name=>{
+    const chip=document.createElement('button');
+    const isSel=_connSelected.includes(name);
+    chip.className='conn-chip'+(isSel?' sel':'');
+    if(!isSel&&_connSelected.length>=3)chip.classList.add('disabled');
+    chip.textContent=name;
+    chip.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(isSel){_connSelected=_connSelected.filter(n=>n!==name);}
+      else if(_connSelected.length<3){_connSelected.push(name);}
+      _updateConnLines3d();
+      _buildConnContent(container);
+    });
+    chipsDiv.appendChild(chip);
+  });
+  container.appendChild(chipsDiv);
+
+  if(_connSelected.length>0){
+    const strip=document.createElement('div');strip.className='conn-selected-strip';
+    _connSelected.forEach(name=>{
+      const sc=document.createElement('div');sc.className='conn-sel-chip';
+      const nm=document.createElement('span');nm.textContent=name;
+      const rm=document.createElement('button');rm.className='rm';rm.textContent='×';
+      rm.addEventListener('click',e=>{
+        e.stopPropagation();
+        _connSelected=_connSelected.filter(n=>n!==name);
+        _updateConnLines3d();_buildConnContent(container);
+      });
+      sc.appendChild(nm);sc.appendChild(rm);strip.appendChild(sc);
+    });
+    container.appendChild(strip);
+
+    const vidLbl=document.createElement('div');vidLbl.className='conn-lbl';
+    vidLbl.textContent=currentLang==='ko'?'함께한 영상':'together';
+    container.appendChild(vidLbl);
+    const vidDiv=document.createElement('div');
+    const songs=_getCollabSongs(_connAnchor,_connSelected);
+    if(songs.length)buildVideoSection(songs,vidDiv);
+    else{const e2=document.createElement('div');e2.className='conn-no-video';e2.textContent=currentLang==='ko'?'해당 조합의 영상이 없어요':'No video for this combination';vidDiv.appendChild(e2);}
+    container.appendChild(vidDiv);
+  }
+}
+
+function openConnCard(artist){
+  _connAnchor=artist;_connSelected=[];_updateConnLines3d();
+  if(isMob()){
+    _buildConnContent(connSheetBody);
+    connSheetInner.scrollTop=0;
+    connSheetEl.style.display='block';
+    requestAnimationFrame(()=>connSheetEl.classList.add('bs-open'));
+  }else{
+    const inMember=memberPanelEl.classList.contains('open');
+    connPanelEl.style.right=(inMember?640:320)+'px';
+    _buildConnContent(connPanelInner);
+    connPanelInner.scrollTop=0;
+    connPanelEl.classList.add('open');
+  }
+}
+function closeConnCard(){
+  _clearConnLines3d();_connAnchor=null;_connSelected=[];
+  if(isMob()){
+    connSheetEl.classList.remove('bs-open');
+    setTimeout(()=>{if(!connSheetEl.classList.contains('bs-open'))connSheetEl.style.display='none';},340);
+  }else{
+    connPanelEl.classList.remove('open');
+  }
+}
+// 연결 시트 스와이프 다운 닫기
+let _csDragY=0,_csDragging=false;
+connSheetEl.addEventListener('touchstart',e=>{_csDragY=e.touches[0].clientY;_csDragging=true;e.stopPropagation();},{passive:true});
+connSheetEl.addEventListener('touchmove',e=>{
+  if(!_csDragging)return;e.stopPropagation();
+  const dy=e.touches[0].clientY-_csDragY;
+  if(dy>0&&connSheetInner.scrollTop<=0){
+    if(e.cancelable)e.preventDefault();
+    connSheetEl.style.transition='none';connSheetEl.style.transform=`translateY(${dy}px)`;
+  }
+},{passive:false});
+connSheetEl.addEventListener('touchend',e=>{
+  if(!_csDragging)return;_csDragging=false;e.stopPropagation();
+  const dy=e.changedTouches[0].clientY-_csDragY;
+  connSheetEl.style.transition='';
+  if(dy>80&&connSheetInner.scrollTop<=0)closeConnCard();
+  else connSheetEl.style.transform='';
+},{passive:true});
+
 // 스와이프 다운 닫기
 let _sheetDragY=0,_sheetDragging=false;
 mobSheetEl.addEventListener('touchstart',e=>{_sheetDragY=e.touches[0].clientY;_sheetDragging=true;e.stopPropagation();},{passive:true});
@@ -1552,6 +1770,7 @@ mobSheetEl.addEventListener('touchend',e=>{
   else mobSheetEl.style.transform='';
 },{passive:true});
 function closeCards(){
+  closeConnCard();
   if(isMob())closeMobSheet();
   else{closeMemberPanel(false);closeSidePanel();}
   document.getElementById('tt').style.display='none';
@@ -1646,6 +1865,7 @@ function positionCard(el,cx,cy,cardW,estH){
 }
 
 function showT(a,cx,cy){
+  closeConnCard();
   setFocus(a.group.ko);_openTArtist=a;
   const el=document.getElementById('tt');
   el.style.display='block';
@@ -1660,7 +1880,14 @@ function showT(a,cx,cy){
   tgEl.onclick=e=>{
     e.stopPropagation();
     if(!isMob()&&memberPanelEl.classList.contains('open')){
-      closeMemberPanel(true);return; // 그룹 카드는 이미 왼쪽에 표시 중
+      closeMemberPanel(true);return; // 그룹 카드가 이미 side-panel에 있는 상태
+    }
+    if(!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===sidePanelEl){
+      // 멤버 카드가 side-panel에 단독으로 열린 상태 → 그룹 카드를 side-panel로, 멤버 카드는 member-panel로
+      const ttEl=document.getElementById('tt');
+      showGC(a.group.ko,cx,cy); // gc→side-panel, tt→body(hidden)
+      openMemberPanel(ttEl);    // tt→member-panel
+      return;
     }
     const ttEl=document.getElementById('tt');
     const gx=parseInt(ttEl.style.left)||cx;
@@ -1680,6 +1907,16 @@ function showT(a,cx,cy){
   document.getElementById('tm').textContent=meta.join(' · ');
   const tv=document.getElementById('tv');
   buildVideoSection(a.songs||[],tv);
+  // ✦ 연결 버튼
+  const ttConnRow=document.getElementById('tt-conn-row');
+  const hasCollab=(a.songs||[]).some(s=>(s.with||[]).length>0);
+  ttConnRow.innerHTML='';
+  if(hasCollab){
+    const btn=document.createElement('button');btn.className='tt-conn-btn';
+    btn.textContent='✦ 연결';
+    btn.addEventListener('click',e=>{e.stopPropagation();openConnCard(a);});
+    ttConnRow.appendChild(btn);ttConnRow.style.display='';
+  }else{ttConnRow.style.display='none';}
   const hasSongs=(a.songs||[]).length>0;
   const cardW=hasSongs?264:210;
   el.style.maxWidth=cardW+'px';
@@ -2035,7 +2272,11 @@ window.addEventListener('click',e=>{
       if(!planetMode){
         // 투명 버블 → 멤버 우선
         const a=nearestMember();
-        if(a){closeCards();showT(a,e.clientX,e.clientY);return;}
+        if(a){
+          const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
+          if(gcInSide){closeMemberPanel(false);}else{closeCards();}
+          showT(a,e.clientX,e.clientY);return;
+        }
       }
       // 행성 모드 or 멤버 없음 → 그룹 카드
       closeCards();
@@ -2047,7 +2288,11 @@ window.addEventListener('click',e=>{
 
   // 버블 밖 → 멤버만 체크
   const a=nearestMember();
-  if(a){closeCards();showT(a,e.clientX,e.clientY);return;}
+  if(a){
+    const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
+    if(gcInSide){closeMemberPanel(false);}else{closeCards();}
+    showT(a,e.clientX,e.clientY);return;
+  }
   closeCards();
 });
 
