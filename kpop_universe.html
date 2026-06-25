@@ -85,12 +85,13 @@
   body.day #tab-sb-input::placeholder{color:rgba(120,100,80,0.28);}
   /* ── Mobile search results ───────────────────────── */
   #mob-sr{
-    position:fixed;left:12px;right:12px;
+    position:fixed;left:12px;right:12px;width:auto;
     bottom:var(--sheet-bottom,73px);
     background:rgba(18,22,40,0.96);border-radius:14px;
     backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
     box-shadow:0 -2px 28px rgba(0,0,0,0.50);z-index:42;
     max-height:260px;overflow-y:auto;display:none;
+    box-sizing:border-box;
   }
   #mob-sr.open{display:block;}
   body.day #mob-sr{background:rgba(246,242,234,0.97);box-shadow:0 -2px 24px rgba(80,60,40,0.14);}
@@ -294,7 +295,7 @@
   .mob-shorts-grid.tv-more-wrap.open{display:grid;}
   /* ── Mobile bottom sheet ─────────────────────────── */
   #mob-sheet{
-    display:none;position:fixed;left:0;right:0;
+    display:none;position:fixed;left:0;right:0;width:100%;
     bottom:var(--sheet-bottom,73px);
     max-height:60vh;
     border-radius:20px 20px 0 0;
@@ -303,6 +304,7 @@
     border:0.5px solid rgba(255,255,255,0.10);
     box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 -8px 32px rgba(0,0,0,0.55);
     z-index:35;pointer-events:all;overflow:hidden;
+    box-sizing:border-box;
     transform:translateY(calc(100% + var(--sheet-bottom,73px)));
     transition:transform .32s cubic-bezier(0.32,0.72,0,1);
   }
@@ -321,11 +323,11 @@
   #yt-lb-close:hover{opacity:1;}
   #mob-sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.14);border-radius:2px;margin:10px auto 6px;display:block;}
   body.day #mob-sheet-handle{background:rgba(150,130,110,0.25);}
-  #mob-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(60vh - 24px);overscroll-behavior:contain;}
+  #mob-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(60vh - 24px);overscroll-behavior:contain;width:100%;box-sizing:border-box;}
   #mob-sheet-inner>#tt,#mob-sheet-inner>#gc{
     position:static!important;display:block!important;
     max-width:100%!important;width:100%!important;
-    left:auto!important;top:auto!important;
+    left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
     border-radius:0!important;box-shadow:none!important;
     border:none!important;background:transparent!important;
     backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
