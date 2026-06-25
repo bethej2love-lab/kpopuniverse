@@ -296,13 +296,13 @@
   #mob-sheet{
     display:none;position:fixed;left:0;right:0;
     bottom:var(--sheet-bottom,73px);
-    max-height:75vh;
+    max-height:60vh;
     border-radius:20px 20px 0 0;
     background:rgba(16,20,36,0.96);
     backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);
     border:0.5px solid rgba(255,255,255,0.10);
     box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 -8px 32px rgba(0,0,0,0.55);
-    z-index:35;pointer-events:all;
+    z-index:35;pointer-events:all;overflow:hidden;
     transform:translateY(calc(100% + var(--sheet-bottom,73px)));
     transition:transform .32s cubic-bezier(0.32,0.72,0,1);
   }
@@ -321,16 +321,24 @@
   #yt-lb-close:hover{opacity:1;}
   #mob-sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.14);border-radius:2px;margin:10px auto 6px;display:block;}
   body.day #mob-sheet-handle{background:rgba(150,130,110,0.25);}
-  #mob-sheet-inner{overflow-y:auto;-webkit-overflow-scrolling:touch;max-height:calc(75vh - 24px);overscroll-behavior:contain;}
+  #mob-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(60vh - 24px);overscroll-behavior:contain;}
   #mob-sheet-inner>#tt,#mob-sheet-inner>#gc{
-    position:static!important;display:block!important;max-width:100%!important;
-    width:100%!important;border-radius:0!important;box-shadow:none!important;
+    position:static!important;display:block!important;
+    max-width:100%!important;width:100%!important;
+    left:auto!important;top:auto!important;
+    border-radius:0!important;box-shadow:none!important;
     border:none!important;background:transparent!important;
     backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
     transform:none!important;transition:none!important;
+    box-sizing:border-box!important;overflow-x:hidden!important;
   }
   @media(max-width:768px){
     #tt,#gc{display:none;} /* 카드는 bottom sheet 안에서만 표시 */
+    #settings-panel{
+      right:0;left:0;bottom:var(--sheet-bottom,73px);
+      width:100%;max-width:100%;border-radius:20px 20px 0 0;
+      max-height:65vh;overflow-y:auto;
+    }
   }
   /* ── Side panel (desktop) ──────────────────────────── */
   #side-panel{
@@ -1486,6 +1494,12 @@ function closeSidePanel(){
 
 function openMobSheet(cardEl){
   clearTimeout(_mobCloseTimer);
+  controls.enabled=false;
+  // CSS가 너비를 담당하므로 인라인 포지셔닝 초기화
+  cardEl.style.maxWidth='';
+  cardEl.style.width='';
+  cardEl.style.left='';
+  cardEl.style.top='';
   const alreadyOpen=mobSheetEl.style.display==='block';
   [document.getElementById('tt'),document.getElementById('gc')].forEach(el=>{
     if(el.parentElement===mobSheetInner)document.body.appendChild(el);
@@ -1509,6 +1523,8 @@ function closeMobSheet(){
   _mobCloseTimer=setTimeout(()=>{
     if(!mobSheetEl.classList.contains('bs-open')){
       mobSheetEl.style.display='none';
+      if(!document.getElementById('settings-panel').classList.contains('open'))
+        controls.enabled=true;
       [document.getElementById('tt'),document.getElementById('gc')].forEach(el=>{
         if(el.parentElement===mobSheetInner)document.body.appendChild(el);
         el.style.display='none';
@@ -1814,7 +1830,10 @@ function closePanels(){
   ['tab-search','tab-settings','dh-search-btn','dh-settings-btn'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.classList.remove('active');
   });
-  if(isMob())exitMobSearch();
+  if(isMob()){
+    exitMobSearch();
+    if(!mobSheetEl.classList.contains('bs-open'))controls.enabled=true;
+  }
 }
 document.getElementById('tab-lang').addEventListener('click',e=>{
   e.stopPropagation();
@@ -1867,6 +1886,8 @@ document.getElementById('tab-settings').addEventListener('click',e=>{
   ['tab-search','dh-search-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
   sp.classList.toggle('open',!open);
   ['tab-settings','dh-settings-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',!open);});
+  // 모바일: 설정 패널 열릴 때 궤도 컨트롤 비활성화 (열린 상태→닫힘: enable, 닫힌 상태→열림: disable)
+  if(isMob()&&!mobSheetEl.classList.contains('bs-open'))controls.enabled=open;
 });
 
 // ── Settings panel controls ───────────────────────
