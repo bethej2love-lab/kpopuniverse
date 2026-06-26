@@ -192,7 +192,8 @@
   #ttx{position:absolute;top:9px;right:11px;font-size:15px;color:rgba(150,170,215,0.65);cursor:pointer;line-height:1;}
   #tt-bar{height:2px;width:100%;margin-bottom:12px;}
   .tn{font-size:16px;font-weight:700;color:#d8e4f6;margin-bottom:3px;padding-right:18px;padding-left:4px;letter-spacing:-.02em;}
-  .tg{font-size:14px;color:#aec8e8;margin-bottom:1px;padding-left:4px;letter-spacing:.05em;font-weight:500;text-transform:uppercase;cursor:pointer;transition:color .12s;}
+  #tg-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1px;padding-right:4px;}
+  .tg{font-size:14px;color:#aec8e8;padding-left:4px;letter-spacing:.05em;font-weight:500;text-transform:uppercase;cursor:pointer;transition:color .12s;width:fit-content;}
   .tg:hover{color:#d0e8ff;}
   .tco{font-size:14px;color:#88aac8;margin-bottom:6px;}
   .tm{display:none;}
@@ -460,10 +461,10 @@
   }
   /* ── Connection Card ─────────────────────────────── */
   #conn-panel{
-    position:fixed;right:320px;top:0;bottom:0;width:280px;
+    position:fixed;right:640px;top:0;bottom:0;width:280px;
     overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
     z-index:34;pointer-events:none;
-    transform:translateX(calc(100% + 320px));transition:transform 0.26s cubic-bezier(0.32,0,0.15,1);
+    transform:translateX(-100%);transition:transform 0.26s cubic-bezier(0.32,0,0.15,1);
     background:rgba(16,20,36,0.88);
     backdrop-filter:blur(40px) saturate(190%);-webkit-backdrop-filter:blur(40px) saturate(190%);
     box-shadow:-6px 0 32px rgba(0,0,0,0.45);font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
@@ -586,7 +587,7 @@
     <button class="dh-btn" id="dh-settings-btn">⚙︎</button>
   </div>
 </div>
-<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div class="tn" id="tn"></div><div class="tg" id="tg"></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div><div id="tt-conn-row"></div></div>
+<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div class="tn" id="tn"></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
@@ -863,6 +864,39 @@ async function buildUniverse(){
   ]);
   document.getElementById('loading').style.display='none';
   GROUPS=grpData;ARTISTS=artData;
+
+  // ── Bidirectional 'with' expansion ──────────────────
+  (function expandWith(){
+    function resolveWith(str,srcGroup){
+      const m=str.match(/^(.+)\((.+)\)$/);
+      return m?{name:m[1],group:m[2]}:{name:str,group:srcGroup};
+    }
+    function fmtFor(name,group,targetGroup){
+      return group===targetGroup?name:`${name}(${group})`;
+    }
+    const snap=artData.map(a=>({a,songs:[...(a.songs||[])]}));
+    snap.forEach(({a,songs})=>{
+      songs.forEach(song=>{
+        if(!song.with||!song.with.length)return;
+        song.with.forEach(withStr=>{
+          const {name:tName,group:tGroup}=resolveWith(withStr,a.group.ko);
+          const target=artData.find(b=>b.name.ko===tName&&b.group.ko===tGroup);
+          if(!target)return;
+          if(!target.songs)target.songs=[];
+          if(target.songs.some(s=>s.u===song.u))return;
+          const reverseWith=[fmtFor(a.name.ko,a.group.ko,target.group.ko)];
+          song.with.forEach(w=>{
+            if(w===withStr)return;
+            const {name:wn,group:wg}=resolveWith(w,a.group.ko);
+            reverseWith.push(fmtFor(wn,wg,target.group.ko));
+          });
+          const ns={t:song.t,u:song.u,with:reverseWith};
+          if(song.type)ns.type=song.type;
+          target.songs.push(ns);
+        });
+      });
+    });
+  })();
 
   const memberMap={};
   const artistByName={};
@@ -1430,6 +1464,7 @@ function openMemberPanel(cardEl){
   if(!_memberPanelShifted){_memberPanelShifted=true;_panWorld(3,400);}
 }
 function closeMemberPanel(panBack){
+  closeConnCard();
   memberPanelEl.classList.remove('open');
   const tt=document.getElementById('tt');
   if(tt.parentElement===memberPanelEl)document.body.appendChild(tt);
@@ -1508,7 +1543,7 @@ function closeMobSheet(){
   },330);
 }
 // ── Connection Card ────────────────────────────────
-let _connAnchor=null,_connSelected=[],_connLines3d=[];
+let _connAnchor=null,_connSelected=[],_connLines3d=[],_connPanelShifted=false;
 const connPanelEl=document.getElementById('conn-panel');
 const connPanelInner=document.getElementById('conn-panel-inner');
 const connSheetEl=document.getElementById('conn-sheet');
@@ -1610,11 +1645,10 @@ function openConnCard(artist){
     connSheetEl.style.display='block';
     requestAnimationFrame(()=>connSheetEl.classList.add('bs-open'));
   }else{
-    const inMember=memberPanelEl.classList.contains('open');
-    connPanelEl.style.right=(inMember?640:320)+'px';
     _buildConnContent(connPanelInner);
     connPanelInner.scrollTop=0;
     connPanelEl.classList.add('open');
+    if(!_connPanelShifted){_connPanelShifted=true;_panWorld(2.5,400);}
   }
 }
 function closeConnCard(){
@@ -1624,6 +1658,7 @@ function closeConnCard(){
     setTimeout(()=>{if(!connSheetEl.classList.contains('bs-open'))connSheetEl.style.display='none';},340);
   }else{
     connPanelEl.classList.remove('open');
+    if(_connPanelShifted){_connPanelShifted=false;_panWorld(-2.5,400);}
   }
 }
 // 연결 시트 스와이프 다운 닫기
@@ -1818,16 +1853,14 @@ function showT(a,cx,cy){
   document.getElementById('tm').innerHTML='';
   const tv=document.getElementById('tv');
   buildVideoSection(a.songs||[],tv);
-  // ✦ 연결 버튼
-  const ttConnRow=document.getElementById('tt-conn-row');
+  // ✦ 연결 버튼 (그룹명 오른쪽)
+  const connBtn=document.getElementById('tt-conn-btn');
   const hasCollab=(a.songs||[]).some(s=>(s.with||[]).length>0);
-  ttConnRow.innerHTML='';
+  connBtn.style.display=hasCollab?'':'none';
+  connBtn.onclick=null;
   if(hasCollab){
-    const btn=document.createElement('button');btn.className='tt-conn-btn';
-    btn.textContent='✦ 연결';
-    btn.addEventListener('click',e=>{e.stopPropagation();openConnCard(a);});
-    ttConnRow.appendChild(btn);ttConnRow.style.display='';
-  }else{ttConnRow.style.display='none';}
+    connBtn.addEventListener('click',e=>{e.stopPropagation();openConnCard(a);},{once:true});
+  }
   const hasSongs=(a.songs||[]).length>0;
   const cardW=hasSongs?264:210;
   el.style.maxWidth=cardW+'px';
