@@ -1594,16 +1594,38 @@ function _clearConnLines3d(){
 function _updateConnLines3d(){
   _clearConnLines3d();
   if(!_connAnchor||!_connAnchor._worldPos)return;
-  const byName={};
-  ARTISTS.forEach(a=>{byName[a.name.ko]=a;if(a.name.en)byName[a.name.en]=a;});
   const col=_connAnchor.color||[140,180,255];
   const hexCol=new THREE.Color(col[0]/255,col[1]/255,col[2]/255).multiplyScalar(1.6);
   _connSelected.forEach(name=>{
-    const other=byName[name];if(!other||!other._worldPos)return;
+    const other=_findArtistByConnName(name,_connAnchor.group.ko);
+    if(!other||!other._worldPos)return;
     const geo=new THREE.BufferGeometry().setFromPoints([_connAnchor._worldPos,other._worldPos]);
     const mat=new THREE.LineBasicMaterial({color:hexCol,transparent:true,opacity:0.72,depthWrite:false});
     const line=new THREE.Line(geo,mat);scene.add(line);_connLines3d.push(line);
   });
+}
+function _flyToConnStars(){
+  if(!_connAnchor||!_connAnchor._worldPos)return;
+  if(!_connSelected.length){
+    const bm=bubbleMeshes.find(b=>b.ko===_connAnchor.group.ko);
+    if(bm)flyToBubble(bm.mesh.position,bm.radius);
+    return;
+  }
+  const pts=[_connAnchor._worldPos.clone()];
+  _connSelected.forEach(name=>{
+    const other=_findArtistByConnName(name,_connAnchor.group.ko);
+    if(other&&other._worldPos)pts.push(other._worldPos.clone());
+  });
+  const center=new THREE.Vector3();
+  pts.forEach(p=>center.add(p));
+  center.divideScalar(pts.length);
+  let maxSpread=0;
+  pts.forEach(p=>{maxSpread=Math.max(maxSpread,p.distanceTo(center));});
+  const halfFov=camera.fov*Math.PI/360;
+  const dist=Math.max(maxSpread/Math.tan(halfFov)*1.6,10);
+  let dir=camera.position.clone().sub(center).normalize();
+  if(dir.lengthSq()<0.001)dir.set(0,0.3,1).normalize();
+  _startFly(center,center.clone().addScaledVector(dir,dist),700);
 }
 
 function _buildConnContent(container){
@@ -1632,6 +1654,7 @@ function _buildConnContent(container){
       if(isSel){_connSelected=_connSelected.filter(n=>n!==name);}
       else if(_connSelected.length<3){_connSelected.push(name);}
       _updateConnLines3d();
+      _flyToConnStars();
       _buildConnContent(container);
     });
     const gotoBtn=document.createElement('span');gotoBtn.className='conn-chip-goto';gotoBtn.textContent='↗';
