@@ -1604,28 +1604,50 @@ function _updateConnLines3d(){
     const line=new THREE.Line(geo,mat);scene.add(line);_connLines3d.push(line);
   });
 }
+function _applyConnFocus(){
+  if(!_connAnchor||!_connSelected.length){
+    if(_connAnchor)setFocus(_connAnchor.group.ko);
+    return;
+  }
+  const brightGroups=new Set([_connAnchor.group.ko]);
+  const brightArtists=new Set([_connAnchor]);
+  _connSelected.forEach(name=>{
+    const other=_findArtistByConnName(name,_connAnchor.group.ko);
+    if(other){brightArtists.add(other);brightGroups.add(other.group.ko);}
+  });
+  focusGroupKo=null;
+  ARTISTS.forEach(a=>{a._focusTarget=brightArtists.has(a)?1:FOCUS_DIM;});
+  bubbleMeshes.forEach(({mesh,ko})=>{mesh._focusTarget=brightGroups.has(ko)?1:FOCUS_DIM;});
+}
 function _flyToConnStars(){
-  if(!_connAnchor||!_connAnchor._worldPos)return;
+  if(!_connAnchor)return;
   if(!_connSelected.length){
     const bm=bubbleMeshes.find(b=>b.ko===_connAnchor.group.ko);
     if(bm)flyToBubble(bm.mesh.position,bm.radius);
     return;
   }
-  const pts=[_connAnchor._worldPos.clone()];
+  const involvedKos=new Set([_connAnchor.group.ko]);
   _connSelected.forEach(name=>{
     const other=_findArtistByConnName(name,_connAnchor.group.ko);
-    if(other&&other._worldPos)pts.push(other._worldPos.clone());
+    if(other)involvedKos.add(other.group.ko);
   });
+  const bms=[];
+  involvedKos.forEach(ko=>{const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)bms.push(bm);});
+  if(!bms.length)return;
+  if(bms.length===1){flyToBubble(bms[0].mesh.position,bms[0].radius);return;}
   const center=new THREE.Vector3();
-  pts.forEach(p=>center.add(p));
-  center.divideScalar(pts.length);
+  bms.forEach(bm=>center.add(bm.mesh.position));
+  center.divideScalar(bms.length);
   let maxSpread=0;
-  pts.forEach(p=>{maxSpread=Math.max(maxSpread,p.distanceTo(center));});
+  bms.forEach(bm=>{maxSpread=Math.max(maxSpread,bm.mesh.position.distanceTo(center)+bm.radius*2.5);});
   const halfFov=camera.fov*Math.PI/360;
-  const dist=Math.max(maxSpread/Math.tan(halfFov)*1.6,10);
-  let dir=camera.position.clone().sub(center).normalize();
-  if(dir.lengthSq()<0.001)dir.set(0,0.3,1).normalize();
-  _startFly(center,center.clone().addScaledVector(dir,dist),700);
+  const dist=Math.max(maxSpread/Math.tan(halfFov)*1.5,18);
+  const tilt=new THREE.Vector3(
+    camera.position.x-center.x,
+    Math.abs(camera.position.y-center.y)*0.4+2,
+    camera.position.z-center.z
+  ).normalize();
+  _startFly(center,center.clone().addScaledVector(tilt,dist),900);
 }
 
 function _buildConnContent(container){
@@ -1654,6 +1676,7 @@ function _buildConnContent(container){
       if(isSel){_connSelected=_connSelected.filter(n=>n!==name);}
       else if(_connSelected.length<3){_connSelected.push(name);}
       _updateConnLines3d();
+      _applyConnFocus();
       _flyToConnStars();
       _buildConnContent(container);
     });
@@ -1713,7 +1736,9 @@ function openConnCard(artist){
   }
 }
 function closeConnCard(){
-  _clearConnLines3d();_connAnchor=null;_connSelected=[];
+  _clearConnLines3d();
+  if(_connAnchor&&_connSelected.length)setFocus(_connAnchor.group.ko);
+  _connAnchor=null;_connSelected=[];
   if(isMob()){
     connSheetEl.classList.remove('bs-open');
     setTimeout(()=>{if(!connSheetEl.classList.contains('bs-open'))connSheetEl.style.display='none';},340);
