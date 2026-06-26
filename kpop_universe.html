@@ -645,6 +645,52 @@
   .tt-conn-btn:hover{background:rgba(130,160,255,0.20);border-color:rgba(130,160,255,0.46);color:rgba(210,225,255,0.98);}
   body.day .tt-conn-btn{background:rgba(55,80,200,0.07);border-color:rgba(55,80,200,0.20);color:rgba(45,65,180,0.82);}
   body.day .tt-conn-btn:hover{background:rgba(55,80,200,0.15);color:rgba(28,48,158,0.98);}
+  /* ── Tag chips ───────────────────────────────────── */
+  .tag-chip{
+    display:inline;cursor:pointer;
+    padding:1px 7px;border-radius:12px;font-size:11px;font-weight:600;letter-spacing:.04em;
+    background:rgba(140,175,255,0.10);border:0.5px solid rgba(140,175,255,0.22);
+    color:rgba(170,205,255,0.80);
+    text-shadow:0 0 7px rgba(140,175,255,0.32),0 0 3px rgba(140,175,255,0.14);
+    transition:background .14s,color .14s,border-color .14s,text-shadow .14s;user-select:none;
+  }
+  .tag-chip:hover{background:rgba(140,175,255,0.22);border-color:rgba(140,175,255,0.45);color:rgba(210,230,255,1.0);text-shadow:0 0 10px rgba(170,210,255,0.52),0 0 4px rgba(170,210,255,0.24);}
+  .tag-chip.active{background:rgba(130,175,255,0.28);border-color:rgba(130,175,255,0.65);color:#fff;text-shadow:0 0 10px rgba(190,220,255,0.60),0 0 4px rgba(190,220,255,0.30);}
+  body.day .tag-chip{background:rgba(55,80,200,0.07);border-color:rgba(55,80,200,0.18);color:rgba(45,65,180,0.80);text-shadow:none;}
+  body.day .tag-chip:hover{background:rgba(55,80,200,0.15);border-color:rgba(55,80,200,0.35);color:rgba(28,48,158,0.98);}
+  body.day .tag-chip.active{background:rgba(55,80,200,0.22);border-color:rgba(55,80,200,0.55);color:rgba(20,40,150,1.0);}
+  /* ── Filter panel (journal-sidebar 내) ───────────── */
+  #filter-panel{display:none;}
+  #filter-panel-hd{
+    display:flex;align-items:flex-start;justify-content:space-between;
+    padding:0 0 10px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:10px;
+  }
+  body.day #filter-panel-hd{border-bottom-color:rgba(0,0,0,0.07);}
+  #filter-panel-label{font-size:8.5px;font-weight:700;letter-spacing:.20em;color:rgba(130,150,205,0.50);text-transform:uppercase;margin-bottom:4px;}
+  body.day #filter-panel-label{color:rgba(140,120,95,0.50);}
+  #filter-panel-active{font-size:12px;color:rgba(195,215,255,0.92);font-weight:600;letter-spacing:.02em;}
+  body.day #filter-panel-active{color:rgba(45,65,180,0.90);}
+  #filter-panel-clear{background:none;border:none;cursor:pointer;font-size:16px;line-height:1;
+    color:rgba(140,165,220,0.40);transition:color .13s;padding:2px 4px;flex-shrink:0;margin-top:-1px;}
+  #filter-panel-clear:hover{color:rgba(200,220,255,0.85);}
+  body.day #filter-panel-clear{color:rgba(110,95,78,0.38);}
+  body.day #filter-panel-clear:hover{color:rgba(55,40,25,0.75);}
+  .fli-group-hd{font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(120,145,200,0.42);padding:12px 0 5px;}
+  body.day .fli-group-hd{color:rgba(130,110,88,0.42);}
+  .filter-list-item{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:7px 0;border-bottom:0.5px solid rgba(255,255,255,0.055);
+    cursor:pointer;transition:opacity .13s;
+  }
+  .filter-list-item:last-child{border-bottom:none;}
+  .filter-list-item:hover .fli-name{color:#e0eeff;}
+  body.day .filter-list-item{border-bottom-color:rgba(0,0,0,0.06);}
+  body.day .filter-list-item:hover .fli-name{color:#1a2c90;}
+  .fli-name{font-size:13px;color:#b8d0ee;font-weight:500;transition:color .13s;}
+  body.day .fli-name{color:#4a3c32;}
+  .fli-sub{font-size:11px;color:#5878a0;letter-spacing:.04em;flex-shrink:0;margin-left:8px;}
+  body.day .fli-sub{color:#a09078;}
 </style>
 </head>
 <body>
@@ -654,7 +700,17 @@
     <span id="journal-toggle-icon">›</span>
   </button>
   <div id="journal-inner">
-    <div class="sp-hd">JOURNAL</div>
+    <div id="filter-panel">
+      <div id="filter-panel-hd">
+        <div>
+          <div id="filter-panel-label">FILTER</div>
+          <div id="filter-panel-active"></div>
+        </div>
+        <button id="filter-panel-clear">×</button>
+      </div>
+      <div id="filter-list"></div>
+    </div>
+    <div class="sp-hd" id="journal-hd">JOURNAL</div>
   </div>
 </div>
 <div id="desktop-header">
@@ -865,6 +921,7 @@ let ARTISTS=[],GROUPS={};
 const bubbleMeshes=[],regularArtists=[],sparkleArtists=[];
 let regularPts=null,sparklePts=null;
 const connLines=[];
+let _tagFilter={type:null,value:null};
 let regColorAttr=null,spkColorAttr=null;
 let currentLang='ko';
 const T={
@@ -892,6 +949,7 @@ function applyLang(){
   if(ttEl.style.display!=='none'&&_openTArtist){
     showT(_openTArtist,0,0);
   }
+  if(_tagFilter&&_tagFilter.type)_renderFilterPanel();
 }
 const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',showInactive:true,connLines:true};
 const FOCUS_DIM=0.06;
@@ -1903,17 +1961,32 @@ function showT(a,cx,cy){
     const gy=parseInt(ttEl.style.top)||cy;
     closeCards();showGC(a.group.ko,gx,gy);
   };
-  document.getElementById('tco').textContent=a.co||'';
-  const meta=[];
-  if(a.nat){const n=a.nat;meta.push(typeof n==='object'?(currentLang==='ko'?(n.ko||n.en):(n.en||n.ko)):n);}
+  _renderTagChip(document.getElementById('tco'),a.co||'','agency',a.co||'');
+  const tmEl=document.getElementById('tm');tmEl.innerHTML='';
+  const _tmParts=[];
+  if(a.nat){
+    const n=a.nat;
+    const natKo=typeof n==='object'?(n.ko||n.en):n;
+    const natDisplay=typeof n==='object'?(currentLang==='ko'?(n.ko||n.en):(n.en||n.ko)):n;
+    _tmParts.push({text:natDisplay,type:'nation',value:natKo});
+  }
   if(a.bday){
     const[by,bm,bd]=a.bday.split('.').map(Number);
     const now=new Date();
     let age=now.getFullYear()-by;
     if(now.getMonth()+1<bm||(now.getMonth()+1===bm&&now.getDate()<bd))age--;
-    meta.push(a.bday+(age>=0?' ('+age+'세)':''));
+    const bdayText=a.bday+(age>=0?` (${age}${currentLang==='ko'?'세':'y.o.'})`:' ');
+    _tmParts.push({text:bdayText,type:'birthYear',value:String(by)});
   }
-  document.getElementById('tm').textContent=meta.join(' · ');
+  _tmParts.forEach((p,i)=>{
+    if(i>0){const sep=document.createElement('span');sep.textContent=' · ';sep.style.color='rgba(120,145,195,0.40)';tmEl.appendChild(sep);}
+    const chip=document.createElement('span');
+    chip.className='tag-chip'+(_tagFilter.type===p.type&&_tagFilter.value===p.value?' active':'');
+    chip.dataset.filterType=p.type;chip.dataset.filterValue=p.value;
+    chip.textContent=p.text;
+    chip.addEventListener('click',e=>{e.stopPropagation();applyTagFilter(p.type,p.value);});
+    tmEl.appendChild(chip);
+  });
   const tv=document.getElementById('tv');
   buildVideoSection(a.songs||[],tv);
   // ✦ 연결 버튼
@@ -1966,8 +2039,9 @@ function showGC(ko,cx,cy){
       logoWrap.style.display='';
     }).catch(()=>{logoWrap.style.display='none';});
   }else{logoWrap.style.display='none';}
-  document.getElementById('gc-co').textContent=info.co||'';
-  document.getElementById('gc-debut').textContent=info.debut||'';
+  _renderTagChip(document.getElementById('gc-co'),info.co||'','agency',info.co||'');
+  const _debutYr=String(info.debut||'').slice(0,4);
+  _renderTagChip(document.getElementById('gc-debut'),info.debut||'','debutYear',_debutYr);
   const fandomRow=document.getElementById('gc-fandom-row');
   const fandomEl=document.getElementById('gc-fandom');
   if(info.fandom){fandomEl.textContent=info.fandom;fandomRow.style.display='';}
@@ -2055,6 +2129,107 @@ function clearFocus(){
   focusGroupKo=null;
   bubbleMeshes.forEach(({mesh})=>{mesh._focusTarget=1;});
   ARTISTS.forEach(a=>{a._focusTarget=1;});
+}
+// ── Tag filter ────────────────────────────────────
+function _renderTagChip(el,text,type,value){
+  el.innerHTML='';
+  if(!text)return;
+  const chip=document.createElement('span');
+  chip.className='tag-chip'+(_tagFilter.type===type&&_tagFilter.value===value?' active':'');
+  chip.dataset.filterType=type;chip.dataset.filterValue=value;
+  chip.textContent=text;
+  chip.addEventListener('click',e=>{e.stopPropagation();applyTagFilter(type,value);});
+  el.appendChild(chip);
+}
+
+function _refreshTagChips(){
+  document.querySelectorAll('.tag-chip').forEach(chip=>{
+    const isActive=!!(_tagFilter.type&&chip.dataset.filterType===_tagFilter.type&&chip.dataset.filterValue===_tagFilter.value);
+    chip.classList.toggle('active',isActive);
+  });
+}
+
+function applyTagFilter(type,value){
+  if(_tagFilter.type===type&&_tagFilter.value===value){clearTagFilter();return;}
+  _tagFilter={type,value};
+  _refreshTagChips();
+  _renderFilterPanel();
+}
+
+function clearTagFilter(){
+  _tagFilter={type:null,value:null};
+  _refreshTagChips();
+  const fp=document.getElementById('filter-panel');if(fp)fp.style.display='none';
+  const jh=document.getElementById('journal-hd');if(jh)jh.style.display='';
+  document.getElementById('journal-sidebar').classList.remove('open');
+}
+
+function _makeFilterListItem(name,sub,onClick){
+  const div=document.createElement('div');div.className='filter-list-item';
+  const nameEl=document.createElement('div');nameEl.className='fli-name';nameEl.textContent=name;
+  div.appendChild(nameEl);
+  if(sub){const subEl=document.createElement('div');subEl.className='fli-sub';subEl.textContent=sub;div.appendChild(subEl);}
+  div.addEventListener('click',e=>{e.stopPropagation();onClick();});
+  return div;
+}
+
+function _renderFilterPanel(){
+  const sidebar=document.getElementById('journal-sidebar');
+  const fp=document.getElementById('filter-panel');
+  const jh=document.getElementById('journal-hd');
+  const activeEl=document.getElementById('filter-panel-active');
+  const listEl=document.getElementById('filter-list');
+  fp.style.display='block';jh.style.display='none';listEl.innerHTML='';
+
+  const typeLabel={agency:currentLang==='ko'?'소속사':'Agency',debutYear:currentLang==='ko'?'데뷔 연도':'Debut Year',birthYear:currentLang==='ko'?'생년':'Birth Year',nation:currentLang==='ko'?'국적':'Nationality'};
+  let displayValue=_tagFilter.value;
+  if(_tagFilter.type==='nation'&&currentLang==='en'){
+    const s=ARTISTS.find(a=>{const n=a.nat;if(!n)return false;return(typeof n==='object'?(n.ko||n.en):n)===_tagFilter.value;});
+    if(s&&typeof s.nat==='object')displayValue=s.nat.en||_tagFilter.value;
+  }
+  activeEl.textContent=(typeLabel[_tagFilter.type]||'')+': '+displayValue;
+
+  if(_tagFilter.type==='agency'){
+    const groups=Object.entries(GROUPS).filter(([,g])=>(g.co||'')=== _tagFilter.value);
+    groups.sort((a,b)=>parseInt(a[1].debut||0)-parseInt(b[1].debut||0));
+    groups.forEach(([ko,g])=>{
+      const item=_makeFilterListItem(currentLang==='ko'?ko:(g.en||ko),g.debut?String(g.debut).slice(0,4):'',()=>{const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)flyToBubble(bm.mesh.position,bm.radius);showGC(ko,window.innerWidth/2,window.innerHeight*0.4);});
+      listEl.appendChild(item);
+    });
+  } else if(_tagFilter.type==='debutYear'){
+    const yr=_tagFilter.value;
+    const groups=Object.entries(GROUPS).filter(([,g])=>String(g.debut||'').startsWith(yr));
+    groups.forEach(([ko,g])=>{
+      const item=_makeFilterListItem(currentLang==='ko'?ko:(g.en||ko),g.co||'',()=>{const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)flyToBubble(bm.mesh.position,bm.radius);showGC(ko,window.innerWidth/2,window.innerHeight*0.4);});
+      listEl.appendChild(item);
+    });
+  } else if(_tagFilter.type==='birthYear'){
+    const yr=parseInt(_tagFilter.value);
+    const members=ARTISTS.filter(a=>a._bdayYear===yr);
+    members.sort((a,b)=>(a.bday||'').localeCompare(b.bday||''));
+    members.forEach(m=>{
+      const name=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
+      const grpName=currentLang==='ko'?m.group.ko:(m.group.en||m.group.ko);
+      const item=_makeFilterListItem(name,grpName,()=>{if(m._worldPos)flyTo(m._worldPos);showT(m,window.innerWidth/2,window.innerHeight*0.4);});
+      listEl.appendChild(item);
+    });
+  } else if(_tagFilter.type==='nation'){
+    const natKo=_tagFilter.value;
+    const members=ARTISTS.filter(a=>{const n=a.nat;if(!n)return false;return(typeof n==='object'?(n.ko||n.en):n)===natKo;});
+    const byGroup={};
+    members.forEach(m=>{const k=m.group.ko;if(!byGroup[k])byGroup[k]=[];byGroup[k].push(m);});
+    Object.entries(byGroup).forEach(([gko,ms])=>{
+      const grpHd=document.createElement('div');grpHd.className='fli-group-hd';
+      grpHd.textContent=currentLang==='ko'?gko:(GROUPS[gko]&&GROUPS[gko].en||gko);
+      listEl.appendChild(grpHd);
+      ms.forEach(m=>{
+        const name=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
+        const item=_makeFilterListItem(name,'',()=>{if(m._worldPos)flyTo(m._worldPos);showT(m,window.innerWidth/2,window.innerHeight*0.4);});
+        listEl.appendChild(item);
+      });
+    });
+  }
+  sidebar.classList.add('open');
 }
 // ── Tab bar ───────────────────────────────────────
 function updateSheetBottom(){
@@ -2335,6 +2510,7 @@ document.getElementById('journal-toggle').addEventListener('click',e=>{
   e.stopPropagation();
   document.getElementById('journal-sidebar').classList.toggle('open');
 });
+document.getElementById('filter-panel-clear').addEventListener('click',e=>{e.stopPropagation();clearTagFilter();});
 document.getElementById('journal-sidebar').addEventListener('click',e=>e.stopPropagation());
 document.getElementById('journal-sidebar').addEventListener('pointerdown',e=>e.stopPropagation());
 
