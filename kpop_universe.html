@@ -649,16 +649,16 @@
   .tag-chip{
     display:inline;cursor:pointer;
     padding:1px 7px;border-radius:12px;font-size:11px;font-weight:600;letter-spacing:.04em;
-    background:rgba(140,175,255,0.10);border:0.5px solid rgba(140,175,255,0.22);
+    background:none;border:none;
     color:rgba(170,205,255,0.80);
     text-shadow:0 0 7px rgba(140,175,255,0.32),0 0 3px rgba(140,175,255,0.14);
-    transition:background .14s,color .14s,border-color .14s,text-shadow .14s;user-select:none;
+    transition:color .14s,text-shadow .14s;user-select:none;
   }
-  .tag-chip:hover{background:rgba(140,175,255,0.22);border-color:rgba(140,175,255,0.45);color:rgba(210,230,255,1.0);text-shadow:0 0 10px rgba(170,210,255,0.52),0 0 4px rgba(170,210,255,0.24);}
-  .tag-chip.active{background:rgba(130,175,255,0.28);border-color:rgba(130,175,255,0.65);color:#fff;text-shadow:0 0 10px rgba(190,220,255,0.60),0 0 4px rgba(190,220,255,0.30);}
-  body.day .tag-chip{background:rgba(55,80,200,0.07);border-color:rgba(55,80,200,0.18);color:rgba(45,65,180,0.80);text-shadow:none;}
-  body.day .tag-chip:hover{background:rgba(55,80,200,0.15);border-color:rgba(55,80,200,0.35);color:rgba(28,48,158,0.98);}
-  body.day .tag-chip.active{background:rgba(55,80,200,0.22);border-color:rgba(55,80,200,0.55);color:rgba(20,40,150,1.0);}
+  .tag-chip:hover{color:rgba(210,230,255,1.0);text-shadow:0 0 10px rgba(170,210,255,0.52),0 0 4px rgba(170,210,255,0.24);}
+  .tag-chip.active{color:#fff;text-shadow:0 0 10px rgba(190,220,255,0.60),0 0 4px rgba(190,220,255,0.30);}
+  body.day .tag-chip{background:none;border:none;color:rgba(45,65,180,0.80);text-shadow:none;}
+  body.day .tag-chip:hover{color:rgba(28,48,158,0.98);}
+  body.day .tag-chip.active{color:rgba(20,40,150,1.0);}
   /* ── Filter panel (journal-sidebar 내) ───────────── */
   #filter-panel{display:none;}
   #filter-panel-hd{
@@ -679,7 +679,7 @@
     color:rgba(120,145,200,0.42);padding:12px 0 5px;}
   body.day .fli-group-hd{color:rgba(130,110,88,0.42);}
   .filter-list-item{
-    display:flex;align-items:center;justify-content:space-between;
+    display:flex;flex-direction:column;
     padding:7px 0;border-bottom:0.5px solid rgba(255,255,255,0.055);
     cursor:pointer;transition:opacity .13s;
   }
@@ -687,10 +687,16 @@
   .filter-list-item:hover .fli-name{color:#e0eeff;}
   body.day .filter-list-item{border-bottom-color:rgba(0,0,0,0.06);}
   body.day .filter-list-item:hover .fli-name{color:#1a2c90;}
+  .fli-item-row{display:flex;align-items:center;justify-content:space-between;}
   .fli-name{font-size:13px;color:#b8d0ee;font-weight:500;transition:color .13s;}
   body.day .fli-name{color:#4a3c32;}
   .fli-sub{font-size:11px;color:#5878a0;letter-spacing:.04em;flex-shrink:0;margin-left:8px;}
   body.day .fli-sub{color:#a09078;}
+  .fli-date-line{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+  .fli-date-line::after{content:'';flex:1;height:0.5px;background:rgba(255,255,255,0.07);}
+  .fli-date-txt{font-size:9px;color:rgba(110,135,185,0.48);letter-spacing:.12em;flex-shrink:0;}
+  body.day .fli-date-line::after{background:rgba(0,0,0,0.07);}
+  body.day .fli-date-txt{color:rgba(130,110,88,0.48);}
 </style>
 </head>
 <body>
@@ -2166,9 +2172,11 @@ function clearTagFilter(){
 
 function _makeFilterListItem(name,sub,onClick){
   const div=document.createElement('div');div.className='filter-list-item';
+  const row=document.createElement('div');row.className='fli-item-row';
   const nameEl=document.createElement('div');nameEl.className='fli-name';nameEl.textContent=name;
-  div.appendChild(nameEl);
-  if(sub){const subEl=document.createElement('div');subEl.className='fli-sub';subEl.textContent=sub;div.appendChild(subEl);}
+  row.appendChild(nameEl);
+  if(sub){const subEl=document.createElement('div');subEl.className='fli-sub';subEl.textContent=sub;row.appendChild(subEl);}
+  div.appendChild(row);
   div.addEventListener('click',e=>{e.stopPropagation();onClick();});
   return div;
 }
@@ -2199,8 +2207,21 @@ function _renderFilterPanel(){
   } else if(_tagFilter.type==='debutYear'){
     const yr=_tagFilter.value;
     const groups=Object.entries(GROUPS).filter(([,g])=>String(g.debut||'').startsWith(yr));
+    groups.sort((a,b)=>String(a[1].debut||'').localeCompare(String(b[1].debut||'')));
     groups.forEach(([ko,g])=>{
-      const item=_makeFilterListItem(currentLang==='ko'?ko:(g.en||ko),g.co||'',()=>{const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)flyToBubble(bm.mesh.position,bm.radius);showGC(ko,window.innerWidth/2,window.innerHeight*0.4);});
+      const dp=String(g.debut||'').split('.');
+      const dateStr=dp.length>=3?dp[1]+'.'+dp[2]:'';
+      const item=document.createElement('div');item.className='filter-list-item';
+      if(dateStr){
+        const dl=document.createElement('div');dl.className='fli-date-line';
+        const dt=document.createElement('span');dt.className='fli-date-txt';dt.textContent=dateStr;
+        dl.appendChild(dt);item.appendChild(dl);
+      }
+      const row=document.createElement('div');row.className='fli-item-row';
+      const nm=document.createElement('div');nm.className='fli-name';nm.textContent=currentLang==='ko'?ko:(g.en||ko);
+      const sub=document.createElement('div');sub.className='fli-sub';sub.textContent=g.co||'';
+      row.appendChild(nm);row.appendChild(sub);item.appendChild(row);
+      item.addEventListener('click',e=>{e.stopPropagation();const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)flyToBubble(bm.mesh.position,bm.radius);showGC(ko,window.innerWidth/2,window.innerHeight*0.4);});
       listEl.appendChild(item);
     });
   } else if(_tagFilter.type==='birthYear'){
