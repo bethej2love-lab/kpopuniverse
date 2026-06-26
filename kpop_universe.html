@@ -1978,11 +1978,30 @@ function _refreshTagChips(){
   });
 }
 
+function _getNatKo(nat){
+  if(!nat)return null;
+  return typeof nat==='object'?(nat.ko||nat.en):nat;
+}
+
+function _applyTagFocus(){
+  if(_tagFilter.type==='nation'){
+    const natKo=_tagFilter.value;
+    ARTISTS.forEach(a=>{a._focusTarget=_getNatKo(a.nat)===natKo?1:FOCUS_DIM;});
+    bubbleMeshes.forEach(({mesh,ko})=>{
+      const has=ARTISTS.some(a=>a.group.ko===ko&&_getNatKo(a.nat)===natKo);
+      mesh._focusTarget=has?1:FOCUS_DIM;
+    });
+  } else if(!focusGroupKo){
+    clearFocus();
+  }
+}
+
 function applyTagFilter(type,value){
   if(_tagFilter.type===type&&_tagFilter.value===value){clearTagFilter();return;}
   _tagFilter={type,value};
   _refreshTagChips();
   _renderFilterPanel();
+  _applyTagFocus();
 }
 
 function clearTagFilter(){
@@ -1991,6 +2010,7 @@ function clearTagFilter(){
   const fp=document.getElementById('filter-panel');if(fp)fp.style.display='none';
   const jh=document.getElementById('journal-hd');if(jh)jh.style.display='';
   document.getElementById('journal-sidebar').classList.remove('open');
+  if(!focusGroupKo)clearFocus();
 }
 
 function _makeFilterListItem(name,sub,onClick){
