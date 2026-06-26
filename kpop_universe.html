@@ -505,6 +505,10 @@
   .conn-chip:hover{background:rgba(155,195,255,0.14);border-color:rgba(155,195,255,0.30);color:rgba(210,230,255,0.98);}
   .conn-chip.sel{background:rgba(130,175,255,0.22);border-color:rgba(130,175,255,0.52);color:rgba(210,230,255,1.0);font-weight:600;}
   .conn-chip.disabled{opacity:0.28;cursor:default;pointer-events:none;}
+  .conn-chip-wrap{display:inline-flex;align-items:center;}
+  .conn-chip-goto{display:inline-flex;align-items:center;width:0;overflow:hidden;opacity:0;pointer-events:none;cursor:pointer;font-size:10px;color:rgba(170,205,255,0.72);line-height:1;transition:opacity 0.13s,width 0.13s,padding-left 0.13s;white-space:nowrap;padding-left:0;}
+  .conn-chip-wrap:hover .conn-chip-goto{width:16px;opacity:1;pointer-events:all;padding-left:3px;}
+  .conn-chip-goto:hover{color:rgba(215,235,255,1);}
   .conn-selected-strip{display:flex;flex-wrap:wrap;gap:5px;padding:9px 0;margin-bottom:12px;border-top:0.5px solid rgba(255,255,255,0.07);border-bottom:0.5px solid rgba(255,255,255,0.07);}
   .conn-sel-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px 3px 11px;border-radius:20px;font-size:10.5px;font-weight:600;background:rgba(140,175,255,0.22);border:0.5px solid rgba(140,175,255,0.48);color:rgba(210,228,255,1.0);letter-spacing:.02em;font-family:inherit;}
   .conn-sel-chip .rm{font-size:12px;cursor:pointer;opacity:0.65;line-height:1;transition:opacity .12s;background:none;border:none;color:inherit;padding:0 1px;}
@@ -1567,6 +1571,11 @@ const connSheetEl=document.getElementById('conn-sheet');
 const connSheetBody=document.getElementById('conn-sheet-body');
 const connSheetInner=document.getElementById('conn-sheet-inner');
 
+function _findArtistByConnName(withStr,anchorGroupKo){
+  const m=withStr.match(/^(.+)\((.+)\)$/);
+  if(m)return ARTISTS.find(a=>a.name.ko===m[1]&&a.group.ko===m[2]);
+  return ARTISTS.find(a=>a.name.ko===withStr&&a.group.ko===anchorGroupKo);
+}
 function _getCollabMembers(artist){
   const s=new Set();
   (artist.songs||[]).forEach(sg=>{(sg.with||[]).forEach(n=>s.add(n));});
@@ -1612,6 +1621,7 @@ function _buildConnContent(container){
   container.appendChild(membersLbl);
   const chipsDiv=document.createElement('div');chipsDiv.className='conn-chips';
   collabNames.forEach(name=>{
+    const wrap=document.createElement('div');wrap.className='conn-chip-wrap';
     const chip=document.createElement('button');
     const isSel=_connSelected.includes(name);
     chip.className='conn-chip'+(isSel?' sel':'');
@@ -1624,7 +1634,16 @@ function _buildConnContent(container){
       _updateConnLines3d();
       _buildConnContent(container);
     });
-    chipsDiv.appendChild(chip);
+    const gotoBtn=document.createElement('span');gotoBtn.className='conn-chip-goto';gotoBtn.textContent='↗';
+    gotoBtn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const target=_findArtistByConnName(name,_connAnchor.group.ko);
+      if(!target)return;
+      closeConnCard();
+      showT(target,window.innerWidth/2,window.innerHeight*0.4);
+    });
+    wrap.appendChild(chip);wrap.appendChild(gotoBtn);
+    chipsDiv.appendChild(wrap);
   });
   container.appendChild(chipsDiv);
 
