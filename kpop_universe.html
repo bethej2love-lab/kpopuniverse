@@ -1149,8 +1149,9 @@ function animate(){
     a._focusAlpha=a._focusAlpha??1;
     const prevF=a._focusAlpha;
     a._focusAlpha+=(a._focusTarget-prevF)*0.10;
-    if(Math.abs(a._filterAlpha-prev)<0.0005&&Math.abs(a._focusAlpha-prevF)<0.0005)return;
-    const fa=a._filterAlpha*a._focusAlpha;
+    if(a._flashPulse>0.005){a._flashPulse*=0.84;colorsDirty=true;}else{a._flashPulse=0;}
+    if(Math.abs(a._filterAlpha-prev)<0.0005&&Math.abs(a._focusAlpha-prevF)<0.0005&&!a._flashPulse)return;
+    const fa=Math.min(1,a._filterAlpha*a._focusAlpha+(a._flashPulse||0));
     const attr=a._ptsType==='sparkle'?spkColorAttr:regColorAttr;
     if(!attr)return;
     const i=a._ptsIdx*3;
@@ -1604,6 +1605,17 @@ function _updateConnLines3d(){
     const line=new THREE.Line(geo,mat);scene.add(line);_connLines3d.push(line);
   });
 }
+function _panelOffsetVec(dist){
+  if(isMob())return new THREE.Vector3();
+  const pw=(sidePanelEl.classList.contains('open')?320:0)
+          +(memberPanelEl.classList.contains('open')?320:0)
+          +(connPanelEl.classList.contains('open')?280:0);
+  if(!pw)return new THREE.Vector3();
+  const hFov=2*Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect);
+  const worldW=2*dist*Math.tan(hFov/2);
+  const shift=(pw/2/window.innerWidth)*worldW;
+  return new THREE.Vector3().setFromMatrixColumn(camera.matrix,0).multiplyScalar(-shift);
+}
 function _applyConnFocus(){
   if(!_connAnchor||!_connSelected.length){
     if(_connAnchor)setFocus(_connAnchor.group.ko);
@@ -1621,9 +1633,19 @@ function _applyConnFocus(){
 }
 function _flyToConnStars(){
   if(!_connAnchor)return;
+  function _flyToBubbleOffset(bm){
+    const pos=bm.mesh.position,r=bm.radius;
+    const dir=camera.position.clone().sub(pos).normalize();
+    if(dir.lengthSq()<0.001)dir.set(0,0.3,1).normalize();
+    const tilted=new THREE.Vector3(dir.x*0.8,dir.y+0.28,dir.z*0.8).normalize();
+    const dist=r*5.5;
+    const off=_panelOffsetVec(dist);
+    const orb=pos.clone().add(off);
+    _startFly(orb,orb.clone().addScaledVector(tilted,dist),800);
+  }
   if(!_connSelected.length){
     const bm=bubbleMeshes.find(b=>b.ko===_connAnchor.group.ko);
-    if(bm)flyToBubble(bm.mesh.position,bm.radius);
+    if(bm)_flyToBubbleOffset(bm);
     return;
   }
   const involvedKos=new Set([_connAnchor.group.ko]);
@@ -1634,7 +1656,7 @@ function _flyToConnStars(){
   const bms=[];
   involvedKos.forEach(ko=>{const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)bms.push(bm);});
   if(!bms.length)return;
-  if(bms.length===1){flyToBubble(bms[0].mesh.position,bms[0].radius);return;}
+  if(bms.length===1){_flyToBubbleOffset(bms[0]);return;}
   const center=new THREE.Vector3();
   bms.forEach(bm=>center.add(bm.mesh.position));
   center.divideScalar(bms.length);
@@ -1647,6 +1669,8 @@ function _flyToConnStars(){
     Math.abs(camera.position.y-center.y)*0.4+2,
     camera.position.z-center.z
   ).normalize();
+  const off=_panelOffsetVec(dist);
+  center.add(off);
   _startFly(center,center.clone().addScaledVector(tilt,dist),900);
 }
 
@@ -1883,6 +1907,7 @@ function positionCard(el,cx,cy,cardW,estH){
 function showT(a,cx,cy){
   closeConnCard();
   setFocus(a.group.ko);_openTArtist=a;
+  if(a._flashPulse!==undefined||a._worldPos){a._flashPulse=1.4;}
   const el=document.getElementById('tt');
   el.style.display='block';
   // 그룹 컬러라인 (같은 색, 낮은 투명도)
