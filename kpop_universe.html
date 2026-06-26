@@ -1847,8 +1847,8 @@ function showT(a,cx,cy){
   tgEl.textContent=currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko);
   tgEl.onclick=e=>{
     e.stopPropagation();
-    if(!isMob()&&memberPanelEl.classList.contains('open')){
-      closeMemberPanel(true);return; // 그룹 카드가 이미 side-panel에 있는 상태
+    if(!isMob()&&memberPanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===memberPanelEl){
+      showGC(a.group.ko,cx,cy,true);return; // 멤버 카드는 member-panel에 유지, side-panel 그룹카드만 교체
     }
     if(!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===sidePanelEl){
       // 멤버 카드가 side-panel에 단독으로 열린 상태 → 그룹 카드를 side-panel로, 멤버 카드는 member-panel로
@@ -1920,7 +1920,7 @@ function showT(a,cx,cy){
   ctrEl.textContent=ttGroupMembers.length>1?`${ttMemberIdx+1} / ${ttGroupMembers.length}`:'';
 }
 
-function showGC(ko,cx,cy){
+function showGC(ko,cx,cy,keepMemberPanel){
   const info=GROUPS[ko];if(!info)return;
   setFocus(ko);_openGCko=ko;
   const el=document.getElementById('gc');
@@ -1982,7 +1982,7 @@ function showGC(ko,cx,cy){
   const hasSongs=(info.songs||[]).length>0;
   const cardW=hasSongs?264:234;
   el.style.maxWidth=cardW+'px';
-  if(isMob()){openMobSheet(el);}else{closeMemberPanel(false);openSidePanel(el);}
+  if(isMob()){openMobSheet(el);}else{if(!keepMemberPanel)closeMemberPanel(false);openSidePanel(el);}
 }
 
 // ── Raycaster / click ─────────────────────────────
