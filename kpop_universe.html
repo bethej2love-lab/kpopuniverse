@@ -556,6 +556,11 @@
   .fli-date-line{display:flex;align-items:center;margin-bottom:4px;}
   .fli-date-txt{font-size:9px;color:rgba(140,165,215,0.72);letter-spacing:.12em;}
   .fli-day-num{font-size:9px;color:rgba(140,165,215,0.65);letter-spacing:.06em;margin-right:9px;font-variant-numeric:tabular-nums;flex-shrink:0;}
+  #member-tooltip{position:fixed;pointer-events:none;z-index:99;padding:4px 9px;border-radius:6px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:12px;font-weight:500;color:rgba(210,228,255,0.95);background:rgba(14,18,34,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(140,165,220,0.18);white-space:nowrap;opacity:0;transition:opacity 0.12s;transform:translate(-50%,-130%);letter-spacing:.02em;}
+  ::-webkit-scrollbar{width:4px;height:4px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:rgba(140,165,220,0.20);border-radius:4px;}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(160,190,240,0.36);}
 </style>
 </head>
 <body>
@@ -677,6 +682,7 @@
   <button id="tab-sb-clear">✕</button>
 </div>
 <div id="mob-sr"></div>
+<div id="member-tooltip"></div>
 <div id="conn-panel"><div class="conn-inner" id="conn-panel-inner"></div></div>
 <div id="conn-sheet">
   <div class="conn-handle"></div>
@@ -989,9 +995,20 @@ async function buildUniverse(){
     div.addEventListener('click',e=>{
       e.stopPropagation();
       const bm=bubbleMeshes.find(b=>b.ko===ko);
-      closeCards();
       if(bm)flyToBubble(bm.mesh.position,bm.radius);
-      showGC(ko,window.innerWidth/2,window.innerHeight*0.4);
+      const _ttEl=document.getElementById('tt');
+      const _ttInSide=!isMob()&&sidePanelEl.classList.contains('open')&&_ttEl.parentElement===sidePanelEl;
+      if(_ttInSide){
+        const _cWas=connPanelEl.classList.contains('open');
+        const _cAnc=_connAnchor;
+        if(_cWas)closeConnCard();
+        showGC(ko,window.innerWidth/2,window.innerHeight*0.4);
+        openMemberPanel(_ttEl);
+        if(_cWas&&_cAnc)openConnCard(_cAnc);
+      }else{
+        closeCards();
+        showGC(ko,window.innerWidth/2,window.innerHeight*0.4);
+      }
       pulseGroup(ko);
     });
     const label=new THREE.CSS2DObject(div);
@@ -1817,8 +1834,12 @@ function showT(a,cx,cy){
     if(!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===sidePanelEl){
       // 멤버 카드가 side-panel에 단독으로 열린 상태 → 그룹 카드를 side-panel로, 멤버 카드는 member-panel로
       const ttEl=document.getElementById('tt');
+      const connWasOpen=connPanelEl.classList.contains('open');
+      const savedConnAnchor=_connAnchor;
+      if(connWasOpen)closeConnCard();
       showGC(a.group.ko,cx,cy); // gc→side-panel, tt→body(hidden)
       openMemberPanel(ttEl);    // tt→member-panel
+      if(connWasOpen&&savedConnAnchor)openConnCard(savedConnAnchor);
       return;
     }
     const ttEl=document.getElementById('tt');
@@ -2183,6 +2204,7 @@ mobSheetInner.addEventListener('scroll',()=>{
 function closePanels(){
   document.getElementById('search-wrap').classList.remove('open');
   document.getElementById('settings-panel').classList.remove('open');
+  document.getElementById('journal-sidebar').classList.remove('open');
   ['tab-search','tab-settings','dh-search-btn','dh-settings-btn'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.classList.remove('active');
   });
@@ -2377,6 +2399,39 @@ document.getElementById('desktop-header').addEventListener('pointerdown',e=>e.st
   document.getElementById(id).addEventListener('pointerdown',e=>e.stopPropagation());
 });
 window.addEventListener('pointerdown',e=>{_mdx=e.clientX;_mdy=e.clientY;closePanels();});
+
+// ── Member hover tooltip ──────────────────────────
+const _tipEl=document.getElementById('member-tooltip');
+let _tipRaf=null;
+window.addEventListener('mousemove',e=>{
+  if(isMob())return;
+  if(_tipRaf)cancelAnimationFrame(_tipRaf);
+  _tipRaf=requestAnimationFrame(()=>{
+    const rect=renderer.domElement.getBoundingClientRect();
+    if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom){
+      _tipEl.style.opacity='0';return;
+    }
+    let nearArtist=null,nearPx=Infinity;
+    ARTISTS.forEach(a=>{
+      if(!a._worldPos)return;
+      const p=a._worldPos.clone().project(camera);
+      if(p.z>1)return;
+      const sx=(p.x+1)*0.5*rect.width+rect.left;
+      const sy=(-p.y+1)*0.5*rect.height+rect.top;
+      const d=Math.hypot(sx-e.clientX,sy-e.clientY);
+      if(d<nearPx){nearPx=d;nearArtist=a;}
+    });
+    if(nearArtist&&nearPx<14){
+      _tipEl.textContent=currentLang==='ko'?nearArtist.name.ko:(nearArtist.name.en||nearArtist.name.ko);
+      _tipEl.style.left=e.clientX+'px';
+      _tipEl.style.top=e.clientY+'px';
+      _tipEl.style.opacity='1';
+    }else{
+      _tipEl.style.opacity='0';
+    }
+  });
+});
+
 window.addEventListener('click',e=>{
   if(Math.hypot(e.clientX-_mdx,e.clientY-_mdy)>5)return;
   const rect=renderer.domElement.getBoundingClientRect();
@@ -2414,9 +2469,20 @@ window.addEventListener('click',e=>{
         }
       }
       // 행성 모드 or 멤버 없음 → 그룹 카드
-      closeCards();
       flyToBubble(found.mesh.position,found.radius);
-      showGC(found.ko,e.clientX,e.clientY);
+      const _ttEl2=document.getElementById('tt');
+      const _ttInSide2=!isMob()&&sidePanelEl.classList.contains('open')&&_ttEl2.parentElement===sidePanelEl;
+      if(_ttInSide2){
+        const _cWas2=connPanelEl.classList.contains('open');
+        const _cAnc2=_connAnchor;
+        if(_cWas2)closeConnCard();
+        showGC(found.ko,e.clientX,e.clientY);
+        openMemberPanel(_ttEl2);
+        if(_cWas2&&_cAnc2)openConnCard(_cAnc2);
+      }else{
+        closeCards();
+        showGC(found.ko,e.clientX,e.clientY);
+      }
       return;
     }
   }
