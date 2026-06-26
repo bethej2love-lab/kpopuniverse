@@ -1,11 +1,11 @@
 [
   {
     "name": {
-      "ko": "移대━??,
+      "ko": "카리나",
       "en": "Karina"
     },
     "group": {
-      "ko": "?먯뒪??,
+      "ko": "에스파",
       "en": "aespa"
     },
     "co": "SM",
@@ -22,13 +22,13 @@
     ],
     "bday": "2000.04.11",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "?꾧묠鍮꾨텋",
+        "t": "도깨비불",
         "u": "https://www.youtube.com/watch?v=tZixREYOIZQ"
       },
       {
@@ -43,11 +43,11 @@
   },
   {
     "name": {
-      "ko": "吏??,
+      "ko": "지젤",
       "en": "Giselle"
     },
     "group": {
-      "ko": "?먯뒪??,
+      "ko": "에스파",
       "en": "aespa"
     },
     "co": "SM",
@@ -64,7 +64,7 @@
     ],
     "bday": "2000.10.30",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -85,11 +85,11 @@
   },
   {
     "name": {
-      "ko": "?덊꽣",
+      "ko": "윈터",
       "en": "Winter"
     },
     "group": {
-      "ko": "?먯뒪??,
+      "ko": "에스파",
       "en": "aespa"
     },
     "co": "SM",
@@ -106,7 +106,7 @@
     ],
     "bday": "2001.01.01",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -127,11 +127,11 @@
   },
   {
     "name": {
-      "ko": "?앸떇",
+      "ko": "닝닝",
       "en": "Ningning"
     },
     "group": {
-      "ko": "?먯뒪??,
+      "ko": "에스파",
       "en": "aespa"
     },
     "co": "SM",
@@ -148,7 +148,7 @@
     ],
     "bday": "2002.10.23",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -169,11 +169,11 @@
   },
   {
     "name": {
-      "ko": "吏??,
+      "ko": "지우",
       "en": "Jiwoo"
     },
     "group": {
-      "ko": "?섏툩?ы븯痢?,
+      "ko": "하츠투하츠",
       "en": "Hearts2Hearts"
     },
     "co": "SM",
@@ -190,7 +190,7 @@
     ],
     "bday": "2006.09.07",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -198,11 +198,11 @@
   },
   {
     "name": {
-      "ko": "移대Ⅴ硫?,
+      "ko": "카르멘",
       "en": "Carmen"
     },
     "group": {
-      "ko": "?섏툩?ы븯痢?,
+      "ko": "하츠투하츠",
       "en": "Hearts2Hearts"
     },
     "co": "SM",
@@ -219,7 +219,7 @@
     ],
     "bday": "2006.03.28",
     "nat": {
-      "ko": "?몃룄?ㅼ떆??,
+      "ko": "인도네시아",
       "en": "ID"
     },
     "sparkle": false,
@@ -227,11 +227,11 @@
   },
   {
     "name": {
-      "ko": "?좏븯",
+      "ko": "유하",
       "en": "Yuha"
     },
     "group": {
-      "ko": "?섏툩?ы븯痢?,
+      "ko": "하츠투하츠",
       "en": "Hearts2Hearts"
     },
     "co": "SM",
@@ -248,7 +248,7 @@
     ],
     "bday": "2007.04.12",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -256,11 +256,11 @@
   },
   {
     "name": {
-      "ko": "?ㅽ뀛??,
+      "ko": "스텔라",
       "en": "Stella"
     },
     "group": {
-      "ko": "?섏툩?ы븯痢?,
+      "ko": "하츠투하츠",
       "en": "Hearts2Hearts"
     },
     "co": "SM",
@@ -277,7 +277,7 @@
     ],
     "bday": "2007.06.18",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -285,11 +285,11 @@
   },
   {
     "name": {
-      "ko": "二쇱?",
+      "ko": "주은",
       "en": "Juun"
     },
     "group": {
-      "ko": "?섏툩?ы븯痢?,
+      "ko": "하츠투하츠",
       "en": "Hearts2Hearts"
     },
     "co": "SM",
@@ -306,7 +306,7 @@
     ],
     "bday": "2008.12.03",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -314,11 +314,11 @@
   },
   {
     "name": {
-      "ko": "?먯씠??,
+      "ko": "에이나",
       "en": "A-na"
     },
     "group": {
-      "ko": "?섏툩?ы븯痢?,
+      "ko": "하츠투하츠",
       "en": "Hearts2Hearts"
     },
     "co": "SM",
@@ -335,7 +335,7 @@
     ],
     "bday": "2008.12.20",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -343,11 +343,11 @@
   },
   {
     "name": {
-      "ko": "?댁븞",
+      "ko": "이안",
       "en": "Ian"
     },
     "group": {
-      "ko": "?섏툩?ы븯痢?,
+      "ko": "하츠투하츠",
       "en": "Hearts2Hearts"
     },
     "co": "SM",
@@ -364,7 +364,7 @@
     ],
     "bday": "2009.10.09",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -372,11 +372,11 @@
   },
   {
     "name": {
-      "ko": "?덉삩",
+      "ko": "예온",
       "en": "Ye-on"
     },
     "group": {
-      "ko": "?섏툩?ы븯痢?,
+      "ko": "하츠투하츠",
       "en": "Hearts2Hearts"
     },
     "co": "SM",
@@ -393,7 +393,7 @@
     ],
     "bday": "2010.04.19",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -401,7 +401,7 @@
   },
   {
     "name": {
-      "ko": "?쒖삩",
+      "ko": "시온",
       "en": "Sion"
     },
     "group": {
@@ -422,7 +422,7 @@
     ],
     "bday": "2002.05.11",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -443,7 +443,7 @@
   },
   {
     "name": {
-      "ko": "由ъ퓼",
+      "ko": "리쿠",
       "en": "Riku"
     },
     "group": {
@@ -464,7 +464,7 @@
     ],
     "bday": "2003.06.28",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -474,18 +474,18 @@
         "u": "https://www.youtube.com/watch?v=TUqZLkjgyVA"
       },
       {
-        "t": "?쇱뙭! ?쇱뙭!",
+        "t": "으쌰! 으쌰!",
         "u": "https://www.youtube.com/watch?v=ooq0MXgSjmU"
       },
       {
-        "t": "???섍만 ?ㅼ뼱遊?,
+        "t": "내 얘길 들어봐",
         "u": "https://www.youtube.com/watch?v=WF4611kq1GQ"
       }
     ]
   },
   {
     "name": {
-      "ko": "?좎슦??,
+      "ko": "유우시",
       "en": "Yuushi"
     },
     "group": {
@@ -506,7 +506,7 @@
     ],
     "bday": "2004.04.05",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -527,7 +527,7 @@
   },
   {
     "name": {
-      "ko": "?ы씗",
+      "ko": "재희",
       "en": "Jaehee"
     },
     "group": {
@@ -548,7 +548,7 @@
     ],
     "bday": "2005.06.21",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -556,7 +556,7 @@
   },
   {
     "name": {
-      "ko": "猷?,
+      "ko": "료",
       "en": "Ryo"
     },
     "group": {
@@ -577,7 +577,7 @@
     ],
     "bday": "2007.08.04",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -585,7 +585,7 @@
   },
   {
     "name": {
-      "ko": "?ъ퓼??,
+      "ko": "사쿠야",
       "en": "Sakuya"
     },
     "group": {
@@ -606,7 +606,7 @@
     ],
     "bday": "2007.11.18",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -614,7 +614,7 @@
   },
   {
     "name": {
-      "ko": "?덈땲",
+      "ko": "쟈니",
       "en": "Johnny"
     },
     "group": {
@@ -635,15 +635,15 @@
     ],
     "bday": "1995.02.09",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?쒖슜",
+      "ko": "태용",
       "en": "Taeyong"
     },
     "group": {
@@ -664,20 +664,20 @@
     ],
     "bday": "1995.07.01",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "吏덉＜",
+        "t": "질주",
         "u": "https://www.youtube.com/watch?v=fXd-uJUrjK4"
       }
     ]
   },
   {
     "name": {
-      "ko": "?좏?",
+      "ko": "유타",
       "en": "Yuta"
     },
     "group": {
@@ -698,7 +698,7 @@
     ],
     "bday": "1995.10.26",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -706,7 +706,7 @@
   },
   {
     "name": {
-      "ko": "?꾩쁺",
+      "ko": "도영",
       "en": "Doyoung"
     },
     "group": {
@@ -727,7 +727,7 @@
     ],
     "bday": "1996.02.01",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -735,7 +735,7 @@
   },
   {
     "name": {
-      "ko": "?ы쁽",
+      "ko": "재현",
       "en": "Jaehyun"
     },
     "group": {
@@ -756,7 +756,7 @@
     ],
     "bday": "1997.02.14",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -764,7 +764,7 @@
   },
   {
     "name": {
-      "ko": "?뺤슦",
+      "ko": "정우",
       "en": "Jungwoo"
     },
     "group": {
@@ -785,7 +785,7 @@
     ],
     "bday": "1998.02.19",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -793,12 +793,12 @@
   },
   {
     "name": {
-      "ko": "留덊겕",
+      "ko": "마크",
       "en": "Mark"
     },
     "group": {
-      "ko": "NCT 127쨌NCT Dream",
-      "en": "NCT 127쨌NCT Dream"
+      "ko": "NCT 127·NCT Dream",
+      "en": "NCT 127·NCT Dream"
     },
     "co": "SM",
     "planet": "main",
@@ -814,20 +814,20 @@
     ],
     "bday": "1999.08.02",
     "nat": {
-      "ko": "?쒓뎅쨌罹먮굹??,
-      "en": "KR쨌CA"
+      "ko": "한국·캐나다",
+      "en": "KR·CA"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?댁갔",
+      "ko": "해찬",
       "en": "Haechan"
     },
     "group": {
-      "ko": "NCT 127쨌NCT Dream",
-      "en": "NCT 127쨌NCT Dream"
+      "ko": "NCT 127·NCT Dream",
+      "en": "NCT 127·NCT Dream"
     },
     "co": "SM",
     "planet": "main",
@@ -843,7 +843,7 @@
     ],
     "bday": "2000.06.06",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -851,7 +851,7 @@
   },
   {
     "name": {
-      "ko": "?곗쪛",
+      "ko": "런쥔",
       "en": "Renjun"
     },
     "group": {
@@ -872,7 +872,7 @@
     ],
     "bday": "2000.03.23",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -880,7 +880,7 @@
   },
   {
     "name": {
-      "ko": "?쒕끂",
+      "ko": "제노",
       "en": "Jeno"
     },
     "group": {
@@ -901,7 +901,7 @@
     ],
     "bday": "2000.04.23",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -909,7 +909,7 @@
   },
   {
     "name": {
-      "ko": "?щ?",
+      "ko": "재민",
       "en": "Jaemin"
     },
     "group": {
@@ -930,7 +930,7 @@
     ],
     "bday": "2000.08.13",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -938,7 +938,7 @@
   },
   {
     "name": {
-      "ko": "泥쒕윭",
+      "ko": "천러",
       "en": "Chenle"
     },
     "group": {
@@ -959,7 +959,7 @@
     ],
     "bday": "2001.11.22",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -967,7 +967,7 @@
   },
   {
     "name": {
-      "ko": "吏??,
+      "ko": "지성",
       "en": "Jisung"
     },
     "group": {
@@ -988,7 +988,7 @@
     ],
     "bday": "2002.02.05",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -996,7 +996,7 @@
   },
   {
     "name": {
-      "ko": "荑?,
+      "ko": "쿤",
       "en": "Kun"
     },
     "group": {
@@ -1017,7 +1017,7 @@
     ],
     "bday": "1996.01.01",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -1025,7 +1025,7 @@
   },
   {
     "name": {
-      "ko": "??,
+      "ko": "텐",
       "en": "Ten"
     },
     "group": {
@@ -1046,7 +1046,7 @@
     ],
     "bday": "1996.02.27",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "태국",
       "en": "TH"
     },
     "sparkle": false,
@@ -1054,7 +1054,7 @@
   },
   {
     "name": {
-      "ko": "?덉쐢",
+      "ko": "윈윈",
       "en": "WinWin"
     },
     "group": {
@@ -1075,7 +1075,7 @@
     ],
     "bday": "1997.10.28",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -1083,7 +1083,7 @@
   },
   {
     "name": {
-      "ko": "?ㅼ삤伊?,
+      "ko": "샤오쥔",
       "en": "Xiaojun"
     },
     "group": {
@@ -1104,7 +1104,7 @@
     ],
     "bday": "1999.08.08",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -1112,7 +1112,7 @@
   },
   {
     "name": {
-      "ko": "?⑤뱶由?,
+      "ko": "헨드리",
       "en": "Hendery"
     },
     "group": {
@@ -1133,7 +1133,7 @@
     ],
     "bday": "1999.09.28",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -1141,7 +1141,7 @@
   },
   {
     "name": {
-      "ko": "?묒뼇",
+      "ko": "양양",
       "en": "Yangyang"
     },
     "group": {
@@ -1162,19 +1162,19 @@
     ],
     "bday": "2000.10.10",
     "nat": {
-      "ko": "以묎뎅쨌?낆씪",
-      "en": "CN쨌DE"
+      "ko": "중국·독일",
+      "en": "CN·DE"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "諛⑹갔",
+      "ko": "방찬",
       "en": "Bang Chan"
     },
     "group": {
-      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
+      "ko": "스트레이키즈",
       "en": "Stray Kids"
     },
     "co": "JYP",
@@ -1191,19 +1191,19 @@
     ],
     "bday": "2000.10.03",
     "nat": {
-      "ko": "?쒓뎅쨌?몄＜",
-      "en": "KR쨌AU"
+      "ko": "한국·호주",
+      "en": "KR·AU"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?대끂",
+      "ko": "이노",
       "en": "Lee Know"
     },
     "group": {
-      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
+      "ko": "스트레이키즈",
       "en": "Stray Kids"
     },
     "co": "JYP",
@@ -1220,7 +1220,7 @@
     ],
     "bday": "2000.10.25",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1228,11 +1228,11 @@
   },
   {
     "name": {
-      "ko": "李쎈퉰",
+      "ko": "창빈",
       "en": "Changbin"
     },
     "group": {
-      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
+      "ko": "스트레이키즈",
       "en": "Stray Kids"
     },
     "co": "JYP",
@@ -1249,7 +1249,7 @@
     ],
     "bday": "2000.08.11",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1257,11 +1257,11 @@
   },
   {
     "name": {
-      "ko": "?꾩쭊",
+      "ko": "현진",
       "en": "Hyunjin"
     },
     "group": {
-      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
+      "ko": "스트레이키즈",
       "en": "Stray Kids"
     },
     "co": "JYP",
@@ -1278,7 +1278,7 @@
     ],
     "bday": "2000.03.20",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1291,11 +1291,11 @@
   },
   {
     "name": {
-      "ko": "??,
+      "ko": "한",
       "en": "Han"
     },
     "group": {
-      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
+      "ko": "스트레이키즈",
       "en": "Stray Kids"
     },
     "co": "JYP",
@@ -1312,7 +1312,7 @@
     ],
     "bday": "2000.09.14",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1320,11 +1320,11 @@
   },
   {
     "name": {
-      "ko": "?꾨┃??,
+      "ko": "필릭스",
       "en": "Felix"
     },
     "group": {
-      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
+      "ko": "스트레이키즈",
       "en": "Stray Kids"
     },
     "co": "JYP",
@@ -1341,19 +1341,19 @@
     ],
     "bday": "2000.09.15",
     "nat": {
-      "ko": "?쒓뎅쨌?몄＜",
-      "en": "KR쨌AU"
+      "ko": "한국·호주",
+      "en": "KR·AU"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?밸?",
+      "ko": "승민",
       "en": "Seungmin"
     },
     "group": {
-      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
+      "ko": "스트레이키즈",
       "en": "Stray Kids"
     },
     "co": "JYP",
@@ -1370,7 +1370,7 @@
     ],
     "bday": "2000.09.22",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1378,11 +1378,11 @@
   },
   {
     "name": {
-      "ko": "?꾩씠??,
+      "ko": "아이엔",
       "en": "I.N"
     },
     "group": {
-      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
+      "ko": "스트레이키즈",
       "en": "Stray Kids"
     },
     "co": "JYP",
@@ -1399,7 +1399,7 @@
     ],
     "bday": "2001.02.08",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1407,11 +1407,11 @@
   },
   {
     "name": {
-      "ko": "?덉?",
+      "ko": "예지",
       "en": "Yeji"
     },
     "group": {
-      "ko": "?덉?",
+      "ko": "있지",
       "en": "ITZY"
     },
     "co": "JYP",
@@ -1428,7 +1428,7 @@
     ],
     "bday": "2000.05.26",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1442,18 +1442,18 @@
         "u": "https://www.youtube.com/watch?v=pmTjOXIu71Q"
       },
       {
-        "t": "?щ씪?щ씪",
+        "t": "달라달라",
         "u": "https://www.youtube.com/watch?v=fSAUQ37xbho"
       }
     ]
   },
   {
     "name": {
-      "ko": "由ъ븘",
+      "ko": "리아",
       "en": "Lia"
     },
     "group": {
-      "ko": "?덉?",
+      "ko": "있지",
       "en": "ITZY"
     },
     "co": "JYP",
@@ -1470,7 +1470,7 @@
     ],
     "bday": "2000.07.21",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1484,18 +1484,18 @@
         "u": "https://www.youtube.com/watch?v=c3jCty-g5x0"
       },
       {
-        "t": "?щ씪?щ씪",
+        "t": "달라달라",
         "u": "https://www.youtube.com/watch?v=5QGp7KkfZ0Y"
       }
     ]
   },
   {
     "name": {
-      "ko": "瑜섏쭊",
+      "ko": "류진",
       "en": "Ryujin"
     },
     "group": {
-      "ko": "?덉?",
+      "ko": "있지",
       "en": "ITZY"
     },
     "co": "JYP",
@@ -1512,7 +1512,7 @@
     ],
     "bday": "2001.04.17",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1526,18 +1526,18 @@
         "u": "https://www.youtube.com/watch?v=syoATmUcmL4"
       },
       {
-        "t": "留????? In the morning",
+        "t": "마.피.아. In the morning",
         "u": "https://www.youtube.com/watch?v=L1f8K9sYAgk"
       }
     ]
   },
   {
     "name": {
-      "ko": "梨꾨졊",
+      "ko": "채령",
       "en": "Chaeryeong"
     },
     "group": {
-      "ko": "?덉?",
+      "ko": "있지",
       "en": "ITZY"
     },
     "co": "JYP",
@@ -1554,7 +1554,7 @@
     ],
     "bday": "2001.06.05",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1575,11 +1575,11 @@
   },
   {
     "name": {
-      "ko": "?좊굹",
+      "ko": "유나",
       "en": "Yuna"
     },
     "group": {
-      "ko": "?덉?",
+      "ko": "있지",
       "en": "ITZY"
     },
     "co": "JYP",
@@ -1596,13 +1596,13 @@
     ],
     "bday": "2003.12.09",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "?щ씪?щ씪",
+        "t": "달라달라",
         "u": "https://www.youtube.com/watch?v=8f2IDOUrzkI"
       },
       {
@@ -1617,11 +1617,11 @@
   },
   {
     "name": {
-      "ko": "由대━",
+      "ko": "릴리",
       "en": "Lily"
     },
     "group": {
-      "ko": "?붾???,
+      "ko": "엔믹스",
       "en": "NMIXX"
     },
     "co": "JYP",
@@ -1638,7 +1638,7 @@
     ],
     "bday": "2003.08.04",
     "nat": {
-      "ko": "罹먮굹??,
+      "ko": "캐나다",
       "en": "CA"
     },
     "sparkle": false,
@@ -1646,11 +1646,11 @@
   },
   {
     "name": {
-      "ko": "?댁썝",
+      "ko": "해원",
       "en": "Haewon"
     },
     "group": {
-      "ko": "?붾???,
+      "ko": "엔믹스",
       "en": "NMIXX"
     },
     "co": "JYP",
@@ -1667,7 +1667,7 @@
     ],
     "bday": "2003.08.06",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1675,11 +1675,11 @@
   },
   {
     "name": {
-      "ko": "?ㅼ쑄",
+      "ko": "설윤",
       "en": "Sullyoon"
     },
     "group": {
-      "ko": "?붾???,
+      "ko": "엔믹스",
       "en": "NMIXX"
     },
     "co": "JYP",
@@ -1696,7 +1696,7 @@
     ],
     "bday": "2004.11.15",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1704,11 +1704,11 @@
   },
   {
     "name": {
-      "ko": "諛곗씠",
+      "ko": "배이",
       "en": "Bae"
     },
     "group": {
-      "ko": "?붾???,
+      "ko": "엔믹스",
       "en": "NMIXX"
     },
     "co": "JYP",
@@ -1725,19 +1725,19 @@
     ],
     "bday": "2005.08.22",
     "nat": {
-      "ko": "?쒓뎅쨌?몄＜",
-      "en": "KR쨌AU"
+      "ko": "한국·호주",
+      "en": "KR·AU"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "吏??,
+      "ko": "지우",
       "en": "Jiwoo"
     },
     "group": {
-      "ko": "?붾???,
+      "ko": "엔믹스",
       "en": "NMIXX"
     },
     "co": "JYP",
@@ -1754,7 +1754,7 @@
     ],
     "bday": "2006.10.26",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1762,11 +1762,11 @@
   },
   {
     "name": {
-      "ko": "洹쒖쭊",
+      "ko": "규진",
       "en": "Kyujin"
     },
     "group": {
-      "ko": "?붾???,
+      "ko": "엔믹스",
       "en": "NMIXX"
     },
     "co": "JYP",
@@ -1783,7 +1783,7 @@
     ],
     "bday": "2006.11.07",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1795,7 +1795,7 @@
       "en": "S.COUPS"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -1812,7 +1812,7 @@
     ],
     "bday": "1995.08.08",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1820,11 +1820,11 @@
   },
   {
     "name": {
-      "ko": "?뺥븳",
+      "ko": "정한",
       "en": "Jeonghan"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -1841,7 +1841,7 @@
     ],
     "bday": "1995.10.04",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1849,11 +1849,11 @@
   },
   {
     "name": {
-      "ko": "議곗뒋??,
+      "ko": "조슈아",
       "en": "Joshua"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -1870,19 +1870,19 @@
     ],
     "bday": "1995.12.30",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "以",
+      "ko": "준",
       "en": "Jun"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -1899,7 +1899,7 @@
     ],
     "bday": "1996.06.10",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -1907,11 +1907,11 @@
   },
   {
     "name": {
-      "ko": "?몄떆",
+      "ko": "호시",
       "en": "Hoshi"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -1928,7 +1928,7 @@
     ],
     "bday": "1996.06.15",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1941,11 +1941,11 @@
   },
   {
     "name": {
-      "ko": "?먯슦",
+      "ko": "원우",
       "en": "Wonwoo"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -1962,7 +1962,7 @@
     ],
     "bday": "1996.07.17",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1970,11 +1970,11 @@
   },
   {
     "name": {
-      "ko": "?곗?",
+      "ko": "우지",
       "en": "Woozi"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -1991,7 +1991,7 @@
     ],
     "bday": "1996.11.22",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -1999,11 +1999,11 @@
   },
   {
     "name": {
-      "ko": "?꾧껴",
+      "ko": "도겸",
       "en": "DK"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -2020,7 +2020,7 @@
     ],
     "bday": "1997.02.18",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2028,11 +2028,11 @@
   },
   {
     "name": {
-      "ko": "誘쇨퇋",
+      "ko": "민규",
       "en": "Mingyu"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -2049,7 +2049,7 @@
     ],
     "bday": "1997.04.06",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2057,11 +2057,11 @@
   },
   {
     "name": {
-      "ko": "?밴?",
+      "ko": "승관",
       "en": "Seungkwan"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -2078,7 +2078,7 @@
     ],
     "bday": "1998.01.16",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2086,11 +2086,11 @@
   },
   {
     "name": {
-      "ko": "踰꾨끉",
+      "ko": "버논",
       "en": "Vernon"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -2107,19 +2107,19 @@
     ],
     "bday": "1998.02.18",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?붾끂",
+      "ko": "디노",
       "en": "Dino"
     },
     "group": {
-      "ko": "?몃툙??,
+      "ko": "세븐틴",
       "en": "SVT"
     },
     "co": "HYBE",
@@ -2136,7 +2136,7 @@
     ],
     "bday": "1999.02.11",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2144,11 +2144,11 @@
   },
   {
     "name": {
-      "ko": "?좎쑀",
+      "ko": "신유",
       "en": "Shinyu"
     },
     "group": {
-      "ko": "?ъ뼱??,
+      "ko": "투어스",
       "en": "TWS"
     },
     "co": "HYBE",
@@ -2165,13 +2165,13 @@
     ],
     "bday": "2003.11.07",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
+        "t": "첫 만남은 계획대로 되지 않아",
         "u": "https://www.youtube.com/watch?v=BtFPgl0tC0k"
       },
       {
@@ -2186,11 +2186,11 @@
   },
   {
     "name": {
-      "ko": "?꾪썕",
+      "ko": "도훈",
       "en": "Dohoon"
     },
     "group": {
-      "ko": "?ъ뼱??,
+      "ko": "투어스",
       "en": "TWS"
     },
     "co": "HYBE",
@@ -2207,7 +2207,7 @@
     ],
     "bday": "2005.01.30",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2217,7 +2217,7 @@
         "u": "https://www.youtube.com/watch?v=EhDIY4FjCeU"
       },
       {
-        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
+        "t": "첫 만남은 계획대로 되지 않아",
         "u": "https://www.youtube.com/watch?v=KPd460eDrWs"
       },
       {
@@ -2228,11 +2228,11 @@
   },
   {
     "name": {
-      "ko": "?곸옱",
+      "ko": "영재",
       "en": "Youngjae"
     },
     "group": {
-      "ko": "?ъ뼱??,
+      "ko": "투어스",
       "en": "TWS"
     },
     "co": "HYBE",
@@ -2249,32 +2249,32 @@
     ],
     "bday": "2005.05.31",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "?덉쓽 紐⑤뱺 媛?μ꽦???섏뼱以꾧쾶",
+        "t": "너의 모든 가능성이 되어줄게",
         "u": "https://www.youtube.com/watch?v=U5QNHCyKvXI"
       },
       {
-        "t": "?ㅼ떆 留뚮궃 ?ㅻ뒛",
+        "t": "다시 만난 오늘",
         "u": "https://www.youtube.com/watch?v=Y_1mhDE_fX0"
       },
       {
-        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
+        "t": "첫 만남은 계획대로 되지 않아",
         "u": "https://www.youtube.com/watch?v=OYK9DHYPXDw"
       }
     ]
   },
   {
     "name": {
-      "ko": "?쒖쭊",
+      "ko": "한진",
       "en": "Hanjin"
     },
     "group": {
-      "ko": "?ъ뼱??,
+      "ko": "투어스",
       "en": "TWS"
     },
     "co": "HYBE",
@@ -2291,13 +2291,13 @@
     ],
     "bday": "2006.01.05",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
+        "t": "첫 만남은 계획대로 되지 않아",
         "u": "https://www.youtube.com/watch?v=WxDm3oin7lk"
       },
       {
@@ -2305,18 +2305,18 @@
         "u": "https://www.youtube.com/watch?v=m9J7C7yrA9w"
       },
       {
-        "t": "?닿? S硫????섏쓽 N???섏뼱以?,
+        "t": "내가 S면 넌 나의 N이 되어줘",
         "u": "https://www.youtube.com/watch?v=X-DLqSIv3YA"
       }
     ]
   },
   {
     "name": {
-      "ko": "吏??,
+      "ko": "지훈",
       "en": "Jihoon"
     },
     "group": {
-      "ko": "?ъ뼱??,
+      "ko": "투어스",
       "en": "TWS"
     },
     "co": "HYBE",
@@ -2333,32 +2333,32 @@
     ],
     "bday": "2006.04.23",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "留덉쓬 ?곕씪 ?곕뒗 嫄?硫뗭?吏 ?딆븘?",
+        "t": "마음 따라 뛰는 건 멋지지 않아?",
         "u": "https://www.youtube.com/watch?v=Ma_JErDCfBM"
       },
       {
-        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
+        "t": "첫 만남은 계획대로 되지 않아",
         "u": "https://www.youtube.com/watch?v=uJnPpGXEEf4"
       },
       {
-        "t": "?닿? S硫????섏쓽 N???섏뼱以?,
+        "t": "내가 S면 넌 나의 N이 되어줘",
         "u": "https://www.youtube.com/watch?v=BzSV1_K-P7A"
       }
     ]
   },
   {
     "name": {
-      "ko": "寃쎈?",
+      "ko": "경민",
       "en": "Kyungmin"
     },
     "group": {
-      "ko": "?ъ뼱??,
+      "ko": "투어스",
       "en": "TWS"
     },
     "co": "HYBE",
@@ -2375,17 +2375,17 @@
     ],
     "bday": "2007.09.07",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
+        "t": "첫 만남은 계획대로 되지 않아",
         "u": "https://www.youtube.com/watch?v=TJxdabTKRQc"
       },
       {
-        "t": "??걯?곥겲?쀣겍",
+        "t": "はじめまして",
         "u": "https://www.youtube.com/watch?v=zVjxDvjt36A"
       },
       {
@@ -2396,11 +2396,11 @@
   },
   {
     "name": {
-      "ko": "誘쇱?",
+      "ko": "민지",
       "en": "Minji"
     },
     "group": {
-      "ko": "?댁쭊??,
+      "ko": "뉴진스",
       "en": "NewJeans"
     },
     "co": "HYBE",
@@ -2417,13 +2417,13 @@
     ],
     "bday": "2004.05.07",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "Odoriko (甕듽굤耶?",
+        "t": "Odoriko (踊り子)",
         "u": "https://www.youtube.com/watch?v=9ninWlkEthY"
       },
       {
@@ -2438,11 +2438,11 @@
   },
   {
     "name": {
-      "ko": "?섎땲",
+      "ko": "하니",
       "en": "Hanni"
     },
     "group": {
-      "ko": "?댁쭊??,
+      "ko": "뉴진스",
       "en": "NewJeans"
     },
     "co": "HYBE",
@@ -2459,13 +2459,13 @@
     ],
     "bday": "2004.10.06",
     "nat": {
-      "ko": "踰좏듃??,
+      "ko": "베트남",
       "en": "VN"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "?몃Ⅸ ?고샇珥?(?믡걚?딁몱鹽?",
+        "t": "푸른 산호초 (青い珊瑚礁)",
         "u": "https://www.youtube.com/watch?v=Rj7N4ThLGQY"
       },
       {
@@ -2480,11 +2480,11 @@
   },
   {
     "name": {
-      "ko": "?대┛",
+      "ko": "해린",
       "en": "Haerin"
     },
     "group": {
-      "ko": "?댁쭊??,
+      "ko": "뉴진스",
       "en": "NewJeans"
     },
     "co": "HYBE",
@@ -2501,7 +2501,7 @@
     ],
     "bday": "2006.05.15",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2522,11 +2522,11 @@
   },
   {
     "name": {
-      "ko": "?쒖씤",
+      "ko": "혜인",
       "en": "Hyein"
     },
     "group": {
-      "ko": "?댁쭊??,
+      "ko": "뉴진스",
       "en": "NewJeans"
     },
     "co": "HYBE",
@@ -2543,7 +2543,7 @@
     ],
     "bday": "2008.04.21",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2564,11 +2564,11 @@
   },
   {
     "name": {
-      "ko": "?ㅻ땲??,
+      "ko": "다니엘",
       "en": "Danielle"
     },
     "group": {
-      "ko": "?댁쭊??,
+      "ko": "뉴진스",
       "en": "NewJeans"
     },
     "co": "HYBE",
@@ -2585,8 +2585,8 @@
     ],
     "bday": "2005.04.11",
     "nat": {
-      "ko": "?쒓뎅쨌?몄＜",
-      "en": "KR쨌AU"
+      "ko": "한국·호주",
+      "en": "KR·AU"
     },
     "sparkle": false,
     "songs": [
@@ -2606,11 +2606,11 @@
   },
   {
     "name": {
-      "ko": "留덊떞",
+      "ko": "마틴",
       "en": "Martin"
     },
     "group": {
-      "ko": "肄붾Ⅴ?곗뒪",
+      "ko": "코르티스",
       "en": "CORTIS"
     },
     "co": "HYBE",
@@ -2627,8 +2627,8 @@
     ],
     "bday": "2008.03.20",
     "nat": {
-      "ko": "?쒓뎅쨌罹먮굹??,
-      "en": "KR쨌CA"
+      "ko": "한국·캐나다",
+      "en": "KR·CA"
     },
     "sparkle": false,
     "songs": [
@@ -2648,11 +2648,11 @@
   },
   {
     "name": {
-      "ko": "?쒖엫??,
+      "ko": "제임스",
       "en": "James"
     },
     "group": {
-      "ko": "肄붾Ⅴ?곗뒪",
+      "ko": "코르티스",
       "en": "CORTIS"
     },
     "co": "HYBE",
@@ -2669,7 +2669,7 @@
     ],
     "bday": "2005.10.14",
     "nat": {
-      "ko": "?留?,
+      "ko": "대만",
       "en": "TW"
     },
     "sparkle": false,
@@ -2690,11 +2690,11 @@
   },
   {
     "name": {
-      "ko": "二쇳썕",
+      "ko": "주훈",
       "en": "Juhoon"
     },
     "group": {
-      "ko": "肄붾Ⅴ?곗뒪",
+      "ko": "코르티스",
       "en": "CORTIS"
     },
     "co": "HYBE",
@@ -2711,7 +2711,7 @@
     ],
     "bday": "2008.01.03",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2732,11 +2732,11 @@
   },
   {
     "name": {
-      "ko": "?깊쁽",
+      "ko": "성현",
       "en": "Seonghyeon"
     },
     "group": {
-      "ko": "肄붾Ⅴ?곗뒪",
+      "ko": "코르티스",
       "en": "CORTIS"
     },
     "co": "HYBE",
@@ -2753,7 +2753,7 @@
     ],
     "bday": "2009.01.13",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": true,
@@ -2779,15 +2779,15 @@
         "u": "https://youtube.com/shorts/4azqyEp2nuA"
       },
       {
-        "t": "?곹겕??,
+        "t": "영크크",
         "u": "https://youtube.com/shorts/DdCDoWqci_0"
       },
       {
-        "t": "?붾옉嫄곕졇??",
+        "t": "팔랑거렸어?",
         "u": "https://youtube.com/shorts/F78vfAun4ps"
       },
       {
-        "t": "?딆뼱踰꾨━吏留?,
+        "t": "잊어버리지마",
         "u": "https://youtu.be/Lj-aVRh1Jlg"
       },
       {
@@ -2802,11 +2802,11 @@
   },
   {
     "name": {
-      "ko": "嫄댄샇",
+      "ko": "건호",
       "en": "Geonho"
     },
     "group": {
-      "ko": "肄붾Ⅴ?곗뒪",
+      "ko": "코르티스",
       "en": "CORTIS"
     },
     "co": "HYBE",
@@ -2823,7 +2823,7 @@
     ],
     "bday": "2009.02.14",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2844,11 +2844,11 @@
   },
   {
     "name": {
-      "ko": "?덉쑀吏?,
+      "ko": "안유진",
       "en": "Yujin"
     },
     "group": {
-      "ko": "?꾩씠釉?,
+      "ko": "아이브",
       "en": "IVE"
     },
     "co": "Starship",
@@ -2865,7 +2865,7 @@
     ],
     "bday": "2003.09.01",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2886,11 +2886,11 @@
   },
   {
     "name": {
-      "ko": "媛??,
+      "ko": "가을",
       "en": "Gaeul"
     },
     "group": {
-      "ko": "?꾩씠釉?,
+      "ko": "아이브",
       "en": "IVE"
     },
     "co": "Starship",
@@ -2907,7 +2907,7 @@
     ],
     "bday": "2002.09.24",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -2928,11 +2928,11 @@
   },
   {
     "name": {
-      "ko": "?덉씠",
+      "ko": "레이",
       "en": "Rei"
     },
     "group": {
-      "ko": "?꾩씠釉?,
+      "ko": "아이브",
       "en": "IVE"
     },
     "co": "Starship",
@@ -2949,7 +2949,7 @@
     ],
     "bday": "2004.02.03",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -2970,11 +2970,11 @@
   },
   {
     "name": {
-      "ko": "?μ썝??,
+      "ko": "장원영",
       "en": "Wonyoung"
     },
     "group": {
-      "ko": "?꾩씠釉?,
+      "ko": "아이브",
       "en": "IVE"
     },
     "co": "Starship",
@@ -2991,7 +2991,7 @@
     ],
     "bday": "2004.08.31",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3012,11 +3012,11 @@
   },
   {
     "name": {
-      "ko": "由ъ쫰",
+      "ko": "리즈",
       "en": "Liz"
     },
     "group": {
-      "ko": "?꾩씠釉?,
+      "ko": "아이브",
       "en": "IVE"
     },
     "co": "Starship",
@@ -3033,13 +3033,13 @@
     ],
     "bday": "2004.11.21",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "諛붾엺??硫덉텛?대떎??,
+        "t": "바람아 멈추어다오",
         "u": "https://www.youtube.com/watch?v=FkmdvsEqW9k"
       },
       {
@@ -3054,11 +3054,11 @@
   },
   {
     "name": {
-      "ko": "?댁꽌",
+      "ko": "이서",
       "en": "Leeseo"
     },
     "group": {
-      "ko": "?꾩씠釉?,
+      "ko": "아이브",
       "en": "IVE"
     },
     "co": "Starship",
@@ -3075,7 +3075,7 @@
     ],
     "bday": "2007.02.21",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3096,11 +3096,11 @@
   },
   {
     "name": {
-      "ko": "?댁넄",
+      "ko": "이솔",
       "en": "Leesol"
     },
     "group": {
-      "ko": "?ㅽ궎",
+      "ko": "키키",
       "en": "KiiiKiii"
     },
     "co": "Starship",
@@ -3117,7 +3117,7 @@
     ],
     "bday": "2005.09.18",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3125,11 +3125,11 @@
   },
   {
     "name": {
-      "ko": "吏??,
+      "ko": "지유",
       "en": "Jiyu"
     },
     "group": {
-      "ko": "?ㅽ궎",
+      "ko": "키키",
       "en": "KiiiKiii"
     },
     "co": "Starship",
@@ -3146,7 +3146,7 @@
     ],
     "bday": "2006.05.14",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3154,11 +3154,11 @@
   },
   {
     "name": {
-      "ko": "?섏씠",
+      "ko": "수이",
       "en": "Sui"
     },
     "group": {
-      "ko": "?ㅽ궎",
+      "ko": "키키",
       "en": "KiiiKiii"
     },
     "co": "Starship",
@@ -3175,7 +3175,7 @@
     ],
     "bday": "2006.04.10",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3183,11 +3183,11 @@
   },
   {
     "name": {
-      "ko": "?섏쓬",
+      "ko": "하음",
       "en": "Haum"
     },
     "group": {
-      "ko": "?ㅽ궎",
+      "ko": "키키",
       "en": "KiiiKiii"
     },
     "co": "Starship",
@@ -3204,7 +3204,7 @@
     ],
     "bday": "2006.11.14",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3212,11 +3212,11 @@
   },
   {
     "name": {
-      "ko": "?ㅼ빞",
+      "ko": "키야",
       "en": "Kya"
     },
     "group": {
-      "ko": "?ㅽ궎",
+      "ko": "키키",
       "en": "KiiiKiii"
     },
     "co": "Starship",
@@ -3233,7 +3233,7 @@
     ],
     "bday": "2010.12.18",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3241,11 +3241,11 @@
   },
   {
     "name": {
-      "ko": "?먯씠",
+      "ko": "원이",
       "en": "Woni"
     },
     "group": {
-      "ko": "由ъ꽱??,
+      "ko": "리센느",
       "en": "RESCENE"
     },
     "co": "더뮤즈",
@@ -3262,7 +3262,7 @@
     ],
     "bday": "2004.05.25",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3283,11 +3283,11 @@
   },
   {
     "name": {
-      "ko": "由щ툕",
+      "ko": "리브",
       "en": "Liv"
     },
     "group": {
-      "ko": "由ъ꽱??,
+      "ko": "리센느",
       "en": "RESCENE"
     },
     "co": "더뮤즈",
@@ -3304,7 +3304,7 @@
     ],
     "bday": "2006.10.11",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3325,11 +3325,11 @@
   },
   {
     "name": {
-      "ko": "誘몃굹誘?,
+      "ko": "미나미",
       "en": "Minami"
     },
     "group": {
-      "ko": "由ъ꽱??,
+      "ko": "리센느",
       "en": "RESCENE"
     },
     "co": "더뮤즈",
@@ -3346,7 +3346,7 @@
     ],
     "bday": "2006.11.29",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": true,
@@ -3356,7 +3356,7 @@
         "u": "https://www.youtube.com/watch?v=3lONVqtRXAI"
       },
       {
-        "t": "?ㅼ떆 留뚮궃 ?멸퀎",
+        "t": "다시 만난 세계",
         "u": "https://www.youtube.com/watch?v=XA1cVAlrid4"
       },
       {
@@ -3367,11 +3367,11 @@
   },
   {
     "name": {
-      "ko": "硫붿씠",
+      "ko": "메이",
       "en": "May"
     },
     "group": {
-      "ko": "由ъ꽱??,
+      "ko": "리센느",
       "en": "RESCENE"
     },
     "co": "더뮤즈",
@@ -3388,13 +3388,13 @@
     ],
     "bday": "2008.08.19",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "?ㅼ떆 留뚮궃 ?멸퀎",
+        "t": "다시 만난 세계",
         "u": "https://www.youtube.com/watch?v=GX4I0MyI6I0"
       },
       {
@@ -3409,11 +3409,11 @@
   },
   {
     "name": {
-      "ko": "?쒕굹",
+      "ko": "제나",
       "en": "Zena"
     },
     "group": {
-      "ko": "由ъ꽱??,
+      "ko": "리센느",
       "en": "RESCENE"
     },
     "co": "더뮤즈",
@@ -3430,7 +3430,7 @@
     ],
     "bday": "2008.11.27",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3451,11 +3451,11 @@
   },
   {
     "name": {
-      "ko": "伊대━",
+      "ko": "쥴리",
       "en": "Julie"
     },
     "group": {
-      "ko": "?ㅼ뒪?ㅻ툕?쇱씠??,
+      "ko": "키스오브라이프",
       "en": "KISS OF LIFE"
     },
     "co": "S2",
@@ -3472,19 +3472,19 @@
     ],
     "bday": "2000.03.29",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?섎씈",
+      "ko": "나띠",
       "en": "Natty"
     },
     "group": {
-      "ko": "?ㅼ뒪?ㅻ툕?쇱씠??,
+      "ko": "키스오브라이프",
       "en": "KISS OF LIFE"
     },
     "co": "S2",
@@ -3501,7 +3501,7 @@
     ],
     "bday": "2002.05.30",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "태국",
       "en": "TH"
     },
     "sparkle": false,
@@ -3514,11 +3514,11 @@
   },
   {
     "name": {
-      "ko": "踰?,
+      "ko": "벨",
       "en": "Belle"
     },
     "group": {
-      "ko": "?ㅼ뒪?ㅻ툕?쇱씠??,
+      "ko": "키스오브라이프",
       "en": "KISS OF LIFE"
     },
     "co": "S2",
@@ -3535,19 +3535,19 @@
     ],
     "bday": "2004.03.20",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?섎뒛",
+      "ko": "하늘",
       "en": "Haneul"
     },
     "group": {
-      "ko": "?ㅼ뒪?ㅻ툕?쇱씠??,
+      "ko": "키스오브라이프",
       "en": "KISS OF LIFE"
     },
     "co": "S2",
@@ -3564,7 +3564,7 @@
     ],
     "bday": "2005.05.25",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3572,11 +3572,11 @@
   },
   {
     "name": {
-      "ko": "?띿쨷",
+      "ko": "홍중",
       "en": "Hongjoong"
     },
     "group": {
-      "ko": "?먯씠?곗쫰",
+      "ko": "에이티즈",
       "en": "ATEEZ"
     },
     "co": "KQ",
@@ -3593,7 +3593,7 @@
     ],
     "bday": "1998.11.07",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3601,11 +3601,11 @@
   },
   {
     "name": {
-      "ko": "?깊솕",
+      "ko": "성화",
       "en": "Seonghwa"
     },
     "group": {
-      "ko": "?먯씠?곗쫰",
+      "ko": "에이티즈",
       "en": "ATEEZ"
     },
     "co": "KQ",
@@ -3622,7 +3622,7 @@
     ],
     "bday": "1998.04.03",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3630,11 +3630,11 @@
   },
   {
     "name": {
-      "ko": "?ㅽ샇",
+      "ko": "윤호",
       "en": "Yunho"
     },
     "group": {
-      "ko": "?먯씠?곗쫰",
+      "ko": "에이티즈",
       "en": "ATEEZ"
     },
     "co": "KQ",
@@ -3651,7 +3651,7 @@
     ],
     "bday": "1999.03.23",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3659,11 +3659,11 @@
   },
   {
     "name": {
-      "ko": "?ъ긽",
+      "ko": "여상",
       "en": "Yeosang"
     },
     "group": {
-      "ko": "?먯씠?곗쫰",
+      "ko": "에이티즈",
       "en": "ATEEZ"
     },
     "co": "KQ",
@@ -3680,7 +3680,7 @@
     ],
     "bday": "1999.06.15",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3688,11 +3688,11 @@
   },
   {
     "name": {
-      "ko": "??,
+      "ko": "산",
       "en": "San"
     },
     "group": {
-      "ko": "?먯씠?곗쫰",
+      "ko": "에이티즈",
       "en": "ATEEZ"
     },
     "co": "KQ",
@@ -3709,7 +3709,7 @@
     ],
     "bday": "1999.07.10",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3717,11 +3717,11 @@
   },
   {
     "name": {
-      "ko": "誘쇨린",
+      "ko": "민기",
       "en": "Mingi"
     },
     "group": {
-      "ko": "?먯씠?곗쫰",
+      "ko": "에이티즈",
       "en": "ATEEZ"
     },
     "co": "KQ",
@@ -3738,7 +3738,7 @@
     ],
     "bday": "1999.08.09",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3746,11 +3746,11 @@
   },
   {
     "name": {
-      "ko": "?곗쁺",
+      "ko": "우영",
       "en": "Wooyoung"
     },
     "group": {
-      "ko": "?먯씠?곗쫰",
+      "ko": "에이티즈",
       "en": "ATEEZ"
     },
     "co": "KQ",
@@ -3767,7 +3767,7 @@
     ],
     "bday": "1999.11.26",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3775,11 +3775,11 @@
   },
   {
     "name": {
-      "ko": "醫낇샇",
+      "ko": "종호",
       "en": "Jongho"
     },
     "group": {
-      "ko": "?먯씠?곗쫰",
+      "ko": "에이티즈",
       "en": "ATEEZ"
     },
     "co": "KQ",
@@ -3796,7 +3796,7 @@
     ],
     "bday": "2000.09.12",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3804,11 +3804,11 @@
   },
   {
     "name": {
-      "ko": "?뚯뿰",
+      "ko": "소연",
       "en": "Soyeon"
     },
     "group": {
-      "ko": "?꾩씠??,
+      "ko": "아이들",
       "en": "(G)I-DLE"
     },
     "co": "Cube",
@@ -3825,7 +3825,7 @@
     ],
     "bday": "1998.08.26",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3833,11 +3833,11 @@
   },
   {
     "name": {
-      "ko": "誘몄뿰",
+      "ko": "미연",
       "en": "Miyeon"
     },
     "group": {
-      "ko": "?꾩씠??,
+      "ko": "아이들",
       "en": "(G)I-DLE"
     },
     "co": "Cube",
@@ -3854,7 +3854,7 @@
     ],
     "bday": "1997.01.31",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3862,11 +3862,11 @@
   },
   {
     "name": {
-      "ko": "誘쇰땲",
+      "ko": "민니",
       "en": "Minnie"
     },
     "group": {
-      "ko": "?꾩씠??,
+      "ko": "아이들",
       "en": "(G)I-DLE"
     },
     "co": "Cube",
@@ -3883,7 +3883,7 @@
     ],
     "bday": "1997.10.23",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "태국",
       "en": "TH"
     },
     "sparkle": false,
@@ -3891,11 +3891,11 @@
   },
   {
     "name": {
-      "ko": "?섏쭊",
+      "ko": "수진",
       "en": "Soojin"
     },
     "group": {
-      "ko": "?꾩씠??,
+      "ko": "아이들",
       "en": "(G)I-DLE"
     },
     "co": "Cube",
@@ -3912,7 +3912,7 @@
     ],
     "bday": "1998.03.26",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -3920,11 +3920,11 @@
   },
   {
     "name": {
-      "ko": "?곌린",
+      "ko": "우기",
       "en": "Yuqi"
     },
     "group": {
-      "ko": "?꾩씠??,
+      "ko": "아이들",
       "en": "(G)I-DLE"
     },
     "co": "Cube",
@@ -3941,7 +3941,7 @@
     ],
     "bday": "1999.09.23",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -3949,11 +3949,11 @@
   },
   {
     "name": {
-      "ko": "?덊솕",
+      "ko": "슈화",
       "en": "Shuhua"
     },
     "group": {
-      "ko": "?꾩씠??,
+      "ko": "아이들",
       "en": "(G)I-DLE"
     },
     "co": "Cube",
@@ -3970,7 +3970,7 @@
     ],
     "bday": "2000.10.10",
     "nat": {
-      "ko": "?留?,
+      "ko": "대만",
       "en": "TW"
     },
     "sparkle": false,
@@ -3978,11 +3978,11 @@
   },
   {
     "name": {
-      "ko": "?깆갔",
+      "ko": "성찬",
       "en": "Sungchan"
     },
     "group": {
-      "ko": "?쇱씠利?,
+      "ko": "라이즈",
       "en": "RIIZE"
     },
     "co": "SM",
@@ -3999,7 +3999,7 @@
     ],
     "bday": "2001.09.13",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4007,11 +4007,11 @@
   },
   {
     "name": {
-      "ko": "???,
+      "ko": "은석",
       "en": "Eunseok"
     },
     "group": {
-      "ko": "?쇱씠利?,
+      "ko": "라이즈",
       "en": "RIIZE"
     },
     "co": "SM",
@@ -4028,7 +4028,7 @@
     ],
     "bday": "2001.01.22",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4036,11 +4036,11 @@
   },
   {
     "name": {
-      "ko": "?쇳?濡?,
+      "ko": "쇼타로",
       "en": "Shotaro"
     },
     "group": {
-      "ko": "?쇱씠利?,
+      "ko": "라이즈",
       "en": "RIIZE"
     },
     "co": "SM",
@@ -4057,7 +4057,7 @@
     ],
     "bday": "2000.11.25",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -4065,11 +4065,11 @@
   },
   {
     "name": {
-      "ko": "?먮퉰",
+      "ko": "원빈",
       "en": "Wonbin"
     },
     "group": {
-      "ko": "?쇱씠利?,
+      "ko": "라이즈",
       "en": "RIIZE"
     },
     "co": "SM",
@@ -4086,7 +4086,7 @@
     ],
     "bday": "2002.02.21",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4094,11 +4094,11 @@
   },
   {
     "name": {
-      "ko": "?뱁븳",
+      "ko": "승한",
       "en": "Seunghan"
     },
     "group": {
-      "ko": "?쇱씠利?,
+      "ko": "라이즈",
       "en": "RIIZE"
     },
     "co": "SM",
@@ -4115,7 +4115,7 @@
     ],
     "bday": "2003.04.02",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4123,11 +4123,11 @@
   },
   {
     "name": {
-      "ko": "?뚰씗",
+      "ko": "소희",
       "en": "Sohee"
     },
     "group": {
-      "ko": "?쇱씠利?,
+      "ko": "라이즈",
       "en": "RIIZE"
     },
     "co": "SM",
@@ -4144,7 +4144,7 @@
     ],
     "bday": "2003.04.17",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4152,11 +4152,11 @@
   },
   {
     "name": {
-      "ko": "?ㅽ넠",
+      "ko": "앤톤",
       "en": "Anton"
     },
     "group": {
-      "ko": "?쇱씠利?,
+      "ko": "라이즈",
       "en": "RIIZE"
     },
     "co": "SM",
@@ -4173,15 +4173,15 @@
     ],
     "bday": "2004.11.21",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?곗?",
+      "ko": "연준",
       "en": "Yeonjun"
     },
     "group": {
@@ -4202,7 +4202,7 @@
     ],
     "bday": "1999.09.13",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4216,14 +4216,14 @@
         "u": "https://www.youtube.com/watch?v=sx4hPjppi6E"
       },
       {
-        "t": "援먰솚?쇨린 (?먮갊???由ъ?由?",
+        "t": "교환일기 (두밧두 와리와리)",
         "u": "https://www.youtube.com/watch?v=o3WX9FRTIUI"
       }
     ]
   },
   {
     "name": {
-      "ko": "?섎퉰",
+      "ko": "수빈",
       "en": "Soobin"
     },
     "group": {
@@ -4244,7 +4244,7 @@
     ],
     "bday": "2000.12.05",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4258,14 +4258,14 @@
         "u": "https://www.youtube.com/watch?v=ibnQ1bH8fIM"
       },
       {
-        "t": "?대뒓??癒몃━?먯꽌 肉붿씠 ?먮옄??(CROWN)",
+        "t": "어느날 머리에서 뿔이 자랐다 (CROWN)",
         "u": "https://www.youtube.com/watch?v=CrYbcz9ONYY"
       }
     ]
   },
   {
     "name": {
-      "ko": "踰붽퇋",
+      "ko": "범규",
       "en": "Beomgyu"
     },
     "group": {
@@ -4286,7 +4286,7 @@
     ],
     "bday": "2001.03.13",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4300,14 +4300,14 @@
         "u": "https://www.youtube.com/watch?v=rDnPaRFDnUk"
       },
       {
-        "t": "LO$ER=LO?쩋R",
+        "t": "LO$ER=LO♥ER",
         "u": "https://www.youtube.com/watch?v=OPdaubrjGqk"
       }
     ]
   },
   {
     "name": {
-      "ko": "?쒗쁽",
+      "ko": "태현",
       "en": "Taehyun"
     },
     "group": {
@@ -4328,7 +4328,7 @@
     ],
     "bday": "2002.02.05",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4342,14 +4342,14 @@
         "u": "https://www.youtube.com/watch?v=A7nimn-8ZA8"
       },
       {
-        "t": "嫄곕━?먯꽌",
+        "t": "거리에서",
         "u": "https://www.youtube.com/watch?v=wYMeibz-Uqc"
       }
     ]
   },
   {
     "name": {
-      "ko": "?대떇移댁씠",
+      "ko": "휴닝카이",
       "en": "Huening Kai"
     },
     "group": {
@@ -4370,8 +4370,8 @@
     ],
     "bday": "2002.08.14",
     "nat": {
-      "ko": "?쒓뎅쨌?낆씪쨌誘멸뎅",
-      "en": "KR쨌DE쨌US"
+      "ko": "한국·독일·미국",
+      "en": "KR·DE·US"
     },
     "sparkle": false,
     "songs": [
@@ -4380,7 +4380,7 @@
         "u": "https://www.youtube.com/watch?v=GINn6TxkNCU"
       },
       {
-        "t": "?대뒓??癒몃━?먯꽌 肉붿씠 ?먮옄??(CROWN)",
+        "t": "어느날 머리에서 뿔이 자랐다 (CROWN)",
         "u": "https://www.youtube.com/watch?v=OJhk0vWphdQ"
       },
       {
@@ -4391,11 +4391,11 @@
   },
   {
     "name": {
-      "ko": "?ъ듅",
+      "ko": "희승",
       "en": "Heeseung"
     },
     "group": {
-      "ko": "?뷀븯?댄뵂",
+      "ko": "엔하이픈",
       "en": "ENHYPEN"
     },
     "co": "HYBE",
@@ -4412,7 +4412,7 @@
     ],
     "bday": "2001.10.15",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4420,11 +4420,11 @@
   },
   {
     "name": {
-      "ko": "?쒖씠",
+      "ko": "제이",
       "en": "Jay"
     },
     "group": {
-      "ko": "?뷀븯?댄뵂",
+      "ko": "엔하이픈",
       "en": "ENHYPEN"
     },
     "co": "HYBE",
@@ -4441,19 +4441,19 @@
     ],
     "bday": "2002.04.20",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?쒖씠??,
+      "ko": "제이크",
       "en": "Jake"
     },
     "group": {
-      "ko": "?뷀븯?댄뵂",
+      "ko": "엔하이픈",
       "en": "ENHYPEN"
     },
     "co": "HYBE",
@@ -4470,7 +4470,7 @@
     ],
     "bday": "2002.11.15",
     "nat": {
-      "ko": "?몄＜",
+      "ko": "호주",
       "en": "AU"
     },
     "sparkle": false,
@@ -4478,11 +4478,11 @@
   },
   {
     "name": {
-      "ko": "?깊썕",
+      "ko": "성훈",
       "en": "Sunghoon"
     },
     "group": {
-      "ko": "?뷀븯?댄뵂",
+      "ko": "엔하이픈",
       "en": "ENHYPEN"
     },
     "co": "HYBE",
@@ -4499,7 +4499,7 @@
     ],
     "bday": "2002.12.08",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4507,11 +4507,11 @@
   },
   {
     "name": {
-      "ko": "?좎슦",
+      "ko": "선우",
       "en": "Sunoo"
     },
     "group": {
-      "ko": "?뷀븯?댄뵂",
+      "ko": "엔하이픈",
       "en": "ENHYPEN"
     },
     "co": "HYBE",
@@ -4528,7 +4528,7 @@
     ],
     "bday": "2003.06.24",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4536,11 +4536,11 @@
   },
   {
     "name": {
-      "ko": "?뺤썝",
+      "ko": "정원",
       "en": "Jungwon"
     },
     "group": {
-      "ko": "?뷀븯?댄뵂",
+      "ko": "엔하이픈",
       "en": "ENHYPEN"
     },
     "co": "HYBE",
@@ -4557,7 +4557,7 @@
     ],
     "bday": "2004.02.09",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4565,11 +4565,11 @@
   },
   {
     "name": {
-      "ko": "?덊궎",
+      "ko": "니키",
       "en": "Ni-Ki"
     },
     "group": {
-      "ko": "?뷀븯?댄뵂",
+      "ko": "엔하이픈",
       "en": "ENHYPEN"
     },
     "co": "HYBE",
@@ -4586,7 +4586,7 @@
     ],
     "bday": "2005.12.09",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -4594,11 +4594,11 @@
   },
   {
     "name": {
-      "ko": "?ㅼ븘",
+      "ko": "윤아",
       "en": "Yunah"
     },
     "group": {
-      "ko": "?꾩씪由?,
+      "ko": "아일릿",
       "en": "ILLIT"
     },
     "co": "HYBE",
@@ -4615,7 +4615,7 @@
     ],
     "bday": "2004.01.15",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4623,11 +4623,11 @@
   },
   {
     "name": {
-      "ko": "誘쇱＜",
+      "ko": "민주",
       "en": "Minju"
     },
     "group": {
-      "ko": "?꾩씪由?,
+      "ko": "아일릿",
       "en": "ILLIT"
     },
     "co": "HYBE",
@@ -4644,7 +4644,7 @@
     ],
     "bday": "2004.05.11",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4652,11 +4652,11 @@
   },
   {
     "name": {
-      "ko": "紐⑥뭅",
+      "ko": "모카",
       "en": "Moka"
     },
     "group": {
-      "ko": "?꾩씪由?,
+      "ko": "아일릿",
       "en": "ILLIT"
     },
     "co": "HYBE",
@@ -4673,7 +4673,7 @@
     ],
     "bday": "2004.10.08",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -4681,11 +4681,11 @@
   },
   {
     "name": {
-      "ko": "?먰씗",
+      "ko": "원희",
       "en": "Wonhee"
     },
     "group": {
-      "ko": "?꾩씪由?,
+      "ko": "아일릿",
       "en": "ILLIT"
     },
     "co": "HYBE",
@@ -4702,7 +4702,7 @@
     ],
     "bday": "2007.06.26",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4710,11 +4710,11 @@
   },
   {
     "name": {
-      "ko": "?대줈??,
+      "ko": "이로하",
       "en": "Iroha"
     },
     "group": {
-      "ko": "?꾩씪由?,
+      "ko": "아일릿",
       "en": "ILLIT"
     },
     "co": "HYBE",
@@ -4731,7 +4731,7 @@
     ],
     "bday": "2008.12.21",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -4739,11 +4739,11 @@
   },
   {
     "name": {
-      "ko": "?ъ퓼??,
+      "ko": "사쿠라",
       "en": "Sakura"
     },
     "group": {
-      "ko": "瑜댁꽭?쇳븣",
+      "ko": "르세라핌",
       "en": "LE SSERAFIM"
     },
     "co": "HYBE",
@@ -4760,7 +4760,7 @@
     ],
     "bday": "1998.03.19",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -4768,11 +4768,11 @@
   },
   {
     "name": {
-      "ko": "源梨꾩썝",
+      "ko": "김채원",
       "en": "Chaewon"
     },
     "group": {
-      "ko": "瑜댁꽭?쇳븣",
+      "ko": "르세라핌",
       "en": "LE SSERAFIM"
     },
     "co": "HYBE",
@@ -4789,7 +4789,7 @@
     ],
     "bday": "2000.08.08",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4797,11 +4797,11 @@
   },
   {
     "name": {
-      "ko": "?덉쑄吏?,
+      "ko": "허윤진",
       "en": "Yunjin"
     },
     "group": {
-      "ko": "瑜댁꽭?쇳븣",
+      "ko": "르세라핌",
       "en": "LE SSERAFIM"
     },
     "co": "HYBE",
@@ -4818,19 +4818,19 @@
     ],
     "bday": "2001.10.08",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "移댁쫰??,
+      "ko": "카즈하",
       "en": "Kazuha"
     },
     "group": {
-      "ko": "瑜댁꽭?쇳븣",
+      "ko": "르세라핌",
       "en": "LE SSERAFIM"
     },
     "co": "HYBE",
@@ -4847,7 +4847,7 @@
     ],
     "bday": "2003.08.09",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -4855,11 +4855,11 @@
   },
   {
     "name": {
-      "ko": "?띿?梨?,
+      "ko": "홍은채",
       "en": "Eunchae"
     },
     "group": {
-      "ko": "瑜댁꽭?쇳븣",
+      "ko": "르세라핌",
       "en": "LE SSERAFIM"
     },
     "co": "HYBE",
@@ -4876,7 +4876,7 @@
     ],
     "bday": "2006.11.16",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4884,11 +4884,11 @@
   },
   {
     "name": {
-      "ko": "源媛??,
+      "ko": "김가람",
       "en": "Garam"
     },
     "group": {
-      "ko": "瑜댁꽭?쇳븣",
+      "ko": "르세라핌",
       "en": "LE SSERAFIM"
     },
     "co": "HYBE",
@@ -4905,7 +4905,7 @@
     ],
     "bday": "2004.10.04",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -4913,11 +4913,11 @@
   },
   {
     "name": {
-      "ko": "猷⑥뭅",
+      "ko": "루카",
       "en": "Ruka"
     },
     "group": {
-      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
+      "ko": "베이비몬스터",
       "en": "BABYMONSTER"
     },
     "co": "YG",
@@ -4934,7 +4934,7 @@
     ],
     "bday": "2004.11.25",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -4942,11 +4942,11 @@
   },
   {
     "name": {
-      "ko": "?뚮━?",
+      "ko": "파리타",
       "en": "Pharita"
     },
     "group": {
-      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
+      "ko": "베이비몬스터",
       "en": "BABYMONSTER"
     },
     "co": "YG",
@@ -4963,7 +4963,7 @@
     ],
     "bday": "2004.03.03",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "태국",
       "en": "TH"
     },
     "sparkle": false,
@@ -4971,11 +4971,11 @@
   },
   {
     "name": {
-      "ko": "?꾩궗",
+      "ko": "아사",
       "en": "Ahyeon"
     },
     "group": {
-      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
+      "ko": "베이비몬스터",
       "en": "BABYMONSTER"
     },
     "co": "YG",
@@ -4992,7 +4992,7 @@
     ],
     "bday": "2006.04.03",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5000,11 +5000,11 @@
   },
   {
     "name": {
-      "ko": "移섑궎?",
+      "ko": "치키타",
       "en": "Chiquita"
     },
     "group": {
-      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
+      "ko": "베이비몬스터",
       "en": "BABYMONSTER"
     },
     "co": "YG",
@@ -5021,7 +5021,7 @@
     ],
     "bday": "2005.01.06",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5029,11 +5029,11 @@
   },
   {
     "name": {
-      "ko": "?쇰?",
+      "ko": "라미",
       "en": "Rami"
     },
     "group": {
-      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
+      "ko": "베이비몬스터",
       "en": "BABYMONSTER"
     },
     "co": "YG",
@@ -5050,7 +5050,7 @@
     ],
     "bday": "2004.09.28",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5058,11 +5058,11 @@
   },
   {
     "name": {
-      "ko": "濡쒕씪",
+      "ko": "로라",
       "en": "Rora"
     },
     "group": {
-      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
+      "ko": "베이비몬스터",
       "en": "BABYMONSTER"
     },
     "co": "YG",
@@ -5079,7 +5079,7 @@
     ],
     "bday": "2007.04.22",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5087,11 +5087,11 @@
   },
   {
     "name": {
-      "ko": "?섎굹",
+      "ko": "하나",
       "en": "Hana"
     },
     "group": {
-      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
+      "ko": "베이비몬스터",
       "en": "BABYMONSTER"
     },
     "co": "YG",
@@ -5108,7 +5108,7 @@
     ],
     "bday": "2007.04.06",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5116,11 +5116,11 @@
   },
   {
     "name": {
-      "ko": "?섏씤",
+      "ko": "수인",
       "en": "Sooin"
     },
     "group": {
-      "ko": "誘몄빞??,
+      "ko": "미야오",
       "en": "MEOVV"
     },
     "co": "The Black Label",
@@ -5137,7 +5137,7 @@
     ],
     "bday": "2005.04.12",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5145,11 +5145,11 @@
   },
   {
     "name": {
-      "ko": "媛??,
+      "ko": "가원",
       "en": "Gawon"
     },
     "group": {
-      "ko": "誘몄빞??,
+      "ko": "미야오",
       "en": "MEOVV"
     },
     "co": "The Black Label",
@@ -5166,7 +5166,7 @@
     ],
     "bday": "2005.04.27",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5174,11 +5174,11 @@
   },
   {
     "name": {
-      "ko": "?덈굹",
+      "ko": "안나",
       "en": "Anna"
     },
     "group": {
-      "ko": "誘몄빞??,
+      "ko": "미야오",
       "en": "MEOVV"
     },
     "co": "The Black Label",
@@ -5195,7 +5195,7 @@
     ],
     "bday": "2005.11.17",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -5203,11 +5203,11 @@
   },
   {
     "name": {
-      "ko": "?섎┛",
+      "ko": "나린",
       "en": "Narin"
     },
     "group": {
-      "ko": "誘몄빞??,
+      "ko": "미야오",
       "en": "MEOVV"
     },
     "co": "The Black Label",
@@ -5224,7 +5224,7 @@
     ],
     "bday": "2007.08.15",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5232,11 +5232,11 @@
   },
   {
     "name": {
-      "ko": "?섎씪",
+      "ko": "엘라",
       "en": "Ella"
     },
     "group": {
-      "ko": "誘몄빞??,
+      "ko": "미야오",
       "en": "MEOVV"
     },
     "co": "The Black Label",
@@ -5253,19 +5253,19 @@
     ],
     "bday": "2008.12.01",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "?꾩씠由?,
+      "ko": "아이린",
       "en": "Irene"
     },
     "group": {
-      "ko": "?덈뱶踰⑤껙",
+      "ko": "레드벨벳",
       "en": "Red Velvet"
     },
     "co": "SM",
@@ -5282,7 +5282,7 @@
     ],
     "bday": "1991.03.29",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5290,11 +5290,11 @@
   },
   {
     "name": {
-      "ko": "?ш린",
+      "ko": "슬기",
       "en": "Seulgi"
     },
     "group": {
-      "ko": "?덈뱶踰⑤껙",
+      "ko": "레드벨벳",
       "en": "Red Velvet"
     },
     "co": "SM",
@@ -5311,7 +5311,7 @@
     ],
     "bday": "1994.02.10",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5319,11 +5319,11 @@
   },
   {
     "name": {
-      "ko": "?щ뵒",
+      "ko": "웬디",
       "en": "Wendy"
     },
     "group": {
-      "ko": "?덈뱶踰⑤껙",
+      "ko": "레드벨벳",
       "en": "Red Velvet"
     },
     "co": "SM",
@@ -5340,19 +5340,19 @@
     ],
     "bday": "1994.02.21",
     "nat": {
-      "ko": "?쒓뎅쨌罹먮굹??,
-      "en": "KR쨌CA"
+      "ko": "한국·캐나다",
+      "en": "KR·CA"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "議곗씠",
+      "ko": "조이",
       "en": "Joy"
     },
     "group": {
-      "ko": "?덈뱶踰⑤껙",
+      "ko": "레드벨벳",
       "en": "Red Velvet"
     },
     "co": "SM",
@@ -5369,7 +5369,7 @@
     ],
     "bday": "1996.09.03",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5377,11 +5377,11 @@
   },
   {
     "name": {
-      "ko": "?덈━",
+      "ko": "예리",
       "en": "Yeri"
     },
     "group": {
-      "ko": "?덈뱶踰⑤껙",
+      "ko": "레드벨벳",
       "en": "Red Velvet"
     },
     "co": "SM",
@@ -5398,7 +5398,7 @@
     ],
     "bday": "1999.03.05",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5406,11 +5406,11 @@
   },
   {
     "name": {
-      "ko": "?쒖뿰",
+      "ko": "태연",
       "en": "Taeyeon"
     },
     "group": {
-      "ko": "?뚮??쒕?",
+      "ko": "소녀시대",
       "en": "SNSD"
     },
     "co": "SM",
@@ -5427,7 +5427,7 @@
     ],
     "bday": "1989.03.09",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5435,11 +5435,11 @@
   },
   {
     "name": {
-      "ko": "?⑤땲",
+      "ko": "써니",
       "en": "Sunny"
     },
     "group": {
-      "ko": "?뚮??쒕?",
+      "ko": "소녀시대",
       "en": "SNSD"
     },
     "co": "SM",
@@ -5456,7 +5456,7 @@
     ],
     "bday": "1989.05.15",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5464,11 +5464,11 @@
   },
   {
     "name": {
-      "ko": "?⑥뿰",
+      "ko": "효연",
       "en": "Hyoyeon"
     },
     "group": {
-      "ko": "?뚮??쒕?",
+      "ko": "소녀시대",
       "en": "SNSD"
     },
     "co": "SM",
@@ -5485,7 +5485,7 @@
     ],
     "bday": "1989.09.22",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5493,11 +5493,11 @@
   },
   {
     "name": {
-      "ko": "?좊━",
+      "ko": "유리",
       "en": "Yuri"
     },
     "group": {
-      "ko": "?뚮??쒕?",
+      "ko": "소녀시대",
       "en": "SNSD"
     },
     "co": "SM",
@@ -5514,7 +5514,7 @@
     ],
     "bday": "1989.12.05",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5522,11 +5522,11 @@
   },
   {
     "name": {
-      "ko": "?섏쁺",
+      "ko": "수영",
       "en": "Sooyoung"
     },
     "group": {
-      "ko": "?뚮??쒕?",
+      "ko": "소녀시대",
       "en": "SNSD"
     },
     "co": "SM",
@@ -5543,7 +5543,7 @@
     ],
     "bday": "1990.02.10",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5551,11 +5551,11 @@
   },
   {
     "name": {
-      "ko": "?ㅼ븘",
+      "ko": "윤아",
       "en": "Yoona"
     },
     "group": {
-      "ko": "?뚮??쒕?",
+      "ko": "소녀시대",
       "en": "SNSD"
     },
     "co": "SM",
@@ -5572,7 +5572,7 @@
     ],
     "bday": "1990.05.30",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5580,11 +5580,11 @@
   },
   {
     "name": {
-      "ko": "?쒗쁽",
+      "ko": "서현",
       "en": "Seohyun"
     },
     "group": {
-      "ko": "?뚮??쒕?",
+      "ko": "소녀시대",
       "en": "SNSD"
     },
     "co": "SM",
@@ -5601,7 +5601,7 @@
     ],
     "bday": "1991.06.28",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5609,11 +5609,11 @@
   },
   {
     "name": {
-      "ko": "?⑥쑀",
+      "ko": "온유",
       "en": "Onew"
     },
     "group": {
-      "ko": "?ㅼ씠??,
+      "ko": "샤이니",
       "en": "SHINee"
     },
     "co": "SM",
@@ -5630,7 +5630,7 @@
     ],
     "bday": "1989.12.14",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5638,11 +5638,11 @@
   },
   {
     "name": {
-      "ko": "??,
+      "ko": "키",
       "en": "Key"
     },
     "group": {
-      "ko": "?ㅼ씠??,
+      "ko": "샤이니",
       "en": "SHINee"
     },
     "co": "SM",
@@ -5659,7 +5659,7 @@
     ],
     "bday": "1991.09.23",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5667,11 +5667,11 @@
   },
   {
     "name": {
-      "ko": "誘쇳샇",
+      "ko": "민호",
       "en": "Minho"
     },
     "group": {
-      "ko": "?ㅼ씠??,
+      "ko": "샤이니",
       "en": "SHINee"
     },
     "co": "SM",
@@ -5688,7 +5688,7 @@
     ],
     "bday": "1991.12.09",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5696,11 +5696,11 @@
   },
   {
     "name": {
-      "ko": "?쒕?",
+      "ko": "태민",
       "en": "Taemin"
     },
     "group": {
-      "ko": "?ㅼ씠??,
+      "ko": "샤이니",
       "en": "SHINee"
     },
     "co": "SM",
@@ -5717,7 +5717,7 @@
     ],
     "bday": "1993.07.18",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5725,11 +5725,11 @@
   },
   {
     "name": {
-      "ko": "醫낇쁽",
+      "ko": "종현",
       "en": "Jonghyun"
     },
     "group": {
-      "ko": "?ㅼ씠??,
+      "ko": "샤이니",
       "en": "SHINee"
     },
     "co": "SM",
@@ -5746,7 +5746,7 @@
     ],
     "bday": "1990.04.08",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5754,7 +5754,7 @@
   },
   {
     "name": {
-      "ko": "鍮낇넗由ъ븘",
+      "ko": "빅토리아",
       "en": "Victoria"
     },
     "group": {
@@ -5775,7 +5775,7 @@
     ],
     "bday": "1987.02.02",
     "nat": {
-      "ko": "以묎뎅",
+      "ko": "중국",
       "en": "CN"
     },
     "sparkle": false,
@@ -5783,7 +5783,7 @@
   },
   {
     "name": {
-      "ko": "?곕쾭",
+      "ko": "앰버",
       "en": "Amber"
     },
     "group": {
@@ -5804,7 +5804,7 @@
     ],
     "bday": "1992.09.18",
     "nat": {
-      "ko": "誘멸뎅",
+      "ko": "미국",
       "en": "US"
     },
     "sparkle": false,
@@ -5812,7 +5812,7 @@
   },
   {
     "name": {
-      "ko": "猷⑤굹",
+      "ko": "루나",
       "en": "Luna"
     },
     "group": {
@@ -5833,7 +5833,7 @@
     ],
     "bday": "1993.08.12",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5841,7 +5841,7 @@
   },
   {
     "name": {
-      "ko": "?щ━?ㅽ깉",
+      "ko": "크리스탈",
       "en": "Krystal"
     },
     "group": {
@@ -5862,8 +5862,8 @@
     ],
     "bday": "1994.10.24",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
@@ -5891,7 +5891,7 @@
     ],
     "bday": "1994.09.12",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5899,7 +5899,7 @@
   },
   {
     "name": {
-      "ko": "吏?,
+      "ko": "진",
       "en": "Jin"
     },
     "group": {
@@ -5920,7 +5920,7 @@
     ],
     "bday": "1992.12.04",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5928,7 +5928,7 @@
   },
   {
     "name": {
-      "ko": "?덇?",
+      "ko": "슈가",
       "en": "Suga"
     },
     "group": {
@@ -5949,7 +5949,7 @@
     ],
     "bday": "1993.03.09",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5957,7 +5957,7 @@
   },
   {
     "name": {
-      "ko": "?쒖씠??,
+      "ko": "제이홉",
       "en": "J-Hope"
     },
     "group": {
@@ -5978,7 +5978,7 @@
     ],
     "bday": "1994.02.18",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -5986,7 +5986,7 @@
   },
   {
     "name": {
-      "ko": "吏誘?,
+      "ko": "지민",
       "en": "Jimin"
     },
     "group": {
@@ -6007,7 +6007,7 @@
     ],
     "bday": "1995.10.13",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6015,7 +6015,7 @@
   },
   {
     "name": {
-      "ko": "酉?,
+      "ko": "뷔",
       "en": "V"
     },
     "group": {
@@ -6036,7 +6036,7 @@
     ],
     "bday": "1995.12.30",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6044,7 +6044,7 @@
   },
   {
     "name": {
-      "ko": "?뺢뎅",
+      "ko": "정국",
       "en": "Jungkook"
     },
     "group": {
@@ -6065,7 +6065,7 @@
     ],
     "bday": "1997.09.01",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6073,11 +6073,11 @@
   },
   {
     "name": {
-      "ko": "?섏뿰",
+      "ko": "나연",
       "en": "Nayeon"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6094,7 +6094,7 @@
     ],
     "bday": "1995.09.22",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6102,11 +6102,11 @@
   },
   {
     "name": {
-      "ko": "?뺤뿰",
+      "ko": "정연",
       "en": "Jeongyeon"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6123,7 +6123,7 @@
     ],
     "bday": "1996.09.01",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6131,11 +6131,11 @@
   },
   {
     "name": {
-      "ko": "紐⑤え",
+      "ko": "모모",
       "en": "Momo"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6152,7 +6152,7 @@
     ],
     "bday": "1996.11.09",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -6160,11 +6160,11 @@
   },
   {
     "name": {
-      "ko": "?щ굹",
+      "ko": "사나",
       "en": "Sana"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6181,7 +6181,7 @@
     ],
     "bday": "1996.12.29",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -6189,11 +6189,11 @@
   },
   {
     "name": {
-      "ko": "吏??,
+      "ko": "지효",
       "en": "Jihyo"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6210,7 +6210,7 @@
     ],
     "bday": "1997.02.01",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6218,11 +6218,11 @@
   },
   {
     "name": {
-      "ko": "誘몃굹",
+      "ko": "미나",
       "en": "Mina"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6239,7 +6239,7 @@
     ],
     "bday": "1997.03.24",
     "nat": {
-      "ko": "?쇰낯",
+      "ko": "일본",
       "en": "JP"
     },
     "sparkle": false,
@@ -6247,11 +6247,11 @@
   },
   {
     "name": {
-      "ko": "?ㅽ쁽",
+      "ko": "다현",
       "en": "Dahyun"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6268,7 +6268,7 @@
     ],
     "bday": "1998.05.28",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6276,11 +6276,11 @@
   },
   {
     "name": {
-      "ko": "梨꾩쁺",
+      "ko": "채영",
       "en": "Chaeyoung"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6297,19 +6297,19 @@
     ],
     "bday": "1999.04.23",
     "nat": {
-      "ko": "?쒓뎅쨌誘멸뎅",
-      "en": "KR쨌US"
+      "ko": "한국·미국",
+      "en": "KR·US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "易붿쐞",
+      "ko": "쯔위",
       "en": "Tzuyu"
     },
     "group": {
-      "ko": "?몄??댁뒪",
+      "ko": "트와이스",
       "en": "TWICE"
     },
     "co": "JYP",
@@ -6326,7 +6326,7 @@
     ],
     "bday": "2000.06.14",
     "nat": {
-      "ko": "?留?,
+      "ko": "대만",
       "en": "TW"
     },
     "sparkle": false,
@@ -6338,7 +6338,7 @@
       "en": "G-Dragon"
     },
     "group": {
-      "ko": "鍮낅콉",
+      "ko": "빅뱅",
       "en": "BIGBANG"
     },
     "co": "YG",
@@ -6355,7 +6355,7 @@
     ],
     "bday": "1988.08.18",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6363,11 +6363,11 @@
   },
   {
     "name": {
-      "ko": "?쒖뼇",
+      "ko": "태양",
       "en": "Taeyang"
     },
     "group": {
-      "ko": "鍮낅콉",
+      "ko": "빅뱅",
       "en": "BIGBANG"
     },
     "co": "YG",
@@ -6384,7 +6384,7 @@
     ],
     "bday": "1988.05.18",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6392,11 +6392,11 @@
   },
   {
     "name": {
-      "ko": "??,
+      "ko": "탑",
       "en": "T.O.P"
     },
     "group": {
-      "ko": "鍮낅콉",
+      "ko": "빅뱅",
       "en": "BIGBANG"
     },
     "co": "YG",
@@ -6413,7 +6413,7 @@
     ],
     "bday": "1987.11.04",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6421,11 +6421,11 @@
   },
   {
     "name": {
-      "ko": "???,
+      "ko": "대성",
       "en": "Daesung"
     },
     "group": {
-      "ko": "鍮낅콉",
+      "ko": "빅뱅",
       "en": "BIGBANG"
     },
     "co": "YG",
@@ -6442,7 +6442,7 @@
     ],
     "bday": "1989.04.26",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6450,11 +6450,11 @@
   },
   {
     "name": {
-      "ko": "吏??,
+      "ko": "지수",
       "en": "Jisoo"
     },
     "group": {
-      "ko": "釉붾옓?묓겕",
+      "ko": "블랙핑크",
       "en": "BLACKPINK"
     },
     "co": "YG",
@@ -6471,7 +6471,7 @@
     ],
     "bday": "1995.01.03",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6479,11 +6479,11 @@
   },
   {
     "name": {
-      "ko": "?쒕땲",
+      "ko": "제니",
       "en": "Jennie"
     },
     "group": {
-      "ko": "釉붾옓?묓겕",
+      "ko": "블랙핑크",
       "en": "BLACKPINK"
     },
     "co": "YG",
@@ -6500,7 +6500,7 @@
     ],
     "bday": "1996.01.16",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
@@ -6508,11 +6508,11 @@
   },
   {
     "name": {
-      "ko": "濡쒖젣",
-      "en": "Ros챕"
+      "ko": "로제",
+      "en": "Rosé"
     },
     "group": {
-      "ko": "釉붾옓?묓겕",
+      "ko": "블랙핑크",
       "en": "BLACKPINK"
     },
     "co": "YG",
@@ -6529,19 +6529,19 @@
     ],
     "bday": "1997.02.11",
     "nat": {
-      "ko": "?쒓뎅쨌NZ",
-      "en": "KR쨌NZ"
+      "ko": "한국·NZ",
+      "en": "KR·NZ"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "由ъ궗",
+      "ko": "리사",
       "en": "Lisa"
     },
     "group": {
-      "ko": "釉붾옓?묓겕",
+      "ko": "블랙핑크",
       "en": "BLACKPINK"
     },
     "co": "YG",
@@ -6558,7 +6558,7 @@
     ],
     "bday": "1997.03.27",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "태국",
       "en": "TH"
     },
     "sparkle": false,
@@ -6566,11 +6566,11 @@
   },
   {
     "name": {
-      "ko": "?꾩씠??,
+      "ko": "아이유",
       "en": "IU"
     },
     "group": {
-      "ko": "?붾줈",
+      "ko": "솔로",
       "en": "Solo"
     },
     "co": "EDAM",
@@ -6587,7 +6587,7 @@
     ],
     "bday": "1993.05.16",
     "nat": {
-      "ko": "?쒓뎅",
+      "ko": "한국",
       "en": "KR"
     },
     "sparkle": false,
