@@ -1,14 +1,14 @@
 [
   {
     "name": {
-      "ko": "카리나",
+      "ko": "移대━??,
       "en": "Karina"
     },
     "group": {
-      "ko": "에스파",
+      "ko": "?먯뒪??,
       "en": "aespa"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 6988,
     "y": 5330,
@@ -22,13 +22,13 @@
     ],
     "bday": "2000.04.11",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "도깨비불",
+        "t": "?꾧묠鍮꾨텋",
         "u": "https://www.youtube.com/watch?v=tZixREYOIZQ"
       },
       {
@@ -43,14 +43,14 @@
   },
   {
     "name": {
-      "ko": "지젤",
+      "ko": "吏??,
       "en": "Giselle"
     },
     "group": {
-      "ko": "에스파",
+      "ko": "?먯뒪??,
       "en": "aespa"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7228,
     "y": 5290,
@@ -64,7 +64,7 @@
     ],
     "bday": "2000.10.30",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -85,14 +85,14 @@
   },
   {
     "name": {
-      "ko": "윈터",
+      "ko": "?덊꽣",
       "en": "Winter"
     },
     "group": {
-      "ko": "에스파",
+      "ko": "?먯뒪??,
       "en": "aespa"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7308,
     "y": 5450,
@@ -106,7 +106,7 @@
     ],
     "bday": "2001.01.01",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -127,14 +127,14 @@
   },
   {
     "name": {
-      "ko": "닝닝",
+      "ko": "?앸떇",
       "en": "Ningning"
     },
     "group": {
-      "ko": "에스파",
+      "ko": "?먯뒪??,
       "en": "aespa"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7068,
     "y": 5550,
@@ -148,7 +148,7 @@
     ],
     "bday": "2002.10.23",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -169,14 +169,14 @@
   },
   {
     "name": {
-      "ko": "지우",
+      "ko": "吏??,
       "en": "Jiwoo"
     },
     "group": {
-      "ko": "하츠투하츠",
+      "ko": "?섏툩?ы븯痢?,
       "en": "Hearts2Hearts"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 6980,
     "y": 4940,
@@ -190,7 +190,7 @@
     ],
     "bday": "2006.09.07",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -198,14 +198,14 @@
   },
   {
     "name": {
-      "ko": "카르멘",
+      "ko": "移대Ⅴ硫?,
       "en": "Carmen"
     },
     "group": {
-      "ko": "하츠투하츠",
+      "ko": "?섏툩?ы븯痢?,
       "en": "Hearts2Hearts"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7180,
     "y": 4910,
@@ -219,7 +219,7 @@
     ],
     "bday": "2006.03.28",
     "nat": {
-      "ko": "인도네시아",
+      "ko": "?몃룄?ㅼ떆??,
       "en": "ID"
     },
     "sparkle": false,
@@ -227,14 +227,14 @@
   },
   {
     "name": {
-      "ko": "유하",
+      "ko": "?좏븯",
       "en": "Yuha"
     },
     "group": {
-      "ko": "하츠투하츠",
+      "ko": "?섏툩?ы븯痢?,
       "en": "Hearts2Hearts"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7380,
     "y": 4936,
@@ -248,7 +248,7 @@
     ],
     "bday": "2007.04.12",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -256,14 +256,14 @@
   },
   {
     "name": {
-      "ko": "스텔라",
+      "ko": "?ㅽ뀛??,
       "en": "Stella"
     },
     "group": {
-      "ko": "하츠투하츠",
+      "ko": "?섏툩?ы븯痢?,
       "en": "Hearts2Hearts"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7580,
     "y": 4910,
@@ -277,7 +277,7 @@
     ],
     "bday": "2007.06.18",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -285,14 +285,14 @@
   },
   {
     "name": {
-      "ko": "주은",
+      "ko": "二쇱?",
       "en": "Juun"
     },
     "group": {
-      "ko": "하츠투하츠",
+      "ko": "?섏툩?ы븯痢?,
       "en": "Hearts2Hearts"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7060,
     "y": 5110,
@@ -306,7 +306,7 @@
     ],
     "bday": "2008.12.03",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -314,14 +314,14 @@
   },
   {
     "name": {
-      "ko": "에이나",
+      "ko": "?먯씠??,
       "en": "A-na"
     },
     "group": {
-      "ko": "하츠투하츠",
+      "ko": "?섏툩?ы븯痢?,
       "en": "Hearts2Hearts"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7260,
     "y": 5080,
@@ -335,7 +335,7 @@
     ],
     "bday": "2008.12.20",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -343,14 +343,14 @@
   },
   {
     "name": {
-      "ko": "이안",
+      "ko": "?댁븞",
       "en": "Ian"
     },
     "group": {
-      "ko": "하츠투하츠",
+      "ko": "?섏툩?ы븯痢?,
       "en": "Hearts2Hearts"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7460,
     "y": 5100,
@@ -364,7 +364,7 @@
     ],
     "bday": "2009.10.09",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -372,14 +372,14 @@
   },
   {
     "name": {
-      "ko": "예온",
+      "ko": "?덉삩",
       "en": "Ye-on"
     },
     "group": {
-      "ko": "하츠투하츠",
+      "ko": "?섏툩?ы븯痢?,
       "en": "Hearts2Hearts"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7680,
     "y": 5080,
@@ -393,7 +393,7 @@
     ],
     "bday": "2010.04.19",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -401,14 +401,14 @@
   },
   {
     "name": {
-      "ko": "시온",
+      "ko": "?쒖삩",
       "en": "Sion"
     },
     "group": {
       "ko": "NCT WISH",
       "en": "NCT WISH"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8752,
     "y": 6246,
@@ -422,7 +422,7 @@
     ],
     "bday": "2002.05.11",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -443,14 +443,14 @@
   },
   {
     "name": {
-      "ko": "리쿠",
+      "ko": "由ъ퓼",
       "en": "Riku"
     },
     "group": {
       "ko": "NCT WISH",
       "en": "NCT WISH"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8932,
     "y": 6206,
@@ -464,7 +464,7 @@
     ],
     "bday": "2003.06.28",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -474,25 +474,25 @@
         "u": "https://www.youtube.com/watch?v=TUqZLkjgyVA"
       },
       {
-        "t": "으쌰! 으쌰!",
+        "t": "?쇱뙭! ?쇱뙭!",
         "u": "https://www.youtube.com/watch?v=ooq0MXgSjmU"
       },
       {
-        "t": "내 얘길 들어봐",
+        "t": "???섍만 ?ㅼ뼱遊?,
         "u": "https://www.youtube.com/watch?v=WF4611kq1GQ"
       }
     ]
   },
   {
     "name": {
-      "ko": "유우시",
+      "ko": "?좎슦??,
       "en": "Yuushi"
     },
     "group": {
       "ko": "NCT WISH",
       "en": "NCT WISH"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 9112,
     "y": 6266,
@@ -506,7 +506,7 @@
     ],
     "bday": "2004.04.05",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -527,14 +527,14 @@
   },
   {
     "name": {
-      "ko": "재희",
+      "ko": "?ы씗",
       "en": "Jaehee"
     },
     "group": {
       "ko": "NCT WISH",
       "en": "NCT WISH"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8812,
     "y": 6446,
@@ -548,7 +548,7 @@
     ],
     "bday": "2005.06.21",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -556,14 +556,14 @@
   },
   {
     "name": {
-      "ko": "료",
+      "ko": "猷?,
       "en": "Ryo"
     },
     "group": {
       "ko": "NCT WISH",
       "en": "NCT WISH"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 9012,
     "y": 6446,
@@ -577,7 +577,7 @@
     ],
     "bday": "2007.08.04",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -585,14 +585,14 @@
   },
   {
     "name": {
-      "ko": "사쿠야",
+      "ko": "?ъ퓼??,
       "en": "Sakuya"
     },
     "group": {
       "ko": "NCT WISH",
       "en": "NCT WISH"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 9152,
     "y": 6366,
@@ -606,7 +606,7 @@
     ],
     "bday": "2007.11.18",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -614,14 +614,14 @@
   },
   {
     "name": {
-      "ko": "쟈니",
+      "ko": "?덈땲",
       "en": "Johnny"
     },
     "group": {
       "ko": "NCT 127",
       "en": "NCT 127"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8130,
     "y": 5510,
@@ -635,22 +635,22 @@
     ],
     "bday": "1995.02.09",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "태용",
+      "ko": "?쒖슜",
       "en": "Taeyong"
     },
     "group": {
       "ko": "NCT 127",
       "en": "NCT 127"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8310,
     "y": 5470,
@@ -664,27 +664,27 @@
     ],
     "bday": "1995.07.01",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "질주",
+        "t": "吏덉＜",
         "u": "https://www.youtube.com/watch?v=fXd-uJUrjK4"
       }
     ]
   },
   {
     "name": {
-      "ko": "유타",
+      "ko": "?좏?",
       "en": "Yuta"
     },
     "group": {
       "ko": "NCT 127",
       "en": "NCT 127"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8510,
     "y": 5490,
@@ -698,7 +698,7 @@
     ],
     "bday": "1995.10.26",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -706,14 +706,14 @@
   },
   {
     "name": {
-      "ko": "도영",
+      "ko": "?꾩쁺",
       "en": "Doyoung"
     },
     "group": {
       "ko": "NCT 127",
       "en": "NCT 127"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8630,
     "y": 5550,
@@ -727,7 +727,7 @@
     ],
     "bday": "1996.02.01",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -735,14 +735,14 @@
   },
   {
     "name": {
-      "ko": "재현",
+      "ko": "?ы쁽",
       "en": "Jaehyun"
     },
     "group": {
       "ko": "NCT 127",
       "en": "NCT 127"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8170,
     "y": 5710,
@@ -756,7 +756,7 @@
     ],
     "bday": "1997.02.14",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -764,14 +764,14 @@
   },
   {
     "name": {
-      "ko": "정우",
+      "ko": "?뺤슦",
       "en": "Jungwoo"
     },
     "group": {
       "ko": "NCT 127",
       "en": "NCT 127"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8390,
     "y": 5670,
@@ -785,7 +785,7 @@
     ],
     "bday": "1998.02.19",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -793,14 +793,14 @@
   },
   {
     "name": {
-      "ko": "마크",
+      "ko": "留덊겕",
       "en": "Mark"
     },
     "group": {
-      "ko": "NCT 127·NCT Dream",
-      "en": "NCT 127·NCT Dream"
+      "ko": "NCT 127쨌NCT Dream",
+      "en": "NCT 127쨌NCT Dream"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8500,
     "y": 5930,
@@ -814,22 +814,22 @@
     ],
     "bday": "1999.08.02",
     "nat": {
-      "ko": "한국·캐나다",
-      "en": "KR·CA"
+      "ko": "?쒓뎅쨌罹먮굹??,
+      "en": "KR쨌CA"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "해찬",
+      "ko": "?댁갔",
       "en": "Haechan"
     },
     "group": {
-      "ko": "NCT 127·NCT Dream",
-      "en": "NCT 127·NCT Dream"
+      "ko": "NCT 127쨌NCT Dream",
+      "en": "NCT 127쨌NCT Dream"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8300,
     "y": 5930,
@@ -843,7 +843,7 @@
     ],
     "bday": "2000.06.06",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -851,14 +851,14 @@
   },
   {
     "name": {
-      "ko": "런쥔",
+      "ko": "?곗쪛",
       "en": "Renjun"
     },
     "group": {
       "ko": "NCT Dream",
       "en": "NCT Dream"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8320,
     "y": 6040,
@@ -872,7 +872,7 @@
     ],
     "bday": "2000.03.23",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -880,14 +880,14 @@
   },
   {
     "name": {
-      "ko": "제노",
+      "ko": "?쒕끂",
       "en": "Jeno"
     },
     "group": {
       "ko": "NCT Dream",
       "en": "NCT Dream"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8520,
     "y": 6000,
@@ -901,7 +901,7 @@
     ],
     "bday": "2000.04.23",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -909,14 +909,14 @@
   },
   {
     "name": {
-      "ko": "재민",
+      "ko": "?щ?",
       "en": "Jaemin"
     },
     "group": {
       "ko": "NCT Dream",
       "en": "NCT Dream"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8640,
     "y": 6060,
@@ -930,7 +930,7 @@
     ],
     "bday": "2000.08.13",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -938,14 +938,14 @@
   },
   {
     "name": {
-      "ko": "천러",
+      "ko": "泥쒕윭",
       "en": "Chenle"
     },
     "group": {
       "ko": "NCT Dream",
       "en": "NCT Dream"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8380,
     "y": 6260,
@@ -959,7 +959,7 @@
     ],
     "bday": "2001.11.22",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -967,14 +967,14 @@
   },
   {
     "name": {
-      "ko": "지성",
+      "ko": "吏??,
       "en": "Jisung"
     },
     "group": {
       "ko": "NCT Dream",
       "en": "NCT Dream"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8580,
     "y": 6260,
@@ -988,7 +988,7 @@
     ],
     "bday": "2002.02.05",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -996,14 +996,14 @@
   },
   {
     "name": {
-      "ko": "쿤",
+      "ko": "荑?,
       "en": "Kun"
     },
     "group": {
       "ko": "WayV",
       "en": "WayV"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8524,
     "y": 7310,
@@ -1017,7 +1017,7 @@
     ],
     "bday": "1996.01.01",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -1025,14 +1025,14 @@
   },
   {
     "name": {
-      "ko": "텐",
+      "ko": "??,
       "en": "Ten"
     },
     "group": {
       "ko": "WayV",
       "en": "WayV"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8684,
     "y": 7270,
@@ -1046,7 +1046,7 @@
     ],
     "bday": "1996.02.27",
     "nat": {
-      "ko": "태국",
+      "ko": "?쒓뎅",
       "en": "TH"
     },
     "sparkle": false,
@@ -1054,14 +1054,14 @@
   },
   {
     "name": {
-      "ko": "윈윈",
+      "ko": "?덉쐢",
       "en": "WinWin"
     },
     "group": {
       "ko": "WayV",
       "en": "WayV"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8844,
     "y": 7350,
@@ -1075,7 +1075,7 @@
     ],
     "bday": "1997.10.28",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -1083,14 +1083,14 @@
   },
   {
     "name": {
-      "ko": "샤오쥔",
+      "ko": "?ㅼ삤伊?,
       "en": "Xiaojun"
     },
     "group": {
       "ko": "WayV",
       "en": "WayV"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8564,
     "y": 7510,
@@ -1104,7 +1104,7 @@
     ],
     "bday": "1999.08.08",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -1112,14 +1112,14 @@
   },
   {
     "name": {
-      "ko": "헨드리",
+      "ko": "?⑤뱶由?,
       "en": "Hendery"
     },
     "group": {
       "ko": "WayV",
       "en": "WayV"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8764,
     "y": 7510,
@@ -1133,7 +1133,7 @@
     ],
     "bday": "1999.09.28",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -1141,14 +1141,14 @@
   },
   {
     "name": {
-      "ko": "양양",
+      "ko": "?묒뼇",
       "en": "Yangyang"
     },
     "group": {
       "ko": "WayV",
       "en": "WayV"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 8904,
     "y": 7430,
@@ -1162,22 +1162,22 @@
     ],
     "bday": "2000.10.10",
     "nat": {
-      "ko": "중국·독일",
-      "en": "CN·DE"
+      "ko": "以묎뎅쨌?낆씪",
+      "en": "CN쨌DE"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "방찬",
+      "ko": "諛⑹갔",
       "en": "Bang Chan"
     },
     "group": {
-      "ko": "스트레이키즈",
+      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
       "en": "Stray Kids"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 5072,
     "y": 7274,
@@ -1191,22 +1191,22 @@
     ],
     "bday": "2000.10.03",
     "nat": {
-      "ko": "한국·호주",
-      "en": "KR·AU"
+      "ko": "?쒓뎅쨌?몄＜",
+      "en": "KR쨌AU"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "이노",
+      "ko": "?대끂",
       "en": "Lee Know"
     },
     "group": {
-      "ko": "스트레이키즈",
+      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
       "en": "Stray Kids"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 5232,
     "y": 7234,
@@ -1220,7 +1220,7 @@
     ],
     "bday": "2000.10.25",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1228,14 +1228,14 @@
   },
   {
     "name": {
-      "ko": "창빈",
+      "ko": "李쎈퉰",
       "en": "Changbin"
     },
     "group": {
-      "ko": "스트레이키즈",
+      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
       "en": "Stray Kids"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 5432,
     "y": 7274,
@@ -1249,7 +1249,7 @@
     ],
     "bday": "2000.08.11",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1257,14 +1257,14 @@
   },
   {
     "name": {
-      "ko": "현진",
+      "ko": "?꾩쭊",
       "en": "Hyunjin"
     },
     "group": {
-      "ko": "스트레이키즈",
+      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
       "en": "Stray Kids"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 5532,
     "y": 7354,
@@ -1278,7 +1278,7 @@
     ],
     "bday": "2000.03.20",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1291,14 +1291,14 @@
   },
   {
     "name": {
-      "ko": "한",
+      "ko": "??,
       "en": "Han"
     },
     "group": {
-      "ko": "스트레이키즈",
+      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
       "en": "Stray Kids"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 5112,
     "y": 7514,
@@ -1312,7 +1312,7 @@
     ],
     "bday": "2000.09.14",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1320,14 +1320,14 @@
   },
   {
     "name": {
-      "ko": "필릭스",
+      "ko": "?꾨┃??,
       "en": "Felix"
     },
     "group": {
-      "ko": "스트레이키즈",
+      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
       "en": "Stray Kids"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 5332,
     "y": 7554,
@@ -1341,22 +1341,22 @@
     ],
     "bday": "2000.09.15",
     "nat": {
-      "ko": "한국·호주",
-      "en": "KR·AU"
+      "ko": "?쒓뎅쨌?몄＜",
+      "en": "KR쨌AU"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "승민",
+      "ko": "?밸?",
       "en": "Seungmin"
     },
     "group": {
-      "ko": "스트레이키즈",
+      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
       "en": "Stray Kids"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 5512,
     "y": 7474,
@@ -1370,7 +1370,7 @@
     ],
     "bday": "2000.09.22",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1378,14 +1378,14 @@
   },
   {
     "name": {
-      "ko": "아이엔",
+      "ko": "?꾩씠??,
       "en": "I.N"
     },
     "group": {
-      "ko": "스트레이키즈",
+      "ko": "?ㅽ듃?덉씠?ㅼ쫰",
       "en": "Stray Kids"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 5252,
     "y": 7614,
@@ -1399,7 +1399,7 @@
     ],
     "bday": "2001.02.08",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1407,14 +1407,14 @@
   },
   {
     "name": {
-      "ko": "예지",
+      "ko": "?덉?",
       "en": "Yeji"
     },
     "group": {
-      "ko": "있지",
+      "ko": "?덉?",
       "en": "ITZY"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4560,
     "y": 7496,
@@ -1428,7 +1428,7 @@
     ],
     "bday": "2000.05.26",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1442,21 +1442,21 @@
         "u": "https://www.youtube.com/watch?v=pmTjOXIu71Q"
       },
       {
-        "t": "달라달라",
+        "t": "?щ씪?щ씪",
         "u": "https://www.youtube.com/watch?v=fSAUQ37xbho"
       }
     ]
   },
   {
     "name": {
-      "ko": "리아",
+      "ko": "由ъ븘",
       "en": "Lia"
     },
     "group": {
-      "ko": "있지",
+      "ko": "?덉?",
       "en": "ITZY"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4720,
     "y": 7456,
@@ -1470,7 +1470,7 @@
     ],
     "bday": "2000.07.21",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1484,21 +1484,21 @@
         "u": "https://www.youtube.com/watch?v=c3jCty-g5x0"
       },
       {
-        "t": "달라달라",
+        "t": "?щ씪?щ씪",
         "u": "https://www.youtube.com/watch?v=5QGp7KkfZ0Y"
       }
     ]
   },
   {
     "name": {
-      "ko": "류진",
+      "ko": "瑜섏쭊",
       "en": "Ryujin"
     },
     "group": {
-      "ko": "있지",
+      "ko": "?덉?",
       "en": "ITZY"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4880,
     "y": 7536,
@@ -1512,7 +1512,7 @@
     ],
     "bday": "2001.04.17",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1526,21 +1526,21 @@
         "u": "https://www.youtube.com/watch?v=syoATmUcmL4"
       },
       {
-        "t": "마.피.아. In the morning",
+        "t": "留????? In the morning",
         "u": "https://www.youtube.com/watch?v=L1f8K9sYAgk"
       }
     ]
   },
   {
     "name": {
-      "ko": "채령",
+      "ko": "梨꾨졊",
       "en": "Chaeryeong"
     },
     "group": {
-      "ko": "있지",
+      "ko": "?덉?",
       "en": "ITZY"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4640,
     "y": 7696,
@@ -1554,7 +1554,7 @@
     ],
     "bday": "2001.06.05",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1575,14 +1575,14 @@
   },
   {
     "name": {
-      "ko": "유나",
+      "ko": "?좊굹",
       "en": "Yuna"
     },
     "group": {
-      "ko": "있지",
+      "ko": "?덉?",
       "en": "ITZY"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4840,
     "y": 7696,
@@ -1596,13 +1596,13 @@
     ],
     "bday": "2003.12.09",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "달라달라",
+        "t": "?щ씪?щ씪",
         "u": "https://www.youtube.com/watch?v=8f2IDOUrzkI"
       },
       {
@@ -1617,14 +1617,14 @@
   },
   {
     "name": {
-      "ko": "릴리",
+      "ko": "由대━",
       "en": "Lily"
     },
     "group": {
-      "ko": "엔믹스",
+      "ko": "?붾???,
       "en": "NMIXX"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4038,
     "y": 7250,
@@ -1638,7 +1638,7 @@
     ],
     "bday": "2003.08.04",
     "nat": {
-      "ko": "캐나다",
+      "ko": "罹먮굹??,
       "en": "CA"
     },
     "sparkle": false,
@@ -1646,14 +1646,14 @@
   },
   {
     "name": {
-      "ko": "해원",
+      "ko": "?댁썝",
       "en": "Haewon"
     },
     "group": {
-      "ko": "엔믹스",
+      "ko": "?붾???,
       "en": "NMIXX"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4218,
     "y": 7210,
@@ -1667,7 +1667,7 @@
     ],
     "bday": "2003.08.06",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1675,14 +1675,14 @@
   },
   {
     "name": {
-      "ko": "설윤",
+      "ko": "?ㅼ쑄",
       "en": "Sullyoon"
     },
     "group": {
-      "ko": "엔믹스",
+      "ko": "?붾???,
       "en": "NMIXX"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4398,
     "y": 7260,
@@ -1696,7 +1696,7 @@
     ],
     "bday": "2004.11.15",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1704,14 +1704,14 @@
   },
   {
     "name": {
-      "ko": "배이",
+      "ko": "諛곗씠",
       "en": "Bae"
     },
     "group": {
-      "ko": "엔믹스",
+      "ko": "?붾???,
       "en": "NMIXX"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4098,
     "y": 7430,
@@ -1725,22 +1725,22 @@
     ],
     "bday": "2005.08.22",
     "nat": {
-      "ko": "한국·호주",
-      "en": "KR·AU"
+      "ko": "?쒓뎅쨌?몄＜",
+      "en": "KR쨌AU"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "지우",
+      "ko": "吏??,
       "en": "Jiwoo"
     },
     "group": {
-      "ko": "엔믹스",
+      "ko": "?붾???,
       "en": "NMIXX"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4278,
     "y": 7430,
@@ -1754,7 +1754,7 @@
     ],
     "bday": "2006.10.26",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1762,14 +1762,14 @@
   },
   {
     "name": {
-      "ko": "규진",
+      "ko": "洹쒖쭊",
       "en": "Kyujin"
     },
     "group": {
-      "ko": "엔믹스",
+      "ko": "?붾???,
       "en": "NMIXX"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "main",
     "x": 4418,
     "y": 7360,
@@ -1783,7 +1783,7 @@
     ],
     "bday": "2006.11.07",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1795,10 +1795,10 @@
       "en": "S.COUPS"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6090,
     "y": 7278,
@@ -1812,7 +1812,7 @@
     ],
     "bday": "1995.08.08",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1820,14 +1820,14 @@
   },
   {
     "name": {
-      "ko": "정한",
+      "ko": "?뺥븳",
       "en": "Jeonghan"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6250,
     "y": 7238,
@@ -1841,7 +1841,7 @@
     ],
     "bday": "1995.10.04",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1849,14 +1849,14 @@
   },
   {
     "name": {
-      "ko": "조슈아",
+      "ko": "議곗뒋??,
       "en": "Joshua"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6410,
     "y": 7238,
@@ -1870,22 +1870,22 @@
     ],
     "bday": "1995.12.30",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "준",
+      "ko": "以",
       "en": "Jun"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6570,
     "y": 7278,
@@ -1899,7 +1899,7 @@
     ],
     "bday": "1996.06.10",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -1907,14 +1907,14 @@
   },
   {
     "name": {
-      "ko": "호시",
+      "ko": "?몄떆",
       "en": "Hoshi"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6730,
     "y": 7338,
@@ -1928,7 +1928,7 @@
     ],
     "bday": "1996.06.15",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1941,14 +1941,14 @@
   },
   {
     "name": {
-      "ko": "원우",
+      "ko": "?먯슦",
       "en": "Wonwoo"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6850,
     "y": 7398,
@@ -1962,7 +1962,7 @@
     ],
     "bday": "1996.07.17",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1970,14 +1970,14 @@
   },
   {
     "name": {
-      "ko": "우지",
+      "ko": "?곗?",
       "en": "Woozi"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6090,
     "y": 7478,
@@ -1991,7 +1991,7 @@
     ],
     "bday": "1996.11.22",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -1999,14 +1999,14 @@
   },
   {
     "name": {
-      "ko": "도겸",
+      "ko": "?꾧껴",
       "en": "DK"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6250,
     "y": 7458,
@@ -2020,7 +2020,7 @@
     ],
     "bday": "1997.02.18",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2028,14 +2028,14 @@
   },
   {
     "name": {
-      "ko": "민규",
+      "ko": "誘쇨퇋",
       "en": "Mingyu"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6410,
     "y": 7458,
@@ -2049,7 +2049,7 @@
     ],
     "bday": "1997.04.06",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2057,14 +2057,14 @@
   },
   {
     "name": {
-      "ko": "승관",
+      "ko": "?밴?",
       "en": "Seungkwan"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6570,
     "y": 7498,
@@ -2078,7 +2078,7 @@
     ],
     "bday": "1998.01.16",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2086,14 +2086,14 @@
   },
   {
     "name": {
-      "ko": "버논",
+      "ko": "踰꾨끉",
       "en": "Vernon"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6730,
     "y": 7538,
@@ -2107,22 +2107,22 @@
     ],
     "bday": "1998.02.18",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "디노",
+      "ko": "?붾끂",
       "en": "Dino"
     },
     "group": {
-      "ko": "세븐틴",
+      "ko": "?몃툙??,
       "en": "SVT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6290,
     "y": 7618,
@@ -2136,7 +2136,7 @@
     ],
     "bday": "1999.02.11",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2144,14 +2144,14 @@
   },
   {
     "name": {
-      "ko": "신유",
+      "ko": "?좎쑀",
       "en": "Shinyu"
     },
     "group": {
-      "ko": "투어스",
+      "ko": "?ъ뼱??,
       "en": "TWS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5600,
     "y": 7720,
@@ -2165,13 +2165,13 @@
     ],
     "bday": "2003.11.07",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "첫 만남은 계획대로 되지 않아",
+        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
         "u": "https://www.youtube.com/watch?v=BtFPgl0tC0k"
       },
       {
@@ -2186,14 +2186,14 @@
   },
   {
     "name": {
-      "ko": "도훈",
+      "ko": "?꾪썕",
       "en": "Dohoon"
     },
     "group": {
-      "ko": "투어스",
+      "ko": "?ъ뼱??,
       "en": "TWS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5760,
     "y": 7680,
@@ -2207,7 +2207,7 @@
     ],
     "bday": "2005.01.30",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2217,7 +2217,7 @@
         "u": "https://www.youtube.com/watch?v=EhDIY4FjCeU"
       },
       {
-        "t": "첫 만남은 계획대로 되지 않아",
+        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
         "u": "https://www.youtube.com/watch?v=KPd460eDrWs"
       },
       {
@@ -2228,14 +2228,14 @@
   },
   {
     "name": {
-      "ko": "영재",
+      "ko": "?곸옱",
       "en": "Youngjae"
     },
     "group": {
-      "ko": "투어스",
+      "ko": "?ъ뼱??,
       "en": "TWS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5920,
     "y": 7740,
@@ -2249,35 +2249,35 @@
     ],
     "bday": "2005.05.31",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "너의 모든 가능성이 되어줄게",
+        "t": "?덉쓽 紐⑤뱺 媛?μ꽦???섏뼱以꾧쾶",
         "u": "https://www.youtube.com/watch?v=U5QNHCyKvXI"
       },
       {
-        "t": "다시 만난 오늘",
+        "t": "?ㅼ떆 留뚮궃 ?ㅻ뒛",
         "u": "https://www.youtube.com/watch?v=Y_1mhDE_fX0"
       },
       {
-        "t": "첫 만남은 계획대로 되지 않아",
+        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
         "u": "https://www.youtube.com/watch?v=OYK9DHYPXDw"
       }
     ]
   },
   {
     "name": {
-      "ko": "한진",
+      "ko": "?쒖쭊",
       "en": "Hanjin"
     },
     "group": {
-      "ko": "투어스",
+      "ko": "?ъ뼱??,
       "en": "TWS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5620,
     "y": 7920,
@@ -2291,13 +2291,13 @@
     ],
     "bday": "2006.01.05",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "첫 만남은 계획대로 되지 않아",
+        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
         "u": "https://www.youtube.com/watch?v=WxDm3oin7lk"
       },
       {
@@ -2305,21 +2305,21 @@
         "u": "https://www.youtube.com/watch?v=m9J7C7yrA9w"
       },
       {
-        "t": "내가 S면 넌 나의 N이 되어줘",
+        "t": "?닿? S硫????섏쓽 N???섏뼱以?,
         "u": "https://www.youtube.com/watch?v=X-DLqSIv3YA"
       }
     ]
   },
   {
     "name": {
-      "ko": "지훈",
+      "ko": "吏??,
       "en": "Jihoon"
     },
     "group": {
-      "ko": "투어스",
+      "ko": "?ъ뼱??,
       "en": "TWS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5820,
     "y": 7920,
@@ -2333,35 +2333,35 @@
     ],
     "bday": "2006.04.23",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "마음 따라 뛰는 건 멋지지 않아?",
+        "t": "留덉쓬 ?곕씪 ?곕뒗 嫄?硫뗭?吏 ?딆븘?",
         "u": "https://www.youtube.com/watch?v=Ma_JErDCfBM"
       },
       {
-        "t": "첫 만남은 계획대로 되지 않아",
+        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
         "u": "https://www.youtube.com/watch?v=uJnPpGXEEf4"
       },
       {
-        "t": "내가 S면 넌 나의 N이 되어줘",
+        "t": "?닿? S硫????섏쓽 N???섏뼱以?,
         "u": "https://www.youtube.com/watch?v=BzSV1_K-P7A"
       }
     ]
   },
   {
     "name": {
-      "ko": "경민",
+      "ko": "寃쎈?",
       "en": "Kyungmin"
     },
     "group": {
-      "ko": "투어스",
+      "ko": "?ъ뼱??,
       "en": "TWS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5960,
     "y": 7840,
@@ -2375,17 +2375,17 @@
     ],
     "bday": "2007.09.07",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "첫 만남은 계획대로 되지 않아",
+        "t": "泥?留뚮궓? 怨꾪쉷?濡??섏? ?딆븘",
         "u": "https://www.youtube.com/watch?v=TJxdabTKRQc"
       },
       {
-        "t": "はじめまして",
+        "t": "??걯?곥겲?쀣겍",
         "u": "https://www.youtube.com/watch?v=zVjxDvjt36A"
       },
       {
@@ -2396,14 +2396,14 @@
   },
   {
     "name": {
-      "ko": "민지",
+      "ko": "誘쇱?",
       "en": "Minji"
     },
     "group": {
-      "ko": "뉴진스",
+      "ko": "?댁쭊??,
       "en": "NewJeans"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5082,
     "y": 8294,
@@ -2417,13 +2417,13 @@
     ],
     "bday": "2004.05.07",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "Odoriko (踊り子)",
+        "t": "Odoriko (甕듽굤耶?",
         "u": "https://www.youtube.com/watch?v=9ninWlkEthY"
       },
       {
@@ -2438,14 +2438,14 @@
   },
   {
     "name": {
-      "ko": "하니",
+      "ko": "?섎땲",
       "en": "Hanni"
     },
     "group": {
-      "ko": "뉴진스",
+      "ko": "?댁쭊??,
       "en": "NewJeans"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5282,
     "y": 8274,
@@ -2459,13 +2459,13 @@
     ],
     "bday": "2004.10.06",
     "nat": {
-      "ko": "베트남",
+      "ko": "踰좏듃??,
       "en": "VN"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "푸른 산호초 (青い珊瑚礁)",
+        "t": "?몃Ⅸ ?고샇珥?(?믡걚?딁몱鹽?",
         "u": "https://www.youtube.com/watch?v=Rj7N4ThLGQY"
       },
       {
@@ -2480,14 +2480,14 @@
   },
   {
     "name": {
-      "ko": "해린",
+      "ko": "?대┛",
       "en": "Haerin"
     },
     "group": {
-      "ko": "뉴진스",
+      "ko": "?댁쭊??,
       "en": "NewJeans"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5062,
     "y": 8474,
@@ -2501,7 +2501,7 @@
     ],
     "bday": "2006.05.15",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2522,14 +2522,14 @@
   },
   {
     "name": {
-      "ko": "혜인",
+      "ko": "?쒖씤",
       "en": "Hyein"
     },
     "group": {
-      "ko": "뉴진스",
+      "ko": "?댁쭊??,
       "en": "NewJeans"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5302,
     "y": 8474,
@@ -2543,7 +2543,7 @@
     ],
     "bday": "2008.04.21",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2564,14 +2564,14 @@
   },
   {
     "name": {
-      "ko": "다니엘",
+      "ko": "?ㅻ땲??,
       "en": "Danielle"
     },
     "group": {
-      "ko": "뉴진스",
+      "ko": "?댁쭊??,
       "en": "NewJeans"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5462,
     "y": 8374,
@@ -2585,8 +2585,8 @@
     ],
     "bday": "2005.04.11",
     "nat": {
-      "ko": "한국·호주",
-      "en": "KR·AU"
+      "ko": "?쒓뎅쨌?몄＜",
+      "en": "KR쨌AU"
     },
     "sparkle": false,
     "songs": [
@@ -2606,14 +2606,14 @@
   },
   {
     "name": {
-      "ko": "마틴",
+      "ko": "留덊떞",
       "en": "Martin"
     },
     "group": {
-      "ko": "코르티스",
+      "ko": "肄붾Ⅴ?곗뒪",
       "en": "CORTIS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7134,
     "y": 8294,
@@ -2627,8 +2627,8 @@
     ],
     "bday": "2008.03.20",
     "nat": {
-      "ko": "한국·캐나다",
-      "en": "KR·CA"
+      "ko": "?쒓뎅쨌罹먮굹??,
+      "en": "KR쨌CA"
     },
     "sparkle": false,
     "songs": [
@@ -2648,14 +2648,14 @@
   },
   {
     "name": {
-      "ko": "제임스",
+      "ko": "?쒖엫??,
       "en": "James"
     },
     "group": {
-      "ko": "코르티스",
+      "ko": "肄붾Ⅴ?곗뒪",
       "en": "CORTIS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7394,
     "y": 8254,
@@ -2669,7 +2669,7 @@
     ],
     "bday": "2005.10.14",
     "nat": {
-      "ko": "대만",
+      "ko": "?留?,
       "en": "TW"
     },
     "sparkle": false,
@@ -2690,14 +2690,14 @@
   },
   {
     "name": {
-      "ko": "주훈",
+      "ko": "二쇳썕",
       "en": "Juhoon"
     },
     "group": {
-      "ko": "코르티스",
+      "ko": "肄붾Ⅴ?곗뒪",
       "en": "CORTIS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7214,
     "y": 8454,
@@ -2711,7 +2711,7 @@
     ],
     "bday": "2008.01.03",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2732,14 +2732,14 @@
   },
   {
     "name": {
-      "ko": "성현",
+      "ko": "?깊쁽",
       "en": "Seonghyeon"
     },
     "group": {
-      "ko": "코르티스",
+      "ko": "肄붾Ⅴ?곗뒪",
       "en": "CORTIS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7414,
     "y": 8414,
@@ -2753,7 +2753,7 @@
     ],
     "bday": "2009.01.13",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": true,
@@ -2779,15 +2779,15 @@
         "u": "https://youtube.com/shorts/4azqyEp2nuA"
       },
       {
-        "t": "영크크",
+        "t": "?곹겕??,
         "u": "https://youtube.com/shorts/DdCDoWqci_0"
       },
       {
-        "t": "팔랑거렸어?",
+        "t": "?붾옉嫄곕졇??",
         "u": "https://youtube.com/shorts/F78vfAun4ps"
       },
       {
-        "t": "잊어버리지마",
+        "t": "?딆뼱踰꾨━吏留?,
         "u": "https://youtu.be/Lj-aVRh1Jlg"
       },
       {
@@ -2802,14 +2802,14 @@
   },
   {
     "name": {
-      "ko": "건호",
+      "ko": "嫄댄샇",
       "en": "Geonho"
     },
     "group": {
-      "ko": "코르티스",
+      "ko": "肄붾Ⅴ?곗뒪",
       "en": "CORTIS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7294,
     "y": 8514,
@@ -2823,7 +2823,7 @@
     ],
     "bday": "2009.02.14",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2844,14 +2844,14 @@
   },
   {
     "name": {
-      "ko": "안유진",
+      "ko": "?덉쑀吏?,
       "en": "Yujin"
     },
     "group": {
-      "ko": "아이브",
+      "ko": "?꾩씠釉?,
       "en": "IVE"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6140,
     "y": 4560,
@@ -2865,7 +2865,7 @@
     ],
     "bday": "2003.09.01",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2886,14 +2886,14 @@
   },
   {
     "name": {
-      "ko": "가을",
+      "ko": "媛??,
       "en": "Gaeul"
     },
     "group": {
-      "ko": "아이브",
+      "ko": "?꾩씠釉?,
       "en": "IVE"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6340,
     "y": 4520,
@@ -2907,7 +2907,7 @@
     ],
     "bday": "2002.09.24",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -2928,14 +2928,14 @@
   },
   {
     "name": {
-      "ko": "레이",
+      "ko": "?덉씠",
       "en": "Rei"
     },
     "group": {
-      "ko": "아이브",
+      "ko": "?꾩씠釉?,
       "en": "IVE"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6540,
     "y": 4580,
@@ -2949,7 +2949,7 @@
     ],
     "bday": "2004.02.03",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -2970,14 +2970,14 @@
   },
   {
     "name": {
-      "ko": "장원영",
+      "ko": "?μ썝??,
       "en": "Wonyoung"
     },
     "group": {
-      "ko": "아이브",
+      "ko": "?꾩씠釉?,
       "en": "IVE"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6220,
     "y": 4770,
@@ -2991,7 +2991,7 @@
     ],
     "bday": "2004.08.31",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3012,14 +3012,14 @@
   },
   {
     "name": {
-      "ko": "리즈",
+      "ko": "由ъ쫰",
       "en": "Liz"
     },
     "group": {
-      "ko": "아이브",
+      "ko": "?꾩씠釉?,
       "en": "IVE"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6420,
     "y": 4770,
@@ -3033,13 +3033,13 @@
     ],
     "bday": "2004.11.21",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "바람아 멈추어다오",
+        "t": "諛붾엺??硫덉텛?대떎??,
         "u": "https://www.youtube.com/watch?v=FkmdvsEqW9k"
       },
       {
@@ -3054,14 +3054,14 @@
   },
   {
     "name": {
-      "ko": "이서",
+      "ko": "?댁꽌",
       "en": "Leeseo"
     },
     "group": {
-      "ko": "아이브",
+      "ko": "?꾩씠釉?,
       "en": "IVE"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6600,
     "y": 4700,
@@ -3075,7 +3075,7 @@
     ],
     "bday": "2007.02.21",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3096,14 +3096,14 @@
   },
   {
     "name": {
-      "ko": "이솔",
+      "ko": "?댁넄",
       "en": "Leesol"
     },
     "group": {
-      "ko": "키키",
+      "ko": "?ㅽ궎",
       "en": "KiiiKiii"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6180,
     "y": 3700,
@@ -3117,7 +3117,7 @@
     ],
     "bday": "2005.09.18",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3125,14 +3125,14 @@
   },
   {
     "name": {
-      "ko": "지유",
+      "ko": "吏??,
       "en": "Jiyu"
     },
     "group": {
-      "ko": "키키",
+      "ko": "?ㅽ궎",
       "en": "KiiiKiii"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6350,
     "y": 3670,
@@ -3146,7 +3146,7 @@
     ],
     "bday": "2006.05.14",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3154,14 +3154,14 @@
   },
   {
     "name": {
-      "ko": "수이",
+      "ko": "?섏씠",
       "en": "Sui"
     },
     "group": {
-      "ko": "키키",
+      "ko": "?ㅽ궎",
       "en": "KiiiKiii"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6500,
     "y": 3710,
@@ -3175,7 +3175,7 @@
     ],
     "bday": "2006.04.10",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3183,14 +3183,14 @@
   },
   {
     "name": {
-      "ko": "하음",
+      "ko": "?섏쓬",
       "en": "Haum"
     },
     "group": {
-      "ko": "키키",
+      "ko": "?ㅽ궎",
       "en": "KiiiKiii"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6240,
     "y": 3880,
@@ -3204,7 +3204,7 @@
     ],
     "bday": "2006.11.14",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3212,14 +3212,14 @@
   },
   {
     "name": {
-      "ko": "키야",
+      "ko": "?ㅼ빞",
       "en": "Kya"
     },
     "group": {
-      "ko": "키키",
+      "ko": "?ㅽ궎",
       "en": "KiiiKiii"
     },
-    "co": "starship",
+    "co": "Starship",
     "planet": "main",
     "x": 6420,
     "y": 3870,
@@ -3233,7 +3233,7 @@
     ],
     "bday": "2010.12.18",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3241,14 +3241,14 @@
   },
   {
     "name": {
-      "ko": "원이",
+      "ko": "?먯씠",
       "en": "Woni"
     },
     "group": {
-      "ko": "리센느",
+      "ko": "由ъ꽱??,
       "en": "RESCENE"
     },
-    "co": "themuse",
+    "co": "더뮤즈",
     "planet": "main",
     "x": 3592,
     "y": 4018,
@@ -3262,7 +3262,7 @@
     ],
     "bday": "2004.05.25",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3283,14 +3283,14 @@
   },
   {
     "name": {
-      "ko": "리브",
+      "ko": "由щ툕",
       "en": "Liv"
     },
     "group": {
-      "ko": "리센느",
+      "ko": "由ъ꽱??,
       "en": "RESCENE"
     },
-    "co": "themuse",
+    "co": "더뮤즈",
     "planet": "main",
     "x": 3812,
     "y": 3998,
@@ -3304,7 +3304,7 @@
     ],
     "bday": "2006.10.11",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3325,14 +3325,14 @@
   },
   {
     "name": {
-      "ko": "미나미",
+      "ko": "誘몃굹誘?,
       "en": "Minami"
     },
     "group": {
-      "ko": "리센느",
+      "ko": "由ъ꽱??,
       "en": "RESCENE"
     },
-    "co": "themuse",
+    "co": "더뮤즈",
     "planet": "main",
     "x": 3892,
     "y": 4138,
@@ -3346,7 +3346,7 @@
     ],
     "bday": "2006.11.29",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": true,
@@ -3356,7 +3356,7 @@
         "u": "https://www.youtube.com/watch?v=3lONVqtRXAI"
       },
       {
-        "t": "다시 만난 세계",
+        "t": "?ㅼ떆 留뚮궃 ?멸퀎",
         "u": "https://www.youtube.com/watch?v=XA1cVAlrid4"
       },
       {
@@ -3367,14 +3367,14 @@
   },
   {
     "name": {
-      "ko": "메이",
+      "ko": "硫붿씠",
       "en": "May"
     },
     "group": {
-      "ko": "리센느",
+      "ko": "由ъ꽱??,
       "en": "RESCENE"
     },
-    "co": "themuse",
+    "co": "더뮤즈",
     "planet": "main",
     "x": 3652,
     "y": 4218,
@@ -3388,13 +3388,13 @@
     ],
     "bday": "2008.08.19",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
     "songs": [
       {
-        "t": "다시 만난 세계",
+        "t": "?ㅼ떆 留뚮궃 ?멸퀎",
         "u": "https://www.youtube.com/watch?v=GX4I0MyI6I0"
       },
       {
@@ -3409,14 +3409,14 @@
   },
   {
     "name": {
-      "ko": "제나",
+      "ko": "?쒕굹",
       "en": "Zena"
     },
     "group": {
-      "ko": "리센느",
+      "ko": "由ъ꽱??,
       "en": "RESCENE"
     },
-    "co": "themuse",
+    "co": "더뮤즈",
     "planet": "main",
     "x": 3852,
     "y": 4218,
@@ -3430,7 +3430,7 @@
     ],
     "bday": "2008.11.27",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3451,14 +3451,14 @@
   },
   {
     "name": {
-      "ko": "쥴리",
+      "ko": "伊대━",
       "en": "Julie"
     },
     "group": {
-      "ko": "키스오브라이프",
+      "ko": "?ㅼ뒪?ㅻ툕?쇱씠??,
       "en": "KISS OF LIFE"
     },
-    "co": "s2",
+    "co": "S2",
     "planet": "main",
     "x": 3350,
     "y": 7088,
@@ -3472,22 +3472,22 @@
     ],
     "bday": "2000.03.29",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "나띠",
+      "ko": "?섎씈",
       "en": "Natty"
     },
     "group": {
-      "ko": "키스오브라이프",
+      "ko": "?ㅼ뒪?ㅻ툕?쇱씠??,
       "en": "KISS OF LIFE"
     },
-    "co": "s2",
+    "co": "S2",
     "planet": "main",
     "x": 3590,
     "y": 7068,
@@ -3501,7 +3501,7 @@
     ],
     "bday": "2002.05.30",
     "nat": {
-      "ko": "태국",
+      "ko": "?쒓뎅",
       "en": "TH"
     },
     "sparkle": false,
@@ -3514,14 +3514,14 @@
   },
   {
     "name": {
-      "ko": "벨",
+      "ko": "踰?,
       "en": "Belle"
     },
     "group": {
-      "ko": "키스오브라이프",
+      "ko": "?ㅼ뒪?ㅻ툕?쇱씠??,
       "en": "KISS OF LIFE"
     },
-    "co": "s2",
+    "co": "S2",
     "planet": "main",
     "x": 3630,
     "y": 7248,
@@ -3535,22 +3535,22 @@
     ],
     "bday": "2004.03.20",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "하늘",
+      "ko": "?섎뒛",
       "en": "Haneul"
     },
     "group": {
-      "ko": "키스오브라이프",
+      "ko": "?ㅼ뒪?ㅻ툕?쇱씠??,
       "en": "KISS OF LIFE"
     },
-    "co": "s2",
+    "co": "S2",
     "planet": "main",
     "x": 3390,
     "y": 7288,
@@ -3564,7 +3564,7 @@
     ],
     "bday": "2005.05.25",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3572,14 +3572,14 @@
   },
   {
     "name": {
-      "ko": "홍중",
+      "ko": "?띿쨷",
       "en": "Hongjoong"
     },
     "group": {
-      "ko": "에이티즈",
+      "ko": "?먯씠?곗쫰",
       "en": "ATEEZ"
     },
-    "co": "kq",
+    "co": "KQ",
     "planet": "main",
     "x": 4360,
     "y": 6264,
@@ -3593,7 +3593,7 @@
     ],
     "bday": "1998.11.07",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3601,14 +3601,14 @@
   },
   {
     "name": {
-      "ko": "성화",
+      "ko": "?깊솕",
       "en": "Seonghwa"
     },
     "group": {
-      "ko": "에이티즈",
+      "ko": "?먯씠?곗쫰",
       "en": "ATEEZ"
     },
-    "co": "kq",
+    "co": "KQ",
     "planet": "main",
     "x": 4540,
     "y": 6224,
@@ -3622,7 +3622,7 @@
     ],
     "bday": "1998.04.03",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3630,14 +3630,14 @@
   },
   {
     "name": {
-      "ko": "윤호",
+      "ko": "?ㅽ샇",
       "en": "Yunho"
     },
     "group": {
-      "ko": "에이티즈",
+      "ko": "?먯씠?곗쫰",
       "en": "ATEEZ"
     },
-    "co": "kq",
+    "co": "KQ",
     "planet": "main",
     "x": 4720,
     "y": 6264,
@@ -3651,7 +3651,7 @@
     ],
     "bday": "1999.03.23",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3659,14 +3659,14 @@
   },
   {
     "name": {
-      "ko": "여상",
+      "ko": "?ъ긽",
       "en": "Yeosang"
     },
     "group": {
-      "ko": "에이티즈",
+      "ko": "?먯씠?곗쫰",
       "en": "ATEEZ"
     },
-    "co": "kq",
+    "co": "KQ",
     "planet": "main",
     "x": 4890,
     "y": 6304,
@@ -3680,7 +3680,7 @@
     ],
     "bday": "1999.06.15",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3688,14 +3688,14 @@
   },
   {
     "name": {
-      "ko": "산",
+      "ko": "??,
       "en": "San"
     },
     "group": {
-      "ko": "에이티즈",
+      "ko": "?먯씠?곗쫰",
       "en": "ATEEZ"
     },
-    "co": "kq",
+    "co": "KQ",
     "planet": "main",
     "x": 4390,
     "y": 6484,
@@ -3709,7 +3709,7 @@
     ],
     "bday": "1999.07.10",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3717,14 +3717,14 @@
   },
   {
     "name": {
-      "ko": "민기",
+      "ko": "誘쇨린",
       "en": "Mingi"
     },
     "group": {
-      "ko": "에이티즈",
+      "ko": "?먯씠?곗쫰",
       "en": "ATEEZ"
     },
-    "co": "kq",
+    "co": "KQ",
     "planet": "main",
     "x": 4570,
     "y": 6464,
@@ -3738,7 +3738,7 @@
     ],
     "bday": "1999.08.09",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3746,14 +3746,14 @@
   },
   {
     "name": {
-      "ko": "우영",
+      "ko": "?곗쁺",
       "en": "Wooyoung"
     },
     "group": {
-      "ko": "에이티즈",
+      "ko": "?먯씠?곗쫰",
       "en": "ATEEZ"
     },
-    "co": "kq",
+    "co": "KQ",
     "planet": "main",
     "x": 4750,
     "y": 6494,
@@ -3767,7 +3767,7 @@
     ],
     "bday": "1999.11.26",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3775,14 +3775,14 @@
   },
   {
     "name": {
-      "ko": "종호",
+      "ko": "醫낇샇",
       "en": "Jongho"
     },
     "group": {
-      "ko": "에이티즈",
+      "ko": "?먯씠?곗쫰",
       "en": "ATEEZ"
     },
-    "co": "kq",
+    "co": "KQ",
     "planet": "main",
     "x": 4910,
     "y": 6444,
@@ -3796,7 +3796,7 @@
     ],
     "bday": "2000.09.12",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3804,14 +3804,14 @@
   },
   {
     "name": {
-      "ko": "소연",
+      "ko": "?뚯뿰",
       "en": "Soyeon"
     },
     "group": {
-      "ko": "아이들",
+      "ko": "?꾩씠??,
       "en": "(G)I-DLE"
     },
-    "co": "cube",
+    "co": "Cube",
     "planet": "main",
     "x": 4646,
     "y": 4796,
@@ -3825,7 +3825,7 @@
     ],
     "bday": "1998.08.26",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3833,14 +3833,14 @@
   },
   {
     "name": {
-      "ko": "미연",
+      "ko": "誘몄뿰",
       "en": "Miyeon"
     },
     "group": {
-      "ko": "아이들",
+      "ko": "?꾩씠??,
       "en": "(G)I-DLE"
     },
-    "co": "cube",
+    "co": "Cube",
     "planet": "main",
     "x": 4826,
     "y": 4756,
@@ -3854,7 +3854,7 @@
     ],
     "bday": "1997.01.31",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3862,14 +3862,14 @@
   },
   {
     "name": {
-      "ko": "민니",
+      "ko": "誘쇰땲",
       "en": "Minnie"
     },
     "group": {
-      "ko": "아이들",
+      "ko": "?꾩씠??,
       "en": "(G)I-DLE"
     },
-    "co": "cube",
+    "co": "Cube",
     "planet": "main",
     "x": 4996,
     "y": 4816,
@@ -3883,7 +3883,7 @@
     ],
     "bday": "1997.10.23",
     "nat": {
-      "ko": "태국",
+      "ko": "?쒓뎅",
       "en": "TH"
     },
     "sparkle": false,
@@ -3891,14 +3891,14 @@
   },
   {
     "name": {
-      "ko": "수진",
+      "ko": "?섏쭊",
       "en": "Soojin"
     },
     "group": {
-      "ko": "아이들",
+      "ko": "?꾩씠??,
       "en": "(G)I-DLE"
     },
-    "co": "cube",
+    "co": "Cube",
     "planet": "main",
     "x": 4716,
     "y": 4996,
@@ -3912,7 +3912,7 @@
     ],
     "bday": "1998.03.26",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -3920,14 +3920,14 @@
   },
   {
     "name": {
-      "ko": "우기",
+      "ko": "?곌린",
       "en": "Yuqi"
     },
     "group": {
-      "ko": "아이들",
+      "ko": "?꾩씠??,
       "en": "(G)I-DLE"
     },
-    "co": "cube",
+    "co": "Cube",
     "planet": "main",
     "x": 4886,
     "y": 5026,
@@ -3941,7 +3941,7 @@
     ],
     "bday": "1999.09.23",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -3949,14 +3949,14 @@
   },
   {
     "name": {
-      "ko": "슈화",
+      "ko": "?덊솕",
       "en": "Shuhua"
     },
     "group": {
-      "ko": "아이들",
+      "ko": "?꾩씠??,
       "en": "(G)I-DLE"
     },
-    "co": "cube",
+    "co": "Cube",
     "planet": "main",
     "x": 5056,
     "y": 5006,
@@ -3970,7 +3970,7 @@
     ],
     "bday": "2000.10.10",
     "nat": {
-      "ko": "대만",
+      "ko": "?留?,
       "en": "TW"
     },
     "sparkle": false,
@@ -3978,14 +3978,14 @@
   },
   {
     "name": {
-      "ko": "성찬",
+      "ko": "?깆갔",
       "en": "Sungchan"
     },
     "group": {
-      "ko": "라이즈",
+      "ko": "?쇱씠利?,
       "en": "RIIZE"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7860,
     "y": 4920,
@@ -3999,7 +3999,7 @@
     ],
     "bday": "2001.09.13",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4007,14 +4007,14 @@
   },
   {
     "name": {
-      "ko": "은석",
+      "ko": "???,
       "en": "Eunseok"
     },
     "group": {
-      "ko": "라이즈",
+      "ko": "?쇱씠利?,
       "en": "RIIZE"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7420,
     "y": 4900,
@@ -4028,7 +4028,7 @@
     ],
     "bday": "2001.01.22",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4036,14 +4036,14 @@
   },
   {
     "name": {
-      "ko": "쇼타로",
+      "ko": "?쇳?濡?,
       "en": "Shotaro"
     },
     "group": {
-      "ko": "라이즈",
+      "ko": "?쇱씠利?,
       "en": "RIIZE"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7900,
     "y": 5070,
@@ -4057,7 +4057,7 @@
     ],
     "bday": "2000.11.25",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -4065,14 +4065,14 @@
   },
   {
     "name": {
-      "ko": "원빈",
+      "ko": "?먮퉰",
       "en": "Wonbin"
     },
     "group": {
-      "ko": "라이즈",
+      "ko": "?쇱씠利?,
       "en": "RIIZE"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7620,
     "y": 4860,
@@ -4086,7 +4086,7 @@
     ],
     "bday": "2002.02.21",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4094,14 +4094,14 @@
   },
   {
     "name": {
-      "ko": "승한",
+      "ko": "?뱁븳",
       "en": "Seunghan"
     },
     "group": {
-      "ko": "라이즈",
+      "ko": "?쇱씠利?,
       "en": "RIIZE"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7760,
     "y": 4900,
@@ -4115,7 +4115,7 @@
     ],
     "bday": "2003.04.02",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4123,14 +4123,14 @@
   },
   {
     "name": {
-      "ko": "소희",
+      "ko": "?뚰씗",
       "en": "Sohee"
     },
     "group": {
-      "ko": "라이즈",
+      "ko": "?쇱씠利?,
       "en": "RIIZE"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7500,
     "y": 5080,
@@ -4144,7 +4144,7 @@
     ],
     "bday": "2003.04.17",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4152,14 +4152,14 @@
   },
   {
     "name": {
-      "ko": "앤톤",
+      "ko": "?ㅽ넠",
       "en": "Anton"
     },
     "group": {
-      "ko": "라이즈",
+      "ko": "?쇱씠利?,
       "en": "RIIZE"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "main",
     "x": 7710,
     "y": 5050,
@@ -4173,22 +4173,22 @@
     ],
     "bday": "2004.11.21",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "연준",
+      "ko": "?곗?",
       "en": "Yeonjun"
     },
     "group": {
       "ko": "TXT",
       "en": "TXT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7250,
     "y": 7880,
@@ -4202,7 +4202,7 @@
     ],
     "bday": "1999.09.13",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4216,21 +4216,21 @@
         "u": "https://www.youtube.com/watch?v=sx4hPjppi6E"
       },
       {
-        "t": "교환일기 (두밧두 와리와리)",
+        "t": "援먰솚?쇨린 (?먮갊???由ъ?由?",
         "u": "https://www.youtube.com/watch?v=o3WX9FRTIUI"
       }
     ]
   },
   {
     "name": {
-      "ko": "수빈",
+      "ko": "?섎퉰",
       "en": "Soobin"
     },
     "group": {
       "ko": "TXT",
       "en": "TXT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7410,
     "y": 7840,
@@ -4244,7 +4244,7 @@
     ],
     "bday": "2000.12.05",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4258,21 +4258,21 @@
         "u": "https://www.youtube.com/watch?v=ibnQ1bH8fIM"
       },
       {
-        "t": "어느날 머리에서 뿔이 자랐다 (CROWN)",
+        "t": "?대뒓??癒몃━?먯꽌 肉붿씠 ?먮옄??(CROWN)",
         "u": "https://www.youtube.com/watch?v=CrYbcz9ONYY"
       }
     ]
   },
   {
     "name": {
-      "ko": "범규",
+      "ko": "踰붽퇋",
       "en": "Beomgyu"
     },
     "group": {
       "ko": "TXT",
       "en": "TXT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7570,
     "y": 7900,
@@ -4286,7 +4286,7 @@
     ],
     "bday": "2001.03.13",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4300,21 +4300,21 @@
         "u": "https://www.youtube.com/watch?v=rDnPaRFDnUk"
       },
       {
-        "t": "LO$ER=LO♥ER",
+        "t": "LO$ER=LO?쩋R",
         "u": "https://www.youtube.com/watch?v=OPdaubrjGqk"
       }
     ]
   },
   {
     "name": {
-      "ko": "태현",
+      "ko": "?쒗쁽",
       "en": "Taehyun"
     },
     "group": {
       "ko": "TXT",
       "en": "TXT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7330,
     "y": 8100,
@@ -4328,7 +4328,7 @@
     ],
     "bday": "2002.02.05",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4342,21 +4342,21 @@
         "u": "https://www.youtube.com/watch?v=A7nimn-8ZA8"
       },
       {
-        "t": "거리에서",
+        "t": "嫄곕━?먯꽌",
         "u": "https://www.youtube.com/watch?v=wYMeibz-Uqc"
       }
     ]
   },
   {
     "name": {
-      "ko": "휴닝카이",
+      "ko": "?대떇移댁씠",
       "en": "Huening Kai"
     },
     "group": {
       "ko": "TXT",
       "en": "TXT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7530,
     "y": 8100,
@@ -4370,8 +4370,8 @@
     ],
     "bday": "2002.08.14",
     "nat": {
-      "ko": "한국·독일·미국",
-      "en": "KR·DE·US"
+      "ko": "?쒓뎅쨌?낆씪쨌誘멸뎅",
+      "en": "KR쨌DE쨌US"
     },
     "sparkle": false,
     "songs": [
@@ -4380,7 +4380,7 @@
         "u": "https://www.youtube.com/watch?v=GINn6TxkNCU"
       },
       {
-        "t": "어느날 머리에서 뿔이 자랐다 (CROWN)",
+        "t": "?대뒓??癒몃━?먯꽌 肉붿씠 ?먮옄??(CROWN)",
         "u": "https://www.youtube.com/watch?v=OJhk0vWphdQ"
       },
       {
@@ -4391,14 +4391,14 @@
   },
   {
     "name": {
-      "ko": "희승",
+      "ko": "?ъ듅",
       "en": "Heeseung"
     },
     "group": {
-      "ko": "엔하이픈",
+      "ko": "?뷀븯?댄뵂",
       "en": "ENHYPEN"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6298,
     "y": 8212,
@@ -4412,7 +4412,7 @@
     ],
     "bday": "2001.10.15",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4420,14 +4420,14 @@
   },
   {
     "name": {
-      "ko": "제이",
+      "ko": "?쒖씠",
       "en": "Jay"
     },
     "group": {
-      "ko": "엔하이픈",
+      "ko": "?뷀븯?댄뵂",
       "en": "ENHYPEN"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6438,
     "y": 8172,
@@ -4441,22 +4441,22 @@
     ],
     "bday": "2002.04.20",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "제이크",
+      "ko": "?쒖씠??,
       "en": "Jake"
     },
     "group": {
-      "ko": "엔하이픈",
+      "ko": "?뷀븯?댄뵂",
       "en": "ENHYPEN"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6598,
     "y": 8212,
@@ -4470,7 +4470,7 @@
     ],
     "bday": "2002.11.15",
     "nat": {
-      "ko": "호주",
+      "ko": "?몄＜",
       "en": "AU"
     },
     "sparkle": false,
@@ -4478,14 +4478,14 @@
   },
   {
     "name": {
-      "ko": "성훈",
+      "ko": "?깊썕",
       "en": "Sunghoon"
     },
     "group": {
-      "ko": "엔하이픈",
+      "ko": "?뷀븯?댄뵂",
       "en": "ENHYPEN"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6718,
     "y": 8272,
@@ -4499,7 +4499,7 @@
     ],
     "bday": "2002.12.08",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4507,14 +4507,14 @@
   },
   {
     "name": {
-      "ko": "선우",
+      "ko": "?좎슦",
       "en": "Sunoo"
     },
     "group": {
-      "ko": "엔하이픈",
+      "ko": "?뷀븯?댄뵂",
       "en": "ENHYPEN"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6338,
     "y": 8452,
@@ -4528,7 +4528,7 @@
     ],
     "bday": "2003.06.24",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4536,14 +4536,14 @@
   },
   {
     "name": {
-      "ko": "정원",
+      "ko": "?뺤썝",
       "en": "Jungwon"
     },
     "group": {
-      "ko": "엔하이픈",
+      "ko": "?뷀븯?댄뵂",
       "en": "ENHYPEN"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6558,
     "y": 8472,
@@ -4557,7 +4557,7 @@
     ],
     "bday": "2004.02.09",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4565,14 +4565,14 @@
   },
   {
     "name": {
-      "ko": "니키",
+      "ko": "?덊궎",
       "en": "Ni-Ki"
     },
     "group": {
-      "ko": "엔하이픈",
+      "ko": "?뷀븯?댄뵂",
       "en": "ENHYPEN"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6698,
     "y": 8412,
@@ -4586,7 +4586,7 @@
     ],
     "bday": "2005.12.09",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -4594,14 +4594,14 @@
   },
   {
     "name": {
-      "ko": "윤아",
+      "ko": "?ㅼ븘",
       "en": "Yunah"
     },
     "group": {
-      "ko": "아일릿",
+      "ko": "?꾩씪由?,
       "en": "ILLIT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5800,
     "y": 8300,
@@ -4615,7 +4615,7 @@
     ],
     "bday": "2004.01.15",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4623,14 +4623,14 @@
   },
   {
     "name": {
-      "ko": "민주",
+      "ko": "誘쇱＜",
       "en": "Minju"
     },
     "group": {
-      "ko": "아일릿",
+      "ko": "?꾩씪由?,
       "en": "ILLIT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5960,
     "y": 8260,
@@ -4644,7 +4644,7 @@
     ],
     "bday": "2004.05.11",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4652,14 +4652,14 @@
   },
   {
     "name": {
-      "ko": "모카",
+      "ko": "紐⑥뭅",
       "en": "Moka"
     },
     "group": {
-      "ko": "아일릿",
+      "ko": "?꾩씪由?,
       "en": "ILLIT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6120,
     "y": 8310,
@@ -4673,7 +4673,7 @@
     ],
     "bday": "2004.10.08",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -4681,14 +4681,14 @@
   },
   {
     "name": {
-      "ko": "원희",
+      "ko": "?먰씗",
       "en": "Wonhee"
     },
     "group": {
-      "ko": "아일릿",
+      "ko": "?꾩씪由?,
       "en": "ILLIT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 5840,
     "y": 8500,
@@ -4702,7 +4702,7 @@
     ],
     "bday": "2007.06.26",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4710,14 +4710,14 @@
   },
   {
     "name": {
-      "ko": "이로하",
+      "ko": "?대줈??,
       "en": "Iroha"
     },
     "group": {
-      "ko": "아일릿",
+      "ko": "?꾩씪由?,
       "en": "ILLIT"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6040,
     "y": 8500,
@@ -4731,7 +4731,7 @@
     ],
     "bday": "2008.12.21",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -4739,14 +4739,14 @@
   },
   {
     "name": {
-      "ko": "사쿠라",
+      "ko": "?ъ퓼??,
       "en": "Sakura"
     },
     "group": {
-      "ko": "르세라핌",
+      "ko": "瑜댁꽭?쇳븣",
       "en": "LE SSERAFIM"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6810,
     "y": 7940,
@@ -4760,7 +4760,7 @@
     ],
     "bday": "1998.03.19",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -4768,14 +4768,14 @@
   },
   {
     "name": {
-      "ko": "김채원",
+      "ko": "源梨꾩썝",
       "en": "Chaewon"
     },
     "group": {
-      "ko": "르세라핌",
+      "ko": "瑜댁꽭?쇳븣",
       "en": "LE SSERAFIM"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6990,
     "y": 7904,
@@ -4789,7 +4789,7 @@
     ],
     "bday": "2000.08.08",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4797,14 +4797,14 @@
   },
   {
     "name": {
-      "ko": "허윤진",
+      "ko": "?덉쑄吏?,
       "en": "Yunjin"
     },
     "group": {
-      "ko": "르세라핌",
+      "ko": "瑜댁꽭?쇳븣",
       "en": "LE SSERAFIM"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7144,
     "y": 7956,
@@ -4818,22 +4818,22 @@
     ],
     "bday": "2001.10.08",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "카즈하",
+      "ko": "移댁쫰??,
       "en": "Kazuha"
     },
     "group": {
-      "ko": "르세라핌",
+      "ko": "瑜댁꽭?쇳븣",
       "en": "LE SSERAFIM"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6844,
     "y": 8136,
@@ -4847,7 +4847,7 @@
     ],
     "bday": "2003.08.09",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -4855,14 +4855,14 @@
   },
   {
     "name": {
-      "ko": "홍은채",
+      "ko": "?띿?梨?,
       "en": "Eunchae"
     },
     "group": {
-      "ko": "르세라핌",
+      "ko": "瑜댁꽭?쇳븣",
       "en": "LE SSERAFIM"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 7054,
     "y": 8146,
@@ -4876,7 +4876,7 @@
     ],
     "bday": "2006.11.16",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4884,14 +4884,14 @@
   },
   {
     "name": {
-      "ko": "김가람",
+      "ko": "源媛??,
       "en": "Garam"
     },
     "group": {
-      "ko": "르세라핌",
+      "ko": "瑜댁꽭?쇳븣",
       "en": "LE SSERAFIM"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "main",
     "x": 6936,
     "y": 8044,
@@ -4905,7 +4905,7 @@
     ],
     "bday": "2004.10.04",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -4913,14 +4913,14 @@
   },
   {
     "name": {
-      "ko": "루카",
+      "ko": "猷⑥뭅",
       "en": "Ruka"
     },
     "group": {
-      "ko": "베이비몬스터",
+      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
       "en": "BABYMONSTER"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "main",
     "x": 4198,
     "y": 4104,
@@ -4934,7 +4934,7 @@
     ],
     "bday": "2004.11.25",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -4942,14 +4942,14 @@
   },
   {
     "name": {
-      "ko": "파리타",
+      "ko": "?뚮━?",
       "en": "Pharita"
     },
     "group": {
-      "ko": "베이비몬스터",
+      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
       "en": "BABYMONSTER"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "main",
     "x": 4378,
     "y": 4064,
@@ -4963,7 +4963,7 @@
     ],
     "bday": "2004.03.03",
     "nat": {
-      "ko": "태국",
+      "ko": "?쒓뎅",
       "en": "TH"
     },
     "sparkle": false,
@@ -4971,14 +4971,14 @@
   },
   {
     "name": {
-      "ko": "아사",
+      "ko": "?꾩궗",
       "en": "Ahyeon"
     },
     "group": {
-      "ko": "베이비몬스터",
+      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
       "en": "BABYMONSTER"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "main",
     "x": 4558,
     "y": 4116,
@@ -4992,7 +4992,7 @@
     ],
     "bday": "2006.04.03",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5000,14 +5000,14 @@
   },
   {
     "name": {
-      "ko": "치키타",
+      "ko": "移섑궎?",
       "en": "Chiquita"
     },
     "group": {
-      "ko": "베이비몬스터",
+      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
       "en": "BABYMONSTER"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "main",
     "x": 4222,
     "y": 4294,
@@ -5021,7 +5021,7 @@
     ],
     "bday": "2005.01.06",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5029,14 +5029,14 @@
   },
   {
     "name": {
-      "ko": "라미",
+      "ko": "?쇰?",
       "en": "Rami"
     },
     "group": {
-      "ko": "베이비몬스터",
+      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
       "en": "BABYMONSTER"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "main",
     "x": 4414,
     "y": 4324,
@@ -5050,7 +5050,7 @@
     ],
     "bday": "2004.09.28",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5058,14 +5058,14 @@
   },
   {
     "name": {
-      "ko": "로라",
+      "ko": "濡쒕씪",
       "en": "Rora"
     },
     "group": {
-      "ko": "베이비몬스터",
+      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
       "en": "BABYMONSTER"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "main",
     "x": 4582,
     "y": 4284,
@@ -5079,7 +5079,7 @@
     ],
     "bday": "2007.04.22",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5087,14 +5087,14 @@
   },
   {
     "name": {
-      "ko": "하나",
+      "ko": "?섎굹",
       "en": "Hana"
     },
     "group": {
-      "ko": "베이비몬스터",
+      "ko": "踰좎씠鍮꾨が?ㅽ꽣",
       "en": "BABYMONSTER"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "main",
     "x": 4454,
     "y": 4220,
@@ -5108,7 +5108,7 @@
     ],
     "bday": "2007.04.06",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5116,14 +5116,14 @@
   },
   {
     "name": {
-      "ko": "수인",
+      "ko": "?섏씤",
       "en": "Sooin"
     },
     "group": {
-      "ko": "미야오",
+      "ko": "誘몄빞??,
       "en": "MEOVV"
     },
-    "co": "blacklabel",
+    "co": "The Black Label",
     "planet": "main",
     "x": 4180,
     "y": 4530,
@@ -5137,7 +5137,7 @@
     ],
     "bday": "2005.04.12",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5145,14 +5145,14 @@
   },
   {
     "name": {
-      "ko": "가원",
+      "ko": "媛??,
       "en": "Gawon"
     },
     "group": {
-      "ko": "미야오",
+      "ko": "誘몄빞??,
       "en": "MEOVV"
     },
-    "co": "blacklabel",
+    "co": "The Black Label",
     "planet": "main",
     "x": 4360,
     "y": 4496,
@@ -5166,7 +5166,7 @@
     ],
     "bday": "2005.04.27",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5174,14 +5174,14 @@
   },
   {
     "name": {
-      "ko": "안나",
+      "ko": "?덈굹",
       "en": "Anna"
     },
     "group": {
-      "ko": "미야오",
+      "ko": "誘몄빞??,
       "en": "MEOVV"
     },
-    "co": "blacklabel",
+    "co": "The Black Label",
     "planet": "main",
     "x": 4536,
     "y": 4524,
@@ -5195,7 +5195,7 @@
     ],
     "bday": "2005.11.17",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -5203,14 +5203,14 @@
   },
   {
     "name": {
-      "ko": "나린",
+      "ko": "?섎┛",
       "en": "Narin"
     },
     "group": {
-      "ko": "미야오",
+      "ko": "誘몄빞??,
       "en": "MEOVV"
     },
-    "co": "blacklabel",
+    "co": "The Black Label",
     "planet": "main",
     "x": 4270,
     "y": 4684,
@@ -5224,7 +5224,7 @@
     ],
     "bday": "2007.08.15",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5232,14 +5232,14 @@
   },
   {
     "name": {
-      "ko": "엘라",
+      "ko": "?섎씪",
       "en": "Ella"
     },
     "group": {
-      "ko": "미야오",
+      "ko": "誘몄빞??,
       "en": "MEOVV"
     },
-    "co": "blacklabel",
+    "co": "The Black Label",
     "planet": "main",
     "x": 4444,
     "y": 4656,
@@ -5253,22 +5253,22 @@
     ],
     "bday": "2008.12.01",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "아이린",
+      "ko": "?꾩씠由?,
       "en": "Irene"
     },
     "group": {
-      "ko": "레드벨벳",
+      "ko": "?덈뱶踰⑤껙",
       "en": "Red Velvet"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "redvelvet",
     "x": 10640,
     "y": 6000,
@@ -5282,7 +5282,7 @@
     ],
     "bday": "1991.03.29",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5290,14 +5290,14 @@
   },
   {
     "name": {
-      "ko": "슬기",
+      "ko": "?ш린",
       "en": "Seulgi"
     },
     "group": {
-      "ko": "레드벨벳",
+      "ko": "?덈뱶踰⑤껙",
       "en": "Red Velvet"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "redvelvet",
     "x": 10800,
     "y": 5960,
@@ -5311,7 +5311,7 @@
     ],
     "bday": "1994.02.10",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5319,14 +5319,14 @@
   },
   {
     "name": {
-      "ko": "웬디",
+      "ko": "?щ뵒",
       "en": "Wendy"
     },
     "group": {
-      "ko": "레드벨벳",
+      "ko": "?덈뱶踰⑤껙",
       "en": "Red Velvet"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "redvelvet",
     "x": 10960,
     "y": 6020,
@@ -5340,22 +5340,22 @@
     ],
     "bday": "1994.02.21",
     "nat": {
-      "ko": "한국·캐나다",
-      "en": "KR·CA"
+      "ko": "?쒓뎅쨌罹먮굹??,
+      "en": "KR쨌CA"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "조이",
+      "ko": "議곗씠",
       "en": "Joy"
     },
     "group": {
-      "ko": "레드벨벳",
+      "ko": "?덈뱶踰⑤껙",
       "en": "Red Velvet"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "redvelvet",
     "x": 10720,
     "y": 6240,
@@ -5369,7 +5369,7 @@
     ],
     "bday": "1996.09.03",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5377,14 +5377,14 @@
   },
   {
     "name": {
-      "ko": "예리",
+      "ko": "?덈━",
       "en": "Yeri"
     },
     "group": {
-      "ko": "레드벨벳",
+      "ko": "?덈뱶踰⑤껙",
       "en": "Red Velvet"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "redvelvet",
     "x": 10920,
     "y": 6240,
@@ -5398,7 +5398,7 @@
     ],
     "bday": "1999.03.05",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5406,14 +5406,14 @@
   },
   {
     "name": {
-      "ko": "태연",
+      "ko": "?쒖뿰",
       "en": "Taeyeon"
     },
     "group": {
-      "ko": "소녀시대",
+      "ko": "?뚮??쒕?",
       "en": "SNSD"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "snsd",
     "x": 10120,
     "y": 880,
@@ -5427,7 +5427,7 @@
     ],
     "bday": "1989.03.09",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5435,14 +5435,14 @@
   },
   {
     "name": {
-      "ko": "써니",
+      "ko": "?⑤땲",
       "en": "Sunny"
     },
     "group": {
-      "ko": "소녀시대",
+      "ko": "?뚮??쒕?",
       "en": "SNSD"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "snsd",
     "x": 10320,
     "y": 840,
@@ -5456,7 +5456,7 @@
     ],
     "bday": "1989.05.15",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5464,14 +5464,14 @@
   },
   {
     "name": {
-      "ko": "효연",
+      "ko": "?⑥뿰",
       "en": "Hyoyeon"
     },
     "group": {
-      "ko": "소녀시대",
+      "ko": "?뚮??쒕?",
       "en": "SNSD"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "snsd",
     "x": 10520,
     "y": 880,
@@ -5485,7 +5485,7 @@
     ],
     "bday": "1989.09.22",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5493,14 +5493,14 @@
   },
   {
     "name": {
-      "ko": "유리",
+      "ko": "?좊━",
       "en": "Yuri"
     },
     "group": {
-      "ko": "소녀시대",
+      "ko": "?뚮??쒕?",
       "en": "SNSD"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "snsd",
     "x": 10600,
     "y": 1000,
@@ -5514,7 +5514,7 @@
     ],
     "bday": "1989.12.05",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5522,14 +5522,14 @@
   },
   {
     "name": {
-      "ko": "수영",
+      "ko": "?섏쁺",
       "en": "Sooyoung"
     },
     "group": {
-      "ko": "소녀시대",
+      "ko": "?뚮??쒕?",
       "en": "SNSD"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "snsd",
     "x": 10400,
     "y": 1080,
@@ -5543,7 +5543,7 @@
     ],
     "bday": "1990.02.10",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5551,14 +5551,14 @@
   },
   {
     "name": {
-      "ko": "윤아",
+      "ko": "?ㅼ븘",
       "en": "Yoona"
     },
     "group": {
-      "ko": "소녀시대",
+      "ko": "?뚮??쒕?",
       "en": "SNSD"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "snsd",
     "x": 10160,
     "y": 1040,
@@ -5572,7 +5572,7 @@
     ],
     "bday": "1990.05.30",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5580,14 +5580,14 @@
   },
   {
     "name": {
-      "ko": "서현",
+      "ko": "?쒗쁽",
       "en": "Seohyun"
     },
     "group": {
-      "ko": "소녀시대",
+      "ko": "?뚮??쒕?",
       "en": "SNSD"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "snsd",
     "x": 10480,
     "y": 1160,
@@ -5601,7 +5601,7 @@
     ],
     "bday": "1991.06.28",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5609,14 +5609,14 @@
   },
   {
     "name": {
-      "ko": "온유",
+      "ko": "?⑥쑀",
       "en": "Onew"
     },
     "group": {
-      "ko": "샤이니",
+      "ko": "?ㅼ씠??,
       "en": "SHINee"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "shinee",
     "x": 11000,
     "y": 4280,
@@ -5630,7 +5630,7 @@
     ],
     "bday": "1989.12.14",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5638,14 +5638,14 @@
   },
   {
     "name": {
-      "ko": "키",
+      "ko": "??,
       "en": "Key"
     },
     "group": {
-      "ko": "샤이니",
+      "ko": "?ㅼ씠??,
       "en": "SHINee"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "shinee",
     "x": 11240,
     "y": 4240,
@@ -5659,7 +5659,7 @@
     ],
     "bday": "1991.09.23",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5667,14 +5667,14 @@
   },
   {
     "name": {
-      "ko": "민호",
+      "ko": "誘쇳샇",
       "en": "Minho"
     },
     "group": {
-      "ko": "샤이니",
+      "ko": "?ㅼ씠??,
       "en": "SHINee"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "shinee",
     "x": 11440,
     "y": 4360,
@@ -5688,7 +5688,7 @@
     ],
     "bday": "1991.12.09",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5696,14 +5696,14 @@
   },
   {
     "name": {
-      "ko": "태민",
+      "ko": "?쒕?",
       "en": "Taemin"
     },
     "group": {
-      "ko": "샤이니",
+      "ko": "?ㅼ씠??,
       "en": "SHINee"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "shinee",
     "x": 11320,
     "y": 4560,
@@ -5717,7 +5717,7 @@
     ],
     "bday": "1993.07.18",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5725,14 +5725,14 @@
   },
   {
     "name": {
-      "ko": "종현",
+      "ko": "醫낇쁽",
       "en": "Jonghyun"
     },
     "group": {
-      "ko": "샤이니",
+      "ko": "?ㅼ씠??,
       "en": "SHINee"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "shinee",
     "x": 11040,
     "y": 4520,
@@ -5746,7 +5746,7 @@
     ],
     "bday": "1990.04.08",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5754,14 +5754,14 @@
   },
   {
     "name": {
-      "ko": "빅토리아",
+      "ko": "鍮낇넗由ъ븘",
       "en": "Victoria"
     },
     "group": {
       "ko": "f(x)",
       "en": "f(x)"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "fx",
     "x": 10960,
     "y": 7480,
@@ -5775,7 +5775,7 @@
     ],
     "bday": "1987.02.02",
     "nat": {
-      "ko": "중국",
+      "ko": "以묎뎅",
       "en": "CN"
     },
     "sparkle": false,
@@ -5783,14 +5783,14 @@
   },
   {
     "name": {
-      "ko": "앰버",
+      "ko": "?곕쾭",
       "en": "Amber"
     },
     "group": {
       "ko": "f(x)",
       "en": "f(x)"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "fx",
     "x": 11240,
     "y": 7440,
@@ -5804,7 +5804,7 @@
     ],
     "bday": "1992.09.18",
     "nat": {
-      "ko": "미국",
+      "ko": "誘멸뎅",
       "en": "US"
     },
     "sparkle": false,
@@ -5812,14 +5812,14 @@
   },
   {
     "name": {
-      "ko": "루나",
+      "ko": "猷⑤굹",
       "en": "Luna"
     },
     "group": {
       "ko": "f(x)",
       "en": "f(x)"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "fx",
     "x": 11280,
     "y": 7680,
@@ -5833,7 +5833,7 @@
     ],
     "bday": "1993.08.12",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5841,14 +5841,14 @@
   },
   {
     "name": {
-      "ko": "크리스탈",
+      "ko": "?щ━?ㅽ깉",
       "en": "Krystal"
     },
     "group": {
       "ko": "f(x)",
       "en": "f(x)"
     },
-    "co": "sm",
+    "co": "SM",
     "planet": "fx",
     "x": 11000,
     "y": 7720,
@@ -5862,8 +5862,8 @@
     ],
     "bday": "1994.10.24",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
@@ -5877,7 +5877,7 @@
       "ko": "BTS",
       "en": "BTS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "bts",
     "x": 9720,
     "y": 10640,
@@ -5891,7 +5891,7 @@
     ],
     "bday": "1994.09.12",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5899,14 +5899,14 @@
   },
   {
     "name": {
-      "ko": "진",
+      "ko": "吏?,
       "en": "Jin"
     },
     "group": {
       "ko": "BTS",
       "en": "BTS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "bts",
     "x": 9960,
     "y": 10560,
@@ -5920,7 +5920,7 @@
     ],
     "bday": "1992.12.04",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5928,14 +5928,14 @@
   },
   {
     "name": {
-      "ko": "슈가",
+      "ko": "?덇?",
       "en": "Suga"
     },
     "group": {
       "ko": "BTS",
       "en": "BTS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "bts",
     "x": 10200,
     "y": 10600,
@@ -5949,7 +5949,7 @@
     ],
     "bday": "1993.03.09",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5957,14 +5957,14 @@
   },
   {
     "name": {
-      "ko": "제이홉",
+      "ko": "?쒖씠??,
       "en": "J-Hope"
     },
     "group": {
       "ko": "BTS",
       "en": "BTS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "bts",
     "x": 10320,
     "y": 10800,
@@ -5978,7 +5978,7 @@
     ],
     "bday": "1994.02.18",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -5986,14 +5986,14 @@
   },
   {
     "name": {
-      "ko": "지민",
+      "ko": "吏誘?,
       "en": "Jimin"
     },
     "group": {
       "ko": "BTS",
       "en": "BTS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "bts",
     "x": 10040,
     "y": 10960,
@@ -6007,7 +6007,7 @@
     ],
     "bday": "1995.10.13",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6015,14 +6015,14 @@
   },
   {
     "name": {
-      "ko": "뷔",
+      "ko": "酉?,
       "en": "V"
     },
     "group": {
       "ko": "BTS",
       "en": "BTS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "bts",
     "x": 9760,
     "y": 10920,
@@ -6036,7 +6036,7 @@
     ],
     "bday": "1995.12.30",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6044,14 +6044,14 @@
   },
   {
     "name": {
-      "ko": "정국",
+      "ko": "?뺢뎅",
       "en": "Jungkook"
     },
     "group": {
       "ko": "BTS",
       "en": "BTS"
     },
-    "co": "hybe",
+    "co": "HYBE",
     "planet": "bts",
     "x": 9920,
     "y": 11080,
@@ -6065,7 +6065,7 @@
     ],
     "bday": "1997.09.01",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6073,14 +6073,14 @@
   },
   {
     "name": {
-      "ko": "나연",
+      "ko": "?섏뿰",
       "en": "Nayeon"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1120,
     "y": 10200,
@@ -6094,7 +6094,7 @@
     ],
     "bday": "1995.09.22",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6102,14 +6102,14 @@
   },
   {
     "name": {
-      "ko": "정연",
+      "ko": "?뺤뿰",
       "en": "Jeongyeon"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1360,
     "y": 10120,
@@ -6123,7 +6123,7 @@
     ],
     "bday": "1996.09.01",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6131,14 +6131,14 @@
   },
   {
     "name": {
-      "ko": "모모",
+      "ko": "紐⑤え",
       "en": "Momo"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1600,
     "y": 10200,
@@ -6152,7 +6152,7 @@
     ],
     "bday": "1996.11.09",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -6160,14 +6160,14 @@
   },
   {
     "name": {
-      "ko": "사나",
+      "ko": "?щ굹",
       "en": "Sana"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1720,
     "y": 10400,
@@ -6181,7 +6181,7 @@
     ],
     "bday": "1996.12.29",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -6189,14 +6189,14 @@
   },
   {
     "name": {
-      "ko": "지효",
+      "ko": "吏??,
       "en": "Jihyo"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1400,
     "y": 10520,
@@ -6210,7 +6210,7 @@
     ],
     "bday": "1997.02.01",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6218,14 +6218,14 @@
   },
   {
     "name": {
-      "ko": "미나",
+      "ko": "誘몃굹",
       "en": "Mina"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1160,
     "y": 10400,
@@ -6239,7 +6239,7 @@
     ],
     "bday": "1997.03.24",
     "nat": {
-      "ko": "일본",
+      "ko": "?쇰낯",
       "en": "JP"
     },
     "sparkle": false,
@@ -6247,14 +6247,14 @@
   },
   {
     "name": {
-      "ko": "다현",
+      "ko": "?ㅽ쁽",
       "en": "Dahyun"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1240,
     "y": 10640,
@@ -6268,7 +6268,7 @@
     ],
     "bday": "1998.05.28",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6276,14 +6276,14 @@
   },
   {
     "name": {
-      "ko": "채영",
+      "ko": "梨꾩쁺",
       "en": "Chaeyoung"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1560,
     "y": 10640,
@@ -6297,22 +6297,22 @@
     ],
     "bday": "1999.04.23",
     "nat": {
-      "ko": "한국·미국",
-      "en": "KR·US"
+      "ko": "?쒓뎅쨌誘멸뎅",
+      "en": "KR쨌US"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "쯔위",
+      "ko": "易붿쐞",
       "en": "Tzuyu"
     },
     "group": {
-      "ko": "트와이스",
+      "ko": "?몄??댁뒪",
       "en": "TWICE"
     },
-    "co": "jyp",
+    "co": "JYP",
     "planet": "twice",
     "x": 1440,
     "y": 10800,
@@ -6326,7 +6326,7 @@
     ],
     "bday": "2000.06.14",
     "nat": {
-      "ko": "대만",
+      "ko": "?留?,
       "en": "TW"
     },
     "sparkle": false,
@@ -6338,10 +6338,10 @@
       "en": "G-Dragon"
     },
     "group": {
-      "ko": "빅뱅",
+      "ko": "鍮낅콉",
       "en": "BIGBANG"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "bigbang",
     "x": 800,
     "y": 840,
@@ -6355,7 +6355,7 @@
     ],
     "bday": "1988.08.18",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6363,14 +6363,14 @@
   },
   {
     "name": {
-      "ko": "태양",
+      "ko": "?쒖뼇",
       "en": "Taeyang"
     },
     "group": {
-      "ko": "빅뱅",
+      "ko": "鍮낅콉",
       "en": "BIGBANG"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "bigbang",
     "x": 1080,
     "y": 800,
@@ -6384,7 +6384,7 @@
     ],
     "bday": "1988.05.18",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6392,14 +6392,14 @@
   },
   {
     "name": {
-      "ko": "탑",
+      "ko": "??,
       "en": "T.O.P"
     },
     "group": {
-      "ko": "빅뱅",
+      "ko": "鍮낅콉",
       "en": "BIGBANG"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "bigbang",
     "x": 1200,
     "y": 1000,
@@ -6413,7 +6413,7 @@
     ],
     "bday": "1987.11.04",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6421,14 +6421,14 @@
   },
   {
     "name": {
-      "ko": "대성",
+      "ko": "???,
       "en": "Daesung"
     },
     "group": {
-      "ko": "빅뱅",
+      "ko": "鍮낅콉",
       "en": "BIGBANG"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "bigbang",
     "x": 880,
     "y": 1160,
@@ -6442,7 +6442,7 @@
     ],
     "bday": "1989.04.26",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6450,14 +6450,14 @@
   },
   {
     "name": {
-      "ko": "지수",
+      "ko": "吏??,
       "en": "Jisoo"
     },
     "group": {
-      "ko": "블랙핑크",
+      "ko": "釉붾옓?묓겕",
       "en": "BLACKPINK"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "blackpink",
     "x": 1200,
     "y": 2840,
@@ -6471,7 +6471,7 @@
     ],
     "bday": "1995.01.03",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6479,14 +6479,14 @@
   },
   {
     "name": {
-      "ko": "제니",
+      "ko": "?쒕땲",
       "en": "Jennie"
     },
     "group": {
-      "ko": "블랙핑크",
+      "ko": "釉붾옓?묓겕",
       "en": "BLACKPINK"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "blackpink",
     "x": 1480,
     "y": 2800,
@@ -6500,7 +6500,7 @@
     ],
     "bday": "1996.01.16",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
@@ -6508,14 +6508,14 @@
   },
   {
     "name": {
-      "ko": "로제",
-      "en": "Rosé"
+      "ko": "濡쒖젣",
+      "en": "Ros챕"
     },
     "group": {
-      "ko": "블랙핑크",
+      "ko": "釉붾옓?묓겕",
       "en": "BLACKPINK"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "blackpink",
     "x": 1560,
     "y": 3080,
@@ -6529,22 +6529,22 @@
     ],
     "bday": "1997.02.11",
     "nat": {
-      "ko": "한국·NZ",
-      "en": "KR·NZ"
+      "ko": "?쒓뎅쨌NZ",
+      "en": "KR쨌NZ"
     },
     "sparkle": false,
     "songs": []
   },
   {
     "name": {
-      "ko": "리사",
+      "ko": "由ъ궗",
       "en": "Lisa"
     },
     "group": {
-      "ko": "블랙핑크",
+      "ko": "釉붾옓?묓겕",
       "en": "BLACKPINK"
     },
-    "co": "yg",
+    "co": "YG",
     "planet": "blackpink",
     "x": 1240,
     "y": 3160,
@@ -6558,7 +6558,7 @@
     ],
     "bday": "1997.03.27",
     "nat": {
-      "ko": "태국",
+      "ko": "?쒓뎅",
       "en": "TH"
     },
     "sparkle": false,
@@ -6566,14 +6566,14 @@
   },
   {
     "name": {
-      "ko": "아이유",
+      "ko": "?꾩씠??,
       "en": "IU"
     },
     "group": {
-      "ko": "솔로",
+      "ko": "?붾줈",
       "en": "Solo"
     },
-    "co": "edam",
+    "co": "EDAM",
     "planet": "iu",
     "x": 6000,
     "y": 400,
@@ -6587,7 +6587,7 @@
     ],
     "bday": "1993.05.16",
     "nat": {
-      "ko": "한국",
+      "ko": "?쒓뎅",
       "en": "KR"
     },
     "sparkle": false,
