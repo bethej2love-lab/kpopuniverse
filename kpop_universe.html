@@ -554,6 +554,7 @@
   .fli-sub{font-size:11px;color:#5878a0;letter-spacing:.04em;flex-shrink:0;margin-left:8px;}
   .fli-date-line{display:flex;align-items:center;margin-bottom:4px;}
   .fli-date-txt{font-size:9px;color:rgba(140,165,215,0.72);letter-spacing:.12em;}
+  .fli-day-num{font-size:9px;color:rgba(140,165,215,0.65);letter-spacing:.06em;margin-right:5px;font-variant-numeric:tabular-nums;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -2045,11 +2046,38 @@ function _renderFilterPanel(){
     const yr=parseInt(_tagFilter.value);
     const members=ARTISTS.filter(a=>a._bdayYear===yr);
     members.sort((a,b)=>(a.bday||'').localeCompare(b.bday||''));
+    const MO_KO=['','1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+    const MO_EN=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const byMonth={};
     members.forEach(m=>{
-      const name=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
-      const grpName=currentLang==='ko'?m.group.ko:(m.group.en||m.group.ko);
-      const item=_makeFilterListItem(name,grpName,()=>{if(m._worldPos)flyTo(m._worldPos);showT(m,window.innerWidth/2,window.innerHeight*0.4);});
-      listEl.appendChild(item);
+      const p=(m.bday||'').split('.');
+      const mo=p.length>=2?parseInt(p[1]):0;
+      const dd=p.length>=3?p[2]:'';
+      if(!byMonth[mo])byMonth[mo]=[];
+      byMonth[mo].push({m,dd});
+    });
+    let first=true;
+    Object.keys(byMonth).sort((a,b)=>+a-+b).forEach(mo=>{
+      const moNum=parseInt(mo);
+      const moLabel=currentLang==='ko'?(MO_KO[moNum]||mo+'월'):(MO_EN[moNum]||'Month '+mo);
+      const hd=document.createElement('div');hd.className='fli-date-line';
+      if(!first)hd.style.marginTop='8px';
+      const dt=document.createElement('span');dt.className='fli-date-txt';dt.textContent=moLabel;
+      hd.appendChild(dt);listEl.appendChild(hd);
+      first=false;
+      byMonth[mo].forEach(({m,dd})=>{
+        const name=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
+        const grpName=currentLang==='ko'?m.group.ko:(m.group.en||m.group.ko);
+        const div=document.createElement('div');div.className='filter-list-item';
+        const row=document.createElement('div');row.className='fli-item-row';
+        const nameEl=document.createElement('div');nameEl.className='fli-name';
+        if(dd){const ds=document.createElement('span');ds.className='fli-day-num';ds.textContent=dd;nameEl.appendChild(ds);}
+        nameEl.appendChild(document.createTextNode(name));
+        const subEl=document.createElement('div');subEl.className='fli-sub';subEl.textContent=grpName;
+        row.appendChild(nameEl);row.appendChild(subEl);div.appendChild(row);
+        div.addEventListener('click',e=>{e.stopPropagation();if(m._worldPos)flyTo(m._worldPos);showT(m,window.innerWidth/2,window.innerHeight*0.4);});
+        listEl.appendChild(div);
+      });
     });
   } else if(_tagFilter.type==='nation'){
     const natKo=_tagFilter.value;
