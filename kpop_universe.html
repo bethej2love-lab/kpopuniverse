@@ -1028,18 +1028,25 @@ async function buildUniverse(){
     bubbleMeshes.push({mesh:bubble,ko,info,radius,labelEl:div});
 
     // ── Collect member positions ───────────────────
+    const _placedMPos=[];
+    const _minSep=radius*0.28; // 최소 간격: 행성 반지름의 28%
     members.forEach(m=>{
       const [mr,mg,mb]=m.color||[r,g,b];
       const mColor=duneColor(mr,mg,mb);
 
-      const phi2=Math.acos(2*Math.random()-1);
-      const theta=Math.random()*Math.PI*2;
-      const rr=Math.cbrt(Math.random())*radius*0.72;
-      const mPos=pos.clone().add(new THREE.Vector3(
-        rr*Math.sin(phi2)*Math.cos(theta),
-        rr*Math.sin(phi2)*Math.sin(theta),
-        rr*Math.cos(phi2)
-      ));
+      let mPos,tries=0;
+      do{
+        const phi2=Math.acos(2*Math.random()-1);
+        const theta=Math.random()*Math.PI*2;
+        const rr=Math.cbrt(Math.random())*radius*0.72;
+        mPos=pos.clone().add(new THREE.Vector3(
+          rr*Math.sin(phi2)*Math.cos(theta),
+          rr*Math.sin(phi2)*Math.sin(theta),
+          rr*Math.cos(phi2)
+        ));
+        tries++;
+      }while(tries<40&&_placedMPos.some(p=>p.distanceTo(mPos)<_minSep));
+      _placedMPos.push(mPos.clone());
 
       const spColor=m.sparkle?mColor.clone().lerp(new THREE.Color(1,1,1),0.25):mColor;
       const pArr=m.sparkle?sparklePos:regularPos;
@@ -1885,30 +1892,42 @@ function pulseGroup(ko){
 function pulseMember(artist){
   if(!artist._worldPos)return;
   const [r,g,b]=artist.color||[255,255,255];
+  // 부드러운 링 텍스처 (캔버스 방사형 그라디언트)
+  const sz=128,c=sz/2;
+  const cv=document.createElement('canvas');cv.width=cv.height=sz;
+  const c2=cv.getContext('2d');
+  const grd=c2.createRadialGradient(c,c,sz*0.30,c,c,sz*0.50);
+  grd.addColorStop(0,`rgba(${r},${g},${b},0)`);
+  grd.addColorStop(0.5,`rgba(${r},${g},${b},0.85)`);
+  grd.addColorStop(0.78,`rgba(${r},${g},${b},0.25)`);
+  grd.addColorStop(1,`rgba(${r},${g},${b},0)`);
+  c2.fillStyle=grd;c2.fillRect(0,0,sz,sz);
+  const tex=new THREE.CanvasTexture(cv);
+
   function makeRipple(delay){
     setTimeout(()=>{
-      const geo=new THREE.SphereGeometry(0.3,8,8);
-      const mat=new THREE.MeshBasicMaterial({
-        color:new THREE.Color(r/255,g/255,b/255),
-        transparent:true,opacity:0.45,depthWrite:false,
-        blending:THREE.AdditiveBlending
+      const mat=new THREE.SpriteMaterial({
+        map:tex,transparent:true,opacity:0,
+        blending:THREE.AdditiveBlending,depthTest:false
       });
-      const s=new THREE.Mesh(geo,mat);
-      s.position.copy(artist._worldPos);
-      scene.add(s);
-      const t0=performance.now(),dur=1700;
+      const sp=new THREE.Sprite(mat);
+      sp.position.copy(artist._worldPos);
+      sp.scale.setScalar(0.05);
+      scene.add(sp);
+      const t0=performance.now(),dur=1600;
       (function tick(){
         const t=Math.min((performance.now()-t0)/dur,1);
-        const ease=1-Math.pow(1-t,2); // easeOut quad — 초반 빠르게 퍼지고 점점 느리게
-        s.scale.setScalar(1+ease*2.2);
-        mat.opacity=(1-t)*0.45;
+        const ease=1-Math.pow(1-t,2.5);
+        sp.scale.setScalar(0.05+ease*2.0);
+        mat.opacity=Math.pow(1-t,0.7)*0.45;
         if(t<1)requestAnimationFrame(tick);
-        else scene.remove(s);
+        else{scene.remove(sp);mat.dispose();}
       })();
     },delay);
   }
   makeRipple(0);
-  makeRipple(700); // 두 번째 파문
+  makeRipple(780);
+  setTimeout(()=>tex.dispose(),2600);
 }
 document.getElementById('ttx').addEventListener('click',e=>{
   e.stopPropagation();
@@ -2595,7 +2614,7 @@ renderer.domElement.addEventListener('touchend',e=>{
     const d=Math.hypot(sx-cx,sy-cy);
     if(d<nearPx){nearPx=d;nearArtist=a;}
   });
-  if(nearArtist&&nearPx<50){
+  if(nearArtist&&nearPx<25){
     e.preventDefault();
     const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
     if(gcInSide){closeMemberPanel(false);}else{closeCards();}
