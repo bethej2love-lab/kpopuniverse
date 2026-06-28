@@ -2572,7 +2572,7 @@ window.addEventListener('click',e=>{
   const rect=renderer.domElement.getBoundingClientRect();
   if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)return;
   _mouse.x=((e.clientX-rect.left)/rect.width)*2-1;
-  _mouse.y=-((e.clientY-rect.top+_mobViewShift)/rect.height)*2+1;
+  _mouse.y=-((e.clientY-rect.top)/rect.height)*2+1;
   raycaster.setFromCamera(_mouse,camera);
 
   function nearestMember(){
@@ -2582,7 +2582,7 @@ window.addEventListener('click',e=>{
       const p=a._worldPos.clone().project(camera);
       if(p.z>1)return;
       const sx=(p.x+1)*0.5*rect.width+rect.left;
-      const sy=(-p.y+1)*0.5*rect.height+rect.top-_mobViewShift;
+      const sy=(-p.y+1)*0.5*rect.height+rect.top;
       const d=Math.hypot(sx-e.clientX,sy-e.clientY);
       if(d<nearPx){nearPx=d;nearArtist=a;}
     });
