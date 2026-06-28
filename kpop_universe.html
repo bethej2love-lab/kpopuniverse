@@ -345,6 +345,10 @@
     font-size:17px;line-height:1;cursor:pointer;font-family:inherit;
     color:rgba(160,180,225,0.45);transition:color .18s;
   }
+  @media(max-width:768px){
+    #tt-nav{margin-top:10px;margin-bottom:18px;}
+    .tt-nav-btn{padding:10px 9px;}
+  }
   .tt-nav-btn:hover{color:rgba(200,218,255,0.75);}
   #tt-counter{display:none;}
   #gc{position:fixed;display:none;max-width:234px;z-index:30;overflow:hidden;pointer-events:all;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
@@ -1538,6 +1542,7 @@ function openMobSheet(cardEl){
   mobSheetInner.scrollTop=0;
   mobSheetInner.appendChild(cardEl);
   if(alreadyOpen){
+    cancelAnimationFrame(_mobViewShiftRaf); // 카드 전환 시 shift 리셋 애니메이션 취소
     mobSheetEl.style.transition='none';
     mobSheetEl.classList.add('bs-open');
     requestAnimationFrame(()=>{mobSheetEl.style.transition='';});
@@ -2595,7 +2600,20 @@ renderer.domElement.addEventListener('touchend',e=>{
     const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
     if(gcInSide){closeMemberPanel(false);}else{closeCards();}
     showT(nearArtist,cx,cy);
+    return;
   }
+  // 멤버 없음 → 행성 버블 체크
+  const _m2=new THREE.Vector2();
+  _m2.x=((cx-rect.left)/rect.width)*2-1;
+  _m2.y=-((cy-rect.top+_mobViewShift)/rect.height)*2+1;
+  raycaster.setFromCamera(_m2,camera);
+  const _bh=raycaster.intersectObjects(bubbleMeshes.map(b=>b.mesh));
+  if(!_bh.length){
+    // 빈 우주 공간 → 포커스 해제 + 카드 닫기
+    e.preventDefault();
+    closeCards();
+  }
+  // 행성 버블 안이면 → click 핸들러에 위임 (preventDefault 안 함)
 },{passive:false});
 
 window.addEventListener('click',e=>{
