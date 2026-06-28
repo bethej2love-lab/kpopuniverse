@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>K-pop Universe</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -49,7 +49,7 @@
   #tabbar.search-mode .tab-btn,#tabbar.search-mode .tab-sep{display:none!important;}
   #tab-sb-icon{display:none;flex-shrink:0;color:rgba(190,205,240,0.65);align-items:center;padding-right:8px;}
   #tab-sb-input{display:none;flex:1;background:none;border:none;color:#c8d8f0;
-    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:14px;
+    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:16px;
     outline:none;padding:4px 0;min-width:0;letter-spacing:.03em;
     -webkit-text-size-adjust:none;}
   #tab-sb-input::placeholder{color:rgba(140,160,200,0.32);}
@@ -239,9 +239,11 @@
     z-index:35;pointer-events:all;overflow:hidden;
     box-sizing:border-box;
     transform:translateY(calc(100% + var(--sheet-bottom,73px)));
-    transition:transform .32s cubic-bezier(0.32,0.72,0,1);
+    transition:transform .32s cubic-bezier(0.32,0.72,0,1),max-height .32s cubic-bezier(0.32,0.72,0,1),border-radius .32s;
   }
   #mob-sheet.bs-open{transform:translateY(0);}
+  #mob-sheet.bs-full{max-height:calc(100vh - var(--sheet-bottom,73px));border-radius:0;}
+  #mob-sheet.bs-full #mob-sheet-inner{max-height:calc(100vh - var(--sheet-bottom,73px) - 24px);}
   #yt-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:55;align-items:center;justify-content:center;}
   #yt-lightbox.open{display:flex;}
   #yt-lb-wrap{position:relative;width:min(88vw,900px);}
@@ -1292,6 +1294,7 @@ _mobSi.addEventListener('keydown',e=>{
 });
 _mobSi.addEventListener('click',e=>e.stopPropagation());
 _mobSrEl.addEventListener('click',e=>e.stopPropagation());
+_mobSrEl.addEventListener('pointerdown',e=>e.stopPropagation()); // 자동완성 탭 시 window pointerdown(closePanels) 차단
 document.getElementById('tab-sb-clear').addEventListener('click',e=>{e.stopPropagation();exitMobSearch();});
 
 // ── Member card nav state ─────────────────────────
@@ -1390,7 +1393,11 @@ function buildVideoSection(songs,containerEl){
       const normRest=normSongs.slice(1);
       if(normRest.length>0){
         const moreWrap=document.createElement('div');moreWrap.className='tv-more-wrap open';
-        normRest.forEach(s=>moreWrap.appendChild(makeSmallThumb(s,all,0)));
+        normRest.forEach((s,i)=>{
+          const thumb=makeSmallThumb(s,all,0);
+          if(normRest.length%2===1&&i===normRest.length-1)thumb.style.flex='0 0 100%';
+          moreWrap.appendChild(thumb);
+        });
         containerEl.appendChild(moreWrap);
       }
     }
@@ -1547,6 +1554,7 @@ function openMobSheet(cardEl){
 function closeMobSheet(){
   clearTimeout(_mobCloseTimer);
   mobSheetEl.style.transition='';
+  mobSheetEl.style.transform=''; // inline transform 제거: 재오픈 시 위치 초기화
   mobSheetEl.classList.remove('bs-open');
   document.getElementById('tabbar').classList.remove('tab-hidden');
   _lastSheetScroll=0;
@@ -1554,6 +1562,8 @@ function closeMobSheet(){
   if(_mobViewShift!==0)_animMobViewShift(0,320);
   _mobCloseTimer=setTimeout(()=>{
     if(!mobSheetEl.classList.contains('bs-open')){
+      _sheetFull=false;
+      mobSheetEl.classList.remove('bs-full');
       mobSheetEl.style.display='none';
       if(!document.getElementById('settings-panel').classList.contains('open'))
         controls.enabled=true;
@@ -1790,13 +1800,24 @@ connSheetEl.addEventListener('touchend',e=>{
   else connSheetEl.style.transform='';
 },{passive:true});
 
-// 스와이프 다운 닫기
-let _sheetDragY=0,_sheetDragging=false;
-mobSheetEl.addEventListener('touchstart',e=>{_sheetDragY=e.touches[0].clientY;_sheetDragging=true;e.stopPropagation();},{passive:true});
+// 스와이프 (3단계: 닫힘 ↔ 반쯤 ↔ 꽉 참)
+let _sheetDragY=0,_sheetDragging=false,_sheetDragFromTop=0,_sheetFull=false;
+mobSheetEl.addEventListener('touchstart',e=>{
+  _sheetDragY=e.touches[0].clientY;
+  _sheetDragFromTop=e.touches[0].clientY-mobSheetEl.getBoundingClientRect().top;
+  _sheetDragging=true;
+  e.stopPropagation();
+},{passive:true});
 mobSheetEl.addEventListener('touchmove',e=>{
   if(!_sheetDragging)return;e.stopPropagation();
   const dy=e.touches[0].clientY-_sheetDragY;
-  if(dy>0&&mobSheetInner.scrollTop<=0){
+  if(dy<0&&!_sheetFull&&_sheetDragFromTop<60){
+    // 위로 드래그 (반쯤→꽉 참) — 핸들 영역에서만
+    if(e.cancelable)e.preventDefault();
+    mobSheetEl.style.transition='none';
+    mobSheetEl.style.transform=`translateY(${dy*0.35}px)`;
+  }else if(dy>0&&mobSheetInner.scrollTop<=0){
+    // 아래로 드래그
     if(e.cancelable)e.preventDefault();
     mobSheetEl.style.transition='none';
     mobSheetEl.style.transform=`translateY(${dy}px)`;
@@ -1806,8 +1827,29 @@ mobSheetEl.addEventListener('touchend',e=>{
   if(!_sheetDragging)return;_sheetDragging=false;e.stopPropagation();
   const dy=e.changedTouches[0].clientY-_sheetDragY;
   mobSheetEl.style.transition='';
-  if(dy>80&&mobSheetInner.scrollTop<=0)closeMobSheet();
-  else mobSheetEl.style.transform='';
+  if(dy<-60&&!_sheetFull&&_sheetDragFromTop<60){
+    // 위로 충분히 → 꽉 참
+    _sheetFull=true;
+    mobSheetEl.style.transform='';
+    mobSheetEl.classList.add('bs-full');
+  }else if(_sheetFull&&dy>0&&mobSheetInner.scrollTop<=0){
+    if(dy>150){
+      // 꽉 찬 상태에서 쭉 내리면 → 닫기
+      closeMobSheet();
+    }else if(dy>60){
+      // 꽉 찬 상태에서 살짝 내리면 → 반쯤
+      _sheetFull=false;
+      mobSheetEl.classList.remove('bs-full');
+      mobSheetEl.style.transform='';
+    }else{
+      mobSheetEl.style.transform='';
+    }
+  }else if(!_sheetFull&&dy>80&&mobSheetInner.scrollTop<=0){
+    // 반쯤 상태에서 내리면 → 닫기
+    closeMobSheet();
+  }else{
+    mobSheetEl.style.transform='';
+  }
 },{passive:true});
 function closeCards(){
   closeConnCard();
@@ -2529,7 +2571,7 @@ window.addEventListener('click',e=>{
   const rect=renderer.domElement.getBoundingClientRect();
   if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)return;
   _mouse.x=((e.clientX-rect.left)/rect.width)*2-1;
-  _mouse.y=-((e.clientY-rect.top)/rect.height)*2+1;
+  _mouse.y=-((e.clientY-rect.top+_mobViewShift)/rect.height)*2+1;
   raycaster.setFromCamera(_mouse,camera);
 
   function nearestMember(){
@@ -2539,7 +2581,7 @@ window.addEventListener('click',e=>{
       const p=a._worldPos.clone().project(camera);
       if(p.z>1)return;
       const sx=(p.x+1)*0.5*rect.width+rect.left;
-      const sy=(-p.y+1)*0.5*rect.height+rect.top;
+      const sy=(-p.y+1)*0.5*rect.height+rect.top-_mobViewShift;
       const d=Math.hypot(sx-e.clientX,sy-e.clientY);
       if(d<nearPx){nearPx=d;nearArtist=a;}
     });
