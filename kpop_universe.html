@@ -2567,12 +2567,43 @@ window.addEventListener('mousemove',e=>{
   });
 });
 
+// ── 모바일: touchend로 멤버 점 직접 감지 (OrbitControls click 억제 우회) ──
+let _mobTapSX=0,_mobTapSY=0;
+renderer.domElement.addEventListener('touchstart',e=>{
+  if(e.touches.length!==1)return;
+  _mobTapSX=e.touches[0].clientX;_mobTapSY=e.touches[0].clientY;
+},{passive:true});
+renderer.domElement.addEventListener('touchend',e=>{
+  if(!isMob()||e.changedTouches.length!==1)return;
+  const t=e.changedTouches[0];
+  if(Math.hypot(t.clientX-_mobTapSX,t.clientY-_mobTapSY)>15)return;
+  const rect=renderer.domElement.getBoundingClientRect();
+  const cx=t.clientX,cy=t.clientY;
+  if(cx<rect.left||cx>rect.right||cy<rect.top||cy>rect.bottom)return;
+  let nearArtist=null,nearPx=Infinity;
+  ARTISTS.forEach(a=>{
+    if(!a._worldPos)return;
+    const p=a._worldPos.clone().project(camera);
+    if(p.z>1)return;
+    const sx=(p.x+1)*0.5*rect.width+rect.left;
+    const sy=(-p.y+1)*0.5*rect.height+rect.top;
+    const d=Math.hypot(sx-cx,sy-cy);
+    if(d<nearPx){nearPx=d;nearArtist=a;}
+  });
+  if(nearArtist&&nearPx<50){
+    e.preventDefault();
+    const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
+    if(gcInSide){closeMemberPanel(false);}else{closeCards();}
+    showT(nearArtist,cx,cy);
+  }
+},{passive:false});
+
 window.addEventListener('click',e=>{
   if(Math.hypot(e.clientX-_mdx,e.clientY-_mdy)>(isMob()?12:5))return;
   const rect=renderer.domElement.getBoundingClientRect();
   if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)return;
   _mouse.x=((e.clientX-rect.left)/rect.width)*2-1;
-  _mouse.y=-((e.clientY-rect.top)/rect.height)*2+1;
+  _mouse.y=-((e.clientY-rect.top+_mobViewShift)/rect.height)*2+1;
   raycaster.setFromCamera(_mouse,camera);
 
   function nearestMember(){
