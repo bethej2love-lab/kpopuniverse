@@ -346,8 +346,8 @@
     color:rgba(160,180,225,0.45);transition:color .18s;
   }
   @media(max-width:768px){
-    #tt-nav{margin-top:10px;margin-bottom:18px;}
-    .tt-nav-btn{padding:10px 9px;}
+    #tt-nav{margin-top:8px;margin-bottom:15px;}
+    .tt-nav-btn{padding:9px 9px;}
   }
   .tt-nav-btn:hover{color:rgba(200,218,255,0.75);}
   #tt-counter{display:none;}
@@ -2600,6 +2600,7 @@ renderer.domElement.addEventListener('touchend',e=>{
     const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
     if(gcInSide){closeMemberPanel(false);}else{closeCards();}
     showT(nearArtist,cx,cy);
+    pulseMember(nearArtist);
     return;
   }
   // 멤버 없음 → 행성 버블 체크
