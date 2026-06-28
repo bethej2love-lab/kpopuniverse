@@ -2113,7 +2113,7 @@ function showGC(ko,cx,cy,keepMemberPanel){
     .forEach(m=>{
     const sp=document.createElement('span');sp.className='gc-mem-name';
     sp.textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
-    sp.addEventListener('click',e=>{e.stopPropagation();if(isMob())closeCards();showT(m,cx,cy);});
+    sp.addEventListener('click',e=>{e.stopPropagation();if(isMob())closeCards();showT(m,cx,cy);if(m._worldPos)pulseMember(m);});
     memListEl.appendChild(sp);
   });
   const gcTv=document.getElementById('gc-tv');
@@ -2604,36 +2604,47 @@ renderer.domElement.addEventListener('touchend',e=>{
   const rect=renderer.domElement.getBoundingClientRect();
   const cx=t.clientX,cy=t.clientY;
   if(cx<rect.left||cx>rect.right||cy<rect.top||cy>rect.bottom)return;
-  let nearArtist=null,nearPx=Infinity;
-  ARTISTS.forEach(a=>{
-    if(!a._worldPos)return;
-    const p=a._worldPos.clone().project(camera);
-    if(p.z>1)return;
-    const sx=(p.x+1)*0.5*rect.width+rect.left;
-    const sy=(-p.y+1)*0.5*rect.height+rect.top;
-    const d=Math.hypot(sx-cx,sy-cy);
-    if(d<nearPx){nearPx=d;nearArtist=a;}
-  });
-  if(nearArtist&&nearPx<25){
-    e.preventDefault();
-    const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
-    if(gcInSide){closeMemberPanel(false);}else{closeCards();}
-    showT(nearArtist,cx,cy);
-    pulseMember(nearArtist);
-    return;
-  }
-  // 멤버 없음 → 행성 버블 체크
+  // 레이캐스터로 행성 hit 여부 먼저 확인 (줌 상태 판단)
   const _m2=new THREE.Vector2();
   _m2.x=((cx-rect.left)/rect.width)*2-1;
   _m2.y=-((cy-rect.top+_mobViewShift)/rect.height)*2+1;
   raycaster.setFromCamera(_m2,camera);
   const _bh=raycaster.intersectObjects(bubbleMeshes.map(b=>b.mesh));
+  const _hitPlanet=_bh.length?bubbleMeshes.find(b=>b.mesh===_bh[0].object):null;
+  // 행성이 불투명(줌아웃) 상태면 멤버 클릭 비활성화 → 그룹 카드만 열림
+  const _inPlanetMode=_hitPlanet&&_hitPlanet.mesh.material.uniforms.uFillOp.value>0.12&&focusGroupKo!==_hitPlanet.ko;
+  if(!_inPlanetMode){
+    // 가까이 줌인된 투명 행성 or 행성 밖 → 멤버 점 체크
+    let nearArtist=null,nearPx=Infinity;
+    ARTISTS.forEach(a=>{
+      if(!a._worldPos)return;
+      const p=a._worldPos.clone().project(camera);
+      if(p.z>1)return;
+      const sx=(p.x+1)*0.5*rect.width+rect.left;
+      const sy=(-p.y+1)*0.5*rect.height+rect.top;
+      const d=Math.hypot(sx-cx,sy-cy);
+      if(d<nearPx){nearPx=d;nearArtist=a;}
+    });
+    if(nearArtist&&nearPx<25){
+      e.preventDefault();
+      const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
+      if(gcInSide){closeMemberPanel(false);}else{closeCards();}
+      showT(nearArtist,cx,cy);
+      pulseMember(nearArtist);
+      return;
+    }
+  }
   if(!_bh.length){
     // 빈 우주 공간 → 포커스 해제 + 카드 닫기
     e.preventDefault();
     closeCards();
+  }else if(_hitPlanet){
+    // 행성 버블 hit → 그룹 카드 직접 열기 (controls.enabled=true 상태에선 synthetic click 억제되므로 여기서 처리)
+    e.preventDefault();
+    flyToBubble(_hitPlanet.mesh.position,_hitPlanet.radius);
+    closeCards();
+    showGC(_hitPlanet.ko,cx,cy);
   }
-  // 행성 버블 안이면 → click 핸들러에 위임 (preventDefault 안 함)
 },{passive:false});
 
 window.addEventListener('click',e=>{
