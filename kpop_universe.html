@@ -285,10 +285,12 @@
     z-index:35;pointer-events:none;
     transform:translateX(100%);transition:transform 0.26s cubic-bezier(0.32,0,0.15,1);
     background:rgba(16,20,36,0.84);
+  }
+  #side-panel.open{
+    transform:translateX(0);pointer-events:all;
     backdrop-filter:blur(40px) saturate(190%);-webkit-backdrop-filter:blur(40px) saturate(190%);
     box-shadow:-8px 0 40px rgba(0,0,0,0.55);
   }
-  #side-panel.open{transform:translateX(0);pointer-events:all;}
   #side-panel>#tt,#side-panel>#gc{
     position:relative!important;display:block!important;max-width:100%!important;
     width:100%!important;border-radius:0!important;border:none!important;
@@ -315,10 +317,12 @@
     z-index:34;pointer-events:none;
     transform:translateX(100%);transition:transform 0.26s cubic-bezier(0.32,0,0.15,1);
     background:rgba(16,20,36,0.84);
+  }
+  #member-panel.open{
+    transform:translateX(0);pointer-events:all;
     backdrop-filter:blur(40px) saturate(190%);-webkit-backdrop-filter:blur(40px) saturate(190%);
     box-shadow:-8px 0 40px rgba(0,0,0,0.45);
   }
-  #member-panel.open{transform:translateX(0);pointer-events:all;}
   #member-panel>#tt{
     position:relative!important;display:block!important;max-width:100%!important;
     width:100%!important;border-radius:0!important;border:none!important;
@@ -546,15 +550,14 @@
   /* ── Filter panel (journal-sidebar 내) ───────────── */
   #filter-panel{display:none;}
   /* ── Zoom slider ────────────────────────────────── */
-  #zoom-ctrl{position:fixed;left:18px;bottom:24px;display:flex;flex-direction:column;align-items:center;gap:7px;z-index:50;user-select:none;}
+  #zoom-ctrl{position:fixed;left:18px;bottom:24px;display:flex;flex-direction:column;align-items:center;gap:0;z-index:50;user-select:none;width:30px;background:rgba(12,16,36,0.60);border:1px solid rgba(140,165,220,0.16);border-radius:14px;padding:10px 0 0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 2px 14px rgba(0,0,0,0.22);}
   @media(max-width:768px){#zoom-ctrl{display:none;}}
-  #zoom-track{width:3px;height:110px;background:rgba(140,165,220,0.14);border-radius:2px;position:relative;cursor:pointer;flex-shrink:0;}
-  #zoom-track::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:100%;background:rgba(140,165,220,0.10);}
-  #zoom-thumb{width:13px;height:13px;background:rgba(150,180,255,0.82);border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);top:0;cursor:grab;box-shadow:0 0 7px rgba(110,150,255,0.55);transition:background .15s,box-shadow .15s;}
-  #zoom-thumb:hover{background:rgba(185,210,255,1);box-shadow:0 0 11px rgba(130,170,255,0.75);}
+  #zoom-track{width:2px;height:96px;background:rgba(140,165,220,0.15);border-radius:1px;position:relative;cursor:pointer;flex-shrink:0;margin-bottom:8px;}
+  #zoom-thumb{width:10px;height:10px;background:rgba(150,180,255,0.85);border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);top:0;cursor:grab;box-shadow:0 0 6px rgba(110,150,255,0.55);transition:background .15s,box-shadow .15s;}
+  #zoom-thumb:hover{background:rgba(185,210,255,1);box-shadow:0 0 10px rgba(130,170,255,0.75);}
   #zoom-thumb:active{cursor:grabbing;}
-  #zoom-overview-btn{width:26px;height:26px;background:rgba(16,20,40,0.68);border:1px solid rgba(140,165,220,0.20);border-radius:8px;color:rgba(155,180,230,0.80);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .15s,color .15s;padding:0;line-height:1;}
-  #zoom-overview-btn:hover{background:rgba(28,36,62,0.90);color:rgba(200,220,255,1);}
+  #zoom-overview-btn{width:100%;height:27px;background:transparent;border:none;border-top:1px solid rgba(140,165,220,0.13);border-radius:0 0 13px 13px;color:rgba(155,180,230,0.72);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;transition:background .15s,color .15s;}
+  #zoom-overview-btn:hover{background:rgba(140,165,220,0.09);color:rgba(200,220,255,1);}
   #filter-panel-hd{
     display:flex;align-items:flex-start;justify-content:space-between;
     padding:0 0 10px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:10px;
@@ -1689,6 +1692,10 @@ function _findArtistByConnName(withStr,anchorGroupKo){
   if(m)return ARTISTS.find(a=>a.name.ko===m[1]&&a.group.ko===m[2]);
   return ARTISTS.find(a=>a.name.ko===withStr&&a.group.ko===anchorGroupKo);
 }
+function _dedupSongs(songs){
+  const seen=new Set();
+  return songs.filter(sg=>{if(seen.has(sg.u))return false;seen.add(sg.u);return true;});
+}
 function _getSongsFeaturingArtist(a){
   const myName=a.name.ko;
   const res=[];
@@ -1718,14 +1725,14 @@ function _getCollabMembers(artist){
 function _getCollabSongs(anchor,sel){
   if(!sel.length)return[];
   const allSongs=[...(anchor.songs||[]).map(sg=>({...sg,_owner:anchor})),..._getSongsFeaturingArtist(anchor)];
-  return allSongs.filter(sg=>
+  return _dedupSongs(allSongs.filter(sg=>
     sel.every(selName=>{
       const selA=_findArtistByConnName(selName,anchor.group.ko);
       if(!selA)return false;
       if(sg._owner===selA)return true;
       return(sg.with||[]).some(w=>_findArtistByConnName(w,anchor.group.ko)===selA);
     })
-  );
+  ));
 }
 function _clearConnLines3d(){
   _connLines3d.forEach(l=>scene.remove(l));_connLines3d=[];
@@ -2144,7 +2151,7 @@ function showT(a,cx,cy){
   document.getElementById('tm').innerHTML='';
   const tv=document.getElementById('tv');
   const _grpSongs=(GROUPS[a.group.ko]||{}).songs||[];
-  const _memberAllSongs=[...(a.songs||[]),..._getSongsFeaturingArtist(a),..._grpSongs];
+  const _memberAllSongs=_dedupSongs([...(a.songs||[]),..._getSongsFeaturingArtist(a),..._grpSongs]);
   buildVideoSection(_memberAllSongs,tv);
   // ✦ 연결 버튼 (그룹명 오른쪽)
   const connBtn=document.getElementById('tt-conn-btn');
@@ -2728,7 +2735,11 @@ function flyHome(){
   });
   document.getElementById('zoom-overview-btn').addEventListener('click',e=>{
     e.stopPropagation();
-    _startFly(new THREE.Vector3(0,0,0),new THREE.Vector3(0,8,120),800);
+    const tgt=controls.target.clone();
+    const dir=camera.position.clone().sub(tgt);
+    if(dir.lengthSq()<0.001)dir.set(0,0,1);
+    const maxPos=tgt.clone().addScaledVector(dir.normalize(),controls.maxDistance);
+    _startFly(tgt,maxPos,800);
     flyState.onComplete=()=>{controls.autoRotate=true;};
   });
 })();
