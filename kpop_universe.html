@@ -210,7 +210,7 @@
     #tv-big-title,.tv-sm-title{text-overflow:unset;}
     .tv-title-inner{display:inline-block;white-space:nowrap;vertical-align:top;}
     #tv-big-title:not(.is-marquee),.tv-sm-title:not(.is-marquee){-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);}
-    .marquee-run{animation:title-marquee 3.5s .4s linear infinite alternate;}
+    .marquee-run{animation:title-marquee 5s .4s linear infinite alternate;}
     @keyframes title-marquee{0%,15%{transform:translateX(0);}85%,100%{transform:translateX(var(--mx,0px));}}
   }
   .tv-empty{font-size:11px;color:#5878a0;}
@@ -385,8 +385,9 @@
   #gc-header{display:flex;align-items:center;gap:10px;padding-right:20px;margin-bottom:10px;}
   #gc-header-text{flex:1;min-width:0;}
   #gc-logo-wrap{flex-shrink:0;}
-  #gc-logo-wrap svg{height:28px;width:auto;display:block;}
-  #gc-logo-wrap svg,#gc-logo-wrap svg g{fill:rgba(225,235,255,0.90);}
+  #gc-logo-wrap svg{max-height:28px;max-width:90px;width:auto;height:auto;display:block;}
+  #gc-logo-wrap svg,#gc-logo-wrap svg *{fill:rgba(225,235,255,0.90)!important;}
+  #gc-logo-wrap img{max-height:28px;max-width:90px;width:auto;height:auto;display:block;filter:brightness(0) invert(1);opacity:0.88;}
   #gc-name{font-size:17px;font-weight:700;margin-bottom:2px;padding-right:0;letter-spacing:-.02em;color:#d8e4f6;}
   #gc-en{font-size:14px;letter-spacing:.1em;color:#7898b8;margin-bottom:0;text-transform:uppercase;font-weight:500;}
   #gc-grid{display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-top:11px;border-top:0.5px solid rgba(255,255,255,0.10);}
@@ -503,7 +504,7 @@
     box-shadow:-6px 0 32px rgba(0,0,0,0.45);
   }
   @media(max-width:768px){#conn-panel{display:none;}}
-  #conn-panel .conn-inner{padding:32px 16px 20px;}
+  #conn-panel .conn-inner{padding:52px 16px 20px;}
   #conn-sheet{
     display:none;position:fixed;left:0;right:0;
     bottom:var(--sheet-bottom,73px);max-height:68vh;
@@ -1461,7 +1462,7 @@ function addMarquee(el){
   el.appendChild(inner);
   el.addEventListener('mouseenter',()=>{
     const ov=inner.scrollWidth-el.clientWidth;
-    if(ov<=2)return;
+    if(ov<=0)return;
     inner.style.setProperty('--mx',`-${ov}px`);
     el.classList.add('is-marquee');
     inner.classList.add('marquee-run');
@@ -2001,6 +2002,43 @@ function closeCards(){
   clearFocus();_openGCko=null;_openTArtist=null;
 }
 
+function pulseGroupRipple(ko){
+  const bm=bubbleMeshes.find(b=>b.ko===ko);
+  if(!bm)return;
+  const[r,g,b]=(bm.info&&bm.info.color)||[180,200,255];
+  const sz=128,c=sz/2;
+  const cv=document.createElement('canvas');cv.width=cv.height=sz;
+  const ctx=cv.getContext('2d');
+  const grd=ctx.createRadialGradient(c,c,sz*0.28,c,c,sz*0.50);
+  grd.addColorStop(0,`rgba(${r},${g},${b},0)`);
+  grd.addColorStop(0.45,`rgba(${r},${g},${b},0.70)`);
+  grd.addColorStop(0.75,`rgba(${r},${g},${b},0.18)`);
+  grd.addColorStop(1,`rgba(${r},${g},${b},0)`);
+  ctx.fillStyle=grd;ctx.fillRect(0,0,sz,sz);
+  const tex=new THREE.CanvasTexture(cv);
+  const rad=bm.radius;
+  let done=0;
+  function makeRipple(delay){
+    setTimeout(()=>{
+      const mat=new THREE.SpriteMaterial({map:tex,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthTest:false});
+      const sp=new THREE.Sprite(mat);
+      sp.position.copy(bm.mesh.position);
+      sp.scale.setScalar(rad*2);
+      scene.add(sp);
+      const t0=performance.now(),dur=2200;
+      (function tick(){
+        const t=Math.min((performance.now()-t0)/dur,1);
+        const ease=1-Math.pow(1-t,2.2);
+        sp.scale.setScalar(rad*2+ease*rad*5.5);
+        mat.opacity=Math.pow(1-t,1.4)*0.12;
+        if(t<1)requestAnimationFrame(tick);
+        else{scene.remove(sp);mat.dispose();if(++done===2)tex.dispose();}
+      })();
+    },delay);
+  }
+  makeRipple(0);
+  makeRipple(950);
+}
 function pulseGroup(ko){
   const bm=bubbleMeshes.find(b=>b.ko===ko);
   if(!bm)return;
@@ -2199,9 +2237,10 @@ function showT(a,cx,cy){
   ctrEl.textContent=ttGroupMembers.length>1?`${ttMemberIdx+1} / ${ttGroupMembers.length}`:'';
 }
 
-function showGC(ko,cx,cy,keepMemberPanel){
+function showGC(ko,cx,cy,keepMemberPanel,skipRipple){
   const info=GROUPS[ko];if(!info)return;
   setFocus(ko);_openGCko=ko;
+  if(!skipRipple)pulseGroupRipple(ko);
   const el=document.getElementById('gc');
   el.classList.add('gc-enter');
   el.style.display='block';
@@ -2217,10 +2256,19 @@ function showGC(ko,cx,cy,keepMemberPanel){
   const logoWrap=document.getElementById('gc-logo-wrap');
   logoWrap.innerHTML='';
   if(info.logo){
-    fetch(info.logo).then(r=>r.text()).then(svg=>{
-      logoWrap.innerHTML=svg;
-      logoWrap.style.display='';
-    }).catch(()=>{logoWrap.style.display='none';});
+    if(/\.svg$/i.test(info.logo)){
+      fetch(info.logo).then(r=>r.text()).then(svg=>{
+        logoWrap.innerHTML=svg;
+        logoWrap.style.display='';
+      }).catch(()=>{logoWrap.style.display='none';});
+    }else{
+      logoWrap.innerHTML='';
+      const img=document.createElement('img');
+      img.src=info.logo;
+      img.onload=()=>logoWrap.style.display='';
+      img.onerror=()=>logoWrap.style.display='none';
+      logoWrap.appendChild(img);
+    }
   }else{logoWrap.style.display='none';}
   _renderTagChip(document.getElementById('gc-co'),info.co||'','agency',info.co||'');
   const _debutYr=String(info.debut||'').slice(0,4);
@@ -2592,7 +2640,7 @@ document.getElementById('tab-explore').addEventListener('click',e=>{
         showGC(bm.ko,window.innerWidth/2,window.innerHeight*0.38);
         pulseGroup(bm.ko);
       }else{
-        if(!isMob())showGC(item.artist.group.ko,window.innerWidth/2,window.innerHeight*0.38);
+        if(!isMob())showGC(item.artist.group.ko,window.innerWidth/2,window.innerHeight*0.38,false,true);
         showT(item.artist,window.innerWidth/2,window.innerHeight*0.38);
         pulseMember(item.artist);pulseGroup(item.artist.group.ko);
       }
@@ -2779,7 +2827,7 @@ document.getElementById('dh-explore-btn').addEventListener('click',e=>{
         showGC(bm.ko,window.innerWidth/2,window.innerHeight*0.38);
         pulseGroup(bm.ko);
       }else{
-        showGC(item.artist.group.ko,window.innerWidth/2,window.innerHeight*0.38);
+        showGC(item.artist.group.ko,window.innerWidth/2,window.innerHeight*0.38,false,true);
         showT(item.artist,window.innerWidth/2,window.innerHeight*0.38);
         pulseMember(item.artist);pulseGroup(item.artist.group.ko);
       }
