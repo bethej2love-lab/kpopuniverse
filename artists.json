@@ -2632,18 +2632,19 @@
     },
     "sparkle": false,
     "songs": [
-      {
-        "t": "GO!",
-        "u": "https://www.youtube.com/watch?v=tWOItSAfA4M"
-      },
-      {
-        "t": "REDRED",
-        "u": "https://www.youtube.com/watch?v=2LDdWZOK34c"
-      },
-      {
-        "t": "What You Want",
-        "u": "https://www.youtube.com/watch?v=2azvJj4u5D4"
-      }
+      {"t": "TNT",              "u": "https://www.youtube.com/watch?v=Gh0paSexs8o"},
+      {"t": "TNT",              "u": "https://www.youtube.com/watch?v=AJTnVwZjnV4"},
+      {"t": "ACAI",             "u": "https://www.youtube.com/watch?v=Mocf2vfxBW0"},
+      {"t": "YOUNGCREATORCREW", "u": "https://www.youtube.com/watch?v=9mmzesSsQrU"},
+      {"t": "GO!",              "u": "https://www.youtube.com/watch?v=tWOItSAfA4M"},
+      {"t": "REDRED",           "u": "https://www.youtube.com/watch?v=2LDdWZOK34c"},
+      {"t": "What You Want",    "u": "https://www.youtube.com/watch?v=2azvJj4u5D4"},
+      {"t": "[리무진서비스] EP.195 마틴 | Lullaby, Thinking Out Loud, 그땐 미처 알지 못했지, 난춘", "u": "https://www.youtube.com/watch?v=1neJU-a_0xk"},
+      {"t": "몽쉘통통?! 일상 속 소름 돋는 프랑스어의 의미 [숭실대 불어불문학과] | 전과자 ep.119", "u": "https://www.youtube.com/watch?v=tT3XwwuPelM", "with": ["성현"]},
+      {"t": "무대 위 넘치는 존재감 리더 마틴",              "u": "https://youtube.com/shorts/neL8xYgI6BI"},
+      {"t": "TNT의 코어 마틴 그냥 느껴 | 릴레이댄스",       "u": "https://youtube.com/shorts/J9GO8OxCaa4"},
+      {"t": "MC 마틴&제임스&성현 〈Really Like You〉 챌린지 #엠카운트다운", "u": "https://youtube.com/shorts/L3cINJl1ySM", "with": ["제임스", "성현"]},
+      {"t": "왔다! 월요병 치료제 💗Love 마틴, Love 제임스, Love 성현💗 #엠카운트다운", "u": "https://youtube.com/shorts/_aLhEp4WB2U", "with": ["제임스", "성현"]}
     ]
   },
   {
@@ -2877,18 +2878,19 @@
     },
     "sparkle": false,
     "songs": [
-      {
-        "t": "GO!",
-        "u": "https://www.youtube.com/watch?v=93iJLm0kUAU"
-      },
-      {
-        "t": "REDRED",
-        "u": "https://www.youtube.com/watch?v=cxcxx0f6caM"
-      },
-      {
-        "t": "FaSHioN",
-        "u": "https://www.youtube.com/watch?v=kPjbIP7kaqs"
-      }
+      {"t": "JoyRide",      "u": "https://www.youtube.com/watch?v=qx8VbGEWcBo"},
+      {"t": "What You Want","u": "https://www.youtube.com/watch?v=M1SqjF8_Yns"},
+      {"t": "MIC Drop",     "u": "https://www.youtube.com/watch?v=fcdjgDyBj7E"},
+      {"t": "GO!",          "u": "https://www.youtube.com/watch?v=93iJLm0kUAU"},
+      {"t": "REDRED",       "u": "https://www.youtube.com/watch?v=cxcxx0f6caM"},
+      {"t": "FaSHioN",      "u": "https://www.youtube.com/watch?v=kPjbIP7kaqs"},
+      {"t": "[LIVE] 건호 - 내 마음에 비친 내 모습 (원곡: 유재하) | 우쥬레코드 편", "u": "https://www.youtube.com/watch?v=7B9XR97PqTw"},
+      {"t": "[리무진서비스] EP.213 건호 | Blue Lips, Great Pretender, 그대 작은 나의 세상이 되어, 나의 외로움이 널 부를 때", "u": "https://www.youtube.com/watch?v=6q-6NwTymiM"},
+      {"t": "말시키면 귀빨개지는 데뷔 5개월차 | EP. 126 마틴 건호 | 살롱드립", "u": "https://www.youtube.com/watch?v=sybGMTcvX7s", "with": ["마틴"]},
+      {"t": "소년미 넘치는 보컬 건호의 ＜그대 작은 나의 세상이 되어＞💚 | EP.213 선공개", "u": "https://youtube.com/shorts/aY6I3GgC1lc"},
+      {"t": "10초 동안 건호 얼굴만 나오는 영상", "u": "https://youtube.com/shorts/wm63jPpPc3A"},
+      {"t": "적당히론 배가 차지 않아 🦛",    "u": "https://youtube.com/shorts/wKAakyOhz0c"},
+      {"t": "드디어 데뷔한 '감자튀김 걔' 건호 | STUDIO CHOOM ORIGINAL", "u": "https://youtube.com/shorts/OPD2pyDlEG0"}
     ]
   },
   {
