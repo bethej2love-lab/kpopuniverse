@@ -79,7 +79,7 @@
     "en": "KiiiKiii",
     "debut": "2025.03.24",
     "co": "Starship",
-    "logo": "logos/KiiiKiii",
+    "logo": "logos/KiiiKiii.webp",
     "color": [
       152,
       215,
@@ -342,8 +342,8 @@
     ],
     "gender": "f"
   },
-  "TXT": {
-    "en": "TXT",
+  "투모로우바이투게더": {
+    "en": "TOMORROW X TOGETHER",
     "debut": "2019.03.04",
     "co": "HYBE / BigHit",
     "logo": "logos/TOMORROW X TOGETHER.svg",
@@ -413,7 +413,7 @@
     "gender": "m"
   },
   "소녀시대": {
-    "en": "Girls Generation",
+    "en": "Girls' Generation",
     "debut": "2007.08.05",
     "co": "SM",
     "logo": "logos/Girls' Generation · SNSD.svg",
@@ -428,7 +428,7 @@
     "en": "SHINee",
     "debut": "2008.05.22",
     "co": "SM",
-    "logo": "logos/SHINee",
+    "logo": "logos/SHINee.webp",
     "color": [
       148,
       188,
