@@ -273,7 +273,7 @@
   }
   /* ── Side panel (desktop) ──────────────────────────── */
   #side-panel{
-    position:fixed;right:0;top:0;bottom:0;width:320px;
+    position:fixed;right:0;top:64px;bottom:0;width:320px;
     overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
     z-index:35;pointer-events:none;
     transform:translateX(100%);transition:transform 0.26s cubic-bezier(0.32,0,0.15,1);
@@ -289,8 +289,8 @@
     backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
     left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
   }
-  #side-panel>#gc{padding-top:108px;}
-  #side-panel>#tt{padding-top:104px;}
+  #side-panel>#gc{padding-top:44px;}
+  #side-panel>#tt{padding-top:40px;}
   /* SNS links */
   #gc-sns-list{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px;}
   .gc-sns-link{
@@ -303,7 +303,7 @@
   @media(max-width:768px){#side-panel{display:none;}}
   /* ── Member panel (그룹 카드 왼쪽 확장) ───────────── */
   #member-panel{
-    position:fixed;right:320px;top:0;bottom:0;width:320px;
+    position:fixed;right:320px;top:64px;bottom:0;width:320px;
     overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
     z-index:34;pointer-events:none;
     transform:translateX(100%);transition:transform 0.26s cubic-bezier(0.32,0,0.15,1);
@@ -318,7 +318,7 @@
     box-shadow:none!important;background:none!important;
     backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
     left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
-    padding-top:120px;
+    padding-top:44px;
   }
   #member-panel>#tt #ttx{display:none!important;}
   /* 접기 탭: member-panel 왼쪽 중간 */
@@ -2680,7 +2680,7 @@ window.addEventListener('click',e=>{
         if(a){
           const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
           if(gcInSide){closeMemberPanel(false);}else{closeCards();}
-          showT(a,e.clientX,e.clientY);return;
+          showT(a,e.clientX,e.clientY);if(!isMob())pulseMember(a);return;
         }
       }
       // 행성 모드 or 멤버 없음 → 그룹 카드
@@ -2707,7 +2707,7 @@ window.addEventListener('click',e=>{
   if(a){
     const gcInSide=!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('gc').parentElement===sidePanelEl;
     if(gcInSide){closeMemberPanel(false);}else{closeCards();}
-    showT(a,e.clientX,e.clientY);return;
+    showT(a,e.clientX,e.clientY);if(!isMob())pulseMember(a);return;
   }
   closeCards();
 });
