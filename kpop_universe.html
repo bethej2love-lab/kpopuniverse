@@ -522,10 +522,6 @@
   .conn-chip-goto{display:inline-flex;align-items:center;width:0;overflow:hidden;opacity:0;pointer-events:none;cursor:pointer;font-size:10px;color:rgba(170,205,255,0.72);line-height:1;transition:opacity 0.13s,width 0.13s,padding-left 0.13s;white-space:nowrap;padding-left:0;}
   .conn-chip-wrap:hover .conn-chip-goto{width:16px;opacity:1;pointer-events:all;padding-left:3px;}
   .conn-chip-goto:hover{color:rgba(215,235,255,1);}
-  .conn-selected-strip{display:flex;flex-wrap:wrap;gap:5px;padding:9px 0;margin-bottom:12px;border-top:0.5px solid rgba(255,255,255,0.07);border-bottom:0.5px solid rgba(255,255,255,0.07);}
-  .conn-sel-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px 3px 11px;border-radius:20px;font-size:10.5px;font-weight:600;background:rgba(140,175,255,0.22);border:0.5px solid rgba(140,175,255,0.48);color:rgba(210,228,255,1.0);letter-spacing:.02em;font-family:inherit;}
-  .conn-sel-chip .rm{font-size:12px;cursor:pointer;opacity:0.65;line-height:1;transition:opacity .12s;background:none;border:none;color:inherit;padding:0 1px;}
-  .conn-sel-chip .rm:hover{opacity:1;}
   .conn-no-video{font-size:11px;color:#5878a0;padding:4px 0;}
   /* ✦ 연결 버튼 */
   #tt-conn-row{margin-top:6px;}
@@ -1779,20 +1775,6 @@ function _buildConnContent(container){
   container.appendChild(chipsDiv);
 
   if(_connSelected.length>0){
-    const strip=document.createElement('div');strip.className='conn-selected-strip';
-    _connSelected.forEach(name=>{
-      const sc=document.createElement('div');sc.className='conn-sel-chip';
-      const nm=document.createElement('span');nm.textContent=name;
-      const rm=document.createElement('button');rm.className='rm';rm.textContent='×';
-      rm.addEventListener('click',e=>{
-        e.stopPropagation();
-        _connSelected=_connSelected.filter(n=>n!==name);
-        _updateConnLines3d();_buildConnContent(container);
-      });
-      sc.appendChild(nm);sc.appendChild(rm);strip.appendChild(sc);
-    });
-    container.appendChild(strip);
-
     const vidLbl=document.createElement('div');vidLbl.className='conn-lbl';
     vidLbl.textContent=currentLang==='ko'?'함께한 영상':'together';
     container.appendChild(vidLbl);
@@ -2244,6 +2226,33 @@ function _applyTagFocus(){
       const has=ARTISTS.some(a=>a.group.ko===ko&&_getNatKo(a.nat)===natKo);
       mesh._focusTarget=has?1:FOCUS_DIM;
     });
+  } else if(_tagFilter.type==='birthYear'){
+    const yr=parseInt(_tagFilter.value);
+    ARTISTS.forEach(a=>{a._focusTarget=(a._bdayYear===yr)?1:FOCUS_DIM;});
+    bubbleMeshes.forEach(({mesh,ko})=>{
+      const has=ARTISTS.some(a=>a.group.ko===ko&&a._bdayYear===yr);
+      mesh._focusTarget=has?1:FOCUS_DIM;
+    });
+  } else if(_tagFilter.type==='debutYear'){
+    const yr=_tagFilter.value;
+    bubbleMeshes.forEach(({mesh,info})=>{
+      mesh._focusTarget=String(info.debut||'').startsWith(yr)?1:FOCUS_DIM;
+    });
+    ARTISTS.forEach(a=>{
+      const bm=bubbleMeshes.find(b=>b.ko===a.group.ko);
+      a._focusTarget=bm?bm.mesh._focusTarget:FOCUS_DIM;
+    });
+  } else if(_tagFilter.type==='agency'){
+    const ag=_tagFilter.value;
+    bubbleMeshes.forEach(({mesh,info})=>{
+      mesh._focusTarget=(info.co||'')===ag?1:FOCUS_DIM;
+    });
+    ARTISTS.forEach(a=>{
+      const bm=bubbleMeshes.find(b=>b.ko===a.group.ko);
+      a._focusTarget=bm?bm.mesh._focusTarget:FOCUS_DIM;
+    });
+  } else if(_connAnchor){
+    _applyConnFocus();
   } else if(!focusGroupKo){
     clearFocus();
   }
@@ -2263,7 +2272,8 @@ function clearTagFilter(){
   const fp=document.getElementById('filter-panel');if(fp)fp.style.display='none';
   const jh=document.getElementById('journal-hd');if(jh)jh.style.display='';
   document.getElementById('journal-sidebar').classList.remove('open');
-  if(!focusGroupKo)clearFocus();
+  if(_connAnchor){_applyConnFocus();}
+  else if(!focusGroupKo){clearFocus();}
 }
 
 function _makeFilterListItem(name,sub,onClick){
