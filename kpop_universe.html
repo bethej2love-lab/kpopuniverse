@@ -206,6 +206,13 @@
   .tv-sm:hover{opacity:.82;}
   .tv-sm img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
   .tv-sm-title{font-size:13px;color:#a8bcd8;line-height:1.3;padding:4px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  @media(min-width:769px){
+    #tv-big-title,.tv-sm-title{text-overflow:unset;}
+    .tv-title-inner{display:inline-block;white-space:nowrap;vertical-align:top;}
+    #tv-big-title:not(.is-marquee),.tv-sm-title:not(.is-marquee){-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);}
+    .marquee-run{animation:title-marquee 3.5s .4s linear infinite alternate;}
+    @keyframes title-marquee{0%,15%{transform:translateX(0);}85%,100%{transform:translateX(var(--mx,0px));}}
+  }
   .tv-empty{font-size:11px;color:#5878a0;}
   /* 쇼츠 썸네일 (9:16) */
   #tv-big-wrap.is-shorts #tv-big{aspect-ratio:9/16;width:40%;margin:0 auto;}
@@ -929,16 +936,23 @@ async function buildUniverse(){
   const sparklePos=[],sparkleColors=[];
   let regularIdx=0,sparkleIdx=0;
 
+  const _placedBubbles=[];
   Object.entries(grpData).forEach(([ko,info])=>{
     const members=memberMap[ko]||[];
     const dist=debutToRadius(parseInt(info.debut)||2020);
-
     const dir=agencyDir(info.co);
-    const pos=randomInCone(dir,coneSpread(info.co)).multiplyScalar(dist);
-
     const [r,g,b]=info.color||[180,180,200];
     const color=duneColor(r,g,b);
     const radius=Math.min(4,Math.max(2,1.8+members.length*0.25));
+
+    // 겹침 방지: 최대 400번 시도, 기존 행성과 표면 간격 2 이상 확보
+    let pos;
+    for(let _t=0;_t<400;_t++){
+      const c=randomInCone(dir,coneSpread(info.co)).multiplyScalar(dist);
+      if(_placedBubbles.every(pb=>c.distanceTo(pb.pos)>=radius+pb.r+2)){pos=c;break;}
+    }
+    if(!pos)pos=randomInCone(dir,coneSpread(info.co)).multiplyScalar(dist);
+    _placedBubbles.push({pos,r:radius});
 
     // ── Bubble fill — Fresnel ShaderMaterial ──────
     const fillGeo=new THREE.SphereGeometry(radius,64,64);
@@ -1366,6 +1380,27 @@ function addHoverPreview(wrapEl,imgEl,videoId,shorts){
   });
 }
 
+function addMarquee(el){
+  if(isMob())return;
+  const inner=document.createElement('span');
+  inner.className='tv-title-inner';
+  inner.textContent=el.textContent;
+  el.textContent='';
+  el.appendChild(inner);
+  el.addEventListener('mouseenter',()=>{
+    const ov=inner.scrollWidth-el.clientWidth;
+    if(ov<=2)return;
+    inner.style.setProperty('--mx',`-${ov}px`);
+    el.classList.add('is-marquee');
+    inner.classList.add('marquee-run');
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.classList.remove('is-marquee');
+    inner.classList.remove('marquee-run');
+    inner.style.removeProperty('--mx');
+  });
+}
+
 function makeSmallThumb(s,allSongs,idx){
   const vid=ytId(s.u);
   const shorts=isShorts(s.u);
@@ -1374,6 +1409,7 @@ function makeSmallThumb(s,allSongs,idx){
   const img=document.createElement('img');
   img.src=`https://img.youtube.com/vi/${vid}/mqdefault.jpg`;img.alt=s.t;
   const lbl=document.createElement('div');lbl.className='tv-sm-title';lbl.textContent=s.t;
+  addMarquee(lbl);
   box.appendChild(img);box.appendChild(lbl);
   addHoverPreview(box,img,vid,shorts);
   box.addEventListener('click',e=>{e.stopPropagation();if(isMob())window.open(s.u,'_blank');else openLightbox(s.u,shorts);});
@@ -1397,6 +1433,7 @@ function buildVideoSection(songs,containerEl){
       const big=document.createElement('img');big.id='tv-big';
       big.src=`https://img.youtube.com/vi/${ytId(first.u)}/mqdefault.jpg`;big.alt=first.t;
       const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
+      addMarquee(bigTitle);
       bigWrap.appendChild(big);bigWrap.appendChild(bigTitle);
       addHoverPreview(bigWrap,big,ytId(first.u),false);
       bigWrap.addEventListener('click',e=>{e.stopPropagation();window.open(first.u,'_blank');});
@@ -1435,6 +1472,7 @@ function buildVideoSection(songs,containerEl){
   const big=document.createElement('img');big.id='tv-big';
   big.src=`https://img.youtube.com/vi/${ytId(first.u)}/mqdefault.jpg`;big.alt=first.t;
   const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
+  addMarquee(bigTitle);
   bigWrap.appendChild(big);bigWrap.appendChild(bigTitle);
   addHoverPreview(bigWrap,big,ytId(first.u),firstShorts);
   bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,firstShorts);});
@@ -1637,7 +1675,7 @@ function _panelOffsetVec(dist){
   const hFov=2*Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect);
   const worldW=2*dist*Math.tan(hFov/2);
   const shift=(pw/2/window.innerWidth)*worldW;
-  return new THREE.Vector3().setFromMatrixColumn(camera.matrix,0).multiplyScalar(-shift);
+  return new THREE.Vector3().setFromMatrixColumn(camera.matrix,0).multiplyScalar(shift);
 }
 function _applyConnFocus(){
   if(!_connAnchor||!_connSelected.length){
@@ -2381,10 +2419,25 @@ document.getElementById('tab-lang').addEventListener('click',e=>{
   const dhl=document.getElementById('dh-lang-btn');if(dhl)dhl.textContent=t;
   applyLang();
 });
+const _recentExploreKos=[];
+function _pickExploreTarget(){
+  const groups=bubbleMeshes.map(bm=>({type:'group',key:'g:'+bm.ko,bm}));
+  const members=ARTISTS.filter(a=>a._worldPos).map(a=>{
+    const bm=bubbleMeshes.find(b=>b.ko===a.group.ko);
+    return bm?{type:'member',key:'m:'+a.name.ko+':'+a.group.ko,artist:a,bm}:null;
+  }).filter(Boolean);
+  const all=[...groups,...members];
+  const pool=all.filter(x=>!_recentExploreKos.includes(x.key));
+  const src=pool.length?pool:all;
+  const item=src[Math.floor(Math.random()*src.length)];
+  _recentExploreKos.push(item.key);
+  if(_recentExploreKos.length>10)_recentExploreKos.shift();
+  return item;
+}
 document.getElementById('tab-explore').addEventListener('click',e=>{
   e.stopPropagation();
   if(!bubbleMeshes.length)return;
-  const bm=bubbleMeshes[Math.floor(Math.random()*bubbleMeshes.length)];
+  const item=_pickExploreTarget();const{bm}=item;
   closePanels();
   // 모바일: closeMobSheet의 330ms 타이머 없이 즉시 시트 초기화 (타이머가 fly 완료 후 display를 재조작하는 충돌 방지)
   if(isMob()){
@@ -2405,8 +2458,14 @@ document.getElementById('tab-explore').addEventListener('click',e=>{
   flyToBubble(bm.mesh.position,bm.radius);
   flyState.onComplete=()=>{
     setTimeout(()=>{
-      showGC(bm.ko,window.innerWidth/2,window.innerHeight*0.38);
-      pulseGroup(bm.ko);
+      if(item.type==='group'){
+        showGC(bm.ko,window.innerWidth/2,window.innerHeight*0.38);
+        pulseGroup(bm.ko);
+      }else{
+        if(!isMob())showGC(item.artist.group.ko,window.innerWidth/2,window.innerHeight*0.38);
+        showT(item.artist,window.innerWidth/2,window.innerHeight*0.38);
+        pulseMember(item.artist);pulseGroup(item.artist.group.ko);
+      }
     },150);
   };
 });
@@ -2522,13 +2581,19 @@ document.getElementById('tab-home').addEventListener('click',e=>{e.stopPropagati
 document.getElementById('dh-explore-btn').addEventListener('click',e=>{
   e.stopPropagation();
   if(!bubbleMeshes.length)return;
-  const bm=bubbleMeshes[Math.floor(Math.random()*bubbleMeshes.length)];
+  const item=_pickExploreTarget();const{bm}=item;
   closePanels();closeCards();
   flyToBubble(bm.mesh.position,bm.radius);
   flyState.onComplete=()=>{
     setTimeout(()=>{
-      showGC(bm.ko,window.innerWidth/2,window.innerHeight*0.38);
-      pulseGroup(bm.ko);
+      if(item.type==='group'){
+        showGC(bm.ko,window.innerWidth/2,window.innerHeight*0.38);
+        pulseGroup(bm.ko);
+      }else{
+        showGC(item.artist.group.ko,window.innerWidth/2,window.innerHeight*0.38);
+        showT(item.artist,window.innerWidth/2,window.innerHeight*0.38);
+        pulseMember(item.artist);pulseGroup(item.artist.group.ko);
+      }
     },150);
   };
 });
