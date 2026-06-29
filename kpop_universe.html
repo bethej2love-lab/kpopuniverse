@@ -941,7 +941,7 @@ async function buildUniverse(){
     const radius=Math.min(4,Math.max(2,1.8+members.length*0.25));
 
     // ── Bubble fill — Fresnel ShaderMaterial ──────
-    const fillGeo=new THREE.SphereGeometry(radius,32,32);
+    const fillGeo=new THREE.SphereGeometry(radius,64,64);
     const fillMat=new THREE.ShaderMaterial({
       uniforms:{
         uColor:{value:color},
@@ -1344,8 +1344,9 @@ function closeLightbox(){
   lb.classList.remove('open');
   document.getElementById('yt-lb-iframe').src='';
 }
-document.getElementById('yt-lightbox').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLightbox();});
-document.getElementById('yt-lb-close').addEventListener('click',closeLightbox);
+document.getElementById('yt-lightbox').addEventListener('pointerdown',e=>e.stopPropagation());
+document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)closeLightbox();});
+document.getElementById('yt-lb-close').addEventListener('click',e=>{e.stopPropagation();closeLightbox();});
 
 function addHoverPreview(wrapEl,imgEl,videoId,shorts){
   if(!videoId)return;
