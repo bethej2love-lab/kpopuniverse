@@ -603,6 +603,24 @@
   ::-webkit-scrollbar-track{background:transparent;}
   ::-webkit-scrollbar-thumb{background:rgba(140,165,220,0.20);border-radius:4px;}
   ::-webkit-scrollbar-thumb:hover{background:rgba(160,190,240,0.36);}
+  /* ── Favorites ───────────────────────────────────── */
+  .fav-btn{background:none;border:none;cursor:pointer;font-size:14px;line-height:1;color:rgba(175,195,240,0.28);padding:2px 4px;border-radius:6px;transition:color .15s,transform .12s;flex-shrink:0;}
+  .fav-btn:hover{color:rgba(255,128,152,0.88);transform:scale(1.20);}
+  .fav-btn.fav-on{color:rgba(255,95,128,0.90);}
+  #tt-name-row{display:flex;align-items:center;gap:4px;margin-bottom:3px;padding-left:4px;padding-right:24px;}
+  #tt-name-row .tn{margin-bottom:0;padding-left:0;padding-right:0;flex:1;min-width:0;}
+  #gc-name-row{display:flex;align-items:center;gap:5px;margin-bottom:2px;}
+  #gc-name-row #gc-name{margin-bottom:0;flex:1;min-width:0;}
+  #fav-section{margin-bottom:14px;padding-bottom:12px;border-bottom:0.5px solid rgba(255,255,255,0.07);}
+  .fav-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .fav-hd-lbl{font-size:9.5px;font-weight:700;letter-spacing:.2em;color:rgba(130,150,205,0.5);text-transform:uppercase;}
+  .fav-item{display:flex;align-items:center;gap:6px;padding:6px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
+  .fav-item:hover{background:rgba(255,255,255,0.06);}
+  .fav-iname{font-size:12px;color:#b8d0ee;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .fav-isub{font-size:10px;color:rgba(125,150,198,0.50);flex-shrink:0;letter-spacing:.02em;}
+  .fav-itag{font-size:9px;font-weight:700;letter-spacing:.05em;padding:1px 5px;border-radius:7px;flex-shrink:0;background:rgba(145,175,255,0.10);color:rgba(150,175,228,0.55);}
+  .fav-empty{font-size:11px;color:rgba(92,112,158,0.42);padding:4px 4px;}
+  #tab-fav.fav-mode-on,#dh-fav-btn.fav-mode-on{color:rgba(255,105,135,0.90)!important;background:rgba(255,100,130,0.10);}
 </style>
 </head>
 <body>
@@ -612,6 +630,10 @@
     <span id="journal-toggle-icon">›</span>
   </button>
   <div id="journal-inner">
+    <div id="fav-section">
+      <div class="fav-hd"><span class="fav-hd-lbl">FAVORITES</span><button id="fav-mode-btn" class="sp-tog">하이라이트</button></div>
+      <div id="fav-list"><div class="fav-empty">즐겨찾기가 없어요</div></div>
+    </div>
     <div id="filter-panel">
       <div id="filter-panel-hd">
         <div>
@@ -630,18 +652,19 @@
     <button class="dh-btn" id="dh-home-btn">⌂</button>
     <button class="dh-btn" id="dh-lang-btn">KO</button>
     <button class="dh-btn" id="dh-explore-btn">✦</button>
+    <button class="dh-btn" id="dh-fav-btn">♡</button>
     <button class="dh-btn" id="dh-search-btn"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="display:block"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
     <button class="dh-btn" id="dh-settings-btn">⚙︎</button>
   </div>
 </div>
-<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div class="tn" id="tn"></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기">♡</button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
     <span id="gcx">×</span>
     <div id="gc-header">
       <div id="gc-header-text">
-        <div id="gc-name"></div>
+        <div id="gc-name-row"><div id="gc-name"></div><button id="gc-fav" class="fav-btn" aria-label="즐겨찾기">♡</button></div>
         <div id="gc-en"></div>
       </div>
       <div id="gc-logo-wrap" style="display:none"></div>
@@ -717,6 +740,7 @@
   <button class="tab-btn" id="tab-home">⌂</button>
   <button class="tab-btn" id="tab-lang">KO</button>
   <button class="tab-btn" id="tab-explore">✦</button>
+  <button class="tab-btn" id="tab-fav">♡</button>
   <button class="tab-btn" id="tab-search" style="display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
   <button class="tab-btn" id="tab-settings">⚙︎</button>
   <span id="tab-sb-icon"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
@@ -956,6 +980,7 @@ async function buildUniverse(){
   ]);
   document.getElementById('loading').style.display='none';
   GROUPS=grpData;ARTISTS=artData;
+  renderFavList();
 
   // ── Bidirectional 'with' expansion ──────────────────
   (function expandWith(){
@@ -2025,19 +2050,19 @@ function pulseGroupRipple(ko){
       sp.position.copy(bm.mesh.position);
       sp.scale.setScalar(rad*2);
       scene.add(sp);
-      const t0=performance.now(),dur=2200;
+      const t0=performance.now(),dur=2800;
       (function tick(){
         const t=Math.min((performance.now()-t0)/dur,1);
-        const ease=1-Math.pow(1-t,2.2);
+        const ease=1-Math.pow(1-t,3.0);
         sp.scale.setScalar(rad*2+ease*rad*5.5);
-        mat.opacity=Math.pow(1-t,1.4)*0.12;
+        mat.opacity=Math.pow(1-t,0.85)*0.12;
         if(t<1)requestAnimationFrame(tick);
         else{scene.remove(sp);mat.dispose();if(++done===2)tex.dispose();}
       })();
     },delay);
   }
   makeRipple(0);
-  makeRipple(950);
+  makeRipple(1300);
 }
 function pulseGroup(ko){
   const bm=bubbleMeshes.find(b=>b.ko===ko);
@@ -2140,6 +2165,7 @@ function positionCard(el,cx,cy,cardW,estH){
 function showT(a,cx,cy){
   closeConnCard();
   setFocus(a.group.ko);_openTArtist=a;
+  _syncFavBtn('member',a);
   if(a._flashPulse!==undefined||a._worldPos){a._flashPulse=1.4;}
   const el=document.getElementById('tt');
   el.style.display='block';
@@ -2240,6 +2266,7 @@ function showT(a,cx,cy){
 function showGC(ko,cx,cy,keepMemberPanel,skipRipple){
   const info=GROUPS[ko];if(!info)return;
   setFocus(ko);_openGCko=ko;
+  _syncFavBtn('group',ko);
   if(!skipRipple)pulseGroupRipple(ko);
   const el=document.getElementById('gc');
   el.classList.add('gc-enter');
@@ -2358,6 +2385,7 @@ function setFocus(groupKo){
 }
 function clearFocus(){
   focusGroupKo=null;
+  if(favMode){applyFavHighlight();return;}
   bubbleMeshes.forEach(({mesh})=>{mesh._focusTarget=1;});
   ARTISTS.forEach(a=>{a._focusTarget=1;});
 }
@@ -3029,6 +3057,110 @@ window.addEventListener('click',e=>{
   }
   closeCards();
 });
+
+// ── Favorites ─────────────────────────────────────
+const FAV_KEY_G='kpu_fav_groups';
+const FAV_KEY_M='kpu_fav_members';
+let favGroups=new Set(JSON.parse(localStorage.getItem(FAV_KEY_G)||'[]'));
+let favMembers=new Set(JSON.parse(localStorage.getItem(FAV_KEY_M)||'[]'));
+let favMode=false;
+
+function _saveFavs(){
+  localStorage.setItem(FAV_KEY_G,JSON.stringify([...favGroups]));
+  localStorage.setItem(FAV_KEY_M,JSON.stringify([...favMembers]));
+}
+function _mFavKey(a){return a.group.ko+':'+a.name.ko;}
+
+function toggleFavGroup(ko){
+  favGroups.has(ko)?favGroups.delete(ko):favGroups.add(ko);
+  _saveFavs();
+  _syncFavBtn('group',ko);
+  renderFavList();
+  if(favMode)applyFavHighlight();
+}
+function toggleFavMember(artist){
+  const k=_mFavKey(artist);
+  favMembers.has(k)?favMembers.delete(k):favMembers.add(k);
+  _saveFavs();
+  _syncFavBtn('member',artist);
+  renderFavList();
+  if(favMode)applyFavHighlight();
+}
+
+function _syncFavBtn(type,data){
+  if(type==='group'){
+    const btn=document.getElementById('gc-fav');if(!btn)return;
+    const on=favGroups.has(data);
+    btn.textContent=on?'♥':'♡';btn.classList.toggle('fav-on',on);
+  }else{
+    const btn=document.getElementById('tt-fav');if(!btn)return;
+    const k=_mFavKey(data);const on=favMembers.has(k);
+    btn.textContent=on?'♥':'♡';btn.classList.toggle('fav-on',on);
+  }
+}
+
+function renderFavList(){
+  const el=document.getElementById('fav-list');if(!el)return;
+  el.innerHTML='';
+  if(!favGroups.size&&!favMembers.size){
+    el.innerHTML='<div class="fav-empty">즐겨찾기가 없어요</div>';return;
+  }
+  [...favGroups].forEach(ko=>{
+    const info=GROUPS[ko];if(!info)return;
+    const d=document.createElement('div');d.className='fav-item';
+    const name=currentLang==='ko'?ko:(info.en||ko);
+    d.innerHTML=`<span class="fav-itag">그룹</span><span class="fav-iname">${name}</span>`;
+    d.addEventListener('click',()=>{
+      const bm=bubbleMeshes.find(b=>b.ko===ko);
+      if(bm)flyToBubble(bm.mesh.position,bm.radius);
+      showGC(ko,window.innerWidth/2,window.innerHeight*0.4);
+    });
+    el.appendChild(d);
+  });
+  [...favMembers].forEach(key=>{
+    const ci=key.indexOf(':');
+    const gko=key.slice(0,ci),mko=key.slice(ci+1);
+    const artist=ARTISTS.find(a=>a.group.ko===gko&&a.name.ko===mko);
+    if(!artist)return;
+    const d=document.createElement('div');d.className='fav-item';
+    const name=currentLang==='ko'?mko:(artist.name.en||mko);
+    d.innerHTML=`<span class="fav-itag">멤버</span><span class="fav-iname">${name}</span><span class="fav-isub">${gko}</span>`;
+    d.addEventListener('click',()=>{
+      const bm=bubbleMeshes.find(b=>b.ko===gko);
+      if(bm)flyToBubble(bm.mesh.position,bm.radius);
+      showT(artist,window.innerWidth/2,window.innerHeight*0.4);
+    });
+    el.appendChild(d);
+  });
+}
+
+function applyFavHighlight(){
+  bubbleMeshes.forEach(({mesh,ko})=>{
+    mesh._focusTarget=favGroups.has(ko)?1:FOCUS_DIM;
+  });
+  ARTISTS.forEach(a=>{
+    const on=favMembers.has(_mFavKey(a))||favGroups.has(a.group.ko);
+    a._focusTarget=on?1:FOCUS_DIM;
+  });
+}
+
+function _toggleFavMode(){
+  favMode=!favMode;
+  document.getElementById('tab-fav')?.classList.toggle('fav-mode-on',favMode);
+  document.getElementById('dh-fav-btn')?.classList.toggle('fav-mode-on',favMode);
+  document.getElementById('fav-mode-btn')?.classList.toggle('on',favMode);
+  if(favMode){
+    applyFavHighlight();
+    document.getElementById('journal-sidebar').classList.add('open');
+  }else{
+    if(focusGroupKo)setFocus(focusGroupKo);else clearFocus();
+  }
+}
+document.getElementById('tab-fav').addEventListener('click',e=>{e.stopPropagation();_toggleFavMode();});
+document.getElementById('dh-fav-btn').addEventListener('click',e=>{e.stopPropagation();_toggleFavMode();});
+document.getElementById('fav-mode-btn').addEventListener('click',e=>{e.stopPropagation();_toggleFavMode();});
+document.getElementById('tt-fav').addEventListener('click',e=>{e.stopPropagation();if(_openTArtist)toggleFavMember(_openTArtist);});
+document.getElementById('gc-fav').addEventListener('click',e=>{e.stopPropagation();if(_openGCko)toggleFavGroup(_openGCko);});
 
 // ── Journal sidebar ───────────────────────────────
 document.getElementById('journal-toggle').addEventListener('click',e=>{
