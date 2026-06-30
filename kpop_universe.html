@@ -623,6 +623,32 @@
   .fav-itag{font-size:9px;font-weight:700;letter-spacing:.05em;padding:1px 5px;border-radius:7px;flex-shrink:0;background:rgba(145,175,255,0.10);color:rgba(150,175,228,0.55);}
   .fav-empty{font-size:11px;color:rgba(92,112,158,0.42);padding:4px 4px;}
   #tab-fav.fav-mode-on,#dh-fav-btn.fav-mode-on{color:rgba(255,105,135,0.90)!important;background:rgba(255,100,130,0.10);}
+  /* ── Profile panel ───────────────────────────────── */
+  #profile-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:60;display:none;align-items:center;justify-content:center;}
+  #profile-overlay.open{display:flex;}
+  #profile-panel{width:min(312px,calc(100vw - 32px));background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:20px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:22px 22px 24px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
+  .pp-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+  .pp-title{font-size:13.5px;font-weight:700;color:rgba(210,225,255,0.88);letter-spacing:.04em;}
+  #pp-close{background:none;border:none;cursor:pointer;font-size:18px;color:rgba(148,168,218,0.48);line-height:1;padding:2px 5px;transition:color .13s;}
+  #pp-close:hover{color:rgba(200,218,255,0.85);}
+  .pp-section{margin-bottom:18px;}
+  .pp-label{font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(126,150,204,0.52);display:block;margin-bottom:8px;}
+  .pp-required{color:rgba(255,108,135,0.82);}
+  .pp-input{width:100%;background:rgba(255,255,255,0.055);border:0.5px solid rgba(255,255,255,0.09);border-radius:10px;color:#c8d8f0;font-family:inherit;font-size:13px;padding:9px 12px;outline:none;letter-spacing:.02em;transition:border-color .15s,background .15s;box-sizing:border-box;}
+  .pp-input:focus{background:rgba(255,255,255,0.085);border-color:rgba(136,164,255,0.38);}
+  .pp-input::placeholder{color:rgba(126,152,202,0.28);}
+  .pp-err{font-size:10.5px;color:rgba(255,108,132,0.82);margin-top:5px;letter-spacing:.02em;}
+  #pp-colors{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px;}
+  .pp-color-swatch{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:transform .13s,border-color .13s;flex-shrink:0;padding:0;outline:none;}
+  .pp-color-swatch:hover{transform:scale(1.18);}
+  .pp-color-swatch.sel{border-color:rgba(255,255,255,0.82);transform:scale(1.14);}
+  .pp-fav-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .pp-fav-info{flex:1;}
+  .pp-fav-label{font-size:12px;color:rgba(178,200,238,0.82);font-weight:500;}
+  .pp-fav-sub{font-size:10px;color:rgba(110,135,182,0.48);margin-top:3px;letter-spacing:.02em;}
+  .pp-save-btn{width:100%;margin-top:4px;padding:11px;border:none;border-radius:12px;background:rgba(126,156,255,0.15);border:0.5px solid rgba(126,156,255,0.26);color:rgba(195,215,255,0.90);font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.07em;cursor:pointer;transition:background .15s,border-color .15s,color .15s;}
+  .pp-save-btn:hover{background:rgba(126,156,255,0.26);border-color:rgba(126,156,255,0.48);color:#fff;}
+  #tab-profile.pp-set,#dh-profile-btn.pp-set{font-size:11px;font-weight:700;letter-spacing:.01em;}
 </style>
 </head>
 <body>
@@ -656,6 +682,7 @@
     <button class="dh-btn" id="dh-explore-btn">✦</button>
     <button class="dh-btn" id="dh-fav-btn">♡</button>
     <button class="dh-btn" id="dh-search-btn"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="display:block"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+    <button class="dh-btn" id="dh-profile-btn">◉</button>
     <button class="dh-btn" id="dh-settings-btn">⚙︎</button>
   </div>
 </div>
@@ -744,6 +771,7 @@
   <button class="tab-btn" id="tab-explore">✦</button>
   <button class="tab-btn" id="tab-fav">♡</button>
   <button class="tab-btn" id="tab-search" style="display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+  <button class="tab-btn" id="tab-profile">◉</button>
   <button class="tab-btn" id="tab-settings">⚙︎</button>
   <span id="tab-sb-icon"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
   <input id="tab-sb-input" type="text" placeholder="그룹 · 멤버 검색…" autocomplete="off" inputmode="search">
@@ -756,6 +784,37 @@
   <button id="zoom-overview-btn" title="전체 보기">⊙</button>
 </div>
 <div id="conn-panel"><div class="conn-inner" id="conn-panel-inner"></div></div>
+<div id="profile-overlay">
+  <div id="profile-panel">
+    <div class="pp-hd">
+      <span class="pp-title">내 프로필</span>
+      <button id="pp-close">×</button>
+    </div>
+    <div class="pp-section">
+      <label class="pp-label" for="pp-nick">닉네임 <span class="pp-required">*</span></label>
+      <input id="pp-nick" type="text" class="pp-input" placeholder="닉네임을 입력하세요" maxlength="20" autocomplete="off">
+      <div id="pp-nick-err" class="pp-err">닉네임을 입력해주세요</div>
+    </div>
+    <div class="pp-section">
+      <label class="pp-label" for="pp-bio">한 줄 소개</label>
+      <input id="pp-bio" type="text" class="pp-input" placeholder="선택사항" maxlength="50" autocomplete="off">
+    </div>
+    <div class="pp-section">
+      <div class="pp-label">내 별 색상</div>
+      <div id="pp-colors"></div>
+    </div>
+    <div class="pp-section" style="margin-bottom:20px">
+      <div class="pp-fav-row">
+        <div class="pp-fav-info">
+          <div class="pp-fav-label">즐겨찾기 공개</div>
+          <div class="pp-fav-sub">다른 사람들이 볼 수 있어요</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="pp-fav-pub" checked><span class="sw-track"><span class="sw-thumb"></span></span></label>
+      </div>
+    </div>
+    <button id="pp-save" class="pp-save-btn">저장하고 우주에 나타나기 ✦</button>
+  </div>
+</div>
 <div id="conn-sheet">
   <div class="conn-handle"></div>
   <div id="conn-sheet-inner"><div class="conn-inner" id="conn-sheet-body"></div></div>
@@ -879,6 +938,7 @@ function applyLang(){
   const si=document.getElementById('search-input');if(si)si.placeholder=t.searchPH;
   const msi=document.getElementById('tab-sb-input');if(msi)msi.placeholder=t.searchPH;
   _refreshOpenCardText();
+  renderFavList();
   const _fp=document.getElementById('filter-panel');
   if(_tagFilter&&_tagFilter.type&&_fp&&_fp.style.display==='block')_renderFilterPanel();
 }
@@ -983,6 +1043,7 @@ async function buildUniverse(){
   document.getElementById('loading').style.display='none';
   GROUPS=grpData;ARTISTS=artData;
   renderFavList();
+  placeMyStarInUniverse();
 
   // ── Bidirectional 'with' expansion ──────────────────
   (function expandWith(){
@@ -1294,6 +1355,15 @@ function animate(){
     el.style.opacity=op.toFixed(3);
     el.style.pointerEvents=op>0.15?'auto':'none';
   });
+  if(myStarSprite){
+    const _st=performance.now()*0.001;
+    myStarSprite.scale.setScalar(myStarBase*(0.88+Math.sin(_st*1.15)*0.12));
+    myStarSprite.material.opacity=0.80+Math.sin(_st*0.85+1.0)*0.16;
+    if(myStarLabel){
+      const _sd=camera.position.distanceTo(myStarSprite.position);
+      myStarLabel.element.style.opacity=(_sd<50?1:_sd<85?(85-_sd)/35:0).toFixed(3);
+    }
+  }
   renderer.render(scene,camera);
   labelRenderer.render(scene,camera);
   if(window._syncZoomSlider)_syncZoomSlider();
@@ -3079,6 +3149,7 @@ function toggleFavGroup(ko){
   _syncFavBtn('group',ko);
   renderFavList();
   if(favMode)applyFavHighlight();
+  if(myStarSprite)placeMyStarInUniverse();
 }
 function toggleFavMember(artist){
   const k=_mFavKey(artist);
@@ -3087,6 +3158,7 @@ function toggleFavMember(artist){
   _syncFavBtn('member',artist);
   renderFavList();
   if(favMode)applyFavHighlight();
+  if(myStarSprite)placeMyStarInUniverse();
 }
 
 function _syncFavBtn(type,data){
@@ -3129,6 +3201,7 @@ function renderFavList(){
       const bm=bubbleMeshes.find(b=>b.ko===gko);
       if(bm)flyToBubble(bm.mesh.position,bm.radius);
       showT(artist,window.innerWidth/2,window.innerHeight*0.4);
+      pulseMember(artist);
     });
     el.appendChild(d);
   });
@@ -3136,7 +3209,11 @@ function renderFavList(){
 
 function applyFavHighlight(){
   bubbleMeshes.forEach(({mesh,ko})=>{
-    mesh._focusTarget=favGroups.has(ko)?1:FOCUS_DIM;
+    if(favGroups.has(ko)){mesh._focusTarget=1;}
+    else{
+      const hasFavMember=ARTISTS.some(a=>a.group.ko===ko&&favMembers.has(_mFavKey(a)));
+      mesh._focusTarget=hasFavMember?FOCUS_DIM*3.5:FOCUS_DIM;
+    }
   });
   ARTISTS.forEach(a=>{
     const on=favMembers.has(_mFavKey(a))||favGroups.has(a.group.ko);
@@ -3161,6 +3238,140 @@ document.getElementById('dh-fav-btn').addEventListener('click',e=>{e.stopPropaga
 document.getElementById('fav-mode-btn').addEventListener('click',e=>{e.stopPropagation();_toggleFavMode();});
 document.getElementById('tt-fav').addEventListener('click',e=>{e.stopPropagation();if(_openTArtist)toggleFavMember(_openTArtist);});
 document.getElementById('gc-fav').addEventListener('click',e=>{e.stopPropagation();if(_openGCko)toggleFavGroup(_openGCko);});
+
+// ── Profile & My Star ─────────────────────────────
+const PROFILE_KEY='kpu_profile';
+const STAR_COLORS=[
+  [155,210,255],[182,150,255],[255,138,175],[138,255,212],
+  [255,218,112],[226,232,255],[255,160,128],[208,122,255]
+];
+let myProfile=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');
+let myStarSprite=null,myStarLabel=null,myStarTex=null,myStarBase=2.4;
+let _ppColorIdx=0;
+if(myProfile?.color){
+  const idx=STAR_COLORS.findIndex(c=>c[0]===myProfile.color[0]&&c[1]===myProfile.color[1]);
+  if(idx>=0)_ppColorIdx=idx;
+}
+
+function _makeMyStarTex([r,g,b]){
+  const sz=128,c=sz/2;
+  const cv=document.createElement('canvas');cv.width=cv.height=sz;
+  const ctx=cv.getContext('2d');
+  const grd=ctx.createRadialGradient(c,c,0,c,c,c*0.88);
+  grd.addColorStop(0,`rgba(${r},${g},${b},1)`);
+  grd.addColorStop(0.10,`rgba(${r},${g},${b},0.92)`);
+  grd.addColorStop(0.28,`rgba(${r},${g},${b},0.48)`);
+  grd.addColorStop(0.55,`rgba(${r},${g},${b},0.11)`);
+  grd.addColorStop(0.82,`rgba(${r},${g},${b},0.02)`);
+  grd.addColorStop(1,`rgba(${r},${g},${b},0)`);
+  ctx.fillStyle=grd;ctx.fillRect(0,0,sz,sz);
+  const core=ctx.createRadialGradient(c,c,0,c,c,sz*0.065);
+  core.addColorStop(0,'rgba(255,255,255,1)');
+  core.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=core;ctx.fillRect(0,0,sz,sz);
+  return new THREE.CanvasTexture(cv);
+}
+
+function _getMyStarPos(){
+  const list=[...favGroups];
+  if(!list.length)return new THREE.Vector3(0,12,0);
+  const c=new THREE.Vector3();let n=0;
+  list.forEach(ko=>{const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm){c.add(bm.mesh.position);n++;}});
+  if(n)c.divideScalar(n);
+  c.y+=7;
+  return c;
+}
+
+function placeMyStarInUniverse(){
+  if(myStarSprite){scene.remove(myStarSprite);if(myStarTex)myStarTex.dispose();myStarSprite=null;myStarTex=null;myStarLabel=null;}
+  if(!myProfile?.nickname)return;
+  const color=myProfile.color||STAR_COLORS[0];
+  const[r,g,b]=color;
+  myStarTex=_makeMyStarTex(color);
+  const mat=new THREE.SpriteMaterial({map:myStarTex,transparent:true,opacity:0.88,blending:THREE.AdditiveBlending,depthTest:false});
+  myStarSprite=new THREE.Sprite(mat);
+  myStarSprite.position.copy(_getMyStarPos());
+  myStarSprite.scale.setScalar(myStarBase);
+  const div=document.createElement('div');
+  div.className='group-label';
+  div.textContent=myProfile.nickname;
+  div.style.color=`rgb(${Math.min(255,r*2.2|0)},${Math.min(255,g*2.2|0)},${Math.min(255,b*2.4|0)})`;
+  div.style.fontSize='11px';
+  div.style.cursor='pointer';
+  div.addEventListener('click',e=>{e.stopPropagation();openProfilePanel();});
+  myStarLabel=new THREE.CSS2DObject(div);
+  myStarLabel.position.set(0,myStarBase*0.75,0);
+  myStarSprite.add(myStarLabel);
+  scene.add(myStarSprite);
+}
+
+function _buildColorSwatches(){
+  const cont=document.getElementById('pp-colors');cont.innerHTML='';
+  STAR_COLORS.forEach(([r,g,b],i)=>{
+    const sw=document.createElement('button');
+    sw.className='pp-color-swatch'+(i===_ppColorIdx?' sel':'');
+    sw.style.cssText=`background:rgb(${r},${g},${b});box-shadow:0 0 7px rgba(${r},${g},${b},0.55)`;
+    sw.addEventListener('click',e=>{
+      e.stopPropagation();_ppColorIdx=i;
+      cont.querySelectorAll('.pp-color-swatch').forEach((s,j)=>s.classList.toggle('sel',j===i));
+    });
+    cont.appendChild(sw);
+  });
+}
+
+function openProfilePanel(){
+  document.getElementById('profile-overlay').classList.add('open');
+  document.getElementById('pp-nick').value=myProfile?.nickname||'';
+  document.getElementById('pp-bio').value=myProfile?.bio||'';
+  document.getElementById('pp-fav-pub').checked=myProfile?.favPublic!==false;
+  document.getElementById('pp-nick-err').style.display='none';
+  _buildColorSwatches();
+  setTimeout(()=>document.getElementById('pp-nick').focus(),80);
+}
+
+function closeProfilePanel(){
+  document.getElementById('profile-overlay').classList.remove('open');
+}
+
+function _updateProfileBtns(){
+  const lbl=myProfile?.nickname?myProfile.nickname[0].toUpperCase():'◉';
+  ['tab-profile','dh-profile-btn'].forEach(id=>{
+    const btn=document.getElementById(id);
+    if(!btn)return;
+    btn.textContent=lbl;
+    btn.classList.toggle('pp-set',!!(myProfile?.nickname));
+    if(myProfile?.color){
+      const[r,g,b]=myProfile.color;
+      btn.style.color=myProfile.nickname?`rgba(${r},${g},${b},0.88)`:'';
+    }else btn.style.color='';
+  });
+}
+
+function saveProfile(){
+  const nick=document.getElementById('pp-nick').value.trim();
+  const errEl=document.getElementById('pp-nick-err');
+  if(!nick){errEl.style.display='block';document.getElementById('pp-nick').focus();return;}
+  errEl.style.display='none';
+  myProfile={
+    nickname:nick,
+    bio:document.getElementById('pp-bio').value.trim(),
+    color:STAR_COLORS[_ppColorIdx],
+    favPublic:document.getElementById('pp-fav-pub').checked
+  };
+  localStorage.setItem(PROFILE_KEY,JSON.stringify(myProfile));
+  closeProfilePanel();
+  _updateProfileBtns();
+  placeMyStarInUniverse();
+}
+
+document.getElementById('pp-save').addEventListener('click',e=>{e.stopPropagation();saveProfile();});
+document.getElementById('pp-close').addEventListener('click',e=>{e.stopPropagation();closeProfilePanel();});
+document.getElementById('profile-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeProfilePanel();});
+document.getElementById('profile-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
+['pp-nick','pp-bio'].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')saveProfile();}));
+document.getElementById('tab-profile').addEventListener('click',e=>{e.stopPropagation();openProfilePanel();});
+document.getElementById('dh-profile-btn').addEventListener('click',e=>{e.stopPropagation();openProfilePanel();});
+_updateProfileBtns();
 
 // ── Journal sidebar ───────────────────────────────
 document.getElementById('journal-toggle').addEventListener('click',e=>{
