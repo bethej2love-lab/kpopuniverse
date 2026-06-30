@@ -961,6 +961,9 @@ let regularPts=null,sparklePts=null;
 let myStarSprite=null,myStarLabel=null,myStarTex=null,myStarBase=2.4;
 let _myStarSelected=false,_myStarSavedCam=null,_myStarSavedTarget=null;
 const connLines=[];
+let _myStarLines=[];
+let _memberCardLines=[];
+function _artistGroups(a){return a.groups||[a.group];}
 let _tagFilter={type:null,value:null};
 let regColorAttr=null,spkColorAttr=null;
 let currentLang='ko';
@@ -994,7 +997,7 @@ function _refreshOpenCardText(){
       document.getElementById('gc-name').textContent=currentLang==='ko'?_openGCko:(info.en||_openGCko);
       document.getElementById('gc-en').textContent=currentLang==='ko'?(info.en||''):'';
       const memListEl=document.getElementById('gc-mem-list');
-      ARTISTS.filter(a=>a.group.ko===_openGCko&&a.active)
+      ARTISTS.filter(a=>a.active&&_artistGroups(a).some(g=>g.ko===_openGCko))
         .sort((a,b)=>(a.bday||'9999-99-99')<(b.bday||'9999-99-99')?-1:1)
         .forEach((m,i)=>{if(memListEl.children[i])memListEl.children[i].textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);});
     }
@@ -1004,7 +1007,7 @@ function _refreshOpenCardText(){
   if(ttEl.style.display!=='none'&&_openTArtist){
     const a=_openTArtist;
     document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
-    document.getElementById('tg').textContent=currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko);
+    document.getElementById('tg').textContent=_artistGroups(a).map(g=>currentLang==='ko'?g.ko:(g.en||g.ko)).join(' · ');
     const tcoEl=document.getElementById('tco');tcoEl.innerHTML='';
     const _tcoParts=[];
     if(a.co)_tcoParts.push({text:a.co,type:'agency',value:a.co});
@@ -1125,9 +1128,12 @@ async function buildUniverse(){
   const memberMap={};
   const artistByName={};
   artData.forEach(a=>{
-    const k=a.group.ko;
-    if(!memberMap[k])memberMap[k]=[];
-    memberMap[k].push(a);
+    a._worldPositions=[];
+    _artistGroups(a).forEach(g=>{
+      const k=g.ko;
+      if(!memberMap[k])memberMap[k]=[];
+      if(!memberMap[k].includes(a))memberMap[k].push(a);
+    });
     artistByName[a.name.ko]=a;
   });
 
@@ -1270,12 +1276,19 @@ async function buildUniverse(){
       pArr.push(mPos.x,mPos.y,mPos.z);
       cArr.push(spColor.r,spColor.g,spColor.b);
       aArr.push(m);
-      m._worldPos=mPos.clone();
-      m._origColor=[spColor.r,spColor.g,spColor.b];
-      m._ptsType=m.sparkle?'sparkle':'regular';
-      m._ptsIdx=m.sparkle?sparkleIdx++:regularIdx++;
-      m._bdayYear=parseInt(m.bday)||0;
-      m._filterAlpha=1; m._filterTarget=1;
+      const _pType=m.sparkle?'sparkle':'regular';
+      const _pIdx=m.sparkle?sparkleIdx++:regularIdx++;
+      const _origCol=[spColor.r,spColor.g,spColor.b];
+      m._worldPositions.push({groupKo:ko,pos:mPos.clone(),ptsType:_pType,ptsIdx:_pIdx,origColor:_origCol});
+      // 첫 번째 그룹(primary) 위치만 _worldPos 등에 세팅
+      if(!m._worldPos){
+        m._worldPos=mPos.clone();
+        m._origColor=_origCol;
+        m._ptsType=_pType;
+        m._ptsIdx=_pIdx;
+        m._bdayYear=parseInt(m.bday)||0;
+        m._filterAlpha=1; m._filterTarget=1;
+      }
     });
   });
 
@@ -1383,10 +1396,12 @@ function animate(){
     if(a._flashPulse>0.005){a._flashPulse*=0.84;colorsDirty=true;}else{a._flashPulse=0;}
     if(Math.abs(a._filterAlpha-prev)<0.0005&&Math.abs(a._focusAlpha-prevF)<0.0005&&!a._flashPulse)return;
     const fa=Math.min(1,a._filterAlpha*a._focusAlpha+(a._flashPulse||0));
-    const attr=a._ptsType==='sparkle'?spkColorAttr:regColorAttr;
-    if(!attr)return;
-    const i=a._ptsIdx*3;
-    attr.array[i]=a._origColor[0]*fa;attr.array[i+1]=a._origColor[1]*fa;attr.array[i+2]=a._origColor[2]*fa;
+    (a._worldPositions||[]).forEach(wp=>{
+      const attr=wp.ptsType==='sparkle'?spkColorAttr:regColorAttr;
+      if(!attr)return;
+      const i=wp.ptsIdx*3;
+      attr.array[i]=wp.origColor[0]*fa;attr.array[i+1]=wp.origColor[1]*fa;attr.array[i+2]=wp.origColor[2]*fa;
+    });
     colorsDirty=true;
   });
   if(colorsDirty){if(regColorAttr)regColorAttr.needsUpdate=true;if(spkColorAttr)spkColorAttr.needsUpdate=true;}
@@ -1399,6 +1414,14 @@ function animate(){
     el.style.opacity=op.toFixed(3);
     el.style.pointerEvents=op>0.15?'auto':'none';
   });
+  if(_myStarLines.length){
+    const _msd=camera.position.distanceTo(myStarSprite?myStarSprite.position:new THREE.Vector3());
+    const _mAlpha=Math.max(0,Math.min(1,(_msd-10)/60));
+    _myStarLines.forEach(l=>{
+      const base=l.material instanceof THREE.LineDashedMaterial?0.28:0.55;
+      l.material.opacity=base*_mAlpha;
+    });
+  }
   if(myStarSprite){
     const _st=performance.now()*0.001;
     myStarSprite.scale.setScalar(myStarBase*(0.88+Math.sin(_st*1.15)*0.12));
@@ -1761,6 +1784,7 @@ function openMemberPanel(cardEl){
   if(!_memberPanelShifted){_memberPanelShifted=true;_panWorld(3,400);}
 }
 function closeMemberPanel(panBack){
+  _clearMemberCardLines();
   closeConnCard();
   memberPanelEl.classList.remove('open');
   const tt=document.getElementById('tt');
@@ -2138,6 +2162,7 @@ mobSheetEl.addEventListener('touchend',e=>{
   }
 },{passive:true});
 function closeCards(){
+  _clearMemberCardLines();
   closeConnCard();
   if(isMob())closeMobSheet();
   else{closeMemberPanel(false);closeSidePanel();}
@@ -2201,7 +2226,8 @@ function pulseGroup(ko){
 }
 
 function pulseMember(artist){
-  if(!artist._worldPos)return;
+  const _positions=(artist._worldPositions||[]).map(wp=>wp.pos);
+  if(!_positions.length){if(artist._worldPos)_positions.push(artist._worldPos);else return;}
   const [r,g,b]=artist.color||[255,255,255];
   // 부드러운 링 텍스처 (캔버스 방사형 그라디언트)
   const sz=128,c=sz/2;
@@ -2215,14 +2241,14 @@ function pulseMember(artist){
   c2.fillStyle=grd;c2.fillRect(0,0,sz,sz);
   const tex=new THREE.CanvasTexture(cv);
 
-  function makeRipple(delay){
+  function makeRipple(delay,pos){
     setTimeout(()=>{
       const mat=new THREE.SpriteMaterial({
         map:tex,transparent:true,opacity:0,
         blending:THREE.AdditiveBlending,depthTest:false
       });
       const sp=new THREE.Sprite(mat);
-      sp.position.copy(artist._worldPos);
+      sp.position.copy(pos);
       sp.scale.setScalar(0.05);
       scene.add(sp);
       const t0=performance.now(),dur=1600;
@@ -2236,8 +2262,7 @@ function pulseMember(artist){
       })();
     },delay);
   }
-  makeRipple(0);
-  makeRipple(780);
+  _positions.forEach(pos=>{makeRipple(0,pos);makeRipple(780,pos);});
   setTimeout(()=>tex.dispose(),2600);
 }
 document.getElementById('ttx').addEventListener('click',e=>{
@@ -2283,6 +2308,8 @@ function positionCard(el,cx,cy,cardW,estH){
 
 function showT(a,cx,cy){
   closeConnCard();
+  _clearMemberCardLines();
+  const _aGroups=_artistGroups(a);
   setFocus(a.group.ko);_openTArtist=a;
   _syncFavBtn('member',a);
   if(a._flashPulse!==undefined||a._worldPos){a._flashPulse=1.4;}
@@ -2295,7 +2322,7 @@ function showT(a,cx,cy){
   else ttBar.style.background='rgba(160,180,220,0.22)';
   document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
   const tgEl=document.getElementById('tg');
-  tgEl.textContent=currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko);
+  tgEl.textContent=_aGroups.map(g=>currentLang==='ko'?g.ko:(g.en||g.ko)).join(' · ');
   tgEl.onclick=e=>{
     e.stopPropagation();
     if(!isMob()&&memberPanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===memberPanelEl){
@@ -2353,7 +2380,7 @@ function showT(a,cx,cy){
   });
   document.getElementById('tm').innerHTML='';
   const tv=document.getElementById('tv');
-  const _grpSongs=(GROUPS[a.group.ko]||{}).songs||[];
+  const _grpSongs=_aGroups.flatMap(g=>(GROUPS[g.ko]||{}).songs||[]);
   const _memberAllSongs=_dedupSongs([...(a.songs||[]),..._getSongsFeaturingArtist(a),..._grpSongs]);
   buildVideoSection(_memberAllSongs,tv,{groupKo:a.group.ko,memberKo:a.name.ko});
   // ✦ 연결 버튼 (그룹명 오른쪽)
@@ -2380,6 +2407,18 @@ function showT(a,cx,cy){
   const ctrEl=document.getElementById('tt-counter');
   navEl.style.display=ttGroupMembers.length>1?'flex':'none';
   ctrEl.textContent=ttGroupMembers.length>1?`${ttMemberIdx+1} / ${ttGroupMembers.length}`:'';
+  // 다중 그룹 소속 멤버 → 각 행성 내 별 사이 선 연결
+  if(a._worldPositions&&a._worldPositions.length>1){
+    const col=a.color||[200,210,255];
+    const hexCol=new THREE.Color(col[0]/255,col[1]/255,col[2]/255).multiplyScalar(1.8);
+    for(let _i=0;_i<a._worldPositions.length-1;_i++){
+      for(let _j=_i+1;_j<a._worldPositions.length;_j++){
+        const geo=new THREE.BufferGeometry().setFromPoints([a._worldPositions[_i].pos.clone(),a._worldPositions[_j].pos.clone()]);
+        const mat=new THREE.LineBasicMaterial({color:hexCol,transparent:true,opacity:0.7,depthWrite:false});
+        const line=new THREE.Line(geo,mat);scene.add(line);_memberCardLines.push(line);
+      }
+    }
+  }
 }
 
 function showGC(ko,cx,cy,keepMemberPanel,skipRipple){
@@ -2442,11 +2481,12 @@ function showGC(ko,cx,cy,keepMemberPanel,skipRipple){
   snsRow.style.display=snsList.children.length?'':'none';
   const memListEl=document.getElementById('gc-mem-list');
   memListEl.innerHTML='';
-  ARTISTS.filter(a=>a.group.ko===ko&&a.active)
+  ARTISTS.filter(a=>a.active&&_artistGroups(a).some(g=>g.ko===ko))
     .sort((a,b)=>(a.bday||'9999-99-99')<(b.bday||'9999-99-99')?-1:1)
     .forEach(m=>{
     const sp=document.createElement('span');sp.className='gc-mem-name';
     sp.textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
+    if(_artistGroups(m).length>1)sp.title=_artistGroups(m).map(g=>g.ko).join(' · ');
     sp.addEventListener('click',e=>{e.stopPropagation();if(isMob())closeCards();showT(m,cx,cy);if(m._worldPos)pulseMember(m);});
     memListEl.appendChild(sp);
   });
@@ -2491,7 +2531,7 @@ function applyFilter(){
   // 3단계: 보이는 멤버가 0명인 그룹은 버블도 숨김
   bubbleMeshes.forEach(({mesh,ko})=>{
     if(mesh._filterTarget===0)return;
-    const members=ARTISTS.filter(a=>a.group.ko===ko);
+    const members=ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===ko));
     if(members.length>0&&members.every(a=>a._filterTarget===0))mesh._filterTarget=0;
   });
 }
@@ -2501,7 +2541,7 @@ function setFocus(groupKo){
   _clearMyStarSel();
   focusGroupKo=groupKo;
   bubbleMeshes.forEach(({mesh,ko})=>{mesh._focusTarget=(ko===groupKo)?1:FOCUS_DIM;});
-  ARTISTS.forEach(a=>{a._focusTarget=(a.group.ko===groupKo)?1:FOCUS_DIM;});
+  ARTISTS.forEach(a=>{a._focusTarget=_artistGroups(a).some(g=>g.ko===groupKo)?1:FOCUS_DIM;});
 }
 function _clearMyStarSel(){
   if(!_myStarSelected)return;
@@ -3034,15 +3074,19 @@ window.addEventListener('mousemove',e=>{
     // 1. 멤버 별 이름 — 행성이 충분히 가까울 때만
     let nearArtist=null,nearPx=Infinity;
     ARTISTS.forEach(a=>{
-      if(!a._worldPos)return;
-      const bm=bubbleMeshes.find(b=>b.ko===a.group.ko);
-      if(bm&&camera.position.distanceTo(bm.mesh.position)>65)return;
-      const p=a._worldPos.clone().project(camera);
-      if(p.z>1)return;
-      const sx=(p.x+1)*0.5*rect.width+rect.left;
-      const sy=(-p.y+1)*0.5*rect.height+rect.top;
-      const d=Math.hypot(sx-e.clientX,sy-e.clientY);
-      if(d<nearPx){nearPx=d;nearArtist=a;}
+      _artistGroups(a).forEach(g=>{
+        const wp=(a._worldPositions||[]).find(w=>w.groupKo===g.ko);
+        const pos=wp?wp.pos:a._worldPos;
+        if(!pos)return;
+        const bm=bubbleMeshes.find(b=>b.ko===g.ko);
+        if(bm&&camera.position.distanceTo(bm.mesh.position)>65)return;
+        const p=pos.clone().project(camera);
+        if(p.z>1)return;
+        const sx=(p.x+1)*0.5*rect.width+rect.left;
+        const sy=(-p.y+1)*0.5*rect.height+rect.top;
+        const d=Math.hypot(sx-e.clientX,sy-e.clientY);
+        if(d<nearPx){nearPx=d;nearArtist=a;}
+      });
     });
     if(nearArtist&&nearPx<14){
       _tipEl.textContent=currentLang==='ko'?nearArtist.name.ko:(nearArtist.name.en||nearArtist.name.ko);
@@ -3092,13 +3136,16 @@ renderer.domElement.addEventListener('touchend',e=>{
     // 가까이 줌인된 투명 행성 or 행성 밖 → 멤버 점 체크
     let nearArtist=null,nearPx=Infinity;
     ARTISTS.forEach(a=>{
-      if(!a._worldPos)return;
-      const p=a._worldPos.clone().project(camera);
-      if(p.z>1)return;
-      const sx=(p.x+1)*0.5*rect.width+rect.left;
-      const sy=(-p.y+1)*0.5*rect.height+rect.top;
-      const d=Math.hypot(sx-cx,sy-cy);
-      if(d<nearPx){nearPx=d;nearArtist=a;}
+      const _wps=a._worldPositions||[];
+      const _chk=_wps.length?_wps.map(wp=>wp.pos):(a._worldPos?[a._worldPos]:[]);
+      _chk.forEach(pos=>{
+        const p=pos.clone().project(camera);
+        if(p.z>1)return;
+        const sx=(p.x+1)*0.5*rect.width+rect.left;
+        const sy=(-p.y+1)*0.5*rect.height+rect.top;
+        const d=Math.hypot(sx-cx,sy-cy);
+        if(d<nearPx){nearPx=d;nearArtist=a;}
+      });
     });
     if(nearArtist&&nearPx<25){
       e.preventDefault();
@@ -3133,13 +3180,16 @@ window.addEventListener('click',e=>{
   function nearestMember(){
     let nearArtist=null,nearPx=Infinity;
     ARTISTS.forEach(a=>{
-      if(!a._worldPos)return;
-      const p=a._worldPos.clone().project(camera);
-      if(p.z>1)return;
-      const sx=(p.x+1)*0.5*rect.width+rect.left;
-      const sy=(-p.y+1)*0.5*rect.height+rect.top;
-      const d=Math.hypot(sx-e.clientX,sy-e.clientY);
-      if(d<nearPx){nearPx=d;nearArtist=a;}
+      const _wps=a._worldPositions||[];
+      const _chk=_wps.length?_wps.map(wp=>wp.pos):(a._worldPos?[a._worldPos]:[]);
+      _chk.forEach(pos=>{
+        const p=pos.clone().project(camera);
+        if(p.z>1)return;
+        const sx=(p.x+1)*0.5*rect.width+rect.left;
+        const sy=(-p.y+1)*0.5*rect.height+rect.top;
+        const d=Math.hypot(sx-e.clientX,sy-e.clientY);
+        if(d<nearPx){nearPx=d;nearArtist=a;}
+      });
     });
     return nearPx<(isMob()?40:20)?nearArtist:null;
   }
@@ -3322,7 +3372,7 @@ function applyFavHighlight(){
   bubbleMeshes.forEach(({mesh,ko})=>{
     if(favGroups.has(ko)){mesh._focusTarget=1;}
     else{
-      const hasFavMember=ARTISTS.some(a=>a.group.ko===ko&&favMembers.has(_mFavKey(a)));
+      const hasFavMember=ARTISTS.some(a=>favMembers.has(_mFavKey(a))&&_artistGroups(a).some(g=>g.ko===ko));
       mesh._focusTarget=hasFavMember?FOCUS_DIM*3.5:FOCUS_DIM;
     }
   });
@@ -3330,6 +3380,7 @@ function applyFavHighlight(){
     const on=favMembers.has(_mFavKey(a))||favGroups.has(a.group.ko);
     a._focusTarget=on?1:FOCUS_DIM;
   });
+  _updateMyStarLines();
 }
 
 function _toggleFavMode(){
@@ -3341,6 +3392,7 @@ function _toggleFavMode(){
     applyFavHighlight();
     document.getElementById('journal-sidebar').classList.add('open');
   }else{
+    _clearMyStarLines();
     if(focusGroupKo)setFocus(focusGroupKo);else clearFocus();
   }
 }
@@ -3388,6 +3440,43 @@ function _getMyStarPos(){
   return c;
 }
 
+function _clearMyStarLines(){
+  _myStarLines.forEach(l=>{scene.remove(l);l.geometry.dispose();l.material.dispose();});
+  _myStarLines=[];
+}
+function _clearMemberCardLines(){
+  _memberCardLines.forEach(l=>{scene.remove(l);l.geometry.dispose();l.material.dispose();});
+  _memberCardLines=[];
+}
+
+function _updateMyStarLines(){
+  _clearMyStarLines();
+  if(!favMode||!myStarSprite)return;
+  const col=myProfile?.color||STAR_COLORS[0];
+  const c=new THREE.Color(col[0]/255,col[1]/255,col[2]/255).multiplyScalar(1.5);
+  const from=myStarSprite.position;
+
+  // 멤버 → 실선
+  [...favMembers].forEach(key=>{
+    const ci=key.indexOf(':');
+    const artist=ARTISTS.find(a=>a.group.ko===key.slice(0,ci)&&a.name.ko===key.slice(ci+1));
+    if(!artist?._worldPos)return;
+    const geo=new THREE.BufferGeometry().setFromPoints([from.clone(),artist._worldPos.clone()]);
+    const mat=new THREE.LineBasicMaterial({color:c,transparent:true,opacity:0.55,depthWrite:false});
+    const line=new THREE.Line(geo,mat);scene.add(line);_myStarLines.push(line);
+  });
+
+  // 그룹 → 파선
+  [...favGroups].forEach(ko=>{
+    const bm=bubbleMeshes.find(b=>b.ko===ko);
+    if(!bm)return;
+    const geo=new THREE.BufferGeometry().setFromPoints([from.clone(),bm.mesh.position.clone()]);
+    const mat=new THREE.LineDashedMaterial({color:c,transparent:true,opacity:0.28,dashSize:2.2,gapSize:1.4,depthWrite:false});
+    const line=new THREE.Line(geo,mat);line.computeLineDistances();
+    scene.add(line);_myStarLines.push(line);
+  });
+}
+
 function placeMyStarInUniverse(){
   if(myStarSprite){scene.remove(myStarSprite);if(myStarTex)myStarTex.dispose();myStarSprite=null;myStarTex=null;myStarLabel=null;}
   if(!myProfile?.nickname)return;
@@ -3409,6 +3498,7 @@ function placeMyStarInUniverse(){
   myStarLabel.position.set(0,myStarBase*0.75,0);
   myStarSprite.add(myStarLabel);
   scene.add(myStarSprite);
+  if(favMode)_updateMyStarLines();
 }
 
 function _randomStarColor(){
