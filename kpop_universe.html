@@ -649,6 +649,33 @@
   .pp-save-btn{width:100%;margin-top:4px;padding:11px;border:none;border-radius:12px;background:rgba(126,156,255,0.15);border:0.5px solid rgba(126,156,255,0.26);color:rgba(195,215,255,0.90);font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.07em;cursor:pointer;transition:background .15s,border-color .15s,color .15s;}
   .pp-save-btn:hover{background:rgba(126,156,255,0.26);border-color:rgba(126,156,255,0.48);color:#fff;}
   #tab-profile.pp-set,#dh-profile-btn.pp-set{font-size:11px;font-weight:700;letter-spacing:.01em;}
+  /* ── My Page (sidebar) ───────────────────────────── */
+  #my-page-header{display:flex;align-items:center;gap:10px;padding:4px 0 14px;margin-bottom:14px;border-bottom:0.5px solid rgba(255,255,255,0.07);}
+  #my-page-star-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:rgba(140,160,210,0.20);transition:background .3s,box-shadow .3s;}
+  #my-page-info{flex:1;min-width:0;}
+  #my-page-nick{font-size:13px;font-weight:700;color:rgba(210,228,255,0.88);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #my-page-bio{font-size:10px;color:rgba(118,142,192,0.52);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #my-page-edit{background:none;border:0.5px solid rgba(140,165,220,0.20);border-radius:7px;color:rgba(138,162,218,0.52);font-size:9px;font-weight:700;letter-spacing:.10em;padding:3px 8px;cursor:pointer;font-family:inherit;transition:background .13s,color .13s,border-color .13s;flex-shrink:0;text-transform:uppercase;}
+  #my-page-edit:hover{background:rgba(140,165,220,0.09);color:rgba(188,210,255,0.88);border-color:rgba(140,165,220,0.38);}
+  /* ── Scrap (playlist) ────────────────────────────── */
+  #scrap-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
+  .scrap-item{display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
+  .scrap-item:hover{background:rgba(255,255,255,0.06);}
+  .scrap-thumb{width:42px;height:28px;border-radius:5px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,0.06);}
+  .scrap-thumb.is-shorts{width:18px;height:28px;}
+  .scrap-info{flex:1;min-width:0;}
+  .scrap-title{font-size:11px;color:#b8d0ee;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .scrap-sub{font-size:9.5px;color:rgba(112,136,180,0.48);margin-top:1px;letter-spacing:.02em;}
+  .scrap-del{background:none;border:none;cursor:pointer;color:rgba(138,158,208,0.30);font-size:13px;line-height:1;padding:2px 4px;flex-shrink:0;transition:color .13s;}
+  .scrap-del:hover{color:rgba(255,100,130,0.72);}
+  /* 썸네일 위 스크랩 버튼 */
+  .tv-sm{position:relative!important;}
+  #tv-big-wrap{position:relative;}
+  .scrap-btn{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.52);border:none;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:rgba(220,230,255,0.72);opacity:0;transition:opacity .15s,color .15s;z-index:3;padding:0;line-height:1;}
+  .tv-sm:hover .scrap-btn,#tv-big-wrap:hover .scrap-btn{opacity:1;}
+  .scrap-btn.scrapped{opacity:1!important;color:rgba(255,92,125,0.92);}
+  /* 랜덤 스와치 */
+  .pp-color-rand{background:conic-gradient(hsl(0,90%,72%),hsl(60,90%,72%),hsl(120,90%,72%),hsl(180,90%,72%),hsl(240,90%,72%),hsl(300,90%,72%),hsl(360,90%,72%))!important;box-shadow:none!important;}
 </style>
 </head>
 <body>
@@ -658,9 +685,21 @@
     <span id="journal-toggle-icon">›</span>
   </button>
   <div id="journal-inner">
+    <div id="my-page-header">
+      <div id="my-page-star-dot"></div>
+      <div id="my-page-info">
+        <div id="my-page-nick">–</div>
+        <div id="my-page-bio"></div>
+      </div>
+      <button id="my-page-edit">편집</button>
+    </div>
     <div id="fav-section">
       <div class="fav-hd"><span class="fav-hd-lbl">FAVORITES</span><button id="fav-mode-btn" class="sp-tog">하이라이트</button></div>
       <div id="fav-list"><div class="fav-empty">즐겨찾기가 없어요</div></div>
+    </div>
+    <div id="scrap-section">
+      <div class="fav-hd"><span class="fav-hd-lbl">PLAYLIST</span></div>
+      <div id="scrap-list"><div class="fav-empty">스크랩한 영상이 없어요</div></div>
     </div>
     <div id="filter-panel">
       <div id="filter-panel-hd">
@@ -840,7 +879,7 @@ document.body.appendChild(renderer.domElement);
 
 const labelRenderer=new THREE.CSS2DRenderer();
 labelRenderer.setSize(W,H);
-labelRenderer.domElement.style.cssText='position:fixed;top:0;left:0;pointer-events:none;';
+labelRenderer.domElement.style.cssText='position:fixed;top:0;left:0;pointer-events:none;z-index:2;';
 document.body.appendChild(labelRenderer.domElement);
 
 const controls=new THREE.OrbitControls(camera,renderer.domElement);
@@ -1044,6 +1083,7 @@ async function buildUniverse(){
   document.getElementById('loading').style.display='none';
   GROUPS=grpData;ARTISTS=artData;
   renderFavList();
+  renderScrapList();
   placeMyStarInUniverse();
 
   // ── Bidirectional 'with' expansion ──────────────────
@@ -1572,7 +1612,7 @@ function addMarquee(el){
   });
 }
 
-function makeSmallThumb(s,allSongs,idx){
+function makeSmallThumb(s,allSongs,idx,ctx){
   const vid=ytId(s.u);
   const shorts=isShorts(s.u);
   const box=document.createElement('div');
@@ -1582,13 +1622,14 @@ function makeSmallThumb(s,allSongs,idx){
   const lbl=document.createElement('div');lbl.className='tv-sm-title';lbl.textContent=s.t;
   addMarquee(lbl);
   box.appendChild(img);box.appendChild(lbl);
+  box.appendChild(_makeScrapBtn(s,ctx));
   addHoverPreview(box,img,vid,shorts);
   box.addEventListener('click',e=>{e.stopPropagation();if(isMob())window.open(s.u,'_blank');else openLightbox(s.u,shorts);});
   return box;
 }
 
 function _shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
-function buildVideoSection(songs,containerEl){
+function buildVideoSection(songs,containerEl,ctx){
   containerEl.innerHTML='';
   const all=(songs||[]);
   if(!all.length){
@@ -1598,7 +1639,6 @@ function buildVideoSection(songs,containerEl){
   if(isMob()){
     const normSongs=all.filter(s=>!isShorts(s.u));
     const shortSongs=all.filter(s=>isShorts(s.u));
-    // 일반 직캠: big 썸네일 + small row
     if(normSongs.length>0){
       const first=normSongs[0];
       const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
@@ -1607,31 +1647,30 @@ function buildVideoSection(songs,containerEl){
       const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
       addMarquee(bigTitle);
       bigWrap.appendChild(big);bigWrap.appendChild(bigTitle);
+      bigWrap.appendChild(_makeScrapBtn(first,ctx));
       addHoverPreview(bigWrap,big,ytId(first.u),false);
       bigWrap.addEventListener('click',e=>{e.stopPropagation();window.open(first.u,'_blank');});
       containerEl.appendChild(bigWrap);
-      // 모바일: 메인 영상 1개만 보이고 나머지는 더보기 뒤로
       const normRest=_shuffle(normSongs.slice(1));
       if(normRest.length>0){
         const moreWrap=document.createElement('div');moreWrap.className='tv-more-wrap open';
         normRest.forEach((s,i)=>{
-          const thumb=makeSmallThumb(s,all,0);
+          const thumb=makeSmallThumb(s,all,0,ctx);
           if(normRest.length%2===1&&i===normRest.length-1)thumb.style.flex='0 0 100%';
           moreWrap.appendChild(thumb);
         });
         containerEl.appendChild(moreWrap);
       }
     }
-    // 쇼츠: 2열 그리드
     if(shortSongs.length>0){
       _shuffle(shortSongs);
       const grid=document.createElement('div');grid.className='mob-shorts-grid';
-      shortSongs.slice(0,2).forEach(s=>grid.appendChild(makeSmallThumb(s,all,0)));
+      shortSongs.slice(0,2).forEach(s=>grid.appendChild(makeSmallThumb(s,all,0,ctx)));
       containerEl.appendChild(grid);
       if(shortSongs.length>2){
         const moreGrid=document.createElement('div');moreGrid.className='mob-shorts-grid tv-more-wrap open';
         moreGrid.style.display='grid';
-        shortSongs.slice(2).forEach(s=>moreGrid.appendChild(makeSmallThumb(s,all,0)));
+        shortSongs.slice(2).forEach(s=>moreGrid.appendChild(makeSmallThumb(s,all,0,ctx)));
         containerEl.appendChild(moreGrid);
       }
     }
@@ -1647,6 +1686,7 @@ function buildVideoSection(songs,containerEl){
   const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
   addMarquee(bigTitle);
   bigWrap.appendChild(big);bigWrap.appendChild(bigTitle);
+  bigWrap.appendChild(_makeScrapBtn(first,ctx));
   addHoverPreview(bigWrap,big,ytId(first.u),firstShorts);
   bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,firstShorts);});
   containerEl.appendChild(bigWrap);
@@ -1666,7 +1706,7 @@ function buildVideoSection(songs,containerEl){
   });
   while(si<sPairs.length)ordered.push(...sPairs[si++]);
   const grid=document.createElement('div');grid.id='tv-grid';
-  ordered.forEach(s=>grid.appendChild(makeSmallThumb(s,all,0)));
+  ordered.forEach(s=>grid.appendChild(makeSmallThumb(s,all,0,ctx)));
   containerEl.appendChild(grid);
 }
 
@@ -2309,7 +2349,7 @@ function showT(a,cx,cy){
   const tv=document.getElementById('tv');
   const _grpSongs=(GROUPS[a.group.ko]||{}).songs||[];
   const _memberAllSongs=_dedupSongs([...(a.songs||[]),..._getSongsFeaturingArtist(a),..._grpSongs]);
-  buildVideoSection(_memberAllSongs,tv);
+  buildVideoSection(_memberAllSongs,tv,{groupKo:a.group.ko,memberKo:a.name.ko});
   // ✦ 연결 버튼 (그룹명 오른쪽)
   const connBtn=document.getElementById('tt-conn-btn');
   const hasCollab=_getCollabMembers(a).length>0;
@@ -2405,7 +2445,7 @@ function showGC(ko,cx,cy,keepMemberPanel,skipRipple){
     memListEl.appendChild(sp);
   });
   const gcTv=document.getElementById('gc-tv');
-  buildVideoSection(info.songs||[],gcTv);
+  buildVideoSection(info.songs||[],gcTv,{groupKo:ko});
   const hasSongs=(info.songs||[]).length>0;
   const cardW=hasSongs?264:234;
   el.style.maxWidth=cardW+'px';
@@ -3138,6 +3178,57 @@ let favGroups=new Set(JSON.parse(localStorage.getItem(FAV_KEY_G)||'[]'));
 let favMembers=new Set(JSON.parse(localStorage.getItem(FAV_KEY_M)||'[]'));
 let favMode=false;
 
+// ── Scraps (playlist) ──────────────────────────────
+const SCRAP_KEY='kpu_scraps';
+let scraps=JSON.parse(localStorage.getItem(SCRAP_KEY)||'[]');
+function _scrapId(s){return s.u;}
+function _isScraped(s){return scraps.some(x=>x.u===_scrapId(s));}
+function toggleScrap(s,ctx){
+  const id=_scrapId(s);
+  const i=scraps.findIndex(x=>x.u===id);
+  if(i>=0)scraps.splice(i,1);
+  else scraps.unshift({t:s.t,u:s.u,...(ctx||{})});
+  localStorage.setItem(SCRAP_KEY,JSON.stringify(scraps));
+  renderScrapList();
+  document.querySelectorAll(`.scrap-btn[data-u="${CSS.escape(id)}"]`).forEach(btn=>{
+    btn.classList.toggle('scrapped',i<0);
+    btn.textContent=i<0?'♥':'♡';
+  });
+}
+function _makeScrapBtn(s,ctx){
+  const btn=document.createElement('button');
+  btn.className='scrap-btn'+((_isScraped(s))?' scrapped':'');
+  btn.dataset.u=s.u;
+  btn.textContent=_isScraped(s)?'♥':'♡';
+  btn.title='플레이리스트에 추가';
+  btn.addEventListener('click',e=>{e.stopPropagation();toggleScrap(s,ctx);});
+  return btn;
+}
+function renderScrapList(){
+  const el=document.getElementById('scrap-list');if(!el)return;
+  if(!scraps.length){el.innerHTML='<div class="fav-empty">스크랩한 영상이 없어요</div>';return;}
+  el.innerHTML='';
+  scraps.forEach((item,i)=>{
+    const vid=ytId(item.u);const shorts=isShorts(item.u);
+    const row=document.createElement('div');row.className='scrap-item';
+    const img=document.createElement('img');
+    img.className='scrap-thumb'+(shorts?' is-shorts':'');
+    img.src=`https://img.youtube.com/vi/${vid}/mqdefault.jpg`;img.alt=item.t;
+    const info=document.createElement('div');info.className='scrap-info';
+    const tEl=document.createElement('div');tEl.className='scrap-title';tEl.textContent=item.t;
+    const sub=document.createElement('div');sub.className='scrap-sub';
+    sub.textContent=[item.groupKo,item.memberKo].filter(Boolean).join(' · ');
+    info.appendChild(tEl);info.appendChild(sub);
+    const del=document.createElement('button');del.className='scrap-del';del.textContent='×';del.title='삭제';
+    del.addEventListener('click',e=>{e.stopPropagation();scraps.splice(i,1);localStorage.setItem(SCRAP_KEY,JSON.stringify(scraps));renderScrapList();
+      document.querySelectorAll(`.scrap-btn[data-u="${CSS.escape(item.u)}"]`).forEach(b=>{b.classList.remove('scrapped');b.textContent='♡';});
+    });
+    row.appendChild(img);row.appendChild(info);row.appendChild(del);
+    row.addEventListener('click',()=>openLightbox(item.u,shorts));
+    el.appendChild(row);
+  });
+}
+
 function _saveFavs(){
   localStorage.setItem(FAV_KEY_G,JSON.stringify([...favGroups]));
   localStorage.setItem(FAV_KEY_M,JSON.stringify([...favMembers]));
@@ -3247,11 +3338,7 @@ const STAR_COLORS=[
   [255,218,112],[226,232,255],[255,160,128],[208,122,255]
 ];
 let myProfile=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');
-let _ppColorIdx=0;
-if(myProfile?.color){
-  const idx=STAR_COLORS.findIndex(c=>c[0]===myProfile.color[0]&&c[1]===myProfile.color[1]);
-  if(idx>=0)_ppColorIdx=idx;
-}
+let _ppSelectedColor=myProfile?.color||STAR_COLORS[0];
 
 function _makeMyStarTex([r,g,b]){
   const sz=128,c=sz/2;
@@ -3305,21 +3392,45 @@ function placeMyStarInUniverse(){
   scene.add(myStarSprite);
 }
 
+function _randomStarColor(){
+  const h=(Math.random()*360)|0,s=65+Math.random()*25,l=62+Math.random()*18;
+  const a=s/100,b=l/100;
+  const f=n=>{const k=(n+h/30)%12,c=a*Math.min(b,1-b);return Math.round((b-c*Math.max(-1,Math.min(k-3,9-k,1)))*255);};
+  return[f(0),f(8),f(4)];
+}
+
+function _isPresetColor(col){
+  return STAR_COLORS.some(([r,g,b])=>r===col[0]&&g===col[1]&&b===col[2]);
+}
+
 function _buildColorSwatches(){
   const cont=document.getElementById('pp-colors');cont.innerHTML='';
   STAR_COLORS.forEach(([r,g,b],i)=>{
     const sw=document.createElement('button');
-    sw.className='pp-color-swatch'+(i===_ppColorIdx?' sel':'');
+    const sel=_ppSelectedColor[0]===r&&_ppSelectedColor[1]===g&&_ppSelectedColor[2]===b;
+    sw.className='pp-color-swatch'+(sel?' sel':'');
     sw.style.cssText=`background:rgb(${r},${g},${b});box-shadow:0 0 7px rgba(${r},${g},${b},0.55)`;
     sw.addEventListener('click',e=>{
-      e.stopPropagation();_ppColorIdx=i;
+      e.stopPropagation();_ppSelectedColor=[r,g,b];
       cont.querySelectorAll('.pp-color-swatch').forEach((s,j)=>s.classList.toggle('sel',j===i));
     });
     cont.appendChild(sw);
   });
+  const randSel=!_isPresetColor(_ppSelectedColor);
+  const rw=document.createElement('button');
+  rw.className='pp-color-swatch pp-color-rand'+(randSel?' sel':'');
+  rw.title='랜덤';
+  rw.addEventListener('click',e=>{
+    e.stopPropagation();
+    _ppSelectedColor=_randomStarColor();
+    cont.querySelectorAll('.pp-color-swatch').forEach(s=>s.classList.remove('sel'));
+    rw.classList.add('sel');
+  });
+  cont.appendChild(rw);
 }
 
 function openProfilePanel(){
+  if(myProfile?.color)_ppSelectedColor=myProfile.color;
   document.getElementById('profile-overlay').classList.add('open');
   document.getElementById('pp-nick').value=myProfile?.nickname||'';
   document.getElementById('pp-bio').value=myProfile?.bio||'';
@@ -3347,6 +3458,18 @@ function _updateProfileBtns(){
   });
 }
 
+function updateMyPage(){
+  const nick=myProfile?.nickname;
+  const col=myProfile?.color||STAR_COLORS[0];
+  const[r,g,b]=col;
+  const dot=document.getElementById('my-page-star-dot');
+  const nickEl=document.getElementById('my-page-nick');
+  const bioEl=document.getElementById('my-page-bio');
+  if(dot){dot.style.background=`rgb(${r},${g},${b})`;dot.style.boxShadow=`0 0 9px rgba(${r},${g},${b},0.55)`;}
+  if(nickEl)nickEl.textContent=nick||'–';
+  if(bioEl)bioEl.textContent=myProfile?.bio||'';
+}
+
 function saveProfile(){
   const nick=document.getElementById('pp-nick').value.trim();
   const errEl=document.getElementById('pp-nick-err');
@@ -3355,12 +3478,13 @@ function saveProfile(){
   myProfile={
     nickname:nick,
     bio:document.getElementById('pp-bio').value.trim(),
-    color:STAR_COLORS[_ppColorIdx],
+    color:_ppSelectedColor,
     favPublic:document.getElementById('pp-fav-pub').checked
   };
   localStorage.setItem(PROFILE_KEY,JSON.stringify(myProfile));
   closeProfilePanel();
   _updateProfileBtns();
+  updateMyPage();
   placeMyStarInUniverse();
 }
 
@@ -3369,9 +3493,17 @@ document.getElementById('pp-close').addEventListener('click',e=>{e.stopPropagati
 document.getElementById('profile-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeProfilePanel();});
 document.getElementById('profile-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 ['pp-nick','pp-bio'].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')saveProfile();}));
-document.getElementById('tab-profile').addEventListener('click',e=>{e.stopPropagation();openProfilePanel();});
-document.getElementById('dh-profile-btn').addEventListener('click',e=>{e.stopPropagation();openProfilePanel();});
+document.getElementById('tab-profile').addEventListener('click',e=>{
+  e.stopPropagation();
+  document.getElementById('journal-sidebar').classList.toggle('open');
+});
+document.getElementById('dh-profile-btn').addEventListener('click',e=>{
+  e.stopPropagation();
+  document.getElementById('journal-sidebar').classList.toggle('open');
+});
+document.getElementById('my-page-edit').addEventListener('click',e=>{e.stopPropagation();openProfilePanel();});
 _updateProfileBtns();
+updateMyPage();
 
 // ── Journal sidebar ───────────────────────────────
 document.getElementById('journal-toggle').addEventListener('click',e=>{
