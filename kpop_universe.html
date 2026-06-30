@@ -653,7 +653,9 @@
   #my-page-header{display:flex;align-items:center;gap:10px;padding:4px 0 14px;margin-bottom:14px;border-bottom:0.5px solid rgba(255,255,255,0.07);}
   #my-page-star-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:rgba(140,160,210,0.20);transition:background .3s,box-shadow .3s;}
   #my-page-info{flex:1;min-width:0;}
-  #my-page-nick{font-size:13px;font-weight:700;color:rgba(210,228,255,0.88);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #my-page-nick{font-size:13px;font-weight:700;color:rgba(210,228,255,0.88);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;transition:color .15s,text-shadow .15s;border-radius:4px;}
+  #my-page-nick:hover{color:rgba(240,248,255,1);}
+  #my-page-nick.my-star-sel{text-shadow:0 0 10px currentColor;}
   #my-page-bio{font-size:10px;color:rgba(118,142,192,0.52);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #my-page-edit{background:none;border:0.5px solid rgba(140,165,220,0.20);border-radius:7px;color:rgba(138,162,218,0.52);font-size:9px;font-weight:700;letter-spacing:.10em;padding:3px 8px;cursor:pointer;font-family:inherit;transition:background .13s,color .13s,border-color .13s;flex-shrink:0;text-transform:uppercase;}
   #my-page-edit:hover{background:rgba(140,165,220,0.09);color:rgba(188,210,255,0.88);border-color:rgba(140,165,220,0.38);}
@@ -957,6 +959,7 @@ let ARTISTS=[],GROUPS={};
 const bubbleMeshes=[],regularArtists=[],sparkleArtists=[];
 let regularPts=null,sparklePts=null;
 let myStarSprite=null,myStarLabel=null,myStarTex=null,myStarBase=2.4;
+let _myStarSelected=false,_myStarSavedCam=null,_myStarSavedTarget=null;
 const connLines=[];
 let _tagFilter={type:null,value:null};
 let regColorAttr=null,spkColorAttr=null;
@@ -1402,7 +1405,9 @@ function animate(){
     myStarSprite.material.opacity=0.80+Math.sin(_st*0.85+1.0)*0.16;
     if(myStarLabel){
       const _sd=camera.position.distanceTo(myStarSprite.position);
-      myStarLabel.element.style.opacity=(_sd<50?1:_sd<85?(85-_sd)/35:0).toFixed(3);
+      const _so=_sd<50?1:_sd<85?(85-_sd)/35:0;
+      myStarLabel.element.style.opacity=_so.toFixed(3);
+      myStarLabel.element.style.pointerEvents=_so>0.15?'auto':'none';
     }
   }
   renderer.render(scene,camera);
@@ -2027,7 +2032,8 @@ function _buildConnContent(container){
     container.appendChild(vidLbl);
     const vidDiv=document.createElement('div');
     const songs=_getCollabSongs(_connAnchor,_connSelected);
-    if(songs.length)buildVideoSection(songs,vidDiv);
+    const _connCtx=_connAnchor?{groupKo:_connAnchor.group.ko,memberKo:_connAnchor.name.ko}:undefined;
+    if(songs.length)buildVideoSection(songs,vidDiv,_connCtx);
     else{const e2=document.createElement('div');e2.className='conn-no-video';e2.textContent=currentLang==='ko'?'해당 조합의 영상이 없어요':'No video for this combination';vidDiv.appendChild(e2);}
     container.appendChild(vidDiv);
   }
@@ -2492,11 +2498,19 @@ function applyFilter(){
 
 // ── Focus mode ────────────────────────────────────
 function setFocus(groupKo){
+  _clearMyStarSel();
   focusGroupKo=groupKo;
   bubbleMeshes.forEach(({mesh,ko})=>{mesh._focusTarget=(ko===groupKo)?1:FOCUS_DIM;});
   ARTISTS.forEach(a=>{a._focusTarget=(a.group.ko===groupKo)?1:FOCUS_DIM;});
 }
+function _clearMyStarSel(){
+  if(!_myStarSelected)return;
+  _myStarSelected=false;
+  const nickEl=document.getElementById('my-page-nick');
+  if(nickEl){nickEl.classList.remove('my-star-sel');nickEl.style.color='';}
+}
 function clearFocus(){
+  _clearMyStarSel();
   focusGroupKo=null;
   if(favMode){applyFavHighlight();return;}
   bubbleMeshes.forEach(({mesh})=>{mesh._focusTarget=1;});
@@ -3015,6 +3029,8 @@ window.addEventListener('mousemove',e=>{
     if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom){
       _tipEl.style.opacity='0';return;
     }
+    const _overPanel=document.elementsFromPoint(e.clientX,e.clientY).some(el=>el.closest('#tt,#gc,#side-panel,#member-panel,#journal-sidebar,#desktop-header,#settings-panel,#search-wrap,#conn-panel,#yt-lightbox'));
+    if(_overPanel){_tipEl.style.opacity='0';return;}
     // 1. 멤버 별 이름 — 행성이 충분히 가까울 때만
     let nearArtist=null,nearPx=Infinity;
     ARTISTS.forEach(a=>{
@@ -3224,7 +3240,7 @@ function renderScrapList(){
       document.querySelectorAll(`.scrap-btn[data-u="${CSS.escape(item.u)}"]`).forEach(b=>{b.classList.remove('scrapped');b.textContent='♡';});
     });
     row.appendChild(img);row.appendChild(info);row.appendChild(del);
-    row.addEventListener('click',()=>openLightbox(item.u,shorts));
+    row.addEventListener('click',()=>isMob()?window.open(item.u,'_blank'):openLightbox(item.u,shorts));
     el.appendChild(row);
   });
 }
@@ -3273,7 +3289,8 @@ function renderFavList(){
     const info=GROUPS[ko];if(!info)return;
     const d=document.createElement('div');d.className='fav-item';
     const name=currentLang==='ko'?ko:(info.en||ko);
-    d.innerHTML=`<span class="fav-itag">그룹</span><span class="fav-iname">${name}</span>`;
+    const _gTag=currentLang==='ko'?'그룹':'Group';
+    d.innerHTML=`<span class="fav-itag">${_gTag}</span><span class="fav-iname">${name}</span>`;
     d.addEventListener('click',()=>{
       const bm=bubbleMeshes.find(b=>b.ko===ko);
       if(bm)flyToBubble(bm.mesh.position,bm.radius);
@@ -3288,7 +3305,9 @@ function renderFavList(){
     if(!artist)return;
     const d=document.createElement('div');d.className='fav-item';
     const name=currentLang==='ko'?mko:(artist.name.en||mko);
-    d.innerHTML=`<span class="fav-itag">멤버</span><span class="fav-iname">${name}</span><span class="fav-isub">${gko}</span>`;
+    const _grpSub=currentLang==='ko'?gko:(GROUPS[gko]?.en||gko);
+    const _mTag=currentLang==='ko'?'멤버':'Member';
+    d.innerHTML=`<span class="fav-itag">${_mTag}</span><span class="fav-iname">${name}</span><span class="fav-isub">${_grpSub}</span>`;
     d.addEventListener('click',()=>{
       const bm=bubbleMeshes.find(b=>b.ko===gko);
       if(bm)flyToBubble(bm.mesh.position,bm.radius);
@@ -3385,7 +3404,7 @@ function placeMyStarInUniverse(){
   div.style.color=`rgb(${Math.min(255,r*2.2|0)},${Math.min(255,g*2.2|0)},${Math.min(255,b*2.4|0)})`;
   div.style.fontSize='11px';
   div.style.cursor='pointer';
-  div.addEventListener('click',e=>{e.stopPropagation();openProfilePanel();});
+  div.addEventListener('click',e=>{e.stopPropagation();_toggleMyStarFocus();});
   myStarLabel=new THREE.CSS2DObject(div);
   myStarLabel.position.set(0,myStarBase*0.75,0);
   myStarSprite.add(myStarLabel);
@@ -3458,16 +3477,61 @@ function _updateProfileBtns(){
   });
 }
 
+function _flyToMyStar(){
+  if(!myStarSprite)return;
+  const pos=myStarSprite.position.clone();
+  const dir=camera.position.clone().sub(controls.target).normalize();
+  if(dir.lengthSq()<0.001)dir.set(0,0,1);
+  _startFly(pos,pos.clone().addScaledVector(dir,18),900);
+}
+
+function _toggleMyStarFocus(){
+  const nickEl=document.getElementById('my-page-nick');
+  if(!myStarSprite){openProfilePanel();return;}
+  if(_myStarSelected){
+    _myStarSelected=false;
+    if(nickEl){
+      nickEl.classList.remove('my-star-sel');
+      nickEl.style.color='';
+    }
+    if(_myStarSavedCam&&_myStarSavedTarget)
+      _startFly(_myStarSavedTarget,_myStarSavedCam,900);
+  }else{
+    _myStarSelected=true;
+    _myStarSavedCam=camera.position.clone();
+    _myStarSavedTarget=controls.target.clone();
+    if(nickEl&&myProfile?.color){
+      const[r,g,b]=myProfile.color;
+      nickEl.style.color=`rgb(${r},${g},${b})`;
+      nickEl.classList.add('my-star-sel');
+    }
+    _flyToMyStar();
+  }
+}
+
 function updateMyPage(){
   const nick=myProfile?.nickname;
-  const col=myProfile?.color||STAR_COLORS[0];
-  const[r,g,b]=col;
   const dot=document.getElementById('my-page-star-dot');
   const nickEl=document.getElementById('my-page-nick');
   const bioEl=document.getElementById('my-page-bio');
-  if(dot){dot.style.background=`rgb(${r},${g},${b})`;dot.style.boxShadow=`0 0 9px rgba(${r},${g},${b},0.55)`;}
-  if(nickEl)nickEl.textContent=nick||'–';
+  if(dot){
+    if(myProfile?.color){
+      const[r,g,b]=myProfile.color;
+      dot.style.background=`rgb(${r},${g},${b})`;
+      dot.style.boxShadow=`0 0 9px rgba(${r},${g},${b},0.55)`;
+    }else{
+      dot.style.background='rgba(140,160,210,0.20)';
+      dot.style.boxShadow='none';
+    }
+  }
+  if(nickEl){
+    nickEl.textContent=nick||'–';
+    nickEl.style.color='';
+    nickEl.classList.remove('my-star-sel');
+    nickEl.onclick=e=>{e.stopPropagation();_toggleMyStarFocus();};
+  }
   if(bioEl)bioEl.textContent=myProfile?.bio||'';
+  _myStarSelected=false;
 }
 
 function saveProfile(){
@@ -3485,7 +3549,10 @@ function saveProfile(){
   closeProfilePanel();
   _updateProfileBtns();
   updateMyPage();
+  const _wasSel=_myStarSelected;
+  _myStarSelected=false;
   placeMyStarInUniverse();
+  if(_wasSel)_toggleMyStarFocus();
 }
 
 document.getElementById('pp-save').addEventListener('click',e=>{e.stopPropagation();saveProfile();});
