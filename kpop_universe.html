@@ -604,13 +604,15 @@
   ::-webkit-scrollbar-thumb{background:rgba(140,165,220,0.20);border-radius:4px;}
   ::-webkit-scrollbar-thumb:hover{background:rgba(160,190,240,0.36);}
   /* ── Favorites ───────────────────────────────────── */
-  .fav-btn{background:none;border:none;cursor:pointer;font-size:14px;line-height:1;color:rgba(175,195,240,0.28);padding:2px 4px;border-radius:6px;transition:color .15s,transform .12s;flex-shrink:0;}
-  .fav-btn:hover{color:rgba(255,128,152,0.88);transform:scale(1.20);}
+  .fav-btn{background:none;border:none;cursor:pointer;padding:2px 3px;border-radius:6px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;color:rgba(175,195,240,0.28);transition:color .15s,transform .12s;}
+  .fav-btn svg{width:13px;height:13px;display:block;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round;transition:fill .15s;}
+  .fav-btn:hover{color:rgba(255,128,152,0.88);transform:scale(1.18);}
   .fav-btn.fav-on{color:rgba(255,95,128,0.90);}
-  #tt-name-row{display:flex;align-items:center;gap:4px;margin-bottom:3px;padding-left:4px;padding-right:24px;}
-  #tt-name-row .tn{margin-bottom:0;padding-left:0;padding-right:0;flex:1;min-width:0;}
-  #gc-name-row{display:flex;align-items:center;gap:5px;margin-bottom:2px;}
-  #gc-name-row #gc-name{margin-bottom:0;flex:1;min-width:0;}
+  .fav-btn.fav-on svg{fill:currentColor;}
+  #tt-name-row{display:inline-flex;align-items:center;gap:3px;margin-bottom:3px;padding-left:4px;max-width:calc(100% - 22px);}
+  #tt-name-row .tn{margin-bottom:0;padding-left:0;padding-right:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #gc-name-row{display:inline-flex;align-items:center;gap:3px;margin-bottom:2px;max-width:100%;}
+  #gc-name-row #gc-name{margin-bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #fav-section{margin-bottom:14px;padding-bottom:12px;border-bottom:0.5px solid rgba(255,255,255,0.07);}
   .fav-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
   .fav-hd-lbl{font-size:9.5px;font-weight:700;letter-spacing:.2em;color:rgba(130,150,205,0.5);text-transform:uppercase;}
@@ -657,14 +659,14 @@
     <button class="dh-btn" id="dh-settings-btn">⚙︎</button>
   </div>
 </div>
-<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기">♡</button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
     <span id="gcx">×</span>
     <div id="gc-header">
       <div id="gc-header-text">
-        <div id="gc-name-row"><div id="gc-name"></div><button id="gc-fav" class="fav-btn" aria-label="즐겨찾기">♡</button></div>
+        <div id="gc-name-row"><div id="gc-name"></div><button id="gc-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button></div>
         <div id="gc-en"></div>
       </div>
       <div id="gc-logo-wrap" style="display:none"></div>
@@ -3090,12 +3092,10 @@ function toggleFavMember(artist){
 function _syncFavBtn(type,data){
   if(type==='group'){
     const btn=document.getElementById('gc-fav');if(!btn)return;
-    const on=favGroups.has(data);
-    btn.textContent=on?'♥':'♡';btn.classList.toggle('fav-on',on);
+    btn.classList.toggle('fav-on',favGroups.has(data));
   }else{
     const btn=document.getElementById('tt-fav');if(!btn)return;
-    const k=_mFavKey(data);const on=favMembers.has(k);
-    btn.textContent=on?'♥':'♡';btn.classList.toggle('fav-on',on);
+    btn.classList.toggle('fav-on',favMembers.has(_mFavKey(data)));
   }
 }
 
