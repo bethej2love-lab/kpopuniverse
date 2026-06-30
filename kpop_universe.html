@@ -917,6 +917,7 @@ const groupLabels=[];
 let ARTISTS=[],GROUPS={};
 const bubbleMeshes=[],regularArtists=[],sparkleArtists=[];
 let regularPts=null,sparklePts=null;
+let myStarSprite=null,myStarLabel=null,myStarTex=null,myStarBase=2.4;
 const connLines=[];
 let _tagFilter={type:null,value:null};
 let regColorAttr=null,spkColorAttr=null;
@@ -3246,7 +3247,6 @@ const STAR_COLORS=[
   [255,218,112],[226,232,255],[255,160,128],[208,122,255]
 ];
 let myProfile=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');
-let myStarSprite=null,myStarLabel=null,myStarTex=null,myStarBase=2.4;
 let _ppColorIdx=0;
 if(myProfile?.color){
   const idx=STAR_COLORS.findIndex(c=>c[0]===myProfile.color[0]&&c[1]===myProfile.color[1]);
