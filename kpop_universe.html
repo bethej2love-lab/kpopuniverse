@@ -1047,7 +1047,7 @@ const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',
 const FOCUS_DIM=0.06;
 let focusGroupKo=null;
 let _extraFocusKos=[];
-let _nctRingGroup=null;
+let _nctRingGroups=[];
 const flyState={
   active:false,
   t0:0,dur:800,
@@ -1349,39 +1349,21 @@ async function buildUniverse(){
   if(regularPts)regColorAttr=regularPts.geometry.attributes.color;
   if(sparklePts)spkColorAttr=sparklePts.geometry.attributes.color;
 
-  // ── NCT Universe Ring ─────────────────────────────
-  (function _buildNctRing(){
-    const nctBms=bubbleMeshes.filter(b=>b.ko.startsWith('NCT'));
-    if(nctBms.length<2)return;
-    const center=new THREE.Vector3();
-    nctBms.forEach(b=>center.add(b.mesh.position));
-    center.divideScalar(nctBms.length);
-    let r=0;
-    nctBms.forEach(b=>{r=Math.max(r,center.distanceTo(b.mesh.position)+b.radius+2.5);});
-
+  // ── NCT Family Rings (mini Saturn ring per NCT planet) ─────
+  _nctRingGroups=[];
+  bubbleMeshes.filter(b=>b.ko.startsWith('NCT')).forEach(({mesh,radius:R})=>{
     const g=new THREE.Group();
-    g.position.copy(center);
-    // Saturn-style tilt (ring plane ~ 20° from horizontal)
+    g.position.copy(mesh.position);
+    // Same tilt for all NCT planets → visual family uniformity
     g.quaternion.setFromEuler(new THREE.Euler(Math.PI*0.22,Math.PI*0.07,0));
-
-    // Concentric bands
-    [{rad:r*0.87,tube:0.035,op:0.055},{rad:r*0.94,tube:0.055,op:0.095},
-     {rad:r,    tube:0.08, op:0.140},{rad:r*1.07,tube:0.04, op:0.065}]
+    [{rad:R*1.55,tube:R*0.030,op:0.09},{rad:R*1.75,tube:R*0.055,op:0.16},{rad:R*1.97,tube:R*0.025,op:0.07}]
     .forEach(({rad,tube,op})=>{
-      const mat=new THREE.MeshBasicMaterial({color:0x77ddbb,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending});
-      g.add(new THREE.Mesh(new THREE.TorusGeometry(rad,tube,5,100),mat));
+      const mat=new THREE.MeshBasicMaterial({color:0x66ddaa,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending});
+      g.add(new THREE.Mesh(new THREE.TorusGeometry(rad,tube,5,72),mat));
     });
-    // Bright edge line
-    const epts=[];
-    for(let i=0;i<=100;i++){const a=(i/100)*Math.PI*2;epts.push(new THREE.Vector3(Math.cos(a)*r,Math.sin(a)*r,0));}
-    g.add(new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(epts),
-      new THREE.LineBasicMaterial({color:0xaaffdd,transparent:true,opacity:0.20,depthWrite:false,blending:THREE.AdditiveBlending})
-    ));
-
     scene.add(g);
-    _nctRingGroup=g;
-  })();
+    _nctRingGroups.push(g);
+  });
 }
 
 // ── Animate ───────────────────────────────────────
@@ -1477,7 +1459,7 @@ function animate(){
       myStarLabel.element.style.pointerEvents=_so>0.15?'auto':'none';
     }
   }
-  if(_nctRingGroup)_nctRingGroup.rotateZ(0.00025);
+  _nctRingGroups.forEach(g=>g.rotateZ(0.00028));
   renderer.render(scene,camera);
   labelRenderer.render(scene,camera);
   if(window._syncZoomSlider)_syncZoomSlider();
@@ -1515,6 +1497,18 @@ function flyToBubble(pos,radius){
   // 정면 충돌 느낌 없애기: 위에서 살짝 비스듬히 + 거리 여유
   const tilted=new THREE.Vector3(dir.x*0.8,dir.y+0.28,dir.z*0.8).normalize();
   _startFly(pos,pos.clone().addScaledVector(tilted,radius*5.5),1000);
+}
+function flyToFitPositions(positions,dur){
+  if(!positions||!positions.length)return;
+  if(positions.length===1){flyTo(positions[0],dur);return;}
+  const center=new THREE.Vector3();
+  positions.forEach(p=>center.add(p));
+  center.divideScalar(positions.length);
+  let maxDist=0;
+  positions.forEach(p=>{maxDist=Math.max(maxDist,center.distanceTo(p));});
+  const dir=camera.position.clone().sub(controls.target).normalize();
+  if(dir.lengthSq()<0.001)dir.set(0,0.3,1).normalize();
+  _startFly(center,center.clone().addScaledVector(dir,maxDist*2.8+35),dur||1000);
 }
 
 function _mScore(name,q,ql){
@@ -2457,17 +2451,19 @@ function showT(a,cx,cy){
   const ctrEl=document.getElementById('tt-counter');
   navEl.style.display=ttGroupMembers.length>1?'flex':'none';
   ctrEl.textContent=ttGroupMembers.length>1?`${ttMemberIdx+1} / ${ttGroupMembers.length}`:'';
-  // 다중 그룹 소속 멤버 → 각 행성 내 별 사이 선 연결
+  // 다중 그룹 소속 멤버 → 각 행성 내 별 사이 선 연결 + 카메라 프레이밍
   if(a._worldPositions&&a._worldPositions.length>1){
     const col=a.color||[200,210,255];
     const hexCol=new THREE.Color(col[0]/255,col[1]/255,col[2]/255).multiplyScalar(1.8);
     for(let _i=0;_i<a._worldPositions.length-1;_i++){
       for(let _j=_i+1;_j<a._worldPositions.length;_j++){
         const geo=new THREE.BufferGeometry().setFromPoints([a._worldPositions[_i].pos.clone(),a._worldPositions[_j].pos.clone()]);
-        const mat=new THREE.LineBasicMaterial({color:hexCol,transparent:true,opacity:0.7,depthWrite:false});
+        const mat=new THREE.LineBasicMaterial({color:hexCol,transparent:true,opacity:0.75,depthWrite:false});
         const line=new THREE.Line(geo,mat);scene.add(line);_memberCardLines.push(line);
       }
     }
+    // 연결된 두 별이 화면에 함께 보이도록 카메라 이동
+    flyToFitPositions(a._worldPositions.map(wp=>wp.pos),950);
   }
 }
 
