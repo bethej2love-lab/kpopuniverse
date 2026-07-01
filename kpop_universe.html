@@ -1007,7 +1007,15 @@ function _refreshOpenCardText(){
   if(ttEl.style.display!=='none'&&_openTArtist){
     const a=_openTArtist;
     document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
-    document.getElementById('tg').textContent=_artistGroups(a).map(g=>currentLang==='ko'?g.ko:(g.en||g.ko)).join(' · ');
+    {const _tgEl=document.getElementById('tg');const _aGrps=_artistGroups(a);
+    _tgEl.innerHTML='';_tgEl.onclick=null;
+    _aGrps.forEach((g,i)=>{
+      if(i>0){const sep=document.createElement('span');sep.textContent=' · ';sep.style.cssText='color:rgba(150,170,210,0.45);pointer-events:none;';_tgEl.appendChild(sep);}
+      const sp=document.createElement('span');sp.className='tg';
+      sp.textContent=currentLang==='ko'?g.ko:(g.en||g.ko);
+      sp.addEventListener('click',e=>{e.stopPropagation();const ttEl2=document.getElementById('tt');const gx=parseInt(ttEl2.style.left)||0;const gy=parseInt(ttEl2.style.top)||0;closeCards();showGC(g.ko,gx,gy);});
+      _tgEl.appendChild(sp);
+    });}
     const tcoEl=document.getElementById('tco');tcoEl.innerHTML='';
     const _tcoParts=[];
     if(a.co)_tcoParts.push({text:a.co,type:'agency',value:a.co});
@@ -1038,6 +1046,8 @@ function _refreshOpenCardText(){
 const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',showInactive:true,connLines:true};
 const FOCUS_DIM=0.06;
 let focusGroupKo=null;
+let _extraFocusKos=[];
+let _nctRingGroup=null;
 const flyState={
   active:false,
   t0:0,dur:800,
@@ -1338,6 +1348,40 @@ async function buildUniverse(){
   sparklePts=makePoints(sparklePos,sparkleColors,isMobile?7:12.8,1.0*opScale);
   if(regularPts)regColorAttr=regularPts.geometry.attributes.color;
   if(sparklePts)spkColorAttr=sparklePts.geometry.attributes.color;
+
+  // ── NCT Universe Ring ─────────────────────────────
+  (function _buildNctRing(){
+    const nctBms=bubbleMeshes.filter(b=>b.ko.startsWith('NCT'));
+    if(nctBms.length<2)return;
+    const center=new THREE.Vector3();
+    nctBms.forEach(b=>center.add(b.mesh.position));
+    center.divideScalar(nctBms.length);
+    let r=0;
+    nctBms.forEach(b=>{r=Math.max(r,center.distanceTo(b.mesh.position)+b.radius+2.5);});
+
+    const g=new THREE.Group();
+    g.position.copy(center);
+    // Saturn-style tilt (ring plane ~ 20° from horizontal)
+    g.quaternion.setFromEuler(new THREE.Euler(Math.PI*0.22,Math.PI*0.07,0));
+
+    // Concentric bands
+    [{rad:r*0.87,tube:0.035,op:0.055},{rad:r*0.94,tube:0.055,op:0.095},
+     {rad:r,    tube:0.08, op:0.140},{rad:r*1.07,tube:0.04, op:0.065}]
+    .forEach(({rad,tube,op})=>{
+      const mat=new THREE.MeshBasicMaterial({color:0x77ddbb,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending});
+      g.add(new THREE.Mesh(new THREE.TorusGeometry(rad,tube,5,100),mat));
+    });
+    // Bright edge line
+    const epts=[];
+    for(let i=0;i<=100;i++){const a=(i/100)*Math.PI*2;epts.push(new THREE.Vector3(Math.cos(a)*r,Math.sin(a)*r,0));}
+    g.add(new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(epts),
+      new THREE.LineBasicMaterial({color:0xaaffdd,transparent:true,opacity:0.20,depthWrite:false,blending:THREE.AdditiveBlending})
+    ));
+
+    scene.add(g);
+    _nctRingGroup=g;
+  })();
 }
 
 // ── Animate ───────────────────────────────────────
@@ -1433,6 +1477,7 @@ function animate(){
       myStarLabel.element.style.pointerEvents=_so>0.15?'auto':'none';
     }
   }
+  if(_nctRingGroup)_nctRingGroup.rotateZ(0.00025);
   renderer.render(scene,camera);
   labelRenderer.render(scene,camera);
   if(window._syncZoomSlider)_syncZoomSlider();
@@ -2310,7 +2355,8 @@ function showT(a,cx,cy){
   closeConnCard();
   _clearMemberCardLines();
   const _aGroups=_artistGroups(a);
-  setFocus(a.group.ko);_openTArtist=a;
+  const _extraGroupKos=_aGroups.map(g=>g.ko).filter(k=>k!==a.group.ko);
+  setFocus(a.group.ko,_extraGroupKos);_openTArtist=a;
   _syncFavBtn('member',a);
   if(a._flashPulse!==undefined||a._worldPos){a._flashPulse=1.4;}
   const el=document.getElementById('tt');
@@ -2322,36 +2368,40 @@ function showT(a,cx,cy){
   else ttBar.style.background='rgba(160,180,220,0.22)';
   document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
   const tgEl=document.getElementById('tg');
-  tgEl.textContent=_aGroups.map(g=>currentLang==='ko'?g.ko:(g.en||g.ko)).join(' · ');
-  tgEl.onclick=e=>{
-    e.stopPropagation();
-    if(!isMob()&&memberPanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===memberPanelEl){
-      showGC(a.group.ko,cx,cy,true);return; // 멤버 카드는 member-panel에 유지, side-panel 그룹카드만 교체
-    }
-    if(!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===sidePanelEl){
-      // 멤버 카드가 side-panel에 단독으로 열린 상태 → 그룹 카드를 side-panel로, 멤버 카드는 member-panel로
-      const ttEl=document.getElementById('tt');
-      const connWasOpen=connPanelEl.classList.contains('open');
-      const savedConnAnchor=_connAnchor;
-      const savedConnSelected=[..._connSelected];
-      if(connWasOpen)closeConnCard();
-      showGC(a.group.ko,cx,cy); // gc→side-panel, tt→body(hidden)
-      openMemberPanel(ttEl);    // tt→member-panel
-      if(connWasOpen&&savedConnAnchor){
-        openConnCard(savedConnAnchor);
-        if(savedConnSelected.length){
-          _connSelected=savedConnSelected;
-          _updateConnLines3d();_applyConnFocus();
-          _buildConnContent(connPanelInner);
-        }
+  tgEl.innerHTML='';tgEl.onclick=null;
+  function _makeGcClickFn(gKo){
+    return e=>{
+      e.stopPropagation();
+      if(!isMob()&&memberPanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===memberPanelEl){
+        showGC(gKo,cx,cy,true);return;
       }
-      return;
-    }
-    const ttEl=document.getElementById('tt');
-    const gx=parseInt(ttEl.style.left)||cx;
-    const gy=parseInt(ttEl.style.top)||cy;
-    closeCards();showGC(a.group.ko,gx,gy);
-  };
+      if(!isMob()&&sidePanelEl.classList.contains('open')&&document.getElementById('tt').parentElement===sidePanelEl){
+        const ttEl=document.getElementById('tt');
+        const connWasOpen=connPanelEl.classList.contains('open');
+        const savedConnAnchor=_connAnchor;
+        const savedConnSelected=[..._connSelected];
+        if(connWasOpen)closeConnCard();
+        showGC(gKo,cx,cy);
+        openMemberPanel(ttEl);
+        if(connWasOpen&&savedConnAnchor){
+          openConnCard(savedConnAnchor);
+          if(savedConnSelected.length){_connSelected=savedConnSelected;_updateConnLines3d();_applyConnFocus();_buildConnContent(connPanelInner);}
+        }
+        return;
+      }
+      const ttEl=document.getElementById('tt');
+      const gx=parseInt(ttEl.style.left)||cx;
+      const gy=parseInt(ttEl.style.top)||cy;
+      closeCards();showGC(gKo,gx,gy);
+    };
+  }
+  _aGroups.forEach((g,i)=>{
+    if(i>0){const sep=document.createElement('span');sep.textContent=' · ';sep.style.cssText='color:rgba(150,170,210,0.45);pointer-events:none;';tgEl.appendChild(sep);}
+    const sp=document.createElement('span');sp.className='tg';
+    sp.textContent=currentLang==='ko'?g.ko:(g.en||g.ko);
+    sp.addEventListener('click',_makeGcClickFn(g.ko));
+    tgEl.appendChild(sp);
+  });
   const tcoEl=document.getElementById('tco');tcoEl.innerHTML='';
   const _tcoParts=[];
   if(a.co)_tcoParts.push({text:a.co,type:'agency',value:a.co});
@@ -2537,11 +2587,13 @@ function applyFilter(){
 }
 
 // ── Focus mode ────────────────────────────────────
-function setFocus(groupKo){
+function setFocus(groupKo, extra=[]){
   _clearMyStarSel();
   focusGroupKo=groupKo;
-  bubbleMeshes.forEach(({mesh,ko})=>{mesh._focusTarget=(ko===groupKo)?1:FOCUS_DIM;});
-  ARTISTS.forEach(a=>{a._focusTarget=_artistGroups(a).some(g=>g.ko===groupKo)?1:FOCUS_DIM;});
+  _extraFocusKos=[...extra];
+  const allKos=[groupKo,...extra];
+  bubbleMeshes.forEach(({mesh,ko})=>{mesh._focusTarget=allKos.includes(ko)?1:FOCUS_DIM;});
+  ARTISTS.forEach(a=>{a._focusTarget=_artistGroups(a).some(g=>allKos.includes(g.ko))?1:FOCUS_DIM;});
 }
 function _clearMyStarSel(){
   if(!_myStarSelected)return;
@@ -2552,6 +2604,7 @@ function _clearMyStarSel(){
 function clearFocus(){
   _clearMyStarSel();
   focusGroupKo=null;
+  _extraFocusKos=[];
   if(favMode){applyFavHighlight();return;}
   bubbleMeshes.forEach(({mesh})=>{mesh._focusTarget=1;});
   ARTISTS.forEach(a=>{a._focusTarget=1;});
@@ -2635,7 +2688,7 @@ function clearTagFilter(){
   const jh=document.getElementById('journal-hd');if(jh)jh.style.display='';
   document.getElementById('journal-sidebar').classList.remove('open');
   if(_connAnchor){_applyConnFocus();}
-  else if(focusGroupKo){setFocus(focusGroupKo);}
+  else if(focusGroupKo){setFocus(focusGroupKo,[..._extraFocusKos]);}
   else{clearFocus();}
 }
 
@@ -3131,7 +3184,7 @@ renderer.domElement.addEventListener('touchend',e=>{
   const _bh=raycaster.intersectObjects(bubbleMeshes.map(b=>b.mesh));
   const _hitPlanet=_bh.length?bubbleMeshes.find(b=>b.mesh===_bh[0].object):null;
   // 행성이 불투명(줌아웃) 상태면 멤버 클릭 비활성화 → 그룹 카드만 열림
-  const _inPlanetMode=_hitPlanet&&_hitPlanet.mesh.material.uniforms.uFillOp.value>0.12&&focusGroupKo!==_hitPlanet.ko;
+  const _inPlanetMode=_hitPlanet&&_hitPlanet.mesh.material.uniforms.uFillOp.value>0.12&&![focusGroupKo,..._extraFocusKos].includes(_hitPlanet.ko);
   if(!_inPlanetMode){
     // 가까이 줌인된 투명 행성 or 행성 밖 → 멤버 점 체크
     let nearArtist=null,nearPx=Infinity;
@@ -3198,7 +3251,7 @@ window.addEventListener('click',e=>{
   if(bHits.length){
     const found=bubbleMeshes.find(b=>b.mesh===bHits[0].object);
     if(found){
-      const planetMode=found.mesh.material.uniforms.uFillOp.value>0.12&&focusGroupKo!==found.ko;
+      const planetMode=found.mesh.material.uniforms.uFillOp.value>0.12&&![focusGroupKo,..._extraFocusKos].includes(found.ko);
       if(!planetMode){
         // 투명 버블 → 멤버 우선
         const a=nearestMember();
@@ -3393,7 +3446,7 @@ function _toggleFavMode(){
     document.getElementById('journal-sidebar').classList.add('open');
   }else{
     _clearMyStarLines();
-    if(focusGroupKo)setFocus(focusGroupKo);else clearFocus();
+    if(focusGroupKo)setFocus(focusGroupKo,[..._extraFocusKos]);else clearFocus();
   }
 }
 document.getElementById('tab-fav').addEventListener('click',e=>{e.stopPropagation();_toggleFavMode();});
