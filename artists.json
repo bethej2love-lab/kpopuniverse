@@ -797,9 +797,13 @@
       "en": "Mark"
     },
     "group": {
-      "ko": "NCT 127·NCT Dream",
-      "en": "NCT 127·NCT Dream"
+      "ko": "NCT 127",
+      "en": "NCT 127"
     },
+    "groups": [
+      {"ko": "NCT 127", "en": "NCT 127"},
+      {"ko": "NCT Dream", "en": "NCT Dream"}
+    ],
     "co": "SM",
     "planet": "main",
     "x": 8500,
@@ -826,9 +830,13 @@
       "en": "Haechan"
     },
     "group": {
-      "ko": "NCT 127·NCT Dream",
-      "en": "NCT 127·NCT Dream"
+      "ko": "NCT 127",
+      "en": "NCT 127"
     },
+    "groups": [
+      {"ko": "NCT 127", "en": "NCT 127"},
+      {"ko": "NCT Dream", "en": "NCT Dream"}
+    ],
     "co": "SM",
     "planet": "main",
     "x": 8300,
