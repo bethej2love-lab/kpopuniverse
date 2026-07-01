@@ -514,5 +514,104 @@
       205
     ],
     "gender": "f"
+  },
+  "보이넥스트도어": {
+    "en": "BOYNEXTDOOR",
+    "debut": "2023.05.30",
+    "co": "KOZ / HYBE",
+    "color": [
+      225,
+      178,
+      132
+    ],
+    "gender": "m"
+  },
+  "스테이씨": {
+    "en": "STAYC",
+    "debut": "2020.11.12",
+    "co": "High Up",
+    "color": [
+      218,
+      148,
+      188
+    ],
+    "gender": "f"
+  },
+  "더보이즈": {
+    "en": "THE BOYZ",
+    "debut": "2017.12.06",
+    "co": "ONE HUNDRED",
+    "color": [
+      155,
+      145,
+      218
+    ],
+    "gender": "m"
+  },
+  "온앤오프": {
+    "en": "ONF",
+    "debut": "2017.08.03",
+    "co": "KI Entertainment",
+    "color": [
+      132,
+      195,
+      222
+    ],
+    "gender": "m"
+  },
+  "트리플에스": {
+    "en": "tripleS",
+    "debut": "2023.02.13",
+    "co": "Modhaus",
+    "color": [
+      175,
+      148,
+      222
+    ],
+    "gender": "f"
+  },
+  "프로미스나인": {
+    "en": "fromis_9",
+    "debut": "2018.01.24",
+    "co": "ASND",
+    "color": [
+      222,
+      162,
+      178
+    ],
+    "gender": "f"
+  },
+  "앤팀": {
+    "en": "&TEAM",
+    "debut": "2022.12.07",
+    "co": "YX LABELS / HYBE",
+    "color": [
+      148,
+      165,
+      222
+    ],
+    "gender": "m"
+  },
+  "비비지": {
+    "en": "VIVIZ",
+    "debut": "2022.02.09",
+    "co": "BPM Entertainment",
+    "color": [
+      215,
+      158,
+      222
+    ],
+    "gender": "f"
+  },
+  "트레저": {
+    "en": "TREASURE",
+    "debut": "2020.08.07",
+    "co": "YG",
+    "color": [
+      222,
+      188,
+      115
+    ],
+    "gender": "m"
   }
 }
