@@ -1112,22 +1112,21 @@ function _isLegacyGroup(debutStr){
   return ageYears>=10;
 }
 
-// NCT 계열 고리용 부드러운 방사형 그라데이션 텍스처 (하드엣지 토러스 대체)
-// 가운데 또렷한 메인 선 + 그보다 살짝 작은/큰 지름의 곁가지 선이 뚝 끊기지 않고 그라데이션으로 이어붙은 형태
-// (사이 골이 0까지 안 떨어져서 "층"으로 안 보이고, 피크가 충분히 밝아서 "도넛 얼룩"이 아니라 "링"으로 읽힘)
-function _makeRingGradTex(){
+// NCT 계열 고리용 "블러 글로우" 텍스처 — 선 자체가 아니라 선 바깥을 감싸는 흐릿한 후광 전용
+// (가우시안 블러 근사: 촘촘한 stop으로 부드럽게 퍼지는 단일 피크. 실제 얇은 선은 텍스처 없는 별도 메쉬로 그림)
+function _makeRingGlowTex(){
   const cvs=document.createElement('canvas');
   cvs.width=4;cvs.height=256;
   const ctx=cvs.getContext('2d');
   const grad=ctx.createLinearGradient(0,0,0,256);
   grad.addColorStop(0.00,'rgba(255,255,255,0)');
-  grad.addColorStop(0.27,'rgba(255,255,255,0)');
-  grad.addColorStop(0.35,'rgba(255,255,255,0.22)');
-  grad.addColorStop(0.43,'rgba(255,255,255,0.55)');
-  grad.addColorStop(0.50,'rgba(255,255,255,0.95)');
-  grad.addColorStop(0.57,'rgba(255,255,255,0.55)');
-  grad.addColorStop(0.65,'rgba(255,255,255,0.22)');
-  grad.addColorStop(0.73,'rgba(255,255,255,0)');
+  grad.addColorStop(0.30,'rgba(255,255,255,0)');
+  grad.addColorStop(0.40,'rgba(255,255,255,0.16)');
+  grad.addColorStop(0.46,'rgba(255,255,255,0.42)');
+  grad.addColorStop(0.50,'rgba(255,255,255,0.62)');
+  grad.addColorStop(0.54,'rgba(255,255,255,0.42)');
+  grad.addColorStop(0.60,'rgba(255,255,255,0.16)');
+  grad.addColorStop(0.70,'rgba(255,255,255,0)');
   grad.addColorStop(1.00,'rgba(255,255,255,0)');
   ctx.fillStyle=grad;
   ctx.fillRect(0,0,4,256);
@@ -1399,19 +1398,27 @@ async function buildUniverse(){
   if(regularPts)regColorAttr=regularPts.geometry.attributes.color;
   if(sparklePts)spkColorAttr=sparklePts.geometry.attributes.color;
 
-  // ── NCT Family Rings (soft gradient ring per NCT planet, no hard edges) ─────
+  // ── NCT Family Rings (얇은 타원 선 하나 + 선 바깥 블러 글로우, 균일한 선 불투명도) ─────
   _nctRingGroups=[];
-  const _ringTex=_makeRingGradTex();
+  const _ringGlowTex=_makeRingGlowTex();
   bubbleMeshes.filter(b=>b.ko.startsWith('NCT')).forEach(({mesh,radius:R,ko:_rko})=>{
     const g=new THREE.Group();
     g.position.copy(mesh.position);
     g.quaternion.setFromEuler(new THREE.Euler(Math.PI*0.22,Math.PI*0.07,0));
-    const ringGeo=new THREE.RingGeometry(R*1.55,R*2.05,96,1);
-    const op=0.58;
-    const mat=new THREE.MeshBasicMaterial({color:0x66ddaa,map:_ringTex,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending});
-    g.add(new THREE.Mesh(ringGeo,mat));
+    g.renderOrder=5; // 반투명 행성과의 프레임별 정렬 뒤집힘(반달로 잘려 보이는 원인) 방지 — 항상 행성 위에 고정 렌더
+
+    // 선: 얇은 타원, 텍스처 없이 단색이라 폭 전체 불투명도가 균일함
+    const lineGeo=new THREE.RingGeometry(R*1.755,R*1.795,96,1);
+    const lineMat=new THREE.MeshBasicMaterial({color:0x66ddaa,transparent:true,opacity:0.62,side:THREE.DoubleSide,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending});
+    g.add(new THREE.Mesh(lineGeo,lineMat));
+
+    // 글로우: 선보다 폭 넓게, 블러 텍스처로 선 바깥을 은은하게 감쌈 (선 자체엔 그라데이션 없음)
+    const glowGeo=new THREE.RingGeometry(R*1.60,R*1.95,96,1);
+    const glowMat=new THREE.MeshBasicMaterial({color:0x66ddaa,map:_ringGlowTex,transparent:true,opacity:0.38,side:THREE.DoubleSide,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending});
+    g.add(new THREE.Mesh(glowGeo,glowMat));
+
     scene.add(g);
-    _nctRingGroups.push({g,ko:_rko,baseOps:[op]});
+    _nctRingGroups.push({g,ko:_rko,baseOps:[0.62,0.38]});
   });
 }
 
