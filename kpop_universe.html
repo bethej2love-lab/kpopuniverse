@@ -1401,6 +1401,22 @@ async function buildUniverse(){
       _baseOps.push(op);
     }
 
+    // 기존 27개는 그대로 두고, 그 바깥쪽으로 훨씬 옅은 스트로크를 더 이어붙여 페이드 아웃 꼬리를 더 길고 은은하게
+    const _EXTRA_PER_SIDE=14;
+    const extraSpan=halfSpan*0.9;
+    const extraGap=extraSpan/_EXTRA_PER_SIDE;
+    for(let i=1;i<=_EXTRA_PER_SIDE;i++){
+      const t=i/_EXTRA_PER_SIDE;                   // 0(기존 가장자리)~1(더 바깥)
+      const op=0.035*Math.pow(1-t,2);               // 기존 어떤 스트로크보다도 옅게, 바깥으로 갈수록 0에 수렴
+      [-1,1].forEach(sign=>{
+        const radius=centerR+sign*(halfSpan+extraGap*i);
+        const geo=new THREE.RingGeometry(radius-extraGap/2,radius+extraGap/2,96,1);
+        const mat=new THREE.MeshBasicMaterial({color:0x66ddaa,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending});
+        g.add(new THREE.Mesh(geo,mat));
+        _baseOps.push(op);
+      });
+    }
+
     scene.add(g);
     _nctRingGroups.push({g,ko:_rko,baseOps:_baseOps});
   });
