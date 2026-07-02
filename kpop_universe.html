@@ -1113,20 +1113,21 @@ function _isLegacyGroup(debutStr){
 }
 
 // NCT 계열 고리용 부드러운 방사형 그라데이션 텍스처 (하드엣지 토러스 대체)
-// 가운데에 얇은 메인 선 하나 + 그 위아래로 은은하게 퍼지는 단일 글로우 (여러 겹 밴드 X, 딱 구분되는 경계 X)
+// 가운데 또렷한 메인 선 + 그보다 살짝 작은/큰 지름의 곁가지 선이 뚝 끊기지 않고 그라데이션으로 이어붙은 형태
+// (사이 골이 0까지 안 떨어져서 "층"으로 안 보이고, 피크가 충분히 밝아서 "도넛 얼룩"이 아니라 "링"으로 읽힘)
 function _makeRingGradTex(){
   const cvs=document.createElement('canvas');
   cvs.width=4;cvs.height=256;
   const ctx=cvs.getContext('2d');
   const grad=ctx.createLinearGradient(0,0,0,256);
   grad.addColorStop(0.00,'rgba(255,255,255,0)');
-  grad.addColorStop(0.34,'rgba(255,255,255,0)');
-  grad.addColorStop(0.42,'rgba(255,255,255,0.08)');
-  grad.addColorStop(0.47,'rgba(255,255,255,0.26)');
-  grad.addColorStop(0.50,'rgba(255,255,255,0.42)');
-  grad.addColorStop(0.53,'rgba(255,255,255,0.26)');
-  grad.addColorStop(0.58,'rgba(255,255,255,0.08)');
-  grad.addColorStop(0.66,'rgba(255,255,255,0)');
+  grad.addColorStop(0.27,'rgba(255,255,255,0)');
+  grad.addColorStop(0.35,'rgba(255,255,255,0.22)');
+  grad.addColorStop(0.43,'rgba(255,255,255,0.55)');
+  grad.addColorStop(0.50,'rgba(255,255,255,0.95)');
+  grad.addColorStop(0.57,'rgba(255,255,255,0.55)');
+  grad.addColorStop(0.65,'rgba(255,255,255,0.22)');
+  grad.addColorStop(0.73,'rgba(255,255,255,0)');
   grad.addColorStop(1.00,'rgba(255,255,255,0)');
   ctx.fillStyle=grad;
   ctx.fillRect(0,0,4,256);
@@ -1405,8 +1406,8 @@ async function buildUniverse(){
     const g=new THREE.Group();
     g.position.copy(mesh.position);
     g.quaternion.setFromEuler(new THREE.Euler(Math.PI*0.22,Math.PI*0.07,0));
-    const ringGeo=new THREE.RingGeometry(R*1.60,R*1.98,96,1);
-    const op=0.30;
+    const ringGeo=new THREE.RingGeometry(R*1.55,R*2.05,96,1);
+    const op=0.58;
     const mat=new THREE.MeshBasicMaterial({color:0x66ddaa,map:_ringTex,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending});
     g.add(new THREE.Mesh(ringGeo,mat));
     scene.add(g);
