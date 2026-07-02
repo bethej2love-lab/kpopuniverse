@@ -1100,7 +1100,38 @@ function randomInCone(dir,halfAngle){
 }
 
 function debutToRadius(debutYear){
-  return (2026 - debutYear) * 7.0;
+  return (2026 - debutYear) * 9.2 + 6;
+}
+
+// 데뷔일 기준 정확한 연차 계산 (달력연도 뺄셈 대신 실제 경과일 사용 — NCT 127 같은 '10주년 임박' 그룹 오조기 판정 방지)
+function _isLegacyGroup(debutStr){
+  const parts=String(debutStr||'').split('.').map(Number);
+  if(!parts[0])return false;
+  const d=new Date(parts[0],(parts[1]||1)-1,parts[2]||1);
+  const ageYears=(Date.now()-d.getTime())/(365.25*24*3600*1000);
+  return ageYears>=10;
+}
+
+// NCT 계열 고리용 부드러운 방사형 그라데이션 텍스처 (하드엣지 토러스 대체)
+function _makeRingGradTex(){
+  const cvs=document.createElement('canvas');
+  cvs.width=4;cvs.height=256;
+  const ctx=cvs.getContext('2d');
+  const grad=ctx.createLinearGradient(0,0,0,256);
+  grad.addColorStop(0.00,'rgba(255,255,255,0)');
+  grad.addColorStop(0.16,'rgba(255,255,255,0)');
+  grad.addColorStop(0.26,'rgba(255,255,255,0.50)');
+  grad.addColorStop(0.36,'rgba(255,255,255,0.08)');
+  grad.addColorStop(0.48,'rgba(255,255,255,0.32)');
+  grad.addColorStop(0.60,'rgba(255,255,255,0.06)');
+  grad.addColorStop(0.76,'rgba(255,255,255,0.40)');
+  grad.addColorStop(0.90,'rgba(255,255,255,0.08)');
+  grad.addColorStop(1.00,'rgba(255,255,255,0)');
+  ctx.fillStyle=grad;
+  ctx.fillRect(0,0,4,256);
+  const tex=new THREE.CanvasTexture(cvs);
+  tex.needsUpdate=true;
+  return tex;
 }
 
 // ── Build universe ────────────────────────────────
@@ -1170,19 +1201,21 @@ async function buildUniverse(){
   const _placedBubbles=[];
   Object.entries(grpData).forEach(([ko,info])=>{
     const members=memberMap[ko]||[];
-    const dist=debutToRadius(parseInt(info.debut)||2020);
+    const distBase=debutToRadius(parseInt(info.debut)||2020);
     const dir=agencyDir(info.co);
     const [r,g,b]=info.color||[180,180,200];
     const color=duneColor(r,g,b);
     const radius=Math.min(4,Math.max(2,1.8+members.length*0.25));
 
-    // 겹침 방지: 최대 400번 시도, 기존 행성과 표면 간격 2 이상 확보
+    // 겹침 방지: 최대 400번 시도, 기존 행성과 표면 간격 4 이상 확보.
+    // 같은 데뷔연도 그룹끼리 얇은 구 껍질에 몰리지 않도록 반경에 랜덤 변주를 줌
     let pos;
     for(let _t=0;_t<400;_t++){
+      const dist=distBase*(0.84+Math.random()*0.32);
       const c=randomInCone(dir,coneSpread(info.co)).multiplyScalar(dist);
-      if(_placedBubbles.every(pb=>c.distanceTo(pb.pos)>=radius+pb.r+2)){pos=c;break;}
+      if(_placedBubbles.every(pb=>c.distanceTo(pb.pos)>=radius+pb.r+4)){pos=c;break;}
     }
-    if(!pos)pos=randomInCone(dir,coneSpread(info.co)).multiplyScalar(dist);
+    if(!pos)pos=randomInCone(dir,coneSpread(info.co)).multiplyScalar(distBase);
     _placedBubbles.push({pos,r:radius});
 
     // ── Bubble fill — Fresnel ShaderMaterial ──────
@@ -1240,6 +1273,7 @@ async function buildUniverse(){
     });
     const bubble=new THREE.Mesh(fillGeo,fillMat);
     bubble.position.copy(pos);
+    bubble._isLegacy=_isLegacyGroup(info.debut);
     scene.add(bubble);
     // ── Group label ───────────────────────────────
     const div=document.createElement('div');
@@ -1363,21 +1397,19 @@ async function buildUniverse(){
   if(regularPts)regColorAttr=regularPts.geometry.attributes.color;
   if(sparklePts)spkColorAttr=sparklePts.geometry.attributes.color;
 
-  // ── NCT Family Rings (mini Saturn ring per NCT planet) ─────
+  // ── NCT Family Rings (soft gradient ring per NCT planet, no hard edges) ─────
   _nctRingGroups=[];
+  const _ringTex=_makeRingGradTex();
   bubbleMeshes.filter(b=>b.ko.startsWith('NCT')).forEach(({mesh,radius:R,ko:_rko})=>{
     const g=new THREE.Group();
     g.position.copy(mesh.position);
     g.quaternion.setFromEuler(new THREE.Euler(Math.PI*0.22,Math.PI*0.07,0));
-    const _baseOps=[];
-    [{rad:R*1.55,tube:R*0.030,op:0.09},{rad:R*1.75,tube:R*0.055,op:0.16},{rad:R*1.97,tube:R*0.025,op:0.07}]
-    .forEach(({rad,tube,op})=>{
-      const mat=new THREE.MeshBasicMaterial({color:0x66ddaa,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending});
-      g.add(new THREE.Mesh(new THREE.TorusGeometry(rad,tube,5,72),mat));
-      _baseOps.push(op);
-    });
+    const ringGeo=new THREE.RingGeometry(R*1.40,R*2.10,96,1);
+    const op=0.20;
+    const mat=new THREE.MeshBasicMaterial({color:0x66ddaa,map:_ringTex,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending});
+    g.add(new THREE.Mesh(ringGeo,mat));
     scene.add(g);
-    _nctRingGroups.push({g,ko:_rko,baseOps:_baseOps});
+    _nctRingGroups.push({g,ko:_rko,baseOps:[op]});
   });
 }
 
@@ -1424,7 +1456,17 @@ function animate(){
     mesh._focusTarget=mesh._focusTarget??1;
     mesh._focusAlpha=mesh._focusAlpha??1;
     mesh._focusAlpha+=(mesh._focusTarget-mesh._focusAlpha)*0.10;
-    mesh.material.uniforms.uFilterOp.value=mesh._filterAlpha*mesh._focusAlpha;
+    // 레거시(데뷔 10년+) 행성: 멀리서는 은은하게 죽이고, 가까이 다가가면 다시 선명하게
+    const legacyTarget=mesh._isLegacy?(dist<26?1:dist<80?1-((dist-26)/54)*0.82:0.18):1;
+    mesh._legacyAlpha=mesh._legacyAlpha??1;
+    mesh._legacyAlpha+=(legacyTarget-mesh._legacyAlpha)*0.06;
+    mesh.material.uniforms.uFilterOp.value=mesh._filterAlpha*mesh._focusAlpha*mesh._legacyAlpha;
+  });
+  _nctRingGroups.forEach(({g,ko,baseOps})=>{
+    const bm=bubbleMeshes.find(b=>b.ko===ko);
+    if(!bm)return;
+    const alpha=(bm.mesh._filterAlpha??1)*(bm.mesh._focusAlpha??1)*(bm.mesh._legacyAlpha??1);
+    g.children.forEach((c,i)=>{if(c.material)c.material.opacity=(baseOps[i]??0)*alpha;});
   });
   ARTISTS.forEach(a=>{
     if(a._ptsType===undefined)return;
@@ -1450,7 +1492,7 @@ function animate(){
     const d=camera.position.distanceTo(worldPos);
     const distFade=d<40?1:d<70?(70-d)/30:0;
     const bm=bubbleMeshes.find(b=>b.ko===ko);
-    const fa=(bm?bm.mesh._filterAlpha??1:1)*(bm?bm.mesh._focusAlpha??1:1);
+    const fa=(bm?bm.mesh._filterAlpha??1:1)*(bm?bm.mesh._focusAlpha??1:1)*(bm?bm.mesh._legacyAlpha??1:1);
     const op=distFade*fa;
     el.style.opacity=op.toFixed(3);
     el.style.pointerEvents=op>0.15?'auto':'none';
