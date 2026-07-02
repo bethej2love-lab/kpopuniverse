@@ -613,5 +613,17 @@
       115
     ],
     "gender": "m"
+  },
+  "크래비티": {
+    "en": "CRAVITY",
+    "debut": "2020.04.14",
+    "co": "Starship",
+    "fandom": "LUVITY",
+    "color": [
+      159,
+      117,
+      177
+    ],
+    "gender": "m"
   }
 }
