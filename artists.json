@@ -2793,7 +2793,7 @@
       "ko": "한국",
       "en": "KR"
     },
-    "sparkle": true,
+    "sparkle": false,
     "songs": [
       {
         "t": "REDRED",
@@ -3408,7 +3408,7 @@
       "ko": "일본",
       "en": "JP"
     },
-    "sparkle": true,
+    "sparkle": false,
     "songs": [
       {
         "t": "LOVE ATTACK",
@@ -7460,5 +7460,88 @@
     "color": [215, 180, 108],
     "bday": "2001.03.25",
     "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "세림", "en": "Serim" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [162, 120, 180],
+    "bday": "1999.03.03",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "앨런", "en": "Allen" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [155, 112, 172],
+    "bday": "1999.04.26",
+    "nat": { "ko": "대만·미국", "en": "TW·US" }
+  },
+  {
+    "name": { "ko": "정모", "en": "Jungmo" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [166, 124, 183],
+    "bday": "2000.02.05",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "우빈", "en": "Woobin" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [152, 109, 169],
+    "bday": "2000.10.16",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "원진", "en": "Wonjin" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [170, 128, 188],
+    "bday": "2001.03.22",
+    "nat": { "ko": "한국", "en": "KR" },
+    "leader": true
+  },
+  {
+    "name": { "ko": "민희", "en": "Minhee" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [148, 106, 165],
+    "bday": "2002.09.17",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "형준", "en": "Hyeongjun" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [163, 118, 178],
+    "bday": "2002.11.30",
+    "nat": { "ko": "한국", "en": "KR" },
+    "leader": true
+  },
+  {
+    "name": { "ko": "태영", "en": "Taeyoung" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [157, 114, 174],
+    "bday": "2003.01.27",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "성민", "en": "Seongmin" },
+    "group": { "ko": "크래비티", "en": "CRAVITY" },
+    "co": "Starship",
+    "active": true,
+    "color": [174, 132, 190],
+    "bday": "2003.08.01",
+    "nat": { "ko": "한국", "en": "KR" }
   }
 ]
