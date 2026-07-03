@@ -599,6 +599,24 @@
   .fli-date-line{display:flex;align-items:center;margin-bottom:4px;}
   .fli-date-txt{font-size:9.5px;font-weight:700;color:rgba(170,200,245,0.88);letter-spacing:.12em;}
   .fli-day-num{font-size:9px;color:rgba(140,165,215,0.65);letter-spacing:.06em;margin-right:9px;font-variant-numeric:tabular-nums;flex-shrink:0;}
+  /* ── Index entry row (마이페이지 상단) ─────────────── */
+  #sp-index-btn{width:100%;box-sizing:border-box;display:flex;align-items:center;gap:7px;padding:8px 9px;margin-bottom:11px;border-radius:9px;cursor:pointer;background:rgba(140,165,220,0.07);border:0.5px solid rgba(140,165,220,0.16);transition:background .13s,border-color .13s;font-family:inherit;}
+  #sp-index-btn:hover{background:rgba(140,165,220,0.13);border-color:rgba(140,165,220,0.30);}
+  #sp-index-lbl{font-size:9px;font-weight:700;letter-spacing:.18em;color:rgba(150,175,225,0.80);}
+  #sp-index-count{flex:1;text-align:right;font-size:11px;color:rgba(180,200,240,0.62);letter-spacing:.02em;}
+  #sp-index-arrow{font-size:13px;color:rgba(140,165,220,0.45);}
+  /* ── Index panel controls (필터 패널 내 인덱스 모드) ── */
+  #idx-ctrl-row{margin-bottom:10px;}
+  #idx-view-toggle{display:flex;gap:4px;margin-bottom:8px;}
+  .idx-view-btn{flex:1;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);border-radius:7px;color:rgba(150,175,220,0.60);font-family:inherit;font-size:11px;font-weight:600;padding:5px 0;cursor:pointer;transition:background .13s,color .13s,border-color .13s;}
+  .idx-view-btn.active{background:rgba(126,156,255,0.16);border-color:rgba(126,156,255,0.32);color:rgba(210,225,255,0.95);}
+  #idx-sort-row{display:flex;gap:6px;margin-bottom:8px;}
+  #idx-sort-sel{flex:1;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:7px;color:#c8d8f0;font-family:inherit;font-size:11px;padding:5px 7px;outline:none;}
+  #idx-dir-btn{width:28px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:7px;color:rgba(180,200,240,0.75);font-size:12px;cursor:pointer;transition:background .13s,color .13s;}
+  #idx-dir-btn:hover{background:rgba(255,255,255,0.09);color:#fff;}
+  #idx-search-inp{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:7px;color:#c8d8f0;font-family:inherit;font-size:12px;padding:6px 9px;outline:none;letter-spacing:.02em;}
+  #idx-search-inp::placeholder{color:rgba(126,152,202,0.32);}
+  #idx-search-inp:focus{border-color:rgba(136,164,255,0.38);}
   #member-tooltip{position:fixed;pointer-events:none;z-index:99;padding:4px 9px;border-radius:6px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:12px;font-weight:500;color:rgba(210,228,255,0.95);background:rgba(14,18,34,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(140,165,220,0.18);white-space:nowrap;opacity:0;transition:opacity 0.12s;transform:translate(-50%,-130%);letter-spacing:.02em;}
   ::-webkit-scrollbar{width:4px;height:4px;}
   ::-webkit-scrollbar-track{background:transparent;}
@@ -726,6 +744,17 @@
         </div>
         <button id="filter-panel-clear">×</button>
       </div>
+      <div id="idx-ctrl-row" style="display:none;">
+        <div id="idx-view-toggle">
+          <button class="idx-view-btn" id="idx-view-group" data-view="group" data-i18n="idxGroupTab">그룹</button>
+          <button class="idx-view-btn" id="idx-view-member" data-view="member" data-i18n="idxMemberTab">멤버</button>
+        </div>
+        <div id="idx-sort-row">
+          <select id="idx-sort-sel"></select>
+          <button id="idx-dir-btn" aria-label="정렬 방향">↑</button>
+        </div>
+        <input id="idx-search-inp" placeholder="그룹명 검색…" style="display:none;">
+      </div>
       <div id="filter-list"></div>
     </div>
     <div class="sp-hd" id="journal-hd">JOURNAL</div>
@@ -772,6 +801,11 @@
 </div>
 <div id="settings-panel">
   <div class="sp-hd" data-i18n="sp_title">설정</div>
+  <button id="sp-index-btn">
+    <span id="sp-index-lbl" data-i18n="idxTitle">인덱스</span>
+    <span id="sp-index-count"></span>
+    <span id="sp-index-arrow">›</span>
+  </button>
   <div class="sp-row">
     <span class="sp-lbl" data-i18n="conn">연결선</span>
     <label class="sw"><input type="checkbox" id="sp-conn-chk" checked><span class="sw-track"><span class="sw-thumb"></span></span></label>
@@ -980,17 +1014,24 @@ let _myStarLines=[];
 let _memberCardLines=[];
 function _artistGroups(a){return a.groups||[a.group];}
 let _tagFilter={type:null,value:null};
+let _idxOpen=false,_idxView='group',_idxSortKey='name',_idxSortDir='asc';
 let regColorAttr=null,spkColorAttr=null;
 let currentLang='ko';
 const T={
   ko:{sp_title:'설정',conn:'연결선',debutYr:'데뷔 연도',birthYr:'멤버 생년',grpType:'그룹 유형',
       all:'전체',girl:'걸그룹',boy:'보이그룹',inactive:'비활동/탈퇴 멤버',reset:'↺ 초기화',
       searchPH:'그룹 · 멤버 검색…',mobileTitle:'케이팝 아이돌 지형도',srGroup:'그룹',
-      preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcFandom:'팬덤',gcLeader:'리더',gcMember:'멤버',gcSNS:'공식'},
+      preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcFandom:'팬덤',gcLeader:'리더',gcMember:'멤버',gcSNS:'공식',
+      idxTitle:'인덱스',idxGroupTab:'그룹',idxMemberTab:'멤버',idxSearchPH:'그룹명 검색…',
+      idxSortName:'이름 (가나다순)',idxSortDebut:'데뷔연도',idxSortAgency:'소속사',idxSortMembers:'멤버 수',
+      idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적'},
   en:{sp_title:'Settings',conn:'Lines',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
       all:'All',girl:'Girl Groups',boy:'Boy Groups',inactive:'Inactive / Left',reset:'↺ Reset',
       searchPH:'Search groups · members…',mobileTitle:'K-pop Idol Map',srGroup:'Group',
-      preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcFandom:'Fandom',gcLeader:'Leader',gcMember:'Members',gcSNS:'Official'}
+      preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcFandom:'Fandom',gcLeader:'Leader',gcMember:'Members',gcSNS:'Official',
+      idxTitle:'Index',idxGroupTab:'Groups',idxMemberTab:'Members',idxSearchPH:'Search group name…',
+      idxSortName:'Name (A–Z)',idxSortDebut:'Debut Year',idxSortAgency:'Agency',idxSortMembers:'Member Count',
+      idxSortBirth:'Birth Year',idxSortGroup:'Group',idxSortNation:'Nationality'}
 };
 function applyLang(){
   const t=T[currentLang];
@@ -1002,6 +1043,8 @@ function applyLang(){
   renderFavList();_buildBdayList();
   const _fp=document.getElementById('filter-panel');
   if(_tagFilter&&_tagFilter.type&&_fp&&_fp.style.display==='block')_renderFilterPanel();
+  _updateIdxEntryCount();
+  if(_idxOpen){_renderIdxSortOptions();_renderIndexList();}
 }
 function _refreshOpenCardText(){
   // 그룹 카드
@@ -1134,6 +1177,7 @@ async function buildUniverse(){
   renderFavList();_buildBdayList();
   renderScrapList();
   placeMyStarInUniverse();
+  _updateIdxEntryCount();
 
   // ── Bidirectional 'with' expansion ──────────────────
   (function expandWith(){
@@ -2785,8 +2829,24 @@ function _applyTagFocus(){
   }
 }
 
+function _hideMyPageSections(){
+  ['my-page-header','fav-section','scrap-section','bday-section'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
+}
+function _showMyPageSections(){
+  ['my-page-header','fav-section','scrap-section','bday-section'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='';
+  });
+}
+function _closeIndexPanel(){
+  _idxOpen=false;
+  const ic=document.getElementById('idx-ctrl-row');if(ic)ic.style.display='none';
+}
+
 function applyTagFilter(type,value){
   if(_tagFilter.type===type&&_tagFilter.value===value){clearTagFilter();return;}
+  _closeIndexPanel();
   _tagFilter={type,value};
   _refreshTagChips();
   _renderFilterPanel();
@@ -2796,8 +2856,10 @@ function applyTagFilter(type,value){
 function clearTagFilter(){
   _tagFilter={type:null,value:null};
   _refreshTagChips();
+  _closeIndexPanel();
   const fp=document.getElementById('filter-panel');if(fp)fp.style.display='none';
   const jh=document.getElementById('journal-hd');if(jh)jh.style.display='';
+  _showMyPageSections();
   document.getElementById('journal-sidebar').classList.remove('open');
   if(_connAnchor){_applyConnFocus();}
   else if(focusGroupKo){setFocus(focusGroupKo,[..._extraFocusKos]);}
@@ -2822,6 +2884,7 @@ function _renderFilterPanel(){
   const activeEl=document.getElementById('filter-panel-active');
   const listEl=document.getElementById('filter-list');
   fp.style.display='block';jh.style.display='none';listEl.innerHTML='';
+  _hideMyPageSections();
 
   const typeLabel={agency:currentLang==='ko'?'소속사':'Agency',debutYear:currentLang==='ko'?'데뷔 연도':'Debut Year',birthYear:currentLang==='ko'?'생년':'Birth Year',nation:currentLang==='ko'?'국적':'Nationality'};
   let displayValue=_tagFilter.value;
@@ -2913,6 +2976,130 @@ function _renderFilterPanel(){
   }
   sidebar.classList.add('open');
 }
+
+// ── Index panel (전체 그룹/멤버 목록) ─────────────────
+function _memberCountFor(ko){
+  return ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===ko)).length;
+}
+function _natOf(a){
+  const n=a.nat;if(!n)return '';
+  return typeof n==='object'?(n.ko||n.en||''):n;
+}
+const _idxSortOptions={
+  group:[
+    {key:'name',label:()=>T[currentLang].idxSortName},
+    {key:'debut',label:()=>T[currentLang].idxSortDebut},
+    {key:'agency',label:()=>T[currentLang].idxSortAgency},
+    {key:'members',label:()=>T[currentLang].idxSortMembers}
+  ],
+  member:[
+    {key:'name',label:()=>T[currentLang].idxSortName},
+    {key:'birth',label:()=>T[currentLang].idxSortBirth},
+    {key:'group',label:()=>T[currentLang].idxSortGroup},
+    {key:'nation',label:()=>T[currentLang].idxSortNation}
+  ]
+};
+function _updateIdxEntryCount(){
+  const cEl=document.getElementById('sp-index-count');if(!cEl)return;
+  const gCount=Object.keys(GROUPS).length,mCount=ARTISTS.length;
+  cEl.textContent=currentLang==='ko'?`${gCount}개 그룹 · ${mCount}명 멤버`:`${gCount} groups · ${mCount} members`;
+}
+function openIndexPanel(){
+  _tagFilter={type:null,value:null};
+  _refreshTagChips();
+  _idxOpen=true;
+  const fp=document.getElementById('filter-panel');
+  const jh=document.getElementById('journal-hd');
+  fp.style.display='block';jh.style.display='none';
+  _hideMyPageSections();
+  document.getElementById('idx-ctrl-row').style.display='block';
+  document.getElementById('idx-search-inp').value='';
+  _renderIdxSortOptions();
+  _renderIndexList();
+  document.getElementById('journal-sidebar').classList.add('open');
+}
+function _renderIdxSortOptions(){
+  const sel=document.getElementById('idx-sort-sel');
+  const opts=_idxSortOptions[_idxView];
+  if(!opts.some(o=>o.key===_idxSortKey))_idxSortKey=opts[0].key;
+  sel.innerHTML='';
+  opts.forEach(o=>{
+    const op=document.createElement('option');op.value=o.key;op.textContent=o.label();
+    if(o.key===_idxSortKey)op.selected=true;
+    sel.appendChild(op);
+  });
+  document.getElementById('idx-search-inp').style.display=_idxView==='group'?'block':'none';
+  document.getElementById('idx-search-inp').placeholder=T[currentLang].idxSearchPH;
+  document.querySelectorAll('.idx-view-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===_idxView));
+  document.getElementById('idx-dir-btn').textContent=_idxSortDir==='asc'?'↑':'↓';
+}
+function _renderIndexList(){
+  const activeEl=document.getElementById('filter-panel-active');
+  const listEl=document.getElementById('filter-list');
+  listEl.innerHTML='';
+  const gCount=Object.keys(GROUPS).length,mCount=ARTISTS.length;
+  activeEl.textContent=T[currentLang].idxTitle+' · '+(currentLang==='ko'?`${gCount}개 그룹 · ${mCount}명 멤버`:`${gCount} groups · ${mCount} members`);
+  const dirMul=_idxSortDir==='asc'?1:-1;
+  if(_idxView==='group'){
+    const q=(document.getElementById('idx-search-inp').value||'').trim().toLowerCase();
+    let groups=Object.entries(GROUPS);
+    if(q)groups=groups.filter(([ko,g])=>ko.toLowerCase().includes(q)||(g.en||'').toLowerCase().includes(q));
+    groups.sort((a,b)=>{
+      let r=0;
+      if(_idxSortKey==='name')r=a[0].localeCompare(b[0],'ko');
+      else if(_idxSortKey==='debut')r=String(a[1].debut||'').localeCompare(String(b[1].debut||''));
+      else if(_idxSortKey==='agency')r=(a[1].co||'').localeCompare(b[1].co||'');
+      else if(_idxSortKey==='members')r=_memberCountFor(a[0])-_memberCountFor(b[0]);
+      return r*dirMul;
+    });
+    if(!groups.length){
+      const e=document.createElement('div');e.className='fav-empty';e.textContent=currentLang==='ko'?'검색 결과가 없어요':'No results';
+      listEl.appendChild(e);
+    }
+    groups.forEach(([ko,g])=>{
+      const sub=_idxSortKey==='members'?(currentLang==='ko'?`${_memberCountFor(ko)}명`:`${_memberCountFor(ko)} members`)
+        :_idxSortKey==='agency'?(g.co||'')
+        :(g.debut?String(g.debut).slice(0,4):'');
+      const item=_makeFilterListItem(currentLang==='ko'?ko:(g.en||ko),sub,()=>{
+        const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)flyToBubble(bm.mesh.position,bm.radius);
+        showGC(ko,window.innerWidth/2,window.innerHeight*0.4);
+      });
+      listEl.appendChild(item);
+    });
+  } else {
+    const members=ARTISTS.slice();
+    members.sort((a,b)=>{
+      let r=0;
+      if(_idxSortKey==='name')r=a.name.ko.localeCompare(b.name.ko,'ko');
+      else if(_idxSortKey==='birth')r=(a.bday||'').localeCompare(b.bday||'');
+      else if(_idxSortKey==='group')r=(a.group.ko||'').localeCompare(b.group.ko||'','ko');
+      else if(_idxSortKey==='nation')r=_natOf(a).localeCompare(_natOf(b));
+      return r*dirMul;
+    });
+    members.forEach(m=>{
+      const name=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
+      const grpName=currentLang==='ko'?m.group.ko:(m.group.en||m.group.ko);
+      const sub=_idxSortKey==='nation'?_natOf(m):(_idxSortKey==='birth'?(m.bday||''):grpName);
+      const item=_makeFilterListItem(name,sub,()=>{
+        if(m._worldPos)flyTo(m._worldPos);showT(m,window.innerWidth/2,window.innerHeight*0.4);
+      });
+      listEl.appendChild(item);
+    });
+  }
+}
+document.getElementById('sp-index-btn').addEventListener('click',e=>{
+  e.stopPropagation();
+  document.getElementById('settings-panel').classList.remove('open');
+  ['tab-settings','dh-settings-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
+  openIndexPanel();
+});
+document.getElementById('idx-view-group').addEventListener('click',e=>{e.stopPropagation();_idxView='group';_renderIdxSortOptions();_renderIndexList();});
+document.getElementById('idx-view-member').addEventListener('click',e=>{e.stopPropagation();_idxView='member';_renderIdxSortOptions();_renderIndexList();});
+document.getElementById('idx-sort-sel').addEventListener('change',e=>{_idxSortKey=e.target.value;_renderIndexList();});
+document.getElementById('idx-dir-btn').addEventListener('click',e=>{e.stopPropagation();_idxSortDir=_idxSortDir==='asc'?'desc':'asc';_renderIdxSortOptions();_renderIndexList();});
+document.getElementById('idx-search-inp').addEventListener('input',()=>{_renderIndexList();});
+document.getElementById('idx-search-inp').addEventListener('click',e=>e.stopPropagation());
+
 // ── Tab bar ───────────────────────────────────────
 function updateSheetBottom(){
   if(window.innerWidth>768)return;
