@@ -1183,7 +1183,7 @@ async function buildUniverse(){
     const dir=agencyDir(info.co);
     const [r,g,b]=info.color||[180,180,200];
     const color=duneColor(r,g,b);
-    const radius=Math.min(4,Math.max(2,1.8+members.length*0.25));
+    const radius=Math.min(4.5,Math.max(2,1.8+members.length*0.25));
 
     // 겹침 방지: 최대 400번 시도, 기존 행성과 표면 간격 4 이상 확보.
     // 같은 데뷔연도 그룹끼리 얇은 구 껍질에 몰리지 않도록 반경에 랜덤 변주를 줌
