@@ -21,6 +21,15 @@
     position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
     color:#8899ff;font-family:'Apple SD Gothic Neo',sans-serif;
     font-size:13px;letter-spacing:0.12em;opacity:0.85;
+    z-index:98;animation:loading-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes loading-pulse{0%,100%{opacity:0.45;}50%{opacity:0.92;}}
+  #loading-veil{
+    position:fixed;inset:0;z-index:97;pointer-events:none;
+    backdrop-filter:blur(34px) saturate(0.85);-webkit-backdrop-filter:blur(34px) saturate(0.85);
+    background:rgba(6,9,20,0.28);
+    -webkit-mask-image:radial-gradient(circle at 50% 50%,transparent 0%,#000 0%);
+    mask-image:radial-gradient(circle at 50% 50%,transparent 0%,#000 0%);
   }
   /* ── Tab bar ────────────────────────────────────── */
   #tabbar{
@@ -711,6 +720,7 @@
 </head>
 <body>
 <div id="loading">Loading universe…</div>
+<div id="loading-veil"></div>
 <div id="journal-sidebar">
   <button id="journal-toggle" aria-label="저널 열기/닫기">
     <span id="journal-toggle-icon">›</span>
@@ -1172,7 +1182,6 @@ async function buildUniverse(){
     fetch('artists.json').then(r=>r.json()),
     fetch('connections.json').then(r=>r.json())
   ]);
-  document.getElementById('loading').style.display='none';
   GROUPS=grpData;ARTISTS=artData;
   renderFavList();_buildBdayList();
   renderScrapList();
@@ -1482,6 +1491,25 @@ async function buildUniverse(){
     scene.add(g);
     _nctRingGroups.push({g,ko:_rko,baseOps:_baseOps});
   });
+  _revealUniverse();
+}
+function _revealUniverse(){
+  const veil=document.getElementById('loading-veil');
+  const loadingEl=document.getElementById('loading');
+  if(!veil||!loadingEl)return;
+  loadingEl.style.animation='none';
+  loadingEl.style.transition='opacity .5s ease';
+  loadingEl.style.opacity='0';
+  const t0=performance.now(),dur=1300;
+  (function tick(){
+    const t=Math.min((performance.now()-t0)/dur,1);
+    const e=1-Math.pow(1-t,3);
+    const r=e*105;
+    const grad=`radial-gradient(circle at 50% 50%, transparent ${Math.max(0,r-38)}%, #000 ${r}%)`;
+    veil.style.webkitMaskImage=grad;veil.style.maskImage=grad;
+    if(t<1)requestAnimationFrame(tick);
+    else{veil.remove();loadingEl.style.display='none';}
+  })();
 }
 
 // ── Animate ───────────────────────────────────────
@@ -2211,12 +2239,11 @@ function _buildConnContent(container){
     const chip=document.createElement('button');
     const isSel=_connSelected.includes(name);
     chip.className='conn-chip'+(isSel?' sel':'');
-    if(!isSel&&_connSelected.length>=3)chip.classList.add('disabled');
     chip.textContent=name;
     chip.addEventListener('click',e=>{
       e.stopPropagation();
       if(isSel){_connSelected=_connSelected.filter(n=>n!==name);}
-      else if(_connSelected.length<3){_connSelected.push(name);}
+      else{_connSelected.push(name);}
       _updateConnLines3d();
       _applyConnFocus();
       _flyToConnStars();
@@ -4106,7 +4133,10 @@ document.getElementById('journal-sidebar').addEventListener('click',e=>e.stopPro
 document.getElementById('journal-sidebar').addEventListener('pointerdown',e=>e.stopPropagation());
 
 buildUniverse().catch(err=>{
-  document.getElementById('loading').textContent='Error: '+err.message;
+  const veil=document.getElementById('loading-veil');if(veil)veil.remove();
+  const loadingEl=document.getElementById('loading');
+  loadingEl.style.animation='none';loadingEl.style.opacity='0.85';
+  loadingEl.textContent='Error: '+err.message;
   console.error(err);
 });
 </script>
