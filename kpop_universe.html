@@ -21,7 +21,7 @@
     position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
     color:#8899ff;font-family:'Apple SD Gothic Neo',sans-serif;
     font-size:13px;letter-spacing:0.12em;opacity:0.85;
-    z-index:98;animation:loading-pulse 1.8s ease-in-out infinite;
+    z-index:98;animation:loading-pulse 0.9s ease-in-out infinite;
   }
   @keyframes loading-pulse{0%,100%{opacity:0.45;}50%{opacity:0.92;}}
   #loading-veil{
@@ -32,10 +32,6 @@
     mask-image:radial-gradient(circle at 50% 50%,transparent 0%,#000 0%);
   }
   #loading-ring{position:fixed;inset:0;z-index:97;pointer-events:none;mix-blend-mode:screen;}
-  #loading-flash{
-    position:fixed;inset:0;z-index:97;pointer-events:none;mix-blend-mode:screen;opacity:0;
-    background:radial-gradient(circle at 50% 50%,rgba(210,225,255,0.9) 0%,rgba(150,180,255,0.35) 30%,transparent 65%);
-  }
   /* ── Tab bar ────────────────────────────────────── */
   #tabbar{
     position:fixed;bottom:0;left:0;right:0;
@@ -220,11 +216,15 @@
   .tv-sm:hover{opacity:.82;}
   .tv-sm img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
   .tv-sm-title{font-size:13px;color:#a8bcd8;line-height:1.3;padding:4px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tv-with-line{font-size:9px;font-weight:500;padding:0 4px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em;}
+  .tv-with-chip{cursor:pointer;color:rgba(150,180,255,0.72);transition:color .13s;}
+  .tv-with-chip:hover{color:rgba(200,220,255,1);text-decoration:underline;}
   @media(min-width:769px){
-    #tv-big-title,.tv-sm-title{text-overflow:unset;}
+    #tv-big-title,.tv-sm-title,.tv-with-line{text-overflow:unset;}
     .tv-title-inner{display:inline-block;white-space:nowrap;vertical-align:top;}
-    #tv-big-title:not(.is-marquee),.tv-sm-title:not(.is-marquee){-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);}
-    .marquee-run{animation:title-marquee 5s .4s linear infinite alternate;}
+    #tv-big-title:not(.is-marquee),.tv-sm-title:not(.is-marquee),.tv-with-line:not(.is-marquee){-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);}
+    .marquee-run{animation:title-marquee 2.2s .2s linear infinite alternate;}
+    .tv-with-line.is-marquee .marquee-run{animation-duration:1.3s;}
     @keyframes title-marquee{0%,15%{transform:translateX(0);}85%,100%{transform:translateX(var(--mx,0px));}}
   }
   .tv-empty{font-size:11px;color:#5878a0;}
@@ -631,7 +631,7 @@
   #idx-search-inp{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:7px;color:#c8d8f0;font-family:inherit;font-size:12px;padding:6px 9px;outline:none;letter-spacing:.02em;}
   #idx-search-inp::placeholder{color:rgba(126,152,202,0.32);}
   #idx-search-inp:focus{border-color:rgba(136,164,255,0.38);}
-  #member-tooltip{position:fixed;pointer-events:none;z-index:99;padding:4px 9px;border-radius:6px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:12px;font-weight:500;color:rgba(210,228,255,0.95);background:rgba(14,18,34,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(140,165,220,0.18);white-space:nowrap;opacity:0;transition:opacity 0.12s;transform:translate(-50%,-130%);letter-spacing:.02em;}
+  #member-tooltip{position:fixed;pointer-events:none;z-index:99;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:12.5px;font-weight:600;color:rgba(245,248,255,0.95);text-shadow:0 0 11px rgba(225,235,255,0.55),0 0 4px rgba(225,235,255,0.45),0 1px 4px rgba(0,0,0,0.85);white-space:nowrap;opacity:0;transition:opacity 0.15s;transform:translate(-50%,-130%);letter-spacing:.04em;}
   ::-webkit-scrollbar{width:4px;height:4px;}
   ::-webkit-scrollbar-track{background:transparent;}
   ::-webkit-scrollbar-thumb{background:rgba(140,165,220,0.20);border-radius:4px;}
@@ -646,7 +646,7 @@
   #tt-name-row .tn{margin-bottom:0;padding-left:0;padding-right:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #gc-name-row{display:inline-flex;align-items:center;gap:3px;margin-bottom:2px;max-width:100%;}
   #gc-name-row #gc-name{margin-bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  #fav-section{margin-bottom:14px;padding-bottom:12px;border-bottom:0.5px solid rgba(255,255,255,0.07);}
+  #fav-section{margin-bottom:14px;padding-bottom:12px;}
   .fav-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
   .fav-hd-lbl{font-size:9.5px;font-weight:700;letter-spacing:.2em;color:rgba(130,150,205,0.5);text-transform:uppercase;}
   .fav-item{display:flex;align-items:center;gap:6px;padding:6px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
@@ -696,6 +696,7 @@
   #scrap-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
   /* ── Birthday calendar ───────────────────────────── */
   #bday-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
+  #journal-hd{margin-top:16px;display:none;}
   .bday-item{display:flex;align-items:center;gap:7px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
   .bday-item:hover{background:rgba(255,255,255,0.06);}
   .bday-badge{font-size:9px;font-weight:800;letter-spacing:.03em;padding:2px 6px;border-radius:6px;flex-shrink:0;min-width:34px;text-align:center;}
@@ -716,9 +717,12 @@
   /* 썸네일 위 스크랩 버튼 */
   .tv-sm{position:relative!important;}
   #tv-big-wrap{position:relative;}
-  .scrap-btn{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.52);border:none;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:rgba(220,230,255,0.72);opacity:0;transition:opacity .15s,color .15s;z-index:3;padding:0;line-height:1;}
+  .scrap-btn{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.52);border:none;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(220,230,255,0.72);opacity:0;transition:opacity .15s,color .15s,transform .15s;z-index:3;padding:0;line-height:1;}
+  .scrap-btn svg{width:14px;height:14px;display:block;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round;transition:fill .15s;}
   .tv-sm:hover .scrap-btn,#tv-big-wrap:hover .scrap-btn{opacity:1;}
   .scrap-btn.scrapped{opacity:1!important;color:rgba(255,92,125,0.92);}
+  .scrap-btn.scrapped svg{fill:currentColor;}
+  .scrap-btn:hover{color:rgba(255,100,130,0.95);transform:scale(1.22);}
   /* 랜덤 스와치 */
   .pp-color-rand{background:conic-gradient(hsl(0,90%,72%),hsl(60,90%,72%),hsl(120,90%,72%),hsl(180,90%,72%),hsl(240,90%,72%),hsl(300,90%,72%),hsl(360,90%,72%))!important;box-shadow:none!important;}
 </style>
@@ -727,7 +731,6 @@
 <div id="loading">Loading universe…</div>
 <div id="loading-veil"></div>
 <div id="loading-ring"></div>
-<div id="loading-flash"></div>
 <div id="journal-sidebar">
   <button id="journal-toggle" aria-label="저널 열기/닫기">
     <span id="journal-toggle-icon">›</span>
@@ -1010,6 +1013,25 @@ function makeGlowTex(){
 }
 const glowTex=makeGlowTex();
 
+// 신인 헤일로 전용 — glowTex(중심이 가장 밝은 점 광원용)와 달리, 행성 실루엣에 가려지지 않도록
+// 중심은 완전히 투명하고 바깥쪽 도넛 형태 밴드에서만 빛나다가 다시 투명해지는 텍스처
+function makeHaloGlowTex(){
+  const c=document.createElement('canvas');c.width=128;c.height=128;
+  const cx=c.getContext('2d');
+  const grad=cx.createRadialGradient(64,64,0,64,64,64);
+  grad.addColorStop(0,   'rgba(255,255,255,0)');
+  grad.addColorStop(0.30,'rgba(255,255,255,0)');
+  grad.addColorStop(0.44,'rgba(255,255,255,0.55)');
+  grad.addColorStop(0.54,'rgba(255,255,255,0.90)');
+  grad.addColorStop(0.66,'rgba(255,255,255,0.40)');
+  grad.addColorStop(0.85,'rgba(255,255,255,0.06)');
+  grad.addColorStop(1,   'rgba(255,255,255,0)');
+  cx.fillStyle=grad;
+  cx.fillRect(0,0,128,128);
+  return new THREE.CanvasTexture(c);
+}
+const haloGlowTex=makeHaloGlowTex();
+
 // Mix rgb with grayscale 30:70
 function duneColor(r,g,b){
   const gr=r*0.299+g*0.587+b*0.114;
@@ -1018,6 +1040,10 @@ function duneColor(r,g,b){
     Math.min(1,(g*0.70+gr*0.30)/255),
     Math.min(1,(b*0.70+gr*0.30)/255 + 0.05)  // 쿨 틴트
   );
+}
+// 라벨/호버 텍스트 글로우용 — 원색을 그대로 쓰면 어두워서 text-shadow 발광이 약하니 밝게 부스트
+function _labelGlowColor(r,g,b){
+  return `rgb(${Math.min(255,r*2.2|0)},${Math.min(255,g*2.2|0)},${Math.min(255,b*2.4|0)})`;
 }
 
 const groupLabels=[];
@@ -1173,13 +1199,17 @@ function _isLegacyGroup(debutStr){
   return ageYears>=10;
 }
 
-// 데뷔 1년 이내 신인 그룹 판정 (레거시 판정과 대칭 구조)
-function _isRookieGroup(debutStr){
+// 데뷔 연차별 신인 헤일로 세기 (레거시 판정과 대칭 구조) — 1년 미만 1, 1~2년 0.8, 2~3년 0.6, 그 이후는 없음
+function _rookieHaloStrength(debutStr){
   const parts=String(debutStr||'').split('.').map(Number);
-  if(!parts[0])return false;
+  if(!parts[0])return 0;
   const d=new Date(parts[0],(parts[1]||1)-1,parts[2]||1);
   const ageYears=(Date.now()-d.getTime())/(365.25*24*3600*1000);
-  return ageYears>=0&&ageYears<1;
+  if(ageYears<0)return 0;
+  if(ageYears<1)return 1;
+  if(ageYears<2)return 0.7;
+  if(ageYears<3)return 0.5;
+  return 0;
 }
 
 // ── Build universe ────────────────────────────────
@@ -1324,19 +1354,28 @@ async function buildUniverse(){
     bubble.position.copy(pos);
     bubble._isLegacy=_isLegacyGroup(info.debut);
     scene.add(bubble);
-    // ── 신인(데뷔 1년 이내) 헤일로 — 구 형태는 그대로 두고 바깥에 숨쉬듯 맥동하는 발광 구 하나 덧씌움
+    // ── 신인 헤일로(데뷔 1년 미만 풀세기, 1~3년 옅게) — glowTex(중심이 제일 밝은 점광원용 텍스처)를 그대로 쓰니
+    // 밝은 부분이 대부분 행성 구 안쪽에 가려져서 "그룹 안에서만 박동"하는 것처럼 보였음.
+    // haloGlowTex(중심 투명, 바깥 도넛 밴드에서만 빛남)로 바꾸고, 그 밝은 밴드가 행성 실루엣 바깥쪽에 오도록 스케일을 넉넉히 키움
     let haloMesh=null;
-    if(_isRookieGroup(info.debut)){
-      const haloGeo=new THREE.SphereGeometry(radius*1.22,32,32);
-      const haloMat=new THREE.MeshBasicMaterial({color,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
-      haloMesh=new THREE.Mesh(haloGeo,haloMat);
+    const _haloStrength=_rookieHaloStrength(info.debut);
+    if(_haloStrength>0){
+      const haloMat=new THREE.SpriteMaterial({
+        map:haloGlowTex,color,transparent:true,opacity:0,
+        blending:THREE.AdditiveBlending,depthWrite:false
+      });
+      haloMesh=new THREE.Sprite(haloMat);
+      const baseScale=radius*(3.0+1.4*_haloStrength);
+      haloMesh.userData.baseScale=baseScale;
+      haloMesh.userData.haloStrength=_haloStrength;
+      haloMesh.scale.setScalar(baseScale);
       bubble.add(haloMesh);
     }
     // ── Group label ───────────────────────────────
     const div=document.createElement('div');
     div.className='group-label';
     div.textContent=ko;
-    div.style.color=`rgb(${Math.min(255,r*2.2|0)},${Math.min(255,g*2.2|0)},${Math.min(255,b*2.4|0)})`;
+    div.style.color=_labelGlowColor(r,g,b);
     div.style.cursor='pointer';
     div.addEventListener('click',e=>{
       e.stopPropagation();
@@ -1500,15 +1539,19 @@ async function buildUniverse(){
     _nctRingGroups.push({g,ko:_rko,baseOps:_baseOps});
   });
   const _elapsed=performance.now()-_loadT0;
-  const _minShow=1800; // "Loading universe…" 최소 노출 시간 — 로딩이 너무 빨라서 텍스트가 안 읽히는 문제 방지
+  const _minShow=550; // "Loading universe…" 최소 노출 시간 — 로딩이 너무 빨라서 텍스트가 안 읽히는 문제 방지
   if(_elapsed<_minShow)await new Promise(res=>setTimeout(res,_minShow-_elapsed));
   _revealUniverse();
+  // 생일 별똥별: 인트로 연출 끝난 뒤 한 번, 이후 30분마다 오늘 생일인 멤버 확인
+  setTimeout(_checkBdayShootingStars,2400);
+  setTimeout(_checkDebutAnniversaries,2400);
+  setInterval(_checkBdayShootingStars,15*60*1000);
+  setInterval(_checkDebutAnniversaries,15*60*1000);
 }
 function _revealUniverse(){
   const veil=document.getElementById('loading-veil');
   const loadingEl=document.getElementById('loading');
   const ring=document.getElementById('loading-ring');
-  const flash=document.getElementById('loading-flash');
   if(!veil||!loadingEl)return;
 
   // 행성들을 일단 안 보이게 축소 — 마스크가 지나가는 순서대로 안쪽→바깥쪽 블룸인
@@ -1520,30 +1563,28 @@ function _revealUniverse(){
   });
   function easeOutBack(t){const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);}
 
+  // 펄스 애니메이션 도중 강제로 opacity:0 트랜지션을 걸면 현재 펄스 값→기본값으로 순간 스냅 후 페이드되어 뚝 끊겨 보임 —
+  // 현재 계산된 opacity를 그대로 굳혀서 스냅 없이 자연스럽게 이어지도록 함
+  const _curOp=getComputedStyle(loadingEl).opacity;
   loadingEl.style.animation='none';
-  loadingEl.style.transition='opacity .6s ease';
+  loadingEl.style.opacity=_curOp;
+  void loadingEl.offsetHeight;
+  const textFadeMs=400,dur=1050; // 텍스트가 흐릿한 배경 위에서 사라지는 동안 퍼짐도 같이 시작
+  loadingEl.style.transition=`opacity ${textFadeMs}ms ease`;
   loadingEl.style.opacity='0';
-
-  const holdMs=350,dur=2400; // 데이터 완비 후 잠깐 숨 고르고, 천천히 넓게 퍼짐
-  setTimeout(()=>{
-    if(flash){
-      flash.style.transition='opacity .6s ease-out';
-      requestAnimationFrame(()=>{
-        flash.style.opacity='0.9';
-        setTimeout(()=>{flash.style.opacity='0';},90);
-      });
-    }
+  {
     const t0=performance.now();
     (function tick(){
       const t=Math.min((performance.now()-t0)/dur,1);
-      const e=1-Math.pow(1-t,3);
+      // 시작~중간은 선형에 가깝게 빠르게, 중간~끝은 기존 지수 가속 곡선 그대로 유지(이음매 없이 매끄럽게 블렌드)
+      const e=t<=0?0:0.26*t+0.74*Math.pow(2,6*t-6);
       const r=e*112;
       const bandInner=Math.max(0,r-42);
       const grad=`radial-gradient(circle at 50% 50%, transparent ${bandInner}%, #000 ${r}%)`;
       veil.style.webkitMaskImage=grad;veil.style.maskImage=grad;
       if(ring){
-        const glowOp=Math.sin(Math.min(t,1)*Math.PI)*0.55;
-        ring.style.background=`radial-gradient(circle at 50% 50%, transparent ${Math.max(0,r-7)}%, rgba(150,190,255,${glowOp.toFixed(3)}) ${r}%, transparent ${r+9}%)`;
+        const glowOp=Math.sin(Math.min(t,1)*Math.PI)*0.18;
+        ring.style.background=`radial-gradient(circle at 50% 50%, transparent ${Math.max(0,r-16)}%, rgba(150,190,255,${glowOp.toFixed(3)}) ${r}%, transparent ${r+20}%)`;
       }
       bubbleMeshes.forEach(bm=>{
         const start=bm.mesh._revealFrac*0.55;
@@ -1560,11 +1601,11 @@ function _revealUniverse(){
           const rg=_nctRingGroups.find(x=>x.ko===bm.ko);
           if(rg)rg.g.scale.setScalar(1);
         });
-        veil.remove();if(ring)ring.remove();if(flash)flash.remove();
+        veil.remove();if(ring)ring.remove();
         loadingEl.style.display='none';
       }
     })();
-  },holdMs);
+  }
 }
 
 // ── Animate ───────────────────────────────────────
@@ -1615,10 +1656,13 @@ function animate(){
     mesh._legacyAlpha=mesh._legacyAlpha??1;
     mesh._legacyAlpha+=(legacyTarget-mesh._legacyAlpha)*0.06;
     mesh.material.uniforms.uFilterOp.value=mesh._filterAlpha*mesh._focusAlpha*mesh._legacyAlpha;
-    // 신인 헤일로: 숨쉬듯 은은하게 맥동
+    // 신인 헤일로: 빛이 새어 퍼지듯 부드럽게 숨쉬는 글로우 (1년 미만은 풀세기, 1~3년은 옅게)
     if(halo){
-      const breathe=0.14+Math.sin(performance.now()*0.0016)*0.10;
+      const st=halo.userData.haloStrength||1;
+      const phase=Math.sin(performance.now()*0.0016);
+      const breathe=(0.22+phase*0.15)*st;
       halo.material.opacity=Math.max(0,breathe)*mesh._filterAlpha*mesh._focusAlpha;
+      halo.scale.setScalar(halo.userData.baseScale*(1+0.08*phase*st));
     }
   });
   _nctRingGroups.forEach(({g,ko,baseOps})=>{
@@ -1887,17 +1931,11 @@ function addHoverPreview(wrapEl,imgEl,videoId,shorts){
   });
 }
 
-function addMarquee(el){
-  if(isMob())return;
-  const inner=document.createElement('span');
-  inner.className='tv-title-inner';
-  inner.textContent=el.textContent;
-  el.textContent='';
-  el.appendChild(inner);
+function _wireMarqueeHover(el,inner){
   el.addEventListener('mouseenter',()=>{
     const ov=inner.scrollWidth-el.clientWidth;
     if(ov<=0)return;
-    inner.style.setProperty('--mx',`-${ov}px`);
+    inner.style.setProperty('--mx',`-${ov+6}px`); // 살짝 더 밀어서 마지막 글자가 안 잘리도록 여유분 추가
     el.classList.add('is-marquee');
     inner.classList.add('marquee-run');
   });
@@ -1907,7 +1945,88 @@ function addMarquee(el){
     inner.style.removeProperty('--mx');
   });
 }
+function addMarquee(el){
+  if(isMob())return;
+  const inner=document.createElement('span');
+  inner.className='tv-title-inner';
+  inner.textContent=el.textContent;
+  el.textContent='';
+  el.appendChild(inner);
+  _wireMarqueeHover(el,inner);
+}
+// 자식 요소(클릭 가능한 칩 등)를 textContent로 날리지 않고 그대로 감싸서 마퀴 적용
+function addMarqueeChildren(el){
+  if(isMob())return;
+  const inner=document.createElement('span');
+  inner.className='tv-title-inner';
+  while(el.firstChild)inner.appendChild(el.firstChild);
+  el.appendChild(inner);
+  _wireMarqueeHover(el,inner);
+}
 
+// 영상에 같이 나온(with) 콜라보 멤버 + 원곡 소속 그룹(origGroup) 표시 — "그룹 멤버 (원곡 그룹)" 형태, 그룹/멤버 각각 클릭 가능
+// origGroup: with 목록에 그 그룹 멤버가 안 나올 수도 있는 커버곡 등에서, 곡 자체가 어느 그룹 소속인지 표기하기 위한 필드
+function _makeGCChip(ko,label){
+  const chip=document.createElement('span');chip.className='tv-with-chip';
+  chip.textContent=label;
+  chip.addEventListener('click',e=>{
+    e.stopPropagation();
+    const bm=bubbleMeshes.find(b=>b.ko===ko);
+    if(bm)flyToBubble(bm.mesh.position,bm.radius);
+    showGC(ko,window.innerWidth/2,window.innerHeight*0.4);
+  });
+  return chip;
+}
+function _makeMemberChip(t){
+  const chip=document.createElement('span');chip.className='tv-with-chip';
+  chip.textContent=currentLang==='ko'?t.name.ko:(t.name.en||t.name.ko);
+  chip.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(t._worldPos)flyTo(t._worldPos);
+    showT(t,window.innerWidth/2,window.innerHeight*0.4);
+  });
+  return chip;
+}
+function _makeWithLine(song,ctx){
+  if(!ctx||!ctx.groupKo)return null;
+  const withTargets=(song.with||[]).map(w=>_findArtistByConnName(w,ctx.groupKo)).filter(Boolean);
+  const hasOrig=song.origGroup&&GROUPS[song.origGroup]&&!withTargets.some(t=>t.group.ko===song.origGroup);
+  if(!withTargets.length&&!hasOrig)return null;
+  const line=document.createElement('div');
+  line.className='tv-with-line';
+  // 같은 그룹끼리 묶어서 그룹명은 한 번만 — 앵커(현재 보고 있는 멤버)의 소속 그룹을 맨 앞에, 나머지는 그룹명 가나다순, 그룹 내 멤버는 이름 가나다순
+  const byGroup=new Map();
+  withTargets.forEach(t=>{
+    if(!byGroup.has(t.group.ko))byGroup.set(t.group.ko,[]);
+    byGroup.get(t.group.ko).push(t);
+  });
+  const groupKos=[...byGroup.keys()].sort((a,b)=>{
+    if(a===ctx.groupKo)return -1;
+    if(b===ctx.groupKo)return 1;
+    return a.localeCompare(b,'ko');
+  });
+  groupKos.forEach((gko,gi)=>{
+    if(gi>0){const sep=document.createElement('span');sep.textContent=' · ';sep.style.color='rgba(120,145,195,0.35)';line.appendChild(sep);}
+    const members=byGroup.get(gko).sort((a,b)=>a.name.ko.localeCompare(b.name.ko,'ko'));
+    const gInfo=GROUPS[gko];
+    const gk=currentLang==='ko'?gko:((gInfo&&gInfo.en)||gko);
+    line.appendChild(_makeGCChip(gko,gk));
+    members.forEach(m=>{
+      line.appendChild(document.createTextNode(' '));
+      line.appendChild(_makeMemberChip(m));
+    });
+  });
+  if(hasOrig){
+    const label=currentLang==='ko'?'원곡':'Original';
+    const og=GROUPS[song.origGroup];
+    const gk=currentLang==='ko'?song.origGroup:(og.en||song.origGroup);
+    line.appendChild(document.createTextNode(` (${label} `));
+    line.appendChild(_makeGCChip(song.origGroup,gk));
+    line.appendChild(document.createTextNode(')'));
+  }
+  addMarqueeChildren(line);
+  return line;
+}
 function makeSmallThumb(s,allSongs,idx,ctx){
   const vid=ytId(s.u);
   const shorts=isShorts(s.u);
@@ -1918,6 +2037,8 @@ function makeSmallThumb(s,allSongs,idx,ctx){
   const lbl=document.createElement('div');lbl.className='tv-sm-title';lbl.textContent=s.t;
   addMarquee(lbl);
   box.appendChild(img);box.appendChild(lbl);
+  const withLine=_makeWithLine(s,ctx);
+  if(withLine)box.appendChild(withLine);
   box.appendChild(_makeScrapBtn(s,ctx));
   addHoverPreview(box,img,vid,shorts);
   box.addEventListener('click',e=>{e.stopPropagation();if(isMob())window.open(s.u,'_blank');else openLightbox(s.u,shorts);});
@@ -1943,6 +2064,8 @@ function buildVideoSection(songs,containerEl,ctx){
       const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
       addMarquee(bigTitle);
       bigWrap.appendChild(big);bigWrap.appendChild(bigTitle);
+      const _bigWithLine=_makeWithLine(first,ctx);
+      if(_bigWithLine)bigWrap.appendChild(_bigWithLine);
       bigWrap.appendChild(_makeScrapBtn(first,ctx));
       addHoverPreview(bigWrap,big,ytId(first.u),false);
       bigWrap.addEventListener('click',e=>{e.stopPropagation();window.open(first.u,'_blank');});
@@ -1982,6 +2105,8 @@ function buildVideoSection(songs,containerEl,ctx){
   const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
   addMarquee(bigTitle);
   bigWrap.appendChild(big);bigWrap.appendChild(bigTitle);
+  const _bigWithLine=_makeWithLine(first,ctx);
+  if(_bigWithLine)bigWrap.appendChild(_bigWithLine);
   bigWrap.appendChild(_makeScrapBtn(first,ctx));
   addHoverPreview(bigWrap,big,ytId(first.u),firstShorts);
   bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,firstShorts);});
@@ -1989,7 +2114,6 @@ function buildVideoSection(songs,containerEl,ctx){
   const rest=all.slice(1);if(!rest.length)return;
   const sArr=_shuffle(rest.filter(s=>isShorts(s.u)));
   const lArr=_shuffle(rest.filter(s=>!isShorts(s.u)));
-  if(sArr.length%2!==0)sArr.pop();
   const lPairs=[],sPairs=[];
   for(let i=0;i<lArr.length;i+=2)lPairs.push(lArr.slice(i,i+2));
   for(let i=0;i<sArr.length;i+=2)sPairs.push(sArr.slice(i,i+2));
@@ -2532,6 +2656,106 @@ function pulseMember(artist){
   _positions.forEach(pos=>{makeRipple(0,pos);makeRipple(780,pos);});
   setTimeout(()=>tex.dispose(),2600);
 }
+
+// ── 생일 별똥별 이벤트 ──────────────────────────────
+function _isBdayToday(a){
+  if(!a.bday)return false;
+  const p=String(a.bday).split('.').map(Number);
+  if(p.length<3)return false;
+  const now=new Date();
+  return p[1]===now.getMonth()+1&&p[2]===now.getDate();
+}
+function _spawnBdayShootingStar(artist){
+  const positions=(artist._worldPositions||[]).map(wp=>wp.pos);
+  if(!positions.length){if(artist._worldPos)positions.push(artist._worldPos);else return;}
+  const [r,g,b]=artist.color||[255,255,255];
+  const tint=new THREE.Color(r/255,g/255,b/255);
+  const trailN=10;
+  positions.forEach(targetPos=>{
+    // 목표 위치(원래 별 자리) 위쪽 비스듬한 방향에서, 훨씬 멀리서부터 날아오는 시작점
+    const dir=new THREE.Vector3((Math.random()-0.5)*1.2,0.7+Math.random()*0.5,(Math.random()-0.5)*1.2).normalize();
+    const dist=92+Math.random()*44;
+    const startPos=targetPos.clone().addScaledVector(dir,dist);
+    const sprites=[];
+    for(let i=0;i<trailN;i++){
+      const mat=new THREE.SpriteMaterial({map:glowTex,color:tint,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false});
+      const sp=new THREE.Sprite(mat);
+      scene.add(sp);
+      sprites.push(sp);
+    }
+    const dur=4600,t0=performance.now(),hist=[];
+    (function tick(){
+      const t=Math.min((performance.now()-t0)/dur,1);
+      const ease=t*t*(3-2*t); // smoothstep
+      const head=startPos.clone().lerp(targetPos,ease);
+      hist.unshift(head);
+      if(hist.length>trailN)hist.length=trailN;
+      sprites.forEach((sp,i)=>{
+        const p=hist[i];
+        if(!p){sp.material.opacity=0;return;}
+        sp.position.copy(p);
+        const fade=1-i/trailN;
+        sp.material.opacity=(i===0?1.0:0.85*fade*fade)*(1-t*0.1);
+        sp.scale.setScalar(i===0?1.4:1.4*(fade*0.7+0.15));
+      });
+      if(t<1)requestAnimationFrame(tick);
+      else{
+        // 꼬리는 정리하고, 머리 스프라이트 하나는 착륙 지점에 잔상으로 남겨서 서서히 사라지게
+        sprites.slice(1).forEach(sp=>{scene.remove(sp);sp.material.dispose();});
+        if(artist._flashPulse!==undefined)artist._flashPulse=1.4; // 도착 순간 실제 별도 반짝
+        const afterglow=sprites[0];
+        afterglow.position.copy(targetPos);
+        afterglow.scale.setScalar(1.8);
+        afterglow.material.opacity=0.9;
+        const gt0=performance.now(),gdur=2000;
+        (function fadeTick(){
+          const gt=Math.min((performance.now()-gt0)/gdur,1);
+          afterglow.material.opacity=0.9*(1-gt)*(1-gt);
+          afterglow.scale.setScalar(1.8+gt*1.2);
+          if(gt<1)requestAnimationFrame(fadeTick);
+          else{scene.remove(afterglow);afterglow.material.dispose();}
+        })();
+      }
+    })();
+  });
+}
+function _checkBdayShootingStars(){
+  ARTISTS.forEach(a=>{if(_isBdayToday(a))_spawnBdayShootingStar(a);});
+}
+
+// ── 그룹 데뷔 기념일 슈퍼노바 ────────────────────────
+function _isDebutAnniversaryToday(info){
+  if(!info||!info.debut)return false;
+  const p=String(info.debut).split('.').map(Number);
+  if(p.length<3)return false;
+  const now=new Date();
+  return p[1]===now.getMonth()+1&&p[2]===now.getDate();
+}
+function _spawnDebutAnniversaryNova(ko){
+  const bm=bubbleMeshes.find(b=>b.ko===ko);
+  if(!bm)return;
+  // 클릭 피드백용 pulseGroup/pulseGroupRipple를 베이스로 깔고, 그 위에 한 번 확 터지는 노바 플래시를 더함
+  pulseGroup(ko);
+  pulseGroupRipple(ko);
+  const [r,g,b]=(bm.info&&bm.info.color)||[200,220,255];
+  const mat=new THREE.SpriteMaterial({map:glowTex,color:new THREE.Color(r/255,g/255,b/255),transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false});
+  const sp=new THREE.Sprite(mat);
+  sp.position.copy(bm.mesh.position);
+  scene.add(sp);
+  const t0=performance.now(),dur=1400;
+  (function tick(){
+    const t=Math.min((performance.now()-t0)/dur,1);
+    const grow=1-Math.pow(1-t,3);
+    sp.scale.setScalar(bm.radius*(1.2+grow*3.2));
+    mat.opacity=Math.pow(1-t,1.4)*0.85;
+    if(t<1)requestAnimationFrame(tick);
+    else{scene.remove(sp);mat.dispose();}
+  })();
+}
+function _checkDebutAnniversaries(){
+  Object.entries(GROUPS).forEach(([ko,info])=>{if(_isDebutAnniversaryToday(info))_spawnDebutAnniversaryNova(ko);});
+}
+
 document.getElementById('ttx').addEventListener('click',e=>{
   e.stopPropagation();
   if(isMob())closeMobSheet();
@@ -3711,14 +3935,13 @@ function toggleScrap(s,ctx){
   renderScrapList();
   document.querySelectorAll(`.scrap-btn[data-u="${CSS.escape(id)}"]`).forEach(btn=>{
     btn.classList.toggle('scrapped',i<0);
-    btn.textContent=i<0?'♥':'♡';
   });
 }
 function _makeScrapBtn(s,ctx){
   const btn=document.createElement('button');
   btn.className='scrap-btn'+((_isScraped(s))?' scrapped':'');
   btn.dataset.u=s.u;
-  btn.textContent=_isScraped(s)?'♥':'♡';
+  btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg>';
   btn.title='플레이리스트에 추가';
   btn.addEventListener('click',e=>{e.stopPropagation();toggleScrap(s,ctx);});
   return btn;
@@ -3740,7 +3963,7 @@ function renderScrapList(){
     info.appendChild(tEl);info.appendChild(sub);
     const del=document.createElement('button');del.className='scrap-del';del.textContent='×';del.title='삭제';
     del.addEventListener('click',e=>{e.stopPropagation();scraps.splice(i,1);localStorage.setItem(SCRAP_KEY,JSON.stringify(scraps));renderScrapList();
-      document.querySelectorAll(`.scrap-btn[data-u="${CSS.escape(item.u)}"]`).forEach(b=>{b.classList.remove('scrapped');b.textContent='♡';});
+      document.querySelectorAll(`.scrap-btn[data-u="${CSS.escape(item.u)}"]`).forEach(b=>{b.classList.remove('scrapped');});
     });
     row.appendChild(img);row.appendChild(info);row.appendChild(del);
     row.addEventListener('click',()=>isMob()?window.open(item.u,'_blank'):openLightbox(item.u,shorts));
@@ -3995,7 +4218,7 @@ function placeMyStarInUniverse(){
   const div=document.createElement('div');
   div.className='group-label';
   div.textContent=myProfile.nickname;
-  div.style.color=`rgb(${Math.min(255,r*2.2|0)},${Math.min(255,g*2.2|0)},${Math.min(255,b*2.4|0)})`;
+  div.style.color=_labelGlowColor(r,g,b);
   div.style.fontSize='11px';
   div.style.cursor='pointer';
   div.addEventListener('click',e=>{e.stopPropagation();_toggleMyStarFocus();});
