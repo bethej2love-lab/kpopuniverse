@@ -192,7 +192,7 @@
   #ttx{position:absolute;top:9px;right:11px;font-size:15px;color:rgba(150,170,215,0.65);cursor:pointer;line-height:1;}
   #tt-bar{height:2px;width:100%;margin-bottom:12px;}
   .tn{font-size:16px;font-weight:700;color:#d8e4f6;margin-bottom:3px;padding-right:18px;padding-left:4px;letter-spacing:-.02em;}
-  #tg-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1px;padding-right:4px;}
+  #tg-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1px;padding-left:4px;padding-right:4px;}
   .tg{font-size:14px;color:#aec8e8;letter-spacing:.05em;font-weight:500;text-transform:uppercase;cursor:pointer;transition:color .12s;width:fit-content;}
   .tg:hover{color:#d0e8ff;}
   .tco{font-size:14px;color:#88aac8;margin-bottom:6px;}
@@ -566,7 +566,8 @@
   /* ── Filter panel (journal-sidebar 내) ───────────── */
   #filter-panel{display:none;}
   /* ── Zoom slider ────────────────────────────────── */
-  #zoom-ctrl{position:fixed;left:18px;bottom:24px;display:flex;flex-direction:column;align-items:center;gap:0;z-index:50;user-select:none;width:30px;background:rgba(12,16,36,0.60);border:1px solid rgba(140,165,220,0.16);border-radius:14px;padding:10px 0 0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 2px 14px rgba(0,0,0,0.22);}
+  #zoom-ctrl{position:fixed;left:18px;bottom:24px;display:flex;flex-direction:column;align-items:center;gap:0;z-index:50;user-select:none;width:30px;background:rgba(12,16,36,0.60);border:1px solid rgba(140,165,220,0.16);border-radius:14px;padding:10px 0 0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 2px 14px rgba(0,0,0,0.22);transition:left 0.32s cubic-bezier(0.4,0,0.2,1);}
+  #journal-sidebar.open~#zoom-ctrl{left:278px;}
   @media(max-width:768px){#zoom-ctrl{display:none;}}
   #zoom-track{width:2px;height:96px;background:rgba(140,165,220,0.15);border-radius:1px;position:relative;cursor:pointer;flex-shrink:0;margin-bottom:8px;}
   #zoom-thumb{width:10px;height:10px;background:rgba(150,180,255,0.85);border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);top:0;cursor:grab;box-shadow:0 0 6px rgba(110,150,255,0.55);transition:background .15s,box-shadow .15s;}
@@ -683,7 +684,7 @@
   /* 썸네일 위 스크랩 버튼 */
   .tv-sm{position:relative!important;}
   #tv-big-wrap{position:relative;}
-  .scrap-btn{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.52);border:none;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:rgba(220,230,255,0.72);opacity:0;transition:opacity .15s,color .15s;z-index:3;padding:0;line-height:1;}
+  .scrap-btn{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.52);border:none;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:rgba(220,230,255,0.72);opacity:0;transition:opacity .15s,color .15s;z-index:3;padding:0;line-height:1;}
   .tv-sm:hover .scrap-btn,#tv-big-wrap:hover .scrap-btn{opacity:1;}
   .scrap-btn.scrapped{opacity:1!important;color:rgba(255,92,125,0.92);}
   /* 랜덤 스와치 */
@@ -1112,6 +1113,15 @@ function _isLegacyGroup(debutStr){
   return ageYears>=10;
 }
 
+// 데뷔 1년 이내 신인 그룹 판정 (레거시 판정과 대칭 구조)
+function _isRookieGroup(debutStr){
+  const parts=String(debutStr||'').split('.').map(Number);
+  if(!parts[0])return false;
+  const d=new Date(parts[0],(parts[1]||1)-1,parts[2]||1);
+  const ageYears=(Date.now()-d.getTime())/(365.25*24*3600*1000);
+  return ageYears>=0&&ageYears<1;
+}
+
 // ── Build universe ────────────────────────────────
 async function buildUniverse(){
   const [grpData,artData,connData]=await Promise.all([
@@ -1183,7 +1193,7 @@ async function buildUniverse(){
     const dir=agencyDir(info.co);
     const [r,g,b]=info.color||[180,180,200];
     const color=duneColor(r,g,b);
-    const radius=Math.min(4.5,Math.max(2,1.8+members.length*0.25));
+    const radius=Math.min(4.5,Math.max(1.6,1.5+members.length*0.25));
 
     // 겹침 방지: 최대 400번 시도, 기존 행성과 표면 간격 4 이상 확보.
     // 같은 데뷔연도 그룹끼리 얇은 구 껍질에 몰리지 않도록 반경에 랜덤 변주를 줌
@@ -1253,6 +1263,14 @@ async function buildUniverse(){
     bubble.position.copy(pos);
     bubble._isLegacy=_isLegacyGroup(info.debut);
     scene.add(bubble);
+    // ── 신인(데뷔 1년 이내) 헤일로 — 구 형태는 그대로 두고 바깥에 숨쉬듯 맥동하는 발광 구 하나 덧씌움
+    let haloMesh=null;
+    if(_isRookieGroup(info.debut)){
+      const haloGeo=new THREE.SphereGeometry(radius*1.22,32,32);
+      const haloMat=new THREE.MeshBasicMaterial({color,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+      haloMesh=new THREE.Mesh(haloGeo,haloMat);
+      bubble.add(haloMesh);
+    }
     // ── Group label ───────────────────────────────
     const div=document.createElement('div');
     div.className='group-label';
@@ -1282,7 +1300,7 @@ async function buildUniverse(){
     label.position.set(0,radius+0.3,0);
     bubble.add(label);
     groupLabels.push({el:div,worldPos:pos.clone(),ko,en:info.en||ko});
-    bubbleMeshes.push({mesh:bubble,ko,info,radius,labelEl:div});
+    bubbleMeshes.push({mesh:bubble,ko,info,radius,labelEl:div,halo:haloMesh});
 
     // ── Collect member positions ───────────────────
     const _placedMPos=[];
@@ -1449,7 +1467,7 @@ function animate(){
   const zoomT=Math.max(0,Math.min(1,(camDist-90)/190));
   const zoomBoost=-(Math.cos(Math.PI*zoomT)-1)/2;
   let colorsDirty=false;
-  bubbleMeshes.forEach(({mesh,labelEl})=>{
+  bubbleMeshes.forEach(({mesh,labelEl,halo})=>{
     const dist=camera.position.distanceTo(mesh.position);
     const t=Math.max(0,Math.min(1,(dist-15)/100));
     const f=-(Math.cos(Math.PI*t)-1)/2;
@@ -1470,6 +1488,11 @@ function animate(){
     mesh._legacyAlpha=mesh._legacyAlpha??1;
     mesh._legacyAlpha+=(legacyTarget-mesh._legacyAlpha)*0.06;
     mesh.material.uniforms.uFilterOp.value=mesh._filterAlpha*mesh._focusAlpha*mesh._legacyAlpha;
+    // 신인 헤일로: 숨쉬듯 은은하게 맥동
+    if(halo){
+      const breathe=0.14+Math.sin(performance.now()*0.0016)*0.10;
+      halo.material.opacity=Math.max(0,breathe)*mesh._filterAlpha*mesh._focusAlpha;
+    }
   });
   _nctRingGroups.forEach(({g,ko,baseOps})=>{
     const bm=bubbleMeshes.find(b=>b.ko===ko);
