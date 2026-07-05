@@ -11,17 +11,50 @@
     ],
     "gender": "m",
     "songs": [
-      {"t": "REDRED",            "u": "https://www.youtube.com/watch?v=qSYNCpb0Bzw"},
-      {"t": "GO! + FaSHioN",     "u": "https://www.youtube.com/watch?v=koED8KSXfeo"},
-      {"t": "Deja Vu + FaSHioN", "u": "https://www.youtube.com/watch?v=ELPeHSrMd8M"},
-      {"t": "What You Want",     "u": "https://www.youtube.com/watch?v=6MYB61hUaFg"},
-      {"t": "REDRED",            "u": "https://youtube.com/shorts/EJqu6C_HFp0"},
-      {"t": "this how we vibe to #BTS_SWIM 🏊🫶 #BTS #방탄소년단", "u": "https://youtube.com/shorts/uGtZAkJhKlE"},
-      {"t": "TNT",               "u": "https://youtube.com/shorts/Z9eI02_ADVQ"},
-      {"t": "REDRED(cheering ver.)", "u": "https://youtube.com/shorts/1iH6jMJDpcM"},
-      {"t": "YOUNGCREATORCREW",  "u": "https://www.youtube.com/watch?v=iyKA7tSb9KI"},
-      {"t": "ACAI",              "u": "https://www.youtube.com/watch?v=ysg6GVlzz9Y"},
-      {"t": "go home",           "u": "https://www.youtube.com/watch?v=NeaXPMDpfnc"}
+      {
+        "t": "REDRED",
+        "u": "https://www.youtube.com/watch?v=qSYNCpb0Bzw"
+      },
+      {
+        "t": "GO! + FaSHioN",
+        "u": "https://www.youtube.com/watch?v=koED8KSXfeo"
+      },
+      {
+        "t": "Deja Vu + FaSHioN",
+        "u": "https://www.youtube.com/watch?v=ELPeHSrMd8M"
+      },
+      {
+        "t": "What You Want",
+        "u": "https://www.youtube.com/watch?v=6MYB61hUaFg"
+      },
+      {
+        "t": "REDRED",
+        "u": "https://youtube.com/shorts/EJqu6C_HFp0"
+      },
+      {
+        "t": "this how we vibe to #BTS_SWIM 🏊🫶 #BTS #방탄소년단",
+        "u": "https://youtube.com/shorts/uGtZAkJhKlE"
+      },
+      {
+        "t": "TNT",
+        "u": "https://youtube.com/shorts/Z9eI02_ADVQ"
+      },
+      {
+        "t": "REDRED(cheering ver.)",
+        "u": "https://youtube.com/shorts/1iH6jMJDpcM"
+      },
+      {
+        "t": "YOUNGCREATORCREW",
+        "u": "https://www.youtube.com/watch?v=iyKA7tSb9KI"
+      },
+      {
+        "t": "ACAI",
+        "u": "https://www.youtube.com/watch?v=ysg6GVlzz9Y"
+      },
+      {
+        "t": "go home",
+        "u": "https://www.youtube.com/watch?v=NeaXPMDpfnc"
+      }
     ]
   },
   "에스파": {
@@ -85,7 +118,81 @@
       215,
       192
     ],
-    "gender": "f"
+    "gender": "f",
+    "songs": [
+      {
+        "t": "404 (New Era)",
+        "u": "https://youtu.be/RMSQcFqznwc"
+      },
+      {
+        "t": "돌들의침묵 (I DO ME)",
+        "u": "https://youtu.be/e427WRcSmzY"
+      },
+      {
+        "t": "4 Walls (원곡: f(x))",
+        "u": "https://youtu.be/M3_OeJQ9SfI"
+      },
+      {
+        "t": "404 (New Era)",
+        "u": "https://youtu.be/QgiRK3_qPWk"
+      },
+      {
+        "t": "Delulu",
+        "u": "https://youtu.be/XC8SlKJj4Zs"
+      },
+      {
+        "t": "404 (New Era)",
+        "u": "https://youtu.be/9sixI39RjVc"
+      },
+      {
+        "t": "I DO ME",
+        "u": "https://youtu.be/jE_Sb6NNcw8"
+      },
+      {
+        "t": "404 (New Era)",
+        "u": "https://youtu.be/TLmRZQgXmEk"
+      },
+      {
+        "t": "404 (New Era)",
+        "u": "https://youtu.be/Wuk7OTzzoBU"
+      },
+      {
+        "t": "DANCING ALONE",
+        "u": "https://youtu.be/02H10qqz3rg"
+      },
+      {
+        "t": "Delulu",
+        "u": "https://youtu.be/FY2gYpzGkZo"
+      },
+      {
+        "t": "I DO ME",
+        "u": "https://youtu.be/wThOHtFEcm8"
+      },
+      {
+        "t": "404 (New Era)",
+        "u": "https://youtu.be/OpqB1GJbzms"
+      },
+      {
+        "t": "UNDERDOGS",
+        "u": "https://youtu.be/vs_WuuJ1Ias"
+      },
+      {
+        "t": "UNDERDOGS",
+        "u": "https://youtu.be/lEk9HHgUl7M"
+      },
+      {
+        "t": "To Me From Me",
+        "u": "https://youtu.be/XjIgcEvCTrE"
+      },
+      {
+        "t": "404 (New Era)",
+        "u": "https://youtu.be/cYWhK_tuABY"
+      },
+      {
+        "t": "I DO ME",
+        "u": "https://youtu.be/_51U548cEQg"
+      }
+    ]
   },
   "있지": {
     "en": "ITZY",
@@ -307,7 +414,93 @@
       148,
       158
     ],
-    "gender": "m"
+    "gender": "m",
+    "songs": [
+      {
+        "t": "Do your dance",
+        "u": "https://youtu.be/vdbg5qS0CEw"
+      },
+      {
+        "t": "Do your dance",
+        "u": "https://youtu.be/RW__-SAN6Zg"
+      },
+      {
+        "t": "집대성 ep.112",
+        "u": "https://youtu.be/FbpyVOqpKfs"
+      },
+      {
+        "t": "WE RIIZE EP.22",
+        "u": "https://youtu.be/CB9AvAc_XpU"
+      },
+      {
+        "t": "WE RIIZE EP.43",
+        "u": "https://youtu.be/Xi8OXaY6xOc"
+      },
+      {
+        "t": "라이즈의 떨면 안되는 팬미팅",
+        "u": "https://youtu.be/ZXRUQCJBRq4"
+      },
+      {
+        "t": "Love 119",
+        "u": "https://youtu.be/w11AQwiT07g"
+      },
+      {
+        "t": "Get A Guitar + Boom Boom Bass",
+        "u": "https://youtu.be/5MSC_Q_Lg-c"
+      },
+      {
+        "t": "홍석천의 보석함 시즌2 EP.09",
+        "u": "https://youtu.be/ydRNw-e9C3Y"
+      },
+      {
+        "t": "Impossible",
+        "u": "https://youtu.be/22olMW9aZI0"
+      },
+      {
+        "t": "Do your dance",
+        "u": "https://youtu.be/GdPjDq8KwPs"
+      },
+      {
+        "t": "Fame",
+        "u": "https://youtu.be/F3C87lOmZBM"
+      },
+      {
+        "t": "Boom Boom Bass",
+        "u": "https://youtu.be/0GTyDijQEUQ"
+      },
+      {
+        "t": "Talk Saxy",
+        "u": "https://youtu.be/rovUWJh_JnA"
+      },
+      {
+        "t": "Get A Guitar",
+        "u": "https://youtu.be/jIG4AaIy-5k"
+      },
+      {
+        "t": "Fly Up",
+        "u": "https://youtu.be/nwvZr4QyQgM"
+      },
+      {
+        "t": "Bag Bad Back",
+        "u": "https://youtu.be/5FgwmDY8MK8"
+      },
+      {
+        "t": "으르렁 (원곡: EXO)",
+        "u": "https://youtu.be/m4_liZ4iJJ8"
+      },
+      {
+        "t": "Talk Saxy + Siren",
+        "u": "https://youtu.be/Bf7JCS6I0ak"
+      },
+      {
+        "t": "Get A Guitar + Boom Boom Bass",
+        "u": "https://youtu.be/s2A-_rhynAY"
+      },
+      {
+        "t": "영웅 (원곡: NCT 127)",
+        "u": "https://youtu.be/1QV4sZnPgXE"
+      }
+    ]
   },
   "엔하이픈": {
     "en": "ENHYPEN",
@@ -456,7 +649,65 @@
       148,
       120
     ],
-    "gender": "m"
+    "gender": "m",
+    "songs": [
+      {
+        "t": "BAD",
+        "u": "https://youtu.be/R9hv2cLYK-w"
+      },
+      {
+        "t": "Ice On My Teeth",
+        "u": "https://youtu.be/c-n92OgbbwA"
+      },
+      {
+        "t": "누가 왕이 될 상인가",
+        "u": "https://youtu.be/inJmmQcJJ78"
+      },
+      {
+        "t": "Adrenaline",
+        "u": "https://youtu.be/tDuZLK78BEk"
+      },
+      {
+        "t": "The Last Supper + Ice On My Teeth",
+        "u": "https://youtu.be/ST9ib_nbizU"
+      },
+      {
+        "t": "WORK",
+        "u": "https://youtu.be/p0T5ZKrjOyk"
+      },
+      {
+        "t": "BOUNCY",
+        "u": "https://youtu.be/-q7zJXR3KMY"
+      },
+      {
+        "t": "NASA",
+        "u": "https://youtu.be/mNLzeeTiYd8"
+      },
+      {
+        "t": "BOUNCY",
+        "u": "https://youtu.be/Nl6unWjkv9k"
+      },
+      {
+        "t": "Cyberpunk",
+        "u": "https://youtu.be/zqpCho3mX-0"
+      },
+      {
+        "t": "Answer",
+        "u": "https://youtu.be/lPBT8H1fYk8"
+      },
+      {
+        "t": "Adrenaline",
+        "u": "https://youtu.be/MbJbawOleqE"
+      },
+      {
+        "t": "On The Road",
+        "u": "https://youtu.be/ue8xg0gqVY8"
+      },
+      {
+        "t": "Our 5th anniversary❤",
+        "u": "https://youtube.com/shorts/cVfhs5S3Sjw"
+      }
+    ]
   },
   "아이들": {
     "en": "(G)I-DLE",
@@ -601,7 +852,61 @@
       158,
       222
     ],
-    "gender": "f"
+    "gender": "f",
+    "songs": [
+      {
+        "t": "MANIAC",
+        "u": "https://youtu.be/nFHG0TeBIIs"
+      },
+      {
+        "t": "BOP BOP!",
+        "u": "https://youtu.be/OF6tzAC0AJE"
+      },
+      {
+        "t": "Untie",
+        "u": "https://youtu.be/pCbPwpcgUbM"
+      },
+      {
+        "t": "Shhh!",
+        "u": "https://youtu.be/DjoXqZMjhJY"
+      },
+      {
+        "t": "La La Love Me",
+        "u": "https://youtu.be/WJ_EJM5NT6E"
+      },
+      {
+        "t": "MANIAC",
+        "u": "https://youtu.be/5WUxq3lcYcM"
+      },
+      {
+        "t": "Shhh!",
+        "u": "https://youtu.be/7jxnB0_YZY0"
+      },
+      {
+        "t": "MANIAC",
+        "u": "https://youtu.be/GfWUBJUTx8k"
+      },
+      {
+        "t": "MANIAC",
+        "u": "https://youtu.be/JGN4WVDaSxI"
+      },
+      {
+        "t": "밤 + 시간을 달려서 (원곡: 여자친구)",
+        "u": "https://youtu.be/rY8Gz8bBoR8"
+      },
+      {
+        "t": "PULL UP",
+        "u": "https://youtu.be/70KGtxHB8BA"
+      },
+      {
+        "t": "Full Moon",
+        "u": "https://youtu.be/-_0VjHT5Ss0"
+      },
+      {
+        "t": "한 걸음 (Day by day)",
+        "u": "https://youtu.be/0j9fa36iQqc"
+      }
+    ]
   },
   "트레저": {
     "en": "TREASURE",
