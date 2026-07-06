@@ -1522,6 +1522,15 @@ async function buildUniverse(){
       depthWrite:false,blending:THREE.AdditiveBlending,
       sizeAttenuation:true
     });
+    // 카메라를 아주 가까이 붙였을 때 gl_PointSize가 한없이 커지는 걸 막는다.
+    // iOS Safari 등 일부 모바일 GPU는 큰 point sprite를 깨끗하게 클램프하지 못하고
+    // 여러 개로 쪼개진 것처럼 깜빡이며 렌더링하는 버그가 있음 — 상한을 걸어 예방.
+    mat.onBeforeCompile=shader=>{
+      shader.vertexShader=shader.vertexShader.replace(
+        'if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );',
+        'if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );\n\t\tgl_PointSize = min( gl_PointSize, 46.0 );'
+      );
+    };
     const pts=new THREE.Points(geo,mat);
     scene.add(pts);
     return pts;
@@ -1778,11 +1787,14 @@ function animate(){
         _setMemberPointPos(o.artist,o.wp,ek>=1?orbitPos:o.origPos.clone().lerp(orbitPos,ek));
       }
     });
-    // 그룹 궤도가 먼저 갱신된 뒤에 그 그룹에 편승하는 멤버 위치를 계산해야 함
+    // 그룹 궤도가 먼저 갱신된 뒤에 그 그룹에 편승하는 멤버 위치를 계산해야 함.
+    // 편승 멤버는 그룹 위치(이미 위에서 ease 처리됨)에 오프셋만 더해 항상 그대로
+    // 따라가게 해야 한다 — 여기서 또 origPos→orbitPos로 별도 lerp를 하면 목표 지점이
+    // 매 프레임 바뀌는 이중 보간이 되어 그룹보다 느리게 따라가다 막판에 따라잡는
+    // 속도 차이(렉)가 생긴다.
     _myUniverseOrbits.forEach(o=>{
       if(o.kind==='member-ride'){
-        const orbitPos=o.bm.mesh.position.clone().add(o.offset);
-        _setMemberPointPos(o.artist,o.wp,ek>=1?orbitPos:o.origPos.clone().lerp(orbitPos,ek));
+        _setMemberPointPos(o.artist,o.wp,o.bm.mesh.position.clone().add(o.offset));
       }
     });
     if(myStarSprite&&_myUniverseStarFrom)myStarSprite.position.copy(ek>=1?_myUniverseHub:_myUniverseStarFrom.clone().lerp(_myUniverseHub,ek));
