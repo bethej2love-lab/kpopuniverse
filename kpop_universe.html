@@ -688,6 +688,18 @@
   .pp-save-btn{width:100%;margin-top:4px;padding:11px;border:none;border-radius:12px;background:rgba(126,156,255,0.15);border:0.5px solid rgba(126,156,255,0.26);color:rgba(195,215,255,0.90);font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.07em;cursor:pointer;transition:background .15s,border-color .15s,color .15s;}
   .pp-save-btn:hover{background:rgba(126,156,255,0.26);border-color:rgba(126,156,255,0.48);color:#fff;}
   #tab-profile.pp-set,#dh-profile-btn.pp-set{font-size:11px;font-weight:700;letter-spacing:.01em;}
+  /* ── 즐겨찾기 해제 확인 / 기념일 날짜 수정 팝업 ────── */
+  #unfav-confirm-overlay,#date-edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:70;display:none;align-items:center;justify-content:center;}
+  #unfav-confirm-overlay.open,#date-edit-overlay.open{display:flex;}
+  #unfav-confirm-panel,#date-edit-panel{width:min(280px,calc(100vw - 40px));background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:18px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:20px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
+  #unfav-confirm-msg{font-size:12px;color:rgba(160,182,222,0.72);line-height:1.5;margin-top:8px;}
+  #unfav-confirm-btns{display:flex;gap:8px;margin-top:18px;}
+  .uc-btn{flex:1;padding:10px;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.03em;cursor:pointer;transition:background .15s,border-color .15s,color .15s;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);color:rgba(180,200,238,0.72);}
+  .uc-btn:hover{background:rgba(255,255,255,0.09);color:#fff;}
+  .uc-btn-danger{background:rgba(255,95,110,0.14);border-color:rgba(255,95,110,0.30);color:rgba(255,160,170,0.92);}
+  .uc-btn-danger:hover{background:rgba(255,95,110,0.24);border-color:rgba(255,95,110,0.50);color:#fff;}
+  .uc-btn-primary{background:rgba(126,156,255,0.15);border-color:rgba(126,156,255,0.26);color:rgba(195,215,255,0.90);}
+  .uc-btn-primary:hover{background:rgba(126,156,255,0.26);border-color:rgba(126,156,255,0.48);color:#fff;}
   /* ── My Page (sidebar) ───────────────────────────── */
   #my-page-header{display:flex;align-items:center;gap:10px;padding:4px 0 14px;margin-bottom:14px;border-bottom:0.5px solid rgba(255,255,255,0.07);}
   #my-page-star-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:rgba(140,160,210,0.20);transition:background .3s,box-shadow .3s;}
@@ -702,8 +714,8 @@
   #scrap-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
   /* ── Bookmarks (universal) ───────────────────────── */
   #bookmark-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
-  /* ── Birthday calendar ───────────────────────────── */
-  #bday-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
+  /* ── Anniversaries (birthdays + 즐겨찾기 기념일) ──── */
+  #anniv-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
   #journal-hd{margin-top:16px;display:none;}
   .bday-item{display:flex;align-items:center;gap:7px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
   .bday-item:hover{background:rgba(255,255,255,0.06);}
@@ -713,6 +725,13 @@
   .bday-badge.normal{background:rgba(145,175,255,0.08);color:rgba(148,170,225,0.48);}
   .bday-name{font-size:12px;color:#b8d0ee;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .bday-date{font-size:10px;color:rgba(125,150,198,0.42);flex-shrink:0;}
+  .anniv-item{display:flex;align-items:center;gap:7px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
+  .anniv-item:hover{background:rgba(255,255,255,0.06);}
+  .anniv-heart{font-size:10px;flex-shrink:0;filter:grayscale(0.15) saturate(1.4);}
+  .anniv-name{font-size:12px;color:#b8d0ee;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .anniv-badge{font-size:10px;font-weight:800;letter-spacing:.02em;color:rgba(255,150,175,0.75);flex-shrink:0;}
+  .anniv-edit{background:none;border:none;cursor:pointer;font-size:10px;color:rgba(120,145,195,0.38);padding:2px 4px;flex-shrink:0;transition:color .13s;}
+  .anniv-edit:hover{color:rgba(200,220,255,0.85);}
   .scrap-item{display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
   .scrap-item:hover{background:rgba(255,255,255,0.06);}
   .scrap-thumb{width:42px;height:28px;border-radius:5px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,0.06);}
@@ -770,9 +789,9 @@
       <div class="fav-hd"><span class="fav-hd-lbl">BOOKMARKS</span></div>
       <div id="bookmark-list"><div class="fav-empty">북마크가 없어요</div></div>
     </div>
-    <div id="bday-section">
-      <div class="fav-hd"><span class="fav-hd-lbl">BIRTHDAYS</span></div>
-      <div id="bday-list"><div class="fav-empty">즐겨찾기한 멤버가 없어요</div></div>
+    <div id="anniv-section">
+      <div class="fav-hd"><span class="fav-hd-lbl">ANNIVERSARIES</span></div>
+      <div id="anniv-list"><div class="fav-empty">기록이 없어요</div></div>
     </div>
     <div id="filter-panel">
       <div id="filter-panel-hd">
@@ -941,6 +960,26 @@
       </div>
     </div>
     <button id="pp-save" class="pp-save-btn">저장하고 우주에 나타나기 ✦</button>
+  </div>
+</div>
+<div id="unfav-confirm-overlay">
+  <div id="unfav-confirm-panel">
+    <div class="pp-title">즐겨찾기를 해제할까요?</div>
+    <div id="unfav-confirm-msg">해제하면 기록된 기념일도<br>함께 사라져요.</div>
+    <div id="unfav-confirm-btns">
+      <button id="unfav-confirm-cancel" class="uc-btn">취소</button>
+      <button id="unfav-confirm-ok" class="uc-btn uc-btn-danger">해제할게요</button>
+    </div>
+  </div>
+</div>
+<div id="date-edit-overlay">
+  <div id="date-edit-panel">
+    <div class="pp-title">기념일 날짜 수정</div>
+    <input id="date-edit-input" type="date" class="pp-input" style="margin-top:14px;">
+    <div id="unfav-confirm-btns" style="margin-top:16px;">
+      <button id="date-edit-cancel" class="uc-btn">취소</button>
+      <button id="date-edit-save" class="uc-btn uc-btn-primary">저장</button>
+    </div>
   </div>
 </div>
 <div id="conn-sheet">
@@ -1114,7 +1153,7 @@ function applyLang(){
   const si=document.getElementById('search-input');if(si)si.placeholder=t.searchPH;
   const msi=document.getElementById('tab-sb-input');if(msi)msi.placeholder=t.searchPH;
   _refreshOpenCardText();
-  renderFavList();_buildBdayList();
+  renderFavList();_buildAnniversaryList();
   renderBookmarkList();
   const _fp=document.getElementById('filter-panel');
   if(_tagFilter&&_tagFilter.type&&_fp&&_fp.style.display==='block')_renderFilterPanel();
@@ -1253,7 +1292,7 @@ async function buildUniverse(){
     fetch('connections.json').then(r=>r.json())
   ]);
   GROUPS=grpData;ARTISTS=artData;
-  renderFavList();_buildBdayList();
+  renderFavList();_buildAnniversaryList();
   renderScrapList();
   renderBookmarkList();
   placeMyStarInUniverse();
@@ -3266,12 +3305,12 @@ function _applyTagFocus(){
 }
 
 function _hideMyPageSections(){
-  ['my-page-header','fav-section','scrap-section','bday-section'].forEach(id=>{
+  ['my-page-header','fav-section','scrap-section','anniv-section'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.style.display='none';
   });
 }
 function _showMyPageSections(){
-  ['my-page-header','fav-section','scrap-section','bday-section'].forEach(id=>{
+  ['my-page-header','fav-section','scrap-section','anniv-section'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.style.display='';
   });
 }
@@ -4051,6 +4090,22 @@ const FAV_KEY_C='kpu_fav_connections';
 let favGroups=new Set(JSON.parse(localStorage.getItem(FAV_KEY_G)||'[]'));
 let favMembers=new Set(JSON.parse(localStorage.getItem(FAV_KEY_M)||'[]'));
 let favConnections=new Set(JSON.parse(localStorage.getItem(FAV_KEY_C)||'[]'));
+// ── 즐겨찾기 기념일(아카이브) ───────────────────────
+const FAV_DATE_KEY='kpu_fav_dates';
+let favDates=JSON.parse(localStorage.getItem(FAV_DATE_KEY)||'{}'); // {key: 'YYYY-MM-DD'}
+let _dateEditKey=null;
+function _todayISO(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function _saveFavDates(){localStorage.setItem(FAV_DATE_KEY,JSON.stringify(favDates));}
+function _confirmUnfavorite(){
+  return new Promise(resolve=>{
+    _unfavConfirmResolve=resolve;
+    document.getElementById('unfav-confirm-overlay').classList.add('open');
+  });
+}
+let _unfavConfirmResolve=null;
 function _connFavKey(anchor,sel){return anchor.group.ko+':'+anchor.name.ko+'|'+_connSelKey(sel);}
 function isConnFavorited(anchor,sel){
   if(!anchor||!sel||!sel.length)return false;
@@ -4059,10 +4114,17 @@ function isConnFavorited(anchor,sel){
 function toggleConnFavorite(anchor,sel){
   if(!anchor||!sel.length)return;
   const k=_connFavKey(anchor,sel);
-  favConnections.has(k)?favConnections.delete(k):favConnections.add(k);
-  localStorage.setItem(FAV_KEY_C,JSON.stringify([...favConnections]));
-  document.getElementById('conn-fav-btn')?.classList.toggle('fav-on',favConnections.has(k));
-  renderFavList();
+  const dk='c:'+k;
+  const doToggle=()=>{
+    if(favConnections.has(k)){favConnections.delete(k);delete favDates[dk];}
+    else{favConnections.add(k);favDates[dk]=_todayISO();}
+    _saveFavDates();
+    localStorage.setItem(FAV_KEY_C,JSON.stringify([...favConnections]));
+    document.getElementById('conn-fav-btn')?.classList.toggle('fav-on',favConnections.has(k));
+    renderFavList();_buildAnniversaryList();
+  };
+  if(favConnections.has(k))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
+  else doToggle();
 }
 let favMode=false;
 
@@ -4256,21 +4318,35 @@ function _saveFavs(){
 function _mFavKey(a){return a.group.ko+':'+a.name.ko;}
 
 function toggleFavGroup(ko){
-  favGroups.has(ko)?favGroups.delete(ko):favGroups.add(ko);
-  _saveFavs();
-  _syncFavBtn('group',ko);
-  renderFavList();_buildBdayList();
-  if(favMode){applyFavHighlight();_enterMyUniverseMode();}
-  else if(myStarSprite)placeMyStarInUniverse();
+  const dk='g:'+ko;
+  const doToggle=()=>{
+    if(favGroups.has(ko)){favGroups.delete(ko);delete favDates[dk];}
+    else{favGroups.add(ko);favDates[dk]=_todayISO();}
+    _saveFavDates();
+    _saveFavs();
+    _syncFavBtn('group',ko);
+    renderFavList();_buildAnniversaryList();
+    if(favMode){applyFavHighlight();_enterMyUniverseMode();}
+    else if(myStarSprite)placeMyStarInUniverse();
+  };
+  if(favGroups.has(ko))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
+  else doToggle();
 }
 function toggleFavMember(artist){
   const k=_mFavKey(artist);
-  favMembers.has(k)?favMembers.delete(k):favMembers.add(k);
-  _saveFavs();
-  _syncFavBtn('member',artist);
-  renderFavList();_buildBdayList();
-  if(favMode){applyFavHighlight();_enterMyUniverseMode();}
-  else if(myStarSprite)placeMyStarInUniverse();
+  const dk='m:'+k;
+  const doToggle=()=>{
+    if(favMembers.has(k)){favMembers.delete(k);delete favDates[dk];}
+    else{favMembers.add(k);favDates[dk]=_todayISO();}
+    _saveFavDates();
+    _saveFavs();
+    _syncFavBtn('member',artist);
+    renderFavList();_buildAnniversaryList();
+    if(favMode){applyFavHighlight();_enterMyUniverseMode();}
+    else if(myStarSprite)placeMyStarInUniverse();
+  };
+  if(favMembers.has(k))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
+  else doToggle();
 }
 
 function _syncFavBtn(type,data){
@@ -4295,11 +4371,24 @@ function _daysUntilBday(bdayStr){
   if(next<today)next=new Date(today.getFullYear()+1,bm-1,bd);
   return Math.round((next-today)/(864e5));
 }
-function _buildBdayList(){
-  const el=document.getElementById('bday-list');if(!el)return;
+function _daysSince(dateStr){
+  if(!dateStr)return null;
+  const d=new Date(dateStr+'T00:00:00');
+  if(isNaN(d.getTime()))return null;
+  const now=new Date();
+  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  return Math.round((today-d)/(864e5));
+}
+function _openDateEditor(item){
+  _dateEditKey=item.dk;
+  document.getElementById('date-edit-input').value=favDates[item.dk]||_todayISO();
+  document.getElementById('date-edit-overlay').classList.add('open');
+}
+function _buildAnniversaryList(){
+  const el=document.getElementById('anniv-list');if(!el)return;
   const MO_KO=['','1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
   const MO_EN=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const items=[];
+  const bdayItems=[];
   [...favMembers].forEach(key=>{
     const ci=key.indexOf(':');
     const gko=key.slice(0,ci),mko=key.slice(ci+1);
@@ -4307,12 +4396,43 @@ function _buildBdayList(){
     if(!a||!a.bday)return;
     const d=_daysUntilBday(a.bday);
     if(d===null)return;
-    items.push({a,gko,mko,d});
+    bdayItems.push({a,gko,mko,d});
   });
-  if(!items.length){el.innerHTML='<div class="fav-empty">즐겨찾기한 멤버가 없어요</div>';return;}
-  items.sort((a,b)=>a.d-b.d);
+  bdayItems.sort((a,b)=>a.d-b.d);
+
+  const annivItems=[];
+  [...favGroups].forEach(ko=>{
+    const info=GROUPS[ko];if(!info)return;
+    const d=_daysSince(favDates['g:'+ko]);if(d===null)return;
+    annivItems.push({type:'group',ko,d,dk:'g:'+ko,name:currentLang==='ko'?ko:(info.en||ko)});
+  });
+  [...favMembers].forEach(key=>{
+    const ci=key.indexOf(':');
+    const gko=key.slice(0,ci),mko=key.slice(ci+1);
+    const a=ARTISTS.find(x=>x.group.ko===gko&&x.name.ko===mko);
+    if(!a)return;
+    const d=_daysSince(favDates['m:'+key]);if(d===null)return;
+    annivItems.push({type:'member',gko,mko,artist:a,d,dk:'m:'+key,name:currentLang==='ko'?mko:(a.name.en||mko)});
+  });
+  [...favConnections].forEach(key=>{
+    const barI=key.indexOf('|');
+    const namePart=key.slice(0,barI),selPart=key.slice(barI+1);
+    const ci=namePart.indexOf(':');
+    const gko=namePart.slice(0,ci),mko=namePart.slice(ci+1);
+    const anchor=ARTISTS.find(a=>a.group.ko===gko&&a.name.ko===mko);
+    if(!anchor)return;
+    const sel=selPart?selPart.split(','):[];
+    const d=_daysSince(favDates['c:'+key]);if(d===null)return;
+    const anchorName=currentLang==='ko'?mko:(anchor.name.en||mko);
+    annivItems.push({type:'connection',gko,mko,anchor,sel,d,dk:'c:'+key,name:`${anchorName} × ${sel.join(', ')}`});
+  });
+  annivItems.sort((a,b)=>a.d-b.d);
+
+  if(!bdayItems.length&&!annivItems.length){
+    el.innerHTML='<div class="fav-empty">기록이 없어요</div>';return;
+  }
   el.innerHTML='';
-  items.forEach(({a,gko,mko,d})=>{
+  bdayItems.forEach(({a,gko,mko,d})=>{
     const parts=a.bday.split('.');
     const bm=parseInt(parts[1]),bd=parseInt(parts[2]);
     const dateStr=currentLang==='ko'?`${MO_KO[bm]} ${bd}일`:`${MO_EN[bm]} ${bd}`;
@@ -4327,6 +4447,38 @@ function _buildBdayList(){
       showT(a,window.innerWidth/2,window.innerHeight*0.4);
       pulseMember(a);
     });
+    el.appendChild(div);
+  });
+  annivItems.forEach(item=>{
+    const div=document.createElement('div');div.className='anniv-item';
+    const nameSpan=document.createElement('span');nameSpan.className='anniv-name';nameSpan.textContent=item.name;
+    div.innerHTML='<span class="anniv-heart">❤</span>';
+    div.appendChild(nameSpan);
+    const badge=document.createElement('span');badge.className='anniv-badge';badge.textContent=`D+${item.d}`;
+    div.appendChild(badge);
+    const editBtn=document.createElement('button');editBtn.className='anniv-edit';editBtn.title='날짜 수정';editBtn.textContent='🖉';
+    div.appendChild(editBtn);
+    div.addEventListener('click',()=>{
+      if(item.type==='group'){
+        const bm=bubbleMeshes.find(b=>b.ko===item.ko);
+        if(bm)flyToBubble(bm.mesh.position,bm.radius);
+        showGC(item.ko,window.innerWidth/2,window.innerHeight*0.4);
+      }else if(item.type==='member'){
+        const bm=bubbleMeshes.find(b=>b.ko===item.gko);
+        if(bm)flyToBubble(bm.mesh.position,bm.radius);
+        showT(item.artist,window.innerWidth/2,window.innerHeight*0.4);
+        pulseMember(item.artist);
+      }else if(item.type==='connection'){
+        const bm=bubbleMeshes.find(b=>b.ko===item.gko);
+        if(bm)flyToBubble(bm.mesh.position,bm.radius);
+        showT(item.anchor,window.innerWidth/2,window.innerHeight*0.4);
+        openConnCard(item.anchor);
+        _connSelected=[...item.sel];
+        _updateConnLines3d();_applyConnFocus();_flyToConnStars();
+        _buildConnContent(isMob()?connSheetBody:connPanelInner);
+      }
+    });
+    editBtn.addEventListener('click',e=>{e.stopPropagation();_openDateEditor(item);});
     el.appendChild(div);
   });
 }
@@ -4392,22 +4544,23 @@ function renderFavList(){
   });
 }
 
+const FAV_DIM=0.03; // 즐겨찾기 하이라이트 모드 전용 — 검색/필터의 FOCUS_DIM보다 다른 행성/별을 더 투명하게
 function applyFavHighlight(){
   bubbleMeshes.forEach(({mesh,ko})=>{
     if(favGroups.has(ko)){mesh._focusTarget=1;}
     else{
       const hasFavMember=ARTISTS.some(a=>favMembers.has(_mFavKey(a))&&_artistGroups(a).some(g=>g.ko===ko));
-      mesh._focusTarget=hasFavMember?FOCUS_DIM*3.5:FOCUS_DIM;
+      mesh._focusTarget=hasFavMember?FAV_DIM*3.5:FAV_DIM;
     }
   });
   ARTISTS.forEach(a=>{
     const on=favMembers.has(_mFavKey(a))||favGroups.has(a.group.ko);
-    a._focusTarget=on?1:FOCUS_DIM;
+    a._focusTarget=on?1:FAV_DIM;
   });
   // NCT rings: dim unless that NCT planet is favorited
   _nctRingGroups.forEach(({g,ko,baseOps})=>{
     const bright=favGroups.has(ko)||ARTISTS.some(a=>favMembers.has(_mFavKey(a))&&_artistGroups(a).some(gr=>gr.ko===ko));
-    g.children.forEach((c,i)=>{if(c.material)c.material.opacity=baseOps[i]*(bright?1:FOCUS_DIM);});
+    g.children.forEach((c,i)=>{if(c.material)c.material.opacity=baseOps[i]*(bright?1:FAV_DIM);});
   });
   // 별자리 선(_updateMyStarLines)은 "내 우주" 모드 도입 후 당분간 비활성화 — 필요해지면 다시 호출 추가
 }
@@ -4648,7 +4801,7 @@ function placeMyStarInUniverse(){
   div.style.cursor='pointer';
   div.addEventListener('click',e=>{e.stopPropagation();_toggleMyStarFocus();});
   myStarLabel=new THREE.CSS2DObject(div);
-  myStarLabel.position.set(0,myStarBase*0.75,0);
+  myStarLabel.position.set(0,myStarBase*0.42,0);
   myStarSprite.add(myStarLabel);
   scene.add(myStarSprite);
 }
@@ -4802,6 +4955,25 @@ document.getElementById('pp-close').addEventListener('click',e=>{e.stopPropagati
 document.getElementById('profile-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeProfilePanel();});
 document.getElementById('profile-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 ['pp-nick','pp-bio'].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')saveProfile();}));
+
+function _closeUnfavConfirm(ok){
+  document.getElementById('unfav-confirm-overlay').classList.remove('open');
+  if(_unfavConfirmResolve){_unfavConfirmResolve(ok);_unfavConfirmResolve=null;}
+}
+document.getElementById('unfav-confirm-ok').addEventListener('click',e=>{e.stopPropagation();_closeUnfavConfirm(true);});
+document.getElementById('unfav-confirm-cancel').addEventListener('click',e=>{e.stopPropagation();_closeUnfavConfirm(false);});
+document.getElementById('unfav-confirm-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)_closeUnfavConfirm(false);});
+document.getElementById('unfav-confirm-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
+
+document.getElementById('date-edit-save').addEventListener('click',e=>{
+  e.stopPropagation();
+  const v=document.getElementById('date-edit-input').value;
+  if(v&&_dateEditKey){favDates[_dateEditKey]=v;_saveFavDates();_buildAnniversaryList();}
+  document.getElementById('date-edit-overlay').classList.remove('open');
+});
+document.getElementById('date-edit-cancel').addEventListener('click',e=>{e.stopPropagation();document.getElementById('date-edit-overlay').classList.remove('open');});
+document.getElementById('date-edit-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)document.getElementById('date-edit-overlay').classList.remove('open');});
+document.getElementById('date-edit-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 function _toggleMyPagePanel(){
   const sidebar=document.getElementById('journal-sidebar');
   const fp=document.getElementById('filter-panel');
