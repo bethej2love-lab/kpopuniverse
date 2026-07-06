@@ -1764,14 +1764,14 @@ function animate(){
         o.angle+=o.speed;
         const cx=Math.cos(o.angle)*o.radius,sx=Math.sin(o.angle)*o.radius;
         const p=_myUniverseHub.clone().addScaledVector(_MY_STAR_ORBIT_U,cx).addScaledVector(_MY_STAR_ORBIT_V,sx);
-        _setMemberOrbitPos(o.artist,p);
+        _setMemberPointPos(o.artist,o.wp,p);
         _posDirty=true;
       }
     });
     // 그룹 궤도가 먼저 갱신된 뒤에 그 그룹에 편승하는 멤버 위치를 계산해야 함
     _myUniverseOrbits.forEach(o=>{
       if(o.kind==='member-ride'){
-        _setMemberOrbitPos(o.artist,o.bm.mesh.position.clone().add(o.offset));
+        _setMemberPointPos(o.artist,o.wp,o.bm.mesh.position.clone().add(o.offset));
         _posDirty=true;
       }
     });
@@ -4349,47 +4349,50 @@ let myProfile=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');
 let _ppSelectedColor=myProfile?.color||STAR_COLORS[0];
 
 // ── "내 우주" 모드: favMode가 켜지면 즐겨찾기한 실제 그룹 행성/멤버 별을
-// 내 별 주위 궤도로 진짜 옮긴다. 소속 그룹도 즐겨찾기됐으면 멤버는 그 그룹을
-// 따라 편승(원래 상대 위치 유지)하고, 그룹이 즐겨찾기 안 됐으면 멤버 혼자 작은
-// 궤도를 돈다. 모드를 끄면 원래 자리로 복귀.
+// 내 별 주위 궤도로 진짜 옮긴다. 그룹을 즐겨찾기하면 그 행성에 속한 멤버
+// 전체(개별 즐겨찾기 여부 무관)가 함께 편승해서, 우주에 멤버들만 덩그러니
+// 남는 일이 없게 한다. 그룹은 즐겨찾기 안 됐는데 멤버만 즐겨찾기했으면
+// 그 멤버 혼자 작은 궤도를 돈다. 모드를 끄면 원래 자리로 복귀.
 // (_myUniverseActive/_myUniverseHub/_myUniverseOrbits, _MY_STAR_ORBIT_U/V는
 // animate()보다 먼저 실행되도록 상단에서 선언됨)
-function _setMemberOrbitPos(artist,p){
-  artist._worldPos.copy(p);
-  const wp=(artist._worldPositions||[]).find(w=>w.groupKo===artist.group.ko);
-  if(!wp)return;
+function _isPrimaryWp(artist,wp){return artist._ptsType===wp.ptsType&&artist._ptsIdx===wp.ptsIdx;}
+function _setMemberPointPos(artist,wp,p){
   wp.pos.copy(p);
   const pts=wp.ptsType==='sparkle'?sparklePts:regularPts;
   const attr=pts&&pts.geometry.attributes.position;
-  if(!attr)return;
-  const i=wp.ptsIdx*3;
-  attr.array[i]=p.x;attr.array[i+1]=p.y;attr.array[i+2]=p.z;
+  if(attr){const i=wp.ptsIdx*3;attr.array[i]=p.x;attr.array[i+1]=p.y;attr.array[i+2]=p.z;}
+  if(_isPrimaryWp(artist,wp))artist._worldPos.copy(p);
 }
 function _enterMyUniverseMode(){
   if(!myStarSprite)return;
   _exitMyUniverseMode();
   const hub=_getMyStarPos();
   const orbits=[];
+  const riddenWps=new Set();
   [...favGroups].forEach((ko,i)=>{
     const bm=bubbleMeshes.find(b=>b.ko===ko);
     if(!bm)return;
-    bm._univOrigPos=bm.mesh.position.clone();
-    orbits.push({kind:'group',ko,bm,radius:3.2+i*1.6,speed:0.0020/(1+i*0.18),angle:Math.random()*Math.PI*2});
+    const origPos=bm.mesh.position.clone();
+    orbits.push({kind:'group',ko,bm,origPos,radius:3.2+i*1.6,speed:0.0020/(1+i*0.18),angle:Math.random()*Math.PI*2});
+    // 이 행성에 속한 멤버 전체를 함께 이동시켜 "덩그러니 남는" 느낌 방지
+    ARTISTS.forEach(artist=>{
+      (artist._worldPositions||[]).forEach(wp=>{
+        if(wp.groupKo!==ko)return;
+        riddenWps.add(wp);
+        orbits.push({kind:'member-ride',artist,wp,bm,origPos:wp.pos.clone(),offset:wp.pos.clone().sub(origPos)});
+      });
+    });
   });
   let soloIdx=0;
   [...favMembers].forEach(key=>{
     const ci=key.indexOf(':');
     const gko=key.slice(0,ci),mko=key.slice(ci+1);
     const artist=ARTISTS.find(a=>a.group.ko===gko&&a.name.ko===mko);
-    if(!artist||!artist._worldPos)return;
-    artist._univOrigPos=artist._worldPos.clone();
-    const rideGroup=orbits.find(o=>o.kind==='group'&&o.ko===gko);
-    if(rideGroup){
-      orbits.push({kind:'member-ride',artist,bm:rideGroup.bm,offset:artist._univOrigPos.clone().sub(rideGroup.bm._univOrigPos)});
-    }else{
-      orbits.push({kind:'member-solo',artist,radius:2.0+soloIdx*1.1,speed:0.0026/(1+soloIdx*0.22),angle:Math.random()*Math.PI*2});
-      soloIdx++;
-    }
+    if(!artist)return;
+    const wp=(artist._worldPositions||[]).find(w=>w.groupKo===gko);
+    if(!wp||riddenWps.has(wp))return; // 이미 소속 그룹과 함께 이동 중
+    orbits.push({kind:'member-solo',artist,wp,origPos:wp.pos.clone(),radius:2.0+soloIdx*1.1,speed:0.0026/(1+soloIdx*0.22),angle:Math.random()*Math.PI*2});
+    soloIdx++;
   });
   if(!orbits.length)return;
   _myUniverseHub=hub;
@@ -4399,13 +4402,10 @@ function _enterMyUniverseMode(){
 }
 function _exitMyUniverseMode(){
   _myUniverseOrbits.forEach(o=>{
-    if(o.kind==='group'&&o.bm._univOrigPos){o.bm.mesh.position.copy(o.bm._univOrigPos);delete o.bm._univOrigPos;}
+    if(o.kind==='group')o.bm.mesh.position.copy(o.origPos);
   });
   _myUniverseOrbits.forEach(o=>{
-    if((o.kind==='member-ride'||o.kind==='member-solo')&&o.artist._univOrigPos){
-      _setMemberOrbitPos(o.artist,o.artist._univOrigPos);
-      delete o.artist._univOrigPos;
-    }
+    if(o.kind==='member-ride'||o.kind==='member-solo')_setMemberPointPos(o.artist,o.wp,o.origPos);
   });
   if(_myUniverseOrbits.length){
     if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
