@@ -647,7 +647,7 @@
   .bookmark-btn:hover{color:rgba(120,190,255,0.92);transform:scale(1.18);}
   .bookmark-btn.bm-on{color:rgba(90,170,255,0.95);}
   .bookmark-btn.bm-on svg{fill:currentColor;}
-  .bookmark-btn.bm-disabled{opacity:.25;pointer-events:none;}
+  .bookmark-btn.bm-disabled,.fav-btn.bm-disabled{opacity:.25;pointer-events:none;}
   #tt-name-row{display:inline-flex;align-items:center;gap:3px;margin-bottom:3px;padding-left:4px;max-width:calc(100% - 22px);}
   #tt-name-row .tn{margin-bottom:0;padding-left:0;padding-right:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #gc-name-row{display:inline-flex;align-items:center;gap:3px;margin-bottom:2px;max-width:100%;}
@@ -1079,6 +1079,12 @@ const _MY_STAR_ORBIT_V=new THREE.Vector3(0,0.5,0.86).normalize();
 let _myUniverseActive=false;
 let _myUniverseHub=null;
 let _myUniverseOrbits=[];
+let _myUniversePhase='idle'; // 'idle' | 'entering' | 'active' | 'exiting'
+let _myUniversePhaseT0=0;
+let _myUniverseStarFrom=null;
+let _myUniverseExitFrom=null;
+const MY_UNIVERSE_ENTER_MS=750;
+const MY_UNIVERSE_EXIT_MS=600;
 let _memberCardLines=[];
 function _artistGroups(a){return a.groups||[a.group];}
 let _tagFilter={type:null,value:null};
@@ -1753,31 +1759,53 @@ function animate(){
       myStarLabel.element.style.pointerEvents=_so>0.15?'auto':'none';
     }
   }
-  if(_myUniverseActive&&_myUniverseOrbits.length&&_myUniverseHub){
-    let _posDirty=false;
+  if(_myUniverseOrbits.length&&_myUniverseHub&&(_myUniversePhase==='entering'||_myUniversePhase==='active')){
+    let ek=1;
+    if(_myUniversePhase==='entering'){
+      const t=Math.min(1,(performance.now()-_myUniversePhaseT0)/MY_UNIVERSE_ENTER_MS);
+      ek=easeInOut(t);
+      if(t>=1)_myUniversePhase='active';
+    }
+    _myUniverseOrbits.forEach(o=>{if(o.kind==='group'||o.kind==='member-solo')o.angle+=o.speed;});
     _myUniverseOrbits.forEach(o=>{
       if(o.kind==='group'){
-        o.angle+=o.speed;
         const cx=Math.cos(o.angle)*o.radius,sx=Math.sin(o.angle)*o.radius;
-        o.bm.mesh.position.copy(_myUniverseHub).addScaledVector(_MY_STAR_ORBIT_U,cx).addScaledVector(_MY_STAR_ORBIT_V,sx);
+        const orbitPos=_myUniverseHub.clone().addScaledVector(_MY_STAR_ORBIT_U,cx).addScaledVector(_MY_STAR_ORBIT_V,sx);
+        o.bm.mesh.position.copy(ek>=1?orbitPos:o.origPos.clone().lerp(orbitPos,ek));
       }else if(o.kind==='member-solo'){
-        o.angle+=o.speed;
         const cx=Math.cos(o.angle)*o.radius,sx=Math.sin(o.angle)*o.radius;
-        const p=_myUniverseHub.clone().addScaledVector(_MY_STAR_ORBIT_U,cx).addScaledVector(_MY_STAR_ORBIT_V,sx);
-        _setMemberPointPos(o.artist,o.wp,p);
-        _posDirty=true;
+        const orbitPos=_myUniverseHub.clone().addScaledVector(_MY_STAR_ORBIT_U,cx).addScaledVector(_MY_STAR_ORBIT_V,sx);
+        _setMemberPointPos(o.artist,o.wp,ek>=1?orbitPos:o.origPos.clone().lerp(orbitPos,ek));
       }
     });
     // 그룹 궤도가 먼저 갱신된 뒤에 그 그룹에 편승하는 멤버 위치를 계산해야 함
     _myUniverseOrbits.forEach(o=>{
       if(o.kind==='member-ride'){
-        _setMemberPointPos(o.artist,o.wp,o.bm.mesh.position.clone().add(o.offset));
-        _posDirty=true;
+        const orbitPos=o.bm.mesh.position.clone().add(o.offset);
+        _setMemberPointPos(o.artist,o.wp,ek>=1?orbitPos:o.origPos.clone().lerp(orbitPos,ek));
       }
     });
-    if(_posDirty){
-      if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
-      if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
+    if(myStarSprite&&_myUniverseStarFrom)myStarSprite.position.copy(ek>=1?_myUniverseHub:_myUniverseStarFrom.clone().lerp(_myUniverseHub,ek));
+    if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
+    if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
+  }else if(_myUniverseOrbits.length&&_myUniversePhase==='exiting'){
+    const t=Math.min(1,(performance.now()-_myUniversePhaseT0)/MY_UNIVERSE_EXIT_MS);
+    const ek=easeInOut(t);
+    _myUniverseOrbits.forEach(o=>{
+      const from=_myUniverseExitFrom.get(o);
+      const p=from.clone().lerp(o.origPos,ek);
+      if(o.kind==='group')o.bm.mesh.position.copy(p);
+      else _setMemberPointPos(o.artist,o.wp,p);
+    });
+    if(myStarSprite&&_myUniverseStarFrom&&_myUniverseHub)myStarSprite.position.copy(_myUniverseStarFrom.clone().lerp(_myUniverseHub,ek));
+    if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
+    if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
+    if(t>=1){
+      _myUniverseOrbits=[];
+      _myUniverseActive=false;
+      _myUniverseHub=null;
+      _myUniversePhase='idle';
+      _myUniverseExitFrom=null;
     }
   }
   if(_myStarLines.length&&myStarSprite){
@@ -2108,7 +2136,11 @@ function makeSmallThumb(s,allSongs,idx,ctx){
 }
 
 function _shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
-function buildVideoSection(songs,containerEl,ctx){
+function _pickMainVideo(pool){
+  const p=pool.slice(0,3);
+  return p[Math.floor(Math.random()*p.length)];
+}
+function buildVideoSection(songs,containerEl,ctx,mainCandidates){
   containerEl.innerHTML='';
   const all=(songs||[]);
   if(!all.length){
@@ -2119,7 +2151,8 @@ function buildVideoSection(songs,containerEl,ctx){
     const normSongs=all.filter(s=>!isShorts(s.u));
     const shortSongs=all.filter(s=>isShorts(s.u));
     if(normSongs.length>0){
-      const first=normSongs[0];
+      const normPool=(mainCandidates&&mainCandidates.length?mainCandidates:normSongs).filter(s=>!isShorts(s.u));
+      const first=normPool.length?_pickMainVideo(normPool):normSongs[0];
       const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
       const big=document.createElement('img');big.id='tv-big';
       big.src=`https://img.youtube.com/vi/${ytId(first.u)}/mqdefault.jpg`;big.alt=first.t;
@@ -2133,7 +2166,7 @@ function buildVideoSection(songs,containerEl,ctx){
       addHoverPreview(bigWrap,big,ytId(first.u),false);
       bigWrap.addEventListener('click',e=>{e.stopPropagation();window.open(first.u,'_blank');});
       containerEl.appendChild(bigWrap);
-      const normRest=_shuffle(normSongs.slice(1));
+      const normRest=_shuffle(normSongs.filter(s=>s!==first));
       if(normRest.length>0){
         const moreWrap=document.createElement('div');moreWrap.className='tv-more-wrap open';
         normRest.forEach((s,i)=>{
@@ -2159,7 +2192,8 @@ function buildVideoSection(songs,containerEl,ctx){
     return;
   }
   // ── 데스크탑 ─────────────────────────────────────
-  const first=all[0];
+  const desktopPool=mainCandidates&&mainCandidates.length?mainCandidates:all;
+  const first=_pickMainVideo(desktopPool);
   const firstShorts=isShorts(first.u);
   const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
   if(firstShorts)bigWrap.classList.add('is-shorts');
@@ -2175,7 +2209,7 @@ function buildVideoSection(songs,containerEl,ctx){
   addHoverPreview(bigWrap,big,ytId(first.u),firstShorts);
   bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,firstShorts);});
   containerEl.appendChild(bigWrap);
-  const rest=all.slice(1);if(!rest.length)return;
+  const rest=all.filter(s=>s!==first);if(!rest.length)return;
   const sArr=_shuffle(rest.filter(s=>isShorts(s.u)));
   const lArr=_shuffle(rest.filter(s=>!isShorts(s.u)));
   const lPairs=[],sPairs=[];
@@ -2471,6 +2505,13 @@ function _buildConnContent(container){
   const anchor=document.createElement('div');anchor.className='conn-anchor-chip';
   anchor.textContent=currentLang==='ko'?_connAnchor.name.ko:(_connAnchor.name.en||_connAnchor.name.ko);
   hd.appendChild(backBtn);hd.appendChild(anchor);
+  const favBtn=document.createElement('button');
+  favBtn.id='conn-fav-btn';
+  favBtn.className='fav-btn'+(isConnFavorited(_connAnchor,_connSelected)?' fav-on':'')+(_connSelected.length?'':' bm-disabled');
+  favBtn.setAttribute('aria-label','즐겨찾기');
+  favBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg>';
+  favBtn.addEventListener('click',e=>{e.stopPropagation();if(_connSelected.length)toggleConnFavorite(_connAnchor,_connSelected);});
+  hd.appendChild(favBtn);
   const bmBtn=document.createElement('button');
   bmBtn.id='conn-bookmark-btn';
   bmBtn.className='bookmark-btn'+(isConnBookmarked(_connAnchor,_connSelected)?' bm-on':'')+(_connSelected.length?'':' bm-disabled');
@@ -2951,7 +2992,10 @@ function showT(a,cx,cy){
   const tv=document.getElementById('tv');
   const _grpSongs=_aGroups.flatMap(g=>(GROUPS[g.ko]||{}).songs||[]);
   const _memberAllSongs=_dedupSongs([...(a.songs||[]),..._getSongsFeaturingArtist(a),..._grpSongs]);
-  buildVideoSection(_memberAllSongs,tv,{groupKo:a.group.ko,memberKo:a.name.ko});
+  // 대표 영상 후보는 개인/콜라보 영상 우선 — 그룹 영상이 멤버 대표 자리를 차지하지 않게(개인 영상이 하나도 없을 때만 예외)
+  const _memberPersonalSongs=_dedupSongs([...(a.songs||[]),..._getSongsFeaturingArtist(a)]);
+  const _memberMainCandidates=_memberPersonalSongs.length?_memberPersonalSongs:_memberAllSongs;
+  buildVideoSection(_memberAllSongs,tv,{groupKo:a.group.ko,memberKo:a.name.ko},_memberMainCandidates);
   // ✦ 연결 버튼 (그룹명 오른쪽)
   const connBtn=document.getElementById('tt-conn-btn');
   const hasCollab=_getCollabMembers(a).length>0;
@@ -3991,8 +4035,23 @@ window.addEventListener('click',e=>{
 // ── Favorites ─────────────────────────────────────
 const FAV_KEY_G='kpu_fav_groups';
 const FAV_KEY_M='kpu_fav_members';
+const FAV_KEY_C='kpu_fav_connections';
 let favGroups=new Set(JSON.parse(localStorage.getItem(FAV_KEY_G)||'[]'));
 let favMembers=new Set(JSON.parse(localStorage.getItem(FAV_KEY_M)||'[]'));
+let favConnections=new Set(JSON.parse(localStorage.getItem(FAV_KEY_C)||'[]'));
+function _connFavKey(anchor,sel){return anchor.group.ko+':'+anchor.name.ko+'|'+_connSelKey(sel);}
+function isConnFavorited(anchor,sel){
+  if(!anchor||!sel||!sel.length)return false;
+  return favConnections.has(_connFavKey(anchor,sel));
+}
+function toggleConnFavorite(anchor,sel){
+  if(!anchor||!sel.length)return;
+  const k=_connFavKey(anchor,sel);
+  favConnections.has(k)?favConnections.delete(k):favConnections.add(k);
+  localStorage.setItem(FAV_KEY_C,JSON.stringify([...favConnections]));
+  document.getElementById('conn-fav-btn')?.classList.toggle('fav-on',favConnections.has(k));
+  renderFavList();
+}
 let favMode=false;
 
 // ── Scraps (playlist) ──────────────────────────────
@@ -4262,7 +4321,7 @@ function _buildBdayList(){
 function renderFavList(){
   const el=document.getElementById('fav-list');if(!el)return;
   el.innerHTML='';
-  if(!favGroups.size&&!favMembers.size){
+  if(!favGroups.size&&!favMembers.size&&!favConnections.size){
     el.innerHTML='<div class="fav-empty">즐겨찾기가 없어요</div>';return;
   }
   [...favGroups].forEach(ko=>{
@@ -4296,6 +4355,29 @@ function renderFavList(){
     });
     el.appendChild(d);
   });
+  [...favConnections].forEach(key=>{
+    const barI=key.indexOf('|');
+    const namePart=key.slice(0,barI),selPart=key.slice(barI+1);
+    const ci=namePart.indexOf(':');
+    const gko=namePart.slice(0,ci),mko=namePart.slice(ci+1);
+    const anchor=ARTISTS.find(a=>a.group.ko===gko&&a.name.ko===mko);
+    if(!anchor)return;
+    const sel=selPart?selPart.split(','):[];
+    const d=document.createElement('div');d.className='fav-item';
+    const anchorName=currentLang==='ko'?mko:(anchor.name.en||mko);
+    const _cTag=currentLang==='ko'?'연결':'Connection';
+    d.innerHTML=`<span class="fav-itag">${_cTag}</span><span class="fav-iname">${anchorName} × ${sel.join(', ')}</span>`;
+    d.addEventListener('click',()=>{
+      const bm=bubbleMeshes.find(b=>b.ko===gko);
+      if(bm)flyToBubble(bm.mesh.position,bm.radius);
+      showT(anchor,window.innerWidth/2,window.innerHeight*0.4);
+      openConnCard(anchor);
+      _connSelected=[...sel];
+      _updateConnLines3d();_applyConnFocus();_flyToConnStars();
+      _buildConnContent(isMob()?connSheetBody:connPanelInner);
+    });
+    el.appendChild(d);
+  });
 }
 
 function applyFavHighlight(){
@@ -4315,7 +4397,7 @@ function applyFavHighlight(){
     const bright=favGroups.has(ko)||ARTISTS.some(a=>favMembers.has(_mFavKey(a))&&_artistGroups(a).some(gr=>gr.ko===ko));
     g.children.forEach((c,i)=>{if(c.material)c.material.opacity=baseOps[i]*(bright?1:FOCUS_DIM);});
   });
-  _updateMyStarLines();
+  // 별자리 선(_updateMyStarLines)은 "내 우주" 모드 도입 후 당분간 비활성화 — 필요해지면 다시 호출 추가
 }
 
 function _toggleFavMode(){
@@ -4363,27 +4445,58 @@ function _setMemberPointPos(artist,wp,p){
   if(attr){const i=wp.ptsIdx*3;attr.array[i]=p.x;attr.array[i+1]=p.y;attr.array[i+2]=p.z;}
   if(_isPrimaryWp(artist,wp))artist._worldPos.copy(p);
 }
+function _hubFromOrbitOrigins(orbits){
+  const pts=[];
+  orbits.forEach(o=>{if(o.kind==='group')pts.push(o.origPos);});
+  [...favMembers].forEach(key=>{
+    const ci=key.indexOf(':');
+    const gko=key.slice(0,ci),mko=key.slice(ci+1);
+    const o=orbits.find(x=>(x.kind==='member-ride'||x.kind==='member-solo')&&x.artist.group.ko===gko&&x.artist.name.ko===mko&&_isPrimaryWp(x.artist,x.wp));
+    if(o)pts.push(o.origPos);
+  });
+  if(!pts.length)return new THREE.Vector3(0,12,0);
+  const c=new THREE.Vector3();pts.forEach(p=>c.add(p));c.divideScalar(pts.length);c.y+=7;
+  return c;
+}
 function _enterMyUniverseMode(){
   if(!myStarSprite)return;
-  _exitMyUniverseMode();
-  const hub=_getMyStarPos();
+  // 재계산(즐겨찾기 중 추가/삭제) 시에도 이미 옮겨진 항목의 '진짜 원래 자리'를 이어받는다
+  const prevGroupOrig=new Map(),prevMemberOrig=new Map();
+  _myUniverseOrbits.forEach(o=>{
+    if(o.kind==='group')prevGroupOrig.set(o.ko,o.origPos);
+    else prevMemberOrig.set(o.wp,o.origPos);
+  });
+  const starFrom=myStarSprite.position.clone();
+
   const orbits=[];
   const riddenWps=new Set();
-  [...favGroups].forEach((ko,i)=>{
+  let groupCursor=5.5,gi=0; // 허브(내 별) 중심에서 첫 행성까지 최소 클리어런스
+  [...favGroups].forEach(ko=>{
     const bm=bubbleMeshes.find(b=>b.ko===ko);
     if(!bm)return;
-    const origPos=bm.mesh.position.clone();
-    orbits.push({kind:'group',ko,bm,origPos,radius:3.2+i*1.6,speed:0.0020/(1+i*0.18),angle:Math.random()*Math.PI*2});
+    const origPos=prevGroupOrig.get(ko)||bm.mesh.position.clone();
+    const shellR=groupCursor+bm.radius;
+    groupCursor=shellR+bm.radius+2.2; // 다음 행성과 서로 안 겹치게 간격 확보
+    orbits.push({kind:'group',ko,bm,origPos,radius:shellR,speed:0.0020/(1+gi*0.18),angle:Math.random()*Math.PI*2});
+    gi++;
     // 이 행성에 속한 멤버 전체를 함께 이동시켜 "덩그러니 남는" 느낌 방지
     ARTISTS.forEach(artist=>{
       (artist._worldPositions||[]).forEach(wp=>{
         if(wp.groupKo!==ko)return;
         riddenWps.add(wp);
-        orbits.push({kind:'member-ride',artist,wp,bm,origPos:wp.pos.clone(),offset:wp.pos.clone().sub(origPos)});
+        const mOrig=prevMemberOrig.get(wp)||wp.pos.clone();
+        orbits.push({kind:'member-ride',artist,wp,bm,origPos:mOrig,offset:mOrig.clone().sub(origPos)});
       });
     });
   });
-  let soloIdx=0;
+  // 개별 즐겨찾기한 멤버(소속 그룹은 즐겨찾기 안 함) 궤도 — 행성 궤도보다 항상 확실히 안쪽에만 배치해서
+  // 다른(즐겨찾기한) 그룹 행성 안에 들어있는 것처럼 보이는 일이 없게 한다
+  const groupOrbitEntries=orbits.filter(o=>o.kind==='group');
+  let innerLimit=4.0;
+  if(groupOrbitEntries.length){
+    innerLimit=Math.max(1.4,Math.min(...groupOrbitEntries.map(o=>o.radius-o.bm.radius))-1.6);
+  }
+  const soloList=[];
   [...favMembers].forEach(key=>{
     const ci=key.indexOf(':');
     const gko=key.slice(0,ci),mko=key.slice(ci+1);
@@ -4391,30 +4504,40 @@ function _enterMyUniverseMode(){
     if(!artist)return;
     const wp=(artist._worldPositions||[]).find(w=>w.groupKo===gko);
     if(!wp||riddenWps.has(wp))return; // 이미 소속 그룹과 함께 이동 중
-    orbits.push({kind:'member-solo',artist,wp,origPos:wp.pos.clone(),radius:2.0+soloIdx*1.1,speed:0.0026/(1+soloIdx*0.22),angle:Math.random()*Math.PI*2});
-    soloIdx++;
+    soloList.push({artist,wp,origPos:prevMemberOrig.get(wp)||wp.pos.clone()});
   });
-  if(!orbits.length)return;
-  _myUniverseHub=hub;
-  myStarSprite.position.copy(hub);
+  const n=soloList.length;
+  soloList.forEach(({artist,wp,origPos},idx)=>{
+    const r=n<=1?Math.min(2.4,innerLimit):1.4+(innerLimit-1.4)*(idx/(n-1));
+    orbits.push({kind:'member-solo',artist,wp,origPos,radius:r,speed:0.0026/(1+idx*0.22),angle:Math.random()*Math.PI*2});
+  });
+
+  if(!orbits.length){
+    if(_myUniverseActive)_exitMyUniverseMode();
+    return;
+  }
+  _myUniverseHub=_hubFromOrbitOrigins(orbits);
   _myUniverseOrbits=orbits;
   _myUniverseActive=true;
+  _myUniverseStarFrom=starFrom;
+  _myUniversePhase='entering';
+  _myUniversePhaseT0=performance.now();
 }
 function _exitMyUniverseMode(){
-  _myUniverseOrbits.forEach(o=>{
-    if(o.kind==='group')o.bm.mesh.position.copy(o.origPos);
-  });
-  _myUniverseOrbits.forEach(o=>{
-    if(o.kind==='member-ride'||o.kind==='member-solo')_setMemberPointPos(o.artist,o.wp,o.origPos);
-  });
-  if(_myUniverseOrbits.length){
-    if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
-    if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
+  if(!_myUniverseOrbits.length){
+    _myUniverseActive=false;_myUniverseHub=null;_myUniversePhase='idle';
+    if(myStarSprite)myStarSprite.position.copy(_getMyStarPos());
+    return;
   }
-  _myUniverseOrbits=[];
-  _myUniverseActive=false;
-  _myUniverseHub=null;
-  if(myStarSprite)myStarSprite.position.copy(_getMyStarPos());
+  const exitFrom=new Map();
+  _myUniverseOrbits.forEach(o=>{
+    exitFrom.set(o,(o.kind==='group'?o.bm.mesh.position:o.wp.pos).clone());
+  });
+  _myUniverseExitFrom=exitFrom;
+  _myUniverseStarFrom=myStarSprite?myStarSprite.position.clone():null;
+  _myUniverseHub=_hubFromOrbitOrigins(_myUniverseOrbits); // 종료 후 안착할 '유휴' 위치
+  _myUniversePhase='exiting';
+  _myUniversePhaseT0=performance.now();
 }
 
 function _makeMyStarTex([r,g,b]){
@@ -4516,7 +4639,6 @@ function placeMyStarInUniverse(){
   myStarLabel.position.set(0,myStarBase*0.75,0);
   myStarSprite.add(myStarLabel);
   scene.add(myStarSprite);
-  if(favMode)_updateMyStarLines();
 }
 
 function _randomStarColor(){
