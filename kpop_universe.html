@@ -1072,9 +1072,13 @@ let myStarSprite=null,myStarLabel=null,myStarTex=null,myStarBase=2.4;
 let _myStarSelected=false,_myStarSavedCam=null,_myStarSavedTarget=null;
 const connLines=[];
 let _myStarLines=[];
-let _myStarSatellites=[];
 const _MY_STAR_ORBIT_U=new THREE.Vector3(1,0,0);
 const _MY_STAR_ORBIT_V=new THREE.Vector3(0,0.5,0.86).normalize();
+// "내 우주" 모드: favMode가 켜지면 즐겨찾기한 실제 그룹 행성/멤버 별을
+// 내 별 주위 궤도로 진짜로 옮긴다 (모드를 끄면 원래 자리로 복귀).
+let _myUniverseActive=false;
+let _myUniverseHub=null;
+let _myUniverseOrbits=[];
 let _memberCardLines=[];
 function _artistGroups(a){return a.groups||[a.group];}
 let _tagFilter={type:null,value:null};
@@ -1106,7 +1110,6 @@ function applyLang(){
   _refreshOpenCardText();
   renderFavList();_buildBdayList();
   renderBookmarkList();
-  if(myStarSprite)_rebuildMyStarSatellites();
   const _fp=document.getElementById('filter-panel');
   if(_tagFilter&&_tagFilter.type&&_fp&&_fp.style.display==='block')_renderFilterPanel();
   _updateIdxEntryCount();
@@ -1731,9 +1734,9 @@ function animate(){
   });
   if(colorsDirty){if(regColorAttr)regColorAttr.needsUpdate=true;if(spkColorAttr)spkColorAttr.needsUpdate=true;}
   groupLabels.forEach(({el,worldPos,ko})=>{
-    const d=camera.position.distanceTo(worldPos);
-    const distFade=d<40?1:d<70?(70-d)/30:0;
     const bm=bubbleMeshes.find(b=>b.ko===ko);
+    const d=camera.position.distanceTo(bm?bm.mesh.position:worldPos);
+    const distFade=d<40?1:d<70?(70-d)/30:0;
     const fa=(bm?bm.mesh._filterAlpha??1:1)*(bm?bm.mesh._focusAlpha??1:1)*(bm?bm.mesh._legacyAlpha??1:1);
     const op=distFade*fa;
     el.style.opacity=op.toFixed(3);
@@ -1750,19 +1753,32 @@ function animate(){
       myStarLabel.element.style.pointerEvents=_so>0.15?'auto':'none';
     }
   }
-  if(_myStarSatellites.length&&myStarSprite){
-    _myStarSatellites.forEach(s=>{
-      s.angle+=s.speed;
-      const cx=Math.cos(s.angle)*s.radius,sx=Math.sin(s.angle)*s.radius;
-      s.sprite.position.copy(myStarSprite.position).addScaledVector(_MY_STAR_ORBIT_U,cx).addScaledVector(_MY_STAR_ORBIT_V,sx);
-      const d=camera.position.distanceTo(s.sprite.position);
-      s.sprite.material.opacity=d<45?0.85:d<75?0.85*(75-d)/30:0;
-      if(s.label){
-        const lo=d<40?1:d<65?(65-d)/25:0;
-        s.label.element.style.opacity=lo.toFixed(3);
-        s.label.element.style.pointerEvents=lo>0.15?'auto':'none';
+  if(_myUniverseActive&&_myUniverseOrbits.length&&_myUniverseHub){
+    let _posDirty=false;
+    _myUniverseOrbits.forEach(o=>{
+      if(o.kind==='group'){
+        o.angle+=o.speed;
+        const cx=Math.cos(o.angle)*o.radius,sx=Math.sin(o.angle)*o.radius;
+        o.bm.mesh.position.copy(_myUniverseHub).addScaledVector(_MY_STAR_ORBIT_U,cx).addScaledVector(_MY_STAR_ORBIT_V,sx);
+      }else if(o.kind==='member-solo'){
+        o.angle+=o.speed;
+        const cx=Math.cos(o.angle)*o.radius,sx=Math.sin(o.angle)*o.radius;
+        const p=_myUniverseHub.clone().addScaledVector(_MY_STAR_ORBIT_U,cx).addScaledVector(_MY_STAR_ORBIT_V,sx);
+        _setMemberOrbitPos(o.artist,p);
+        _posDirty=true;
       }
     });
+    // 그룹 궤도가 먼저 갱신된 뒤에 그 그룹에 편승하는 멤버 위치를 계산해야 함
+    _myUniverseOrbits.forEach(o=>{
+      if(o.kind==='member-ride'){
+        _setMemberOrbitPos(o.artist,o.bm.mesh.position.clone().add(o.offset));
+        _posDirty=true;
+      }
+    });
+    if(_posDirty){
+      if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
+      if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
+    }
   }
   if(_myStarLines.length&&myStarSprite){
     const _msd=camera.position.distanceTo(myStarSprite.position);
@@ -4173,8 +4189,8 @@ function toggleFavGroup(ko){
   _saveFavs();
   _syncFavBtn('group',ko);
   renderFavList();_buildBdayList();
-  if(favMode)applyFavHighlight();
-  if(myStarSprite)placeMyStarInUniverse();
+  if(favMode){applyFavHighlight();_enterMyUniverseMode();}
+  else if(myStarSprite)placeMyStarInUniverse();
 }
 function toggleFavMember(artist){
   const k=_mFavKey(artist);
@@ -4182,8 +4198,8 @@ function toggleFavMember(artist){
   _saveFavs();
   _syncFavBtn('member',artist);
   renderFavList();_buildBdayList();
-  if(favMode)applyFavHighlight();
-  if(myStarSprite)placeMyStarInUniverse();
+  if(favMode){applyFavHighlight();_enterMyUniverseMode();}
+  else if(myStarSprite)placeMyStarInUniverse();
 }
 
 function _syncFavBtn(type,data){
@@ -4309,9 +4325,11 @@ function _toggleFavMode(){
   document.getElementById('fav-mode-btn')?.classList.toggle('on',favMode);
   if(favMode){
     applyFavHighlight();
+    _enterMyUniverseMode();
     document.getElementById('journal-sidebar').classList.add('open');
   }else{
     _clearMyStarLines();
+    _exitMyUniverseMode();
     if(focusGroupKo)setFocus(focusGroupKo,[..._extraFocusKos]);else clearFocus();
   }
 }
@@ -4330,71 +4348,73 @@ const STAR_COLORS=[
 let myProfile=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');
 let _ppSelectedColor=myProfile?.color||STAR_COLORS[0];
 
-// ── My Star 궤도(위성) ──────────────────────────────
-// 내 별은 즐겨찾기들의 무게중심에 자리잡고, 즐겨찾기한 그룹/멤버 각각이
-// 작은 위성이 되어 내 별 주위를 돈다 (안쪽 궤도일수록 더 빨리 돈다).
-// (_myStarSatellites, _MY_STAR_ORBIT_U/V는 animate()보다 먼저 실행되도록 상단에서 선언됨)
-function _disposeMyStarSatellites(){
-  _myStarSatellites.forEach(s=>{
-    if(s.label)s.sprite.remove(s.label); // CSS2DObject의 DOM 요소는 직속 부모에서 제거돼야 정리됨
-    scene.remove(s.sprite);
-    if(s.tex)s.tex.dispose();
-  });
-  _myStarSatellites=[];
+// ── "내 우주" 모드: favMode가 켜지면 즐겨찾기한 실제 그룹 행성/멤버 별을
+// 내 별 주위 궤도로 진짜 옮긴다. 소속 그룹도 즐겨찾기됐으면 멤버는 그 그룹을
+// 따라 편승(원래 상대 위치 유지)하고, 그룹이 즐겨찾기 안 됐으면 멤버 혼자 작은
+// 궤도를 돈다. 모드를 끄면 원래 자리로 복귀.
+// (_myUniverseActive/_myUniverseHub/_myUniverseOrbits, _MY_STAR_ORBIT_U/V는
+// animate()보다 먼저 실행되도록 상단에서 선언됨)
+function _setMemberOrbitPos(artist,p){
+  artist._worldPos.copy(p);
+  const wp=(artist._worldPositions||[]).find(w=>w.groupKo===artist.group.ko);
+  if(!wp)return;
+  wp.pos.copy(p);
+  const pts=wp.ptsType==='sparkle'?sparklePts:regularPts;
+  const attr=pts&&pts.geometry.attributes.position;
+  if(!attr)return;
+  const i=wp.ptsIdx*3;
+  attr.array[i]=p.x;attr.array[i+1]=p.y;attr.array[i+2]=p.z;
 }
-function _rebuildMyStarSatellites(){
-  _disposeMyStarSatellites();
+function _enterMyUniverseMode(){
   if(!myStarSprite)return;
-  const items=[];
-  [...favGroups].forEach(ko=>{
-    const info=GROUPS[ko];if(!info)return;
-    items.push({kind:'group',ko,color:info.color||[160,190,255],name:currentLang==='ko'?ko:(info.en||ko)});
+  _exitMyUniverseMode();
+  const hub=_getMyStarPos();
+  const orbits=[];
+  [...favGroups].forEach((ko,i)=>{
+    const bm=bubbleMeshes.find(b=>b.ko===ko);
+    if(!bm)return;
+    bm._univOrigPos=bm.mesh.position.clone();
+    orbits.push({kind:'group',ko,bm,radius:3.2+i*1.6,speed:0.0020/(1+i*0.18),angle:Math.random()*Math.PI*2});
   });
+  let soloIdx=0;
   [...favMembers].forEach(key=>{
     const ci=key.indexOf(':');
     const gko=key.slice(0,ci),mko=key.slice(ci+1);
-    const a=ARTISTS.find(x=>x.group.ko===gko&&x.name.ko===mko);
-    if(!a)return;
-    items.push({kind:'member',gko,mko,color:a.color||[220,220,255],name:currentLang==='ko'?mko:(a.name.en||mko)});
+    const artist=ARTISTS.find(a=>a.group.ko===gko&&a.name.ko===mko);
+    if(!artist||!artist._worldPos)return;
+    artist._univOrigPos=artist._worldPos.clone();
+    const rideGroup=orbits.find(o=>o.kind==='group'&&o.ko===gko);
+    if(rideGroup){
+      orbits.push({kind:'member-ride',artist,bm:rideGroup.bm,offset:artist._univOrigPos.clone().sub(rideGroup.bm._univOrigPos)});
+    }else{
+      orbits.push({kind:'member-solo',artist,radius:2.0+soloIdx*1.1,speed:0.0026/(1+soloIdx*0.22),angle:Math.random()*Math.PI*2});
+      soloIdx++;
+    }
   });
-  items.forEach((it,i)=>{
-    const tex=_makeMyStarTex(it.color);
-    const mat=new THREE.SpriteMaterial({map:tex,transparent:true,opacity:0.85,blending:THREE.AdditiveBlending,depthTest:false});
-    const sprite=new THREE.Sprite(mat);
-    const satScale=myStarBase*0.42;
-    sprite.scale.setScalar(satScale);
-    const div=document.createElement('div');
-    div.className='group-label';
-    div.textContent=it.name;
-    div.style.color=_labelGlowColor(it.color[0],it.color[1],it.color[2]);
-    div.style.fontSize='9.5px';
-    div.style.cursor='pointer';
-    div.addEventListener('click',e=>{
-      e.stopPropagation();
-      if(it.kind==='group'){
-        const bm=bubbleMeshes.find(b=>b.ko===it.ko);
-        if(bm)flyToBubble(bm.mesh.position,bm.radius);
-        showGC(it.ko,window.innerWidth/2,window.innerHeight*0.4);
-      }else{
-        const a=ARTISTS.find(x=>x.group.ko===it.gko&&x.name.ko===it.mko);
-        if(!a)return;
-        const bm=bubbleMeshes.find(b=>b.ko===it.gko);
-        if(bm)flyToBubble(bm.mesh.position,bm.radius);
-        showT(a,window.innerWidth/2,window.innerHeight*0.4);
-        pulseMember(a);
-      }
-    });
-    const label=new THREE.CSS2DObject(div);
-    label.position.set(0,satScale*0.85,0);
-    sprite.add(label);
-    scene.add(sprite);
-    _myStarSatellites.push({
-      sprite,tex,label,
-      radius:3.0+i*1.3,
-      speed:0.0026/(1+i*0.22),
-      angle:Math.random()*Math.PI*2
-    });
+  if(!orbits.length)return;
+  _myUniverseHub=hub;
+  myStarSprite.position.copy(hub);
+  _myUniverseOrbits=orbits;
+  _myUniverseActive=true;
+}
+function _exitMyUniverseMode(){
+  _myUniverseOrbits.forEach(o=>{
+    if(o.kind==='group'&&o.bm._univOrigPos){o.bm.mesh.position.copy(o.bm._univOrigPos);delete o.bm._univOrigPos;}
   });
+  _myUniverseOrbits.forEach(o=>{
+    if((o.kind==='member-ride'||o.kind==='member-solo')&&o.artist._univOrigPos){
+      _setMemberOrbitPos(o.artist,o.artist._univOrigPos);
+      delete o.artist._univOrigPos;
+    }
+  });
+  if(_myUniverseOrbits.length){
+    if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
+    if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
+  }
+  _myUniverseOrbits=[];
+  _myUniverseActive=false;
+  _myUniverseHub=null;
+  if(myStarSprite)myStarSprite.position.copy(_getMyStarPos());
 }
 
 function _makeMyStarTex([r,g,b]){
@@ -4444,6 +4464,7 @@ function _clearMemberCardLines(){
 function _updateMyStarLines(){
   _clearMyStarLines();
   if(!favMode||!myStarSprite)return;
+  if(_myUniverseActive)return; // "내 우주" 모드에서는 실제로 옆에서 도는 게 곧 관계 표시라 선이 필요 없음
   const col=myProfile?.color||STAR_COLORS[0];
   const c=new THREE.Color(col[0]/255,col[1]/255,col[2]/255).multiplyScalar(1.5);
   const from=myStarSprite.position;
@@ -4476,13 +4497,13 @@ function placeMyStarInUniverse(){
     if(myStarTex)myStarTex.dispose();
     myStarSprite=null;myStarTex=null;myStarLabel=null;
   }
-  if(!myProfile?.nickname){_disposeMyStarSatellites();return;}
+  if(!myProfile?.nickname){if(_myUniverseActive)_exitMyUniverseMode();return;}
   const color=myProfile.color||STAR_COLORS[0];
   const[r,g,b]=color;
   myStarTex=_makeMyStarTex(color);
   const mat=new THREE.SpriteMaterial({map:myStarTex,transparent:true,opacity:0.88,blending:THREE.AdditiveBlending,depthTest:false});
   myStarSprite=new THREE.Sprite(mat);
-  myStarSprite.position.copy(_getMyStarPos());
+  myStarSprite.position.copy(_myUniverseActive&&_myUniverseHub?_myUniverseHub:_getMyStarPos());
   myStarSprite.scale.setScalar(myStarBase);
   const div=document.createElement('div');
   div.className='group-label';
@@ -4496,7 +4517,6 @@ function placeMyStarInUniverse(){
   myStarSprite.add(myStarLabel);
   scene.add(myStarSprite);
   if(favMode)_updateMyStarLines();
-  _rebuildMyStarSatellites();
 }
 
 function _randomStarColor(){
