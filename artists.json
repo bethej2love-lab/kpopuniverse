@@ -3037,6 +3037,16 @@
       "ko": "아이브",
       "en": "IVE"
     },
+    "groups": [
+      {
+        "ko": "아이브",
+        "en": "IVE"
+      },
+      {
+        "ko": "아이즈원",
+        "en": "IZ*ONE"
+      }
+    ],
     "co": "Starship",
     "planet": "main",
     "x": 6140,
@@ -3163,6 +3173,16 @@
       "ko": "아이브",
       "en": "IVE"
     },
+    "groups": [
+      {
+        "ko": "아이브",
+        "en": "IVE"
+      },
+      {
+        "ko": "아이즈원",
+        "en": "IZ*ONE"
+      }
+    ],
     "co": "Starship",
     "planet": "main",
     "x": 6220,
@@ -4987,6 +5007,16 @@
       "ko": "르세라핌",
       "en": "LE SSERAFIM"
     },
+    "groups": [
+      {
+        "ko": "르세라핌",
+        "en": "LE SSERAFIM"
+      },
+      {
+        "ko": "아이즈원",
+        "en": "IZ*ONE"
+      }
+    ],
     "co": "HYBE",
     "planet": "main",
     "x": 6810,
@@ -5016,6 +5046,16 @@
       "ko": "르세라핌",
       "en": "LE SSERAFIM"
     },
+    "groups": [
+      {
+        "ko": "르세라핌",
+        "en": "LE SSERAFIM"
+      },
+      {
+        "ko": "아이즈원",
+        "en": "IZ*ONE"
+      }
+    ],
     "co": "HYBE",
     "planet": "main",
     "x": 6990,
@@ -9051,6 +9091,182 @@
     "nat": {
       "ko": "한국",
       "en": "KR"
+    }
+  },
+  {
+    "name": {
+      "ko": "최예나",
+      "en": "Yena"
+    },
+    "group": {
+      "ko": "아이즈원",
+      "en": "IZ*ONE"
+    },
+    "co": "YH엔터테인먼트",
+    "active": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "bday": "1999.09.29",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    }
+  },
+  {
+    "name": {
+      "ko": "강혜원",
+      "en": "Hyewon"
+    },
+    "group": {
+      "ko": "아이즈원",
+      "en": "IZ*ONE"
+    },
+    "co": "에잇디엔터테인먼트",
+    "active": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "bday": "1999.07.05",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    }
+  },
+  {
+    "name": {
+      "ko": "김민주",
+      "en": "Minju"
+    },
+    "group": {
+      "ko": "아이즈원",
+      "en": "IZ*ONE"
+    },
+    "co": "얼반웍스이엔티",
+    "active": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "bday": "2001.02.05",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    }
+  },
+  {
+    "name": {
+      "ko": "이채연",
+      "en": "Chaeyeon"
+    },
+    "group": {
+      "ko": "아이즈원",
+      "en": "IZ*ONE"
+    },
+    "co": "WM엔터테인먼트",
+    "active": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "bday": "2000.01.11",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    }
+  },
+  {
+    "name": {
+      "ko": "권은비",
+      "en": "Eunbi"
+    },
+    "group": {
+      "ko": "아이즈원",
+      "en": "IZ*ONE"
+    },
+    "co": "RBW",
+    "active": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "bday": "1995.09.27",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    }
+  },
+  {
+    "name": {
+      "ko": "조유리",
+      "en": "Yuri"
+    },
+    "group": {
+      "ko": "아이즈원",
+      "en": "IZ*ONE"
+    },
+    "co": "웨이크원",
+    "active": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "bday": "2001.10.22",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    }
+  },
+  {
+    "name": {
+      "ko": "야부키 나코",
+      "en": "Nako"
+    },
+    "group": {
+      "ko": "아이즈원",
+      "en": "IZ*ONE"
+    },
+    "co": "TWIN PLANET",
+    "active": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "bday": "2001.06.18",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
+    }
+  },
+  {
+    "name": {
+      "ko": "혼다 히토미",
+      "en": "Hitomi"
+    },
+    "group": {
+      "ko": "아이즈원",
+      "en": "IZ*ONE"
+    },
+    "co": "iNKODE",
+    "active": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "bday": "2001.10.06",
+    "nat": {
+      "ko": "일본",
+      "en": "JP"
     }
   }
 ]

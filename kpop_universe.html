@@ -46,28 +46,33 @@
     color:rgba(190,205,240,0.55);
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
     font-size:14px;padding:8px 4px;border-radius:10px;
-    transition:background .15s,color .15s;line-height:1;text-align:center;
+    transition:background .15s,color .15s,opacity .14s,flex .16s ease,padding .16s ease;
+    line-height:1;text-align:center;overflow:hidden;white-space:nowrap;
   }
   .tab-btn:hover{background:rgba(255,255,255,0.07);color:rgba(210,225,255,0.85);}
   .tab-btn.active{background:rgba(255,255,255,0.09);color:rgba(225,238,255,0.95);}
   #tab-lang{font-size:10px;font-weight:700;letter-spacing:.1em;}
   .tab-sep{display:none;}
   /* ── Tabbar search mode (mobile) ────────────────── */
-  #tabbar{transition:left .22s cubic-bezier(0.4,0,0.2,1),right .22s cubic-bezier(0.4,0,0.2,1),bottom .22s cubic-bezier(0.4,0,0.2,1),border-radius .22s,border-top-color .22s,transform .28s cubic-bezier(0.4,0,0.2,1),opacity .28s;}
+  /* 탭 아이콘↔검색창 전환 시 컨테이너 모양과 내용물이 같은 속도로 접히고 펼쳐지도록,
+     display 하드 스왑 대신 flex-basis/opacity를 함께 트랜지션해서 자연스럽게 이어지게 함 */
+  #tabbar{transition:left .18s cubic-bezier(0.4,0,0.2,1),right .18s cubic-bezier(0.4,0,0.2,1),bottom .18s cubic-bezier(0.4,0,0.2,1),border-radius .18s ease,border-top-color .18s ease,box-shadow .18s ease,transform .18s cubic-bezier(0.4,0,0.2,1),opacity .18s ease;}
   #tabbar.tab-hidden{transform:translateY(110%);opacity:0;pointer-events:none;}
   #tabbar.search-mode{bottom:10px;left:16px;right:16px;border-radius:16px;border-top-color:transparent;padding:6px 10px;justify-content:flex-start;box-shadow:0 4px 24px rgba(0,0,0,0.45);}
-  #tabbar.search-mode .tab-btn,#tabbar.search-mode .tab-sep{display:none!important;}
-  #tab-sb-icon{display:none;flex-shrink:0;color:rgba(190,205,240,0.65);align-items:center;padding-right:8px;}
-  #tab-sb-input{display:none;flex:1;background:none;border:none;color:#c8d8f0;
+  #tabbar.search-mode .tab-btn{flex:0 0 0;opacity:0;padding-left:0;padding-right:0;pointer-events:none;}
+  #tab-sb-icon{display:flex;flex:0 0 0;overflow:hidden;opacity:0;color:rgba(190,205,240,0.65);align-items:center;padding-right:0;transition:opacity .14s,flex .16s ease,padding .16s ease;}
+  #tab-sb-input{display:block;flex:0 0 0;width:0;min-width:0;overflow:hidden;opacity:0;background:none;border:none;color:#c8d8f0;
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:16px;
-    outline:none;padding:4px 0;min-width:0;letter-spacing:.03em;
+    outline:none;padding:4px 0;letter-spacing:.03em;
+    transition:opacity .14s,flex .16s ease;
     -webkit-text-size-adjust:none;}
   #tab-sb-input::placeholder{color:rgba(140,160,200,0.32);}
-  #tab-sb-clear{display:none;flex-shrink:0;background:none;border:none;
-    color:rgba(190,205,240,0.55);font-size:16px;cursor:pointer;padding:4px 6px;line-height:1;align-items:center;}
-  #tabbar.search-mode #tab-sb-icon{display:flex;}
-  #tabbar.search-mode #tab-sb-input{display:block;}
-  #tabbar.search-mode #tab-sb-clear{display:flex;}
+  #tab-sb-clear{display:flex;flex:0 0 0;overflow:hidden;opacity:0;background:none;border:none;
+    color:rgba(190,205,240,0.55);font-size:16px;cursor:pointer;padding:4px 0;line-height:1;align-items:center;
+    transition:opacity .14s,flex .16s ease,padding .16s ease;}
+  #tabbar.search-mode #tab-sb-icon{flex:0 0 auto;opacity:1;padding-right:8px;}
+  #tabbar.search-mode #tab-sb-input{flex:1 1 auto;width:auto;opacity:1;}
+  #tabbar.search-mode #tab-sb-clear{flex:0 0 auto;opacity:1;padding:4px 6px;}
   /* ── Mobile search results ───────────────────────── */
   #mob-sr{
     position:fixed;left:12px;right:12px;
@@ -205,6 +210,8 @@
   #tg-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1px;padding-left:4px;padding-right:4px;}
   .tg{font-size:14px;color:#aec8e8;letter-spacing:.05em;font-weight:500;text-transform:uppercase;cursor:pointer;transition:color .12s;width:fit-content;}
   .tg:hover{color:#d0e8ff;}
+  .tg.tg-past{color:rgba(150,165,200,0.42);}
+  .tg.tg-past:hover{color:#d0e8ff;}
   .tco{font-size:14px;color:#88aac8;margin-bottom:6px;}
   .tm{display:none;}
   #tv-big-wrap{cursor:pointer;border-radius:8px;overflow:hidden;background:rgba(255,255,255,0.04);}
@@ -547,15 +554,23 @@
     padding:3px 11px;border-radius:20px;font-size:10.5px;cursor:pointer;
     background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.13);
     color:rgba(175,198,238,0.80);letter-spacing:.02em;font-family:inherit;
-    transition:background .14s,border-color .14s,color .14s;
+    transition:background .14s,border-color .14s,color .14s,transform .1s;
   }
-  .conn-chip:hover{background:rgba(155,195,255,0.14);border-color:rgba(155,195,255,0.30);color:rgba(210,230,255,0.98);}
   .conn-chip.sel{background:rgba(130,175,255,0.22);border-color:rgba(130,175,255,0.52);color:rgba(210,230,255,1.0);font-weight:600;}
   .conn-chip.disabled{opacity:0.28;cursor:default;pointer-events:none;}
   .conn-chip-wrap{display:inline-flex;align-items:center;}
   .conn-chip-goto{display:inline-flex;align-items:center;width:0;overflow:hidden;opacity:0;pointer-events:none;cursor:pointer;font-size:10px;color:rgba(170,205,255,0.72);line-height:1;transition:opacity 0.13s,width 0.13s,padding-left 0.13s;white-space:nowrap;padding-left:0;}
-  .conn-chip-wrap:hover .conn-chip-goto{width:16px;opacity:1;pointer-events:all;padding-left:3px;}
   .conn-chip-goto:hover{color:rgba(215,235,255,1);}
+  /* 호버 가능한 기기(마우스)에서만 화살표를 hover로 노출 — 터치 기기는 hover가 "고스트 탭"으로 소비돼
+     첫 탭에 화살표만 뜨고 실제 선택은 두 번째 탭에서야 되는 문제가 있어 꾹 누르기 제스처로 대체함 */
+  @media(hover:hover){
+    .conn-chip:hover{background:rgba(155,195,255,0.14);border-color:rgba(155,195,255,0.30);color:rgba(210,230,255,0.98);}
+    .conn-chip-wrap:hover .conn-chip-goto{width:16px;opacity:1;pointer-events:all;padding-left:3px;}
+  }
+  @media(hover:none){
+    .conn-chip-goto{display:none;}
+  }
+  .conn-chip.lp-active{background:rgba(155,195,255,0.22);border-color:rgba(155,195,255,0.45);transform:scale(0.94);}
   .conn-no-video{font-size:11px;color:#5878a0;padding:4px 0;}
   /* ✦ 연결 버튼 */
   #tt-conn-row{margin-top:6px;}
@@ -1183,7 +1198,7 @@ function _refreshOpenCardText(){
     _tgEl.innerHTML='';_tgEl.onclick=null;
     _aGrps.forEach((g,i)=>{
       if(i>0){const sep=document.createElement('span');sep.textContent=' · ';sep.style.cssText='color:rgba(150,170,210,0.45);pointer-events:none;';_tgEl.appendChild(sep);}
-      const sp=document.createElement('span');sp.className='tg';
+      const sp=document.createElement('span');sp.className='tg'+((GROUPS[g.ko]||{}).survivalShow?' tg-past':'');
       sp.textContent=currentLang==='ko'?g.ko:(g.en||g.ko);
       sp.addEventListener('click',e=>{e.stopPropagation();const ttEl2=document.getElementById('tt');const gx=parseInt(ttEl2.style.left)||0;const gy=parseInt(ttEl2.style.top)||0;closeCards();showGC(g.ko,gx,gy);});
       _tgEl.appendChild(sp);
@@ -1624,10 +1639,39 @@ async function buildUniverse(){
     scene.add(g);
     _nctRingGroups.push({g,ko:_rko,baseOps:_baseOps});
   });
+
+  // ── 서바이벌 오디션 프로젝트 그룹: 옅은 점선 궤도 링으로 "일시적으로 결성된 그룹" 느낌 표시 ──
+  // NCT 링(굵은 실선 다중 밴드)과는 확실히 다른 인상을 주도록 얇은 점선 단일 링 하나만 두름.
+  // _nctRingGroups에 그대로 얹혀서 기존 회전/줌 페이드/즐겨찾기 dim 로직을 그대로 재사용한다.
+  bubbleMeshes.filter(b=>b.info.survivalShow).forEach(({mesh,radius:R,ko:_rko,info})=>{
+    const ringGroup=new THREE.Group();
+    ringGroup.position.copy(mesh.position);
+    ringGroup.quaternion.setFromEuler(new THREE.Euler(Math.PI*0.15,-Math.PI*0.12,0));
+    ringGroup.renderOrder=5;
+    const [cr,cg,cb]=info.color||[220,200,160];
+    const ringR=R*1.45;
+    const SEG=80,pts=[];
+    for(let i=0;i<=SEG;i++){
+      const t=i/SEG*Math.PI*2;
+      pts.push(new THREE.Vector3(Math.cos(t)*ringR,Math.sin(t)*ringR,0));
+    }
+    const geo=new THREE.BufferGeometry().setFromPoints(pts);
+    const op=0.5;
+    const mat=new THREE.LineDashedMaterial({
+      color:new THREE.Color(cr/255,cg/255,cb/255),transparent:true,opacity:op,
+      dashSize:ringR*0.16,gapSize:ringR*0.13,depthWrite:false,depthTest:false
+    });
+    const ringLine=new THREE.Line(geo,mat);
+    ringLine.computeLineDistances();
+    ringGroup.add(ringLine);
+    scene.add(ringGroup);
+    _nctRingGroups.push({g:ringGroup,ko:_rko,baseOps:[op]});
+  });
+
   // 그룹/멤버 위치가 모두 확정된 뒤에 다시 배치해야 즐겨찾기 무게중심이 정확하다
   if(myStarSprite)placeMyStarInUniverse();
   const _elapsed=performance.now()-_loadT0;
-  const _minShow=550; // "Loading universe…" 최소 노출 시간 — 로딩이 너무 빨라서 텍스트가 안 읽히는 문제 방지
+  const _minShow=750; // "Loading universe…" 최소 노출 시간 — 로딩이 너무 빨라서 텍스트가 안 읽히는 문제 방지
   if(_elapsed<_minShow)await new Promise(res=>setTimeout(res,_minShow-_elapsed));
   _revealUniverse();
   // 생일 별똥별: 인트로 연출 끝난 뒤 한 번, 이후 30분마다 오늘 생일인 멤버 확인
@@ -2583,8 +2627,33 @@ function _buildConnContent(container){
     const isSel=_connSelected.includes(name);
     chip.className='conn-chip'+(isSel?' sel':'');
     chip.textContent=name;
+    const _gotoMember=()=>{
+      const target=_findArtistByConnName(name,_connAnchor.group.ko);
+      if(!target)return;
+      closeConnCard();
+      showT(target,window.innerWidth/2,window.innerHeight*0.4);
+    };
+    // 터치 기기 꾹 누르기 → 데스크톱의 ↗ 화살표와 동일하게 해당 멤버로 바로 이동.
+    // 탭(짧게 누름)은 그대로 선택 토글 — 마우스는 손대지 않고 기존 hover+화살표 흐름 유지
+    let _lpTimer=null,_lpFired=false;
+    const LP_MS=480;
+    chip.addEventListener('pointerdown',e=>{
+      if(e.pointerType==='mouse')return;
+      _lpFired=false;
+      chip.classList.add('lp-active');
+      _lpTimer=setTimeout(()=>{
+        _lpFired=true;
+        chip.classList.remove('lp-active');
+        _gotoMember();
+      },LP_MS);
+    });
+    ['pointerup','pointercancel','pointerleave'].forEach(ev=>chip.addEventListener(ev,()=>{
+      clearTimeout(_lpTimer);
+      chip.classList.remove('lp-active');
+    }));
     chip.addEventListener('click',e=>{
       e.stopPropagation();
+      if(_lpFired){_lpFired=false;return;} // 꾹 누르기로 이미 처리됨 → 탭 토글 무시
       if(isSel){_connSelected=_connSelected.filter(n=>n!==name);}
       else{_connSelected.push(name);}
       _updateConnLines3d();
@@ -2595,10 +2664,7 @@ function _buildConnContent(container){
     const gotoBtn=document.createElement('span');gotoBtn.className='conn-chip-goto';gotoBtn.textContent='↗';
     gotoBtn.addEventListener('click',e=>{
       e.stopPropagation();
-      const target=_findArtistByConnName(name,_connAnchor.group.ko);
-      if(!target)return;
-      closeConnCard();
-      showT(target,window.innerWidth/2,window.innerHeight*0.4);
+      _gotoMember();
     });
     wrap.appendChild(chip);wrap.appendChild(gotoBtn);
     chipsDiv.appendChild(wrap);
@@ -3008,7 +3074,7 @@ function showT(a,cx,cy){
   }
   _aGroups.forEach((g,i)=>{
     if(i>0){const sep=document.createElement('span');sep.textContent=' · ';sep.style.cssText='color:rgba(150,170,210,0.45);pointer-events:none;';tgEl.appendChild(sep);}
-    const sp=document.createElement('span');sp.className='tg';
+    const sp=document.createElement('span');sp.className='tg'+((GROUPS[g.ko]||{}).survivalShow?' tg-past':'');
     sp.textContent=currentLang==='ko'?g.ko:(g.en||g.ko);
     sp.addEventListener('click',_makeGcClickFn(g.ko));
     tgEl.appendChild(sp);
@@ -3092,8 +3158,14 @@ function showT(a,cx,cy){
         }
         const geo=new THREE.BufferGeometry().setFromPoints(pts);
         geo.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));
-        const mat=new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0.45,depthWrite:false,blending:THREE.AdditiveBlending});
-        const line=new THREE.Line(geo,mat);scene.add(line);_memberCardLines.push(line);
+        // 해체/프로젝트 그룹(survivalShow)과의 연결은 점선으로 — "현재 소속 아님"을 선에서도 드러냄
+        const _isPastLink=((GROUPS[wpA.groupKo]||{}).survivalShow)||((GROUPS[wpB.groupKo]||{}).survivalShow);
+        const mat=_isPastLink
+          ?new THREE.LineDashedMaterial({vertexColors:true,transparent:true,opacity:0.45,depthWrite:false,blending:THREE.AdditiveBlending,dashSize:1.1,gapSize:0.8})
+          :new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0.45,depthWrite:false,blending:THREE.AdditiveBlending});
+        const line=new THREE.Line(geo,mat);
+        if(_isPastLink)line.computeLineDistances();
+        scene.add(line);_memberCardLines.push(line);
       }
     }
     flyToFitPositions(a._worldPositions.map(wp=>wp.pos),950);
@@ -4565,15 +4637,21 @@ function applyFavHighlight(){
   // 별자리 선(_updateMyStarLines)은 "내 우주" 모드 도입 후 당분간 비활성화 — 필요해지면 다시 호출 추가
 }
 
+let _favSidebarOpenTimer=null;
 function _toggleFavMode(){
   favMode=!favMode;
   document.getElementById('tab-fav')?.classList.toggle('fav-mode-on',favMode);
   document.getElementById('dh-fav-btn')?.classList.toggle('fav-mode-on',favMode);
   document.getElementById('fav-mode-btn')?.classList.toggle('on',favMode);
+  clearTimeout(_favSidebarOpenTimer);
   if(favMode){
     applyFavHighlight();
     _enterMyUniverseMode();
-    document.getElementById('journal-sidebar').classList.add('open');
+    // 별이 궤도로 모이는 연출(MY_UNIVERSE_ENTER_MS)이 끝난 직후에 카드가 뜨도록 지연 —
+    // 우주 연출과 카드가 동시에 뜨면 화면이 한꺼번에 바뀌어 어수선해 보이는 문제 방지
+    _favSidebarOpenTimer=setTimeout(()=>{
+      if(favMode)document.getElementById('journal-sidebar').classList.add('open');
+    },MY_UNIVERSE_ENTER_MS+200);
   }else{
     _clearMyStarLines();
     _exitMyUniverseMode();
@@ -5005,6 +5083,40 @@ document.getElementById('journal-toggle').addEventListener('click',e=>{
 document.getElementById('filter-panel-clear').addEventListener('click',e=>{e.stopPropagation();clearTagFilter();});
 document.getElementById('journal-sidebar').addEventListener('click',e=>e.stopPropagation());
 document.getElementById('journal-sidebar').addEventListener('pointerdown',e=>e.stopPropagation());
+
+// 스와이프로 닫기: 화살표 탭 없이 카드를 왼쪽으로 밀면 닫힘 (세로 스크롤과는 방향으로 구분)
+{
+  const journalSidebarEl=document.getElementById('journal-sidebar');
+  let _jsDragX=0,_jsDragY=0,_jsDragging=false,_jsDragHoriz=false;
+  journalSidebarEl.addEventListener('touchstart',e=>{
+    if(!journalSidebarEl.classList.contains('open'))return;
+    _jsDragX=e.touches[0].clientX;_jsDragY=e.touches[0].clientY;
+    _jsDragging=true;_jsDragHoriz=false;
+    e.stopPropagation();
+  },{passive:true});
+  journalSidebarEl.addEventListener('touchmove',e=>{
+    if(!_jsDragging)return;
+    const dx=e.touches[0].clientX-_jsDragX,dy=e.touches[0].clientY-_jsDragY;
+    if(!_jsDragHoriz){
+      if(Math.abs(dx)<8&&Math.abs(dy)<8)return;
+      _jsDragHoriz=Math.abs(dx)>Math.abs(dy);
+      if(!_jsDragHoriz){_jsDragging=false;return;} // 세로 움직임이면 리스트 스크롤이 우선되도록 드래그 취소
+    }
+    if(dx>=0)return; // 오른쪽(이미 열린 방향)으로는 안 밀림
+    e.stopPropagation();
+    if(e.cancelable)e.preventDefault();
+    journalSidebarEl.style.transition='none';
+    journalSidebarEl.style.transform=`translateX(${Math.max(dx,-260)}px)`;
+  },{passive:false});
+  journalSidebarEl.addEventListener('touchend',e=>{
+    if(!_jsDragging)return;_jsDragging=false;e.stopPropagation();
+    journalSidebarEl.style.transition='';
+    journalSidebarEl.style.transform='';
+    if(!_jsDragHoriz)return;
+    const dx=e.changedTouches[0].clientX-_jsDragX;
+    if(dx<-70)journalSidebarEl.classList.remove('open');
+  },{passive:true});
+}
 
 buildUniverse().catch(err=>{
   const veil=document.getElementById('loading-veil');if(veil)veil.remove();

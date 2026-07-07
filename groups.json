@@ -930,5 +930,31 @@
       177
     ],
     "gender": "m"
+  },
+  "아이즈원": {
+    "en": "IZ*ONE",
+    "debut": "2018.10.29",
+    "co": "오프더레코드",
+    "survivalShow": true,
+    "color": [
+      216,
+      178,
+      168
+    ],
+    "gender": "f",
+    "songs": [
+      {
+        "t": "라비앙로즈 (La Vie en Rose)",
+        "u": "https://www.youtube.com/watch?v=WZwr2a_lFWY"
+      },
+      {
+        "t": "비올레타 (Violeta)",
+        "u": "https://www.youtube.com/watch?v=6eEZ7DJMzuk"
+      },
+      {
+        "t": "Panorama",
+        "u": "https://www.youtube.com/watch?v=G8GaQdW2wHc"
+      }
+    ]
   }
 }
