@@ -878,10 +878,6 @@
     <span id="sp-index-count"></span>
     <span id="sp-index-arrow">›</span>
   </button>
-  <div class="sp-row">
-    <span class="sp-lbl" data-i18n="conn">연결선</span>
-    <label class="sw"><input type="checkbox" id="sp-conn-chk" checked><span class="sw-track"><span class="sw-thumb"></span></span></label>
-  </div>
   <div class="sp-sec">
     <div class="sp-sec-lbl" data-i18n="debutYr">데뷔 연도</div>
     <div class="sp-dual">
@@ -1146,14 +1142,14 @@ let _idxOpen=false,_idxView='group',_idxSortKey='name',_idxSortDir='asc';
 let regColorAttr=null,spkColorAttr=null;
 let currentLang='ko';
 const T={
-  ko:{sp_title:'설정',conn:'연결선',debutYr:'데뷔 연도',birthYr:'멤버 생년',grpType:'그룹 유형',
+  ko:{sp_title:'설정',debutYr:'데뷔 연도',birthYr:'멤버 생년',grpType:'그룹 유형',
       all:'전체',girl:'걸그룹',boy:'보이그룹',inactive:'비활동/탈퇴 멤버',reset:'↺ 초기화',
       searchPH:'그룹 · 멤버 검색…',mobileTitle:'케이팝 아이돌 지형도',srGroup:'그룹',
       preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcFandom:'팬덤',gcLeader:'리더',gcMember:'멤버',gcSNS:'공식',
       idxTitle:'인덱스',idxGroupTab:'그룹',idxMemberTab:'멤버',idxSearchPH:'그룹명 검색…',idxSearchPHMember:'멤버명 검색…',
       idxSortName:'이름 (가나다순)',idxSortDebut:'데뷔연도',idxSortAgency:'소속사',idxSortMembers:'멤버 수',
       idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적'},
-  en:{sp_title:'Settings',conn:'Lines',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
+  en:{sp_title:'Settings',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
       all:'All',girl:'Girl Groups',boy:'Boy Groups',inactive:'Inactive / Left',reset:'↺ Reset',
       searchPH:'Search groups · members…',mobileTitle:'K-pop Idol Map',srGroup:'Group',
       preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcFandom:'Fandom',gcLeader:'Leader',gcMember:'Members',gcSNS:'Official',
@@ -1230,7 +1226,7 @@ function _refreshOpenCardText(){
     _buildConnContent(connPanelInner);
   }
 }
-const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',showInactive:true,connLines:true};
+const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',showInactive:true};
 const FOCUS_DIM=0.06;
 let focusGroupKo=null;
 let _extraFocusKos=[];
@@ -1445,6 +1441,7 @@ async function buildUniverse(){
     const bubble=new THREE.Mesh(fillGeo,fillMat);
     bubble.position.copy(pos);
     bubble._isLegacy=_isLegacyGroup(info.debut);
+    bubble._isSurvivalShow=!!info.survivalShow;
     scene.add(bubble);
     // ── 신인 헤일로(데뷔 1년 미만 풀세기, 1~3년 옅게) — glowTex(중심이 제일 밝은 점광원용 텍스처)를 그대로 쓰니
     // 밝은 부분이 대부분 행성 구 안쪽에 가려져서 "그룹 안에서만 박동"하는 것처럼 보였음.
@@ -1543,13 +1540,27 @@ async function buildUniverse(){
     if(conn.type!=='member')return;
     const candA=artData.filter(a=>a.name.ko===conn.a);
     const candB=artData.filter(a=>a.name.ko===conn.b);
-    let artA,artB;
-    for(const ca of candA){const cb=candB.find(b=>b.group.ko===ca.group.ko);if(cb){artA=ca;artB=cb;break;}}
-    if(!artA||!artB||!artA._worldPos||!artB._worldPos)return;
-    const geo=new THREE.BufferGeometry().setFromPoints([artA._worldPos,artB._worldPos]);
+    let artA,artB,shareKo;
+    if(conn.group){
+      // 다중 소속 멤버(예: 이중 그룹) 연결 — 데이터에 명시된 그룹으로 어느 소속 간 연결인지 특정한다
+      outer: for(const ca of candA){
+        if(!_artistGroups(ca).some(g=>g.ko===conn.group))continue;
+        for(const cb of candB){
+          if(_artistGroups(cb).some(g=>g.ko===conn.group)){artA=ca;artB=cb;shareKo=conn.group;break outer;}
+        }
+      }
+    }else{
+      for(const ca of candA){const cb=candB.find(b=>b.group.ko===ca.group.ko);if(cb){artA=ca;artB=cb;shareKo=ca.group.ko;break;}}
+    }
+    if(!artA||!artB)return;
+    const wpA=(artA._worldPositions||[]).find(wp=>wp.groupKo===shareKo);
+    const wpB=(artB._worldPositions||[]).find(wp=>wp.groupKo===shareKo);
+    const posA=wpA?wpA.pos:artA._worldPos,posB=wpB?wpB.pos:artB._worldPos;
+    if(!posA||!posB)return;
+    const geo=new THREE.BufferGeometry().setFromPoints([posA,posB]);
     let mat;
     if(conn.type==='member'){
-      const grpInfo=grpData[artA.group.ko]||{};
+      const grpInfo=grpData[shareKo]||{};
       const[r,g,b]=grpInfo.color||[180,180,200];
       const col=duneColor(r,g,b);
       mat=new THREE.LineBasicMaterial({color:col,transparent:true,opacity:0.15,depthWrite:false});
@@ -1560,7 +1571,7 @@ async function buildUniverse(){
     if(conn.type!=='member')line.computeLineDistances();
     line.visible=false;
     scene.add(line);
-    const mid=artA._worldPos.clone().lerp(artB._worldPos,0.5);
+    const mid=posA.clone().lerp(posB,0.5);
     connLines.push({line,mid,baseOp:mat.opacity});
   });
 
@@ -1640,8 +1651,10 @@ async function buildUniverse(){
     _nctRingGroups.push({g,ko:_rko,baseOps:_baseOps});
   });
 
-  // ── 서바이벌 오디션 프로젝트 그룹: 옅은 점선 궤도 링으로 "일시적으로 결성된 그룹" 느낌 표시 ──
-  // NCT 링(굵은 실선 다중 밴드)과는 확실히 다른 인상을 주도록 얇은 점선 단일 링 하나만 두름.
+  // ── 서바이벌 오디션 프로젝트 그룹: 점-줄 번갈아가는 궤도 링으로 "일시적으로 결성된 그룹" 느낌 표시 ──
+  // NCT 링(굵은 실선 다중 밴드)과는 확실히 다른 인상을 주도록 가는 점-줄(.-.-.) 패턴을 씀.
+  // NCT 링과 같은 방식으로, 이 패턴을 반지름 방향으로 얇은 스트로크 여러 겹을 쌓아
+  // 중심은 진하고 가장자리는 옅어지는 부드러운 그라데이션 밴드처럼 보이게 한다(개별 스트로크는 얇게 유지).
   // _nctRingGroups에 그대로 얹혀서 기존 회전/줌 페이드/즐겨찾기 dim 로직을 그대로 재사용한다.
   bubbleMeshes.filter(b=>b.info.survivalShow).forEach(({mesh,radius:R,ko:_rko,info})=>{
     const ringGroup=new THREE.Group();
@@ -1649,23 +1662,53 @@ async function buildUniverse(){
     ringGroup.quaternion.setFromEuler(new THREE.Euler(Math.PI*0.15,-Math.PI*0.12,0));
     ringGroup.renderOrder=5;
     const [cr,cg,cb]=info.color||[220,200,160];
-    const ringR=R*1.45;
-    const SEG=80,pts=[];
-    for(let i=0;i<=SEG;i++){
-      const t=i/SEG*Math.PI*2;
-      pts.push(new THREE.Vector3(Math.cos(t)*ringR,Math.sin(t)*ringR,0));
+    const centerR=R*1.45;
+    // 점-줄-점-줄 반복 패턴의 "켜짐" 구간(각도 범위)만 한 번 계산해서 레이어마다 재사용
+    const dotLen=centerR*0.010,dashLen=centerR*0.05,gapLen=centerR*0.022;
+    const pattern=[dotLen,gapLen,dashLen,gapLen];
+    const isOn=[true,false,true,false];
+    const circumference=2*Math.PI*centerR;
+    const onRanges=[];
+    {
+      let dist=0,idx=0;
+      while(dist<circumference){
+        const segLen=pattern[idx%pattern.length];
+        if(isOn[idx%isOn.length])onRanges.push([dist/centerR,Math.min(dist+segLen,circumference)/centerR]);
+        dist+=segLen;idx++;
+      }
     }
-    const geo=new THREE.BufferGeometry().setFromPoints(pts);
-    const op=0.5;
-    const mat=new THREE.LineDashedMaterial({
-      color:new THREE.Color(cr/255,cg/255,cb/255),transparent:true,opacity:op,
-      dashSize:ringR*0.16,gapSize:ringR*0.13,depthWrite:false,depthTest:false
-    });
-    const ringLine=new THREE.Line(geo,mat);
-    ringLine.computeLineDistances();
-    ringGroup.add(ringLine);
+    // WebGL은 대부분 환경(특히 ANGLE/Windows)에서 LineBasicMaterial의 linewidth를 무시하고 항상 1px로
+    // 그리기 때문에, 스트로크는 얇은 리본(사각형 스트립) 메쉬로 직접 그린다.
+    const col=new THREE.Color(cr/255,cg/255,cb/255);
+    const _RING_STROKE_N=45;
+    const halfSpan=centerR*0.022;
+    const gap=(halfSpan*2)/(_RING_STROKE_N-1);
+    const baseOps=[];
+    for(let i=0;i<_RING_STROKE_N;i++){
+      const off=-halfSpan+gap*i;
+      const d=Math.abs(off)/halfSpan;
+      const op=0.32*Math.pow(1-d,2.4); // NCT 링과 같은 감쇠 곡선, 다만 기준 세기는 NCT(0.8)보다 낮게
+      const radius=centerR+off;
+      const halfThick=gap/2;
+      const ribbonPos=[];
+      onRanges.forEach(([a0,a1])=>{
+        const subSteps=Math.max(1,Math.ceil((a1-a0)/0.05));
+        for(let s=0;s<subSteps;s++){
+          const ta=a0+(a1-a0)*(s/subSteps),tb=a0+(a1-a0)*((s+1)/subSteps);
+          const cA=Math.cos(ta),sA=Math.sin(ta),cB=Math.cos(tb),sB=Math.sin(tb);
+          const aIn=[cA*(radius-halfThick),sA*(radius-halfThick),0],aOut=[cA*(radius+halfThick),sA*(radius+halfThick),0];
+          const bIn=[cB*(radius-halfThick),sB*(radius-halfThick),0],bOut=[cB*(radius+halfThick),sB*(radius+halfThick),0];
+          ribbonPos.push(...aIn,...aOut,...bOut, ...aIn,...bOut,...bIn);
+        }
+      });
+      const geo=new THREE.BufferGeometry();
+      geo.setAttribute('position',new THREE.Float32BufferAttribute(ribbonPos,3));
+      const mat=new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false,depthTest:false});
+      ringGroup.add(new THREE.Mesh(geo,mat));
+      baseOps.push(op);
+    }
     scene.add(ringGroup);
-    _nctRingGroups.push({g:ringGroup,ko:_rko,baseOps:[op]});
+    _nctRingGroups.push({g:ringGroup,ko:_rko,baseOps});
   });
 
   // 그룹/멤버 위치가 모두 확정된 뒤에 다시 배치해야 즐겨찾기 무게중심이 정확하다
@@ -1756,7 +1799,7 @@ function animate(){
   }
   controls.update();
   connLines.forEach(({line,mid,baseOp})=>{
-    line.visible=filterCfg.connLines&&camera.position.distanceTo(mid)<20;
+    line.visible=camera.position.distanceTo(mid)<20;
     if(line.visible){
       const tgt=focusGroupKo?baseOp*0.18:baseOp;
       line.material.opacity+=(tgt-line.material.opacity)*0.10;
@@ -1787,7 +1830,9 @@ function animate(){
     const legacyTarget=mesh._isLegacy?(dist<26?1:dist<80?1-((dist-26)/54)*0.82:0.18):1;
     mesh._legacyAlpha=mesh._legacyAlpha??1;
     mesh._legacyAlpha+=(legacyTarget-mesh._legacyAlpha)*0.06;
-    mesh.material.uniforms.uFilterOp.value=mesh._filterAlpha*mesh._focusAlpha*mesh._legacyAlpha;
+    // 서바이벌 오디션 프로젝트 그룹(해체됨): 행성 자체를 다른 행성보다 항상 옅고 흐릿하게 유지
+    const survivalDim=mesh._isSurvivalShow?0.4:1;
+    mesh.material.uniforms.uFilterOp.value=mesh._filterAlpha*mesh._focusAlpha*mesh._legacyAlpha*survivalDim;
     // 신인 헤일로: 빛이 새어 퍼지듯 부드럽게 숨쉬는 글로우 (1년 미만은 풀세기, 1~3년은 옅게)
     if(halo){
       const st=halo.userData.haloStrength||1;
@@ -3161,7 +3206,7 @@ function showT(a,cx,cy){
         // 해체/프로젝트 그룹(survivalShow)과의 연결은 점선으로 — "현재 소속 아님"을 선에서도 드러냄
         const _isPastLink=((GROUPS[wpA.groupKo]||{}).survivalShow)||((GROUPS[wpB.groupKo]||{}).survivalShow);
         const mat=_isPastLink
-          ?new THREE.LineDashedMaterial({vertexColors:true,transparent:true,opacity:0.45,depthWrite:false,blending:THREE.AdditiveBlending,dashSize:1.1,gapSize:0.8})
+          ?new THREE.LineDashedMaterial({vertexColors:true,transparent:true,opacity:0.26,depthWrite:false,blending:THREE.AdditiveBlending,dashSize:0.6,gapSize:0.32})
           :new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0.45,depthWrite:false,blending:THREE.AdditiveBlending});
         const line=new THREE.Line(geo,mat);
         if(_isPastLink)line.computeLineDistances();
@@ -3796,9 +3841,6 @@ document.getElementById('tab-settings').addEventListener('click',e=>{
 
 // ── Settings panel controls ───────────────────────
 
-document.getElementById('sp-conn-chk').addEventListener('change',e=>{
-  e.stopPropagation();filterCfg.connLines=e.target.checked;
-});
 function syncDualZ(loId,hiId,activeId){
   document.getElementById(loId).style.zIndex=activeId===loId?3:2;
   document.getElementById(hiId).style.zIndex=activeId===hiId?3:2;
@@ -3839,7 +3881,7 @@ document.getElementById('sp-reset').addEventListener('click',e=>{
   e.stopPropagation();
   filterCfg.debutLo=2000;filterCfg.debutHi=2026;
   filterCfg.bdayLo=1985;filterCfg.bdayHi=2012;
-  filterCfg.gender='all';filterCfg.showInactive=true;filterCfg.connLines=true;
+  filterCfg.gender='all';filterCfg.showInactive=true;
   ['sp-dlo','sp-dhi','sp-blo','sp-bhi'].forEach(id=>{
     const el=document.getElementById(id);
     el.value=id==='sp-dlo'?2000:id==='sp-dhi'?2026:id==='sp-blo'?1985:2012;
@@ -3849,7 +3891,6 @@ document.getElementById('sp-reset').addEventListener('click',e=>{
   syncDualZ('sp-dlo','sp-dhi','sp-dhi');syncDualZ('sp-blo','sp-bhi','sp-bhi');
   document.querySelectorAll('.sp-type').forEach((b,i)=>b.classList.toggle('active',i===0));
   document.getElementById('sp-inactive-chk').checked=true;
-  document.getElementById('sp-conn-chk').checked=true;
   applyFilter();
 });
 
@@ -4049,7 +4090,11 @@ renderer.domElement.addEventListener('touchend',e=>{
   const _bh=raycaster.intersectObjects(bubbleMeshes.map(b=>b.mesh));
   const _hitPlanet=_bh.length?bubbleMeshes.find(b=>b.mesh===_bh[0].object):null;
   // 행성이 불투명(줌아웃) 상태면 멤버 클릭 비활성화 → 그룹 카드만 열림
-  const _inPlanetMode=_hitPlanet&&_hitPlanet.mesh.material.uniforms.uFillOp.value>0.12&&![focusGroupKo,..._extraFocusKos].includes(_hitPlanet.ko);
+  // 포커스된 그룹이 하나뿐일 때만 "포커스=멤버 우선" 예외를 적용한다 — 다중 그룹(예: 이중 소속 멤버 카드의
+  // 연결선) 상태에서는 카메라가 두 행성을 함께 담기 위해 멀리 빠져 있으므로, 각 행성의 실제 uFillOp(줌 상태)
+  // 그대로 따라야 "멀리서 보이는 행성을 눌렀는데 멤버가 클릭되는" 문제가 안 생긴다.
+  const _soloFocusHit=_extraFocusKos.length===0;
+  const _inPlanetMode=_hitPlanet&&_hitPlanet.mesh.material.uniforms.uFillOp.value>0.12&&!(_soloFocusHit&&_hitPlanet.ko===focusGroupKo);
   if(!_inPlanetMode){
     // 가까이 줌인된 투명 행성 or 행성 밖 → 멤버 점 체크
     let nearArtist=null,nearPx=Infinity;
@@ -4116,7 +4161,10 @@ window.addEventListener('click',e=>{
   if(bHits.length){
     const found=bubbleMeshes.find(b=>b.mesh===bHits[0].object);
     if(found){
-      const planetMode=found.mesh.material.uniforms.uFillOp.value>0.12&&![focusGroupKo,..._extraFocusKos].includes(found.ko);
+      // 포커스된 그룹이 하나뿐일 때만 "포커스=멤버 우선" 예외 적용 (이중 소속 멤버 카드처럼
+      // 여러 그룹이 동시에 포커스된 상태에서는 각 행성의 실제 줌 상태를 그대로 따름)
+      const _soloFocusClick=_extraFocusKos.length===0;
+      const planetMode=found.mesh.material.uniforms.uFillOp.value>0.12&&!(_soloFocusClick&&found.ko===focusGroupKo);
       if(!planetMode){
         // 투명 버블 → 멤버 우선
         const a=nearestMember();
