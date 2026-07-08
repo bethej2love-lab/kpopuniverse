@@ -3,7 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>K-pop Universe</title>
+<title>K-POP UNIVERSE</title>
+<meta name="description" content="내 최애부터 케이팝 씬 전체까지, 연결을 탐험하는 인터랙티브 지도">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="K-POP UNIVERSE">
+<meta property="og:title" content="K-POP UNIVERSE">
+<meta property="og:description" content="내 최애부터 케이팝 씬 전체까지, 연결을 탐험하는 인터랙티브 지도">
+<meta property="og:url" content="https://bethej2love-lab.github.io/kpopuniverse/kpop_universe">
+<meta property="og:image" content="https://bethej2love-lab.github.io/kpopuniverse/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="K-POP UNIVERSE">
+<meta name="twitter:description" content="내 최애부터 케이팝 씬 전체까지, 연결을 탐험하는 인터랙티브 지도">
+<meta name="twitter:image" content="https://bethej2love-lab.github.io/kpopuniverse/og-image.png">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   body{
@@ -19,11 +35,16 @@
   canvas{display:block;}
   #loading{
     position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-    color:#8899ff;font-family:'Apple SD Gothic Neo',sans-serif;
-    font-size:13px;letter-spacing:0.12em;opacity:0.85;
-    z-index:98;animation:loading-pulse 0.9s ease-in-out infinite;
+    font-family:'Apple SD Gothic Neo',sans-serif;
+    font-size:13px;letter-spacing:0.12em;
+    z-index:98;
+    background:linear-gradient(100deg,#7d8ef0 35%,#e8edff 50%,#7d8ef0 65%);
+    background-size:220% 100%;
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;
+    animation:loading-shimmer 2.2s linear infinite;
   }
-  @keyframes loading-pulse{0%,100%{opacity:0.45;}50%{opacity:0.92;}}
+  @keyframes loading-shimmer{0%{background-position:160% 0;}100%{background-position:-60% 0;}}
   #loading-veil{
     position:fixed;inset:0;z-index:96;pointer-events:none;
     backdrop-filter:blur(34px) saturate(0.85);-webkit-backdrop-filter:blur(34px) saturate(0.85);
@@ -92,6 +113,26 @@
     padding:0 16px;z-index:40;pointer-events:none;
   }
   @media(max-width:768px){#desktop-header{display:none;}}
+  /* 즐겨찾기 유도 말풍선 — 첫 즐겨찾기 전까지 탐색 버튼을 가리킨다 */
+  #fav-hint-callout{
+    position:fixed;top:58px;z-index:39;
+    background:rgba(18,22,40,0.90);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    box-shadow:0 8px 24px rgba(0,0,0,0.42);
+    border:0.5px solid rgba(255,255,255,0.10);border-radius:12px;
+    padding:8px 14px;font-size:12px;font-weight:700;letter-spacing:.02em;
+    color:rgba(235,240,255,0.95);white-space:nowrap;
+    pointer-events:none;opacity:0;transform:translateY(-4px);
+    transition:opacity .3s ease,transform .3s ease;
+  }
+  #fav-hint-callout.show{opacity:1;transform:translateY(0);}
+  #fhc-arrow{
+    position:absolute;top:-5px;left:22px;width:9px;height:9px;
+    background:rgba(18,22,40,0.90);
+    border-left:0.5px solid rgba(255,255,255,0.10);border-top:0.5px solid rgba(255,255,255,0.10);
+    transform:rotate(45deg);
+  }
+  @media(max-width:768px){#fav-hint-callout{display:none!important;}}
   #dh-right{pointer-events:all;}
   #dh-right{
     background:rgba(18,22,40,0.82);
@@ -659,6 +700,12 @@
   .fav-btn:hover{color:rgba(255,128,152,0.88);transform:scale(1.18);}
   .fav-btn.fav-on{color:rgba(255,95,128,0.90);}
   .fav-btn.fav-on svg{fill:currentColor;}
+  /* 첫 즐겨찾기를 유도하는 은은한 펄스 — favGroups/favMembers가 둘 다 비어있는 동안만(_syncFavBtn) */
+  @keyframes fav-hint-pulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(255,95,128,0);transform:scale(1);}
+    50%{box-shadow:0 0 0 5px rgba(255,95,128,0.16);transform:scale(1.10);}
+  }
+  .fav-btn.fav-hint{color:rgba(255,130,160,0.55);border-radius:50%;animation:fav-hint-pulse 1.8s ease-in-out infinite;}
   .bookmark-btn{background:none;border:none;cursor:pointer;padding:2px 3px;border-radius:6px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;color:rgba(175,195,240,0.28);transition:color .15s,transform .12s;}
   .bookmark-btn svg{width:13px;height:13px;display:block;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round;transition:fill .15s;}
   .bookmark-btn:hover{color:rgba(120,190,255,0.92);transform:scale(1.18);}
@@ -845,6 +892,7 @@
     <button class="dh-btn" id="dh-settings-btn">⚙︎</button>
   </div>
 </div>
+<div id="fav-hint-callout">Start with Your Favorite!<span id="fhc-arrow"></span></div>
 <div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none">‹</button><span id="ttx">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
@@ -1137,6 +1185,9 @@ let _myUniverseStarFrom=null;
 let _myUniverseExitFrom=null;
 const MY_UNIVERSE_ENTER_MS=750;
 const MY_UNIVERSE_EXIT_MS=600;
+// 궤도 재계산 시 "이번엔 빠진" 개별 항목(즐겨찾기 해제 등)만 따로 원위치로 복귀시키는 목록
+let _myUniverseDeparting=[];
+const MY_UNIVERSE_DEPART_MS=600;
 let _memberCardLines=[];
 function _artistGroups(a){return a.groups||[a.group];}
 let _tagFilter={type:null,value:null};
@@ -1172,6 +1223,7 @@ function applyLang(){
   if(_tagFilter&&_tagFilter.type&&_fp&&_fp.style.display==='block')_renderFilterPanel();
   _updateIdxEntryCount();
   if(_idxOpen){_renderIdxSortOptions();_renderIndexList();}
+  _updateFavHintCallout();
 }
 function _refreshOpenCardText(){
   // 그룹 카드
@@ -1310,6 +1362,7 @@ async function buildUniverse(){
   renderBookmarkList();
   placeMyStarInUniverse();
   _updateIdxEntryCount();
+  _updateFavHintCallout();
 
   // ── Bidirectional 'with' expansion ──────────────────
   (function expandWith(){
@@ -1950,6 +2003,19 @@ function animate(){
       _myUniverseExitFrom=null;
     }
   }
+  if(_myUniverseDeparting.length){
+    const _dNow=performance.now();
+    _myUniverseDeparting=_myUniverseDeparting.filter(d=>{
+      const t=Math.min(1,(_dNow-d.t0)/MY_UNIVERSE_DEPART_MS);
+      const ek=easeInOut(t);
+      const p=d.from.clone().lerp(d.origPos,ek);
+      if(d.kind==='group')d.bm.mesh.position.copy(p);
+      else _setMemberPointPos(d.artist,d.wp,p);
+      return t<1;
+    });
+    if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
+    if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
+  }
   if(_myStarLines.length&&myStarSprite){
     const _msd=camera.position.distanceTo(myStarSprite.position);
     const _mAlpha=Math.max(0,Math.min(1,(_msd-10)/60));
@@ -1970,6 +2036,7 @@ window.addEventListener('resize',()=>{
   camera.aspect=w/h;camera.updateProjectionMatrix();
   renderer.setSize(w,h);
   labelRenderer.setSize(w,h);
+  _updateFavHintCallout();
 });
 
 // ── Search & fly-to ───────────────────────────────
@@ -3778,6 +3845,7 @@ function closePanels(){
     exitMobSearch();
     if(!mobSheetEl.classList.contains('bs-open'))controls.enabled=true;
   }
+  _updateFavHintCallout();
 }
 document.getElementById('tab-lang').addEventListener('click',e=>{
   e.stopPropagation();
@@ -4030,6 +4098,7 @@ document.getElementById('dh-search-btn').addEventListener('click',e=>{
   sw.classList.toggle('open',!open);
   ['tab-search','dh-search-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',!open);});
   if(!open)setTimeout(()=>document.getElementById('search-input').focus(),50);
+  _updateFavHintCallout();
 });
 document.getElementById('dh-settings-btn').addEventListener('click',e=>{
   e.stopPropagation();
@@ -4040,6 +4109,7 @@ document.getElementById('dh-settings-btn').addEventListener('click',e=>{
   ['tab-search','dh-search-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
   sp.classList.toggle('open',!open);
   ['tab-settings','dh-settings-btn'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',!open);});
+  _updateFavHintCallout();
 });
 document.getElementById('desktop-header').addEventListener('click',e=>e.stopPropagation());
 document.getElementById('desktop-header').addEventListener('pointerdown',e=>e.stopPropagation());
@@ -4559,13 +4629,37 @@ function toggleFavMember(artist){
 }
 
 function _syncFavBtn(type,data){
+  const _noFavYet=favGroups.size===0&&favMembers.size===0;
   if(type==='group'){
     const btn=document.getElementById('gc-fav');if(!btn)return;
     btn.classList.toggle('fav-on',favGroups.has(data));
+    btn.classList.toggle('fav-hint',_noFavYet);
   }else{
     const btn=document.getElementById('tt-fav');if(!btn)return;
     btn.classList.toggle('fav-on',favMembers.has(_mFavKey(data)));
+    btn.classList.toggle('fav-hint',_noFavYet);
   }
+  _updateFavHintCallout();
+}
+// 데스크톱 헤더의 "Start with Your Favorite!" 말풍선 — 즐겨찾기가 하나도 없을 때만,
+// 탐색(✦) 버튼을 화살표로 가리키도록 위치를 매번 실측해서 맞춘다(언어 토글로 버튼 폭이 바뀌어도 안전)
+function _updateFavHintCallout(){
+  const el=document.getElementById('fav-hint-callout');
+  if(!el)return;
+  const _panelsOpen=document.getElementById('search-wrap').classList.contains('open')||document.getElementById('settings-panel').classList.contains('open');
+  const show=!isMob()&&!_panelsOpen&&favGroups.size===0&&favMembers.size===0;
+  if(!show){el.classList.remove('show');return;}
+  const pill=document.getElementById('dh-right'),exploreBtn=document.getElementById('dh-explore-btn');
+  if(!pill||!exploreBtn)return;
+  const pillRect=pill.getBoundingClientRect(),exploreRect=exploreBtn.getBoundingClientRect();
+  // 화살표는 박스 안에서 항상 고정 오프셋(ARROW_OFFSET, CSS #fhc-arrow left와 일치)에 있으므로,
+  // 박스 오른쪽 기준이 아니라 "화살표가 탐색 버튼 중앙에 오도록" 박스의 left를 역산한다
+  const ARROW_OFFSET=22+4.5; // #fhc-arrow의 left(22px) + 화살표 자체 폭의 절반
+  const exploreCenterX=(exploreRect.left+exploreRect.right)/2;
+  el.style.right='auto';
+  el.style.left=Math.round(exploreCenterX-ARROW_OFFSET)+'px';
+  el.style.top=Math.round(pillRect.bottom+10)+'px';
+  el.classList.add('show');
 }
 
 function _daysUntilBday(bdayStr){
@@ -4896,6 +4990,19 @@ function _enterMyUniverseMode(){
     if(_myUniverseActive)_exitMyUniverseMode();
     return;
   }
+  // 이전엔 궤도에 있었는데 이번 재계산엔 빠진 항목(즐겨찾기 해제 등) → 원래 자리로 돌아가는 애니메이션으로 분리
+  const _newGroupKos=new Set(orbits.filter(o=>o.kind==='group').map(o=>o.ko));
+  const _newWps=new Set(orbits.filter(o=>o.kind!=='group').map(o=>o.wp));
+  _myUniverseDeparting=_myUniverseDeparting.filter(d=>d.kind==='group'?!_newGroupKos.has(d.bm.ko):!_newWps.has(d.wp));
+  _myUniverseOrbits.forEach(o=>{
+    if(o.kind==='group'){
+      if(_newGroupKos.has(o.ko))return;
+      _myUniverseDeparting.push({kind:'group',bm:o.bm,origPos:o.origPos,from:o.bm.mesh.position.clone(),t0:performance.now()});
+    }else{
+      if(_newWps.has(o.wp))return;
+      _myUniverseDeparting.push({kind:'member',artist:o.artist,wp:o.wp,origPos:o.origPos,from:o.wp.pos.clone(),t0:performance.now()});
+    }
+  });
   _myUniverseHub=_hubFromOrbitOrigins(orbits);
   _myUniverseOrbits=orbits;
   _myUniverseActive=true;
