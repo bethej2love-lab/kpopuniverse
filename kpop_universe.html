@@ -3129,12 +3129,14 @@ window.addEventListener('keydown',e=>{
 });
 document.getElementById('tt-prev').addEventListener('click',e=>{e.stopPropagation();navigateMember(-1);});
 document.getElementById('tt-next').addEventListener('click',e=>{e.stopPropagation();navigateMember(1);});
-// 스와이프
-let _ttSX=0;
-document.getElementById('tt').addEventListener('pointerdown',e=>{_ttSX=e.clientX;},{passive:true});
+// 스와이프 — 가로 이동이 세로 이동보다 확실히 커야만(1.5배 이상) 멤버 전환.
+// 그렇지 않으면 모바일 시트를 위로 밀어 올리는 제스처(세로 위주)에 손가락이 살짝만 옆으로
+// 틀어져도 다른 멤버로 튕겨 넘어가는 문제가 생김.
+let _ttSX=0,_ttSY=0;
+document.getElementById('tt').addEventListener('pointerdown',e=>{_ttSX=e.clientX;_ttSY=e.clientY;},{passive:true});
 document.getElementById('tt').addEventListener('pointerup',e=>{
-  const dx=e.clientX-_ttSX;
-  if(Math.abs(dx)>44)navigateMember(dx<0?1:-1);
+  const dx=e.clientX-_ttSX,dy=e.clientY-_ttSY;
+  if(Math.abs(dx)>44&&Math.abs(dx)>Math.abs(dy)*1.5)navigateMember(dx<0?1:-1);
 },{passive:true});
 document.getElementById('gcx').addEventListener('click',e=>{e.stopPropagation();closeCards();});
 
