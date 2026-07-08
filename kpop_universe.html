@@ -46,7 +46,7 @@
     color:rgba(190,205,240,0.55);
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
     font-size:14px;padding:8px 4px;border-radius:10px;
-    transition:background .15s,color .15s,opacity .14s,flex .16s ease,padding .16s ease;
+    transition:background .15s,color .15s,opacity .1s;
     line-height:1;text-align:center;overflow:hidden;white-space:nowrap;
   }
   .tab-btn:hover{background:rgba(255,255,255,0.07);color:rgba(210,225,255,0.85);}
@@ -56,20 +56,20 @@
   /* ── Tabbar search mode (mobile) ────────────────── */
   /* 탭 아이콘↔검색창 전환 시 컨테이너 모양과 내용물이 같은 속도로 접히고 펼쳐지도록,
      display 하드 스왑 대신 flex-basis/opacity를 함께 트랜지션해서 자연스럽게 이어지게 함 */
-  #tabbar{transition:left .18s cubic-bezier(0.4,0,0.2,1),right .18s cubic-bezier(0.4,0,0.2,1),bottom .18s cubic-bezier(0.4,0,0.2,1),border-radius .18s ease,border-top-color .18s ease,box-shadow .18s ease,transform .18s cubic-bezier(0.4,0,0.2,1),opacity .18s ease;}
+  #tabbar{transition:transform .18s cubic-bezier(0.4,0,0.2,1),opacity .18s ease;}
   #tabbar.tab-hidden{transform:translateY(110%);opacity:0;pointer-events:none;}
   #tabbar.search-mode{bottom:10px;left:16px;right:16px;border-radius:16px;border-top-color:transparent;padding:6px 10px;justify-content:flex-start;box-shadow:0 4px 24px rgba(0,0,0,0.45);}
   #tabbar.search-mode .tab-btn{flex:0 0 0;opacity:0;padding-left:0;padding-right:0;pointer-events:none;}
-  #tab-sb-icon{display:flex;flex:0 0 0;overflow:hidden;opacity:0;color:rgba(190,205,240,0.65);align-items:center;padding-right:0;transition:opacity .14s,flex .16s ease,padding .16s ease;}
+  #tab-sb-icon{display:flex;flex:0 0 0;overflow:hidden;opacity:0;color:rgba(190,205,240,0.65);align-items:center;padding-right:0;transition:opacity .1s;}
   #tab-sb-input{display:block;flex:0 0 0;width:0;min-width:0;overflow:hidden;opacity:0;background:none;border:none;color:#c8d8f0;
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:16px;
     outline:none;padding:4px 0;letter-spacing:.03em;
-    transition:opacity .14s,flex .16s ease;
+    transition:opacity .1s;
     -webkit-text-size-adjust:none;}
   #tab-sb-input::placeholder{color:rgba(140,160,200,0.32);}
   #tab-sb-clear{display:flex;flex:0 0 0;overflow:hidden;opacity:0;background:none;border:none;
     color:rgba(190,205,240,0.55);font-size:16px;cursor:pointer;padding:4px 0;line-height:1;align-items:center;
-    transition:opacity .14s,flex .16s ease,padding .16s ease;}
+    transition:opacity .1s;}
   #tabbar.search-mode #tab-sb-icon{flex:0 0 auto;opacity:1;padding-right:8px;}
   #tabbar.search-mode #tab-sb-input{flex:1 1 auto;width:auto;opacity:1;}
   #tabbar.search-mode #tab-sb-clear{flex:0 0 auto;opacity:1;padding:4px 6px;}
@@ -205,6 +205,7 @@
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
   }
   #ttx{position:absolute;top:9px;right:11px;font-size:15px;color:rgba(150,170,215,0.65);cursor:pointer;line-height:1;}
+  #tt-back{position:absolute;top:7px;left:9px;z-index:1;}
   #tt-bar{height:2px;width:100%;margin-bottom:12px;}
   .tn{font-size:16px;font-weight:700;color:#d8e4f6;margin-bottom:3px;padding-right:18px;padding-left:4px;letter-spacing:-.02em;}
   #tg-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1px;padding-left:4px;padding-right:4px;}
@@ -555,10 +556,11 @@
     background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.13);
     color:rgba(175,198,238,0.80);letter-spacing:.02em;font-family:inherit;
     transition:background .14s,border-color .14s,color .14s,transform .1s;
+    user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
   }
   .conn-chip.sel{background:rgba(130,175,255,0.22);border-color:rgba(130,175,255,0.52);color:rgba(210,230,255,1.0);font-weight:600;}
   .conn-chip.disabled{opacity:0.28;cursor:default;pointer-events:none;}
-  .conn-chip-wrap{display:inline-flex;align-items:center;}
+  .conn-chip-wrap{display:inline-flex;align-items:center;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
   .conn-chip-goto{display:inline-flex;align-items:center;width:0;overflow:hidden;opacity:0;pointer-events:none;cursor:pointer;font-size:10px;color:rgba(170,205,255,0.72);line-height:1;transition:opacity 0.13s,width 0.13s,padding-left 0.13s;white-space:nowrap;padding-left:0;}
   .conn-chip-goto:hover{color:rgba(215,235,255,1);}
   /* 호버 가능한 기기(마우스)에서만 화살표를 hover로 노출 — 터치 기기는 hover가 "고스트 탭"으로 소비돼
@@ -843,7 +845,7 @@
     <button class="dh-btn" id="dh-settings-btn">⚙︎</button>
   </div>
 </div>
-<div id="tt"><div id="tt-bar"></div><span id="ttx">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none">‹</button><span id="ttx">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next">›</button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
@@ -1572,7 +1574,7 @@ async function buildUniverse(){
     line.visible=false;
     scene.add(line);
     const mid=posA.clone().lerp(posB,0.5);
-    connLines.push({line,mid,baseOp:mat.opacity});
+    connLines.push({line,mid,baseOp:mat.opacity,grpKo:shareKo});
   });
 
   // ── Member points (fixed pixel size, camera-distance independent) ──
@@ -1798,10 +1800,10 @@ function animate(){
     }
   }
   controls.update();
-  connLines.forEach(({line,mid,baseOp})=>{
+  connLines.forEach(({line,mid,baseOp,grpKo})=>{
     line.visible=camera.position.distanceTo(mid)<20;
     if(line.visible){
-      const tgt=focusGroupKo?baseOp*0.18:baseOp;
+      const tgt=focusGroupKo?(grpKo===focusGroupKo?baseOp*2.4:baseOp*0.18):baseOp;
       line.material.opacity+=(tgt-line.material.opacity)*0.10;
     }
   });
@@ -2488,7 +2490,7 @@ function closeMobSheet(){
       _sheetFull=false;
       mobSheetEl.classList.remove('bs-full');
       mobSheetEl.style.display='none';
-      if(!document.getElementById('settings-panel').classList.contains('open'))
+      if(!document.getElementById('settings-panel').classList.contains('open')&&!_zdActive)
         controls.enabled=true;
       [document.getElementById('tt'),document.getElementById('gc')].forEach(el=>{
         if(el.parentElement===mobSheetInner)document.body.appendChild(el);
@@ -2499,6 +2501,8 @@ function closeMobSheet(){
 }
 // ── Connection Card ────────────────────────────────
 let _connAnchor=null,_connSelected=[],_connLines3d=[],_connPanelShifted=false;
+// 연결 카드 콜라보 칩(꾹 누르기/↗)으로 다른 멤버 카드로 넘어갔을 때 "뒤로" 갈 수 있도록 이전 상태를 쌓아두는 스택
+let _memberNavStack=[];
 const connPanelEl=document.getElementById('conn-panel');
 const connPanelInner=document.getElementById('conn-panel-inner');
 const connSheetEl=document.getElementById('conn-sheet');
@@ -2675,8 +2679,10 @@ function _buildConnContent(container){
     const _gotoMember=()=>{
       const target=_findArtistByConnName(name,_connAnchor.group.ko);
       if(!target)return;
+      // 돌아갈 수 있도록 현재 연결 카드 상태(누구를, 어떤 선택으로 보고 있었는지)를 스택에 남겨둔다
+      _memberNavStack.push({anchor:_connAnchor,selected:[..._connSelected]});
       closeConnCard();
-      showT(target,window.innerWidth/2,window.innerHeight*0.4);
+      showT(target,window.innerWidth/2,window.innerHeight*0.4,true);
     };
     // 터치 기기 꾹 누르기 → 데스크톱의 ↗ 화살표와 동일하게 해당 멤버로 바로 이동.
     // 탭(짧게 누름)은 그대로 선택 토글 — 마우스는 손대지 않고 기존 hover+화살표 흐름 유지
@@ -2696,6 +2702,8 @@ function _buildConnContent(container){
       clearTimeout(_lpTimer);
       chip.classList.remove('lp-active');
     }));
+    // 꾹 누르기 중 브라우저 기본 텍스트 선택/콜아웃(iOS 돋보기, 안드로이드 복사 팝업)이 함께 뜨는 문제 방지
+    chip.addEventListener('contextmenu',e=>e.preventDefault());
     chip.addEventListener('click',e=>{
       e.stopPropagation();
       if(_lpFired){_lpFired=false;return;} // 꾹 누르기로 이미 처리됨 → 탭 토글 무시
@@ -2830,6 +2838,7 @@ mobSheetEl.addEventListener('touchend',e=>{
 function closeCards(){
   _clearMemberCardLines();
   closeConnCard();
+  _memberNavStack=[];
   if(isMob())closeMobSheet();
   else{closeMemberPanel(false);closeSidePanel();}
   document.getElementById('tt').style.display='none';
@@ -3062,6 +3071,24 @@ document.getElementById('tt').addEventListener('pointerup',e=>{
 },{passive:true});
 document.getElementById('gcx').addEventListener('click',e=>{e.stopPropagation();closeCards();});
 
+function _updateTtBackBtn(){
+  const btn=document.getElementById('tt-back');
+  if(btn)btn.style.display=_memberNavStack.length?'block':'none';
+}
+function _ttGoBack(){
+  const prev=_memberNavStack.pop();
+  if(!prev)return;
+  showT(prev.anchor,window.innerWidth/2,window.innerHeight*0.4,true);
+  openConnCard(prev.anchor);
+  if(prev.selected.length){
+    _connSelected=[...prev.selected];
+    _updateConnLines3d();
+    _applyConnFocus();
+    _buildConnContent(isMob()?connSheetBody:connPanelInner);
+  }
+}
+document.getElementById('tt-back').addEventListener('click',e=>{e.stopPropagation();_ttGoBack();});
+
 function positionCard(el,cx,cy,cardW,estH){
   const W=window.innerWidth,H=window.innerHeight;
   let lx=cx+14,ly=cy-10;
@@ -3072,7 +3099,9 @@ function positionCard(el,cx,cy,cardW,estH){
   el.style.left=lx+'px';el.style.top=ly+'px';
 }
 
-function showT(a,cx,cy){
+function showT(a,cx,cy,keepNavStack){
+  if(!keepNavStack)_memberNavStack=[];
+  _updateTtBackBtn();
   closeConnCard();
   _clearMemberCardLines();
   const _aGroups=_artistGroups(a);
@@ -3213,7 +3242,10 @@ function showT(a,cx,cy){
         scene.add(line);_memberCardLines.push(line);
       }
     }
-    flyToFitPositions(a._worldPositions.map(wp=>wp.pos),950);
+    // 해체/서바이벌 그룹(예: 아이즈원)과의 이중 소속은 화면을 두 행성이 다 담기도록 재배치하지 않는다 —
+    // 연결선만 그어주고 카메라(현재 보고 있는 그룹)는 그대로 유지한다.
+    const _hasPastLink=a._worldPositions.some(wp=>(GROUPS[wp.groupKo]||{}).survivalShow);
+    if(!_hasPastLink)flyToFitPositions(a._worldPositions.map(wp=>wp.pos),950);
   }
 }
 
@@ -4131,6 +4163,63 @@ renderer.domElement.addEventListener('touchend',e=>{
     showGC(_hitPlanet.ko,cx,cy);
   }
 },{passive:false});
+
+// ── 모바일: 더블탭 후 손을 떼지 않고 위/아래로 드래그 → 확대/축소 (네이버지도식 원-핑거 줌) ──
+// 첫 탭 이후 짧은 시간·짧은 거리 내에 두 번째 손가락이 닿으면 "더블탭 후보"로 보고,
+// 그 상태에서 일정 거리 이상 움직이면 궤도 회전(OrbitControls) 대신 카메라를 target 방향으로 당기고 미는 줌 제스처로 전환한다.
+let _zdCandidate=false,_zdCandX=0,_zdCandY=0;
+let _zdActive=false,_zdStartY=0,_zdStartDist=0,_zdPrevControlsEnabled=true,_zdPrevAutoRotate=true;
+let _zdLastUpTime=0,_zdLastUpX=0,_zdLastUpY=0;
+const ZD_DOUBLE_TAP_MS=350,ZD_DOUBLE_TAP_DIST=40,ZD_TRIGGER_DIST=10,ZD_SENS_PX=220;
+renderer.domElement.addEventListener('touchstart',e=>{
+  if(!isMob())return;
+  if(e.touches.length!==1){
+    if(_zdActive){controls.enabled=_zdPrevControlsEnabled;controls.autoRotate=_zdPrevAutoRotate;_zdActive=false;}
+    _zdCandidate=false;
+    return;
+  }
+  const t=e.touches[0];
+  const now=performance.now();
+  _zdCandidate=(now-_zdLastUpTime<ZD_DOUBLE_TAP_MS)&&(Math.hypot(t.clientX-_zdLastUpX,t.clientY-_zdLastUpY)<ZD_DOUBLE_TAP_DIST);
+  _zdCandX=t.clientX;_zdCandY=t.clientY;
+},{passive:true});
+renderer.domElement.addEventListener('touchmove',e=>{
+  if(!isMob()||e.touches.length!==1)return;
+  const t=e.touches[0];
+  if(_zdActive){
+    e.preventDefault();
+    const dy=_zdStartY-t.clientY; // 위로 드래그하면 양수
+    const rawDist=_zdStartDist*Math.pow(2,-dy/ZD_SENS_PX);
+    const dist=Math.min(controls.maxDistance,Math.max(controls.minDistance,rawDist));
+    const dir=camera.position.clone().sub(controls.target).normalize();
+    camera.position.copy(controls.target).addScaledVector(dir,dist);
+    return;
+  }
+  if(_zdCandidate&&Math.hypot(t.clientX-_zdCandX,t.clientY-_zdCandY)>ZD_TRIGGER_DIST){
+    _zdActive=true;_zdCandidate=false;
+    _zdStartY=t.clientY;
+    _zdStartDist=camera.position.distanceTo(controls.target);
+    _zdPrevControlsEnabled=controls.enabled;
+    _zdPrevAutoRotate=controls.autoRotate;
+    controls.enabled=false;
+    controls.autoRotate=false;
+    e.preventDefault();
+  }
+},{passive:false});
+renderer.domElement.addEventListener('touchend',e=>{
+  if(!isMob())return;
+  if(_zdActive){
+    controls.enabled=_zdPrevControlsEnabled;
+    controls.autoRotate=_zdPrevAutoRotate;
+    _zdActive=false;
+  }
+  _zdCandidate=false;
+  if(e.touches.length===0&&e.changedTouches.length===1){
+    const t=e.changedTouches[0];
+    _zdLastUpTime=performance.now();
+    _zdLastUpX=t.clientX;_zdLastUpY=t.clientY;
+  }
+},{passive:true});
 
 window.addEventListener('click',e=>{
   if(Math.hypot(e.clientX-_mdx,e.clientY-_mdy)>(isMob()?12:5))return;
