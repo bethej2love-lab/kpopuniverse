@@ -283,12 +283,14 @@
   .tg.tg-past{color:rgba(150,165,200,0.42);}
   .tg.tg-past:hover{color:#d0e8ff;}
   .tco{font-size:14px;color:#88aac8;margin-bottom:6px;}
-  .presence-badge{display:none;align-items:center;gap:5px;font-size:10.5px;color:rgba(255,170,150,0.85);margin:2px 0 7px;letter-spacing:.01em;}
-  .presence-badge.show{display:flex;}
+  /* 그룹/멤버 카드 상태 한 줄 — "지금 N명이 보고 있어요"와 "N명이 즐겨찾기했어요"가 한 자리에서 번갈아 표시됨 */
+  .gc-status-line{display:none;align-items:center;gap:5px;font-size:10.5px;letter-spacing:.01em;margin:8px 0 7px;transition:opacity .3s ease;}
+  .gc-status-line.show{display:flex;}
+  .gc-status-line.fade{opacity:0;}
+  .gc-status-line.type-presence{color:rgba(255,170,150,0.85);}
+  .gc-status-line.type-favcount{color:rgba(165,180,215,0.62);}
   .presence-dot{width:6px;height:6px;border-radius:50%;background:rgb(255,140,120);box-shadow:0 0 5px rgba(255,140,120,0.8);animation:presence-pulse 1.6s ease-in-out infinite;flex:none;}
   @keyframes presence-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.45;transform:scale(0.72);}}
-  .fav-count-badge{display:none;align-items:center;gap:5px;font-size:10.5px;color:rgba(165,180,215,0.62);margin:2px 0 7px;letter-spacing:.01em;}
-  .fav-count-badge.show{display:flex;}
   .tm{display:none;}
   #tv-big-wrap{cursor:pointer;border-radius:8px;overflow:hidden;background:rgba(255,255,255,0.04);}
   #tv-big-wrap:hover #tv-big{opacity:.84;}
@@ -486,12 +488,12 @@
   #gc-grid{display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-top:11px;border-top:0.5px solid rgba(255,255,255,0.10);}
   #gc-grid .row{display:flex;align-items:baseline;}
   #gc-grid .lbl{font-size:13px;color:#9abcd8;min-width:56px;flex-shrink:0;letter-spacing:.02em;}
-  #gc-mem-label.toggleable{cursor:pointer;user-select:none;transition:color .15s;border-bottom:1px dashed rgba(154,188,216,0.45);}
+  #gc-mem-label.toggleable{cursor:pointer;user-select:none;transition:color .15s,text-shadow .15s;}
   #gc-mem-label.toggleable:hover{color:#c8dcff;}
-  #gc-mem-label.toggleable.on{color:rgba(170,205,255,0.95);border-bottom-color:rgba(170,205,255,0.7);}
+  #gc-mem-label.toggleable.on{color:rgba(170,205,255,0.95);text-shadow:0 0 6px rgba(140,175,255,0.35);}
   .gc-mem-name.gc-mem-inactive{opacity:0.55;}
   #gc-grid .val{font-size:14px;color:#c0d6f0;font-weight:500;}
-  #gc-fandom,#gc-leader{
+  #gc-grid #gc-fandom,#gc-grid #gc-leader{
     font-size:11px;font-weight:600;letter-spacing:.04em;
     color:rgba(170,205,255,0.80);
     text-shadow:0 0 4px rgba(140,175,255,0.16),0 0 2px rgba(140,175,255,0.07);
@@ -934,7 +936,7 @@
   </div>
 </div>
 <div id="fav-hint-callout">Start with Your Favorite!<span id="fhc-arrow"></span></div>
-<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-presence" class="presence-badge"></div><div id="tt-fav-count" class="fav-count-badge"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버">›</button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버">›</button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
@@ -943,8 +945,7 @@
       <div id="gc-header-text">
         <div id="gc-name-row"><div id="gc-name"></div><button id="gc-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="gc-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button></div>
         <div id="gc-en-row"><div id="gc-en"></div><div id="gc-links"></div></div>
-        <div id="gc-presence" class="presence-badge"></div>
-        <div id="gc-fav-count" class="fav-count-badge"></div>
+        <div id="gc-status-line" class="gc-status-line"></div>
       </div>
     </div>
     <div id="gc-bar-mob"></div>
@@ -1693,7 +1694,7 @@ async function buildUniverse(){
     line.visible=false;
     scene.add(line);
     const mid=posA.clone().lerp(posB,0.5);
-    connLines.push({line,mid,baseOp:mat.opacity,grpKo:shareKo});
+    connLines.push({line,mid,baseOp:mat.opacity,grpKo:shareKo,posA,posB});
   });
 
   // ── Member points (fixed pixel size, camera-distance independent) ──
@@ -1721,8 +1722,8 @@ async function buildUniverse(){
     scene.add(pts);
     return pts;
   }
-  regularPts=makePoints(regularPos,regularColors,isMobile?4.2:6.8,0.82*opScale);
-  sparklePts=makePoints(sparklePos,sparkleColors,isMobile?8.4:15.4,1.0*opScale);
+  regularPts=makePoints(regularPos,regularColors,isMobile?8.6:14,0.82*opScale);
+  sparklePts=makePoints(sparklePos,sparkleColors,isMobile?17.2:31,1.0*opScale);
   if(regularPts)regColorAttr=regularPts.geometry.attributes.color;
   if(sparklePts)spkColorAttr=sparklePts.geometry.attributes.color;
 
@@ -1921,7 +1922,13 @@ function animate(){
     }
   }
   controls.update();
-  connLines.forEach(({line,mid,baseOp,grpKo})=>{
+  connLines.forEach(({line,mid,baseOp,grpKo,posA,posB})=>{
+    // 즐겨찾기(내 우주 모드) 등으로 멤버/행성이 실시간 이동할 때 선 끝점이 예전 자리에 덩그러니 남지 않도록 매 프레임 동기화
+    const posAttr=line.geometry.attributes.position;
+    posAttr.array[0]=posA.x;posAttr.array[1]=posA.y;posAttr.array[2]=posA.z;
+    posAttr.array[3]=posB.x;posAttr.array[4]=posB.y;posAttr.array[5]=posB.z;
+    posAttr.needsUpdate=true;
+    mid.copy(posA).lerp(posB,0.5);
     // 그룹 카드가 열려 포커스된 그룹이면 줌 거리와 무관하게 그 그룹의 연결선은 전부 보이게(부분적으로만 나타나는 것 방지)
     const isFocused=grpKo===focusGroupKo;
     line.visible=isFocused||camera.position.distanceTo(mid)<20;
@@ -2987,8 +2994,8 @@ function closeCards(){
   document.getElementById('gc').style.display='none';
   clearFocus();_openGCko=null;_openTArtist=null;
   _leavePresence();
-  document.getElementById('gc-fav-count')?.classList.remove('show');
-  document.getElementById('tt-fav-count')?.classList.remove('show');
+  _gcStatusState.group.favcount='';_gcStatusState.member.favcount='';
+  _renderGcStatusLine('group');_renderGcStatusLine('member');
   _syncUrl('replace');
 }
 
@@ -3503,7 +3510,10 @@ function _renderGcMemberList(ko,cx,cy){
   labelEl.classList.toggle('on',hasInactive&&_gcShowInactive);
   labelEl.title=hasInactive?(currentLang==='ko'?'눌러서 비활동/탈퇴 멤버 보기':'Click to show inactive members'):'';
   (hasInactive&&_gcShowInactive?allMembers:allMembers.filter(a=>a.active))
-    .sort((a,b)=>(a.bday||'9999-99-99')<(b.bday||'9999-99-99')?-1:1)
+    .sort((a,b)=>{
+      if(a.active!==b.active)return a.active?-1:1; // 활동 멤버 먼저, 비활동/탈퇴 멤버는 맨 뒤로
+      return (a.bday||'9999-99-99')<(b.bday||'9999-99-99')?-1:1;
+    })
     .forEach(m=>{
       const sp=document.createElement('span');sp.className='gc-mem-name'+(m.active?'':' gc-mem-inactive');
       sp.textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
@@ -4781,6 +4791,7 @@ function toggleFavGroup(ko){
     renderFavList();_buildAnniversaryList();
     if(favMode){applyFavHighlight();_enterMyUniverseMode();}
     else if(myStarSprite)placeMyStarInUniverse();
+    if(myStarSprite)_flyToMyStar(); // 즐겨찾기 토글 시 화면이 안 움직이던 문제 — 내 별 쪽으로 카메라 이동
   };
   if(favGroups.has(ko))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
   else doToggle();
@@ -4799,6 +4810,7 @@ function toggleFavMember(artist){
     renderFavList();_buildAnniversaryList();
     if(favMode){applyFavHighlight();_enterMyUniverseMode();}
     else if(myStarSprite)placeMyStarInUniverse();
+    if(myStarSprite)_flyToMyStar(); // 즐겨찾기 토글 시 화면이 안 움직이던 문제 — 내 별 쪽으로 카메라 이동
   };
   if(favMembers.has(k))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
   else doToggle();
@@ -5681,25 +5693,46 @@ document.getElementById('pp-google-link').addEventListener('click',async e=>{
   // 성공하면 브라우저가 구글 동의 화면으로 이동하므로 이후 코드는 실행되지 않음
 });
 
+// ── 그룹/멤버 카드 상태 한 줄: 실시간 시청자 수 + 즐겨찾기 인기 지표를 한 자리에서 번갈아 표시 ──
+const _gcStatusState={group:{presence:'',favcount:''},member:{presence:'',favcount:''}};
+const _gcStatusTimers={group:null,member:null};
+const _gcStatusIdx={group:0,member:0};
+function _statusEl(kind){return document.getElementById(kind==='group'?'gc-status-line':'tt-status-line');}
+function _renderGcStatusLine(kind){
+  const el=_statusEl(kind);
+  if(!el)return;
+  clearInterval(_gcStatusTimers[kind]);
+  const entries=[];
+  if(_gcStatusState[kind].presence)entries.push({type:'presence',html:_gcStatusState[kind].presence});
+  if(_gcStatusState[kind].favcount)entries.push({type:'favcount',html:_gcStatusState[kind].favcount});
+  if(!entries.length){el.classList.remove('show');el.innerHTML='';return;}
+  const paint=i=>{el.className='gc-status-line show type-'+entries[i].type;el.innerHTML=entries[i].html;};
+  _gcStatusIdx[kind]=0;
+  paint(0);
+  if(entries.length>1){
+    _gcStatusTimers[kind]=setInterval(()=>{
+      el.classList.add('fade');
+      setTimeout(()=>{
+        _gcStatusIdx[kind]=(_gcStatusIdx[kind]+1)%entries.length;
+        paint(_gcStatusIdx[kind]);
+        el.classList.remove('fade');
+      },300);
+    },4000);
+  }
+}
+
 // ── 실시간 "지금 N명이 보고 있어요" (Supabase Realtime Presence) ──────
 // 프레즌스는 특정 테이블 구독이 아니라 순수 채널 기반이라 별도 DB 설정 없이 바로 동작함.
 let _presenceChannel=null;
 function _renderPresenceCount(kind,count){
-  const el=document.getElementById(kind==='group'?'gc-presence':'tt-presence');
-  if(!el)return;
-  if(count>=2){
-    el.innerHTML='<span class="presence-dot"></span>지금 '+count+'명이 보고 있어요';
-    el.classList.add('show');
-  }else{
-    el.classList.remove('show');
-    el.innerHTML='';
-  }
+  _gcStatusState[kind].presence=count>=2?('<span class="presence-dot"></span>지금 '+count+'명이 보고 있어요'):'';
+  _renderGcStatusLine(kind);
 }
 function _leavePresence(){
   if(sb&&_presenceChannel)sb.removeChannel(_presenceChannel);
   _presenceChannel=null;
-  document.getElementById('gc-presence')?.classList.remove('show');
-  document.getElementById('tt-presence')?.classList.remove('show');
+  _gcStatusState.group.presence='';_gcStatusState.member.presence='';
+  _renderGcStatusLine('group');_renderGcStatusLine('member');
 }
 function _joinPresence(kind,roomKey){
   _leavePresence();
@@ -5717,17 +5750,16 @@ function _joinPresence(kind,roomKey){
 // ── 즐겨찾기 인기 지표 — 순위/비교 없이, 지금 열린 카드 하나에만 조용히 숫자만 ──────
 let _favCountReqId=0;
 async function _showFavCount(kind,key,rpcFn){
-  const el=document.getElementById(kind==='group'?'gc-fav-count':'tt-fav-count');
-  if(!el)return;
-  el.classList.remove('show');el.textContent='';
+  _gcStatusState[kind].favcount='';
+  _renderGcStatusLine(kind);
   if(!sb)return;
   const reqId=++_favCountReqId;
   const{data,error}=await sb.rpc(rpcFn,kind==='group'?{p_group_ko:key}:{p_member_key:key});
   if(reqId!==_favCountReqId)return; // 그 사이 다른 카드로 넘어감 — 오래된 응답은 무시
   if(error){console.error('fav count fetch failed',error);return;}
   if(data>0){
-    el.textContent='즐겨찾기한 사람 '+data+'명';
-    el.classList.add('show');
+    _gcStatusState[kind].favcount=data+'명이 좋아해요';
+    _renderGcStatusLine(kind);
   }
 }
 
