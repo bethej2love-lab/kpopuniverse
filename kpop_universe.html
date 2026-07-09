@@ -472,10 +472,6 @@
   #gcx{position:absolute;top:11px;right:11px;font-size:15px;color:rgba(150,170,215,0.70);cursor:pointer;line-height:1;}
   #gc-header{display:flex;align-items:center;gap:10px;padding-right:20px;margin-bottom:10px;}
   #gc-header-text{flex:1;min-width:0;}
-  #gc-logo-wrap{flex-shrink:0;}
-  #gc-logo-wrap svg{max-height:28px;max-width:90px;width:auto;height:auto;display:block;}
-  #gc-logo-wrap svg,#gc-logo-wrap svg *{fill:rgba(225,235,255,0.90)!important;}
-  #gc-logo-wrap img{max-height:28px;max-width:90px;width:auto;height:auto;display:block;filter:brightness(0) invert(1);opacity:0.88;}
   #gc-name{font-size:17px;font-weight:700;margin-bottom:2px;padding-right:0;letter-spacing:-.02em;color:#d8e4f6;}
   #gc-en{font-size:14px;letter-spacing:.1em;color:#7898b8;margin-bottom:0;text-transform:uppercase;font-weight:500;}
   #gc-en-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
@@ -490,11 +486,15 @@
   #gc-grid{display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-top:11px;border-top:0.5px solid rgba(255,255,255,0.10);}
   #gc-grid .row{display:flex;align-items:baseline;}
   #gc-grid .lbl{font-size:13px;color:#9abcd8;min-width:56px;flex-shrink:0;letter-spacing:.02em;}
+  #gc-mem-label.toggleable{cursor:pointer;user-select:none;transition:color .15s;border-bottom:1px dashed rgba(154,188,216,0.45);}
+  #gc-mem-label.toggleable:hover{color:#c8dcff;}
+  #gc-mem-label.toggleable.on{color:rgba(170,205,255,0.95);border-bottom-color:rgba(170,205,255,0.7);}
+  .gc-mem-name.gc-mem-inactive{opacity:0.55;}
   #gc-grid .val{font-size:14px;color:#c0d6f0;font-weight:500;}
   #gc-fandom,#gc-leader{
-    font-size:13px;font-weight:600;letter-spacing:.02em;
-    color:rgba(170,210,255,0.95);
-    text-shadow:0 0 10px rgba(170,210,255,0.6),0 0 4px rgba(170,210,255,0.3);
+    font-size:11px;font-weight:600;letter-spacing:.04em;
+    color:rgba(170,205,255,0.80);
+    text-shadow:0 0 4px rgba(140,175,255,0.16),0 0 2px rgba(140,175,255,0.07);
   }
   #gc-mem-row{align-items:flex-start;}
   #gc-mem-list{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px;padding-left:4px;}
@@ -946,7 +946,6 @@
         <div id="gc-presence" class="presence-badge"></div>
         <div id="gc-fav-count" class="fav-count-badge"></div>
       </div>
-      <div id="gc-logo-wrap" style="display:none"></div>
     </div>
     <div id="gc-bar-mob"></div>
     <div id="gc-grid">
@@ -954,7 +953,7 @@
       <div class="row"><span class="lbl" data-i18n="gcDebut">데뷔</span><span class="val" id="gc-debut"></span></div>
       <div class="row" id="gc-fandom-row" style="display:none"><span class="lbl" data-i18n="gcFandom">팬덤</span><span class="val" id="gc-fandom"></span></div>
       <div class="row" id="gc-leader-row" style="display:none"><span class="lbl" data-i18n="gcLeader">리더</span><span class="val" id="gc-leader"></span></div>
-      <div class="row" id="gc-mem-row"><span class="lbl" data-i18n="gcMember">멤버</span><span class="val" id="gc-mem-list"></span></div>
+      <div class="row" id="gc-mem-row"><span class="lbl" id="gc-mem-label" data-i18n="gcMember">멤버</span><span class="val" id="gc-mem-list"></span></div>
     </div>
     <div id="gc-tv"></div>
   </div>
@@ -1299,10 +1298,7 @@ function _refreshOpenCardText(){
       if(info.fandom){
         document.getElementById('gc-fandom').textContent=_fandomText(info.fandom);
       }
-      const memListEl=document.getElementById('gc-mem-list');
-      ARTISTS.filter(a=>a.active&&_artistGroups(a).some(g=>g.ko===_openGCko))
-        .sort((a,b)=>(a.bday||'9999-99-99')<(b.bday||'9999-99-99')?-1:1)
-        .forEach((m,i)=>{if(memListEl.children[i])memListEl.children[i].textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);});
+      _renderGcMemberList(_openGCko,window.innerWidth/2,window.innerHeight*0.4);
     }
   }
   // 멤버 카드
@@ -1494,7 +1490,9 @@ async function buildUniverse(){
     const dir=agencyDir(info.co);
     const [r,g,b]=info.color||[180,180,200];
     const color=duneColor(r,g,b);
-    const radius=Math.min(4.5,Math.max(1.6,1.5+members.length*0.25));
+    // 탈퇴/비활동 멤버 포함 4명 이하인 소규모 그룹은 행성도 한 단계 더 작게
+    const _radiusBase=Math.min(4.5,Math.max(1.6,1.5+members.length*0.25));
+    const radius=members.length<=4?_radiusBase*0.75:_radiusBase;
 
     // 겹침 방지: 최대 400번 시도, 기존 행성과 표면 간격 4 이상 확보.
     // 같은 데뷔연도 그룹끼리 얇은 구 껍질에 몰리지 않도록 반경에 랜덤 변주를 줌
@@ -1928,7 +1926,10 @@ function animate(){
     const isFocused=grpKo===focusGroupKo;
     line.visible=isFocused||camera.position.distanceTo(mid)<20;
     if(line.visible){
-      const tgt=focusGroupKo?(isFocused?baseOp*2.4:baseOp*0.18):baseOp;
+      // 해체/서바이벌 프로젝트 그룹(survivalShow)은 행성 자체가 0.4배로 옅게 표시되므로,
+      // 그 그룹 내 멤버 연결선도 같은 비율로 옅게 해서 행성-선 투명도가 어긋나 보이지 않게 함
+      const survivalDim=(GROUPS[grpKo]||{}).survivalShow?0.4:1;
+      const tgt=(focusGroupKo?(isFocused?baseOp*2.4:baseOp*0.18):baseOp)*survivalDim;
       line.material.opacity+=(tgt-line.material.opacity)*0.10;
     }
   });
@@ -3490,6 +3491,33 @@ function _renderGcLinks(links){
     wrap.appendChild(a);
   });
 }
+// ── 그룹 카드 멤버 목록: 비활동/탈퇴 멤버가 있으면 "멤버" 라벨을 토글 버튼으로 ──
+let _gcShowInactive=false;
+function _renderGcMemberList(ko,cx,cy){
+  const memListEl=document.getElementById('gc-mem-list');
+  const labelEl=document.getElementById('gc-mem-label');
+  memListEl.innerHTML='';
+  const allMembers=ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===ko));
+  const hasInactive=allMembers.some(a=>!a.active);
+  labelEl.classList.toggle('toggleable',hasInactive);
+  labelEl.classList.toggle('on',hasInactive&&_gcShowInactive);
+  labelEl.title=hasInactive?(currentLang==='ko'?'눌러서 비활동/탈퇴 멤버 보기':'Click to show inactive members'):'';
+  (hasInactive&&_gcShowInactive?allMembers:allMembers.filter(a=>a.active))
+    .sort((a,b)=>(a.bday||'9999-99-99')<(b.bday||'9999-99-99')?-1:1)
+    .forEach(m=>{
+      const sp=document.createElement('span');sp.className='gc-mem-name'+(m.active?'':' gc-mem-inactive');
+      sp.textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
+      if(_artistGroups(m).length>1)sp.title=_artistGroups(m).map(g=>g.ko).join(' · ');
+      sp.addEventListener('click',e=>{e.stopPropagation();if(isMob())closeCards();showT(m,cx,cy);if(m._worldPos)pulseMember(m);});
+      memListEl.appendChild(sp);
+    });
+}
+document.getElementById('gc-mem-label').addEventListener('click',e=>{
+  e.stopPropagation();
+  if(!e.currentTarget.classList.contains('toggleable')||!_openGCko)return;
+  _gcShowInactive=!_gcShowInactive;
+  _renderGcMemberList(_openGCko,window.innerWidth/2,window.innerHeight*0.4);
+});
 function showGC(ko,cx,cy,keepMemberPanel,skipRipple,urlMode){
   const info=GROUPS[ko];if(!info)return;
   setFocus(ko);_openGCko=ko;
@@ -3508,23 +3536,6 @@ function showGC(ko,cx,cy,keepMemberPanel,skipRipple,urlMode){
   nameEl.textContent=currentLang==='ko'?ko:(info.en||ko);
   nameEl.style.color='';
   document.getElementById('gc-en').textContent=currentLang==='ko'?(info.en||''):'';
-  const logoWrap=document.getElementById('gc-logo-wrap');
-  logoWrap.innerHTML='';
-  if(info.logo){
-    if(/\.svg$/i.test(info.logo)){
-      fetch(info.logo).then(r=>r.text()).then(svg=>{
-        logoWrap.innerHTML=svg;
-        logoWrap.style.display='';
-      }).catch(()=>{logoWrap.style.display='none';});
-    }else{
-      logoWrap.innerHTML='';
-      const img=document.createElement('img');
-      img.src=info.logo;
-      img.onload=()=>logoWrap.style.display='';
-      img.onerror=()=>logoWrap.style.display='none';
-      logoWrap.appendChild(img);
-    }
-  }else{logoWrap.style.display='none';}
   _renderTagChip(document.getElementById('gc-co'),info.co||'','agency',info.co||'');
   const _debutYr=String(info.debut||'').slice(0,4);
   _renderTagChip(document.getElementById('gc-debut'),info.debut||'','debutYear',_debutYr);
@@ -3538,17 +3549,8 @@ function showGC(ko,cx,cy,keepMemberPanel,skipRipple,urlMode){
   if(info.leader){leaderEl.textContent=info.leader;leaderRow.style.display='';}
   else leaderRow.style.display='none';
   _renderGcLinks(info.links);
-  const memListEl=document.getElementById('gc-mem-list');
-  memListEl.innerHTML='';
-  ARTISTS.filter(a=>a.active&&_artistGroups(a).some(g=>g.ko===ko))
-    .sort((a,b)=>(a.bday||'9999-99-99')<(b.bday||'9999-99-99')?-1:1)
-    .forEach(m=>{
-    const sp=document.createElement('span');sp.className='gc-mem-name';
-    sp.textContent=currentLang==='ko'?m.name.ko:(m.name.en||m.name.ko);
-    if(_artistGroups(m).length>1)sp.title=_artistGroups(m).map(g=>g.ko).join(' · ');
-    sp.addEventListener('click',e=>{e.stopPropagation();if(isMob())closeCards();showT(m,cx,cy);if(m._worldPos)pulseMember(m);});
-    memListEl.appendChild(sp);
-  });
+  _gcShowInactive=false;
+  _renderGcMemberList(ko,cx,cy);
   const gcTv=document.getElementById('gc-tv');
   buildVideoSection(info.songs||[],gcTv,{groupKo:ko});
   const hasSongs=(info.songs||[]).length>0;
@@ -3688,12 +3690,12 @@ function _applyTagFocus(){
 }
 
 function _hideMyPageSections(){
-  ['my-page-header','fav-section','scrap-section','anniv-section'].forEach(id=>{
+  ['my-page-header','fav-section','scrap-section','bookmark-section','anniv-section'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.style.display='none';
   });
 }
 function _showMyPageSections(){
-  ['my-page-header','fav-section','scrap-section','anniv-section'].forEach(id=>{
+  ['my-page-header','fav-section','scrap-section','bookmark-section','anniv-section'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.style.display='';
   });
 }

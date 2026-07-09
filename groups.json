@@ -3,7 +3,6 @@
     "en": "CORTIS",
     "debut": "2025.08.18",
     "co": "HYBE",
-    "logo": "logos/CORTIS.svg",
     "color": [
       130,
       192,
@@ -73,7 +72,6 @@
     "en": "aespa",
     "debut": "2020.11.17",
     "co": "SM",
-    "logo": "logos/aespa.svg",
     "color": [
       148,
       188,
@@ -132,7 +130,6 @@
     "en": "KiiiKiii",
     "debut": "2025.02.24",
     "co": "Starship",
-    "logo": "logos/KiiiKiii.webp",
     "color": [
       152,
       215,
@@ -222,7 +219,6 @@
     "en": "ITZY",
     "debut": "2019.02.12",
     "co": "JYP",
-    "logo": "logos/ITZY.svg",
     "color": [
       175,
       145,
@@ -332,7 +328,6 @@
     "en": "Stray Kids",
     "debut": "2018.03.25",
     "co": "JYP",
-    "logo": "logos/Stray Kids.svg",
     "color": [
       222,
       192,
@@ -393,7 +388,6 @@
     "en": "TWS",
     "debut": "2024.01.22",
     "co": "HYBE",
-    "logo": "logos/TWS.svg",
     "color": [
       178,
       165,
@@ -627,7 +621,6 @@
     "en": "TOMORROW X TOGETHER",
     "debut": "2019.03.04",
     "co": "HYBE / BigHit",
-    "logo": "logos/TOMORROW X TOGETHER.svg",
     "color": [
       138,
       210,
@@ -717,7 +710,6 @@
     "en": "Girls' Generation",
     "debut": "2007.08.05",
     "co": "SM",
-    "logo": "logos/Girls' Generation · SNSD.svg",
     "color": [
       218,
       175,
@@ -733,7 +725,6 @@
     "en": "SHINee",
     "debut": "2008.05.22",
     "co": "SM",
-    "logo": "logos/SHINee.webp",
     "color": [
       148,
       188,
@@ -760,7 +751,7 @@
       "en": "ReVeluv"
     }
   },
-  "f(x)": {
+  "에프엑스": {
     "en": "f(x)",
     "debut": "2009.09.05",
     "co": "SM",
@@ -882,7 +873,6 @@
     "en": "BABYMONSTER",
     "debut": "2023.11.27",
     "co": "YG",
-    "logo": "logos/BABYMONSTER.svg",
     "color": [
       210,
       148,
@@ -913,7 +903,6 @@
     "en": "Hearts2Hearts",
     "debut": "2025.02.24",
     "co": "SM",
-    "logo": "logos/Hearts2Hearts.svg",
     "color": [
       222,
       162,

@@ -2606,7 +2606,7 @@
     "y": 8374,
     "sat": 0.7,
     "op": 0.42,
-    "active": false,
+    "active": true,
     "color": [
       120,
       162,
@@ -6019,7 +6019,7 @@
     "y": 4520,
     "sat": 0.92,
     "op": 0.35,
-    "active": false,
+    "active": true,
     "color": [
       148,
       188,
@@ -6039,7 +6039,7 @@
       "en": "Victoria"
     },
     "group": {
-      "ko": "f(x)",
+      "ko": "에프엑스",
       "en": "f(x)"
     },
     "co": "SM",
@@ -6048,7 +6048,7 @@
     "y": 7480,
     "sat": 0.75,
     "op": 0.5,
-    "active": false,
+    "active": true,
     "color": [
       162,
       218,
@@ -6068,7 +6068,7 @@
       "en": "Amber"
     },
     "group": {
-      "ko": "f(x)",
+      "ko": "에프엑스",
       "en": "f(x)"
     },
     "co": "SM",
@@ -6077,7 +6077,7 @@
     "y": 7440,
     "sat": 0.78,
     "op": 0.55,
-    "active": false,
+    "active": true,
     "color": [
       162,
       218,
@@ -6097,7 +6097,7 @@
       "en": "Luna"
     },
     "group": {
-      "ko": "f(x)",
+      "ko": "에프엑스",
       "en": "f(x)"
     },
     "co": "SM",
@@ -6106,7 +6106,7 @@
     "y": 7680,
     "sat": 0.72,
     "op": 0.5,
-    "active": false,
+    "active": true,
     "color": [
       162,
       218,
@@ -6122,11 +6122,40 @@
   },
   {
     "name": {
+      "ko": "설리",
+      "en": "Sulli"
+    },
+    "group": {
+      "ko": "에프엑스",
+      "en": "f(x)"
+    },
+    "co": "SM",
+    "planet": "fx",
+    "x": 11150,
+    "y": 7600,
+    "sat": 0.75,
+    "op": 0.5,
+    "active": false,
+    "color": [
+      162,
+      218,
+      175
+    ],
+    "bday": "1994.03.29",
+    "nat": {
+      "ko": "한국",
+      "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
       "ko": "크리스탈",
       "en": "Krystal"
     },
     "group": {
-      "ko": "f(x)",
+      "ko": "에프엑스",
       "en": "f(x)"
     },
     "co": "SM",
@@ -6135,7 +6164,7 @@
     "y": 7720,
     "sat": 0.8,
     "op": 0.55,
-    "active": false,
+    "active": true,
     "color": [
       162,
       218,
@@ -6657,7 +6686,7 @@
     "y": 800,
     "sat": 0.78,
     "op": 0.5,
-    "active": false,
+    "active": true,
     "color": [
       218,
       192,
@@ -6715,7 +6744,7 @@
     "y": 1160,
     "sat": 0.68,
     "op": 0.5,
-    "active": false,
+    "active": true,
     "color": [
       218,
       192,
