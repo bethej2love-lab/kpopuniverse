@@ -55,7 +55,19 @@
         "t": "go home",
         "u": "https://www.youtube.com/watch?v=NeaXPMDpfnc"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "코어",
+      "en": "COER"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@cortis_bighit",
+      "instagram": "https://instagram.com/cortis",
+      "x": "https://x.com/cortis_bighit",
+      "weverse": "https://weverse.io/cortis",
+      "tiktok": "https://tiktok.com/@cortis_bighit",
+      "namu": "https://namu.wiki/w/CORTIS"
+    }
   },
   "에스파": {
     "en": "aespa",
@@ -81,7 +93,11 @@
         "t": "Dreams Come True",
         "u": "https://www.youtube.com/watch?v=wHvpwSxCOyQ"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "마이",
+      "en": "MY"
+    }
   },
   "아이브": {
     "en": "IVE",
@@ -106,7 +122,11 @@
         "t": "After LIKE",
         "u": "https://www.youtube.com/watch?v=fdzojloPlFA"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "다이브",
+      "en": "DIVE"
+    }
   },
   "키키": {
     "en": "KiiiKiii",
@@ -192,7 +212,11 @@
         "t": "I DO ME",
         "u": "https://youtu.be/_51U548cEQg"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "티키",
+      "en": "TiiiKiii"
+    }
   },
   "있지": {
     "en": "ITZY",
@@ -218,7 +242,11 @@
         "t": "THAT'S A NO NO",
         "u": "https://www.youtube.com/watch?v=Geh1ZEjkaeM"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "믿지",
+      "en": "MIDZY"
+    }
   },
   "뉴진스": {
     "en": "NewJeans",
@@ -243,7 +271,11 @@
         "t": "Ditto",
         "u": "https://www.youtube.com/watch?v=jUNz-uTF--E"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "버니즈",
+      "en": "Bunnies"
+    }
   },
   "세븐틴": {
     "en": "SEVENTEEN",
@@ -260,7 +292,11 @@
         "t": "좋은 사람",
         "u": "https://www.youtube.com/watch?v=UA_t1VBt_GU"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "캐럿",
+      "en": "CARAT"
+    }
   },
   "키스오브라이프": {
     "en": "KISS OF LIFE",
@@ -271,7 +307,11 @@
       182,
       125
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "키씨",
+      "en": "KISSY"
+    }
   },
   "엔믹스": {
     "en": "NMIXX",
@@ -282,7 +322,11 @@
       132,
       185
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "엔써",
+      "en": "NSWER"
+    }
   },
   "스트레이키즈": {
     "en": "Stray Kids",
@@ -294,7 +338,11 @@
       192,
       118
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "스테이",
+      "en": "STAY"
+    }
   },
   "NCT 127": {
     "en": "NCT 127",
@@ -305,7 +353,11 @@
       135,
       135
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "시즈니",
+      "en": "NCTzen"
+    }
   },
   "NCT Dream": {
     "en": "NCT Dream",
@@ -316,7 +368,11 @@
       215,
       185
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "시즈니",
+      "en": "NCTzen"
+    }
   },
   "WayV": {
     "en": "WayV",
@@ -327,7 +383,11 @@
       168,
       222
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "웨이젠니",
+      "en": "WayZenNi"
+    }
   },
   "투어스": {
     "en": "TWS",
@@ -353,7 +413,19 @@
         "t": "OVERDRIVE",
         "u": "https://www.youtube.com/watch?v=VyKb0WWl6k8"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "사이",
+      "en": "42"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@TWS_PLEDIS",
+      "instagram": "https://instagram.com/tws_pledis",
+      "x": "https://x.com/TWS_PLEDIS",
+      "weverse": "https://weverse.io/tws",
+      "tiktok": "https://tiktok.com/@tws_pledis",
+      "namu": "https://namu.wiki/w/TWS"
+    }
   },
   "NCT WISH": {
     "en": "NCT WISH",
@@ -378,7 +450,11 @@
         "t": "으쌰! 으쌰!",
         "u": "https://www.youtube.com/watch?v=oorVGzxTzuw"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "시즈니",
+      "en": "NCTzen"
+    }
   },
   "리센느": {
     "en": "RESCENE",
@@ -403,7 +479,18 @@
         "t": "고백주파수",
         "u": "https://www.youtube.com/watch?v=p1asr5bLsl0"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "리마인",
+      "en": "REMINE"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@RESCENE_official",
+      "instagram": "https://instagram.com/rescene_official",
+      "x": "https://x.com/RESCENEofficial",
+      "tiktok": "https://tiktok.com/@rescene_official",
+      "namu": "https://namu.wiki/w/RESCENE"
+    }
   },
   "라이즈": {
     "en": "RIIZE",
@@ -500,7 +587,11 @@
         "t": "영웅 (원곡: NCT 127)",
         "u": "https://youtu.be/1QV4sZnPgXE"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "브리즈",
+      "en": "BRIIZE"
+    }
   },
   "엔하이픈": {
     "en": "ENHYPEN",
@@ -511,7 +602,11 @@
       138,
       218
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "엔진",
+      "en": "ENGENE"
+    }
   },
   "아일릿": {
     "en": "ILLIT",
@@ -522,7 +617,11 @@
       162,
       215
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "글릿",
+      "en": "GLLIT"
+    }
   },
   "투모로우바이투게더": {
     "en": "TOMORROW X TOGETHER",
@@ -548,7 +647,11 @@
         "t": "Upside Down Kiss",
         "u": "https://www.youtube.com/watch?v=e2r_i9fEp0o"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "모아",
+      "en": "MOA"
+    }
   },
   "BTS": {
     "en": "BTS",
@@ -559,7 +662,11 @@
       152,
       218
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "아미",
+      "en": "ARMY"
+    }
   },
   "트와이스": {
     "en": "TWICE",
@@ -570,7 +677,11 @@
       175,
       165
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "원스",
+      "en": "ONCE"
+    }
   },
   "블랙핑크": {
     "en": "BLACKPINK",
@@ -581,7 +692,11 @@
       132,
       172
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "블링크",
+      "en": "BLINK"
+    }
   },
   "빅뱅": {
     "en": "BIGBANG",
@@ -592,7 +707,11 @@
       192,
       135
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "브이아이피",
+      "en": "V.I.P"
+    }
   },
   "소녀시대": {
     "en": "Girls' Generation",
@@ -604,7 +723,11 @@
       175,
       188
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "소원",
+      "en": "SONE"
+    }
   },
   "샤이니": {
     "en": "SHINee",
@@ -616,7 +739,11 @@
       188,
       222
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "샤월",
+      "en": "SHAWOL"
+    }
   },
   "레드벨벳": {
     "en": "Red Velvet",
@@ -627,7 +754,11 @@
       148,
       168
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "레베럽",
+      "en": "ReVeluv"
+    }
   },
   "f(x)": {
     "en": "f(x)",
@@ -638,7 +769,11 @@
       218,
       175
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "미유",
+      "en": "me(you)"
+    }
   },
   "에이티즈": {
     "en": "ATEEZ",
@@ -707,7 +842,11 @@
         "t": "Our 5th anniversary❤",
         "u": "https://youtube.com/shorts/cVfhs5S3Sjw"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "에이티니",
+      "en": "ATINY"
+    }
   },
   "아이들": {
     "en": "(G)I-DLE",
@@ -718,7 +857,11 @@
       142,
       218
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "네버랜드",
+      "en": "Neverland"
+    }
   },
   "르세라핌": {
     "en": "LE SSERAFIM",
@@ -729,7 +872,11 @@
       208,
       185
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "피어나",
+      "en": "FEARNOT"
+    }
   },
   "베이비몬스터": {
     "en": "BABYMONSTER",
@@ -741,7 +888,11 @@
       148,
       185
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "몬스티즈",
+      "en": "MONSTIEZ"
+    }
   },
   "미야오": {
     "en": "MEOVV",
@@ -752,7 +903,11 @@
       155,
       218
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "폼폼",
+      "en": "PAWMPAWM"
+    }
   },
   "하츠투하츠": {
     "en": "Hearts2Hearts",
@@ -764,7 +919,11 @@
       162,
       205
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "하츄",
+      "en": "S2U"
+    }
   },
   "보이넥스트도어": {
     "en": "BOYNEXTDOOR",
@@ -775,7 +934,11 @@
       178,
       132
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "원도어",
+      "en": "ONEDOOR"
+    }
   },
   "스테이씨": {
     "en": "STAYC",
@@ -786,7 +949,11 @@
       148,
       188
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "스윗",
+      "en": "SWITH"
+    }
   },
   "더보이즈": {
     "en": "THE BOYZ",
@@ -797,7 +964,11 @@
       145,
       218
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "더비",
+      "en": "THE B"
+    }
   },
   "온앤오프": {
     "en": "ONF",
@@ -808,7 +979,11 @@
       195,
       222
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "퓨즈",
+      "en": "FUSE"
+    }
   },
   "트리플에스": {
     "en": "tripleS",
@@ -819,7 +994,11 @@
       148,
       222
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "웨이브",
+      "en": "WAV"
+    }
   },
   "프로미스나인": {
     "en": "fromis_9",
@@ -830,7 +1009,11 @@
       162,
       178
     ],
-    "gender": "f"
+    "gender": "f",
+    "fandom": {
+      "ko": "플로버",
+      "en": "flover"
+    }
   },
   "앤팀": {
     "en": "&TEAM",
@@ -841,7 +1024,11 @@
       165,
       222
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "루네",
+      "en": "LUNÉ"
+    }
   },
   "비비지": {
     "en": "VIVIZ",
@@ -906,7 +1093,11 @@
         "t": "한 걸음 (Day by day)",
         "u": "https://youtu.be/0j9fa36iQqc"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "나비",
+      "en": "Na.V"
+    }
   },
   "트레저": {
     "en": "TREASURE",
@@ -917,13 +1108,20 @@
       188,
       115
     ],
-    "gender": "m"
+    "gender": "m",
+    "fandom": {
+      "ko": "트레저메이커",
+      "en": "TREASURE MAKER"
+    }
   },
   "크래비티": {
     "en": "CRAVITY",
     "debut": "2020.04.14",
     "co": "Starship",
-    "fandom": "LUVITY",
+    "fandom": {
+      "ko": "러비티",
+      "en": "LUVITY"
+    },
     "color": [
       159,
       117,
@@ -955,6 +1153,10 @@
         "t": "Panorama",
         "u": "https://www.youtube.com/watch?v=G8GaQdW2wHc"
       }
-    ]
+    ],
+    "fandom": {
+      "ko": "위즈원",
+      "en": "WIZ*ONE"
+    }
   }
 }
