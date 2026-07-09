@@ -1694,7 +1694,8 @@ async function buildUniverse(){
     line.visible=false;
     scene.add(line);
     const mid=posA.clone().lerp(posB,0.5);
-    connLines.push({line,mid,baseOp:mat.opacity,grpKo:shareKo,posA,posB});
+    const bm=bubbleMeshes.find(b=>b.ko===shareKo);
+    connLines.push({line,mid,baseOp:mat.opacity,grpKo:shareKo,posA,posB,bm});
   });
 
   // ── Member points (fixed pixel size, camera-distance independent) ──
@@ -1922,7 +1923,7 @@ function animate(){
     }
   }
   controls.update();
-  connLines.forEach(({line,mid,baseOp,grpKo,posA,posB})=>{
+  connLines.forEach(({line,mid,baseOp,grpKo,posA,posB,bm})=>{
     // 즐겨찾기(내 우주 모드) 등으로 멤버/행성이 실시간 이동할 때 선 끝점이 예전 자리에 덩그러니 남지 않도록 매 프레임 동기화
     const posAttr=line.geometry.attributes.position;
     posAttr.array[0]=posA.x;posAttr.array[1]=posA.y;posAttr.array[2]=posA.z;
@@ -1936,7 +1937,9 @@ function animate(){
       // 해체/서바이벌 프로젝트 그룹(survivalShow)은 행성 자체가 0.4배로 옅게 표시되므로,
       // 그 그룹 내 멤버 연결선도 같은 비율로 옅게 해서 행성-선 투명도가 어긋나 보이지 않게 함
       const survivalDim=(GROUPS[grpKo]||{}).survivalShow?0.4:1;
-      const tgt=(focusGroupKo?(isFocused?baseOp*2.4:baseOp*0.18):baseOp)*survivalDim;
+      // 즐겨찾기 하이라이트(favMode) 등으로 그 그룹 행성이 흐려질 때 연결선도 행성의 실제 현재 밝기(focusAlpha)를 그대로 따라가게 함
+      const focusDim=bm?bm.mesh._focusAlpha??1:1;
+      const tgt=(focusGroupKo?(isFocused?baseOp*2.4:baseOp*0.18):baseOp)*survivalDim*focusDim;
       line.material.opacity+=(tgt-line.material.opacity)*0.10;
     }
   });
@@ -4778,6 +4781,21 @@ function _saveFavs(){
 }
 function _mFavKey(a){return a.group.ko+':'+a.name.ko;}
 
+// 즐겨찾기 추가 직전에 보고 있던 카드 — 해제(undo)하면 그 카드로 되돌아가기 위해 기억해둠
+let _preHeartCard=null; // {heartedType,heartedKey,card:{type:'group',ko}|{type:'member',artist}}
+function _currentOpenCard(){
+  if(_openGCko)return{type:'group',ko:_openGCko};
+  if(_openTArtist)return{type:'member',artist:_openTArtist};
+  return null;
+}
+function _reopenPreHeartCard(){
+  const c=_preHeartCard&&_preHeartCard.card;
+  _preHeartCard=null;
+  if(!c)return;
+  const cx=window.innerWidth/2,cy=window.innerHeight*0.4;
+  if(c.type==='group')showGC(c.ko,cx,cy);
+  else showT(c.artist,cx,cy);
+}
 function toggleFavGroup(ko){
   const dk='g:'+ko;
   const doToggle=()=>{
@@ -4789,9 +4807,15 @@ function toggleFavGroup(ko){
     _saveFavs();
     _syncFavBtn('group',ko);
     renderFavList();_buildAnniversaryList();
+    if(!wasFav){
+      // 즐겨찾기 추가: 지금 보던 카드를 기억해두고 닫은 뒤 내 별로 이동(카드에 화면이 가려 이동이 안 보이는 문제 방지)
+      _preHeartCard={heartedType:'group',heartedKey:ko,card:_currentOpenCard()};
+      closeCards();
+    }
     if(favMode){applyFavHighlight();_enterMyUniverseMode();}
     else if(myStarSprite)placeMyStarInUniverse();
-    if(myStarSprite)_flyToMyStar(); // 즐겨찾기 토글 시 화면이 안 움직이던 문제 — 내 별 쪽으로 카메라 이동
+    if(!wasFav&&myStarSprite)_flyToMyStar();
+    else if(wasFav&&_preHeartCard&&_preHeartCard.heartedType==='group'&&_preHeartCard.heartedKey===ko)_reopenPreHeartCard();
   };
   if(favGroups.has(ko))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
   else doToggle();
@@ -4808,9 +4832,14 @@ function toggleFavMember(artist){
     _saveFavs();
     _syncFavBtn('member',artist);
     renderFavList();_buildAnniversaryList();
+    if(!wasFav){
+      _preHeartCard={heartedType:'member',heartedKey:k,card:_currentOpenCard()};
+      closeCards();
+    }
     if(favMode){applyFavHighlight();_enterMyUniverseMode();}
     else if(myStarSprite)placeMyStarInUniverse();
-    if(myStarSprite)_flyToMyStar(); // 즐겨찾기 토글 시 화면이 안 움직이던 문제 — 내 별 쪽으로 카메라 이동
+    if(!wasFav&&myStarSprite)_flyToMyStar();
+    else if(wasFav&&_preHeartCard&&_preHeartCard.heartedType==='member'&&_preHeartCard.heartedKey===k)_reopenPreHeartCard();
   };
   if(favMembers.has(k))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
   else doToggle();
