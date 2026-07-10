@@ -1172,27 +1172,75 @@ dirLight.position.set(3,2,-1);
 scene.add(dirLight);
 
 // ── Glow texture ──────────────────────────────────
+// 밤하늘 별처럼: 중심에서 부드럽게 퍼지는 radial glow + 상하좌우로 가늘고 긴 렌즈 플레어(십자 빛갈라짐)
 function makeGlowTex(){
-  const c=document.createElement('canvas');c.width=64;c.height=64;
+  const sz=128,c0=sz/2;
+  const c=document.createElement('canvas');c.width=sz;c.height=sz;
   const cx=c.getContext('2d');
-  const glow=cx.createRadialGradient(32,32,0,32,32,32);
-  glow.addColorStop(0,    'rgba(255,255,255,0.65)');
-  glow.addColorStop(0.15, 'rgba(255,255,255,0.38)');
-  glow.addColorStop(0.35, 'rgba(255,255,255,0.15)');
-  glow.addColorStop(0.55, 'rgba(255,255,255,0.05)');
-  glow.addColorStop(0.78, 'rgba(255,255,255,0.01)');
+  // 별의 3단계 층위, 각 경계는 다음 단계 시작값과 정확히 이어지도록(끊김 없이). 비율은 1:2:3 = 15%:25%:60%
+  // 1) 코어(0~15%) — 끝까지 1.0 유지하는 작고 단단한 핵
+  // 2) 중간(15~40%) — 코어 끝값(1.0)에서 확 꺾인 뒤, 외곽에 가까운 낮은 밝기대를 넓게 유지하며 시작값(0.19)으로
+  // 3) 외곽(40~100%, 전체 반경의 60%) — 중간 끝값에서 이어받아 넓고 은은하게 퍼지는 꼬리
+  const glow=cx.createRadialGradient(c0,c0,0,c0,c0,c0);
+  glow.addColorStop(0,    'rgba(255,255,255,1.0)');
+  glow.addColorStop(0.06, 'rgba(255,255,255,0.97)');
+  glow.addColorStop(0.09, 'rgba(255,255,255,0.75)');
+  glow.addColorStop(0.11, 'rgba(255,255,255,0.55)');
+  glow.addColorStop(0.19, 'rgba(255,255,255,0.32)');
+  glow.addColorStop(0.25, 'rgba(255,255,255,0.23)');
+  glow.addColorStop(0.32, 'rgba(255,255,255,0.205)');
+  glow.addColorStop(0.40, 'rgba(255,255,255,0.19)');
+  glow.addColorStop(0.52, 'rgba(255,255,255,0.12)');
+  glow.addColorStop(0.64, 'rgba(255,255,255,0.075)');
+  glow.addColorStop(0.76, 'rgba(255,255,255,0.045)');
+  glow.addColorStop(0.88, 'rgba(255,255,255,0.02)');
+  glow.addColorStop(0.964, 'rgba(255,255,255,0.006)');
   glow.addColorStop(1,    'rgba(255,255,255,0)');
   cx.fillStyle=glow;
-  cx.fillRect(0,0,64,64);
-  const core=cx.createRadialGradient(32,32,0,32,32,3);
-  core.addColorStop(0,   'rgba(255,255,255,1.0)');
-  core.addColorStop(0.55,'rgba(255,255,255,0.7)');
-  core.addColorStop(1,   'rgba(255,255,255,0)');
-  cx.fillStyle=core;
-  cx.fillRect(0,0,64,64);
+  cx.fillRect(0,0,sz,sz);
+  // 십자 플레어: 가로/세로 각각 얇은 띠를 여러 겹 겹쳐서, 길이 방향(가운데일수록 밝음)과
+  // 두께 방향(가운데 줄일수록 밝음) 둘 다 자연스럽게 페이드되는 얇고 긴 빛줄기를 만든다.
+  cx.globalCompositeOperation='lighter';
+  const halfW=4,peak=0.28;
+  for(let d=-halfW;d<=halfW;d++){
+    const vf=Math.exp(-(d/(halfW*0.62))*(d/(halfW*0.62)));
+    const a=peak*vf;
+    if(a<0.004)continue;
+    const gH=cx.createLinearGradient(0,c0+d,sz,c0+d);
+    gH.addColorStop(0,   'rgba(255,255,255,0)');
+    gH.addColorStop(0.5, `rgba(255,255,255,${a})`);
+    gH.addColorStop(1,   'rgba(255,255,255,0)');
+    cx.fillStyle=gH;
+    cx.fillRect(0,c0+d,sz,1);
+    const gV=cx.createLinearGradient(c0+d,0,c0+d,sz);
+    gV.addColorStop(0,   'rgba(255,255,255,0)');
+    gV.addColorStop(0.5, `rgba(255,255,255,${a})`);
+    gV.addColorStop(1,   'rgba(255,255,255,0)');
+    cx.fillStyle=gV;
+    cx.fillRect(c0+d,0,1,sz);
+  }
+  cx.globalCompositeOperation='source-over';
   return new THREE.CanvasTexture(c);
 }
 const glowTex=makeGlowTex();
+
+// 멤버 코어가 실제 빛처럼 번져 보이게 하는 '블룸 흉내' 레이어용 — 뚜렷한 코어 없이
+// 아주 넓고 부드럽게만 퍼지는 텍스처. glowTex 점 뒤에 훨씬 크게 additive로 겹쳐 그려서
+// (후처리 블룸 없이도) 경계 없이 빛이 새어나가는 느낌을 낸다.
+function makeBloomHaloTex(){
+  const c=document.createElement('canvas');c.width=64;c.height=64;
+  const cx=c.getContext('2d');
+  const g=cx.createRadialGradient(32,32,0,32,32,32);
+  g.addColorStop(0,   'rgba(255,255,255,0.55)');
+  g.addColorStop(0.25,'rgba(255,255,255,0.30)');
+  g.addColorStop(0.50,'rgba(255,255,255,0.13)');
+  g.addColorStop(0.75,'rgba(255,255,255,0.04)');
+  g.addColorStop(1,   'rgba(255,255,255,0)');
+  cx.fillStyle=g;
+  cx.fillRect(0,0,64,64);
+  return new THREE.CanvasTexture(c);
+}
+const bloomHaloTex=makeBloomHaloTex();
 
 // 신인 헤일로 전용 — glowTex(중심이 가장 밝은 점 광원용)와 달리, 행성 실루엣에 가려지지 않도록
 // 중심은 완전히 투명하고 바깥쪽 도넛 형태 밴드에서만 빛나다가 다시 투명해지는 텍스처
@@ -1699,13 +1747,9 @@ async function buildUniverse(){
   });
 
   // ── Member points (fixed pixel size, camera-distance independent) ──
-  function makePoints(positions,colors,sizeW,opacity){
-    if(!positions.length)return;
-    const geo=new THREE.BufferGeometry();
-    geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(positions),3));
-    geo.setAttribute('color',new THREE.BufferAttribute(new Float32Array(colors),3));
+  function makePointsMat(tex,sizeW,opacity,sizeClamp){
     const mat=new THREE.PointsMaterial({
-      size:sizeW/Math.min(window.devicePixelRatio,2),map:glowTex,vertexColors:true,
+      size:sizeW/Math.min(window.devicePixelRatio,2),map:tex,vertexColors:true,
       transparent:true,opacity,
       depthWrite:false,blending:THREE.AdditiveBlending,
       sizeAttenuation:true
@@ -1713,20 +1757,82 @@ async function buildUniverse(){
     // 카메라를 아주 가까이 붙였을 때 gl_PointSize가 한없이 커지는 걸 막는다.
     // iOS Safari 등 일부 모바일 GPU는 큰 point sprite를 깨끗하게 클램프하지 못하고
     // 여러 개로 쪼개진 것처럼 깜빡이며 렌더링하는 버그가 있음 — 상한을 걸어 예방.
+    // + 십자 플레어가 모든 별에서 똑같은 방향/굵기로 보이면 인위적으로 느껴져서,
+    // 정점별 랜덤 시드(flareSeed)로 UV를 회전시켜 방향을, 크기를 살짝씩 지터시켜 정도를 다르게 만든다.
     mat.onBeforeCompile=shader=>{
-      shader.vertexShader=shader.vertexShader.replace(
-        'if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );',
-        'if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );\n\t\tgl_PointSize = min( gl_PointSize, 46.0 );'
-      );
+      shader.vertexShader=shader.vertexShader
+        .replace(
+          'uniform float size;\nuniform float scale;',
+          'uniform float size;\nuniform float scale;\nattribute float flareSeed;\nvarying float vFlareAngle;'
+        )
+        .replace(
+          'gl_PointSize = size;',
+          'vFlareAngle = flareSeed * 6.2831853;\n\t\tfloat _fJit = 0.85 + 0.3 * fract(sin(flareSeed*78.233)*43758.5453);\n\t\tgl_PointSize = size * _fJit;'
+        )
+        .replace(
+          'if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );',
+          `if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );\n\t\tgl_PointSize = min( gl_PointSize, ${sizeClamp.toFixed(1)} );`
+        );
+      shader.fragmentShader=shader.fragmentShader
+        .replace(
+          'uniform vec3 diffuse;\nuniform float opacity;',
+          'uniform vec3 diffuse;\nuniform float opacity;\nvarying float vFlareAngle;'
+        )
+        .replace(
+          '#include <map_particle_fragment>',
+          `#if defined( USE_MAP ) || defined( USE_ALPHAMAP )
+	vec2 _pc = gl_PointCoord - vec2(0.5);
+	float _ca = cos(vFlareAngle), _sa = sin(vFlareAngle);
+	_pc = vec2(_pc.x*_ca - _pc.y*_sa, _pc.x*_sa + _pc.y*_ca) + vec2(0.5);
+	vec2 uv = ( uvTransform * vec3( _pc.x, 1.0 - _pc.y, 1 ) ).xy;
+#endif
+#ifdef USE_MAP
+	vec4 mapTexel = texture2D( map, uv );
+	diffuseColor *= mapTexelToLinear( mapTexel );
+#endif
+#ifdef USE_ALPHAMAP
+	diffuseColor.a *= texture2D( alphaMap, uv ).g;
+#endif`
+        );
     };
+    return mat;
+  }
+  function makePoints(positions,colors,sizeW,opacity){
+    if(!positions.length)return;
+    const geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(positions),3));
+    geo.setAttribute('color',new THREE.BufferAttribute(new Float32Array(colors),3));
+    const flareSeeds=new Float32Array(positions.length/3);
+    for(let i=0;i<flareSeeds.length;i++)flareSeeds[i]=Math.random();
+    geo.setAttribute('flareSeed',new THREE.BufferAttribute(flareSeeds,1));
+    const mat=makePointsMat(glowTex,sizeW,opacity,46.0);
     const pts=new THREE.Points(geo,mat);
     scene.add(pts);
+    // 후처리 블룸 없이 '빛이 실제로 번지는' 느낌을 내기 위한 halo 레이어 — 같은 geometry(포지션/컬러)를
+    // 공유해서 즐겨찾기·필터 등으로 색이 바뀌어도 자동으로 같이 반영되고, 훨씬 크고 옅은 텍스처로
+    // additive 겹쳐 그려서 코어 바깥으로 빛이 새어나가는 것처럼 보이게 한다.
+    const haloMat=makePointsMat(bloomHaloTex,sizeW*3.4,opacity*0.55,150.0);
+    const haloPts=new THREE.Points(geo,haloMat);
+    scene.add(haloPts);
+    pts.userData.halo=haloPts;
     return pts;
   }
-  regularPts=makePoints(regularPos,regularColors,isMobile?8.6:14,0.82*opScale);
-  sparklePts=makePoints(sparklePos,sparkleColors,isMobile?17.2:31,1.0*opScale);
-  if(regularPts)regColorAttr=regularPts.geometry.attributes.color;
-  if(sparklePts)spkColorAttr=sparklePts.geometry.attributes.color;
+  regularPts=makePoints(regularPos,regularColors,isMobile?20.6:33.6,0.82*opScale);
+  sparklePts=makePoints(sparklePos,sparkleColors,isMobile?41.3:74.4,1.0*opScale);
+  if(regularPts){
+    regColorAttr=regularPts.geometry.attributes.color;
+    regularPts.userData.baseOp=0.82*opScale;
+    regularPts.userData.baseSize=regularPts.material.size;
+    regularPts.userData.halo.userData.baseOp=regularPts.userData.halo.material.opacity;
+    regularPts.userData.halo.userData.baseSize=regularPts.userData.halo.material.size;
+  }
+  if(sparklePts){
+    spkColorAttr=sparklePts.geometry.attributes.color;
+    sparklePts.userData.baseOp=1.0*opScale;
+    sparklePts.userData.baseSize=sparklePts.material.size;
+    sparklePts.userData.halo.userData.baseOp=sparklePts.userData.halo.material.opacity;
+    sparklePts.userData.halo.userData.baseSize=sparklePts.userData.halo.material.size;
+  }
 
   // ── NCT Family Rings (아주 얇은 단색 스트로크를 간격 없이 촘촘히 쌓아 부드러운 그라데이션처럼 보이게) ─────
   // 각 선 자체는 여전히 그라데이션 없는 단색이지만, 개수를 늘리고 두께=간격으로 맞춰 틈을 없애 자연스럽게 이어붙임
@@ -1947,6 +2053,38 @@ function animate(){
   const camDist=camera.position.length();
   const zoomT=Math.max(0,Math.min(1,(camDist-90)/190));
   const zoomBoost=-(Math.cos(Math.PI*zoomT)-1)/2;
+  // 멤버 점 발광: zoomBoost는 홈(≈120)에서 0.06 정도로 거의 0이라, 홈이 사실상 풀브라이트에
+  // 가까운 채로 남아 최대 줌아웃(zoomBoost=1, 확인 결과 문제없음)과 밝기 차이가 거의 없었음 —
+  // 홈 부근을 최대 줌아웃 쪽에 훨씬 가깝게 낮춰서 평상시엔 은은하게 유지.
+  // 강한 자체발광은 실제로 그룹을 '클릭해 포커스'했을 때(focusGroupKo)만 거리와 무관하게 적용.
+  // opacity는 항상 1 이하로 캡(1을 넘기면 중간톤까지 하얗게 뭉개짐). 그런데 그동안 포커스 때도
+  // 이 opacity 자체가 0.4~0.55 수준에 묶여 있어서, 텍스처 코어를 아무리 진하게(alpha=1) 만들어도
+  // 화면엔 반투명하게만 보였음 — 포커스 때는 opacity도 최대(1)까지 확실히 풀어준다.
+  const ptsOpMult=focusGroupKo?1.3:(0.40-zoomBoost*0.25);
+  const ptsSizeMult=0.40-zoomBoost*0.12;
+  const focusBoost=focusGroupKo?4.5:1;
+  // halo(블룸 흉내) 레이어는 평소엔 살짝만 번지다가, 포커스했을 때 훨씬 크게 부풀어
+  // 실제 '빛 덩어리'처럼 보이게 — 코어(ptsOpMult/focusBoost)보다 더 과감한 배율을 쓴다.
+  const haloFocusBoost=focusGroupKo?7:1.6;
+  function _updatePtsHalo(pts){
+    const halo=pts.userData.halo;
+    if(!halo)return;
+    const tgt=Math.min(1,halo.userData.baseOp*ptsOpMult);
+    halo.material.opacity+=(tgt-halo.material.opacity)*0.08;
+    halo.material.size=halo.userData.baseSize*ptsSizeMult*haloFocusBoost;
+  }
+  if(regularPts){
+    const tgt=Math.min(1,regularPts.userData.baseOp*ptsOpMult);
+    regularPts.material.opacity+=(tgt-regularPts.material.opacity)*0.08;
+    regularPts.material.size=regularPts.userData.baseSize*ptsSizeMult*focusBoost;
+    _updatePtsHalo(regularPts);
+  }
+  if(sparklePts){
+    const tgt=Math.min(1,sparklePts.userData.baseOp*ptsOpMult);
+    sparklePts.material.opacity+=(tgt-sparklePts.material.opacity)*0.08;
+    sparklePts.material.size=sparklePts.userData.baseSize*ptsSizeMult*focusBoost;
+    _updatePtsHalo(sparklePts);
+  }
   let colorsDirty=false;
   bubbleMeshes.forEach(({mesh,labelEl,halo})=>{
     const dist=camera.position.distanceTo(mesh.position);
