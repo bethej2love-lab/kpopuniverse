@@ -2848,6 +2848,9 @@
       "en": "CORTIS"
     },
     "co": "HYBE",
+    "links": {
+      "namu": "https://namu.wiki/w/%EC%84%B1%ED%98%84(CORTIS)"
+    },
     "planet": "main",
     "x": 7414,
     "y": 8414,
@@ -6884,11 +6887,7 @@
       "en": "Solo"
     },
     "co": "EDAM",
-    "planet": "iu",
-    "x": 6000,
-    "y": 400,
-    "sat": 0.95,
-    "op": 0.85,
+    "debut": "2008.09.19",
     "active": true,
     "color": [
       208,
