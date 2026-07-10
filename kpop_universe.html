@@ -449,18 +449,21 @@
   #tt-collapse:hover{background:rgba(40,50,80,0.96);color:rgba(200,220,255,0.95);}
   @media(max-width:768px){#member-panel{display:none;}#tt-collapse{display:none;}}
   /* ── Member card nav ──────────────────────────────── */
+  /* 데스크톱: 옆 멤버 이동 화살표를 상단 X(닫기) 버튼과 같은 줄로 이동 */
   #tt-nav{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-top:2px;margin-bottom:8px;
+    position:absolute;top:8px;right:29px;
+    display:flex;align-items:center;justify-content:flex-end;
+    margin:0;
   }
   .tt-nav-btn{
-    background:none;border:none;padding:5px 9px;
-    font-size:17px;line-height:1;cursor:pointer;font-family:inherit;
+    background:none;border:none;padding:2px 4px;
+    font-size:13px;line-height:1;cursor:pointer;font-family:inherit;
     color:rgba(160,180,225,0.45);transition:color .18s;
   }
   @media(max-width:768px){
-    #tt-nav{margin-top:8px;margin-bottom:15px;}
-    .tt-nav-btn{padding:9px 9px;}
+    /* 모바일은 기존대로 영상 위 줄에 그대로 유지 */
+    #tt-nav{position:static;justify-content:space-between;margin-top:8px;margin-bottom:15px;}
+    .tt-nav-btn{padding:9px 9px;font-size:17px;}
   }
   .tt-nav-btn:hover{color:rgba(200,218,255,0.75);}
   #tt-counter{display:none;}
@@ -483,6 +486,7 @@
   #gc-en-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
   #gc-links{display:flex;align-items:center;gap:9px;flex-shrink:0;}
   #tt-links{display:flex;align-items:center;gap:7px;flex-shrink:0;}
+  #tt-links:not(:empty)::after{content:'·';color:rgba(120,145,195,0.4);font-size:10px;}
   #tt-links .gc-link-icon{width:14px;height:14px;}
   .gc-link-icon{
     display:flex;align-items:center;justify-content:center;
@@ -1289,8 +1293,8 @@ let ARTISTS=[],GROUPS={};
 const bubbleMeshes=[],regularArtists=[],sparkleArtists=[];
 let regularPts=null,sparklePts=null;
 // 마크(NCT 127) 파일럿: 비활동 상태를 "행성 밖에 떠 있다가 멤버 토글 시 안으로 날아들어옴"으로 표현
-let _markArtist=null,_markInsidePos=null,_markOutsidePos=null,_markFlyState=null;
-const MARK_FLY_MS=650;
+let _flyToggleAnims=[]; // 비활동/탈퇴 멤버가 그룹 카드 "멤버" 토글에 따라 행성 안팎으로 날아다니는 애니메이션들 — {artist,wp,t0,from,to}
+const FLY_TOGGLE_MS=650;
 let myStarSprite=null,myStarLabel=null,myStarTex=null,myStarBase=2.4;
 let _myStarSelected=false,_myStarSavedCam=null,_myStarSavedTarget=null;
 const connLines=[];
@@ -1700,13 +1704,14 @@ async function buildUniverse(){
       }while(tries<60&&_placedMPos.some(p=>p.distanceTo(mPos)<_minSep));
       _placedMPos.push(mPos.clone());
 
-      // 마크(NCT 127 한정) 파일럿: 기본 위치를 행성 표면 바깥으로 — NCT Dream 쪽은 정상 배치 유지
-      if(ko==='NCT 127'&&m.name.ko==='마크'){
-        _markArtist=m;
-        _markInsidePos=mPos.clone(); // 원래라면 여기 있었을 자리(토글 켜면 여기로 날아들어옴)
+      // 비활동/탈퇴 멤버(주 소속 그룹 한정): 기본 위치를 행성 표면 바깥으로 — 그룹 카드 "멤버" 토글로 안팎을 날아다님.
+      // 이중 소속인 경우 다른(주 소속이 아닌) 그룹 쪽 위치는 정상 배치 그대로 둔다.
+      let _flyInside=null,_flyOutside=null;
+      if(!m.active&&ko===m.group.ko){
+        _flyInside=mPos.clone(); // 원래라면 여기 있었을 자리(토글 켜면 여기로 날아들어옴)
         const outDir=new THREE.Vector3(Math.random()-0.5,Math.random()*0.6+0.2,Math.random()-0.5).normalize();
-        _markOutsidePos=pos.clone().addScaledVector(outDir,radius+5);
-        mPos=_markOutsidePos.clone();
+        _flyOutside=pos.clone().addScaledVector(outDir,radius+5);
+        mPos=_flyOutside.clone();
       }
 
       const spColor=m.sparkle?mColor.clone().lerp(new THREE.Color(1,1,1),0.25):mColor;
@@ -1719,7 +1724,9 @@ async function buildUniverse(){
       const _pType=m.sparkle?'sparkle':'regular';
       const _pIdx=m.sparkle?sparkleIdx++:regularIdx++;
       const _origCol=[spColor.r,spColor.g,spColor.b];
-      m._worldPositions.push({groupKo:ko,pos:mPos.clone(),ptsType:_pType,ptsIdx:_pIdx,origColor:_origCol});
+      const _wp={groupKo:ko,pos:mPos.clone(),ptsType:_pType,ptsIdx:_pIdx,origColor:_origCol};
+      if(_flyOutside){_wp.insidePos=_flyInside;_wp.outsidePos=_flyOutside;_wp.flyToggle=true;}
+      m._worldPositions.push(_wp);
       // 첫 번째 그룹(primary) 위치만 _worldPos 등에 세팅
       if(!m._worldPos){
         m._worldPos=mPos.clone();
@@ -1788,6 +1795,7 @@ async function buildUniverse(){
       for(const ca of candA){const cb=candB.find(b=>b.group.ko===ca.group.ko);if(cb){artA=ca;artB=cb;shareKo=ca.group.ko;break;}}
     }
     if(!artA||!artB)return;
+    if(!artA.active||!artB.active)return; // 비활동/탈퇴 멤버는 행성 밖에 떠 있으므로 그룹 내 관계선을 아예 안 그림(토글로 안에 들어와도 마찬가지)
     const wpA=(artA._worldPositions||[]).find(wp=>wp.groupKo===shareKo);
     const wpB=(artB._worldPositions||[]).find(wp=>wp.groupKo===shareKo);
     const posA=wpA?wpA.pos:artA._worldPos,posB=wpB?wpB.pos:artB._worldPos;
@@ -2311,13 +2319,17 @@ function animate(){
     if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
     if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
   }
-  if(_markFlyState){
-    const t=Math.min(1,(performance.now()-_markFlyState.t0)/MARK_FLY_MS);
-    const p=_markFlyState.from.clone().lerp(_markFlyState.to,easeInOut(t));
-    _setMemberPointPos(_markArtist,_markFlyState.wp,p);
+  if(_flyToggleAnims.length){
+    const _now=performance.now();
+    for(let i=_flyToggleAnims.length-1;i>=0;i--){
+      const fl=_flyToggleAnims[i];
+      const t=Math.min(1,(_now-fl.t0)/FLY_TOGGLE_MS);
+      const p=fl.from.clone().lerp(fl.to,easeInOut(t));
+      _setMemberPointPos(fl.artist,fl.wp,p);
+      if(t>=1)_flyToggleAnims.splice(i,1);
+    }
     if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
     if(sparklePts)sparklePts.geometry.attributes.position.needsUpdate=true;
-    if(t>=1)_markFlyState=null;
   }
   if(_myStarLines.length&&myStarSprite){
     const _msd=camera.position.distanceTo(myStarSprite.position);
@@ -3776,7 +3788,11 @@ document.getElementById('gc-mem-label').addEventListener('click',e=>{
   e.stopPropagation();
   if(!e.currentTarget.classList.contains('toggleable')||!_openGCko)return;
   _gcShowInactive=!_gcShowInactive;
-  if(_openGCko==='NCT 127'&&_markArtist)_markFlyTo(_gcShowInactive?_markInsidePos:_markOutsidePos);
+  ARTISTS.forEach(m=>{
+    (m._worldPositions||[]).forEach(wp=>{
+      if(wp.flyToggle&&wp.groupKo===_openGCko)_flyToggleTo(m,wp,_gcShowInactive?wp.insidePos:wp.outsidePos);
+    });
+  });
   _renderGcMemberList(_openGCko,window.innerWidth/2,window.innerHeight*0.4);
 });
 function showGC(ko,cx,cy,keepMemberPanel,skipRipple,urlMode){
@@ -3816,11 +3832,15 @@ function showGC(ko,cx,cy,keepMemberPanel,skipRipple,urlMode){
   else leaderRow.style.display='none';
   _renderGcLinks(info.links);
   _gcShowInactive=false;
-  if(_markArtist){
-    _markFlyState=null;
-    const _mwp=(_markArtist._worldPositions||[]).find(w=>w.groupKo==='NCT 127');
-    if(_mwp){_setMemberPointPos(_markArtist,_mwp,_markOutsidePos);if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;}
-  }
+  ARTISTS.forEach(m=>{
+    (m._worldPositions||[]).forEach(wp=>{
+      if(wp.flyToggle&&wp.groupKo===ko){
+        _flyToggleAnims=_flyToggleAnims.filter(fl=>fl.wp!==wp);
+        _setMemberPointPos(m,wp,wp.outsidePos);
+      }
+    });
+  });
+  if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
   _renderGcMemberList(ko,cx,cy);
   const gcTv=document.getElementById('gc-tv');
   buildVideoSection(info.songs||[],gcTv,{groupKo:ko});
@@ -4302,7 +4322,7 @@ document.getElementById('tab-lang').addEventListener('click',e=>{
 const _recentExploreKos=[];
 function _pickExploreTarget(){
   const groups=bubbleMeshes.map(bm=>({type:'group',key:'g:'+bm.ko,bm}));
-  const members=ARTISTS.filter(a=>a._worldPos).map(a=>{
+  const members=ARTISTS.filter(a=>a._worldPos&&a.active).map(a=>{
     const bm=bubbleMeshes.find(b=>b.ko===a.group.ko);
     return bm?{type:'member',key:'m:'+a.name.ko+':'+a.group.ko,artist:a,bm}:null;
   }).filter(Boolean);
@@ -4515,6 +4535,7 @@ document.getElementById('dh-home-btn').addEventListener('click',e=>{e.stopPropag
 document.getElementById('tab-home').addEventListener('click',e=>{e.stopPropagation();flyHome();});
 document.getElementById('dh-explore-btn').addEventListener('click',e=>{
   e.stopPropagation();
+  _dismissFavHint();
   if(!bubbleMeshes.length)return;
   const item=_pickExploreTarget();const{bm}=item;
   closePanels();closeCards();
@@ -4817,6 +4838,7 @@ window.addEventListener('click',e=>{
 const FAV_KEY_G='kpu_fav_groups';
 const FAV_KEY_M='kpu_fav_members';
 const FAV_KEY_C='kpu_fav_connections';
+const FAV_HINT_DISMISSED_KEY='kpu_fav_hint_dismissed'; // 탐색 버튼을 눌렀거나 로그인했으면 "Start with Your Favorite!" 안내는 다시 안 보여줌
 let favGroups=new Set(JSON.parse(localStorage.getItem(FAV_KEY_G)||'[]'));
 let favMembers=new Set(JSON.parse(localStorage.getItem(FAV_KEY_M)||'[]'));
 let favConnections=new Set(JSON.parse(localStorage.getItem(FAV_KEY_C)||'[]'));
@@ -5145,7 +5167,7 @@ function _updateFavHintCallout(){
   const el=document.getElementById('fav-hint-callout');
   if(!el)return;
   const _panelsOpen=document.getElementById('search-wrap').classList.contains('open')||document.getElementById('settings-panel').classList.contains('open');
-  const show=!isMob()&&!_panelsOpen&&favGroups.size===0&&favMembers.size===0;
+  const show=!isMob()&&!_panelsOpen&&favGroups.size===0&&favMembers.size===0&&!localStorage.getItem(FAV_HINT_DISMISSED_KEY);
   if(!show){el.classList.remove('show');return;}
   const pill=document.getElementById('dh-right'),exploreBtn=document.getElementById('dh-explore-btn');
   if(!pill||!exploreBtn)return;
@@ -5158,6 +5180,10 @@ function _updateFavHintCallout(){
   el.style.left=Math.round(exploreCenterX-ARROW_OFFSET)+'px';
   el.style.top=Math.round(pillRect.bottom+10)+'px';
   el.classList.add('show');
+}
+function _dismissFavHint(){
+  localStorage.setItem(FAV_HINT_DISMISSED_KEY,'1');
+  _updateFavHintCallout();
 }
 
 function _daysUntilBday(bdayStr){
@@ -5376,6 +5402,7 @@ function _toggleFavMode(){
   if(favMode){
     applyFavHighlight();
     _enterMyUniverseMode();
+    _flyToMyUniverse();
     // 별이 궤도로 모이는 연출(MY_UNIVERSE_ENTER_MS)이 끝난 직후에 카드가 뜨도록 지연 —
     // 우주 연출과 카드가 동시에 뜨면 화면이 한꺼번에 바뀌어 어수선해 보이는 문제 방지
     _favSidebarOpenTimer=setTimeout(()=>{
@@ -5418,11 +5445,9 @@ function _setMemberPointPos(artist,wp,p){
   if(attr){const i=wp.ptsIdx*3;attr.array[i]=p.x;attr.array[i+1]=p.y;attr.array[i+2]=p.z;}
   if(_isPrimaryWp(artist,wp))artist._worldPos.copy(p);
 }
-function _markFlyTo(targetPos){
-  if(!_markArtist)return;
-  const wp=(_markArtist._worldPositions||[]).find(w=>w.groupKo==='NCT 127');
-  if(!wp)return;
-  _markFlyState={t0:performance.now(),from:wp.pos.clone(),to:targetPos.clone(),wp};
+function _flyToggleTo(artist,wp,targetPos){
+  _flyToggleAnims=_flyToggleAnims.filter(fl=>fl.wp!==wp); // 같은 wp에 대한 기존 애니메이션은 새로 시작하는 쪽으로 교체
+  _flyToggleAnims.push({artist,wp,t0:performance.now(),from:wp.pos.clone(),to:targetPos.clone()});
 }
 function _hubFromOrbitOrigins(orbits){
   const pts=[];
@@ -5514,6 +5539,20 @@ function _enterMyUniverseMode(){
   _myUniverseStarFrom=starFrom;
   _myUniversePhase='entering';
   _myUniversePhaseT0=performance.now();
+}
+// 즐겨찾기(하트) 모드를 켰을 때 궤도로 모인 내 우주 전체(행성/별/my 별)가 한눈에 보이도록 카메라를 이동
+function _flyToMyUniverse(dur){
+  if(!_myUniverseHub||!_myUniverseOrbits.length)return;
+  let maxR=2.4;
+  _myUniverseOrbits.forEach(o=>{
+    if(o.kind==='group')maxR=Math.max(maxR,o.radius+o.bm.radius);
+    else if(o.kind==='member-solo')maxR=Math.max(maxR,o.radius);
+  });
+  const dir=camera.position.clone().sub(controls.target);
+  if(dir.lengthSq()<0.001)dir.set(0,0.3,1);
+  dir.normalize();
+  const dist=Math.max(maxR*2.6+18,30);
+  _startFly(_myUniverseHub.clone(),_myUniverseHub.clone().addScaledVector(dir,dist),dur||MY_UNIVERSE_ENTER_MS+250);
 }
 function _exitMyUniverseMode(){
   if(!_myUniverseOrbits.length){
@@ -5963,6 +6002,7 @@ async function initSupabaseSync(){
     window._sbSession=session;
     _warmScrapCounts(); // fire-and-forget — 메인 직캠 선정용 공개 스크랩 집계 캐시를 최대한 빨리 채워둔다
     const isAnonymous=session.user.is_anonymous===true;
+    if(!isAnonymous)_dismissFavHint(); // 구글 계정 연결(로그인) 상태면 즐겨찾기 시작 안내는 더 이상 필요 없음
     if(isBrandNewAnonymous){
       await _migrateLocalToServer(session.user.id);
       localStorage.setItem(SB_LAST_UID_KEY,session.user.id);
