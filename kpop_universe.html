@@ -289,6 +289,7 @@
   .gc-status-line.fade{opacity:0;}
   .gc-status-line.type-presence{color:rgba(255,170,150,0.85);}
   .gc-status-line.type-favcount{color:rgba(165,180,215,0.62);}
+  #tt-status-line{padding-left:4px;} /* #tt-name-row/#tg-row와 좌측 맞춤(4px) */
   .presence-dot{width:6px;height:6px;border-radius:50%;background:rgb(255,140,120);box-shadow:0 0 5px rgba(255,140,120,0.8);animation:presence-pulse 1.6s ease-in-out infinite;flex:none;}
   @keyframes presence-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.45;transform:scale(0.72);}}
   .tm{display:none;}
@@ -478,6 +479,8 @@
   #gc-en{font-size:14px;letter-spacing:.1em;color:#7898b8;margin-bottom:0;text-transform:uppercase;font-weight:500;}
   #gc-en-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
   #gc-links{display:flex;align-items:center;gap:9px;flex-shrink:0;}
+  #tt-links{display:flex;align-items:center;gap:7px;flex-shrink:0;}
+  #tt-links .gc-link-icon{width:14px;height:14px;}
   .gc-link-icon{
     display:flex;align-items:center;justify-content:center;
     width:16px;height:16px;color:rgba(150,175,220,0.60);
@@ -495,6 +498,7 @@
   #gc-grid .val{font-size:14px;color:#c0d6f0;font-weight:500;}
   #gc-grid #gc-fandom,#gc-grid #gc-leader{
     font-size:11px;font-weight:600;letter-spacing:.04em;
+    margin-left:4px; /* 작은 글꼴+글로우 특성상 글자 잉크가 다른 값 줄보다 왼쪽에서 시작해 보정 */
     color:rgba(170,205,255,0.80);
     text-shadow:0 0 4px rgba(140,175,255,0.16),0 0 2px rgba(140,175,255,0.07);
   }
@@ -936,7 +940,7 @@
   </div>
 </div>
 <div id="fav-hint-callout">Start with Your Favorite!<span id="fhc-arrow"></span></div>
-<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button></div><div id="tg-row"><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버">›</button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버">‹</button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버">›</button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
@@ -1759,20 +1763,24 @@ async function buildUniverse(){
     // 여러 개로 쪼개진 것처럼 깜빡이며 렌더링하는 버그가 있음 — 상한을 걸어 예방.
     // + 십자 플레어가 모든 별에서 똑같은 방향/굵기로 보이면 인위적으로 느껴져서,
     // 정점별 랜덤 시드(flareSeed)로 UV를 회전시켜 방향을, 크기를 살짝씩 지터시켜 정도를 다르게 만든다.
+    // + my 별의 "숨쉬듯 살짝 커졌다 작아지는" 효과를 멤버 별에도 적용 — 단, 전부 같은 위상으로 숨쉬면
+    // 한꺼번에 맥동하는 것처럼 부자연스러워서 flareSeed로 별마다 위상을 어긋나게 한다(진폭은 my 별보다 살짝 작게).
     mat.onBeforeCompile=shader=>{
+      shader.uniforms.uTime={value:0};
       shader.vertexShader=shader.vertexShader
         .replace(
           'uniform float size;\nuniform float scale;',
-          'uniform float size;\nuniform float scale;\nattribute float flareSeed;\nvarying float vFlareAngle;'
+          'uniform float size;\nuniform float scale;\nuniform float uTime;\nattribute float flareSeed;\nvarying float vFlareAngle;'
         )
         .replace(
           'gl_PointSize = size;',
-          'vFlareAngle = flareSeed * 6.2831853;\n\t\tfloat _fJit = 0.85 + 0.3 * fract(sin(flareSeed*78.233)*43758.5453);\n\t\tgl_PointSize = size * _fJit;'
+          'vFlareAngle = flareSeed * 6.2831853;\n\t\tfloat _fJit = 0.85 + 0.3 * fract(sin(flareSeed*78.233)*43758.5453);\n\t\tfloat _breathe = 1.0 + 0.20 * sin(uTime*1.15 + flareSeed*6.2831853);\n\t\tgl_PointSize = size * _fJit * _breathe;'
         )
         .replace(
           'if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );',
           `if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );\n\t\tgl_PointSize = min( gl_PointSize, ${sizeClamp.toFixed(1)} );`
         );
+      mat.userData.shader=shader;
       shader.fragmentShader=shader.fragmentShader
         .replace(
           'uniform vec3 diffuse;\nuniform float opacity;',
@@ -1817,8 +1825,8 @@ async function buildUniverse(){
     pts.userData.halo=haloPts;
     return pts;
   }
-  regularPts=makePoints(regularPos,regularColors,isMobile?20.6:33.6,0.82*opScale);
-  sparklePts=makePoints(sparklePos,sparkleColors,isMobile?41.3:74.4,1.0*opScale);
+  regularPts=makePoints(regularPos,regularColors,33.6,0.82*opScale);
+  sparklePts=makePoints(sparklePos,sparkleColors,74.4,1.0*opScale);
   if(regularPts){
     regColorAttr=regularPts.geometry.attributes.color;
     regularPts.userData.baseOp=0.82*opScale;
@@ -2066,23 +2074,28 @@ function animate(){
   // halo(블룸 흉내) 레이어는 평소엔 살짝만 번지다가, 포커스했을 때 훨씬 크게 부풀어
   // 실제 '빛 덩어리'처럼 보이게 — 코어(ptsOpMult/focusBoost)보다 더 과감한 배율을 쓴다.
   const haloFocusBoost=focusGroupKo?7:1.6;
+  const _ptsNowSec=performance.now()*0.001;
+  function _syncPtsTime(mat){if(mat.userData.shader)mat.userData.shader.uniforms.uTime.value=_ptsNowSec;}
   function _updatePtsHalo(pts){
     const halo=pts.userData.halo;
     if(!halo)return;
     const tgt=Math.min(1,halo.userData.baseOp*ptsOpMult);
     halo.material.opacity+=(tgt-halo.material.opacity)*0.08;
     halo.material.size=halo.userData.baseSize*ptsSizeMult*haloFocusBoost;
+    _syncPtsTime(halo.material);
   }
   if(regularPts){
     const tgt=Math.min(1,regularPts.userData.baseOp*ptsOpMult);
     regularPts.material.opacity+=(tgt-regularPts.material.opacity)*0.08;
     regularPts.material.size=regularPts.userData.baseSize*ptsSizeMult*focusBoost;
+    _syncPtsTime(regularPts.material);
     _updatePtsHalo(regularPts);
   }
   if(sparklePts){
     const tgt=Math.min(1,sparklePts.userData.baseOp*ptsOpMult);
     sparklePts.material.opacity+=(tgt-sparklePts.material.opacity)*0.08;
     sparklePts.material.size=sparklePts.userData.baseSize*ptsSizeMult*focusBoost;
+    _syncPtsTime(sparklePts.material);
     _updatePtsHalo(sparklePts);
   }
   let colorsDirty=false;
@@ -2568,7 +2581,17 @@ function makeSmallThumb(s,allSongs,idx,ctx){
 
 function _shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
 function _pickMainVideo(pool){
-  const p=pool.slice(0,3);
+  // 뮤비(type:'mv')는 메인 후보에서 항상 제외 — 직캠이 메인 위주가 되도록.
+  const eligible=pool.filter(s=>(s.type||'fancam')==='fancam');
+  const base=eligible.length?eligible:pool;
+  // 공개 스크랩 집계가 있으면 최다 스크랩 직캠을 메인으로(동률이면 그 안에서 랜덤).
+  // 집계가 아직 없거나(로딩 전/Supabase 불가) 전부 0이면 기존 방식(상위 3개 중 랜덤)으로 자연 폴백.
+  const maxCount=Math.max(0,...base.map(s=>_scrapCounts.get(s.u)||0));
+  if(maxCount>0){
+    const top=base.filter(s=>(_scrapCounts.get(s.u)||0)===maxCount);
+    return top[Math.floor(Math.random()*top.length)];
+  }
+  const p=base.slice(0,3);
   return p[Math.floor(Math.random()*p.length)];
 }
 function buildVideoSection(songs,containerEl,ctx,mainCandidates){
@@ -2583,7 +2606,7 @@ function buildVideoSection(songs,containerEl,ctx,mainCandidates){
     const shortSongs=all.filter(s=>isShorts(s.u));
     if(normSongs.length>0){
       const normPool=(mainCandidates&&mainCandidates.length?mainCandidates:normSongs).filter(s=>!isShorts(s.u));
-      const first=normPool.length?_pickMainVideo(normPool):normSongs[0];
+      const first=normPool.length?_pickMainVideo(normPool):(normSongs.find(s=>(s.type||'fancam')==='fancam')||normSongs[0]);
       const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
       const big=document.createElement('img');big.id='tv-big';
       big.src=`https://img.youtube.com/vi/${ytId(first.u)}/mqdefault.jpg`;big.alt=first.t;
@@ -3473,6 +3496,7 @@ function showT(a,cx,cy,keepNavStack,urlMode){
   if(gInfo&&gInfo.color){const[cr,cg,cb]=gInfo.color;ttBar.style.background=`linear-gradient(90deg,rgba(${cr},${cg},${cb},0.50),rgba(${cr},${cg},${cb},0.18))`;}
   else ttBar.style.background='rgba(160,180,220,0.22)';
   document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
+  _renderGcLinks(a.links,'tt-links');
   const tgEl=document.getElementById('tg');
   tgEl.innerHTML='';tgEl.onclick=null;
   function _makeGcClickFn(gKo){
@@ -3611,7 +3635,7 @@ function showT(a,cx,cy,keepNavStack,urlMode){
 function _fandomText(fd){
   if(!fd)return '';
   if(typeof fd!=='object')return fd;
-  if(currentLang==='ko')return fd.en&&fd.ko?`${fd.en}(${fd.ko})`:(fd.ko||fd.en||'');
+  if(currentLang==='ko')return fd.en&&fd.ko?`${fd.ko}(${fd.en})`:(fd.ko||fd.en||'');
   return fd.en||fd.ko||'';
 }
 // ── 그룹 외부 링크 (영문명 줄 오른쪽 아이콘) — 소비 빈도순: 유튜브>인스타>X>위버스>틱톡>나무위키 ──
@@ -3623,8 +3647,8 @@ const _LINK_DEFS=[
   {key:'tiktok',label:'TikTok',svg:'<svg viewBox="0 0 24 24" fill="none"><path d="M14 4v10.2a3.3 3.3 0 1 1-2.4-3.18V4h2.4z" fill="currentColor"/><path d="M14 4c.3 2 1.8 3.5 3.8 3.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>'},
   {key:'namu',label:'나무위키',svg:'<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l4 4v14H6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M15 3v4h4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12h6M9 15.5h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>'}
 ];
-function _renderGcLinks(links){
-  const wrap=document.getElementById('gc-links');
+function _renderGcLinks(links,wrapId){
+  const wrap=document.getElementById(wrapId||'gc-links');
   wrap.innerHTML='';
   if(!links)return;
   _LINK_DEFS.forEach(({key,label,svg})=>{
@@ -4736,13 +4760,25 @@ function _isScraped(s){return scraps.some(x=>x.u===_scrapId(s));}
 function toggleScrap(s,ctx){
   const id=_scrapId(s);
   const i=scraps.findIndex(x=>x.u===id);
+  const nowScrapped=i<0;
   if(i>=0)scraps.splice(i,1);
   else scraps.unshift({t:s.t,u:s.u,...(ctx||{})});
   localStorage.setItem(SCRAP_KEY,JSON.stringify(scraps));_sbPushColumn('scraps',scraps);
   renderScrapList();
   document.querySelectorAll(`.scrap-btn[data-u="${CSS.escape(id)}"]`).forEach(btn=>{
-    btn.classList.toggle('scrapped',i<0);
+    btn.classList.toggle('scrapped',nowScrapped);
   });
+  // 개인 플레이리스트 저장과 별개로, "몇 명이 스크랩했는지" 공개 집계에도 반영(메인 직캠 선정용).
+  // 기존 user_data.scraps(개인 목록)와는 별도 테이블 — 실패해도 위 로컬/개인 동기화는 이미 끝난 뒤라 영향 없음(fail-open).
+  if(sb&&window._sbSession){
+    const uid=window._sbSession.user.id,url=s.u;
+    const cur=_scrapCounts.get(url)||0;
+    _scrapCounts.set(url,nowScrapped?cur+1:Math.max(0,cur-1));
+    const q=nowScrapped
+      ?sb.from('video_scraps').insert({user_id:uid,video_url:url})
+      :sb.from('video_scraps').delete().eq('user_id',uid).eq('video_url',url);
+    q.then(({error})=>{if(error)console.error('scrap count sync failed',error);});
+  }
 }
 function _makeScrapBtn(s,ctx){
   const btn=document.createElement('button');
@@ -5241,6 +5277,7 @@ function _toggleFavMode(){
   }else{
     _clearMyStarLines();
     _exitMyUniverseMode();
+    document.getElementById('journal-sidebar').classList.remove('open');
     if(focusGroupKo)setFocus(focusGroupKo,[..._extraFocusKos]);else clearFocus();
   }
 }
@@ -5735,6 +5772,21 @@ try{
   });
 }catch(e){console.error('Supabase client init failed',e);}
 
+// ── 영상 스크랩 공개 집계 (메인 직캠 선정용) ──────
+// 개인 플레이리스트(scraps, 위 user_data)와는 별개로, "이 영상을 몇 명이 스크랩했는지"를
+// video_scraps 테이블(영상×유저 1행)로 공개 집계해서, 그룹/멤버 카드의 메인 직캠을
+// 스크랩 수 내림차순으로 고를 수 있게 한다. 캐시가 비어있으면(로딩 전/Supabase 불가)
+// _pickMainVideo가 자동으로 기존 랜덤 방식으로 폴백한다.
+let _scrapCounts=new Map(); // video url -> scrap_count
+async function _warmScrapCounts(){
+  if(!sb||!window._sbSession)return;
+  try{
+    const{data,error}=await sb.from('video_scrap_counts').select('video_url,scrap_count');
+    if(error){console.error('scrap counts fetch failed',error);return;}
+    (data||[]).forEach(r=>_scrapCounts.set(r.video_url,r.scrap_count));
+  }catch(e){console.error('_warmScrapCounts failed',e);}
+}
+
 let _sbPushTimers={};
 function _sbPushColumn(column,value){
   if(!sb||!window._sbSession)return; // 초기화 실패/아직 세션 없음 → 로컬 전용으로 조용히 스킵
@@ -5796,6 +5848,7 @@ async function initSupabaseSync(){
       isBrandNewAnonymous=true;
     }
     window._sbSession=session;
+    _warmScrapCounts(); // fire-and-forget — 메인 직캠 선정용 공개 스크랩 집계 캐시를 최대한 빨리 채워둔다
     const isAnonymous=session.user.is_anonymous===true;
     if(isBrandNewAnonymous){
       await _migrateLocalToServer(session.user.id);
