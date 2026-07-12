@@ -7364,29 +7364,41 @@ async function _loadGcChVids(ko,reset,randomize=false){
       const main=_pickMainChVid(vids);
       if(main) vids=[{...main,_featured:true},...vids.filter(v=>v.id!==main.id)];
     }
-    // Shorts를 2개씩 쌍으로 landscape 사이에 고르게 교차
-    if(filter==='all'||filter==='short'||(vids.some(v=>v.category==='short'))){
+    // 전체 탭에서 oardefault.jpg 프로브로 미분류 쇼츠 감지 (렌더 전에 완료해야 행 정렬이 올바름)
+    if(filter==='all'){
+      await Promise.all(
+        vids.filter(v=>v.category!=='short'&&!v._featured).map(v=>new Promise(res=>{
+          const p=new Image();
+          p.onload=()=>{if(p.naturalHeight>p.naturalWidth)v.category='short';res();};
+          p.onerror=()=>res();
+          p.src=`https://i.ytimg.com/vi/${v.id}/oardefault.jpg`;
+          setTimeout(res,1000);
+        }))
+      );
+    }
+    // 같은 비율끼리 같은 행: 가로 먼저, 쇼츠 뒤에
+    // 가로가 홀수개면 경계에서 쇼츠와 섞이지 않도록 투명 스페이서 삽입
+    {
       const norm=vids.filter(v=>v.category!=='short');
       const sh=vids.filter(v=>v.category==='short');
       if(sh.length&&norm.length){
-        const nP=[],sP=[];
-        for(let i=0;i<norm.length;i+=2)nP.push(norm.slice(i,i+2));
-        for(let i=0;i<sh.length;i+=2)sP.push(sh.slice(i,i+2));
-        const step=sP.length>0?nP.length/(sP.length+1):Infinity;
-        let si=0,next=step;
-        const ordered=[];
-        nP.forEach((p,i)=>{ordered.push(...p);if(si<sP.length&&i+1>=next){ordered.push(...sP[si++]);next+=step;}});
-        while(si<sP.length)ordered.push(...sP[si++]);
-        vids=ordered;
+        vids=[...norm,...(norm.length%2===1?[{_spacer:true}]:[]),...sh];
       }
     }
     vids.forEach(v=>{
+      if(v._spacer){const sp=document.createElement('div');sp.style.cssText='aspect-ratio:16/9;visibility:hidden;';grid.appendChild(sp);return;}
       const isShort=v.category==='short';
       const item=document.createElement('div');
       item.className='gc-ch-item'+(isShort?' is-short':v._featured?' featured':'');
       const img=document.createElement('img');
       img.className='gc-ch-thumb';
-      img.src=v.thumb||`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
+      const baseThumb=v.thumb||`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
+      if(isShort){
+        img.src=`https://i.ytimg.com/vi/${v.id}/oardefault.jpg`;
+        img.onerror=()=>{img.onerror=null;img.src=baseThumb;};
+      }else{
+        img.src=baseThumb;
+      }
       img.alt=v.title;img.loading='lazy';
       const tEl=document.createElement('div');
       tEl.className='tv-sm-title';tEl.textContent=v.title;
