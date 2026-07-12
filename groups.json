@@ -95,6 +95,13 @@
     "fandom": {
       "ko": "마이",
       "en": "MY"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@aespa_official",
+      "instagram": "https://instagram.com/aespa_official",
+      "x": "https://x.com/aespa_official",
+      "tiktok": "https://tiktok.com/@aespa_official",
+      "namu": "https://namu.wiki/w/에스파"
     }
   },
   "아이브": {
@@ -124,6 +131,13 @@
     "fandom": {
       "ko": "다이브",
       "en": "DIVE"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@IVEstarship",
+      "instagram": "https://instagram.com/ivestarship",
+      "x": "https://x.com/IVEstarship",
+      "tiktok": "https://tiktok.com/@IVE.official",
+      "namu": "https://namu.wiki/w/아이브(아이돌)"
     }
   },
   "키키": {
@@ -213,6 +227,13 @@
     "fandom": {
       "ko": "티키",
       "en": "TiiiKiii"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@KiiiKiii_starship",
+      "instagram": "https://instagram.com/kiiikiii.official",
+      "x": "https://x.com/We_KiiiKiii",
+      "tiktok": "https://tiktok.com/@kiiikiii_official",
+      "namu": "https://namu.wiki/w/KiiiKiii"
     }
   },
   "있지": {
@@ -242,6 +263,13 @@
     "fandom": {
       "ko": "믿지",
       "en": "MIDZY"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@ITZY",
+      "instagram": "https://instagram.com/itzy.all.in.us",
+      "x": "https://x.com/ITZYofficial",
+      "tiktok": "https://tiktok.com/@itzyofficial",
+      "namu": "https://namu.wiki/w/있지"
     }
   },
   "뉴진스": {
@@ -271,6 +299,14 @@
     "fandom": {
       "ko": "버니즈",
       "en": "Bunnies"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@NewJeans_official",
+      "instagram": "https://instagram.com/newjeans_official",
+      "x": "https://x.com/NewJeans_ADOR",
+      "weverse": "https://weverse.io/newjeansofficial",
+      "tiktok": "https://tiktok.com/@newjeans_official",
+      "namu": "https://namu.wiki/w/뉴진스"
     }
   },
   "세븐틴": {
@@ -286,6 +322,14 @@
     "fandom": {
       "ko": "캐럿",
       "en": "CARAT"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@pledis17",
+      "instagram": "https://instagram.com/saythename_17",
+      "x": "https://x.com/pledis_17",
+      "weverse": "https://weverse.io/seventeen",
+      "tiktok": "https://tiktok.com/@seventeen17_official",
+      "namu": "https://namu.wiki/w/세븐틴"
     }
   },
   "키스오브라이프": {
@@ -301,6 +345,13 @@
     "fandom": {
       "ko": "키씨",
       "en": "KISSY"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@KISSOFLIFE_official",
+      "instagram": "https://instagram.com/kissoflife_s2",
+      "x": "https://x.com/KISSOFLIFE_S2",
+      "tiktok": "https://tiktok.com/@kissoflife_official",
+      "namu": "https://namu.wiki/w/KISS OF LIFE"
     }
   },
   "엔믹스": {
@@ -316,6 +367,13 @@
     "fandom": {
       "ko": "엔써",
       "en": "NSWER"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@NMIXXOfficial",
+      "instagram": "https://instagram.com/nmixx_official",
+      "x": "https://x.com/NMIXX_official",
+      "tiktok": "https://tiktok.com/@nmixx_official",
+      "namu": "https://namu.wiki/w/NMIXX"
     }
   },
   "스트레이키즈": {
@@ -331,6 +389,13 @@
     "fandom": {
       "ko": "스테이",
       "en": "STAY"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@Stray_Kids",
+      "instagram": "https://instagram.com/realstraykids",
+      "x": "https://x.com/Stray_Kids",
+      "tiktok": "https://tiktok.com/@jypestraykids",
+      "namu": "https://namu.wiki/w/스트레이키즈"
     }
   },
   "엔시티 127": {
@@ -346,6 +411,13 @@
     "fandom": {
       "ko": "시즈니",
       "en": "NCTzen"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@NCT127",
+      "instagram": "https://instagram.com/nct127",
+      "x": "https://x.com/NCTsmtown_127",
+      "tiktok": "https://tiktok.com/@nct127official",
+      "namu": "https://namu.wiki/w/NCT 127"
     }
   },
   "엔시티 드림": {
@@ -361,6 +433,13 @@
     "fandom": {
       "ko": "시즈니",
       "en": "NCTzen"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@NCTDream",
+      "instagram": "https://instagram.com/nct_dream",
+      "x": "https://x.com/NCTsmtown_DREAM",
+      "tiktok": "https://tiktok.com/@nctdreamofficial",
+      "namu": "https://namu.wiki/w/NCT Dream"
     }
   },
   "웨이션브이": {
@@ -376,6 +455,13 @@
     "fandom": {
       "ko": "웨이젠니",
       "en": "WayZenNi"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@WayV_official",
+      "instagram": "https://instagram.com/wayvofficial",
+      "x": "https://x.com/WayV_official",
+      "tiktok": "https://tiktok.com/@official_wayv",
+      "namu": "https://namu.wiki/w/WayV"
     }
   },
   "투어스": {
@@ -442,6 +528,14 @@
     "fandom": {
       "ko": "시즈니",
       "en": "NCTzen"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@NCTWISH_official",
+      "instagram": "https://instagram.com/nctwish_official",
+      "x": "https://x.com/nctwishofficial",
+      "weverse": "https://weverse.io/nctwish",
+      "tiktok": "https://tiktok.com/@nctwish_official",
+      "namu": "https://namu.wiki/w/NCT WISH"
     }
   },
   "리센느": {
@@ -579,6 +673,14 @@
     "fandom": {
       "ko": "브리즈",
       "en": "BRIIZE"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@RIIZE",
+      "instagram": "https://instagram.com/riize_official",
+      "x": "https://x.com/RIIZE_official",
+      "weverse": "https://weverse.io/riize",
+      "tiktok": "https://tiktok.com/@riize_official",
+      "namu": "https://namu.wiki/w/라이즈(아이돌)"
     }
   },
   "엔하이픈": {
@@ -594,6 +696,14 @@
     "fandom": {
       "ko": "엔진",
       "en": "ENGENE"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@ENHYPEN",
+      "instagram": "https://instagram.com/enhypen",
+      "x": "https://x.com/ENHYPEN",
+      "weverse": "https://weverse.io/enhypen",
+      "tiktok": "https://tiktok.com/@enhypen",
+      "namu": "https://namu.wiki/w/ENHYPEN"
     }
   },
   "아일릿": {
@@ -609,6 +719,14 @@
     "fandom": {
       "ko": "글릿",
       "en": "GLLIT"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@ILLIT_official",
+      "instagram": "https://instagram.com/illit_official",
+      "x": "https://x.com/ILLIT_official",
+      "weverse": "https://weverse.io/illit",
+      "tiktok": "https://tiktok.com/@illit_official",
+      "namu": "https://namu.wiki/w/아일릿"
     }
   },
   "투모로우바이투게더": {
@@ -638,6 +756,14 @@
     "fandom": {
       "ko": "모아",
       "en": "MOA"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@TXT_bighit",
+      "instagram": "https://instagram.com/txt_bighit",
+      "x": "https://x.com/TXT_bighit",
+      "weverse": "https://weverse.io/txt",
+      "tiktok": "https://tiktok.com/@txt.bighitent",
+      "namu": "https://namu.wiki/w/투모로우바이투게더"
     }
   },
   "방탄소년단": {
@@ -653,6 +779,14 @@
     "fandom": {
       "ko": "아미",
       "en": "ARMY"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@BTS_official_bighit",
+      "instagram": "https://instagram.com/bts.bighitofficial",
+      "x": "https://x.com/BTS_twt",
+      "weverse": "https://weverse.io/bts",
+      "tiktok": "https://tiktok.com/@bts_official_bighit",
+      "namu": "https://namu.wiki/w/방탄소년단"
     }
   },
   "트와이스": {
@@ -668,6 +802,13 @@
     "fandom": {
       "ko": "원스",
       "en": "ONCE"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@TWICE",
+      "instagram": "https://instagram.com/twicetagram",
+      "x": "https://x.com/JYPETWICE",
+      "tiktok": "https://tiktok.com/@twice_tiktok_official",
+      "namu": "https://namu.wiki/w/트와이스"
     }
   },
   "블랙핑크": {
@@ -683,6 +824,14 @@
     "fandom": {
       "ko": "블링크",
       "en": "BLINK"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@BLACKPINK",
+      "instagram": "https://instagram.com/blackpinkofficial",
+      "x": "https://x.com/ygofficialblink",
+      "weverse": "https://weverse.io/blackpink",
+      "tiktok": "https://tiktok.com/@bp_tiktok",
+      "namu": "https://namu.wiki/w/블랙핑크"
     }
   },
   "빅뱅": {
@@ -698,6 +847,11 @@
     "fandom": {
       "ko": "브이아이피",
       "en": "V.I.P"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@bigbang",
+      "instagram": "https://instagram.com/bigbang_official",
+      "namu": "https://namu.wiki/w/BIGBANG"
     }
   },
   "소녀시대": {
@@ -713,6 +867,13 @@
     "fandom": {
       "ko": "소원",
       "en": "SONE"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@GirlsGeneration",
+      "instagram": "https://instagram.com/girlsgeneration",
+      "x": "https://x.com/GirlsGeneration",
+      "tiktok": "https://tiktok.com/@girlsgeneration.official",
+      "namu": "https://namu.wiki/w/소녀시대"
     }
   },
   "샤이니": {
@@ -728,6 +889,14 @@
     "fandom": {
       "ko": "샤월",
       "en": "SHAWOL"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@SHINee",
+      "instagram": "https://instagram.com/shinee",
+      "x": "https://x.com/SHINee",
+      "weverse": "https://weverse.io/shinee",
+      "tiktok": "https://tiktok.com/@shinee_official",
+      "namu": "https://namu.wiki/w/샤이니"
     }
   },
   "레드벨벳": {
@@ -743,6 +912,13 @@
     "fandom": {
       "ko": "레베럽",
       "en": "ReVeluv"
+    },
+    "links": {
+      "youtube": "https://youtube.com/redvelvet",
+      "instagram": "https://instagram.com/redvelvet.smtown",
+      "x": "https://x.com/RVsmtown",
+      "tiktok": "https://tiktok.com/@redvelvet_smtown",
+      "namu": "https://namu.wiki/w/레드벨벳"
     }
   },
   "에프엑스": {
@@ -758,6 +934,11 @@
     "fandom": {
       "ko": "미유",
       "en": "me(you)"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@fxsmtown",
+      "instagram": "https://instagram.com/fx.official",
+      "namu": "https://namu.wiki/w/f(x)"
     }
   },
   "에이티즈": {
@@ -831,6 +1012,13 @@
     "fandom": {
       "ko": "에이티니",
       "en": "ATINY"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@ATEEZofficial",
+      "instagram": "https://instagram.com/ateez_official_",
+      "x": "https://x.com/ATEEZofficial",
+      "tiktok": "https://tiktok.com/@ateez_official_",
+      "namu": "https://namu.wiki/w/에이티즈"
     }
   },
   "아이들": {
@@ -846,6 +1034,14 @@
     "fandom": {
       "ko": "네버랜드",
       "en": "Neverland"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@official_i_dle",
+      "instagram": "https://instagram.com/i_dle_official",
+      "x": "https://x.com/official_i_dle",
+      "weverse": "https://weverse.io/idle",
+      "tiktok": "https://tiktok.com/@official_i_dle",
+      "namu": "https://namu.wiki/w/(여자)아이들"
     }
   },
   "르세라핌": {
@@ -861,6 +1057,14 @@
     "fandom": {
       "ko": "피어나",
       "en": "FEARNOT"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@LESSERAFIM",
+      "instagram": "https://instagram.com/le_sserafim",
+      "x": "https://x.com/IM_LESSERAFIM",
+      "weverse": "https://weverse.io/lesserafim",
+      "tiktok": "https://tiktok.com/@le_sserafim",
+      "namu": "https://namu.wiki/w/르세라핌"
     }
   },
   "베이비몬스터": {
@@ -876,6 +1080,14 @@
     "fandom": {
       "ko": "몬스티즈",
       "en": "MONSTIEZ"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@BABYMONSTER",
+      "instagram": "https://instagram.com/babymonster_ygofficial",
+      "x": "https://x.com/YGBABYMONSTER_",
+      "weverse": "https://weverse.io/babymonster",
+      "tiktok": "https://tiktok.com/@babymonster_yg_tiktok",
+      "namu": "https://namu.wiki/w/베이비몬스터(아이돌)"
     }
   },
   "미야오": {
@@ -891,6 +1103,13 @@
     "fandom": {
       "ko": "폼폼",
       "en": "PAWMPAWM"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@MEOVV",
+      "instagram": "https://instagram.com/meovv",
+      "x": "https://x.com/OFFICIAL_MEOVV",
+      "tiktok": "https://tiktok.com/@meovv_official",
+      "namu": "https://namu.wiki/w/MEOVV"
     }
   },
   "하츠투하츠": {
@@ -906,6 +1125,14 @@
     "fandom": {
       "ko": "하츄",
       "en": "S2U"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@Hearts2Hearts",
+      "instagram": "https://instagram.com/hearts2hearts",
+      "x": "https://x.com/Hearts2Hearts",
+      "weverse": "https://weverse.io/hearts2hearts",
+      "tiktok": "https://tiktok.com/@hearts2hearts",
+      "namu": "https://namu.wiki/w/Hearts2Hearts"
     }
   },
   "보이넥스트도어": {
@@ -921,6 +1148,14 @@
     "fandom": {
       "ko": "원도어",
       "en": "ONEDOOR"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@BOYNEXTDOOR",
+      "instagram": "https://instagram.com/boynextdoor_official",
+      "x": "https://x.com/BOYNEXTDOOR_KOZ",
+      "weverse": "https://weverse.io/boynextdoor",
+      "tiktok": "https://tiktok.com/@boynextdoor_official",
+      "namu": "https://namu.wiki/w/BOYNEXTDOOR"
     }
   },
   "스테이씨": {
@@ -936,6 +1171,14 @@
     "fandom": {
       "ko": "스윗",
       "en": "SWITH"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@STAYC_official",
+      "instagram": "https://instagram.com/stayc_highup",
+      "x": "https://x.com/STAYC_official",
+      "weverse": "https://weverse.io/stayc",
+      "tiktok": "https://tiktok.com/@stayc_official",
+      "namu": "https://namu.wiki/w/스테이씨"
     }
   },
   "더보이즈": {
@@ -951,6 +1194,14 @@
     "fandom": {
       "ko": "더비",
       "en": "THE B"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@officialTHEBOYZ",
+      "instagram": "https://instagram.com/official_theboyz",
+      "x": "https://x.com/THEBOYZ_officl",
+      "weverse": "https://weverse.io/the_boyz",
+      "tiktok": "https://tiktok.com/@istent_theboyz",
+      "namu": "https://namu.wiki/w/더보이즈"
     }
   },
   "온앤오프": {
@@ -966,6 +1217,14 @@
     "fandom": {
       "ko": "퓨즈",
       "en": "FUSE"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@ONF_official",
+      "instagram": "https://instagram.com/onf_offcl",
+      "x": "https://x.com/ONF_offcl",
+      "weverse": "https://weverse.io/onf",
+      "tiktok": "https://tiktok.com/@onf_offcl",
+      "namu": "https://namu.wiki/w/온앤오프"
     }
   },
   "트리플에스": {
@@ -981,6 +1240,13 @@
     "fandom": {
       "ko": "웨이브",
       "en": "WAV"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@triplescosmos",
+      "instagram": "https://instagram.com/triplescosmos",
+      "x": "https://x.com/triplescosmos",
+      "tiktok": "https://tiktok.com/@triplescosmos",
+      "namu": "https://namu.wiki/w/tripleS"
     }
   },
   "프로미스나인": {
@@ -996,6 +1262,14 @@
     "fandom": {
       "ko": "플로버",
       "en": "flover"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@fromis_9",
+      "instagram": "https://instagram.com/officialfromis_9",
+      "x": "https://x.com/realfromis_9",
+      "weverse": "https://weverse.io/fromis9",
+      "tiktok": "https://tiktok.com/@official_fromis9",
+      "namu": "https://namu.wiki/w/fromis_9"
     }
   },
   "앤팀": {
@@ -1011,6 +1285,14 @@
     "fandom": {
       "ko": "루네",
       "en": "LUNÉ"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@andTEAMofficial",
+      "instagram": "https://instagram.com/andteam_official",
+      "x": "https://x.com/andTEAMofficial",
+      "weverse": "https://weverse.io/andteam",
+      "tiktok": "https://tiktok.com/@andteam_official",
+      "namu": "https://namu.wiki/w/&TEAM"
     }
   },
   "비비지": {
@@ -1080,6 +1362,13 @@
     "fandom": {
       "ko": "나비",
       "en": "Na.V"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@VIVIZ_official",
+      "instagram": "https://instagram.com/viviz_official",
+      "x": "https://x.com/VIVIZ_official",
+      "tiktok": "https://tiktok.com/@viviz_bpm",
+      "namu": "https://namu.wiki/w/VIVIZ"
     }
   },
   "트레저": {
@@ -1095,6 +1384,14 @@
     "fandom": {
       "ko": "트레저메이커",
       "en": "TREASURE MAKER"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@TREASURE_official",
+      "instagram": "https://instagram.com/yg_treasure_official",
+      "x": "https://x.com/ygtreasuremaker",
+      "weverse": "https://weverse.io/treasure",
+      "tiktok": "https://tiktok.com/@yg_treasure_tiktok",
+      "namu": "https://namu.wiki/w/트레저(아이돌)"
     }
   },
   "크래비티": {
@@ -1110,7 +1407,14 @@
       117,
       177
     ],
-    "gender": "m"
+    "gender": "m",
+    "links": {
+      "youtube": "https://youtube.com/@CRAVITY_official",
+      "instagram": "https://instagram.com/cravity_official",
+      "x": "https://x.com/CRAVITYstarship",
+      "tiktok": "https://tiktok.com/@cravityofficial",
+      "namu": "https://namu.wiki/w/CRAVITY"
+    }
   },
   "아이즈원": {
     "en": "IZ*ONE",
@@ -1140,6 +1444,13 @@
     "fandom": {
       "ko": "위즈원",
       "en": "WIZ*ONE"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@izone",
+      "instagram": "https://instagram.com/official_izone",
+      "x": "https://x.com/official_izone",
+      "tiktok": "https://tiktok.com/@officializone_",
+      "namu": "https://namu.wiki/w/아이즈원"
     }
   }
 }
