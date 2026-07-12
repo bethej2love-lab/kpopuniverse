@@ -89,7 +89,7 @@
     background:rgba(14,18,36,0.92);
     backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
     border-top:0.5px solid rgba(255,255,255,0.07);
-    border-radius:0;padding:9px 0 11px;z-index:40;
+    border-radius:0;padding:9px 0 calc(11px + env(safe-area-inset-bottom,0px));z-index:40;
   }
   .tab-btn{
     flex:1;background:none;border:none;cursor:pointer;
@@ -439,6 +439,26 @@
   #yt-lb-scrap.scrapped svg{fill:currentColor;}
   #yt-lb-bm.bm-on{color:rgba(130,185,255,0.9);}
   #yt-lb-bm.bm-on svg{fill:currentColor;}
+  .lb-action-cnt{font-size:10px;font-weight:700;color:rgba(200,215,255,0.6);margin-left:3px;font-family:'Pretendard',sans-serif;line-height:1;}
+  .lb-action-cnt:empty{display:none;}
+  #yt-lb-reactions{display:flex;align-items:center;justify-content:center;gap:4px;padding:10px 0 4px;flex-wrap:wrap;}
+  .lb-react-btn{background:rgba(255,255,255,0.07);border:none;border-radius:18px;padding:5px 9px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:17px;line-height:1;position:relative;overflow:hidden;transition:background .15s,transform .2s ease-out;color:#fff;}
+  .lb-react-btn:active{transform:scale(0.86);transition:transform .08s;}
+  .lb-react-btn.reacted{background:rgba(255,255,255,0.20);}
+  .lb-react-cnt{font-size:11px;color:rgba(220,235,255,0.75);font-family:'Pretendard',sans-serif;font-weight:600;line-height:1;}
+  .lb-react-cnt:empty{display:none;}
+  .lb-react-more{background:rgba(255,255,255,0.07);border:none;border-radius:18px;padding:5px 11px;cursor:pointer;color:rgba(200,215,255,0.65);font-size:14px;font-weight:700;line-height:1;position:relative;overflow:hidden;transition:background .15s,transform .2s ease-out;}
+  .lb-react-more:active{background:rgba(255,255,255,0.14);transform:scale(0.86);transition:transform .08s;}
+  @keyframes _lbRipple{0%{transform:scale(0);opacity:.55;}100%{transform:scale(3.5);opacity:0;}}
+  .lb-ripple{position:absolute;border-radius:50%;width:44px;height:44px;margin:-22px 0 0 -22px;background:rgba(255,255,255,0.42);pointer-events:none;animation:_lbRipple .48s ease-out forwards;}
+  #lb-react-extended{display:none;flex-wrap:wrap;justify-content:center;gap:4px;padding:0 0 6px;}
+  #lb-react-extended.open{display:flex;}
+  #lb-emoji-picker-wrap{display:none;flex-direction:column;position:absolute;left:0;right:0;bottom:0;background:rgba(10,13,28,0.98);border-radius:16px 16px 0 0;border-top:0.5px solid rgba(255,255,255,0.10);overflow:hidden;z-index:2;}
+  #lb-emoji-picker-wrap.open{display:flex;}
+  #lb-emoji-picker-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 6px;flex-shrink:0;}
+  #lb-emoji-picker-title{font-size:13px;font-weight:600;color:rgba(200,215,255,0.8);font-family:'Pretendard',sans-serif;letter-spacing:.02em;}
+  #lb-emoji-picker-close{background:none;border:none;color:rgba(180,200,240,0.55);font-size:16px;cursor:pointer;padding:2px 4px;line-height:1;}
+  emoji-picker{--background:transparent;--border-color:rgba(255,255,255,0.07);--button-active-background:rgba(255,255,255,0.14);--button-hover-background:rgba(255,255,255,0.08);--category-emoji-size:1.1rem;--emoji-size:1.5rem;--input-border-color:rgba(255,255,255,0.12);--input-font-color:#fff;--input-placeholder-color:rgba(180,200,240,0.4);--indicator-color:rgba(150,180,255,0.85);--outline-color:rgba(150,180,255,0.5);--text-color:rgba(200,220,255,0.9);--num-columns:8;width:100%;height:300px;border:none;}
   @media(max-width:768px){
     #yt-lb-wrap{width:95vw;}
     #yt-lb-iframe{border-radius:10px;}
@@ -676,6 +696,7 @@
   .sr-item-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .sr-item-name.sr-group{color:#9ab8dc;}
   .sr-tag{font-size:10px;color:#9ab8dc;letter-spacing:.05em;text-transform:uppercase;flex-shrink:0;}
+  .sr-empty{padding:14px 13px;font-size:12px;color:rgba(140,160,200,0.5);text-align:center;}
   /* ── Responsive: desktop panel positions ────────── */
   @media(min-width:769px){
     #tabbar{display:none;}
@@ -689,7 +710,7 @@
     backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
     border-right:0.5px solid rgba(255,255,255,0.10);
     box-shadow:4px 0 24px rgba(0,0,0,0.35);
-    z-index:35;
+    z-index:45;
     transform:translateX(-260px);
     transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
   }
@@ -928,25 +949,25 @@
   #profile-panel{width:min(312px,calc(100vw - 32px));background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:20px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:22px 22px 24px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
   .pp-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
   .pp-title{font-size:13.5px;font-weight:700;color:rgba(210,225,255,0.88);letter-spacing:.04em;}
-  #pp-close{background:none;border:none;cursor:pointer;font-size:18px;color:rgba(148,168,218,0.48);line-height:1;padding:2px 5px;transition:color .13s;}
-  #pp-close:hover{color:rgba(200,218,255,0.85);}
+  #pp-close{background:rgba(255,255,255,0.06);border:none;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:rgba(148,168,218,0.55);line-height:1;padding:0;position:relative;overflow:hidden;flex-shrink:0;transition:background .13s,color .13s,transform .2s ease-out;}
+  #pp-close:hover{background:rgba(255,255,255,0.11);color:rgba(200,218,255,0.85);}  #pp-close:active{background:rgba(255,255,255,0.16);transform:scale(0.86);transition:transform .07s;}
   .pp-section{margin-bottom:18px;}
   .pp-label{font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(126,150,204,0.52);display:block;margin-bottom:8px;}
   .pp-required{color:rgba(255,108,135,0.82);}
   .pp-input{width:100%;background:rgba(255,255,255,0.055);border:0.5px solid rgba(255,255,255,0.09);border-radius:10px;color:#c8d8f0;font-family:inherit;font-size:13px;padding:9px 12px;outline:none;letter-spacing:.02em;transition:border-color .15s,background .15s;box-sizing:border-box;}
-  .pp-input:focus{background:rgba(255,255,255,0.085);border-color:rgba(136,164,255,0.38);}
+  .pp-input:focus{background:rgba(255,255,255,0.085);border-color:rgba(100,150,255,0.55);box-shadow:0 0 0 3px rgba(100,150,255,0.09);}
   .pp-input::placeholder{color:rgba(126,152,202,0.28);}
   .pp-err{font-size:10.5px;color:rgba(255,108,132,0.82);margin-top:5px;letter-spacing:.02em;}
   #pp-colors{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px;}
   .pp-color-swatch{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:transform .13s,border-color .13s;flex-shrink:0;padding:0;outline:none;}
-  .pp-color-swatch:hover{transform:scale(1.18);}
+  .pp-color-swatch:hover{transform:scale(1.18);}  .pp-color-swatch:active{transform:scale(0.88);transition:transform .07s;}
   .pp-color-swatch.sel{border-color:rgba(255,255,255,0.82);transform:scale(1.14);}
   .pp-fav-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .pp-fav-info{flex:1;}
   .pp-fav-label{font-size:12px;color:rgba(178,200,238,0.82);font-weight:500;}
   .pp-fav-sub{font-size:10px;color:rgba(110,135,182,0.48);margin-top:3px;letter-spacing:.02em;}
-  .pp-save-btn{width:100%;margin-top:4px;padding:11px;border:none;border-radius:12px;background:rgba(126,156,255,0.15);border:0.5px solid rgba(126,156,255,0.26);color:rgba(195,215,255,0.90);font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.07em;cursor:pointer;transition:background .15s,border-color .15s,color .15s;}
-  .pp-save-btn:hover{background:rgba(126,156,255,0.26);border-color:rgba(126,156,255,0.48);color:#fff;}
+  .pp-save-btn{width:100%;margin-top:4px;padding:13px;border:none;border-radius:14px;background:rgba(115,145,255,0.18);border:0.5px solid rgba(120,150,255,0.32);color:rgba(210,225,255,0.95);font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.04em;cursor:pointer;position:relative;overflow:hidden;transition:background .15s,transform .22s ease-out;}
+  .pp-save-btn:hover{background:rgba(115,145,255,0.28);border-color:rgba(120,150,255,0.48);color:#fff;}  .pp-save-btn:active{background:rgba(115,145,255,0.32);transform:scale(0.97);transition:transform .07s;}
   #tab-profile.pp-set,#dh-profile-btn.pp-set{font-size:11px;font-weight:700;letter-spacing:.01em;}
   /* ── 즐겨찾기 해제 확인 / 기념일 날짜 수정 / 계정 연결 확인 팝업 ────── */
   #unfav-confirm-overlay,#date-edit-overlay,#link-confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:70;display:none;align-items:center;justify-content:center;}
@@ -956,12 +977,12 @@
   #unfav-confirm-btns,#link-confirm-btns{display:flex;gap:8px;margin-top:18px;}
   #pp-google-link{width:100%;margin-top:10px;}
   #pp-linked-state{font-size:11px;color:rgba(130,200,160,0.85);margin-top:10px;letter-spacing:.02em;}
-  .uc-btn{flex:1;padding:10px;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.03em;cursor:pointer;transition:background .15s,border-color .15s,color .15s;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);color:rgba(180,200,238,0.72);}
+  .uc-btn{flex:1;padding:10px;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.03em;cursor:pointer;position:relative;overflow:hidden;transition:background .15s,border-color .15s,color .15s,transform .2s ease-out;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);color:rgba(180,200,238,0.72);}
   .uc-btn:hover{background:rgba(255,255,255,0.09);color:#fff;}
   .uc-btn-danger{background:rgba(255,95,110,0.14);border-color:rgba(255,95,110,0.30);color:rgba(255,160,170,0.92);}
   .uc-btn-danger:hover{background:rgba(255,95,110,0.24);border-color:rgba(255,95,110,0.50);color:#fff;}
   .uc-btn-primary{background:rgba(126,156,255,0.15);border-color:rgba(126,156,255,0.26);color:rgba(195,215,255,0.90);}
-  .uc-btn-primary:hover{background:rgba(126,156,255,0.26);border-color:rgba(126,156,255,0.48);color:#fff;}
+  .uc-btn-primary:hover{background:rgba(126,156,255,0.26);border-color:rgba(126,156,255,0.48);color:#fff;}  .uc-btn:active{transform:scale(0.96);transition:transform .07s;}
   /* ── My Page (sidebar) ───────────────────────────── */
   #my-page-header{display:flex;align-items:center;gap:10px;padding:4px 0 14px;margin-bottom:14px;border-bottom:0.5px solid rgba(255,255,255,0.07);}
   #my-page-star-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:rgba(140,160,210,0.20);transition:background .3s,box-shadow .3s;}
@@ -1024,6 +1045,7 @@
   /* 랜덤 스와치 */
   .pp-color-rand{background:conic-gradient(hsl(0,90%,72%),hsl(60,90%,72%),hsl(120,90%,72%),hsl(180,90%,72%),hsl(240,90%,72%),hsl(300,90%,72%),hsl(360,90%,72%))!important;box-shadow:none!important;}
 </style>
+<script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1/index.js"></script>
 </head>
 <body>
 <div id="loading">Loading Our Universe...</div>
@@ -1043,7 +1065,7 @@
       <button id="my-page-edit">편집</button>
     </div>
     <div id="fav-section">
-      <div class="fav-hd"><span class="fav-hd-lbl">FAVORITES</span><button id="fav-mode-btn" class="sp-tog">하이라이트</button></div>
+      <div class="fav-hd"><span class="fav-hd-lbl">FAVORITES</span><button id="fav-mode-btn" class="sp-tog">Highlight</button></div>
       <div id="fav-list"><div class="fav-empty">즐겨찾기가 없어요</div></div>
     </div>
     <div id="scrap-section">
@@ -1175,10 +1197,27 @@
   <div id="yt-lb-wrap">
     <button id="yt-lb-close" aria-label="동영상 닫기">✕</button>
     <iframe id="yt-lb-iframe" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+    <div id="yt-lb-reactions">
+      <button class="lb-react-btn" data-emoji="❤️‍🔥">❤️‍🔥<span class="lb-react-cnt"></span></button>
+      <button class="lb-react-btn" data-emoji="🫠">🫠<span class="lb-react-cnt"></span></button>
+      <button class="lb-react-btn" data-emoji="😭">😭<span class="lb-react-cnt"></span></button>
+      <button class="lb-react-btn" data-emoji="✨">✨<span class="lb-react-cnt"></span></button>
+      <button class="lb-react-btn" data-emoji="🥹">🥹<span class="lb-react-cnt"></span></button>
+      <button class="lb-react-btn" data-emoji="💀">💀<span class="lb-react-cnt"></span></button>
+      <button id="lb-react-more" class="lb-react-more">+</button>
+    </div>
+    <div id="lb-react-extended"></div>
+    <div id="lb-emoji-picker-wrap">
+      <div id="lb-emoji-picker-header">
+        <span id="lb-emoji-picker-title">이모지 선택</span>
+        <button id="lb-emoji-picker-close">✕</button>
+      </div>
+      <emoji-picker id="lb-emoji-picker"></emoji-picker>
+    </div>
     <div id="yt-lb-toolbar">
       <button id="yt-lb-prev" aria-label="이전 영상">‹</button>
       <div id="yt-lb-actions">
-        <button id="yt-lb-scrap" aria-label="플레이리스트 추가"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button>
+        <button id="yt-lb-scrap" aria-label="플레이리스트 추가"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg><span id="yt-lb-scrap-cnt" class="lb-action-cnt"></span></button>
         <button id="yt-lb-bm" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></button>
       </div>
       <button id="yt-lb-next" aria-label="다음 영상">›</button>
@@ -1213,27 +1252,27 @@
 <div id="profile-overlay">
   <div id="profile-panel">
     <div class="pp-hd">
-      <span class="pp-title">내 프로필</span>
+      <span class="pp-title" data-i18n="ppTitle">내 프로필</span>
       <button id="pp-close" aria-label="프로필 편집 닫기">×</button>
     </div>
     <div class="pp-section">
-      <label class="pp-label" for="pp-nick">닉네임 <span class="pp-required">*</span></label>
-      <input id="pp-nick" type="text" class="pp-input" placeholder="닉네임을 입력하세요" maxlength="20" autocomplete="off">
-      <div id="pp-nick-err" class="pp-err">닉네임을 입력해주세요</div>
+      <label class="pp-label" for="pp-nick" id="pp-nick-label">닉네임 <span class="pp-required">*</span></label>
+      <input id="pp-nick" type="text" class="pp-input" placeholder="닉네임을 입력하세요" data-i18n-ph="ppNickPH" maxlength="20" autocomplete="off">
+      <div id="pp-nick-err" class="pp-err" data-i18n="ppNickErr">닉네임을 입력해주세요</div>
     </div>
     <div class="pp-section">
-      <label class="pp-label" for="pp-bio">한 줄 소개</label>
-      <input id="pp-bio" type="text" class="pp-input" placeholder="선택사항" maxlength="50" autocomplete="off">
+      <label class="pp-label" for="pp-bio" data-i18n="ppBio">한 줄 소개</label>
+      <input id="pp-bio" type="text" class="pp-input" placeholder="선택사항" data-i18n-ph="ppBioPH" maxlength="50" autocomplete="off">
     </div>
     <div class="pp-section">
-      <div class="pp-label">내 별 색상</div>
+      <div class="pp-label" data-i18n="ppColor">내 별 색상</div>
       <div id="pp-colors"></div>
     </div>
     <div class="pp-section" style="margin-bottom:20px">
       <div class="pp-fav-row">
         <div class="pp-fav-info">
-          <div class="pp-fav-label">즐겨찾기 공개</div>
-          <div class="pp-fav-sub">다른 사람들이 볼 수 있어요</div>
+          <div class="pp-fav-label" data-i18n="ppFavLabel">즐겨찾기 공개</div>
+          <div class="pp-fav-sub" data-i18n="ppFavSub">다른 사람들이 볼 수 있어요</div>
         </div>
         <label class="sw"><input type="checkbox" id="pp-fav-pub" checked><span class="sw-track"><span class="sw-thumb"></span></span></label>
       </div>
@@ -1241,14 +1280,14 @@
     <div class="pp-section" id="pp-link-section" style="margin-bottom:20px">
       <div class="pp-fav-row">
         <div class="pp-fav-info">
-          <div class="pp-fav-label">다른 기기와 동기화</div>
-          <div class="pp-fav-sub">구글 계정을 연결하면 다른 기기에서도 즐겨찾기를 불러올 수 있어요</div>
+          <div class="pp-fav-label" data-i18n="ppSyncLabel">다른 기기와 동기화</div>
+          <div class="pp-fav-sub" data-i18n="ppSyncSub">구글 계정을 연결하면 다른 기기에서도 즐겨찾기를 불러올 수 있어요</div>
         </div>
       </div>
-      <button id="pp-google-link" class="uc-btn uc-btn-primary">구글로 연결하기</button>
-      <div id="pp-linked-state" style="display:none">구글 계정에 연결됨 ✓</div>
+      <button id="pp-google-link" class="uc-btn uc-btn-primary" data-i18n="ppGoogleBtn">구글로 연결하기</button>
+      <div id="pp-linked-state" style="display:none" data-i18n="ppLinked">구글 계정에 연결됨 ✓</div>
     </div>
-    <button id="pp-save" class="pp-save-btn">저장하고 우주에 나타나기 ✦</button>
+    <button id="pp-save" class="pp-save-btn" data-i18n="ppSave">저장</button>
   </div>
 </div>
 <div id="link-confirm-overlay">
@@ -1487,7 +1526,7 @@ function _artistGroups(a){return a.groups||[a.group];}
 let _tagFilter={type:null,value:null};
 let _idxOpen=false,_idxView='group',_idxSortKey='name',_idxSortDir='asc';
 let regColorAttr=null,spkColorAttr=null;
-let currentLang='ko';
+let currentLang=localStorage.getItem('kpu_lang')||'ko';
 const T={
   ko:{sp_title:'설정',debutYr:'데뷔 연도',birthYr:'멤버 생년',grpType:'그룹 유형',
       all:'전체',girl:'걸그룹',boy:'보이그룹',inactive:'비활동/탈퇴 멤버',reset:'↺ 초기화',
@@ -1495,20 +1534,25 @@ const T={
       preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcFandom:'팬덤',gcLeader:'리더',gcMember:'멤버',gcSNS:'공식',
       idxTitle:'인덱스',idxGroupTab:'그룹',idxMemberTab:'멤버',idxSearchPH:'그룹명 검색…',idxSearchPHMember:'멤버명 검색…',
       idxSortName:'이름 (가나다순)',idxSortDebut:'데뷔연도',idxSortAgency:'소속사',idxSortMembers:'멤버 수',
-      idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적'},
+      idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적',ppTitle:'내 프로필',ppNick:'닉네임',ppNickPH:'닉네임을 입력하세요',ppNickErr:'닉네임을 입력해주세요',ppBio:'한 줄 소개',ppBioPH:'선택사항',ppColor:'내 별 색상',ppFavLabel:'즐겨찾기 공개',ppFavSub:'다른 사람들이 볼 수 있어요',ppSyncLabel:'다른 기기와 동기화',ppSyncSub:'구글 계정을 연결하면 다른 기기에서도 즐겨찾기를 불러올 수 있어요',ppGoogleBtn:'구글로 연결하기',ppLinked:'구글 계정에 연결됨 ✓',ppSave:'저장'},
   en:{sp_title:'Settings',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
       all:'All',girl:'Girl Groups',boy:'Boy Groups',inactive:'Inactive / Left',reset:'↺ Reset',
       searchPH:'Search groups · members…',mobileTitle:'K-pop Idol Map',srGroup:'Group',
       preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcFandom:'Fandom',gcLeader:'Leader',gcMember:'Members',gcSNS:'Official',
       idxTitle:'Index',idxGroupTab:'Groups',idxMemberTab:'Members',idxSearchPH:'Search group name…',idxSearchPHMember:'Search member name…',
       idxSortName:'Name (A–Z)',idxSortDebut:'Debut Year',idxSortAgency:'Agency',idxSortMembers:'Member Count',
-      idxSortBirth:'Birth Year',idxSortGroup:'Group',idxSortNation:'Nationality'}
+      idxSortBirth:'Birth Year',idxSortGroup:'Group',idxSortNation:'Nationality',ppTitle:'My Profile',ppNick:'Nickname',ppNickPH:'Enter nickname',ppNickErr:'Nickname is required',ppBio:'Bio',ppBioPH:'Optional',ppColor:'Star Color',ppFavLabel:'Public Favorites',ppFavSub:'Others can see your favorites',ppSyncLabel:'Sync Across Devices',ppSyncSub:'Connect with Google to sync favorites across devices',ppGoogleBtn:'Connect with Google',ppLinked:'Connected to Google ✓',ppSave:'Save'}
 };
 function applyLang(){
   document.body.classList.toggle('lang-en',currentLang==='en');
   const t=T[currentLang];
+  const _lt=currentLang.toUpperCase();
+  const _tl=document.getElementById('tab-lang');if(_tl)_tl.textContent=_lt;
+  const _dl=document.getElementById('dh-lang-btn');if(_dl)_dl.textContent=_lt;
   groupLabels.forEach(({el,ko,en})=>{el.textContent=currentLang==='ko'?ko:(en||ko);});
   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k];});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{const k=el.dataset.i18nPh;if(t[k])el.placeholder=t[k];});
+  const _nl=document.getElementById('pp-nick-label');if(_nl&&_nl.childNodes[0])_nl.childNodes[0].textContent=t.ppNick+' ';
   const si=document.getElementById('search-input');if(si)si.placeholder=t.searchPH;
   const msi=document.getElementById('tab-sb-input');if(msi)msi.placeholder=t.searchPH;
   _refreshOpenCardText();
@@ -1667,6 +1711,7 @@ async function buildUniverse(){
   await initSupabaseSync(); // 로그인 사용자의 서버 데이터가 첫 렌더 전에 로컬을 덮어써야 하므로 JSON fetch와 병렬로 먼저 완료 대기
   const [grpData,artData,connData]=await _jsonPromise;
   GROUPS=grpData;ARTISTS=artData;
+  applyLang();
   renderFavList();_buildAnniversaryList();
   renderScrapList();
   renderBookmarkList();
@@ -2665,12 +2710,17 @@ function doSearch(q){
     });
     res.appendChild(div);
   });
-  if(mobSearch){
-    const hasHits=hits.length>0;
-    res.classList.toggle('open',hasHits);
-    document.getElementById('tabbar').classList.toggle('has-sr',hasHits);
+  if(!hits.length){
+    const empty=document.createElement('div');
+    empty.className='sr-empty';
+    empty.textContent=currentLang==='ko'?'검색 결과가 없어요':'No results found';
+    res.appendChild(empty);
   }
-  else{res.style.display=hits.length?'block':'none';}
+  if(mobSearch){
+    res.classList.add('open');
+    document.getElementById('tabbar').classList.toggle('has-sr',hits.length>0);
+  }
+  else{res.style.display='block';}
 }
 
 const _si=document.getElementById('search-input');
@@ -2760,7 +2810,182 @@ function _lbUpdateToolbar(){
   }else{
     prevBtn.style.display='none';nextBtn.style.display='none';
   }
+  // scrap count
+  const scrapCntEl=document.getElementById('yt-lb-scrap-cnt');
+  if(scrapCntEl){const sc=s?(_scrapCounts.get(s.u)||0):0;scrapCntEl.textContent=sc>0?sc:'';}
+  // reactions
+  const reactUrl=s?s.u:'';
+  if(reactUrl!==_lbCurVideoUrl){
+    _lbCurVideoUrl=reactUrl;
+    _reactExpandedLevel=0;
+    document.getElementById('lb-react-extended').classList.remove('open');
+    document.getElementById('lb-react-more').textContent='+';
+    if(document.getElementById('lb-react-custom-wrap'))document.getElementById('lb-react-custom-wrap').classList.remove('open');
+    _loadReactions(reactUrl);
+  }else{
+    _renderReactions();
+  }
 }
+
+// ── 이모지 반응 ───────────────────────────────────────────────────────
+const LB_REACT_DEFAULT=['❤️‍🔥','🫠','😭','✨','🥹','💀'];
+const LB_REACT_EXTENDED=['👀','🫢','😳','👏','👑','👼'];
+let _myReactions=new Set(); // "videoUrl\x00emoji"
+let _reactionCounts=new Map(); // "videoUrl\x00emoji" → count
+let _lbCurVideoUrl='';
+let _reactExpandedLevel=0;
+
+async function _loadReactions(videoUrl){
+  _renderReactions();
+  if(!videoUrl||!sb||!window._sbSession)return;
+  try{
+    const uid=window._sbSession.user.id;
+    const[{data:cntData},{data:myData}]=await Promise.all([
+      sb.from('video_reaction_counts').select('emoji,cnt').eq('video_url',videoUrl),
+      sb.from('video_reactions').select('emoji').eq('user_id',uid).eq('video_url',videoUrl)
+    ]);
+    (cntData||[]).forEach(r=>_reactionCounts.set(videoUrl+'\x00'+r.emoji,r.cnt));
+    _myReactions=new Set((myData||[]).map(r=>videoUrl+'\x00'+r.emoji));
+    _renderReactions();
+  }catch(e){console.error('_loadReactions failed',e);}
+}
+
+async function _toggleReaction(videoUrl,emoji){
+  if(!sb||!window._sbSession||!videoUrl)return;
+  const key=videoUrl+'\x00'+emoji;
+  const uid=window._sbSession.user.id;
+  const wasOn=_myReactions.has(key);
+  // optimistic update
+  if(wasOn){_myReactions.delete(key);_reactionCounts.set(key,Math.max(0,(_reactionCounts.get(key)||0)-1));}
+  else{_myReactions.add(key);_reactionCounts.set(key,(_reactionCounts.get(key)||0)+1);}
+  _renderReactions();
+  try{
+    if(wasOn){await sb.from('video_reactions').delete().eq('user_id',uid).eq('video_url',videoUrl).eq('emoji',emoji);}
+    else{await sb.from('video_reactions').upsert({user_id:uid,video_url:videoUrl,emoji},{onConflict:'user_id,video_url,emoji'});}
+  }catch(e){
+    // rollback
+    if(wasOn){_myReactions.add(key);_reactionCounts.set(key,(_reactionCounts.get(key)||0)+1);}
+    else{_myReactions.delete(key);_reactionCounts.set(key,Math.max(0,(_reactionCounts.get(key)||0)-1));}
+    _renderReactions();
+    console.error('_toggleReaction failed',e);
+  }
+}
+
+function _renderReactions(){
+  document.querySelectorAll('.lb-react-btn').forEach(btn=>{
+    const emoji=btn.dataset.emoji;
+    const key=_lbCurVideoUrl+'\x00'+emoji;
+    const cnt=_reactionCounts.get(key)||0;
+    const on=_myReactions.has(key);
+    btn.classList.toggle('reacted',on);
+    const cntEl=btn.querySelector('.lb-react-cnt');
+    const _fmt=n=>n<=0?'':(n<1000?n:(n<10000?(Math.floor(n/100)/10).toFixed(n%1000===0?0:1)+'K':Math.floor(n/1000)+'K'));
+    if(cntEl)cntEl.textContent=_fmt(cnt);
+  });
+}
+
+// 확장 이모지 행 빌드 (첫 번째 + 클릭시 매번 재빌드 — 카운트 기반 정렬)
+function _buildExtendedReactions(){
+  const wrap=document.getElementById('lb-react-extended');
+  wrap.innerHTML='';
+  const row1Set=new Set(LB_REACT_DEFAULT);
+  // 풀: 기본 2행 이모지 + 유저 반응 중 1행에 없는 것
+  const poolSet=new Set(LB_REACT_EXTENDED);
+  _reactionCounts.forEach((cnt,key)=>{
+    const[url,emoji]=key.split(' ');
+    if(url===_lbCurVideoUrl&&cnt>0&&!row1Set.has(emoji)&&!poolSet.has(emoji))poolSet.add(emoji);
+  });
+  _myReactions.forEach(key=>{
+    const[url,emoji]=key.split(' ');
+    if(url===_lbCurVideoUrl&&!row1Set.has(emoji)&&!poolSet.has(emoji))poolSet.add(emoji);
+  });
+  // 반응 수 내림차순 정렬 (0은 뒤로)
+  const pool=[...poolSet].sort((a,b)=>{
+    const cA=_reactionCounts.get(_lbCurVideoUrl+' '+a)||0;
+    const cB=_reactionCounts.get(_lbCurVideoUrl+' '+b)||0;
+    return cB-cA;
+  });
+  // 최대 11개 (+ 버튼 포함 2행 한계)
+  pool.slice(0,11).forEach(emoji=>{
+    const btn=document.createElement('button');
+    btn.className='lb-react-btn';btn.dataset.emoji=emoji;
+    btn.innerHTML=`${emoji}<span class="lb-react-cnt"></span>`;
+    btn.addEventListener('click',()=>_toggleReaction(_lbCurVideoUrl,emoji));
+    wrap.appendChild(btn);
+  });
+  // 두 번째 + → 전체 이모지 피커
+  const more2=document.createElement('button');
+  more2.className='lb-react-more';more2.textContent='+';
+  more2.addEventListener('click',()=>{_reactExpandedLevel=2;_openEmojiPicker();});
+  wrap.appendChild(more2);
+}
+
+// 전체 이모지 피커 (emoji-picker-element)
+function _openEmojiPicker(){
+  const pickerWrap=document.getElementById('lb-emoji-picker-wrap');
+  pickerWrap.classList.add('open');
+  const picker=document.getElementById('lb-emoji-picker');
+  // 이모지 선택 이벤트 (중복 바인딩 방지)
+  if(!picker._bound){
+    picker._bound=true;
+    picker.addEventListener('emoji-click',e=>{
+      const emoji=e.detail.unicode;
+      _toggleReaction(_lbCurVideoUrl,emoji);
+      _closeEmojiPicker();
+    });
+  }
+}
+function _closeEmojiPicker(){
+  document.getElementById('lb-emoji-picker-wrap').classList.remove('open');
+  _reactExpandedLevel=1;
+}
+
+document.getElementById('lb-emoji-picker-close').addEventListener('click',_closeEmojiPicker);
+
+// 첫 번째 +/← 버튼 (확장 토글)
+document.getElementById('lb-react-more').addEventListener('click',()=>{
+  const moreBtn=document.getElementById('lb-react-more');
+  if(_reactExpandedLevel===0){
+    _reactExpandedLevel=1;
+    _buildExtendedReactions();
+    document.getElementById('lb-react-extended').classList.add('open');
+    moreBtn.textContent='←';
+    _renderReactions();
+  }else if(_reactExpandedLevel===1){
+    _reactExpandedLevel=0;
+    document.getElementById('lb-react-extended').classList.remove('open');
+    moreBtn.textContent='+';
+  }
+});
+
+// 기본 반응 버튼 이벤트
+document.querySelectorAll('.lb-react-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>_toggleReaction(_lbCurVideoUrl,btn.dataset.emoji));
+});
+// 물방울 리플 (이벤트 위임)
+function _lbRipple(btn,e){
+  const rc=btn.getBoundingClientRect();
+  const cx=(e.touches?e.touches[0].clientX:e.clientX)-rc.left;
+  const cy=(e.touches?e.touches[0].clientY:e.clientY)-rc.top;
+  const sp=document.createElement('span');
+  sp.className='lb-ripple';sp.style.left=cx+'px';sp.style.top=cy+'px';
+  btn.appendChild(sp);
+  sp.addEventListener('animationend',()=>sp.remove());
+}
+['yt-lb-reactions','lb-react-extended'].forEach(id=>{
+  const el=document.getElementById(id);
+  const sel='.lb-react-btn,.lb-react-more';
+  el.addEventListener('touchstart',e=>{const b=e.target.closest(sel);if(b)_lbRipple(b,e);},{passive:true});
+  el.addEventListener('mousedown',e=>{const b=e.target.closest(sel);if(b)_lbRipple(b,e);});
+});
+// 프로필 패널 버튼 리플
+['pp-save','pp-close','pp-google-link'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener('touchstart',e=>_lbRipple(el,e),{passive:true});
+  el.addEventListener('mousedown',e=>_lbRipple(el,e));
+});
+
 function _lbGo(delta){
   if(!_lbPlaylist)return;
   const ni=_lbIdx+delta;
@@ -2772,6 +2997,11 @@ function closeLightbox(){
   const lb=document.getElementById('yt-lightbox');
   lb.classList.remove('open');
   document.getElementById('yt-lb-iframe').src='';
+  document.getElementById('lb-emoji-picker-wrap').classList.remove('open');
+  document.getElementById('lb-react-extended').classList.remove('open');
+  document.getElementById('lb-react-more').textContent='+';
+  _reactExpandedLevel=0;
+  _lbCurVideoUrl='';
 }
 document.getElementById('yt-lightbox').addEventListener('pointerdown',e=>e.stopPropagation());
 document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)closeLightbox();});
@@ -4832,6 +5062,7 @@ function closePanels(){
 document.getElementById('tab-lang').addEventListener('click',e=>{
   e.stopPropagation();
   currentLang=currentLang==='ko'?'en':'ko';
+  localStorage.setItem('kpu_lang',currentLang);
   const t=currentLang.toUpperCase();
   document.getElementById('tab-lang').textContent=t;
   const dhl=document.getElementById('dh-lang-btn');if(dhl)dhl.textContent=t;
@@ -4980,6 +5211,7 @@ document.getElementById('sp-reset').addEventListener('click',e=>{
 document.getElementById('dh-lang-btn').addEventListener('click',e=>{
   e.stopPropagation();
   currentLang=currentLang==='ko'?'en':'ko';
+  localStorage.setItem('kpu_lang',currentLang);
   const t=currentLang.toUpperCase();
   document.getElementById('tab-lang').textContent=t;
   document.getElementById('dh-lang-btn').textContent=t;
@@ -6261,17 +6493,20 @@ function closeProfilePanel(){
 }
 
 function _updateProfileBtns(){
-  const lbl=myProfile?.nickname?myProfile.nickname[0].toUpperCase():'◉';
-  ['tab-profile','dh-profile-btn'].forEach(id=>{
-    const btn=document.getElementById(id);
-    if(!btn)return;
-    btn.textContent=lbl;
-    btn.classList.toggle('pp-set',!!(myProfile?.nickname));
-    if(myProfile?.color){
-      const[r,g,b]=myProfile.color;
-      btn.style.color=myProfile.nickname?`rgba(${r},${g},${b},0.88)`:'';
-    }else btn.style.color='';
-  });
+  const tabBtn=document.getElementById('tab-profile');
+  if(tabBtn){
+    tabBtn.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    tabBtn.classList.remove('pp-set');
+    if(myProfile?.color){const[r,g,b]=myProfile.color;tabBtn.style.color=`rgba(${r},${g},${b},0.88)`;}
+    else tabBtn.style.color='';
+  }
+  const dhBtn=document.getElementById('dh-profile-btn');
+  if(dhBtn){
+    const lbl=myProfile?.nickname?myProfile.nickname[0].toUpperCase():'◉';
+    dhBtn.textContent=lbl;
+    dhBtn.classList.toggle('pp-set',!!(myProfile?.nickname));
+    if(myProfile?.color){const[r,g,b]=myProfile.color;dhBtn.style.color=myProfile.nickname?`rgba(${r},${g},${b},0.88)`:'';}else dhBtn.style.color='';
+  }
 }
 
 function _flyToMyStar(){
