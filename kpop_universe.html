@@ -709,6 +709,14 @@
   #vid-tag-members{display:flex;flex-wrap:wrap;gap:7px;}
   .vid-tag-mem{display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(220,230,250,0.88);background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08);border-radius:10px;padding:6px 10px;cursor:pointer;}
   .vid-tag-mem input{accent-color:#6d8cff;}
+  #vid-tag-with-results{margin-top:4px;max-height:140px;overflow-y:auto;border-radius:10px;background:rgba(255,255,255,0.04);}
+  #vid-tag-with-results:empty{display:none;}
+  .vid-tag-with-opt{padding:7px 10px;font-size:12px;color:rgba(220,230,250,0.85);cursor:pointer;}
+  .vid-tag-with-opt:hover{background:rgba(255,255,255,0.08);}
+  #vid-tag-with-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  #vid-tag-with-chips:empty{display:none;}
+  .vid-tag-chip{display:flex;align-items:center;gap:5px;font-size:11.5px;color:rgba(220,230,250,0.9);background:rgba(109,140,255,0.16);border:0.5px solid rgba(109,140,255,0.35);border-radius:20px;padding:4px 10px 4px 12px;}
+  .vid-tag-chip button{background:none;border:none;color:rgba(220,230,250,0.7);cursor:pointer;font-size:12px;padding:0;line-height:1;}
   #vid-tag-status{font-size:11.5px;color:rgba(155,178,228,0.7);margin-top:10px;min-height:14px;}
   #vid-tag-btns{display:flex;gap:8px;margin-top:16px;}
   #gc-ch-more-wrap{min-height:1px;font-size:11px;color:rgba(155,178,228,0.45);text-align:center;padding:8px 0 2px;}
@@ -1404,8 +1412,10 @@
     <div id="vid-tag-vidtitle"></div>
     <div id="vid-tag-members"></div>
     <div class="pp-section" style="margin-top:14px">
-      <label class="pp-label" for="vid-tag-with">타 그룹 멤버 (선택, "이름(그룹)" 쉼표로 구분)</label>
-      <input id="vid-tag-with" type="text" class="pp-input" placeholder="예: 성호(보이넥스트도어)" autocomplete="off">
+      <label class="pp-label" for="vid-tag-with-search">타 그룹 멤버 (선택)</label>
+      <input id="vid-tag-with-search" type="text" class="pp-input" placeholder="이름 검색 (예: 성호)" autocomplete="off">
+      <div id="vid-tag-with-results"></div>
+      <div id="vid-tag-with-chips"></div>
     </div>
     <div id="vid-tag-status"></div>
     <div id="vid-tag-btns">
@@ -7552,8 +7562,24 @@ function _isAdmin(){
   return!!(u&&!u.is_anonymous&&u.email===ADMIN_EMAIL);
 }
 let _vidTagTarget=null;
+let _vidTagWithSelected=[]; // [{ko,groupKo}] — 타 그룹 멤버 검색/선택 결과
+function _renderVidTagChips(){
+  const chipsEl=document.getElementById('vid-tag-with-chips');
+  chipsEl.innerHTML='';
+  _vidTagWithSelected.forEach((m,i)=>{
+    const chip=document.createElement('span');
+    chip.className='vid-tag-chip';
+    chip.appendChild(document.createTextNode(`${m.ko}(${m.groupKo})`));
+    const rm=document.createElement('button');
+    rm.type='button';rm.textContent='✕';rm.setAttribute('aria-label','제거');
+    rm.addEventListener('click',e=>{e.stopPropagation();_vidTagWithSelected.splice(i,1);_renderVidTagChips();});
+    chip.appendChild(rm);
+    chipsEl.appendChild(chip);
+  });
+}
 function _openVidTagModal(v,ko){
   _vidTagTarget={id:v.id,ko};
+  _vidTagWithSelected=[];
   document.getElementById('vid-tag-vidtitle').textContent=v.title;
   const membersEl=document.getElementById('vid-tag-members');
   membersEl.innerHTML='';
@@ -7567,7 +7593,9 @@ function _openVidTagModal(v,ko){
     label.appendChild(document.createTextNode(a.name.ko));
     membersEl.appendChild(label);
   });
-  document.getElementById('vid-tag-with').value='';
+  document.getElementById('vid-tag-with-search').value='';
+  document.getElementById('vid-tag-with-results').innerHTML='';
+  _renderVidTagChips();
   document.getElementById('vid-tag-status').textContent='';
   document.getElementById('vid-tag-overlay').classList.add('open');
 }
@@ -7578,12 +7606,37 @@ function _closeVidTagModal(){
 document.getElementById('vid-tag-cancel').addEventListener('click',e=>{e.stopPropagation();_closeVidTagModal();});
 document.getElementById('vid-tag-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)_closeVidTagModal();});
 document.getElementById('vid-tag-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
+document.getElementById('vid-tag-with-search').addEventListener('input',e=>{
+  const q=e.target.value.trim();
+  const resultsEl=document.getElementById('vid-tag-with-results');
+  resultsEl.innerHTML='';
+  if(!q||!_vidTagTarget)return;
+  const already=new Set(_vidTagWithSelected.map(m=>m.ko+'|'+m.groupKo));
+  const matches=ARTISTS.filter(a=>
+    a.name.ko.includes(q)&&
+    !_artistGroups(a).some(g=>g.ko===_vidTagTarget.ko)&&
+    !already.has(a.name.ko+'|'+a.group.ko)
+  ).slice(0,8);
+  matches.forEach(a=>{
+    const opt=document.createElement('div');
+    opt.className='vid-tag-with-opt';
+    opt.textContent=`${a.name.ko} (${a.group.ko})`;
+    opt.addEventListener('click',ev=>{
+      ev.stopPropagation();
+      _vidTagWithSelected.push({ko:a.name.ko,groupKo:a.group.ko});
+      _renderVidTagChips();
+      e.target.value='';
+      resultsEl.innerHTML='';
+    });
+    resultsEl.appendChild(opt);
+  });
+});
 document.getElementById('vid-tag-save').addEventListener('click',async e=>{
   e.stopPropagation();
   if(!_vidTagTarget||!sb)return;
   const statusEl=document.getElementById('vid-tag-status');
   const members=[...document.querySelectorAll('#vid-tag-members input:checked')].map(cb=>cb.value);
-  const withMembers=document.getElementById('vid-tag-with').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const withMembers=_vidTagWithSelected.map(m=>`${m.ko}(${m.groupKo})`);
   statusEl.textContent='저장 중…';
   const{id,ko}=_vidTagTarget;
   const{error}=await sb.from(_YT_TABLE).update({members,with_members:withMembers}).eq('id',id);
