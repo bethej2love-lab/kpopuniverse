@@ -689,11 +689,28 @@
   .gc-totop:hover{background:rgba(255,255,255,0.14);}
   .gc-totop:active{transform:scale(0.9);}
   .gc-ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;align-items:start;}
-  .gc-ch-item{cursor:pointer;border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.04);transition:opacity .13s;}
+  .gc-ch-item{position:relative;cursor:pointer;border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.04);transition:opacity .13s;}
   .gc-ch-item:hover{opacity:.78;}
   .gc-ch-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
   .gc-ch-item.featured,.gc-ch-item.gc-ch-wide{grid-column:span 2;}
   .gc-ch-item.is-short .gc-ch-thumb{aspect-ratio:9/16;}
+  /* ── 관리자 전용: 영상 출연 멤버 태깅 ───────────────── */
+  .gc-ch-edit{
+    position:absolute;top:4px;right:4px;z-index:2;width:22px;height:22px;border-radius:50%;
+    background:rgba(10,14,28,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:0.5px solid rgba(255,255,255,0.22);color:rgba(230,238,255,0.95);font-size:11px;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;
+  }
+  .gc-ch-edit:hover{background:rgba(30,40,70,0.85);}
+  #vid-tag-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:80;display:none;align-items:center;justify-content:center;}
+  #vid-tag-overlay.open{display:flex;}
+  #vid-tag-panel{width:min(320px,calc(100vw - 40px));max-height:82vh;overflow-y:auto;background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:18px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:20px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
+  #vid-tag-vidtitle{font-size:11px;color:rgba(160,182,222,0.65);margin:6px 0 14px;line-height:1.4;}
+  #vid-tag-members{display:flex;flex-wrap:wrap;gap:7px;}
+  .vid-tag-mem{display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(220,230,250,0.88);background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08);border-radius:10px;padding:6px 10px;cursor:pointer;}
+  .vid-tag-mem input{accent-color:#6d8cff;}
+  #vid-tag-status{font-size:11.5px;color:rgba(155,178,228,0.7);margin-top:10px;min-height:14px;}
+  #vid-tag-btns{display:flex;gap:8px;margin-top:16px;}
   #gc-ch-more-wrap{min-height:1px;font-size:11px;color:rgba(155,178,228,0.45);text-align:center;padding:8px 0 2px;}
   .gc-ch-msg{font-size:12px;color:rgba(155,178,228,0.45);text-align:center;padding:10px 0;line-height:1.6;}
   .gc-ch-err{font-size:11.5px;color:rgba(228,155,155,0.65);text-align:center;padding:6px 0;}
@@ -1378,6 +1395,22 @@
     <div id="link-confirm-btns">
       <button id="link-confirm-cancel" class="uc-btn">취소</button>
       <button id="link-confirm-ok" class="uc-btn uc-btn-primary">계속할게요</button>
+    </div>
+  </div>
+</div>
+<div id="vid-tag-overlay">
+  <div id="vid-tag-panel">
+    <div class="pp-title">출연 멤버 지정</div>
+    <div id="vid-tag-vidtitle"></div>
+    <div id="vid-tag-members"></div>
+    <div class="pp-section" style="margin-top:14px">
+      <label class="pp-label" for="vid-tag-with">타 그룹 멤버 (선택, "이름(그룹)" 쉼표로 구분)</label>
+      <input id="vid-tag-with" type="text" class="pp-input" placeholder="예: 성호(보이넥스트도어)" autocomplete="off">
+    </div>
+    <div id="vid-tag-status"></div>
+    <div id="vid-tag-btns">
+      <button id="vid-tag-cancel" class="uc-btn">취소</button>
+      <button id="vid-tag-save" class="uc-btn uc-btn-primary">저장</button>
     </div>
   </div>
 </div>
@@ -6870,6 +6903,12 @@ try{
   });
 }catch(e){console.error('Supabase client init failed',e);}
 
+// ── OAuth 리디렉트 진단용 임시 로깅 (기기별 로그인 실패 원인 파악용, 확인되면 제거) ──
+function _authAlert(msg){
+  console.error('[Auth Debug]',msg);
+  try{alert('[Auth Debug] '+msg);}catch(e){}
+}
+
 // ── 영상 스크랩 공개 집계 (메인 직캠 선정용) ──────
 // 개인 플레이리스트(scraps, 위 user_data)와는 별개로, "이 영상을 몇 명이 스크랩했는지"를
 // video_scraps 테이블(영상×유저 1행)로 공개 집계해서, 그룹/멤버 카드의 메인 직캠을
@@ -6936,12 +6975,20 @@ async function _pullServerToLocal(userId){
 async function initSupabaseSync(){
   if(!sb)return;
   try{
-    const{data:{session:existingSession}}=await sb.auth.getSession();
+    const urlParams=new URLSearchParams(location.search);
+    const oauthErr=urlParams.get('error_description')||urlParams.get('error');
+    const hadOAuthCode=urlParams.has('code');
+    if(oauthErr)_authAlert('OAuth 리디렉트 에러: '+oauthErr);
+    const{data:{session:existingSession},error:getSessionErr}=await sb.auth.getSession();
+    if(getSessionErr)_authAlert('getSession 에러: '+(getSessionErr.message||getSessionErr));
+    if(hadOAuthCode&&!oauthErr&&(!existingSession||existingSession.user.is_anonymous===true)){
+      _authAlert('구글 로그인 콜백은 감지됐지만 세션이 익명 상태로 남음 (코드 교환 실패 추정)');
+    }
     let session=existingSession;
     let isBrandNewAnonymous=false;
     if(!session){
       const{data,error}=await sb.auth.signInAnonymously();
-      if(error){console.error('anon sign-in failed',error);return;}
+      if(error){_authAlert('익명 로그인 실패: '+error.message);return;}
       session=data.session;
       isBrandNewAnonymous=true;
     }
@@ -6969,7 +7016,7 @@ async function initSupabaseSync(){
       }
     }
   }catch(e){
-    console.error('initSupabaseSync failed',e);
+    _authAlert('initSupabaseSync 예외: '+(e&&e.message||e));
   }
 }
 
@@ -7004,9 +7051,9 @@ document.getElementById('pp-google-link').addEventListener('click',async e=>{
     if(error.code==='identity_already_exists'||/already.*(linked|exists)/i.test(error.message||'')){
       // 이 구글 계정은 이미 다른 브라우저/UID에 연결돼 있음 → "연결"이 아니라 그 계정으로 "로그인"으로 전환
       const{error:loginErr}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo}});
-      if(loginErr)console.error('signInWithOAuth failed',loginErr);
+      if(loginErr)_authAlert('signInWithOAuth 실패: '+loginErr.message);
     }else{
-      console.error('linkIdentity failed',error);
+      _authAlert('linkIdentity 실패: '+error.message);
     }
   }
   // 성공하면 브라우저가 구글 동의 화면으로 이동하므로 이후 코드는 실행되지 않음
@@ -7498,6 +7545,56 @@ function _groupGcVids(items,featured,startPos,startCat){
   return{renderList,endPos:pos,endCat:cat,widenPrevTrailing};
 }
 
+// ── 관리자 전용: 영상 출연 멤버 태깅 (bethej2love@gmail.com만 편집 가능, DB 트리거로도 이중 보호됨) ──
+const ADMIN_EMAIL='bethej2love@gmail.com';
+function _isAdmin(){
+  const u=window._sbSession&&window._sbSession.user;
+  return!!(u&&!u.is_anonymous&&u.email===ADMIN_EMAIL);
+}
+let _vidTagTarget=null;
+function _openVidTagModal(v,ko){
+  _vidTagTarget={id:v.id,ko};
+  document.getElementById('vid-tag-vidtitle').textContent=v.title;
+  const membersEl=document.getElementById('vid-tag-members');
+  membersEl.innerHTML='';
+  const groupMembers=ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===ko));
+  groupMembers.forEach(a=>{
+    const label=document.createElement('label');
+    label.className='vid-tag-mem';
+    const cb=document.createElement('input');
+    cb.type='checkbox';cb.value=a.name.ko;
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(a.name.ko));
+    membersEl.appendChild(label);
+  });
+  document.getElementById('vid-tag-with').value='';
+  document.getElementById('vid-tag-status').textContent='';
+  document.getElementById('vid-tag-overlay').classList.add('open');
+}
+function _closeVidTagModal(){
+  document.getElementById('vid-tag-overlay').classList.remove('open');
+  _vidTagTarget=null;
+}
+document.getElementById('vid-tag-cancel').addEventListener('click',e=>{e.stopPropagation();_closeVidTagModal();});
+document.getElementById('vid-tag-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)_closeVidTagModal();});
+document.getElementById('vid-tag-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
+document.getElementById('vid-tag-save').addEventListener('click',async e=>{
+  e.stopPropagation();
+  if(!_vidTagTarget||!sb)return;
+  const statusEl=document.getElementById('vid-tag-status');
+  const members=[...document.querySelectorAll('#vid-tag-members input:checked')].map(cb=>cb.value);
+  const withMembers=document.getElementById('vid-tag-with').value.split(',').map(s=>s.trim()).filter(Boolean);
+  statusEl.textContent='저장 중…';
+  const{id,ko}=_vidTagTarget;
+  const{error}=await sb.from(_YT_TABLE).update({members,with_members:withMembers}).eq('id',id);
+  if(error){statusEl.textContent='저장 실패: '+error.message;return;}
+  statusEl.textContent='저장됨';
+  setTimeout(()=>{
+    _closeVidTagModal();
+    if(_gcChState.ko===ko)_loadGcChVids(ko,true); // members가 채워졌으니 그룹 카드 그리드에서 자동으로 빠짐
+  },500);
+});
+
 // vids(그룹핑된 순서)를 grid에 렌더링. DOM 노드 목록과, 백그라운드 재확인이 필요한 가로 항목 참조를 반환.
 function _renderGcVidItems(vids,grid){
   const nodes=[];
@@ -7522,6 +7619,13 @@ function _renderGcVidItems(vids,grid){
     tEl.className='tv-sm-title';tEl.textContent=v.title;
     addMarquee(tEl);
     item.appendChild(img);item.appendChild(tEl);
+    if(_isAdmin()){
+      const editBtn=document.createElement('button');
+      editBtn.className='gc-ch-edit';editBtn.type='button';editBtn.textContent='✎';
+      editBtn.setAttribute('aria-label','출연 멤버 지정');
+      editBtn.addEventListener('click',e=>{e.stopPropagation();_openVidTagModal(v,_gcChState.ko);});
+      item.appendChild(editBtn);
+    }
     item.addEventListener('click',e=>{
       e.stopPropagation();
       openLightbox(`https://www.youtube.com/watch?v=${v.id}`,isShort);
@@ -7662,7 +7766,8 @@ async function _loadGcChVids(ko,reset,randomize=false){
   btn.id='gc-totop';btn.className='gc-totop';btn.setAttribute('aria-label','맨 위로');
   btn.textContent='↑';
   document.body.appendChild(btn);
-  btn.addEventListener('click',()=>{
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
     const gc=document.getElementById('gc');
     if(!gc)return;
     for(const id of['mob-sheet-inner','mob-card-stack-inner','side-panel']){
