@@ -659,14 +659,35 @@
   /* ── YouTube 채널 영상 섹션 ─────────────────────────── */
   #gc-ch-vid{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.10);}
   #gc-ch-vid:empty{display:none;}
-  .gc-ch-hd{display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;}
-  .gc-ch-refresh{background:none;border:none;cursor:pointer;color:rgba(155,178,228,0.4);font-size:13px;padding:2px 3px;transition:color .15s;font-family:inherit;}
+  .gc-ch-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
+  .gc-ch-refresh{flex:0 0 auto;background:none;border:none;cursor:pointer;color:rgba(155,178,228,0.4);font-size:13px;padding:2px 3px;transition:color .15s;font-family:inherit;}
   .gc-ch-refresh:hover{color:#c0d6f0;}
   @keyframes gc-ch-spin{to{transform:rotate(360deg);}}
   .gc-ch-refresh.spinning{animation:gc-ch-spin .5s linear;}
-  .gc-ch-filters{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap;}
-  .gc-ch-filter{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.10);border-radius:12px;padding:3px 9px;font-size:11px;color:rgba(192,214,240,0.6);cursor:pointer;transition:all .15s;font-family:inherit;}
-  .gc-ch-filter.active{background:rgba(155,178,228,0.18);color:#c0d6f0;border-color:rgba(155,178,228,0.35);}
+  .gc-ch-filters{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+  .gc-ch-filter{
+    background:rgba(255,255,255,0.055);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:0.5px solid rgba(255,255,255,0.14);border-radius:20px;padding:4px 11px;
+    font-size:11px;color:rgba(192,214,240,0.65);cursor:pointer;font-family:inherit;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
+    transition:background .14s,border-color .14s,color .14s,transform .14s;
+  }
+  .gc-ch-filter:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.22);color:rgba(220,235,255,0.95);}
+  .gc-ch-filter:active{transform:scale(0.93);}
+  .gc-ch-filter.active{
+    background:rgba(155,178,228,0.22);color:#c8ddff;border-color:rgba(170,195,255,0.4);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 0 10px rgba(155,178,228,0.25);
+  }
+  .gc-totop{
+    position:fixed;right:16px;bottom:90px;z-index:50;width:36px;height:36px;border-radius:50%;
+    background:rgba(255,255,255,0.08);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:0.5px solid rgba(255,255,255,0.16);color:rgba(220,235,255,0.9);font-size:16px;
+    display:none;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.14),0 4px 14px rgba(0,0,0,0.35);
+    transition:background .14s,transform .14s;
+  }
+  .gc-totop:hover{background:rgba(255,255,255,0.14);}
+  .gc-totop:active{transform:scale(0.9);}
   .gc-ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;align-items:start;}
   .gc-ch-item{cursor:pointer;border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.04);transition:opacity .13s;}
   .gc-ch-item:hover{opacity:.78;}
@@ -3620,6 +3641,66 @@ function _dedupSongs(songs){
   const seen=new Set();
   return songs.filter(sg=>{if(seen.has(sg.u))return false;seen.add(sg.u);return true;});
 }
+// Supabase yt_channel_videos 행을 artists.json songs 항목({t,u,with,type})과 같은 형태로 변환.
+// members/with_members 태깅은 [[project_kpop_map]] "영상 노출 로직 설계" 참고.
+function _apiVidToSong(v,memberKo,groupKo){
+  const withList=[];
+  const selfTagged=`${memberKo}(${groupKo})`;
+  (v.members||[]).forEach(n=>{
+    if(n===memberKo&&v.group_ko===groupKo)return; // 본인 제외
+    withList.push(v.group_ko===groupKo?n:`${n}(${v.group_ko})`);
+  });
+  (v.with_members||[]).forEach(n=>{
+    if(n===selfTagged||n===memberKo)return; // 본인 제외
+    withList.push(n);
+  });
+  const song={
+    t:v.title,
+    u:v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`,
+  };
+  if(withList.length)song.with=withList;
+  if(v.category==='mv')song.type='mv';
+  return song;
+}
+// 멤버 카드에 API로 수집된(그룹 채널 동기화) 영상 중 이 멤버가 출연 태깅된 것을 백그라운드로 불러와 합쳐서 다시 렌더링.
+// 즉시 표시 후 보정하는 방식(그룹 카드 쇼츠 판별과 동일한 패턴) — 카드를 옮겨가면 _openTArtist가 바뀌어 있으므로 갱신을 건너뜀.
+async function _enrichMemberVideosFromApi(a,tv,baseSongs,basePersonalSongs){
+  if(!sb)return;
+  const memberKo=a.name.ko,groupKo=a.group.ko;
+  const withKey=`${memberKo}(${groupKo})`;
+  try{
+    const[ownQ,withQ]=await Promise.all([
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').eq('group_ko',groupKo).contains('members',[memberKo]),
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').contains('with_members',[withKey]),
+    ]);
+    if(ownQ.error)throw new Error(ownQ.error.message);
+    if(withQ.error)throw new Error(withQ.error.message);
+    const rows=[...(ownQ.data||[]),...(withQ.data||[])];
+    if(!rows.length)return;
+    const render=()=>{
+      if(_openTArtist!==a)return; // 그 사이 다른 멤버 카드로 이동함
+      const apiSongs=rows.map(v=>_apiVidToSong(v,memberKo,groupKo));
+      const merged=_dedupSongs([...baseSongs,...apiSongs]);
+      const mergedPersonal=_dedupSongs([...basePersonalSongs,...apiSongs]);
+      buildVideoSection(merged,tv,{groupKo,memberKo},mergedPersonal.length?mergedPersonal:merged);
+    };
+    render();
+    // DB category가 부정확해 실제론 쇼츠(세로)인데 가로로 표시될 수 있어 백그라운드로 재확인 후 다시 렌더링
+    // (그룹 카드 영상 그리드에 쓴 것과 동일한 보정 로직 재사용)
+    const uncertain=rows.filter(v=>v.category!=='short');
+    if(uncertain.length){
+      const correctedIds=await _probeShortsBatch(uncertain);
+      if(correctedIds.length){
+        sb.from(_YT_TABLE).update({category:'short'}).in('id',correctedIds).then(({error})=>{
+          if(error)console.error('쇼츠 분류 보정 저장 실패',error.message);
+        });
+        render();
+      }
+    }
+  }catch(e){
+    console.error('멤버 API 영상 로드 실패',e);
+  }
+}
 function _getSongsFeaturingArtist(a){
   const myName=a.name.ko;
   const res=[];
@@ -4398,6 +4479,7 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
   const _memberPersonalSongs=_dedupSongs([...(a.songs||[]),..._getSongsFeaturingArtist(a)]);
   const _memberMainCandidates=_memberPersonalSongs.length?_memberPersonalSongs:_memberAllSongs;
   buildVideoSection(_memberAllSongs,tv,{groupKo:a.group.ko,memberKo:a.name.ko},_memberMainCandidates);
+  _enrichMemberVideosFromApi(a,tv,_memberAllSongs,_memberPersonalSongs);
   // ✦ 연결 버튼 (그룹명 오른쪽)
   const connBtn=document.getElementById('tt-conn-btn');
   const hasCollab=_getCollabMembers(a).length>0;
@@ -7305,7 +7387,7 @@ async function _buildGcChVid(ko){
   const info=GROUPS[ko];
   if(!info?.links?.youtube||!sb)return;
   _gcChState={ko,filter:'all',offset:0,total:0,pos:0,cat:null,gen:_gcChState.gen+1,appendLock:false,trailingEl:null,hasMore:false};
-  cont.innerHTML=`<div class="gc-ch-hd"><button class="gc-ch-refresh" id="gc-ch-ref" title="새로고침">↻</button></div><div class="gc-ch-filters" id="gc-ch-filters"></div><div class="gc-ch-grid" id="gc-ch-grid"></div><div id="gc-ch-more-wrap"></div>`;
+  cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters" id="gc-ch-filters"></div><button class="gc-ch-refresh" id="gc-ch-ref" title="새로고침">↻</button></div><div class="gc-ch-grid" id="gc-ch-grid"></div><div id="gc-ch-more-wrap"></div>`;
   const filEl=document.getElementById('gc-ch-filters');
   [['all','전체'],['mv','MV'],['live','라이브'],['short','Shorts']].forEach(([val,lbl])=>{
     const b=document.createElement('button');
@@ -7508,7 +7590,8 @@ async function _loadGcChVids(ko,reset,randomize=false){
   const releaseLock=()=>{if(myGen===_gcChState.gen)_gcChState.appendLock=false;};
   const{filter,offset}=_gcChState;
   try{
-    let q=sb.from(_YT_TABLE).select('id,title,thumb,category',{count:'exact'}).eq('group_ko',ko).order('published_at',{ascending:false}).range(offset,offset+_YT_PAGE-1);
+    // 특정 멤버가 태깅된 영상(members 비어있지 않음)은 그룹 전체 영상이 아니라 그 멤버 개인 카드에만 노출 — 그룹 카드에선 제외
+    let q=sb.from(_YT_TABLE).select('id,title,thumb,category',{count:'exact'}).eq('group_ko',ko).filter('members','eq','{}').order('published_at',{ascending:false}).range(offset,offset+_YT_PAGE-1);
     if(filter!=='all')q=q.eq('category',filter);
     const{data,error,count}=await q;
     if(myGen!==_gcChState.gen)return; // 대기 중 다른 그룹/새로고침으로 전환됨: 그쪽이 이미 자신의 잠금을 걸어놨으므로 여기선 해제하지 않는다
@@ -7546,7 +7629,7 @@ async function _loadGcChVids(ko,reset,randomize=false){
     // moreWrap은 그리드 맨 아래 센티널: 스크롤로 뷰포트 근처에 들어오면 IntersectionObserver가
     // _gcChTryLoadMore를 호출해 다음 페이지를 자동으로 불러온다(무한 스크롤)
     if(moreWrap)moreWrap.textContent='';
-    if(filter==='all'&&pendingProbe.length){
+    if(pendingProbe.length){
       _settleGcPage({myGen,grid,pageItems,featured,pageStartPos,pageStartCat,pageNodes,pendingProbe,hasMore,incomingTrailingEl}).finally(releaseLock);
     }else{
       releaseLock();
@@ -7568,6 +7651,25 @@ async function _loadGcChVids(ko,reset,randomize=false){
   keyEl?.addEventListener('blur',e=>localStorage.setItem('kpu_yt_key',e.target.value.trim()));
   document.getElementById('sp-yt-sync')?.addEventListener('click',_ytSyncAll);
   document.getElementById('sp-yt-reclassify')?.addEventListener('click',_ytReclassifyShorts);
+})();
+
+// 그룹 카드 "맨 위로" 버튼 — 무한 스크롤로 아래로 많이 내려간 뒤 다시 카드 맨 위로 쉽게 돌아가기 위함
+(()=>{
+  const btn=document.createElement('button');
+  btn.id='gc-totop';btn.className='gc-totop';btn.setAttribute('aria-label','맨 위로');
+  btn.textContent='↑';
+  document.body.appendChild(btn);
+  btn.addEventListener('click',()=>{
+    document.getElementById('gc-header')?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  const header=document.getElementById('gc-header');
+  if(header){
+    const io=new IntersectionObserver(entries=>{
+      const gcOpen=document.getElementById('gc').style.display==='block';
+      btn.style.display=(gcOpen&&!entries[0].isIntersecting)?'flex':'none';
+    },{root:null,threshold:0});
+    io.observe(header);
+  }
 })();
 
 </script>
