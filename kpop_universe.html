@@ -671,10 +671,9 @@
   .gc-ch-item{cursor:pointer;border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.04);transition:opacity .13s;}
   .gc-ch-item:hover{opacity:.78;}
   .gc-ch-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
-  .gc-ch-item.featured{grid-column:span 2;}
+  .gc-ch-item.featured,.gc-ch-item.gc-ch-wide{grid-column:span 2;}
   .gc-ch-item.is-short .gc-ch-thumb{aspect-ratio:9/16;}
-  .gc-ch-more{display:block;width:100%;margin-top:7px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.10);border-radius:7px;padding:7px;font-size:11.5px;color:rgba(192,214,240,0.6);cursor:pointer;text-align:center;transition:background .15s;font-family:inherit;}
-  .gc-ch-more:hover{background:rgba(255,255,255,0.09);}
+  #gc-ch-more-wrap{min-height:1px;font-size:11px;color:rgba(155,178,228,0.45);text-align:center;padding:8px 0 2px;}
   .gc-ch-msg{font-size:12px;color:rgba(155,178,228,0.45);text-align:center;padding:10px 0;line-height:1.6;}
   .gc-ch-err{font-size:11.5px;color:rgba(228,155,155,0.65);text-align:center;padding:6px 0;}
   .sp-yt-key{width:100%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:7px;padding:6px 9px;font-size:11px;color:#c0d6f0;font-family:inherit;outline:none;box-sizing:border-box;margin-top:5px;}
@@ -7290,7 +7289,14 @@ async function _ytReclassifyShorts(){
 }
 
 // ── 그룹 카드 YouTube 영상 섹션 ──
-let _gcChState={ko:null,filter:'all',offset:0,total:0};
+let _gcChState={ko:null,filter:'all',offset:0,total:0,pos:0,cat:null,gen:0,appendLock:false,trailingEl:null,hasMore:false};
+let _gcChObserver=null;
+
+// 스크롤로 more-wrap(그리드 맨 아래 센티널)이 뷰포트 근처에 들어오면 다음 페이지를 자동으로 불러온다.
+function _gcChTryLoadMore(ko){
+  if(_gcChState.ko!==ko||!_gcChState.hasMore||_gcChState.appendLock)return;
+  _loadGcChVids(ko,false);
+}
 
 async function _buildGcChVid(ko){
   const cont=document.getElementById('gc-ch-vid');
@@ -7298,7 +7304,7 @@ async function _buildGcChVid(ko){
   cont.innerHTML='';
   const info=GROUPS[ko];
   if(!info?.links?.youtube||!sb)return;
-  _gcChState={ko,filter:'all',offset:0,total:0};
+  _gcChState={ko,filter:'all',offset:0,total:0,pos:0,cat:null,gen:_gcChState.gen+1,appendLock:false,trailingEl:null,hasMore:false};
   cont.innerHTML=`<div class="gc-ch-hd"><button class="gc-ch-refresh" id="gc-ch-ref" title="새로고침">↻</button></div><div class="gc-ch-filters" id="gc-ch-filters"></div><div class="gc-ch-grid" id="gc-ch-grid"></div><div id="gc-ch-more-wrap"></div>`;
   const filEl=document.getElementById('gc-ch-filters');
   [['all','전체'],['mv','MV'],['live','라이브'],['short','Shorts']].forEach(([val,lbl])=>{
@@ -7319,25 +7325,174 @@ async function _buildGcChVid(ko){
     setTimeout(()=>refBtn.classList.remove('spinning'),500);
     _loadGcChVids(ko,true,true);
   });
+  if(_gcChObserver)_gcChObserver.disconnect();
+  const moreWrap=document.getElementById('gc-ch-more-wrap');
+  _gcChObserver=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting)_gcChTryLoadMore(ko);
+  },{root:null,rootMargin:'0px 0px 400px 0px'});
+  if(moreWrap)_gcChObserver.observe(moreWrap);
   _loadGcChVids(ko,true);
 }
 
+// DB category가 부정확한(가로로 저장됐지만 실제론 쇼츠인) 영상을 화면 표시 후 백그라운드에서 확인.
+// 네트워크가 느릴 때 프로브 요청이 동시에 몰리면 개별 요청이 크게 지연되므로 동시 개수를 제한한다.
+function _probeIsPortrait(id){
+  return new Promise(resolve=>{
+    const p=new Image();
+    let done=false;
+    const finish=r=>{if(done)return;done=true;resolve(r);};
+    p.onload=()=>finish(p.naturalHeight>p.naturalWidth);
+    p.onerror=()=>finish(false);
+    p.src=`https://i.ytimg.com/vi/${id}/oardefault.jpg`;
+    setTimeout(()=>finish(false),8000); // 안전장치용 타임아웃(주 판별 수단 아님)
+  });
+}
+// refs의 각 항목이 실제로 쇼츠인지 확인. 확인되는 즉시 카드를 바꾸지 않고(그러면 원래 자리에서
+// 잠깐 옆 칸과 비율이 섞여 보임) v.category만 갱신해두고, 배치가 다 끝난 뒤 호출부가 한 번에 재배치한다.
+async function _probeShortsBatch(refs){
+  const CONCURRENCY=6;
+  let idx=0;
+  const correctedIds=[];
+  async function worker(){
+    while(idx<refs.length){
+      const v=refs[idx++];
+      const isPortrait=await _probeIsPortrait(v.id);
+      if(!isPortrait)continue;
+      v.category='short';
+      correctedIds.push(v.id);
+    }
+  }
+  await Promise.all(Array.from({length:Math.min(CONCURRENCY,refs.length)},worker));
+  return correctedIds;
+}
+
+// 대표(featured) 영상은 항상 가로로 긴 풀로우 카드이므로 쇼츠는 후보에서 완전히 제외.
+// 가로 영상이 하나도 없으면 대표 영상 없이 목록만 표시한다.
 function _pickMainChVid(videos){
-  const pool=videos.filter(v=>v.category!=='mv'&&v.category!=='short');
-  const base=pool.length?pool:videos;
+  const nonShort=videos.filter(v=>v.category!=='short');
+  if(!nonShort.length)return null;
+  const pool=nonShort.filter(v=>v.category!=='mv');
+  const base=pool.length?pool:nonShort;
   const maxC=Math.max(0,...base.map(v=>_scrapCounts.get(`https://www.youtube.com/watch?v=${v.id}`)||0));
   if(maxC>0){
     const top=base.filter(v=>(_scrapCounts.get(`https://www.youtube.com/watch?v=${v.id}`)||0)===maxC);
     return top[Math.floor(Math.random()*top.length)];
   }
-  return base[0]||videos[0]||null;
+  return base[0]||nonShort[0]||null;
+}
+
+// 그룹핑 순수함수: 원래(업로드 시간순) 순서를 그대로 유지하면서, 같은 비율이 연속될 때만 한 행에
+// 2개씩 짝짓는다. 비율이 바뀌는 경계에서 홀수로 남는 카드는 빈 스페이서를 옆에 두는 대신 그 카드
+// 자체를 2열 폭으로 넓혀서(v._wide) 빈 공간이 생기지 않게 한다.
+// (가로만 쭉/세로만 쭉 나오는 게 아니라, 원래 업로드 순서대로 가로 묶음↔세로 묶음이 자연스럽게 번갈아 나옴)
+// featured는 풀로우(2열)를 실제로 차지하므로 항상 새 행에서 시작.
+// startPos/startCat은 이전 페이지에서 이어지는 그리드상 현재 위치(홀/짝, 대기 중인 비율).
+// widenPrevTrailing: 이 페이지 첫 항목의 비율이 이전 페이지의 마지막(홀로 남은) 카드와 달라서,
+// 그 이전 페이지 카드를 넓혀야 하는 경우 true.
+function _groupGcVids(items,featured,startPos,startCat){
+  const renderList=[];
+  let pos=startPos,cat=startCat;
+  let lastItem=null;
+  let widenPrevTrailing=false;
+  if(featured){
+    renderList.push(featured);pos=0;cat=null;
+  }else if(pos===1&&items.length&&(items[0].category==='short'?'short':'norm')!==cat){
+    widenPrevTrailing=true;pos=0;cat=null;
+  }
+  for(const v of items){
+    const c=v.category==='short'?'short':'norm';
+    if(pos===1&&cat!==c){
+      if(lastItem)lastItem._wide=true;
+      pos=0;cat=null;
+    }
+    renderList.push(v);
+    lastItem=v;
+    pos=(pos+1)%2;
+    cat=pos===1?c:null;
+  }
+  return{renderList,endPos:pos,endCat:cat,widenPrevTrailing};
+}
+
+// vids(그룹핑된 순서)를 grid에 렌더링. DOM 노드 목록과, 백그라운드 재확인이 필요한 가로 항목 참조를 반환.
+function _renderGcVidItems(vids,grid){
+  const nodes=[];
+  const pendingProbe=[];
+  vids.forEach(v=>{
+    const isShort=v.category==='short';
+    const item=document.createElement('div');
+    item.className='gc-ch-item'+(isShort?' is-short':'')+(v._featured?' featured':'')+(v._wide?' gc-ch-wide':'');
+    const img=document.createElement('img');
+    img.className='gc-ch-thumb';
+    const baseThumb=v.thumb||`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
+    if(isShort){
+      img.src=`https://i.ytimg.com/vi/${v.id}/oardefault.jpg`;
+      img.onerror=()=>{img.onerror=null;img.src=baseThumb;};
+    }else{
+      img.src=baseThumb;
+      // DB 분류상 가로지만 실제로는 쇼츠(세로)일 수 있어 백그라운드에서 재확인 (대표 영상은 제외)
+      if(!v._featured)pendingProbe.push(v);
+    }
+    img.alt=v.title;img.loading='lazy';
+    const tEl=document.createElement('div');
+    tEl.className='tv-sm-title';tEl.textContent=v.title;
+    addMarquee(tEl);
+    item.appendChild(img);item.appendChild(tEl);
+    item.addEventListener('click',e=>{
+      e.stopPropagation();
+      openLightbox(`https://www.youtube.com/watch?v=${v.id}`,isShort);
+    });
+    grid.appendChild(item);
+    nodes.push(item);
+  });
+  return{nodes,pendingProbe};
+}
+
+// 홀로 남는 카드를 스페이서 대신 2열 폭으로 넓힌다. incomingTrailingEl은 "이전 페이지"의
+// 홀로 남은 카드(있다면) — 이 페이지 첫 항목과 비율이 다르면 그 카드를 넓힌다.
+// 더 불러올 페이지가 없는데(hasMore=false) 이 페이지가 홀수로 끝나면, 기다릴 다음 항목이 없으므로
+// 이 페이지의 마지막 카드를 즉시 넓힌다.
+function _resolveGcTrailing(g,pageNodes,hasMore,incomingTrailingEl){
+  if(incomingTrailingEl)incomingTrailingEl.classList.toggle('gc-ch-wide',g.widenPrevTrailing);
+  const newTrailing=g.endPos===1?pageNodes[pageNodes.length-1]:null;
+  if(newTrailing&&!hasMore){
+    newTrailing.classList.add('gc-ch-wide');
+    _gcChState.trailingEl=null;
+  }else{
+    _gcChState.trailingEl=newTrailing;
+  }
+}
+
+// 페이지 하나 분량의 백그라운드 확인이 모두 끝나면, 정정된 분류로 그 페이지를 통째로 다시 그룹핑해
+// 한 번에 깔끔하게 다시 그린다(카드 하나씩 개별로 바뀌면서 행이 잠깐 섞이는 것을 방지).
+// 확인 중엔 _gcChState.appendLock으로 "더보기"를 막아 이 페이지가 항상 그리드의 마지막임을 보장한다.
+async function _settleGcPage({myGen,grid,pageItems,featured,pageStartPos,pageStartCat,pageNodes,pendingProbe,hasMore,incomingTrailingEl}){
+  const correctedIds=await _probeShortsBatch(pendingProbe);
+  if(correctedIds.length&&sb){
+    sb.from(_YT_TABLE).update({category:'short'}).in('id',correctedIds).then(({error})=>{
+      if(error)console.error('쇼츠 분류 보정 저장 실패',error.message);
+    });
+  }
+  if(!correctedIds.length)return;
+  if(myGen!==_gcChState.gen)return; // 그 사이 다른 그룹/새로고침으로 전환됨: DB 보정만 반영하고 화면은 건너뜀
+  // pageItems는 원래(업로드 시간순) 순서를 그대로 유지한 배열이므로, 정정된 category로 그대로 재그룹핑
+  const g=_groupGcVids(pageItems,featured,pageStartPos,pageStartCat);
+  pageNodes.forEach(n=>n.remove());
+  const{nodes:newNodes}=_renderGcVidItems(g.renderList,grid);
+  _gcChState.pos=g.endPos;_gcChState.cat=g.endCat;
+  _resolveGcTrailing(g,newNodes,hasMore,incomingTrailingEl);
 }
 
 async function _loadGcChVids(ko,reset,randomize=false){
   const grid=document.getElementById('gc-ch-grid');
   const moreWrap=document.getElementById('gc-ch-more-wrap');
   if(!grid||!sb)return;
+  // 이전 페이지의 로딩/백그라운드 재확인이 끝나기 전엔 다음 페이지를 이어붙이지 않는다
+  // (그래야 이 페이지가 항상 그리드의 마지막이라는 가정이 깨지지 않고, 빠른 연타로 같은 페이지가 중복 로드되지 않음)
+  if(!reset&&_gcChState.appendLock)return;
+  _gcChState.appendLock=true; // 응답을 기다리는 동안에도 즉시 잠가서 연타로 인한 중복 요청을 막는다
+  if(!reset&&moreWrap)moreWrap.textContent='불러오는 중…'; // 무한 스크롤로 다음 페이지 가져오는 동안 표시
   if(reset){
+    _gcChState.gen++;
     grid.innerHTML='<div class="gc-ch-msg">불러오는 중…</div>';
     if(moreWrap)moreWrap.innerHTML='';
     if(randomize&&_gcChState.total>_YT_PAGE){
@@ -7345,86 +7500,62 @@ async function _loadGcChVids(ko,reset,randomize=false){
     }else{
       _gcChState.offset=0;
     }
+    // 그리드가 새로 비워졌으므로 행 정렬 추적 상태도 초기화
+    _gcChState.pos=0;_gcChState.cat=null;_gcChState.trailingEl=null;
   }
+  const myGen=_gcChState.gen;
+  // gen이 그대로일 때만(그 사이 다른 그룹/새로고침으로 전환되지 않았을 때만) 이 호출이 건 잠금을 해제한다
+  const releaseLock=()=>{if(myGen===_gcChState.gen)_gcChState.appendLock=false;};
   const{filter,offset}=_gcChState;
   try{
     let q=sb.from(_YT_TABLE).select('id,title,thumb,category',{count:'exact'}).eq('group_ko',ko).order('published_at',{ascending:false}).range(offset,offset+_YT_PAGE-1);
     if(filter!=='all')q=q.eq('category',filter);
     const{data,error,count}=await q;
+    if(myGen!==_gcChState.gen)return; // 대기 중 다른 그룹/새로고침으로 전환됨: 그쪽이 이미 자신의 잠금을 걸어놨으므로 여기선 해제하지 않는다
     if(error)throw new Error(error.message);
     if(reset)grid.innerHTML='';
     if(!data?.length&&offset===0){
       grid.innerHTML='<div class="gc-ch-msg">아직 동기화된 영상이 없어요<br><small style="opacity:.7">설정에서 채널 영상 동기화</small></div>';
+      releaseLock();
       return;
     }
     if(count!=null)_gcChState.total=count;
     let vids=data||[];
-    // 첫 로드 + 전체 탭: 스크랩 기반 메인 직캠을 맨 앞으로 (Shorts 제외)
+    // 첫 로드 + 전체 탭: 스크랩 기반 메인 직캠을 맨 앞으로 (풀로우 카드, 쇼츠는 후보에서 제외됨)
+    let featured=null;
     if(reset&&filter==='all'&&vids.length){
       const main=_pickMainChVid(vids);
-      if(main) vids=[{...main,_featured:true},...vids.filter(v=>v.id!==main.id)];
-    }
-    // 전체 탭에서 oardefault.jpg 프로브로 미분류 쇼츠 감지 (렌더 전에 완료해야 행 정렬이 올바름)
-    if(filter==='all'){
-      await Promise.all(
-        vids.filter(v=>v.category!=='short'&&!v._featured).map(v=>new Promise(res=>{
-          const p=new Image();
-          p.onload=()=>{if(p.naturalHeight>p.naturalWidth)v.category='short';res();};
-          p.onerror=()=>res();
-          p.src=`https://i.ytimg.com/vi/${v.id}/oardefault.jpg`;
-          setTimeout(res,1000);
-        }))
-      );
-    }
-    // 같은 비율끼리 같은 행: 가로 먼저, 쇼츠 뒤에
-    // 가로가 홀수개면 경계에서 쇼츠와 섞이지 않도록 투명 스페이서 삽입
-    {
-      const norm=vids.filter(v=>v.category!=='short');
-      const sh=vids.filter(v=>v.category==='short');
-      if(sh.length&&norm.length){
-        vids=[...norm,...(norm.length%2===1?[{_spacer:true}]:[]),...sh];
+      if(main){
+        vids=vids.filter(v=>v.id!==main.id);
+        featured={...main,_featured:true};
       }
     }
-    vids.forEach(v=>{
-      if(v._spacer){const sp=document.createElement('div');sp.style.cssText='aspect-ratio:16/9;visibility:hidden;';grid.appendChild(sp);return;}
-      const isShort=v.category==='short';
-      const item=document.createElement('div');
-      item.className='gc-ch-item'+(isShort?' is-short':v._featured?' featured':'');
-      const img=document.createElement('img');
-      img.className='gc-ch-thumb';
-      const baseThumb=v.thumb||`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
-      if(isShort){
-        img.src=`https://i.ytimg.com/vi/${v.id}/oardefault.jpg`;
-        img.onerror=()=>{img.onerror=null;img.src=baseThumb;};
-      }else{
-        img.src=baseThumb;
-      }
-      img.alt=v.title;img.loading='lazy';
-      const tEl=document.createElement('div');
-      tEl.className='tv-sm-title';tEl.textContent=v.title;
-      addMarquee(tEl);
-      item.appendChild(img);item.appendChild(tEl);
-      item.addEventListener('click',e=>{
-        e.stopPropagation();
-        openLightbox(`https://www.youtube.com/watch?v=${v.id}`,isShort);
-      });
-      grid.appendChild(item);
-    });
+    // 원래(업로드 시간순) 순서를 유지하면서 같은 비율끼리만 같은 행에 짝짓는다. featured는 풀로우(2열)를
+    // 실제로 차지하므로 _gcChState.pos/cat으로 그리드상 현재 위치를 정확히 추적해 페이지("더보기") 경계에서도
+    // 가로/세로가 한 행에 섞이지 않도록 하고, 홀수로 남는 카드는 빈 스페이서 대신 폭을 넓혀 채운다
+    const pageStartPos=_gcChState.pos,pageStartCat=_gcChState.cat;
+    const incomingTrailingEl=_gcChState.trailingEl; // 이전 페이지에서 홀로 남은 카드(있다면)
+    const pageItems=vids; // published_at desc로 이미 정렬되어 있음
+    const g=_groupGcVids(pageItems,featured,pageStartPos,pageStartCat);
+    _gcChState.pos=g.endPos;_gcChState.cat=g.endCat;
+    const{nodes:pageNodes,pendingProbe}=_renderGcVidItems(g.renderList,grid);
     _gcChState.offset=offset+(data?.length||0);
     const hasMore=_gcChState.offset<_gcChState.total;
-    if(moreWrap){
-      moreWrap.innerHTML='';
-      if(hasMore){
-        const mb=document.createElement('button');
-        mb.className='gc-ch-more';
-        mb.textContent='더 보기';
-        mb.addEventListener('click',()=>_loadGcChVids(ko,false));
-        moreWrap.appendChild(mb);
-      }
+    _gcChState.hasMore=hasMore;
+    _resolveGcTrailing(g,pageNodes,hasMore,incomingTrailingEl);
+    // moreWrap은 그리드 맨 아래 센티널: 스크롤로 뷰포트 근처에 들어오면 IntersectionObserver가
+    // _gcChTryLoadMore를 호출해 다음 페이지를 자동으로 불러온다(무한 스크롤)
+    if(moreWrap)moreWrap.textContent='';
+    if(filter==='all'&&pendingProbe.length){
+      _settleGcPage({myGen,grid,pageItems,featured,pageStartPos,pageStartCat,pageNodes,pendingProbe,hasMore,incomingTrailingEl}).finally(releaseLock);
+    }else{
+      releaseLock();
     }
   }catch(e){
     if(reset)grid.innerHTML=`<div class="gc-ch-err">${e.message}</div>`;
+    else if(moreWrap)moreWrap.textContent='';
     console.error('gc-ch-vid 로드 실패',e);
+    releaseLock();
   }
 }
 
