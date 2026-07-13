@@ -3669,13 +3669,16 @@ async function _enrichMemberVideosFromApi(a,tv,baseSongs,basePersonalSongs){
   const memberKo=a.name.ko,groupKo=a.group.ko;
   const withKey=`${memberKo}(${groupKo})`;
   try{
-    const[ownQ,withQ]=await Promise.all([
+    const[ownQ,withQ,generalQ]=await Promise.all([
       sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').eq('group_ko',groupKo).contains('members',[memberKo]),
       sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').contains('with_members',[withKey]),
+      // 멤버 태깅 없는 그룹 전체 영상 — 모든 멤버 카드에 노출
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').eq('group_ko',groupKo).filter('members','eq','{}'),
     ]);
     if(ownQ.error)throw new Error(ownQ.error.message);
     if(withQ.error)throw new Error(withQ.error.message);
-    const rows=[...(ownQ.data||[]),...(withQ.data||[])];
+    if(generalQ.error)throw new Error(generalQ.error.message);
+    const rows=[...(ownQ.data||[]),...(withQ.data||[]),...(generalQ.data||[])];
     if(!rows.length)return;
     const render=()=>{
       if(_openTArtist!==a)return; // 그 사이 다른 멤버 카드로 이동함
@@ -7660,7 +7663,12 @@ async function _loadGcChVids(ko,reset,randomize=false){
   btn.textContent='↑';
   document.body.appendChild(btn);
   btn.addEventListener('click',()=>{
-    document.getElementById('gc-header')?.scrollIntoView({behavior:'smooth',block:'start'});
+    const gc=document.getElementById('gc');
+    if(!gc)return;
+    for(const id of['mob-sheet-inner','mob-card-stack-inner','side-panel']){
+      const el=document.getElementById(id);
+      if(el?.contains(gc)){el.scrollTo({top:0,behavior:'smooth'});return;}
+    }
   });
   const header=document.getElementById('gc-header');
   if(header){
