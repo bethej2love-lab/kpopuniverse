@@ -849,7 +849,7 @@
     box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 -8px 32px rgba(0,0,0,0.60);
     z-index:37;pointer-events:all;
     transform:translateY(calc(100% + var(--sheet-bottom,73px)));
-    transition:transform .32s cubic-bezier(0.32,0.72,0,1);
+    transition:transform .32s cubic-bezier(0.32,0.72,0,1),bottom .18s cubic-bezier(0.4,0,0.2,1),min-height .18s cubic-bezier(0.4,0,0.2,1),max-height .18s cubic-bezier(0.4,0,0.2,1);
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
   }
   #conn-sheet.bs-open{transform:translateY(0);}
@@ -3132,7 +3132,7 @@ function closeLightbox(){
 }
 document.getElementById('yt-lightbox').addEventListener('pointerdown',e=>e.stopPropagation());
 document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)closeLightbox();});
-// 모바일: 라이트박스 스와이프 다운 닫기
+// 모바일: 라이트박스 상하 스와이프로 이전/다음 영상 이동 (릴스/쇼츠 방식 — 닫기는 X버튼/배경 클릭/ESC 전용)
 {
   const _lbEl=document.getElementById('yt-lightbox');
   const _lbWrap=document.getElementById('yt-lb-wrap');
@@ -3149,41 +3149,26 @@ document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropag
       if(Math.abs(dx)>8||Math.abs(dy)>8)_lbAxis=Math.abs(dx)>Math.abs(dy)?'x':'y';
       return;
     }
-    if(_lbAxis==='y'&&dy>0){
+    if(_lbAxis==='y'){
       if(e.cancelable)e.preventDefault();
       _lbWrap.style.transform=`translateY(${dy}px)`;
-      _lbEl.style.background=`rgba(0,0,0,${Math.max(0.25,0.9-dy/200)})`;
-    }else if(_lbAxis==='x'){
-      if(e.cancelable)e.preventDefault();
-      _lbWrap.style.transform=`translateX(${dx}px)`;
-      _lbWrap.style.opacity=`${Math.max(0.3,1-Math.abs(dx)/250)}`;
+      _lbWrap.style.opacity=`${Math.max(0.3,1-Math.abs(dy)/250)}`;
     }
   },{passive:false});
   _lbEl.addEventListener('touchend',e=>{
     if(!_lbDragging)return;
     _lbDragging=false;
-    const dx=e.changedTouches.length?e.changedTouches[0].clientX-_lbTX:0;
     const dy=e.changedTouches.length?e.changedTouches[0].clientY-_lbTY:0;
     if(_lbAxis==='y'){
-      if(dy>80){
-        _lbWrap.style.transition='transform .22s ease';
-        _lbWrap.style.transform='translateY(100vh)';
-        setTimeout(()=>{closeLightbox();_lbWrap.style.transition='';_lbWrap.style.transform='';_lbEl.style.background='';},230);
-      }else{
-        _lbWrap.style.transition='transform .22s ease';_lbEl.style.transition='background .22s ease';
-        _lbWrap.style.transform='';_lbEl.style.background='';
-        setTimeout(()=>{_lbWrap.style.transition='';_lbEl.style.transition='';},230);
-      }
-    }else if(_lbAxis==='x'){
       const canPrev=_lbPlaylist&&_lbIdx>0;
       const canNext=_lbPlaylist&&_lbIdx<_lbPlaylist.length-1;
-      if(dx<-60&&canNext){
+      if(dy<-60&&canNext){
         _lbWrap.style.transition='transform .2s ease,opacity .2s';
-        _lbWrap.style.transform='translateX(-100vw)';_lbWrap.style.opacity='0';
+        _lbWrap.style.transform='translateY(-100vh)';_lbWrap.style.opacity='0';
         setTimeout(()=>{_lbGo(1);_lbWrap.style.transition='';_lbWrap.style.transform='';_lbWrap.style.opacity='';},200);
-      }else if(dx>60&&canPrev){
+      }else if(dy>60&&canPrev){
         _lbWrap.style.transition='transform .2s ease,opacity .2s';
-        _lbWrap.style.transform='translateX(100vw)';_lbWrap.style.opacity='0';
+        _lbWrap.style.transform='translateY(100vh)';_lbWrap.style.opacity='0';
         setTimeout(()=>{_lbGo(-1);_lbWrap.style.transition='';_lbWrap.style.transform='';_lbWrap.style.opacity='';},200);
       }else{
         _lbWrap.style.transition='transform .22s ease,opacity .22s';
@@ -3191,7 +3176,7 @@ document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropag
         setTimeout(()=>{_lbWrap.style.transition='';},230);
       }
     }else{
-      _lbWrap.style.transform='';_lbEl.style.background='';_lbWrap.style.opacity='';
+      _lbWrap.style.transform='';_lbWrap.style.opacity='';
     }
   },{passive:true});
 }
@@ -3605,7 +3590,9 @@ function closeMobSheet(){
   mobSheetEl.classList.remove('bs-open');
   mobSheetEl.style.transform='';
   document.getElementById('tabbar').classList.remove('tab-hidden');
-  _lastSheetScroll=0;
+  _retractSheets();
+  mobSheetInner._lastScroll=0;
+  mobCardStackInner._lastScroll=0;
   // 뷰 원위치
   if(_mobViewShift!==0)_animMobViewShift(0,320);
   _mobCloseTimer=setTimeout(()=>{
@@ -3630,6 +3617,11 @@ function _popMobCard(){
   _cardStack.pop();
   const prev=_cardStack[_cardStack.length-1];
   _updateTtBackBtn();
+  if(document.getElementById('tabbar').classList.contains('tab-hidden')){
+    document.getElementById('tabbar').classList.remove('tab-hidden');
+    _retractSheets();
+  }
+  mobCardStackInner._lastScroll=0;
 
   // mob-card-stack이 열려있으면 → mob-card-stack만 아래로 슬라이드아웃
   // mob-sheet는 건드리지 않음 (이전 카드가 그대로 뒤에 있음)
@@ -3999,6 +3991,11 @@ function closeConnCard(){
   if(isMob()){
     connSheetEl.classList.remove('bs-open');
     setTimeout(()=>{if(!connSheetEl.classList.contains('bs-open'))connSheetEl.style.display='none';},340);
+    if(document.getElementById('tabbar').classList.contains('tab-hidden')){
+      document.getElementById('tabbar').classList.remove('tab-hidden');
+      _retractSheets();
+    }
+    connSheetInner._lastScroll=0;
   }else{
     connPanelEl.classList.remove('open');
     if(_connPanelShifted){_connPanelShifted=false;_panWorld(-2.5,400);}
@@ -5228,39 +5225,55 @@ function exitMobSearch(){
 }
 window.addEventListener('resize',updateSheetBottom);
 requestAnimationFrame(updateSheetBottom);
-let _lastSheetScroll=0;
-const _sheetEls=[document.getElementById('mob-sheet'),document.getElementById('mob-card-stack')];
+// 시트별 [바깥 패널, 실제 스크롤되는 안쪽 콘텐츠] 쌍 — 탭바가 숨겨질 때 바깥 패널뿐 아니라
+// 안쪽 콘텐츠의 max-height도 같이 늘려야, 탭바가 사라진 자리까지 카드 내용이 실제로 채워짐
+// (안쪽만 CSS 고정값(60vh-24px)에 묶여 있으면 바깥만 늘어나고 빈 여백만 남는 버그가 있었음)
+const _sheetPairs=[
+  [document.getElementById('mob-sheet'),document.getElementById('mob-sheet-inner')],
+  [document.getElementById('mob-card-stack'),document.getElementById('mob-card-stack-inner')],
+  [document.getElementById('conn-sheet'),document.getElementById('conn-sheet-inner')]
+];
 function _extendSheets(){
-  _sheetEls.forEach(el=>{
-    el.style.bottom='0px';
-    el.style.minHeight=`calc(60vh + ${_tabbarH}px)`;
-    el.style.maxHeight=`calc(60vh + ${_tabbarH}px)`;
+  _sheetPairs.forEach(([outer,inner])=>{
+    if(!outer)return;
+    outer.style.bottom='0px';
+    outer.style.minHeight=`calc(60vh + ${_tabbarH}px)`;
+    outer.style.maxHeight=`calc(60vh + ${_tabbarH}px)`;
+    if(inner)inner.style.maxHeight=`calc(60vh + ${_tabbarH}px - 24px)`;
   });
 }
 function _retractSheets(){
-  _sheetEls.forEach(el=>{
-    el.style.bottom='';
-    el.style.minHeight='';
-    el.style.maxHeight='';
+  _sheetPairs.forEach(([outer,inner])=>{
+    if(!outer)return;
+    outer.style.bottom='';
+    outer.style.minHeight='';
+    outer.style.maxHeight='';
+    if(inner)inner.style.maxHeight='';
   });
   document.documentElement.style.setProperty('--sheet-bottom',_tabbarH+'px');
 }
-mobSheetInner.addEventListener('scroll',()=>{
-  const cur=mobSheetInner.scrollTop;
-  const tb=document.getElementById('tabbar');
-  if(cur>_lastSheetScroll&&cur>10){
-    if(!tb.classList.contains('tab-hidden')){
-      tb.classList.add('tab-hidden');
-      _extendSheets();
+// 그룹/멤버/연결 카드 시트 전부 같은 방식으로: 아래로 스크롤하면 탭바 숨김+시트 확장, 위로 스크롤(또는 맨 위)하면 원복
+function _wireSheetTabbarHide(scrollEl){
+  if(!scrollEl)return;
+  scrollEl._lastScroll=0;
+  scrollEl.addEventListener('scroll',()=>{
+    const cur=scrollEl.scrollTop;
+    const tb=document.getElementById('tabbar');
+    if(cur>scrollEl._lastScroll&&cur>10){
+      if(!tb.classList.contains('tab-hidden')){
+        tb.classList.add('tab-hidden');
+        _extendSheets();
+      }
+    } else {
+      if(tb.classList.contains('tab-hidden')){
+        tb.classList.remove('tab-hidden');
+        _retractSheets();
+      }
     }
-  } else {
-    if(tb.classList.contains('tab-hidden')){
-      tb.classList.remove('tab-hidden');
-      _retractSheets();
-    }
-  }
-  _lastSheetScroll=cur;
-},{passive:true});
+    scrollEl._lastScroll=cur;
+  },{passive:true});
+}
+[mobSheetInner,mobCardStackInner,connSheetInner].forEach(_wireSheetTabbarHide);
 function closePanels(){
   document.getElementById('search-wrap').classList.remove('open');
   document.getElementById('settings-panel').classList.remove('open');
