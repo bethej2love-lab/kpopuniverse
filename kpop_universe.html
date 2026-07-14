@@ -739,8 +739,12 @@
   .pp-bias-chip{display:flex;align-items:center;gap:5px;font-size:12.5px;color:rgba(220,230,250,0.9);background:rgba(109,140,255,0.16);border:0.5px solid rgba(109,140,255,0.35);border-radius:20px;padding:5px 10px 5px 12px;}
   .pp-bias-chip button{background:none;border:none;color:rgba(220,230,250,0.7);cursor:pointer;font-size:12px;padding:0;line-height:1;}
   #pp-bias-hint{display:none;font-size:11px;color:rgba(140,160,200,0.5);line-height:1.5;margin-bottom:4px;}
-  #pp-bias-search-wrap{margin-top:8px;}
-  #pp-bias-search-results{margin-top:4px;max-height:140px;overflow-y:auto;border-radius:10px;background:rgba(255,255,255,0.04);}
+  /* "+ 최애 추가" 버튼과 검색창이 같은 줄을 공유 — 평소엔 버튼만, 누르면 버튼 자리에 검색창이 들어섬 */
+  #pp-bias-add-row{position:relative;margin-top:8px;}
+  #pp-bias-add-row #pp-bias-search{margin:0;}
+  /* 프로필 카드 높이가 검색 결과 개수에 따라 출렁이지 않도록 절대배치 오버레이로 띄워서 아래 내용을 덮게 함 */
+  #pp-bias-search-results{position:absolute;left:0;right:0;top:calc(100% + 4px);max-height:180px;overflow-y:auto;border-radius:10px;background:rgba(20,24,44,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.10);box-shadow:0 8px 24px rgba(0,0,0,0.45);z-index:5;}
+  #pp-bias-search-results:empty{display:none;}
   .pp-bias-opt{padding:7px 10px;font-size:12px;color:rgba(220,230,250,0.85);cursor:pointer;}
   .pp-bias-opt:hover{background:rgba(255,255,255,0.08);}
   #pp-bias-emoji-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:80;display:none;align-items:center;justify-content:center;}
@@ -751,7 +755,8 @@
   /* 마이페이지 헤더에 상시 노출되는 최애 칩(읽기 전용) */
   #my-page-bias{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 14px;}
   #my-page-bias:empty{display:none;margin:0;}
-  .mp-bias-chip{font-size:12px;color:rgba(210,225,255,0.85);background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:20px;padding:4px 11px;cursor:pointer;transition:background .13s,border-color .13s;}
+  .mp-bias-chip{font-size:12px;color:rgba(210,225,255,0.85);background:none;border:none;padding:0;cursor:pointer;transition:color .13s;}
+  .mp-bias-chip:hover{color:rgba(240,248,255,1);}
   .mp-bias-chip:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.22);}
   #gc-ch-more-wrap{min-height:1px;font-size:11px;color:rgba(155,178,228,0.45);text-align:center;padding:8px 0 2px;}
   .gc-ch-msg{font-size:12px;color:rgba(155,178,228,0.45);text-align:center;padding:10px 0;line-height:1.6;}
@@ -1056,7 +1061,7 @@
   #tt-name-row .tn{margin-bottom:0;padding-left:0;padding-right:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #gc-name-row{display:inline-flex;align-items:center;gap:8px;margin-bottom:6px;max-width:100%;}
   #gc-name-row #gc-name{margin-bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  #fav-section{margin-bottom:14px;padding-bottom:12px;}
+  #fav-section{margin-bottom:14px;padding-top:12px;padding-bottom:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
   .fav-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
   .fav-hd-lbl{font-size:9.5px;font-weight:700;letter-spacing:.2em;color:rgba(130,150,205,0.5);text-transform:uppercase;}
   .fav-item{display:flex;align-items:center;gap:6px;padding:6px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
@@ -1107,7 +1112,7 @@
   .uc-btn-primary{background:rgba(126,156,255,0.15);border-color:rgba(126,156,255,0.26);color:rgba(195,215,255,0.90);}
   .uc-btn-primary:hover{background:rgba(126,156,255,0.26);border-color:rgba(126,156,255,0.48);color:#fff;}  .uc-btn:active{transform:scale(0.96);transition:transform .07s;}
   /* ── My Page (sidebar) ───────────────────────────── */
-  #my-page-header{display:flex;align-items:center;gap:10px;padding:4px 0 14px;margin-bottom:14px;border-bottom:0.5px solid rgba(255,255,255,0.07);}
+  #my-page-header{display:flex;align-items:center;gap:10px;padding:4px 0 14px;margin-bottom:14px;}
   #my-page-star-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:rgba(140,160,210,0.20);transition:background .3s,box-shadow .3s;}
   #my-page-info{flex:1;min-width:0;}
   #my-page-nick{font-size:13px;font-weight:700;color:rgba(210,228,255,0.88);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;transition:color .15s,text-shadow .15s;border-radius:4px;}
@@ -1133,9 +1138,8 @@
   .bday-date{font-size:10px;color:rgba(125,150,198,0.42);flex-shrink:0;}
   .anniv-item{display:flex;align-items:center;gap:7px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
   .anniv-item:hover{background:rgba(255,255,255,0.06);}
-  .anniv-heart{font-size:10px;flex-shrink:0;filter:grayscale(0.15) saturate(1.4);}
   .anniv-name{font-size:12px;color:#b8d0ee;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .anniv-badge{font-size:10px;font-weight:800;letter-spacing:.02em;color:rgba(255,150,175,0.75);flex-shrink:0;}
+  .anniv-badge{font-size:9px;font-weight:800;letter-spacing:.03em;padding:2px 6px;border-radius:6px;flex-shrink:0;min-width:34px;text-align:center;background:rgba(255,110,140,0.13);color:rgba(255,130,155,0.85);}
   .anniv-edit{background:none;border:none;cursor:pointer;font-size:10px;color:rgba(120,145,195,0.38);padding:2px 4px;flex-shrink:0;transition:color .13s;}
   .anniv-edit:hover{color:rgba(200,220,255,0.85);}
   .scrap-item{display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
@@ -1167,6 +1171,8 @@
   }
   /* 랜덤 스와치 */
   .pp-color-rand{background:conic-gradient(hsl(0,90%,72%),hsl(60,90%,72%),hsl(120,90%,72%),hsl(180,90%,72%),hsl(240,90%,72%),hsl(300,90%,72%),hsl(360,90%,72%))!important;box-shadow:none!important;}
+  .pp-color-custom{display:flex;align-items:center;justify-content:center;position:relative;background:rgba(255,255,255,0.08)!important;box-shadow:none;color:rgba(210,225,255,0.75);font-size:13px;font-weight:700;line-height:1;}
+  .pp-color-custom input[type=color]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:none;padding:0;}
 
   /* ── 탐험 피드 ──────────────────────────────────────────────────────── */
   #feed-overlay{position:fixed;inset:0;z-index:39;display:none;flex-direction:column;}
@@ -1424,9 +1430,9 @@
       <div class="pp-label">최애 (선택, 최대 3명)</div>
       <div id="pp-bias-chips"></div>
       <div id="pp-bias-hint">먼저 별을 만들면(닉네임 저장) 최애를 추가할 수 있어요</div>
-      <button id="pp-bias-add-btn" class="uc-btn" type="button">+ 최애 추가</button>
-      <div id="pp-bias-search-wrap" style="display:none">
-        <input type="text" id="pp-bias-search" class="pp-input" placeholder="멤버 이름 검색" autocomplete="off">
+      <div id="pp-bias-add-row">
+        <button id="pp-bias-add-btn" class="uc-btn" type="button">+ 최애 추가</button>
+        <input type="text" id="pp-bias-search" class="pp-input" placeholder="검색" autocomplete="off" style="display:none">
         <div id="pp-bias-search-results"></div>
       </div>
     </div>
@@ -1439,11 +1445,11 @@
         <label class="sw"><input type="checkbox" id="pp-fav-pub" checked><span class="sw-track"><span class="sw-thumb"></span></span></label>
       </div>
     </div>
-    <div class="pp-section" id="pp-link-section" style="margin-bottom:20px">
+    <div class="pp-section" id="pp-link-section" style="margin-bottom:8px">
       <div class="pp-fav-row">
         <div class="pp-fav-info">
-          <div class="pp-fav-label" data-i18n="ppSyncLabel">다른 기기와 동기화</div>
-          <div class="pp-fav-sub" data-i18n="ppSyncSub">구글 계정을 연결하면 다른 기기에서도 즐겨찾기를 불러올 수 있어요</div>
+          <div class="pp-fav-label" data-i18n="ppSyncLabel">기기 간 동기화</div>
+          <div class="pp-fav-sub" data-i18n="ppSyncSub">다른 기기에서도 즐겨찾기가 유지돼요</div>
         </div>
       </div>
       <button id="pp-google-link" class="pp-save-btn" data-i18n="ppGoogleBtn">구글로 연결하기</button>
@@ -5851,7 +5857,7 @@ window.addEventListener('mousemove',e=>{
     if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom){
       _tipEl.style.opacity='0';return;
     }
-    const _overPanel=document.elementsFromPoint(e.clientX,e.clientY).some(el=>el.closest('#tt,#gc,#side-panel,#member-panel,#journal-sidebar,#desktop-header,#settings-panel,#search-wrap,#conn-panel,#yt-lightbox'));
+    const _overPanel=document.elementsFromPoint(e.clientX,e.clientY).some(el=>el.closest('#tt,#gc,#side-panel,#member-panel,#journal-sidebar,#desktop-header,#settings-panel,#search-wrap,#conn-panel,#yt-lightbox,#profile-overlay,#vid-tag-overlay,#pp-bias-emoji-overlay,#link-confirm-overlay,#unfav-confirm-overlay,#date-edit-overlay'));
     if(_overPanel){_tipEl.style.opacity='0';return;}
     // 1. 멤버 별 이름 — 행성이 충분히 가까울 때만
     let nearArtist=null,nearPx=Infinity;
@@ -6572,11 +6578,10 @@ function _buildAnniversaryList(){
   });
   annivItems.forEach(item=>{
     const div=document.createElement('div');div.className='anniv-item';
-    const nameSpan=document.createElement('span');nameSpan.className='anniv-name';nameSpan.textContent=item.name;
-    div.innerHTML='<span class="anniv-heart">❤</span>';
-    div.appendChild(nameSpan);
     const badge=document.createElement('span');badge.className='anniv-badge';badge.textContent=`D+${item.d}`;
     div.appendChild(badge);
+    const nameSpan=document.createElement('span');nameSpan.className='anniv-name';nameSpan.textContent=item.name;
+    div.appendChild(nameSpan);
     const editBtn=document.createElement('button');editBtn.className='anniv-edit';editBtn.title='날짜 수정';editBtn.textContent='🖉';
     div.appendChild(editBtn);
     div.addEventListener('click',()=>{
@@ -6719,7 +6724,7 @@ document.getElementById('gc-fav').addEventListener('click',e=>{e.stopPropagation
 const PROFILE_KEY='kpu_profile';
 const STAR_COLORS=[
   [155,210,255],[182,150,255],[255,138,175],[138,255,212],
-  [255,218,112],[226,232,255],[255,160,128],[208,122,255]
+  [255,218,112],[255,160,128]
 ];
 let myProfile=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');
 let _ppSelectedColor=myProfile?.color||STAR_COLORS[0];
@@ -6984,30 +6989,54 @@ function _isPresetColor(col){
   return STAR_COLORS.some(([r,g,b])=>r===col[0]&&g===col[1]&&b===col[2]);
 }
 
+function _rgbToHex([r,g,b]){return'#'+[r,g,b].map(v=>Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('');}
+function _hexToRgb(hex){const n=parseInt(hex.slice(1),16);return[(n>>16)&255,(n>>8)&255,n&255];}
 function _buildColorSwatches(){
   const cont=document.getElementById('pp-colors');cont.innerHTML='';
-  STAR_COLORS.forEach(([r,g,b],i)=>{
+  STAR_COLORS.forEach(([r,g,b])=>{
     const sw=document.createElement('button');
+    sw.type='button';
     const sel=_ppSelectedColor[0]===r&&_ppSelectedColor[1]===g&&_ppSelectedColor[2]===b;
     sw.className='pp-color-swatch'+(sel?' sel':'');
     sw.style.cssText=`background:rgb(${r},${g},${b});box-shadow:0 0 7px rgba(${r},${g},${b},0.55)`;
     sw.addEventListener('click',e=>{
       e.stopPropagation();_ppSelectedColor=[r,g,b];
-      cont.querySelectorAll('.pp-color-swatch').forEach((s,j)=>s.classList.toggle('sel',j===i));
+      _buildColorSwatches();
     });
     cont.appendChild(sw);
   });
-  const randSel=!_isPresetColor(_ppSelectedColor);
+  // 랜덤 — 상태 표시가 아니라 그냥 "눌러서 새로 뽑기" 액션 버튼
   const rw=document.createElement('button');
-  rw.className='pp-color-swatch pp-color-rand'+(randSel?' sel':'');
+  rw.type='button';
+  rw.className='pp-color-swatch pp-color-rand';
   rw.title='랜덤';
   rw.addEventListener('click',e=>{
     e.stopPropagation();
     _ppSelectedColor=_randomStarColor();
-    cont.querySelectorAll('.pp-color-swatch').forEach(s=>s.classList.remove('sel'));
-    rw.classList.add('sel');
+    _buildColorSwatches();
   });
   cont.appendChild(rw);
+  // 직접 선택(+) — 프리셋에 없는 색이 현재 선택돼 있으면(랜덤으로 뽑았든 직접 골랐든) 그 실제 색을 보여주며 선택 표시
+  const isPreset=_isPresetColor(_ppSelectedColor);
+  const cw=document.createElement('label');
+  cw.className='pp-color-swatch pp-color-custom'+(!isPreset?' sel':'');
+  cw.title='직접 선택';
+  if(!isPreset){
+    const[cr,cg,cb]=_ppSelectedColor;
+    cw.style.cssText=`background:rgb(${cr},${cg},${cb});box-shadow:0 0 7px rgba(${cr},${cg},${cb},0.55)`;
+  }else{
+    cw.textContent='+';
+  }
+  const cInput=document.createElement('input');
+  cInput.type='color';
+  cInput.value=_rgbToHex(_ppSelectedColor);
+  cInput.addEventListener('click',e=>e.stopPropagation());
+  cInput.addEventListener('input',e=>{
+    _ppSelectedColor=_hexToRgb(e.target.value);
+    _buildColorSwatches();
+  });
+  cw.appendChild(cInput);
+  cont.appendChild(cw);
 }
 
 function openProfilePanel(){
@@ -7021,7 +7050,7 @@ function openProfilePanel(){
   const _isLinked=window._sbSession&&window._sbSession.user.is_anonymous===false;
   document.getElementById('pp-google-link').style.display=_isLinked?'none':'';
   document.getElementById('pp-linked-state').style.display=_isLinked?'':'none';
-  document.getElementById('pp-bias-search-wrap').style.display='none';
+  _closeBiasSearch();
   _renderBiasChips();
   setTimeout(()=>document.getElementById('pp-nick').focus(),80);
 }
@@ -7031,7 +7060,7 @@ function closeProfilePanel(){
 }
 
 // ── 최애(bias) — 프로필 편집 패널에서만 추가/삭제 가능(최대 3명), 마이페이지 헤더에 항상 노출 ──
-function _biasKey(b){return b.ko+'|'+b.groupKo;}
+function _biasKey(b){return`${b.type||'member'}|${b.ko}|${b.groupKo||''}`;}
 function _saveBias(){
   if(!myProfile)return;
   localStorage.setItem(PROFILE_KEY,JSON.stringify(myProfile));
@@ -7052,8 +7081,10 @@ function _renderBiasChips(){
   if(ppEl){
     ppEl.innerHTML='';
     bias.forEach((b,i)=>{
+      const isGroup=(b.type||'member')==='group';
+      const label=b.ko;
       const chip=document.createElement('span');chip.className='pp-bias-chip';
-      chip.appendChild(document.createTextNode(`${b.emoji||'🤍'} ${b.ko}`));
+      chip.appendChild(document.createTextNode(`${b.emoji||'🤍'} ${label}`));
       const rm=document.createElement('button');rm.type='button';rm.textContent='✕';rm.setAttribute('aria-label','최애 삭제');
       rm.addEventListener('click',e=>{
         e.stopPropagation();
@@ -7068,16 +7099,30 @@ function _renderBiasChips(){
   if(mpEl){
     mpEl.innerHTML='';
     bias.forEach(b=>{
-      const a=ARTISTS.find(x=>x.name.ko===b.ko&&x.group.ko===b.groupKo);
+      const isGroup=(b.type||'member')==='group';
+      const label=b.ko;
       const chip=document.createElement('span');chip.className='mp-bias-chip';
-      chip.textContent=`${b.emoji||'🤍'} ${b.ko}`;
-      if(a){
-        chip.addEventListener('click',e=>{
-          e.stopPropagation();
-          if(a._worldPos)flyTo(a._worldPos);
-          showT(a,window.innerWidth/2,window.innerHeight*0.4);
-          pulseMember(a);
-        });
+      chip.textContent=`${b.emoji||'🤍'} ${label}`;
+      if(isGroup){
+        const bm=bubbleMeshes.find(x=>x.ko===b.ko);
+        if(bm){
+          chip.addEventListener('click',e=>{
+            e.stopPropagation();
+            flyToBubble(bm.mesh.position,bm.radius);
+            showGC(b.ko,window.innerWidth/2,window.innerHeight*0.4);
+            pulseGroup(b.ko);
+          });
+        }
+      }else{
+        const a=ARTISTS.find(x=>x.name.ko===b.ko&&x.group.ko===b.groupKo);
+        if(a){
+          chip.addEventListener('click',e=>{
+            e.stopPropagation();
+            if(a._worldPos)flyTo(a._worldPos);
+            showT(a,window.innerWidth/2,window.innerHeight*0.4);
+            pulseMember(a);
+          });
+        }
       }
       mpEl.appendChild(chip);
     });
@@ -7085,9 +7130,9 @@ function _renderBiasChips(){
   _updateBiasAddBtn();
 }
 let _biasEmojiTarget=null;
-function _openBiasEmojiPicker(a){
-  _biasEmojiTarget=a;
-  document.getElementById('pp-bias-emoji-target').textContent=`${a.name.ko} (${a.group.ko})`;
+function _openBiasEmojiPicker(r){
+  _biasEmojiTarget=r;
+  document.getElementById('pp-bias-emoji-target').textContent=r.type==='group'?r.ko:`${r.ko} (${r.groupKo})`;
   document.getElementById('pp-bias-emoji-overlay').classList.add('open');
 }
 function _closeBiasEmojiPicker(){
@@ -7097,19 +7142,32 @@ function _closeBiasEmojiPicker(){
 function _addBias(emoji){
   if(!_biasEmojiTarget||!myProfile){_closeBiasEmojiPicker();return;}
   myProfile.bias=myProfile.bias||[];
-  if(myProfile.bias.length<3)myProfile.bias.push({ko:_biasEmojiTarget.name.ko,groupKo:_biasEmojiTarget.group.ko,emoji:emoji||'🤍'});
+  if(myProfile.bias.length<3){
+    const{type,ko,groupKo}=_biasEmojiTarget;
+    myProfile.bias.push({type,ko,groupKo,emoji:emoji||'🤍'});
+  }
   _saveBias();
   _renderBiasChips();
   _closeBiasEmojiPicker();
 }
-document.getElementById('pp-bias-add-btn').addEventListener('click',e=>{
-  e.stopPropagation();
-  const wrap=document.getElementById('pp-bias-search-wrap');
-  const opening=wrap.style.display==='none';
-  wrap.style.display=opening?'':'none';
+function _closeBiasSearch(){
+  document.getElementById('pp-bias-add-btn').style.display='';
+  document.getElementById('pp-bias-search').style.display='none';
   document.getElementById('pp-bias-search').value='';
   document.getElementById('pp-bias-search-results').innerHTML='';
-  if(opening)document.getElementById('pp-bias-search').focus();
+}
+document.getElementById('pp-bias-add-btn').addEventListener('click',e=>{
+  e.stopPropagation();
+  document.getElementById('pp-bias-add-btn').style.display='none';
+  const inp=document.getElementById('pp-bias-search');
+  inp.style.display='';
+  inp.focus();
+});
+document.getElementById('pp-bias-search').addEventListener('blur',()=>{
+  // 결과를 클릭하는 중일 수도 있으니(blur가 클릭보다 먼저 옴) 살짝 지연 후 비어있으면 원상복귀
+  setTimeout(()=>{
+    if(document.activeElement!==document.getElementById('pp-bias-search'))_closeBiasSearch();
+  },150);
 });
 document.getElementById('pp-bias-search').addEventListener('input',e=>{
   const q=e.target.value.trim();
@@ -7117,23 +7175,39 @@ document.getElementById('pp-bias-search').addEventListener('input',e=>{
   resultsEl.innerHTML='';
   if(!q)return;
   const already=new Set((myProfile?.bias||[]).map(b=>_biasKey(b)));
-  const matches=ARTISTS.filter(a=>a.name.ko.includes(q)&&!already.has(a.name.ko+'|'+a.group.ko)).slice(0,8);
-  matches.forEach(a=>{
+  const results=[];
+  Object.keys(GROUPS).forEach(gko=>{
+    if(gko.includes(q)&&!already.has(`group|${gko}|`)){
+      results.push({type:'group',ko:gko,groupKo:null,name:gko});
+    }
+  });
+  ARTISTS.forEach(a=>{
+    if(a.name.ko.includes(q)&&!already.has(`member|${a.name.ko}|${a.group.ko}`)){
+      results.push({type:'member',ko:a.name.ko,groupKo:a.group.ko,name:a.name.ko});
+    }
+  });
+  results.slice(0,10).forEach(r=>{
     const opt=document.createElement('div');
     opt.className='pp-bias-opt';
-    opt.textContent=`${a.name.ko} (${a.group.ko})`;
+    // 우주 검색창 결과랑 같은 스타일(.sr-tag: 작은 크기+옅은 파랑)로 그룹명을 이름 옆에 살짝 띄워서 표기
+    if(r.groupKo){
+      const gc=GROUPS[r.groupKo]?.color;
+      const gcStyle=gc?`color:rgb(${gc[0]},${gc[1]},${gc[2]});`:'';
+      opt.innerHTML=`${r.name}<span class="sr-tag" style="margin-left:8px;${gcStyle}">${r.groupKo}</span>`;
+    }else{
+      opt.textContent=r.name;
+    }
     opt.addEventListener('click',ev=>{
       ev.stopPropagation();
-      document.getElementById('pp-bias-search-wrap').style.display='none';
-      resultsEl.innerHTML='';e.target.value='';
-      _openBiasEmojiPicker(a);
+      _closeBiasSearch();
+      _openBiasEmojiPicker(r);
     });
     resultsEl.appendChild(opt);
   });
 });
 document.getElementById('pp-bias-emoji-picker').addEventListener('emoji-click',e=>{_addBias(e.detail.unicode);});
 document.getElementById('pp-bias-emoji-skip').addEventListener('click',e=>{e.stopPropagation();_addBias('🤍');});
-document.getElementById('pp-bias-emoji-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)_closeBiasEmojiPicker();});
+document.getElementById('pp-bias-emoji-overlay').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)_closeBiasEmojiPicker();});
 document.getElementById('pp-bias-emoji-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 
 function _updateProfileBtns(){
@@ -7238,7 +7312,7 @@ function saveProfile(){
 
 document.getElementById('pp-save').addEventListener('click',e=>{e.stopPropagation();saveProfile();});
 document.getElementById('pp-close').addEventListener('click',e=>{e.stopPropagation();closeProfilePanel();});
-document.getElementById('profile-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeProfilePanel();});
+document.getElementById('profile-overlay').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)closeProfilePanel();});
 document.getElementById('profile-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 ['pp-nick','pp-bio'].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')saveProfile();}));
 
@@ -7248,7 +7322,7 @@ function _closeUnfavConfirm(ok){
 }
 document.getElementById('unfav-confirm-ok').addEventListener('click',e=>{e.stopPropagation();_closeUnfavConfirm(true);});
 document.getElementById('unfav-confirm-cancel').addEventListener('click',e=>{e.stopPropagation();_closeUnfavConfirm(false);});
-document.getElementById('unfav-confirm-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)_closeUnfavConfirm(false);});
+document.getElementById('unfav-confirm-overlay').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)_closeUnfavConfirm(false);});
 document.getElementById('unfav-confirm-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 
 document.getElementById('date-edit-save').addEventListener('click',e=>{
@@ -7258,7 +7332,7 @@ document.getElementById('date-edit-save').addEventListener('click',e=>{
   document.getElementById('date-edit-overlay').classList.remove('open');
 });
 document.getElementById('date-edit-cancel').addEventListener('click',e=>{e.stopPropagation();document.getElementById('date-edit-overlay').classList.remove('open');});
-document.getElementById('date-edit-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)document.getElementById('date-edit-overlay').classList.remove('open');});
+document.getElementById('date-edit-overlay').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)document.getElementById('date-edit-overlay').classList.remove('open');});
 document.getElementById('date-edit-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 function _toggleMyPagePanel(){
   const sidebar=document.getElementById('journal-sidebar');
@@ -7480,7 +7554,7 @@ function _closeLinkConfirm(ok){
 }
 document.getElementById('link-confirm-ok').addEventListener('click',e=>{e.stopPropagation();_closeLinkConfirm(true);});
 document.getElementById('link-confirm-cancel').addEventListener('click',e=>{e.stopPropagation();_closeLinkConfirm(false);});
-document.getElementById('link-confirm-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)_closeLinkConfirm(false);});
+document.getElementById('link-confirm-overlay').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)_closeLinkConfirm(false);});
 document.getElementById('link-confirm-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 
 document.getElementById('pp-google-link').addEventListener('click',async e=>{
@@ -8045,7 +8119,7 @@ function _closeVidTagModal(){
   _vidTagTarget=null;
 }
 document.getElementById('vid-tag-cancel').addEventListener('click',e=>{e.stopPropagation();_closeVidTagModal();});
-document.getElementById('vid-tag-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)_closeVidTagModal();});
+document.getElementById('vid-tag-overlay').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)_closeVidTagModal();});
 document.getElementById('vid-tag-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 document.getElementById('vid-tag-with-search').addEventListener('input',e=>{
   const q=e.target.value.trim();
