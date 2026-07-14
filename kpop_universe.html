@@ -431,7 +431,8 @@
   #yt-lb-prev:hover,#yt-lb-next:hover{color:rgba(255,255,255,0.9);}
   #yt-lb-prev:disabled,#yt-lb-next:disabled{color:rgba(255,255,255,0.12);cursor:default;}
   #yt-lb-actions{display:flex;gap:10px;}
-  #yt-lb-scrap,#yt-lb-bm{background:rgba(255,255,255,0.08);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(200,215,255,0.7);transition:color .15s,background .15s;}
+  #yt-lb-scrap,#yt-lb-bm,#yt-lb-edit{background:rgba(255,255,255,0.08);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(200,215,255,0.7);transition:color .15s,background .15s;font-size:15px;}
+  #yt-lb-edit:hover{background:rgba(255,255,255,0.16);color:#fff;}
   #yt-lb-scrap svg,#yt-lb-bm svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;}
   #yt-lb-scrap.scrapped{color:rgba(255,92,125,0.92);}
   #yt-lb-scrap.scrapped svg{fill:currentColor;}
@@ -700,14 +701,17 @@
   .gc-ch-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
   .gc-ch-item.featured,.gc-ch-item.gc-ch-wide{grid-column:span 2;}
   .gc-ch-item.is-short .gc-ch-thumb{aspect-ratio:9/16;}
-  /* ── 관리자 전용: 영상 출연 멤버 태깅 ───────────────── */
-  .gc-ch-edit{
-    position:absolute;top:4px;right:4px;z-index:2;width:22px;height:22px;border-radius:50%;
+  /* ── 관리자 전용: 영상 출연 멤버 태깅 (그룹/멤버/연결 카드 썸네일 공용) ───────────────── */
+  .vid-edit-btn{
+    width:22px;height:22px;border-radius:50%;
     background:rgba(10,14,28,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
     border:0.5px solid rgba(255,255,255,0.22);color:rgba(230,238,255,0.95);font-size:11px;
-    display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;flex-shrink:0;
   }
-  .gc-ch-edit:hover{background:rgba(30,40,70,0.85);}
+  .vid-edit-btn:hover{background:rgba(30,40,70,0.85);}
+  .gc-ch-item .vid-edit-btn{position:absolute;top:4px;right:4px;z-index:2;}
+  /* tv-sm/tv-big-wrap은 스크랩(오른쪽4px)/북마크(오른쪽34px) 버튼이 이미 오른쪽을 쓰므로 왼쪽에 배치 */
+  .tv-sm .vid-edit-btn,#tv-big-wrap .vid-edit-btn{position:absolute;top:4px;left:4px;z-index:3;}
   #vid-tag-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:80;display:none;align-items:center;justify-content:center;}
   #vid-tag-overlay.open{display:flex;}
   #vid-tag-panel{width:min(320px,calc(100vw - 40px));max-height:82vh;overflow-y:auto;background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:18px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:20px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
@@ -1339,6 +1343,7 @@
       <div id="yt-lb-actions">
         <button id="yt-lb-scrap" aria-label="플레이리스트 추가"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg><span id="yt-lb-scrap-cnt" class="lb-action-cnt"></span></button>
         <button id="yt-lb-bm" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></button>
+        <button id="yt-lb-edit" aria-label="출연 멤버 지정" style="display:none">✎</button>
       </div>
       <button id="yt-lb-next" aria-label="다음 영상">›</button>
     </div>
@@ -1910,8 +1915,8 @@ async function buildUniverse(){
   // 모바일 세로(aspect<1)는 변형 없음, 데스크톱(aspect>1)은 sqrt(aspect)로 확장
   const _aspect=window.innerWidth/window.innerHeight;
   const _xSpread=_aspect>1?Math.sqrt(_aspect):1;
-  const regularPos=[],regularColors=[];
-  const sparklePos=[],sparkleColors=[];
+  const regularPos=[],regularColors=[],regularHalo=[];
+  const sparklePos=[],sparkleColors=[],sparkleHalo=[];
   let regularIdx=0,sparkleIdx=0;
 
   const _placedBubbles=[];
@@ -2077,7 +2082,8 @@ async function buildUniverse(){
       if(!m.active&&ko===m.group.ko){
         _flyInside=mPos.clone(); // 원래라면 여기 있었을 자리(토글 켜면 여기로 날아들어옴)
         const outDir=new THREE.Vector3(Math.random()-0.5,Math.random()*0.6+0.2,Math.random()-0.5).normalize();
-        _flyOutside=pos.clone().addScaledVector(outDir,radius+5);
+        // 행성 바로 앞(radius+5)이 아니라 우주에 멀찍이 떠다니는 느낌이 나도록 훨씬 멀리 배치
+        _flyOutside=pos.clone().addScaledVector(outDir,radius+26+Math.random()*14);
         mPos=_flyOutside.clone();
       }
 
@@ -2085,9 +2091,13 @@ async function buildUniverse(){
       const pArr=m.sparkle?sparklePos:regularPos;
       const cArr=m.sparkle?sparkleColors:regularColors;
       const aArr=m.sparkle?sparkleArtists:regularArtists;
+      const hArr=m.sparkle?sparkleHalo:regularHalo;
       pArr.push(mPos.x,mPos.y,mPos.z);
       cArr.push(spColor.r,spColor.g,spColor.b);
       aArr.push(m);
+      // 우주에 홀로 멀찍이 떠 있는 탈퇴/비활동 멤버는 별 자체(코어 크기·밝기)는 그대로 두되,
+      // halo(번짐)만 줄여서 텅 빈 배경에서 유난히 도드라져 보이는 것만 완화 — "덜 중요해 보임" 방지
+      hArr.push(_flyOutside?0.15:1);
       const _pType=m.sparkle?'sparkle':'regular';
       const _pIdx=m.sparkle?sparkleIdx++:regularIdx++;
       const _origCol=[spColor.r,spColor.g,spColor.b];
@@ -2187,7 +2197,7 @@ async function buildUniverse(){
   });
 
   // ── Member points (fixed pixel size, camera-distance independent) ──
-  function makePointsMat(tex,sizeW,opacity,sizeClamp){
+  function makePointsMat(tex,sizeW,opacity,sizeClamp,useHaloScale){
     const mat=new THREE.PointsMaterial({
       size:sizeW/Math.min(window.devicePixelRatio,2),map:tex,vertexColors:true,
       transparent:true,opacity,
@@ -2201,16 +2211,19 @@ async function buildUniverse(){
     // 정점별 랜덤 시드(flareSeed)로 UV를 회전시켜 방향을, 크기를 살짝씩 지터시켜 정도를 다르게 만든다.
     // + my 별의 "숨쉬듯 살짝 커졌다 작아지는" 효과를 멤버 별에도 적용 — 단, 전부 같은 위상으로 숨쉬면
     // 한꺼번에 맥동하는 것처럼 부자연스러워서 flareSeed로 별마다 위상을 어긋나게 한다(진폭은 my 별보다 살짝 작게).
+    // + halo 레이어에 한해서만(useHaloScale) haloScale 속성으로 개별 별의 번짐 정도를 줄일 수 있게 함 —
+    // 우주에 홀로 멀리 떠 있는 탈퇴/비활동 멤버가 빈 배경 대비로 유난히 도드라지는 것을 완화하기 위함
+    // (코어 별 자체 크기/밝기는 그대로 둬서 "덜 중요해 보이는" 인상은 안 주도록).
     mat.onBeforeCompile=shader=>{
       shader.uniforms.uTime={value:0};
       shader.vertexShader=shader.vertexShader
         .replace(
           'uniform float size;\nuniform float scale;',
-          'uniform float size;\nuniform float scale;\nuniform float uTime;\nattribute float flareSeed;\nvarying float vFlareAngle;'
+          'uniform float size;\nuniform float scale;\nuniform float uTime;\nattribute float flareSeed;\nvarying float vFlareAngle;'+(useHaloScale?'\nattribute float haloScale;':'')
         )
         .replace(
           'gl_PointSize = size;',
-          `vFlareAngle = flareSeed * 6.2831853;\n\t\tfloat _fJit = 0.85 + 0.3 * fract(sin(flareSeed*78.233)*43758.5453);\n\t\tfloat _breathe = 1.0 + ${isMob()?'0.0':'0.03'} * sin(uTime*1.15 + flareSeed*6.2831853);\n\t\tgl_PointSize = size * _fJit * _breathe;`
+          `vFlareAngle = flareSeed * 6.2831853;\n\t\tfloat _fJit = 0.85 + 0.3 * fract(sin(flareSeed*78.233)*43758.5453);\n\t\tfloat _breathe = 1.0 + ${isMob()?'0.0':'0.03'} * sin(uTime*1.15 + flareSeed*6.2831853);\n\t\tgl_PointSize = size * _fJit * _breathe${useHaloScale?' * haloScale':''};`
         )
         .replace(
           'if ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );',
@@ -2241,7 +2254,7 @@ async function buildUniverse(){
     };
     return mat;
   }
-  function makePoints(positions,colors,sizeW,opacity){
+  function makePoints(positions,colors,haloScale,sizeW,opacity){
     if(!positions.length)return;
     const geo=new THREE.BufferGeometry();
     geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(positions),3));
@@ -2249,20 +2262,21 @@ async function buildUniverse(){
     const flareSeeds=new Float32Array(positions.length/3);
     for(let i=0;i<flareSeeds.length;i++)flareSeeds[i]=Math.random();
     geo.setAttribute('flareSeed',new THREE.BufferAttribute(flareSeeds,1));
-    const mat=makePointsMat(glowTex,sizeW,opacity,46.0);
+    geo.setAttribute('haloScale',new THREE.BufferAttribute(new Float32Array(haloScale),1));
+    const mat=makePointsMat(glowTex,sizeW,opacity,46.0,false);
     const pts=new THREE.Points(geo,mat);
     scene.add(pts);
     // 후처리 블룸 없이 '빛이 실제로 번지는' 느낌을 내기 위한 halo 레이어 — 같은 geometry(포지션/컬러)를
     // 공유해서 즐겨찾기·필터 등으로 색이 바뀌어도 자동으로 같이 반영되고, 훨씬 크고 옅은 텍스처로
     // additive 겹쳐 그려서 코어 바깥으로 빛이 새어나가는 것처럼 보이게 한다.
-    const haloMat=makePointsMat(bloomHaloTex,sizeW*3.4,opacity*0.55,150.0);
+    const haloMat=makePointsMat(bloomHaloTex,sizeW*3.4,opacity*0.55,150.0,true);
     const haloPts=new THREE.Points(geo,haloMat);
     scene.add(haloPts);
     pts.userData.halo=haloPts;
     return pts;
   }
-  regularPts=makePoints(regularPos,regularColors,33.6,0.82*opScale);
-  sparklePts=makePoints(sparklePos,sparkleColors,74.4,1.0*opScale);
+  regularPts=makePoints(regularPos,regularColors,regularHalo,33.6,0.82*opScale);
+  sparklePts=makePoints(sparklePos,sparkleColors,sparkleHalo,74.4,1.0*opScale);
   if(regularPts){
     regColorAttr=regularPts.geometry.attributes.color;
     regularPts.userData.baseOp=0.82*opScale;
@@ -3017,6 +3031,8 @@ function _lbUpdateToolbar(){
   }else{
     scrapBtn.style.display='none';bmBtn.style.display='none';
   }
+  const editBtn=document.getElementById('yt-lb-edit');
+  if(editBtn)editBtn.style.display=(_isAdmin()&&s&&s._apiId)?'':'none';
   if(_lbPlaylist&&_lbPlaylist.length>1){
     prevBtn.style.display='';nextBtn.style.display='';
     prevBtn.disabled=(_lbIdx<=0);
@@ -3291,6 +3307,13 @@ document.getElementById('yt-lb-bm').addEventListener('click',e=>{
   btn.classList.toggle('bm-on',on);
   btn.querySelector('svg').style.fill=on?'currentColor':'none';
 });
+document.getElementById('yt-lb-edit').addEventListener('click',e=>{
+  e.stopPropagation();
+  if(!_lbPlaylist||_lbIdx<0)return;
+  const s=_lbPlaylist[_lbIdx];
+  if(!s||!s._apiId)return;
+  _openVidTagModal({id:s._apiId,title:s.t},s._apiGroupKo);
+});
 
 function addHoverPreview(wrapEl,imgEl,videoId,shorts){
   if(!videoId)return;
@@ -3442,6 +3465,13 @@ function makeSmallThumb(s,allSongs,idx,ctx){
   if(withLine)box.appendChild(withLine);
   box.appendChild(_makeScrapBtn(s,ctx));
   box.appendChild(_makeBookmarkBtn(s,ctx));
+  if(_isAdmin()&&s._apiId){
+    const editBtn=document.createElement('button');
+    editBtn.className='vid-edit-btn';editBtn.type='button';editBtn.textContent='✎';
+    editBtn.setAttribute('aria-label','출연 멤버 지정');
+    editBtn.addEventListener('click',e=>{e.stopPropagation();_openVidTagModal({id:s._apiId,title:s.t},s._apiGroupKo);});
+    box.appendChild(editBtn);
+  }
   addHoverPreview(box,img,vid,shorts);
   box.addEventListener('click',e=>{e.stopPropagation();openLightbox(s.u,shorts,allSongs,allSongs.indexOf(s),ctx);});
   return box;
@@ -3507,6 +3537,13 @@ function buildVideoSection(songs,containerEl,ctx,mainCandidates){
       if(_bigWithLine)bigWrap.appendChild(_bigWithLine);
       bigWrap.appendChild(_makeScrapBtn(first,ctx));
   bigWrap.appendChild(_makeBookmarkBtn(first,ctx));
+      if(_isAdmin()&&first._apiId){
+        const editBtn=document.createElement('button');
+        editBtn.className='vid-edit-btn';editBtn.type='button';editBtn.textContent='✎';
+        editBtn.setAttribute('aria-label','출연 멤버 지정');
+        editBtn.addEventListener('click',e=>{e.stopPropagation();_openVidTagModal({id:first._apiId,title:first.t},first._apiGroupKo);});
+        bigWrap.appendChild(editBtn);
+      }
       addHoverPreview(bigWrap,big,ytId(first.u),false);
       bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,isShorts(first.u),all,all.indexOf(first),ctx);});
       containerEl.appendChild(bigWrap);
@@ -3532,6 +3569,13 @@ function buildVideoSection(songs,containerEl,ctx,mainCandidates){
   if(_bigWithLine)bigWrap.appendChild(_bigWithLine);
   bigWrap.appendChild(_makeScrapBtn(first,ctx));
   bigWrap.appendChild(_makeBookmarkBtn(first,ctx));
+  if(_isAdmin()&&first._apiId){
+    const editBtn=document.createElement('button');
+    editBtn.className='vid-edit-btn';editBtn.type='button';editBtn.textContent='✎';
+    editBtn.setAttribute('aria-label','출연 멤버 지정');
+    editBtn.addEventListener('click',e=>{e.stopPropagation();_openVidTagModal({id:first._apiId,title:first.t},first._apiGroupKo);});
+    bigWrap.appendChild(editBtn);
+  }
   addHoverPreview(bigWrap,big,ytId(first.u),firstShorts);
   bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,firstShorts,all,all.indexOf(first),ctx);});
   containerEl.appendChild(bigWrap);
@@ -3796,6 +3840,10 @@ function _apiVidToSong(v,memberKo,groupKo){
   };
   if(withList.length)song.with=withList;
   if(v.category==='mv')song.type='mv';
+  // Supabase 원본 식별자 보존 — 관리자 태깅 버튼(멤버/연결 카드)이 어떤 행을 업데이트할지 알 수 있게 함.
+  // artists.json 수동 등록곡은 이 필드가 없어서(_apiId undefined) 태깅 버튼이 자동으로 안 뜸(대상 행이 없으므로).
+  song._apiId=v.id;
+  song._apiGroupKo=v.group_ko;
   return song;
 }
 // 멤버 카드에 API로 수집된(그룹 채널 동기화) 영상 중 이 멤버가 출연 태깅된 것을 백그라운드로 불러와 합쳐서 다시 렌더링.
@@ -7888,14 +7936,16 @@ function _renderGcVidItems(vids,grid){
     item.appendChild(img);item.appendChild(tEl);
     if(_isAdmin()){
       const editBtn=document.createElement('button');
-      editBtn.className='gc-ch-edit';editBtn.type='button';editBtn.textContent='✎';
+      editBtn.className='vid-edit-btn';editBtn.type='button';editBtn.textContent='✎';
       editBtn.setAttribute('aria-label','출연 멤버 지정');
       editBtn.addEventListener('click',e=>{e.stopPropagation();_openVidTagModal(v,_gcChState.ko);});
       item.appendChild(editBtn);
     }
     item.addEventListener('click',e=>{
       e.stopPropagation();
-      openLightbox(`https://www.youtube.com/watch?v=${v.id}`,isShort);
+      const vidUrl=`https://www.youtube.com/watch?v=${v.id}`;
+      // 단일 항목 "플레이리스트"로 넘겨서 라이트박스가 관리자 태깅 대상(_apiId/_apiGroupKo)을 알 수 있게 함
+      openLightbox(vidUrl,isShort,[{t:v.title,u:vidUrl,_apiId:v.id,_apiGroupKo:_gcChState.ko}],0);
     });
     grid.appendChild(item);
     nodes.push(item);
