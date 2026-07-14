@@ -133,7 +133,7 @@
     border:0.5px solid rgba(255,255,255,0.09);border-bottom:none;
     backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
     box-shadow:0 -4px 32px rgba(0,0,0,0.45);
-    z-index:42;max-height:180px;overflow-y:auto;overflow-x:hidden;display:none;
+    z-index:68;max-height:180px;overflow-y:auto;overflow-x:hidden;display:none;
     box-sizing:border-box;padding:4px 0;
   }
   #mob-sr.open{display:block;}
@@ -305,7 +305,7 @@
   #tt{
     position:fixed;display:none;max-width:210px;
     padding:16px 28px 14px 28px;font-size:14px;line-height:1.55;
-    color:#ccd8ee;z-index:30;pointer-events:all;
+    color:#ccd8ee;z-index:61;pointer-events:all;
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
   }
   #ttx{position:absolute;top:9px;right:11px;font-size:15px;color:rgba(150,170,215,0.65);cursor:pointer;line-height:1;}
@@ -348,34 +348,27 @@
   .tv-with-line{font-size:9px;font-weight:500;padding:0 4px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em;}
   .tv-with-chip{cursor:pointer;color:rgba(150,180,255,0.72);transition:color .13s;}
   .tv-with-chip:hover{color:rgba(200,220,255,1);text-decoration:underline;}
-  @media(min-width:769px){
-    #tv-big-title,.tv-sm-title,.tv-with-line{text-overflow:unset;}
-    .tv-title-inner{display:inline-block;white-space:nowrap;vertical-align:top;}
-    #tv-big-title:not(.is-marquee),.tv-sm-title:not(.is-marquee),.tv-with-line:not(.is-marquee){-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);}
-    .marquee-run{animation:title-marquee 2.2s .2s linear infinite alternate;}
-    .tv-with-line.is-marquee .marquee-run{animation-duration:1.3s;}
-    @keyframes title-marquee{0%,15%{transform:translateX(0);}85%,100%{transform:translateX(var(--mx,0px));}}
-  }
+  /* 마퀴(긴 제목 슬라이드) — 데스크톱은 hover, 모바일은 탭으로 트리거(JS의 addMarquee 참고). 둘 다 같은 표시 규칙 공유 */
+  #tv-big-title,.tv-sm-title,.tv-with-line{text-overflow:unset;}
+  .tv-title-inner{display:inline-block;white-space:nowrap;vertical-align:top;}
+  #tv-big-title:not(.is-marquee),.tv-sm-title:not(.is-marquee),.tv-with-line:not(.is-marquee){-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);mask-image:linear-gradient(to right,#000 calc(100% - 14px),transparent 100%);}
+  .marquee-run{animation:title-marquee 2.2s .2s linear infinite alternate;}
+  .tv-with-line.is-marquee .marquee-run{animation-duration:1.3s;}
+  @keyframes title-marquee{0%,15%{transform:translateX(0);}85%,100%{transform:translateX(var(--mx,0px));}}
+  /* 모바일 탭: hover가 없으므로 한 번만 끝까지 슬라이드했다가 되돌아옴(무한반복 아님) */
+  @keyframes title-marquee-tap{0%,10%{transform:translateX(0);}45%,65%{transform:translateX(var(--mx,0px));}100%{transform:translateX(0);}}
+  .marquee-tap-run{animation:title-marquee-tap 1.7s ease-in-out;}
   .tv-empty{font-size:11px;color:#5878a0;}
   /* 쇼츠 썸네일 (9:16) */
   #tv-big-wrap.is-shorts #tv-big{aspect-ratio:9/16;width:40%;margin:0 auto;}
-  #tv-small-row .tv-sm.is-shorts,.tv-more-wrap .tv-sm.is-shorts{flex:0 0 52px;width:52px;}
+  #tv-small-row .tv-sm.is-shorts{flex:0 0 52px;width:52px;}
   .tv-sm.is-shorts img{aspect-ratio:9/16;}
-  /* 웹 2열 그리드 (가로 영상 먼저, 쇼츠 짝수로 뒤에) */
-  #tv-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px;}
+  /* 대표영상 제외 나머지 영상 그리드 — 그룹카드처럼 가로/쇼츠를 업로드 순서 기반으로 섞어서 배치 (모바일/데스크톱 공용) */
+  .tv-mix-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px;}
+  .tv-mix-grid .tv-sm.wide{grid-column:span 2;}
   /* 더보기 버튼 */
   .tv-more-btn{width:100%;margin-top:5px;padding:5px 8px;border:none;border-radius:8px;background:rgba(255,255,255,0.08);color:rgba(160,180,225,0.80);font-family:inherit;font-size:10px;font-weight:600;cursor:pointer;letter-spacing:.02em;transition:background .13s,color .13s;}
   .tv-more-btn:hover{background:rgba(255,255,255,0.13);color:rgba(205,220,255,0.95);}
-  .tv-more-wrap{flex-wrap:wrap;gap:5px;margin-top:5px;display:none;}
-  .tv-more-wrap.open{display:flex;}
-  .tv-more-wrap .tv-sm{flex:0 0 calc(50% - 2.5px);}
-  /* 모바일 쇼츠 2열 그리드 */
-  .mob-shorts-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px;}
-  .mob-shorts-grid .tv-sm{width:100%;flex:none;}
-  .mob-shorts-grid .tv-sm.is-shorts{flex:none;width:100%;}
-  .mob-shorts-grid .tv-sm img{width:100%;aspect-ratio:9/16;object-fit:cover;}
-  .mob-shorts-grid.tv-more-wrap{display:none;}
-  .mob-shorts-grid.tv-more-wrap.open{display:grid;}
   /* ── Mobile bottom sheet ─────────────────────────── */
   #mob-sheet{
     display:none;position:fixed;left:0;right:0;width:100%;
@@ -386,7 +379,7 @@
     backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);
     border:0.5px solid rgba(255,255,255,0.10);
     box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 -8px 32px rgba(0,0,0,0.55);
-    z-index:35;pointer-events:all;overflow:hidden;
+    z-index:63;pointer-events:all;overflow:hidden;
     box-sizing:border-box;
     transform:translateY(calc(100% + var(--sheet-bottom,73px)));
     transition:transform .32s cubic-bezier(0.32,0.72,0,1),max-height .18s cubic-bezier(0.4,0,0.2,1),min-height .18s cubic-bezier(0.4,0,0.2,1),border-radius .32s,bottom .18s cubic-bezier(0.4,0,0.2,1);
@@ -403,7 +396,7 @@
     backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);
     border:0.5px solid rgba(255,255,255,0.10);
     box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 -8px 32px rgba(0,0,0,0.55);
-    z-index:36;pointer-events:all;
+    z-index:64;pointer-events:all;
     transform:translateY(calc(100% + var(--sheet-bottom,73px)));
     transition:transform .32s cubic-bezier(0.32,0.72,0,1),bottom .18s cubic-bezier(0.4,0,0.2,1),min-height .18s cubic-bezier(0.4,0,0.2,1),max-height .18s cubic-bezier(0.4,0,0.2,1);
     will-change:transform;
@@ -423,13 +416,16 @@
   }
   @media(min-width:769px){#mob-card-stack{display:none!important;}}
   #gc-back{position:absolute;top:-2px;left:-2px;z-index:2;padding:14px 16px;}
-  #yt-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:55;align-items:center;justify-content:center;}
+  #yt-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:67;align-items:center;justify-content:center;}
   #yt-lightbox.open{display:flex;}
   #yt-lb-wrap{position:relative;width:min(88vw,900px);}
   #yt-lb-iframe{width:100%;aspect-ratio:16/9;border:none;border-radius:8px;display:block;}
   #yt-lb-iframe.is-shorts{aspect-ratio:9/16;width:min(42vw,320px);margin:0 auto;}
   #yt-lb-close{position:absolute;top:-30px;right:0;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:4px 6px;opacity:.65;line-height:1;}
   #yt-lb-close:hover{opacity:1;}
+  /* 모바일 첫 진입 시 1회: 상하로 스와이프해서 영상 넘길 수 있다는 걸 살짝 들썩임으로 암시 */
+  @keyframes lb-swipe-hint{0%,100%{transform:translateY(0);}25%{transform:translateY(-16px);}60%{transform:translateY(0);}80%{transform:translateY(10px);}}
+  #yt-lb-wrap.swipe-hint{animation:lb-swipe-hint 1s ease-in-out 2;}
   #yt-lb-toolbar{display:flex;align-items:center;justify-content:space-between;padding:10px 0 0;user-select:none;}
   #yt-lb-prev,#yt-lb-next{background:none;border:none;color:rgba(255,255,255,0.45);font-size:30px;line-height:1;cursor:pointer;padding:4px 10px;transition:color .15s;}
   #yt-lb-prev:hover,#yt-lb-next:hover{color:rgba(255,255,255,0.9);}
@@ -464,10 +460,16 @@
   @media(max-width:768px){
     #yt-lb-wrap{width:95vw;}
     #yt-lb-iframe{border-radius:10px;}
-    #yt-lb-iframe.is-shorts{height:min(78vh,580px);width:auto;aspect-ratio:9/16;margin:0 auto;display:block;}
+    /* 쇼츠는 세로로 길어서 화면 대부분을 차지해 스와이프 시작 지점(유튜브 iframe 바깥 여백)이 거의 없었음 —
+       살짝 줄여서 위아래 여백을 확보 (탭으로 재생/일시정지하는 유튜브 기본 컨트롤은 그대로 유지됨) */
+    #yt-lb-iframe.is-shorts{height:min(58vh,460px);width:auto;aspect-ratio:9/16;margin:0 auto;display:block;}
     #yt-lb-close{top:auto;bottom:calc(100% + 8px);right:0;font-size:15px;padding:4px 6px;opacity:.7;}
+    /* 모바일은 상하 스와이프로 영상 넘기므로 좌우 버튼은 오히려 잘못된 방향을 암시함 — 숨김 */
+    #yt-lb-prev,#yt-lb-next{display:none;}
+    #yt-lb-toolbar{justify-content:center;}
     #mob-sr .sr-item{padding:8px 22px;font-size:14px;line-height:1;}
     .sr-tag{font-size:11px;}
+    .gc-ch-refresh{font-size:20px;padding:6px 8px;}
   }
   #mob-sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.14);border-radius:2px;margin:10px auto 6px;display:block;}
   #mob-sheet-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:calc(60vh - 24px);overscroll-behavior:contain;width:100%;box-sizing:border-box;position:relative;}
@@ -497,7 +499,7 @@
   #side-panel{
     position:fixed;right:0;top:64px;bottom:0;width:320px;
     overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
-    z-index:35;pointer-events:none;
+    z-index:63;pointer-events:none;
     transform:translateX(100%);
     visibility:hidden;
     transition:transform 0.26s cubic-bezier(0.32,0,0.15,1),visibility 0s 0.26s;
@@ -524,7 +526,7 @@
   #member-panel{
     position:fixed;right:320px;top:64px;bottom:0;width:320px;
     overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
-    z-index:34;pointer-events:none;
+    z-index:62;pointer-events:none;
     transform:translateX(100%);
     visibility:hidden;
     transition:transform 0.26s cubic-bezier(0.32,0,0.15,1),visibility 0s 0.26s;
@@ -552,7 +554,7 @@
     width:26px;height:52px;border:none;border-radius:8px 0 0 8px;
     background:rgba(20,24,44,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
     color:rgba(160,185,230,0.80);font-size:18px;line-height:1;
-    cursor:pointer;padding:0;z-index:34;
+    cursor:pointer;padding:0;z-index:62;
     opacity:0;pointer-events:none;
     transition:opacity 0.22s,background 0.15s,color 0.15s;
     display:flex;align-items:center;justify-content:center;
@@ -580,7 +582,7 @@
   }
   .tt-nav-btn:hover{color:rgba(200,218,255,0.75);}
   #tt-counter{display:none;}
-  #gc{position:fixed;display:none;max-width:234px;z-index:30;overflow:hidden;pointer-events:all;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
+  #gc{position:fixed;display:none;max-width:234px;z-index:61;overflow:hidden;pointer-events:all;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
     transition:opacity 0.22s ease,transform 0.22s ease;}
   #gc.gc-enter{opacity:0;transform:translateY(6px) scale(0.97);}
   #gc-bar{height:3px;width:calc(100% - 8px);margin:0 4px;}
@@ -631,8 +633,8 @@
   #gc-grid .row{display:flex;align-items:baseline;}
   #gc-grid .lbl{font-size:11.5px;color:#9abcd8;min-width:56px;flex-shrink:0;letter-spacing:.02em;}
   body.lang-en #gc-grid .lbl{font-size:11px;}
-  #gc-mem-label.toggleable{cursor:pointer;user-select:none;transition:color .15s,text-shadow .15s;}
-  #gc-mem-label.toggleable:hover{color:#c8dcff;}
+  #gc-mem-label.toggleable{cursor:pointer;user-select:none;color:rgba(170,205,255,0.80);text-shadow:0 0 4px rgba(140,175,255,0.16),0 0 2px rgba(140,175,255,0.07);transition:color .15s,text-shadow .15s;}
+  #gc-mem-label.toggleable:hover{color:#c8dcff;text-shadow:0 0 6px rgba(160,195,255,0.28),0 0 3px rgba(160,195,255,0.14);}
   #gc-mem-label.toggleable.on{color:rgba(170,205,255,0.95);text-shadow:0 0 6px rgba(140,175,255,0.35);}
   .gc-mem-name.gc-mem-inactive{opacity:0.55;}
   #gc-grid .val{font-size:14px;color:#c0d6f0;font-weight:500;line-height:20px;}
@@ -660,7 +662,7 @@
   #gc-ch-vid{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.10);}
   #gc-ch-vid:empty{display:none;}
   .gc-ch-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
-  .gc-ch-refresh{flex:0 0 auto;background:none;border:none;cursor:pointer;color:rgba(155,178,228,0.4);font-size:13px;padding:2px 3px;transition:color .15s;font-family:inherit;}
+  .gc-ch-refresh{flex:0 0 auto;background:none;border:none;cursor:pointer;color:rgba(155,178,228,0.4);font-size:17px;padding:4px 6px;transition:color .15s;font-family:inherit;}
   .gc-ch-refresh:hover{color:#c0d6f0;}
   @keyframes gc-ch-spin{to{transform:rotate(360deg);}}
   .gc-ch-refresh.spinning{animation:gc-ch-spin .5s linear;}
@@ -678,8 +680,12 @@
     background:rgba(155,178,228,0.22);color:#c8ddff;border-color:rgba(170,195,255,0.4);
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 0 10px rgba(155,178,228,0.25);
   }
+  @media(min-width:769px){
+    .gc-ch-filter{font-size:9px;}
+    .gc-ch-refresh{font-size:15px;}
+  }
   .gc-totop{
-    position:fixed;right:16px;bottom:78px;z-index:50;width:36px;height:36px;border-radius:50%;
+    position:fixed;right:16px;bottom:78px;z-index:66;width:36px;height:36px;border-radius:50%;
     background:rgba(255,255,255,0.08);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border:0.5px solid rgba(255,255,255,0.16);color:rgba(220,235,255,0.9);font-size:16px;
     display:none;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;
@@ -732,7 +738,7 @@
   /* ── Search ──────────────────────────────────── */
   #search-wrap{
     position:fixed;bottom:78px;left:50%;transform:translateX(-50%);
-    z-index:40;width:240px;
+    z-index:68;width:240px;
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
     display:none;
   }
@@ -776,6 +782,7 @@
   .sr-item-name.sr-group{color:#9ab8dc;}
   .sr-tag{font-size:10px;color:#9ab8dc;letter-spacing:.05em;text-transform:uppercase;flex-shrink:0;}
   .sr-empty{padding:14px 13px;font-size:12px;color:rgba(140,160,200,0.5);text-align:center;}
+  .sr-recent-label{padding:6px 13px 4px;font-size:10px;font-weight:700;color:rgba(140,160,200,0.5);letter-spacing:.06em;text-transform:uppercase;}
   /* ── Responsive: desktop panel positions ────────── */
   @media(min-width:769px){
     #tabbar{display:none;}
@@ -823,7 +830,7 @@
   #conn-panel{
     position:fixed;right:640px;top:64px;bottom:0;width:280px;
     overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
-    z-index:34;pointer-events:none;
+    z-index:62;pointer-events:none;
     transform:translateX(calc(100% + 640px));
     visibility:hidden;
     transition:transform 0.26s cubic-bezier(0.32,0,0.15,1),visibility 0s 0.26s;
@@ -847,7 +854,7 @@
     backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);
     border:0.5px solid rgba(255,255,255,0.10);
     box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 -8px 32px rgba(0,0,0,0.60);
-    z-index:37;pointer-events:all;
+    z-index:65;pointer-events:all;
     transform:translateY(calc(100% + var(--sheet-bottom,73px)));
     transition:transform .32s cubic-bezier(0.32,0.72,0,1),bottom .18s cubic-bezier(0.4,0,0.2,1),min-height .18s cubic-bezier(0.4,0,0.2,1),max-height .18s cubic-bezier(0.4,0,0.2,1);
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
@@ -990,11 +997,19 @@
   ::-webkit-scrollbar-thumb{-webkit-appearance:none;background:rgba(180,200,240,0.07);border-radius:2px;}
   ::-webkit-scrollbar-thumb:hover{background:rgba(180,200,240,0.14);}
   /* ── Favorites ───────────────────────────────────── */
-  .fav-btn{background:none;border:none;outline:none;cursor:pointer;padding:2px 3px;border-radius:6px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;color:rgba(255,110,140,0.48);transition:color .15s,transform .12s;}
+  .fav-btn{position:relative;background:none;border:none;outline:none;cursor:pointer;padding:2px 3px;border-radius:6px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;color:rgba(255,110,140,0.48);transition:color .15s,transform .12s;}
   .fav-btn svg{width:13px;height:13px;display:block;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round;transition:fill .15s;}
   .fav-btn:hover{color:rgba(255,95,128,0.92);transform:scale(1.18);}
   .fav-btn.fav-on{color:rgba(255,95,128,0.92);}
   .fav-btn.fav-on svg{fill:currentColor;}
+  /* 즐겨찾기 추가 순간: 하트가 탱글하게 바운스 + 작은 하트 조각이 톡톡 터지며 퍼짐 */
+  @keyframes fav-heart-bounce{0%{transform:scale(1);}30%{transform:scale(1.4);}55%{transform:scale(0.9);}75%{transform:scale(1.15);}100%{transform:scale(1);}}
+  .fav-btn.fav-burst svg{animation:fav-heart-bounce .45s ease-out;}
+  @keyframes fav-particle{
+    0%{transform:translate(-50%,-50%) scale(0.7);opacity:1;}
+    100%{transform:translate(calc(-50% + var(--px)),calc(-50% + var(--py))) scale(0.15);opacity:0;}
+  }
+  .fav-particle{position:absolute;left:50%;top:50%;pointer-events:none;line-height:1;color:rgba(255,110,140,0.95);animation:fav-particle .6s cubic-bezier(0.2,0.7,0.4,1) forwards;will-change:transform,opacity;}
   /* 첫 즐겨찾기를 유도하는 은은한 펄스 — favGroups/favMembers가 둘 다 비어있는 동안만(_syncFavBtn) */
   @keyframes fav-hint-pulse{
     0%,100%{filter:drop-shadow(0 0 0px rgba(255,95,128,0));transform:scale(1);}
@@ -1029,8 +1044,8 @@
   #profile-panel{width:min(312px,calc(100vw - 32px));background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:20px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:22px 22px 24px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
   .pp-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
   .pp-title{font-size:13.5px;font-weight:700;color:rgba(210,225,255,0.88);letter-spacing:.04em;}
-  #pp-close{background:rgba(255,255,255,0.06);border:none;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:rgba(148,168,218,0.55);line-height:1;padding:0;position:relative;overflow:hidden;flex-shrink:0;transition:background .13s,color .13s,transform .2s ease-out;}
-  #pp-close:hover{background:rgba(255,255,255,0.11);color:rgba(200,218,255,0.85);}  #pp-close:active{background:rgba(255,255,255,0.16);transform:scale(0.86);transition:transform .07s;}
+  #pp-close{background:none;border:none;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:rgba(148,168,218,0.55);line-height:1;padding:0;position:relative;overflow:hidden;flex-shrink:0;transition:color .13s,transform .2s ease-out;}
+  #pp-close:hover{color:rgba(200,218,255,0.85);}  #pp-close:active{transform:scale(0.86);transition:transform .07s;}
   .pp-section{margin-bottom:18px;}
   .pp-label{font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(126,150,204,0.52);display:block;margin-bottom:8px;}
   .pp-required{color:rgba(255,108,135,0.82);}
@@ -1046,8 +1061,8 @@
   .pp-fav-info{flex:1;}
   .pp-fav-label{font-size:12px;color:rgba(178,200,238,0.82);font-weight:500;}
   .pp-fav-sub{font-size:10px;color:rgba(110,135,182,0.48);margin-top:3px;letter-spacing:.02em;}
-  .pp-save-btn{width:100%;margin-top:4px;padding:13px;border:none;border-radius:14px;background:rgba(115,145,255,0.18);border:0.5px solid rgba(120,150,255,0.32);color:rgba(210,225,255,0.95);font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.04em;cursor:pointer;position:relative;overflow:hidden;transition:background .15s,transform .22s ease-out;}
-  .pp-save-btn:hover{background:rgba(115,145,255,0.28);border-color:rgba(120,150,255,0.48);color:#fff;}  .pp-save-btn:active{background:rgba(115,145,255,0.32);transform:scale(0.97);transition:transform .07s;}
+  .pp-save-btn{width:100%;margin-top:4px;padding:9px;border:none;border-radius:12px;background:rgba(115,145,255,0.10);border:0.5px solid rgba(120,150,255,0.20);color:rgba(180,195,230,0.75);font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.04em;cursor:pointer;position:relative;overflow:hidden;transition:background .15s,color .15s,transform .22s ease-out;}
+  .pp-save-btn:hover{background:rgba(115,145,255,0.18);border-color:rgba(120,150,255,0.32);color:rgba(220,230,255,0.92);}  .pp-save-btn:active{background:rgba(115,145,255,0.22);transform:scale(0.97);transition:transform .07s;}
   #tab-profile.pp-set,#dh-profile-btn.pp-set{font-size:11px;font-weight:700;letter-spacing:.01em;}
   /* ── 즐겨찾기 해제 확인 / 기념일 날짜 수정 / 계정 연결 확인 팝업 ────── */
   #unfav-confirm-overlay,#date-edit-overlay,#link-confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:70;display:none;align-items:center;justify-content:center;}
@@ -1055,7 +1070,7 @@
   #unfav-confirm-panel,#date-edit-panel,#link-confirm-panel{width:min(280px,calc(100vw - 40px));background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:18px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:20px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
   #unfav-confirm-msg,#link-confirm-msg{font-size:12px;color:rgba(160,182,222,0.72);line-height:1.5;margin-top:8px;}
   #unfav-confirm-btns,#link-confirm-btns{display:flex;gap:8px;margin-top:18px;}
-  #pp-google-link{width:100%;margin-top:10px;}
+  #pp-google-link{margin-top:10px;}
   #pp-linked-state{font-size:11px;color:rgba(130,200,160,0.85);margin-top:10px;letter-spacing:.02em;}
   .uc-btn{flex:1;padding:10px;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.03em;cursor:pointer;position:relative;overflow:hidden;transition:background .15s,border-color .15s,color .15s,transform .2s ease-out;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);color:rgba(180,200,238,0.72);}
   .uc-btn:hover{background:rgba(255,255,255,0.09);color:#fff;}
@@ -1209,7 +1224,7 @@
     <button class="dh-btn" id="dh-explore-btn" aria-label="무작위로 둘러보기">✦</button>
     <button class="dh-btn" id="dh-fav-btn" aria-label="즐겨찾기 하이라이트">♡</button>
     <button class="dh-btn" id="dh-search-btn" aria-label="검색 열기"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="display:block"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-    <button class="dh-btn" id="dh-profile-btn" aria-label="내 프로필">◉</button>
+    <button class="dh-btn" id="dh-profile-btn" aria-label="내 프로필"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:block"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
     <button class="dh-btn" id="dh-settings-btn" aria-label="설정 열기">⚙︎</button>
   </div>
 </div>
@@ -1279,7 +1294,7 @@
   <div class="sp-row">
     <button class="sp-reset" id="sp-reset" data-i18n="reset">↺ 초기화</button>
   </div>
-  <div class="sp-sec" id="sp-yt-sec">
+  <div class="sp-sec" id="sp-yt-sec" style="display:none">
     <div class="sp-sec-lbl">YouTube 채널 영상</div>
     <input type="text" class="sp-yt-key" id="sp-yt-key" placeholder="API 키 (AIzaSy...)" autocomplete="off" spellcheck="false">
     <button class="sp-yt-sync" id="sp-yt-sync">채널 영상 전체 동기화</button>
@@ -1390,7 +1405,7 @@
           <div class="pp-fav-sub" data-i18n="ppSyncSub">구글 계정을 연결하면 다른 기기에서도 즐겨찾기를 불러올 수 있어요</div>
         </div>
       </div>
-      <button id="pp-google-link" class="uc-btn uc-btn-primary" data-i18n="ppGoogleBtn">구글로 연결하기</button>
+      <button id="pp-google-link" class="pp-save-btn" data-i18n="ppGoogleBtn">구글로 연결하기</button>
       <div id="pp-linked-state" style="display:none" data-i18n="ppLinked">구글 계정에 연결됨 ✓</div>
     </div>
     <button id="pp-save" class="pp-save-btn" data-i18n="ppSave">저장</button>
@@ -2446,6 +2461,18 @@ function _revealUniverse(){
 // ── Animate ───────────────────────────────────────
 function animate(){
   requestAnimationFrame(animate);
+  // 모바일에서 카드/라이트박스가 화면을 사실상 다 덮고 조작도 막혀있는 동안은 3D 렌더링을 완전히 건너뛴다.
+  // (안 보이고 조작도 안 되니 시각적 차이는 없고, 그만큼 스크롤 등 카드 쪽 인터랙션에 CPU/GPU 여유가 생김)
+  // document.getElementById로 직접 조회하는 이유: mobSheetEl 등의 const는 이 함수보다 뒤에 선언되는데
+  // animate()는 스크립트 로드 시 즉시 한 번 호출되므로, 그 시점엔 아직 TDZ라 참조하면 에러가 남.
+  if(isMob()&&(
+    document.getElementById('mob-sheet').classList.contains('bs-open')||
+    document.getElementById('mob-card-stack').classList.contains('bs-open')||
+    document.getElementById('conn-sheet').classList.contains('bs-open')||
+    document.getElementById('yt-lightbox').classList.contains('open')
+  )){
+    return;
+  }
   if(flyState.active){
     const raw=Math.min((performance.now()-flyState.t0)/flyState.dur,1);
     const k=easeInOut(raw);
@@ -2775,13 +2802,90 @@ function _mScore(name,q,ql){
   if(name.startsWith(q)||n.startsWith(ql))return 1;
   return 2;
 }
+// ── 최근 검색 (검색창 열고 아직 안 쳤을 때 위에 뜨는 목록) ──────
+const RECENT_SEARCH_KEY='kpu_recent_searches';
+const RECENT_SEARCH_MAX=8;
+function _loadRecentSearches(){
+  try{return JSON.parse(localStorage.getItem(RECENT_SEARCH_KEY)||'[]');}catch(e){return[];}
+}
+function _recordRecentSearch(h){
+  const entry=h.type==='group'?{type:'group',ko:h.data}:{type:'member',ko:h.data.name.ko,groupKo:h.data.group.ko};
+  const list=_loadRecentSearches().filter(e=>!(e.type===entry.type&&e.ko===entry.ko&&e.groupKo===entry.groupKo));
+  list.unshift(entry);
+  localStorage.setItem(RECENT_SEARCH_KEY,JSON.stringify(list.slice(0,RECENT_SEARCH_MAX)));
+}
+// 저장된 최근 검색 항목(그룹 ko / 멤버 이름+그룹)을 doSearch의 hits와 같은 형태로 다시 조립.
+// 그룹이 삭제됐거나 멤버를 못 찾으면(데이터 갱신 등) 조용히 건너뜀.
+function _resolveRecentSearches(){
+  return _loadRecentSearches().map(e=>{
+    if(e.type==='group'){
+      const info=GROUPS[e.ko];const bm=bubbleMeshes.find(b=>b.ko===e.ko);
+      if(!info||!bm)return null;
+      const enN=info.en||'';
+      const dispName=currentLang==='ko'?e.ko:(enN||e.ko);
+      const dispSub=(enN&&enN!==dispName)?enN:'';
+      return{type:'group',name:dispName,sub:dispSub,pos:bm.mesh.position.clone(),data:e.ko};
+    }
+    const a=ARTISTS.find(x=>x.name.ko===e.ko&&x.group.ko===e.groupKo);
+    if(!a)return null;
+    const enN=a.name.en||'';
+    const dispName=currentLang==='ko'?a.name.ko:(enN||a.name.ko);
+    const dispSub=currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko);
+    return{type:'member',name:dispName,sub:dispSub,pos:a._worldPos,data:a};
+  }).filter(Boolean);
+}
+// hits 렌더링 공통 로직 — 실시간 검색 결과와 최근 검색 목록이 그대로 재사용
+function _renderSearchHits(hits,res,mobSearch,isRecent){
+  res.innerHTML='';
+  if(isRecent&&hits.length){
+    const lbl=document.createElement('div');lbl.className='sr-recent-label';
+    lbl.textContent=currentLang==='ko'?'최근 검색':'Recent';
+    res.appendChild(lbl);
+  }
+  hits.forEach(h=>{
+    const div=document.createElement('div');
+    div.className='sr-item';
+    div.innerHTML=`<span class="sr-item-name${h.type==='group'?' sr-group':''}">${h.name}</span>${h.sub?`<span class="sr-tag${h.type==='group'?' sr-group':''}">${h.sub}</span>`:''}`;
+    div.addEventListener('click',e=>{
+      e.stopPropagation();
+      _recordRecentSearch(h);
+      _closeFeedOverlay();
+      closeCards();
+      flyTo(h.pos);
+      if(mobSearch){
+        exitMobSearch();
+      }else{
+        document.getElementById('search-input').value='';
+        res.style.display='none';
+        closePanels();
+      }
+      const cx=window.innerWidth/2,cy=window.innerHeight*0.38;
+      if(h.type==='group'){showGC(h.data,cx,cy);pulseGroup(h.data);}
+      else{showT(h.data,cx,cy);pulseMember(h.data);pulseGroup(h.data.group.ko);}
+    });
+    res.appendChild(div);
+  });
+  if(!hits.length&&!isRecent){
+    const empty=document.createElement('div');
+    empty.className='sr-empty';
+    empty.textContent=currentLang==='ko'?'검색 결과가 없어요':'No results found';
+    res.appendChild(empty);
+  }
+}
 function doSearch(q){
   const mobSearch=isMob()&&document.getElementById('tabbar').classList.contains('search-mode');
   const res=mobSearch?document.getElementById('mob-sr'):document.getElementById('search-results');
   q=q.trim();
   if(!q){
-    if(mobSearch){res.classList.remove('open');res.innerHTML='';}
-    else{res.style.display='none';}
+    const recentHits=_resolveRecentSearches();
+    if(!recentHits.length){
+      if(mobSearch){res.classList.remove('open');res.innerHTML='';}
+      else{res.style.display='none';}
+      return;
+    }
+    _renderSearchHits(recentHits,res,mobSearch,true);
+    if(mobSearch){res.classList.add('open');document.getElementById('tabbar').classList.add('has-sr');}
+    else{res.style.display='block';}
     return;
   }
   const ql=q.toLowerCase();
@@ -2813,35 +2917,7 @@ function doSearch(q){
   });
   const _isChosung=/^[ㄱ-ㅎ]+$/.test(q);
   hits.sort((a,b)=>{const sd=a.score-b.score;if(sd!==0)return sd;return _isChosung?a.name.localeCompare(b.name,'ko'):0;});
-  res.innerHTML='';
-  hits.slice(0,40).forEach(h=>{
-    const div=document.createElement('div');
-    div.className='sr-item';
-    div.innerHTML=`<span class="sr-item-name${h.type==='group'?' sr-group':''}">${h.name}</span>${h.sub?`<span class="sr-tag${h.type==='group'?' sr-group':''}">${h.sub}</span>`:''}`;
-    div.addEventListener('click',e=>{
-      e.stopPropagation();
-      _closeFeedOverlay();
-      closeCards();
-      flyTo(h.pos);
-      if(mobSearch){
-        exitMobSearch();
-      }else{
-        document.getElementById('search-input').value='';
-        res.style.display='none';
-        closePanels();
-      }
-      const cx=window.innerWidth/2,cy=window.innerHeight*0.38;
-      if(h.type==='group'){showGC(h.data,cx,cy);pulseGroup(h.data);}
-      else{showT(h.data,cx,cy);pulseMember(h.data);pulseGroup(h.data.group.ko);}
-    });
-    res.appendChild(div);
-  });
-  if(!hits.length){
-    const empty=document.createElement('div');
-    empty.className='sr-empty';
-    empty.textContent=currentLang==='ko'?'검색 결과가 없어요':'No results found';
-    res.appendChild(empty);
-  }
+  _renderSearchHits(hits.slice(0,40),res,mobSearch,false);
   if(mobSearch){
     res.classList.add('open');
     document.getElementById('tabbar').classList.toggle('has-sr',hits.length>0);
@@ -2852,6 +2928,7 @@ function doSearch(q){
 const _si=document.getElementById('search-input');
 const _sr=document.getElementById('search-results');
 _si.addEventListener('input',e=>{doSearch(e.target.value);_trackSearchDebounced(e.target.value);});
+_si.addEventListener('focus',()=>doSearch(_si.value)); // 빈 채로 포커스되면 최근 검색 표시
 _si.addEventListener('keydown',e=>{
   if(e.key==='Escape'){_si.value='';_sr.style.display='none';}
   if(e.key==='Enter'){const first=_sr.querySelector('.sr-item');if(first)first.click();}
@@ -2863,11 +2940,10 @@ document.getElementById('search-wrap').addEventListener('click',e=>e.stopPropaga
 const _mobSi=document.getElementById('tab-sb-input');
 const _mobSrEl=document.getElementById('mob-sr');
 _mobSi.addEventListener('input',e=>{
-  const q=e.target.value;
-  _trackSearchDebounced(q);
-  if(!q.trim()){_mobSrEl.classList.remove('open');_mobSrEl.innerHTML='';return;}
-  doSearch(q);
+  _trackSearchDebounced(e.target.value);
+  doSearch(e.target.value); // 비어있으면 doSearch가 알아서 최근 검색 표시(없으면 목록 닫힘)
 });
+_mobSi.addEventListener('focus',()=>doSearch(_mobSi.value)); // 빈 채로 포커스되면 최근 검색 표시
 _mobSi.addEventListener('keydown',e=>{
   if(e.key==='Escape')exitMobSearch();
   if(e.key==='Enter'){const first=_mobSrEl.querySelector('.sr-item');if(first)first.click();}
@@ -2912,6 +2988,18 @@ function openLightbox(url,shorts,playlist,idx,ctx){
   iframe.className=shorts?'is-shorts':'';
   lb.classList.add('open');
   _lbUpdateToolbar();
+  _maybeShowSwipeHint();
+}
+const LB_SWIPE_HINT_KEY='kpu_lb_swipe_hint_shown'; // 상하 스와이프로 영상 넘길 수 있다는 걸 처음 한 번만 안내
+function _maybeShowSwipeHint(){
+  if(!isMob()||localStorage.getItem(LB_SWIPE_HINT_KEY))return;
+  if(!_lbPlaylist||_lbPlaylist.length<2)return; // 넘길 영상이 없으면 힌트도 무의미
+  localStorage.setItem(LB_SWIPE_HINT_KEY,'1');
+  const wrap=document.getElementById('yt-lb-wrap');
+  wrap.classList.remove('swipe-hint');
+  void wrap.offsetWidth; // 리플로우 강제 — 같은 클래스 재적용 시에도 애니메이션이 다시 시작되도록
+  wrap.classList.add('swipe-hint');
+  setTimeout(()=>wrap.classList.remove('swipe-hint'),2000);
 }
 function _lbUpdateToolbar(){
   const s=(_lbPlaylist&&_lbIdx>=0)?_lbPlaylist[_lbIdx]:null;
@@ -3236,23 +3324,44 @@ function _wireMarqueeHover(el,inner){
     inner.style.removeProperty('--mx');
   });
 }
+// 모바일: hover가 없으므로 탭하면 한 번만 끝까지 슬라이드했다가 되돌아옴. stopPropagation으로
+// 썸네일 전체의 "영상 열기" 클릭과 분리 — 제목을 탭하면 슬라이드만, 썸네일 이미지를 탭하면 영상 열림.
+function _wireMarqueeTap(el,inner){
+  let playing=false;
+  el.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(playing)return;
+    const ov=inner.scrollWidth-el.clientWidth;
+    if(ov<=0)return;
+    playing=true;
+    inner.style.setProperty('--mx',`-${ov+6}px`);
+    el.classList.add('is-marquee');
+    inner.classList.add('marquee-tap-run');
+    inner.addEventListener('animationend',()=>{
+      el.classList.remove('is-marquee');
+      inner.classList.remove('marquee-tap-run');
+      inner.style.removeProperty('--mx');
+      playing=false;
+    },{once:true});
+  });
+}
 function addMarquee(el){
-  if(isMob())return;
   const inner=document.createElement('span');
   inner.className='tv-title-inner';
   inner.textContent=el.textContent;
   el.textContent='';
   el.appendChild(inner);
-  _wireMarqueeHover(el,inner);
+  if(isMob())_wireMarqueeTap(el,inner);
+  else _wireMarqueeHover(el,inner);
 }
 // 자식 요소(클릭 가능한 칩 등)를 textContent로 날리지 않고 그대로 감싸서 마퀴 적용
 function addMarqueeChildren(el){
-  if(isMob())return;
   const inner=document.createElement('span');
   inner.className='tv-title-inner';
   while(el.firstChild)inner.appendChild(el.firstChild);
   el.appendChild(inner);
-  _wireMarqueeHover(el,inner);
+  if(isMob())_wireMarqueeTap(el,inner);
+  else _wireMarqueeHover(el,inner);
 }
 
 // 영상에 같이 나온(with) 콜라보 멤버 + 원곡 소속 그룹(origGroup) 표시 — "그룹 멤버 (원곡 그룹)" 형태, 그룹/멤버 각각 클릭 가능
@@ -3324,6 +3433,7 @@ function makeSmallThumb(s,allSongs,idx,ctx){
   const box=document.createElement('div');
   box.className='tv-sm'+(shorts?' is-shorts':'');
   const img=document.createElement('img');
+  img.loading='lazy';img.decoding='async';
   img.src=`https://img.youtube.com/vi/${vid}/mqdefault.jpg`;img.alt=s.t;
   const lbl=document.createElement('div');lbl.className='tv-sm-title';lbl.textContent=s.t;
   addMarquee(lbl);
@@ -3352,6 +3462,30 @@ function _pickMainVideo(pool){
   const p=base.slice(0,3);
   return p[Math.floor(Math.random()*p.length)];
 }
+// 대표영상을 뺀 "나머지" 목록을 그룹카드 영상그리드처럼 섞는다 — 순서상 같은 비율(가로/쇼츠)이
+// 연속될 때만 2개씩 짝짓고, 비율이 바뀌는 경계에서 홀로 남는 카드는 2열 폭으로 넓혀 빈칸 없이 채운다.
+// (그룹카드의 _groupGcVids와 동일한 규칙 — 페이지네이션이 없는 단발성 렌더링이라 간소화한 버전)
+function _groupMixedVids(items){
+  const out=[];let pos=0,cat=null,lastEntry=null;
+  items.forEach(s=>{
+    const c=isShorts(s.u)?'short':'norm';
+    if(pos===1&&cat!==c){if(lastEntry)lastEntry.wide=true;pos=0;cat=null;}
+    const entry={song:s,wide:false};
+    out.push(entry);lastEntry=entry;pos=(pos+1)%2;cat=pos===1?c:null;
+  });
+  if(pos===1&&lastEntry)lastEntry.wide=true; // 마지막에 홀로 남으면(더 이어질 페이지가 없으므로) 바로 넓힘
+  return out;
+}
+function _renderMixedVidGrid(items,containerEl,all,ctx){
+  if(!items.length)return;
+  const grid=document.createElement('div');grid.className='tv-mix-grid';
+  _groupMixedVids(_shuffle(items)).forEach(({song,wide})=>{
+    const thumb=makeSmallThumb(song,all,0,ctx);
+    if(wide)thumb.classList.add('wide');
+    grid.appendChild(thumb);
+  });
+  containerEl.appendChild(grid);
+}
 function buildVideoSection(songs,containerEl,ctx,mainCandidates){
   containerEl.innerHTML='';
   const all=(songs||[]);
@@ -3360,12 +3494,11 @@ function buildVideoSection(songs,containerEl,ctx,mainCandidates){
   }
   if(isMob()){
     const normSongs=all.filter(s=>!isShorts(s.u));
-    const shortSongs=all.filter(s=>isShorts(s.u));
     if(normSongs.length>0){
       const normPool=(mainCandidates&&mainCandidates.length?mainCandidates:normSongs).filter(s=>!isShorts(s.u));
       const first=normPool.length?_pickMainVideo(normPool):(normSongs.find(s=>(s.type||'fancam')==='fancam')||normSongs[0]);
       const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
-      const big=document.createElement('img');big.id='tv-big';
+      const big=document.createElement('img');big.id='tv-big';big.decoding='async';
       big.src=`https://img.youtube.com/vi/${ytId(first.u)}/mqdefault.jpg`;big.alt=first.t;
       const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
       addMarquee(bigTitle);
@@ -3377,28 +3510,10 @@ function buildVideoSection(songs,containerEl,ctx,mainCandidates){
       addHoverPreview(bigWrap,big,ytId(first.u),false);
       bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,isShorts(first.u),all,all.indexOf(first),ctx);});
       containerEl.appendChild(bigWrap);
-      const normRest=_shuffle(normSongs.filter(s=>s!==first));
-      if(normRest.length>0){
-        const moreWrap=document.createElement('div');moreWrap.className='tv-more-wrap open';
-        normRest.forEach((s,i)=>{
-          const thumb=makeSmallThumb(s,all,0,ctx);
-          if(normRest.length%2===1&&i===normRest.length-1)thumb.style.flex='0 0 100%';
-          moreWrap.appendChild(thumb);
-        });
-        containerEl.appendChild(moreWrap);
-      }
-    }
-    if(shortSongs.length>0){
-      _shuffle(shortSongs);
-      const grid=document.createElement('div');grid.className='mob-shorts-grid';
-      shortSongs.slice(0,2).forEach(s=>grid.appendChild(makeSmallThumb(s,all,0,ctx)));
-      containerEl.appendChild(grid);
-      if(shortSongs.length>2){
-        const moreGrid=document.createElement('div');moreGrid.className='mob-shorts-grid tv-more-wrap open';
-        moreGrid.style.display='grid';
-        shortSongs.slice(2).forEach(s=>moreGrid.appendChild(makeSmallThumb(s,all,0,ctx)));
-        containerEl.appendChild(moreGrid);
-      }
+      _renderMixedVidGrid(all.filter(s=>s!==first),containerEl,all,ctx);
+    }else{
+      // 가로 영상이 하나도 없어(전부 쇼츠) 대표영상을 못 뽑는 경우 — 대표 없이 전부 섞어서 그리드로만 표시
+      _renderMixedVidGrid(all,containerEl,all,ctx);
     }
     return;
   }
@@ -3408,7 +3523,7 @@ function buildVideoSection(songs,containerEl,ctx,mainCandidates){
   const firstShorts=isShorts(first.u);
   const bigWrap=document.createElement('div');bigWrap.id='tv-big-wrap';
   if(firstShorts)bigWrap.classList.add('is-shorts');
-  const big=document.createElement('img');big.id='tv-big';
+  const big=document.createElement('img');big.id='tv-big';big.decoding='async';
   big.src=`https://img.youtube.com/vi/${ytId(first.u)}/mqdefault.jpg`;big.alt=first.t;
   const bigTitle=document.createElement('div');bigTitle.id='tv-big-title';bigTitle.textContent=first.t;
   addMarquee(bigTitle);
@@ -3420,23 +3535,7 @@ function buildVideoSection(songs,containerEl,ctx,mainCandidates){
   addHoverPreview(bigWrap,big,ytId(first.u),firstShorts);
   bigWrap.addEventListener('click',e=>{e.stopPropagation();openLightbox(first.u,firstShorts,all,all.indexOf(first),ctx);});
   containerEl.appendChild(bigWrap);
-  const rest=all.filter(s=>s!==first);if(!rest.length)return;
-  const sArr=_shuffle(rest.filter(s=>isShorts(s.u)));
-  const lArr=_shuffle(rest.filter(s=>!isShorts(s.u)));
-  const lPairs=[],sPairs=[];
-  for(let i=0;i<lArr.length;i+=2)lPairs.push(lArr.slice(i,i+2));
-  for(let i=0;i<sArr.length;i+=2)sPairs.push(sArr.slice(i,i+2));
-  const ordered=[];
-  const step=sPairs.length>0?lPairs.length/(sPairs.length+1):Infinity;
-  let si=0,next=step;
-  lPairs.forEach((lp,i)=>{
-    ordered.push(...lp);
-    if(si<sPairs.length&&i+1>=next){ordered.push(...sPairs[si++]);next+=step;}
-  });
-  while(si<sPairs.length)ordered.push(...sPairs[si++]);
-  const grid=document.createElement('div');grid.id='tv-grid';
-  ordered.forEach(s=>grid.appendChild(makeSmallThumb(s,all,0,ctx)));
-  containerEl.appendChild(grid);
+  _renderMixedVidGrid(all.filter(s=>s!==first),containerEl,all,ctx);
 }
 
 // ── Mobile bottom sheet ──────────────────────────────
@@ -4944,6 +5043,12 @@ function _resetToMyPage(){
   else if(focusGroupKo){setFocus(focusGroupKo,[..._extraFocusKos]);}
   else{clearFocus();}
 }
+// 우주에서 내 별 클릭 시 열리는 "마이페이지"(즐겨찾기·플레이리스트·북마크·기념일) — 프로필 버튼(탭바/데스크톱 헤더)과
+// 동일한 _toggleMyPagePanel()을 재사용하고, 카메라도 내 별로 줌인
+function _openMyPageSidebar(){
+  _toggleMyPagePanel();
+  if(myStarSprite)_flyToMyStar();
+}
 function clearTagFilter(){
   _resetToMyPage();
   document.getElementById('journal-sidebar').classList.remove('open');
@@ -5802,6 +5907,19 @@ window.addEventListener('click',e=>{
   _mouse.y=-((e.clientY-rect.top+_mobViewShift)/rect.height)*2+1;
   raycaster.setFromCamera(_mouse,camera);
 
+  // 내 별 클릭 → 마이페이지(즐겨찾기/플레이리스트/북마크/기념일) 사이드바 열기 (그룹 행성/멤버 히트 판정보다 먼저 체크해 우선권을 줌)
+  if(myStarSprite){
+    const _msp=myStarSprite.position.clone().project(camera);
+    if(_msp.z<=1){
+      const _msx=(_msp.x+1)*0.5*rect.width+rect.left;
+      const _msy=(-_msp.y+1)*0.5*rect.height+rect.top;
+      if(Math.hypot(_msx-e.clientX,_msy-e.clientY)<(isMob()?44:26)){
+        _openMyPageSidebar();
+        return;
+      }
+    }
+  }
+
   function nearestMember(){
     let nearArtist=null,nearPx=Infinity;
     ARTISTS.forEach(a=>{
@@ -5907,12 +6025,14 @@ function toggleConnFavorite(anchor,sel){
   const k=_connFavKey(anchor,sel);
   const dk='c:'+k;
   const doToggle=()=>{
-    if(favConnections.has(k)){favConnections.delete(k);delete favDates[dk];}
+    const wasFav=favConnections.has(k);
+    if(wasFav){favConnections.delete(k);delete favDates[dk];}
     else{favConnections.add(k);favDates[dk]=_todayISO();}
     _saveFavDates();
     localStorage.setItem(FAV_KEY_C,JSON.stringify([...favConnections]));
     _sbPushColumn('fav_connections',[...favConnections]);
     document.getElementById('conn-fav-btn')?.classList.toggle('fav-on',favConnections.has(k));
+    if(!wasFav)_favBurst(document.getElementById('conn-fav-btn'));
     renderFavList();_buildAnniversaryList();
   };
   if(favConnections.has(k))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
@@ -6138,6 +6258,27 @@ function _reopenPreHeartCard(){
   if(c.type==='group')showGC(c.ko,cx,cy);
   else showT(c.artist,cx,cy);
 }
+// 즐겨찾기 추가 순간 하트 바운스 + 작은 하트 조각 파티클 몇 개가 사방으로 톡 터지는 효과
+function _favBurst(btn){
+  if(!btn)return;
+  btn.classList.remove('fav-burst');
+  void btn.offsetWidth; // 강제 리플로우 — 연속으로 눌러도 애니메이션이 처음부터 다시 재생되도록
+  btn.classList.add('fav-burst');
+  setTimeout(()=>btn.classList.remove('fav-burst'),450);
+  const n=5;
+  for(let i=0;i<n;i++){
+    const p=document.createElement('span');
+    p.className='fav-particle';
+    p.textContent='♥';
+    p.style.fontSize=(7+Math.random()*4)+'px';
+    const angle=(Math.PI*2/n)*i+(Math.random()-0.5)*0.7;
+    const dist=13+Math.random()*9;
+    p.style.setProperty('--px',`${Math.cos(angle)*dist}px`);
+    p.style.setProperty('--py',`${Math.sin(angle)*dist}px`);
+    btn.appendChild(p);
+    p.addEventListener('animationend',()=>p.remove());
+  }
+}
 function toggleFavGroup(ko){
   const dk='g:'+ko;
   const doToggle=()=>{
@@ -6151,11 +6292,11 @@ function toggleFavGroup(ko){
     renderFavList();_buildAnniversaryList();
     if(!wasFav){
       _preHeartCard={heartedType:'group',heartedKey:ko,card:_currentOpenCard()};
+      _favBurst(document.getElementById('gc-fav'));
     }
     if(favMode){applyFavHighlight();_enterMyUniverseMode();}
     else if(myStarSprite)placeMyStarInUniverse();
-    if(!wasFav&&myStarSprite)_flyToMyStar();
-    else if(wasFav&&_preHeartCard&&_preHeartCard.heartedType==='group'&&_preHeartCard.heartedKey===ko)_reopenPreHeartCard();
+    if(wasFav&&_preHeartCard&&_preHeartCard.heartedType==='group'&&_preHeartCard.heartedKey===ko)_reopenPreHeartCard();
   };
   if(favGroups.has(ko))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
   else doToggle();
@@ -6174,11 +6315,11 @@ function toggleFavMember(artist){
     renderFavList();_buildAnniversaryList();
     if(!wasFav){
       _preHeartCard={heartedType:'member',heartedKey:k,card:_currentOpenCard()};
+      _favBurst(document.getElementById('tt-fav'));
     }
     if(favMode){applyFavHighlight();_enterMyUniverseMode();}
     else if(myStarSprite)placeMyStarInUniverse();
-    if(!wasFav&&myStarSprite)_flyToMyStar();
-    else if(wasFav&&_preHeartCard&&_preHeartCard.heartedType==='member'&&_preHeartCard.heartedKey===k)_reopenPreHeartCard();
+    if(wasFav&&_preHeartCard&&_preHeartCard.heartedType==='member'&&_preHeartCard.heartedKey===k)_reopenPreHeartCard();
   };
   if(favMembers.has(k))_confirmUnfavorite().then(ok=>{if(ok)doToggle();});
   else doToggle();
@@ -6780,10 +6921,10 @@ function _updateProfileBtns(){
   }
   const dhBtn=document.getElementById('dh-profile-btn');
   if(dhBtn){
-    const lbl=myProfile?.nickname?myProfile.nickname[0].toUpperCase():'◉';
-    dhBtn.textContent=lbl;
-    dhBtn.classList.toggle('pp-set',!!(myProfile?.nickname));
-    if(myProfile?.color){const[r,g,b]=myProfile.color;dhBtn.style.color=myProfile.nickname?`rgba(${r},${g},${b},0.88)`:'';}else dhBtn.style.color='';
+    dhBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:block"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    dhBtn.classList.remove('pp-set');
+    if(myProfile?.color){const[r,g,b]=myProfile.color;dhBtn.style.color=`rgba(${r},${g},${b},0.88)`;}
+    else dhBtn.style.color='';
   }
 }
 
@@ -7070,6 +7211,7 @@ async function initSupabaseSync(){
       isBrandNewAnonymous=true;
     }
     window._sbSession=session;
+    _updateAdminUI();
     _warmScrapCounts(); // fire-and-forget — 메인 직캠 선정용 공개 스크랩 집계 캐시를 최대한 빨리 채워둔다
     const isAnonymous=session.user.is_anonymous===true;
     if(!isAnonymous)_dismissFavHint(); // 구글 계정 연결(로그인) 상태면 즐겨찾기 시작 안내는 더 이상 필요 없음
@@ -7628,6 +7770,11 @@ function _isAdmin(){
   const u=window._sbSession&&window._sbSession.user;
   return!!(u&&!u.is_anonymous&&u.email===ADMIN_EMAIL);
 }
+// 유튜브 채널 동기화/Shorts 재분류 버튼은 관리자만 — 아무나 API 키만 있으면 실행 가능한 구조라 UI에서부터 숨김
+function _updateAdminUI(){
+  const sec=document.getElementById('sp-yt-sec');
+  if(sec)sec.style.display=_isAdmin()?'':'none';
+}
 let _vidTagTarget=null;
 let _vidTagWithSelected=[]; // [{ko,groupKo}] — 타 그룹 멤버 검색/선택 결과
 function _renderVidTagChips(){
@@ -7734,7 +7881,7 @@ function _renderGcVidItems(vids,grid){
       // DB 분류상 가로지만 실제로는 쇼츠(세로)일 수 있어 백그라운드에서 재확인 (대표 영상은 제외)
       if(!v._featured)pendingProbe.push(v);
     }
-    img.alt=v.title;img.loading='lazy';
+    img.alt=v.title;img.loading='lazy';img.decoding='async';
     const tEl=document.createElement('div');
     tEl.className='tv-sm-title';tEl.textContent=v.title;
     addMarquee(tEl);
