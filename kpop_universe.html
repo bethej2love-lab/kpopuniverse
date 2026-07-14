@@ -679,7 +679,7 @@
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 0 10px rgba(155,178,228,0.25);
   }
   .gc-totop{
-    position:fixed;right:16px;bottom:90px;z-index:50;width:36px;height:36px;border-radius:50%;
+    position:fixed;right:16px;bottom:78px;z-index:50;width:36px;height:36px;border-radius:50%;
     background:rgba(255,255,255,0.08);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border:0.5px solid rgba(255,255,255,0.16);color:rgba(220,235,255,0.9);font-size:16px;
     display:none;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;
@@ -3593,6 +3593,7 @@ function closeMobSheet(){
   _retractSheets();
   mobSheetInner._lastScroll=0;
   mobCardStackInner._lastScroll=0;
+  _hideTotop();
   // 뷰 원위치
   if(_mobViewShift!==0)_animMobViewShift(0,320);
   _mobCloseTimer=setTimeout(()=>{
@@ -3622,6 +3623,7 @@ function _popMobCard(){
     _retractSheets();
   }
   mobCardStackInner._lastScroll=0;
+  _hideTotop();
 
   // mob-card-stack이 열려있으면 → mob-card-stack만 아래로 슬라이드아웃
   // mob-sheet는 건드리지 않음 (이전 카드가 그대로 뒤에 있음)
@@ -3750,6 +3752,42 @@ function _getSongsFeaturingArtist(a){
   });
   return res;
 }
+// 연결 카드도 그룹/멤버 카드처럼 artists.json 수동 등록분(with) + Supabase members/with_members(관리자 태깅분)을
+// 합쳐서 보여준다. 세션 중 앵커별로 캐시(_connApiCache)해두고, 카드 열릴 때 비동기로 채운 뒤 재렌더링.
+let _connApiCache=new Map(); // key: "이름|그룹" → {songs:[...], names:Set}
+function _connCacheKey(a){return`${a.name.ko}|${a.group.ko}`;}
+async function _fetchApiCollabData(anchor){
+  if(!sb)return{songs:[],names:new Set()};
+  const groupKo=anchor.group.ko,memberKo=anchor.name.ko;
+  const withKey=`${memberKo}(${groupKo})`;
+  try{
+    const[ownQ,taggedQ]=await Promise.all([
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').eq('group_ko',groupKo).contains('members',[memberKo]),
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').contains('with_members',[withKey])
+    ]);
+    if(ownQ.error)throw new Error(ownQ.error.message);
+    if(taggedQ.error)throw new Error(taggedQ.error.message);
+    const rows=[...(ownQ.data||[]),...(taggedQ.data||[])];
+    const songs=[],names=new Set();
+    rows.forEach(v=>{
+      const song=_apiVidToSong(v,memberKo,groupKo);
+      if(!song.with||!song.with.length)return; // with 태그 없으면 콜라보 아님(그룹 전체/개인 영상) — 연결 카드엔 무관
+      song.with.forEach(n=>names.add(n));
+      songs.push(song);
+    });
+    return{songs:_dedupSongs(songs),names};
+  }catch(e){
+    console.error('연결 카드 API 콜라보 로드 실패',e);
+    return{songs:[],names:new Set()};
+  }
+}
+// 연결 카드를 열 때 fire-and-forget으로 호출 — 로드 완료 후 앵커가 그대로면(카드 안 바뀌었으면) 재렌더링
+async function _enrichConnCardFromApi(anchor){
+  const data=await _fetchApiCollabData(anchor);
+  if(_connAnchor!==anchor)return; // 그 사이 다른 멤버/카드로 전환됨
+  _connApiCache.set(_connCacheKey(anchor),data);
+  _buildConnContent(isMob()?connSheetBody:connPanelInner);
+}
 function _getCollabMembers(artist){
   const s=new Set();
   (artist.songs||[]).forEach(sg=>{(sg.with||[]).forEach(n=>s.add(n));});
@@ -3763,10 +3801,14 @@ function _getCollabMembers(artist){
       }
     });
   });
+  const apiData=_connApiCache.get(_connCacheKey(artist));
+  if(apiData)apiData.names.forEach(n=>s.add(n));
   return[...s];
 }
 function _getCollabSongs(anchor,sel){
   const allSongs=[...(anchor.songs||[]).map(sg=>({...sg,_owner:anchor})),..._getSongsFeaturingArtist(anchor)];
+  const apiData=_connApiCache.get(_connCacheKey(anchor));
+  if(apiData)allSongs.push(...apiData.songs.map(sg=>({...sg,_owner:anchor})));
   return _dedupSongs(allSongs.filter(sg=>{
     if(!sel.length)return(sg.with||[]).length>0;
     return sel.every(selName=>{
@@ -3960,6 +4002,7 @@ function _buildConnContent(container){
 
 function openConnCard(artist){
   _connAnchor=artist;_connSelected=[];_updateConnLines3d();
+  if(!_connApiCache.has(_connCacheKey(artist)))_enrichConnCardFromApi(artist); // 즉시 표시 후 백그라운드로 API 콜라보 데이터 보강
   if(isMob()){
     _buildConnContent(connSheetBody);
     connSheetInner.scrollTop=0;
@@ -3996,6 +4039,7 @@ function closeConnCard(){
       _retractSheets();
     }
     connSheetInner._lastScroll=0;
+    _hideTotop();
   }else{
     connPanelEl.classList.remove('open');
     if(_connPanelShifted){_connPanelShifted=false;_panWorld(-2.5,400);}
@@ -7001,7 +7045,17 @@ async function initSupabaseSync(){
     const urlParams=new URLSearchParams(location.search);
     const oauthErr=urlParams.get('error_description')||urlParams.get('error');
     const hadOAuthCode=urlParams.has('code');
-    if(oauthErr)_authAlert('OAuth 리디렉트 에러: '+oauthErr);
+    if(oauthErr){
+      if(/already.*(linked|exists)/i.test(oauthErr)){
+        // "계정 연결(link)" 시도였는데, 이 구글 계정이 이미 다른 유저에 연결돼 있다는 사실이
+        // 구글 인증을 마치고 돌아온 뒤에야 확인됨 — 연결 대신 로그인으로 전환해 자동 재시도.
+        // 성공하면 다시 리디렉트되므로 이후 코드는 실행되지 않음.
+        const{error:loginErr}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});
+        if(loginErr)_authAlert('구글 로그인 자동 재시도 실패: '+loginErr.message);
+        return;
+      }
+      _authAlert('OAuth 리디렉트 에러: '+oauthErr);
+    }
     const{data:{session:existingSession},error:getSessionErr}=await sb.auth.getSession();
     if(getSessionErr)_authAlert('getSession 에러: '+(getSessionErr.message||getSessionErr));
     if(hadOAuthCode&&!oauthErr&&(!existingSession||existingSession.user.is_anonymous===true)){
@@ -7826,30 +7880,37 @@ async function _loadGcChVids(ko,reset,randomize=false){
   document.getElementById('sp-yt-reclassify')?.addEventListener('click',_ytReclassifyShorts);
 })();
 
-// 그룹 카드 "맨 위로" 버튼 — 무한 스크롤로 아래로 많이 내려간 뒤 다시 카드 맨 위로 쉽게 돌아가기 위함
-(()=>{
-  const btn=document.createElement('button');
-  btn.id='gc-totop';btn.className='gc-totop';btn.setAttribute('aria-label','맨 위로');
-  btn.textContent='↑';
-  document.body.appendChild(btn);
-  btn.addEventListener('click',e=>{
-    e.stopPropagation();
-    const gc=document.getElementById('gc');
-    if(!gc)return;
-    for(const id of['mob-sheet-inner','mob-card-stack-inner','side-panel']){
-      const el=document.getElementById(id);
-      if(el?.contains(gc)){el.scrollTo({top:0,behavior:'smooth'});return;}
+// 그룹/멤버/연결 카드 공통 "맨 위로" 버튼 — 스크롤로 아래로 많이 내려간 뒤 카드 맨 위로 쉽게 돌아가기 위함.
+// 카드마다 헤더 높이가 달라 IntersectionObserver 대신 "각 스크롤 컨테이너의 scrollTop이 임계값을 넘었는가"로
+// 통일해서 판단 — 세 카드가 서로 다른 컨테이너(mob-sheet-inner/mob-card-stack-inner/conn-sheet-inner)를
+// 쓰기 때문에, 실제로 스크롤이 발생한 컨테이너를 그대로 "맨 위로" 이동 대상으로 기억해둔다.
+const _totopBtn=document.createElement('button');
+_totopBtn.id='gc-totop';_totopBtn.className='gc-totop';_totopBtn.setAttribute('aria-label','맨 위로');
+_totopBtn.textContent='↑';
+document.body.appendChild(_totopBtn);
+const TOTOP_SHOW_AT=140;
+let _totopScrollTarget=null;
+function _hideTotop(){
+  _totopBtn.style.display='none';
+  _totopScrollTarget=null;
+}
+function _wireTotop(scrollEl){
+  if(!scrollEl)return;
+  scrollEl.addEventListener('scroll',()=>{
+    if(scrollEl.scrollTop>TOTOP_SHOW_AT){
+      _totopScrollTarget=scrollEl;
+      _totopBtn.style.display='flex';
+    }else if(_totopScrollTarget===scrollEl){
+      _hideTotop();
     }
-  });
-  const header=document.getElementById('gc-header');
-  if(header){
-    const io=new IntersectionObserver(entries=>{
-      const gcOpen=document.getElementById('gc').style.display==='block';
-      btn.style.display=(gcOpen&&!entries[0].isIntersecting)?'flex':'none';
-    },{root:null,threshold:0});
-    io.observe(header);
-  }
-})();
+  },{passive:true});
+}
+[mobSheetInner,mobCardStackInner,connSheetInner].forEach(_wireTotop);
+_wireTotop(document.getElementById('side-panel'));
+_totopBtn.addEventListener('click',e=>{
+  e.stopPropagation();
+  _totopScrollTarget?.scrollTo({top:0,behavior:'smooth'});
+});
 
 </script>
 
