@@ -2933,7 +2933,7 @@ function _resolveRecentSearches(){
     if(!a)return null;
     const enN=a.name.en||'';
     const dispName=currentLang==='ko'?a.name.ko:(enN||a.name.ko);
-    const dispSub=currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko);
+    const dispSub=!GROUPS[a.group.ko]?'':(currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko));
     return{type:'member',name:dispName,sub:dispSub,pos:a._worldPos,data:a};
   }).filter(Boolean);
 }
@@ -3014,7 +3014,8 @@ function doSearch(q){
     if(koN.includes(q)||enN.toLowerCase().includes(ql)||csM<99){
       const s=Math.min(_mScore(koN,q,ql),_mScore(enN,q,ql),csM);
       const dispName=(_hasLatin&&enN)?enN:(currentLang==='ko'?koN:(enN||koN));
-      const dispSub=(_hasLatin&&a.group.en)?a.group.en:(currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko));
+      // 아이유의 "솔로"처럼 실존하지 않는 가짜 그룹은 검색 결과 우측 태그에도 표시하지 않음
+      const dispSub=!GROUPS[a.group.ko]?'':((_hasLatin&&a.group.en)?a.group.en:(currentLang==='ko'?a.group.ko:(a.group.en||a.group.ko)));
       hits.push({type:'member',name:dispName,sub:dispSub,pos:a._worldPos,data:a,score:s});
     }
   });
@@ -3083,6 +3084,11 @@ function isMob(){return window.innerWidth<=768;}
 // (정규식 리터럴에 U+2028/2029를 직접 쓰면 소스 파일 자체가 깨지므로 charCode로 안전하게 구성)
 const _TITLE_BREAK_RE=new RegExp('['+['\r','\n',String.fromCharCode(0x2028),String.fromCharCode(0x2029)].join('')+']+');
 function _cleanTitle(t){return(t||'').replace(_TITLE_BREAK_RE,' ').replace(/ {2,}/g,' ').trim();}
+// 성범죄로 퇴출된 인물(승리, 태일) 관련 영상은 이 우주에 어떤 형태로도 노출되지 않아야 함 — 제목에 이름이
+// 언급된 영상은 동기화 단계(_ytFetchNewVideos)와 표시 단계(그룹/멤버/연결 카드 영상 목록) 양쪽에서 모두 걸러냄.
+// (그룹 구분 없이 전역 적용 — 특정 채널에만 국한하지 않음)
+function _isBannedVideoTitle(t){return /승리|seungri|태일|taeil/i.test(t||'');}
+function _filterBannedVideos(list){return(list||[]).filter(v=>!_isBannedVideoTitle(v.title));}
 
 let _lbPlaylist=null,_lbIdx=-1,_lbCtx=null;
 let _lbSpeed=1; // 우측 탭존을 꾹 누르는 동안의 배속 (1 또는 2)
@@ -4031,7 +4037,7 @@ async function _enrichMemberVideosFromApi(a,tv,baseSongs,basePersonalSongs){
     if(ownQ.error)throw new Error(ownQ.error.message);
     if(withQ.error)throw new Error(withQ.error.message);
     if(generalQ.error)throw new Error(generalQ.error.message);
-    const rows=[...(ownQ.data||[]),...(withQ.data||[]),...(generalQ.data||[])];
+    const rows=_filterBannedVideos([...(ownQ.data||[]),...(withQ.data||[]),...(generalQ.data||[])]);
     if(!rows.length)return;
     const render=()=>{
       if(_openTArtist!==a)return; // 그 사이 다른 멤버 카드로 이동함
@@ -4083,7 +4089,7 @@ async function _fetchApiCollabData(anchor){
     ]);
     if(ownQ.error)throw new Error(ownQ.error.message);
     if(taggedQ.error)throw new Error(taggedQ.error.message);
-    const rows=[...(ownQ.data||[]),...(taggedQ.data||[])];
+    const rows=_filterBannedVideos([...(ownQ.data||[]),...(taggedQ.data||[])]);
     const songs=[],names=new Set();
     rows.forEach(v=>{
       const song=_apiVidToSong(v,memberKo,groupKo);
@@ -4936,13 +4942,13 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
       closeCards();showGC(gKo,gx,gy);
     };
   }
-  _aGroups.forEach((g,i)=>{
-    if(i>0){const sep=document.createElement('span');sep.textContent=' · ';sep.style.cssText='color:rgba(150,170,210,0.45);pointer-events:none;';tgEl.appendChild(sep);}
+  _aGroups.forEach(g=>{
+    if(!GROUPS[g.ko])return; // 아이유의 "솔로"처럼 실존하지 않는 가짜 그룹 태그는 표시하지 않음 — SNS 링크 아이콘만 노출
+    if(tgEl.childNodes.length){const sep=document.createElement('span');sep.textContent=' · ';sep.style.cssText='color:rgba(150,170,210,0.45);pointer-events:none;';tgEl.appendChild(sep);}
     const sp=document.createElement('span');
-    const hasGroup=!!GROUPS[g.ko]; // 아이유의 "솔로"처럼 실존하지 않는 그룹은 클릭해도 갈 곳이 없음
-    sp.className='tg'+((GROUPS[g.ko]||{}).survivalShow?' tg-past':'')+(hasGroup?'':' tg-nogroup');
+    sp.className='tg'+(GROUPS[g.ko].survivalShow?' tg-past':'');
     sp.textContent=currentLang==='ko'?g.ko:(g.en||g.ko);
-    if(hasGroup)sp.addEventListener('click',_makeGcClickFn(g.ko));
+    sp.addEventListener('click',_makeGcClickFn(g.ko));
     tgEl.appendChild(sp);
   });
   const tcoEl=document.getElementById('tco');tcoEl.innerHTML='';
@@ -8022,6 +8028,7 @@ async function _ytFetchNewVideos(uploadsId,key,sinceId,onProg){
       const vid=item.snippet?.resourceId?.videoId;
       if(!vid)continue;
       if(vid===sinceId){hit=true;break;}
+      if(_isBannedVideoTitle(item.snippet.title))continue; // 성범죄로 퇴출된 인물 관련 영상은 동기화 단계에서부터 저장하지 않음
       const th=item.snippet.thumbnails||{};
       const hiTh=th.maxres||th.standard||th.high;
       const isShortThumb=!!(hiTh&&hiTh.height>hiTh.width);
@@ -8500,7 +8507,7 @@ async function _loadGcChVids(ko,reset,randomize=false){
     if(count!=null)_gcChState.total=count;
     // DB 조회는 무한스크롤 페이지네이션이 어긋나지 않도록 published_at desc로 고정하되(offset 기반이라 정렬이
     // 흔들리면 중복/누락 발생), 화면에 보여줄 순서는 페이지 단위로 섞어서 업로드 시기가 몰려 보이지 않게 함
-    let vids=_shuffle(data||[]);
+    let vids=_shuffle(_filterBannedVideos(data||[]));
     // 첫 로드 + 전체 탭: 스크랩(하트) 최다 영상을 맨 앞으로 (쇼츠도 후보에 포함됨)
     let featured=null;
     if(reset&&filter==='all'&&vids.length){
