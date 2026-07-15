@@ -8008,15 +8008,22 @@ function _ytClassify(title){
 
 async function _ytGetUploadsId(ytUrl,key){
   const hm=ytUrl.match(/@([^/?#]+)/);
-  const um=!hm&&ytUrl.match(/youtube\.com\/(?:c\/|user\/)?([^/@?#\s]+)/);
-  const param=hm?`forHandle=${encodeURIComponent(hm[1])}`:um?`forUsername=${encodeURIComponent(um[1])}`:null;
-  if(!param)throw new Error('YouTube URL 파싱 실패: '+ytUrl);
-  const r=await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&${param}&key=${key}`);
-  if(!r.ok)throw new Error('YouTube API 오류 '+r.status);
-  const d=await r.json();
-  if(d.error)throw new Error(d.error.message);
-  if(!d.items?.length)throw new Error('채널을 찾을 수 없습니다 ('+ytUrl+')');
-  return d.items[0].contentDetails.relatedPlaylists.uploads;
+  const um=ytUrl.match(/youtube\.com\/(?:c\/|user\/)?([^/@?#\s]+)/);
+  const slug=hm?hm[1]:(um?um[1]:null);
+  if(!slug)throw new Error('YouTube URL 파싱 실패: '+ytUrl);
+  const tryParam=async param=>{
+    const r=await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&${param}&key=${key}`);
+    if(!r.ok)throw new Error('YouTube API 오류 '+r.status);
+    const d=await r.json();
+    if(d.error)throw new Error(d.error.message);
+    return d.items?.[0]?.contentDetails?.relatedPlaylists?.uploads||null;
+  };
+  // @핸들 URL이면 forHandle을 우선 쓰지만, youtube.com/dlwlrma처럼 /c/,/user/,@ 없는 구식 커스텀 URL은
+  // forUsername(옛 유튜브 아이디 시스템)에 없는 경우가 많아 못 찾을 수 있음 — forHandle을 먼저 시도하고
+  // 안 되면 forUsername으로 재시도(아이유 채널에서 실제로 forUsername 단독으로는 조회 실패했음)
+  const uploadsId=await tryParam(`forHandle=${encodeURIComponent(slug)}`)||await tryParam(`forUsername=${encodeURIComponent(slug)}`);
+  if(!uploadsId)throw new Error('채널을 찾을 수 없습니다 ('+ytUrl+')');
+  return uploadsId;
 }
 
 async function _ytFetchNewVideos(uploadsId,key,sinceId,onProg){
