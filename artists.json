@@ -7100,20 +7100,7 @@
       "namu": "https://namu.wiki/w/%EC%95%84%EC%9D%B4%EC%9C%A0"
     },
     "sparkle": false,
-    "songs": [
-      {
-        "t": "LILAC",
-        "u": "https://www.youtube.com/watch?v=A-Bd5NnUMNk"
-      },
-      {
-        "t": "Celebrity",
-        "u": "https://www.youtube.com/watch?v=6oanIo_9Z4M"
-      },
-      {
-        "t": "Strawberry Moon",
-        "u": "https://www.youtube.com/watch?v=UY4ZCgkTHpQ"
-      }
-    ]
+    "songs": []
   },
   {
     "name": {
