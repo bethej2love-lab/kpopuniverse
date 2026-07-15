@@ -4090,18 +4090,33 @@ async function _fetchApiCollabData(anchor){
   const groupKo=_ytGroupKoFor(anchor); // 솔로면 본인 이름이 곧 채널 동기화 키
   const withKey=`${memberKo}(${anchor.group.ko})`; // 타 채널 콜라보 태깅 표시용 키는 원래 그룹 표기 그대로
   try{
-    const[ownQ,taggedQ]=await Promise.all([
+    const[ownQ,taggedQ,groupTagQ]=await Promise.all([
       sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').eq('group_ko',groupKo).contains('members',[memberKo]),
-      sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').contains('with_members',[withKey])
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').contains('with_members',[withKey]),
+      // 아이유의 팔레트, 뉴진스편처럼 개별 멤버가 아니라 그룹 전체가 with_groups로 태깅된 내 채널 영상
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,with_groups').eq('group_ko',groupKo).not('with_groups','eq','{}')
     ]);
     if(ownQ.error)throw new Error(ownQ.error.message);
     if(taggedQ.error)throw new Error(taggedQ.error.message);
+    if(groupTagQ.error)throw new Error(groupTagQ.error.message);
     const rows=_filterBannedVideos([...(ownQ.data||[]),...(taggedQ.data||[])]);
     const songs=[],names=new Set();
     rows.forEach(v=>{
       const song=_apiVidToSong(v,memberKo,groupKo);
       if(!song.with||!song.with.length)return; // with 태그 없으면 콜라보 아님(그룹 전체/개인 영상) — 연결 카드엔 무관
       song.with.forEach(n=>names.add(n));
+      songs.push(song);
+    });
+    // with_groups 태깅 영상: 태깅된 그룹을 "지금 그 그룹 멤버 전원"으로 펼쳐서 콜라보 후보에 포함
+    _filterBannedVideos(groupTagQ.data||[]).forEach(v=>{
+      const withList=(v.with_groups||[]).flatMap(gko=>
+        ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===gko))
+          .map(a=>a.group.ko===anchor.group.ko?a.name.ko:`${a.name.ko}(${a.group.ko})`)
+      );
+      if(!withList.length)return;
+      const song={t:v.title,u:v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`,with:withList,_apiId:v.id,_apiGroupKo:v.group_ko};
+      if(v.category==='mv')song.type='mv';
+      withList.forEach(n=>names.add(n));
       songs.push(song);
     });
     return{songs:_dedupSongs(songs),names};
@@ -5030,8 +5045,10 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
     buildVideoSection(_memberAllSongs,tv,{groupKo:a.group.ko,memberKo:a.name.ko},_memberMainCandidates);
     _enrichMemberVideosFromApi(a,tv,_memberAllSongs,_memberPersonalSongs);
   }
-  // ✦ 연결 버튼 (그룹명 오른쪽)
+  // ✦ 연결 버튼 (그룹명 오른쪽) — 정적 소스만으로 우선 판단해 즉시 표시하고, API 콜라보 캐시가 없으면
+  // 백그라운드로 받아와서(연결 카드를 아예 안 열어봤어도) 카드 열자마자 정확한 상태로 갱신
   _updateConnBtn(a);
+  if(!_connApiCache.has(_connCacheKey(a)))_refreshOpenCardCollab();
   const hasSongs=_memberAllSongs.length>0;
   const cardW=hasSongs?264:210;
   el.style.maxWidth=cardW+'px';
