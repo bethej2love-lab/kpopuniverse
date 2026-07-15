@@ -4108,6 +4108,32 @@ async function _fetchApiCollabData(anchor){
     return{songs:[],names:new Set()};
   }
 }
+// 멤버 카드의 "연결" 버튼 노출/클릭 핸들러를 세팅 — showT()와 태깅 후 갱신(_refreshOpenCardCollab) 양쪽에서 공용으로 씀
+function _updateConnBtn(a){
+  const connBtn=document.getElementById('tt-conn-btn');
+  if(!connBtn)return;
+  const hasCollab=_getCollabMembers(a).length>0;
+  connBtn.style.display=hasCollab?'':'none';
+  connBtn.onclick=hasCollab?e=>{
+    e.stopPropagation();
+    if(connPanelEl.classList.contains('open')&&_connAnchor===a){closeConnCard();}
+    else{openConnCard(a);}
+  }:null;
+}
+// 관리자가 영상 태깅 모달에서 with 멤버를 새로 추가/수정했을 때, 지금 열려있는 멤버 카드의 콜라보
+// 캐시가 낡은 채로 남아있어서 "연결" 버튼이 그대로 숨겨져 있는 문제를 해결 — 저장 직후 호출해서
+// 현재 열린 멤버 카드의 API 콜라보 데이터를 다시 받아오고, 버튼과(열려있다면) 연결 카드 내용까지 갱신.
+async function _refreshOpenCardCollab(){
+  const a=_openTArtist;
+  if(!a)return;
+  const data=await _fetchApiCollabData(a);
+  if(_openTArtist!==a)return; // 응답 오는 사이 다른 멤버 카드로 전환됨
+  _connApiCache.set(_connCacheKey(a),data);
+  _updateConnBtn(a);
+  if(_connAnchor===a&&(connPanelEl.classList.contains('open')||connSheetEl.classList.contains('open'))){
+    _buildConnContent(isMob()?connSheetBody:connPanelInner);
+  }
+}
 // 연결 카드를 열 때 fire-and-forget으로 호출 — 로드 완료 후 앵커가 그대로면(카드 안 바뀌었으면) 재렌더링
 async function _enrichConnCardFromApi(anchor){
   const data=await _fetchApiCollabData(anchor);
@@ -4999,14 +5025,7 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
     _enrichMemberVideosFromApi(a,tv,_memberAllSongs,_memberPersonalSongs);
   }
   // ✦ 연결 버튼 (그룹명 오른쪽)
-  const connBtn=document.getElementById('tt-conn-btn');
-  const hasCollab=_getCollabMembers(a).length>0;
-  connBtn.style.display=hasCollab?'':'none';
-  connBtn.onclick=hasCollab?e=>{
-    e.stopPropagation();
-    if(connPanelEl.classList.contains('open')&&_connAnchor===a){closeConnCard();}
-    else{openConnCard(a);}
-  }:null;
+  _updateConnBtn(a);
   const hasSongs=_memberAllSongs.length>0;
   const cardW=hasSongs?264:210;
   el.style.maxWidth=cardW+'px';
@@ -8595,6 +8614,7 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
     // members가 채워졌으니 그 영상을 보여주고 있던 채널 섹션(그룹 카드든, 솔로 멤버 카드든)에서 자동으로 빠짐
     _gcChVidCtl.reloadIfShowing(ko);
     _ttChVidCtl.reloadIfShowing(ko);
+    _refreshOpenCardCollab(); // with 태그 추가/변경으로 "연결" 버튼 노출 여부가 바뀌었을 수 있으니 갱신
   },500);
 });
 
