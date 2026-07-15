@@ -225,7 +225,7 @@
     background:rgba(18,22,40,0.94);
     backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
     box-shadow:0 8px 32px rgba(0,0,0,0.5);
-    border-radius:16px;padding:14px 16px 16px;z-index:40;display:none;
+    border-radius:16px;padding:14px 16px 16px;z-index:68;display:none;
     font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
   }
   #settings-panel.open{display:block;}
@@ -1755,6 +1755,9 @@ let _myUniverseDeparting=[];
 const MY_UNIVERSE_DEPART_MS=600;
 let _memberCardLines=[];
 function _artistGroups(a){return a.groups||[a.group];}
+// 유튜브 채널 동기화 조회에 쓰는 키: 실존하는 그룹 소속이면 그 그룹 키를, 아이유처럼 소속 그룹이 없는
+// 솔로 아티스트면 본인 이름을 키로 써서 본인 채널을 동기화/조회한다(그룹별 group_ko 컬럼 재사용).
+function _ytGroupKoFor(a){return GROUPS[a.group.ko]?a.group.ko:a.name.ko;}
 let _tagFilter={type:null,value:null};
 let _idxOpen=false,_idxView='group',_idxSortKey='name',_idxSortDir='asc';
 let regColorAttr=null,spkColorAttr=null;
@@ -4025,8 +4028,9 @@ function _apiVidToSong(v,memberKo,groupKo){
 // 즉시 표시 후 보정하는 방식(그룹 카드 쇼츠 판별과 동일한 패턴) — 카드를 옮겨가면 _openTArtist가 바뀌어 있으므로 갱신을 건너뜀.
 async function _enrichMemberVideosFromApi(a,tv,baseSongs,basePersonalSongs){
   if(!sb)return;
-  const memberKo=a.name.ko,groupKo=a.group.ko;
-  const withKey=`${memberKo}(${groupKo})`;
+  const memberKo=a.name.ko;
+  const groupKo=_ytGroupKoFor(a); // 솔로면 본인 이름이 곧 채널 동기화 키
+  const withKey=`${memberKo}(${a.group.ko})`; // 타 채널에서 콜라보로 태깅될 때 쓰는 표시용 키는 원래 그룹 표기 그대로
   try{
     const[ownQ,withQ,generalQ]=await Promise.all([
       sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').eq('group_ko',groupKo).contains('members',[memberKo]),
@@ -4080,8 +4084,9 @@ let _connApiCache=new Map(); // key: "이름|그룹" → {songs:[...], names:Set
 function _connCacheKey(a){return`${a.name.ko}|${a.group.ko}`;}
 async function _fetchApiCollabData(anchor){
   if(!sb)return{songs:[],names:new Set()};
-  const groupKo=anchor.group.ko,memberKo=anchor.name.ko;
-  const withKey=`${memberKo}(${groupKo})`;
+  const memberKo=anchor.name.ko;
+  const groupKo=_ytGroupKoFor(anchor); // 솔로면 본인 이름이 곧 채널 동기화 키
+  const withKey=`${memberKo}(${anchor.group.ko})`; // 타 채널 콜라보 태깅 표시용 키는 원래 그룹 표기 그대로
   try{
     const[ownQ,taggedQ]=await Promise.all([
       sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').eq('group_ko',groupKo).contains('members',[memberKo]),
@@ -8050,13 +8055,14 @@ async function _ytFetchNewVideos(uploadsId,key,sinceId,onProg){
   return{vids,total};
 }
 
-async function _ytSyncGroup(ko,key,onProg){
+async function _ytSyncGroup(ko,key,onProg,youtubeUrl){
   if(!sb)throw new Error('Supabase 연결 없음');
-  const info=GROUPS[ko];
-  if(!info?.links?.youtube)throw new Error('YouTube 링크 없음');
+  // youtubeUrl이 명시적으로 오면 그걸 쓰고(아이유처럼 GROUPS에 없는 솔로 채널 동기화용), 아니면 기존처럼 그룹 링크 사용
+  const url=youtubeUrl||GROUPS[ko]?.links?.youtube;
+  if(!url)throw new Error('YouTube 링크 없음');
   const{data:top}=await sb.from(_YT_TABLE).select('id').eq('group_ko',ko).order('published_at',{ascending:false}).limit(1);
   const sinceId=top?.[0]?.id||null;
-  const uploadsId=await _ytGetUploadsId(info.links.youtube,key);
+  const uploadsId=await _ytGetUploadsId(url,key);
   const{vids}=await _ytFetchNewVideos(uploadsId,key,sinceId,onProg);
   if(vids.length){
     const rows=vids.map(v=>({...v,group_ko:ko}));
@@ -8077,23 +8083,32 @@ async function _ytSyncAll(){
   _ytSyncing=true;
   const btn=document.getElementById('sp-yt-sync');
   if(btn)btn.disabled=true;
-  const groups=Object.entries(GROUPS).filter(([,v])=>v?.links?.youtube);
+  const groups=Object.entries(GROUPS).filter(([,v])=>v?.links?.youtube).map(([ko,v])=>({ko,url:v.links.youtube}));
+  // 아이유처럼 소속 그룹이 없는(GROUPS에 없는) 솔로 아티스트도, 본인 링크에 유튜브가 있으면 본인 이름을 키로 같이 동기화
+  const seenSolo=new Set();
+  const solos=[];
+  ARTISTS.forEach(a=>{
+    if(GROUPS[a.group.ko]||!a.links?.youtube||seenSolo.has(a.name.ko))return;
+    seenSolo.add(a.name.ko);
+    solos.push({ko:a.name.ko,url:a.links.youtube});
+  });
+  const targets=[...groups,...solos];
   let done=0;
-  for(const[ko]of groups){
-    _ytSetProg(`[${done+1}/${groups.length}] ${ko} 동기화 중...`);
+  for(const{ko,url}of targets){
+    _ytSetProg(`[${done+1}/${targets.length}] ${ko} 동기화 중...`);
     try{
       const n=await _ytSyncGroup(ko,key,(fetched,total)=>{
-        _ytSetProg(`[${done+1}/${groups.length}] ${ko}: ${fetched}${total?'/'+total:''}개`);
-      });
+        _ytSetProg(`[${done+1}/${targets.length}] ${ko}: ${fetched}${total?'/'+total:''}개`);
+      },url);
       console.log(`[YT sync] ${ko}: +${n}개`);
     }catch(e){
       console.error(`[YT sync] ${ko} 실패:`,e.message);
-      _ytSetProg(`[${done+1}/${groups.length}] ${ko} 오류: ${e.message}`);
+      _ytSetProg(`[${done+1}/${targets.length}] ${ko} 오류: ${e.message}`);
       await new Promise(res=>setTimeout(res,600));
     }
     done++;
   }
-  _ytSetProg(`완료! ${groups.length}개 그룹 동기화됨`);
+  _ytSetProg(`완료! ${targets.length}개 채널 동기화됨`);
   _ytSyncing=false;
   if(btn)btn.disabled=false;
 }
