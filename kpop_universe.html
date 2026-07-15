@@ -745,9 +745,11 @@
   #vid-tag-with-results:empty{display:none;}
   .vid-tag-with-opt{padding:7px 10px;font-size:12px;color:rgba(220,230,250,0.85);cursor:pointer;}
   .vid-tag-with-opt:hover{background:rgba(255,255,255,0.08);}
+  .vid-tag-with-opt-group{color:rgba(255,190,140,0.9);font-weight:600;}
   #vid-tag-with-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
   #vid-tag-with-chips:empty{display:none;}
   .vid-tag-chip{display:flex;align-items:center;gap:5px;font-size:11.5px;color:rgba(220,230,250,0.9);background:rgba(109,140,255,0.16);border:0.5px solid rgba(109,140,255,0.35);border-radius:20px;padding:4px 10px 4px 12px;}
+  .vid-tag-chip-group{background:rgba(255,170,109,0.16);border-color:rgba(255,170,109,0.4);}
   .vid-tag-chip button{background:none;border:none;color:rgba(220,230,250,0.7);cursor:pointer;font-size:12px;padding:0;line-height:1;}
   #vid-tag-status{font-size:11.5px;color:rgba(155,178,228,0.7);margin-top:10px;min-height:14px;}
   #vid-tag-btns{display:flex;gap:8px;margin-top:16px;}
@@ -5015,11 +5017,15 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
   // 대표 영상 후보는 개인/콜라보 영상 우선 — 그룹 영상이 멤버 대표 자리를 차지하지 않게(개인 영상이 하나도 없을 때만 예외)
   const _memberPersonalSongs=_dedupSongs([...(a.songs||[]),..._getSongsFeaturingArtist(a)]);
   const _memberMainCandidates=_memberPersonalSongs.length?_memberPersonalSongs:_memberAllSongs;
-  // 아이유처럼 소속 그룹이 없는(GROUPS에 없는) 솔로 아티스트는 그룹 카드와 동일한 채널 영상 섹션(전체/MV/라이브/Shorts
-  // 필터 + 무한스크롤)을 그대로 씀 — 본인 채널 자체가 사실상 "그룹"과 같은 급이라 카탈로그가 큼. 콜라보(함께한 멤버)
-  // 표시줄은 이 그리드엔 안 나오고 연결 카드에서만 보임(그룹 카드 그리드와 동일한 동작).
-  if(!GROUPS[a.group.ko]&&a.links?.youtube&&sb){
-    _ttChVidCtl.build(_ytGroupKoFor(a));
+  // 멤버 카드도 그룹 카드와 동일한 채널 영상 섹션(필터 + 무한스크롤)을 씀 — 태깅 안 된 그룹 전체 영상 +
+  // 이 멤버가 직접 태깅된 영상까지 포함(MV 탭은 제외, 뮤비는 그룹 단위라 그룹 카드에서 이미 다뤄짐).
+  // 아이유처럼 소속 그룹이 없는(GROUPS에 없는) 솔로 아티스트는 본인 채널 자체를 "그룹"처럼 취급(MV 탭 포함,
+  // 본인 채널이라 태깅 필터링 자체가 필요 없음). 콜라보(함께한 멤버) 표시줄은 이 그리드엔 안 나오고 연결
+  // 카드에서만 보임(그룹 카드 그리드와 동일한 동작). Supabase를 못 쓰는 경우에만 기존 방식으로 폴백.
+  const _hasRealGroup=!!GROUPS[a.group.ko];
+  if(sb&&(_hasRealGroup||a.links?.youtube)){
+    if(_hasRealGroup)_ttChVidCtl.build(a.group.ko,a.name.ko);
+    else _ttChVidCtl.build(_ytGroupKoFor(a));
   }else{
     buildVideoSection(_memberAllSongs,tv,{groupKo:a.group.ko,memberKo:a.name.ko},_memberMainCandidates);
     _enrichMemberVideosFromApi(a,tv,_memberAllSongs,_memberPersonalSongs);
@@ -8194,7 +8200,7 @@ async function _ytReclassifyShorts(){
 // 써야 함 — 데스크톱에서는 그룹 카드+멤버 카드가 동시에 도킹돼 화면에 같이 떠 있을 수 있어서, 상태를
 // 전역 변수 하나로 공유하면 한쪽을 열 때 다른 쪽의 페이지네이션/옵저버가 깨짐.
 function _makeChVidController(contId){
-  let state={ko:null,filter:'all',offset:0,total:0,pos:0,cat:null,gen:0,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
+  let state={ko:null,memberKo:null,filter:'all',offset:0,total:0,pos:0,cat:null,gen:0,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
   let observer=null;
 
   // 스크롤로 more-wrap(그리드 맨 아래 센티널)이 뷰포트 근처에 들어오면 다음 페이지를 자동으로 불러온다.
@@ -8316,8 +8322,16 @@ function _makeChVidController(contId){
     const releaseLock=()=>{if(myGen===state.gen)state.appendLock=false;};
     const{filter,offset}=state;
     try{
-      // 특정 멤버가 태깅된 영상(members 비어있지 않음)은 그룹 전체 영상이 아니라 그 멤버 개인 카드에만 노출 — 그룹 카드에선 제외
-      let q=sb.from(_YT_TABLE).select('id,title,thumb,category',{count:'exact'}).eq('group_ko',ko).filter('members','eq','{}').order('published_at',{ascending:false}).range(offset,offset+_YT_PAGE-1);
+      let q=sb.from(_YT_TABLE).select('id,title,thumb,category',{count:'exact'});
+      if(state.memberKo){
+        // 멤버 카드: 태깅 안 된(그룹 전체) 영상 + 이 멤버가 직접 태깅된 영상까지 포함
+        q=q.eq('group_ko',ko).or(`members.eq.{},members.cs.{${state.memberKo}}`);
+      }else{
+        // 그룹 카드: 내 채널의 태깅 안 된 영상(특정 멤버 태깅된 건 그 멤버 개인 카드로) + 다른 채널 영상인데
+        // 아이유 팔레트처럼 우리 그룹 전체가 with_groups로 태깅된 경우도 같이 노출
+        q=q.or(`and(group_ko.eq.${ko},members.eq.{}),with_groups.cs.{${ko}}`);
+      }
+      q=q.order('published_at',{ascending:false}).range(offset,offset+_YT_PAGE-1);
       if(filter!=='all')q=q.eq('category',filter);
       const{data,error,count}=await q;
       if(myGen!==state.gen)return; // 대기 중 다른 그룹/새로고침으로 전환됨: 그쪽이 이미 자신의 잠금을 걸어놨으므로 여기선 해제하지 않는다
@@ -8371,15 +8385,17 @@ function _makeChVidController(contId){
     }
   }
 
-  function build(ko){
+  function build(ko,memberKo){
     const cont=document.getElementById(contId);
     if(!cont)return;
     cont.innerHTML='';
     if(!sb)return;
-    state={ko,filter:'all',offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
+    state={ko,memberKo:memberKo||null,filter:'all',offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
     cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters"></div><button class="gc-ch-refresh" title="새로고침">↻</button></div><div class="gc-ch-grid"></div><div class="gc-ch-more-wrap"></div>`;
     const filEl=cont.querySelector('.gc-ch-filters');
-    [['all','전체'],['mv','MV'],['live','라이브'],['short','Shorts']].forEach(([val,lbl])=>{
+    // 멤버 카드는 MV 탭 제외 — 뮤비는 그룹 단위 콘텐츠라 그룹 카드 MV 탭에서 이미 다뤄지고, 멤버 개인 태깅 영상엔 거의 안 나옴
+    const tabs=memberKo?[['all','전체'],['live','라이브'],['short','Shorts']]:[['all','전체'],['mv','MV'],['live','라이브'],['short','Shorts']];
+    tabs.forEach(([val,lbl])=>{
       const b=document.createElement('button');
       b.className='gc-ch-filter'+(val==='all'?' active':'');
       b.textContent=lbl;
@@ -8514,6 +8530,7 @@ function _updateAdminUI(){
 }
 let _vidTagTarget=null;
 let _vidTagWithSelected=[]; // [{ko,groupKo}] — 타 그룹 멤버 검색/선택 결과
+let _vidTagGroupsSelected=[]; // [groupKo,...] — "아이유의 팔레트, 뉴진스편"처럼 그룹 전체가 출연할 때(with_groups)
 function _renderVidTagChips(){
   const chipsEl=document.getElementById('vid-tag-with-chips');
   chipsEl.innerHTML='';
@@ -8527,10 +8544,21 @@ function _renderVidTagChips(){
     chip.appendChild(rm);
     chipsEl.appendChild(chip);
   });
+  _vidTagGroupsSelected.forEach((gko,i)=>{
+    const chip=document.createElement('span');
+    chip.className='vid-tag-chip vid-tag-chip-group';
+    chip.appendChild(document.createTextNode(`${gko} (그룹 전체)`));
+    const rm=document.createElement('button');
+    rm.type='button';rm.textContent='✕';rm.setAttribute('aria-label','제거');
+    rm.addEventListener('click',e=>{e.stopPropagation();_vidTagGroupsSelected.splice(i,1);_renderVidTagChips();});
+    chip.appendChild(rm);
+    chipsEl.appendChild(chip);
+  });
 }
 async function _openVidTagModal(v,ko){
   _vidTagTarget={id:v.id,ko};
   _vidTagWithSelected=[];
+  _vidTagGroupsSelected=[];
   document.getElementById('vid-tag-vidtitle').textContent=_cleanTitle(v.title);
   const membersEl=document.getElementById('vid-tag-members');
   membersEl.innerHTML='';
@@ -8552,7 +8580,7 @@ async function _openVidTagModal(v,ko){
   // 카드에 넘어온 v에는 members/with_members가 안 실려있는 경우가 많아서(그룹 카드 그리드는 해당 컬럼을
   // 아예 select하지 않음), 모달을 열 때 저장된 값을 DB에서 직접 불러와 체크박스/칩에 반영한다.
   if(sb){
-    const{data,error}=await sb.from(_YT_TABLE).select('members,with_members').eq('id',v.id).maybeSingle();
+    const{data,error}=await sb.from(_YT_TABLE).select('members,with_members,with_groups').eq('id',v.id).maybeSingle();
     if(!_vidTagTarget||_vidTagTarget.id!==v.id)return; // 응답 오는 사이 모달이 닫히거나 다른 영상으로 전환됨
     if(!error&&data){
       const savedMembers=new Set(data.members||[]);
@@ -8561,6 +8589,7 @@ async function _openVidTagModal(v,ko){
         const m=str.match(/^(.*)\((.*)\)$/);
         return m?{ko:m[1],groupKo:m[2]}:null;
       }).filter(Boolean);
+      _vidTagGroupsSelected=data.with_groups||[];
       _renderVidTagChips();
     }
   }
@@ -8579,6 +8608,23 @@ document.getElementById('vid-tag-with-search').addEventListener('input',e=>{
   resultsEl.innerHTML='';
   if(!q||!_vidTagTarget)return;
   const already=new Set(_vidTagWithSelected.map(m=>m.ko+'|'+m.groupKo));
+  // 아이유의 팔레트, 뉴진스편처럼 멤버 개개인이 아니라 그룹 전체가 출연하는 경우 — 그룹 이름째로 검색/선택
+  const groupMatches=Object.keys(GROUPS).filter(gko=>
+    gko.includes(q)&&gko!==_vidTagTarget.ko&&!_vidTagGroupsSelected.includes(gko)
+  ).slice(0,4);
+  groupMatches.forEach(gko=>{
+    const opt=document.createElement('div');
+    opt.className='vid-tag-with-opt vid-tag-with-opt-group';
+    opt.textContent=`${gko} (그룹 전체)`;
+    opt.addEventListener('click',ev=>{
+      ev.stopPropagation();
+      _vidTagGroupsSelected.push(gko);
+      _renderVidTagChips();
+      e.target.value='';
+      resultsEl.innerHTML='';
+    });
+    resultsEl.appendChild(opt);
+  });
   const matches=ARTISTS.filter(a=>
     a.name.ko.includes(q)&&
     !_artistGroups(a).some(g=>g.ko===_vidTagTarget.ko)&&
@@ -8605,8 +8651,9 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
   const members=[...document.querySelectorAll('#vid-tag-members input:checked')].map(cb=>cb.value);
   const withMembers=_vidTagWithSelected.map(m=>`${m.ko}(${m.groupKo})`);
   statusEl.textContent='저장 중…';
+  const withGroups=[..._vidTagGroupsSelected];
   const{id,ko}=_vidTagTarget;
-  const{error}=await sb.from(_YT_TABLE).update({members,with_members:withMembers}).eq('id',id);
+  const{error}=await sb.from(_YT_TABLE).update({members,with_members:withMembers,with_groups:withGroups}).eq('id',id);
   if(error){statusEl.textContent='저장 실패: '+error.message;return;}
   statusEl.textContent='저장됨';
   setTimeout(()=>{
@@ -8614,6 +8661,8 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
     // members가 채워졌으니 그 영상을 보여주고 있던 채널 섹션(그룹 카드든, 솔로 멤버 카드든)에서 자동으로 빠짐
     _gcChVidCtl.reloadIfShowing(ko);
     _ttChVidCtl.reloadIfShowing(ko);
+    // with_groups로 새로 태깅된 그룹의 카드가 지금 열려있다면(예: 아이유 팔레트 뉴진스편 → 뉴진스 그룹 카드), 거기도 갱신
+    withGroups.forEach(gko=>_gcChVidCtl.reloadIfShowing(gko));
     _refreshOpenCardCollab(); // with 태그 추가/변경으로 "연결" 버튼 노출 여부가 바뀌었을 수 있으니 갱신
   },500);
 });
