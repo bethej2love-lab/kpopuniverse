@@ -430,8 +430,9 @@
   #yt-lb-video-box{position:relative;width:100%;aspect-ratio:16/9;}
   #yt-lb-video-box.is-shorts{aspect-ratio:9/16;width:min(54vw,420px);margin:0 auto;}
   #yt-lb-iframe{width:100%;height:100%;border:none;border-radius:8px;display:block;}
-  /* 우측 상단~중단 영역을 눌러 2배속을 토글하는 탭존 — 하단 44px는 유튜브 진행바/컨트롤 조작을 막지 않도록 비워둠 */
-  #yt-lb-speed-zone{position:absolute;top:0;right:0;bottom:44px;width:32%;cursor:pointer;z-index:1;touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;}
+  /* 우측 중단 영역을 눌러 2배속을 토글하는 탭존 — 위/아래 모서리는 유튜브 자체 버튼(설정·전체화면 등)이
+     눌리도록 터치 감지 영역에서 비워둠(정확한 크기는 실기기 테스트로 조정 필요) */
+  #yt-lb-speed-zone{position:absolute;top:52px;right:0;bottom:56px;width:32%;cursor:pointer;z-index:1;touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;}
   #yt-lb-speed-badge{display:none;position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.65);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:10px;pointer-events:none;z-index:2;letter-spacing:.02em;}
   #yt-lb-speed-badge.is-on{display:block;}
   #yt-lb-close{position:absolute;top:-30px;right:0;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:4px 6px;opacity:.65;line-height:1;}
@@ -609,6 +610,8 @@
     #mob-sheet-inner #gc-bar,#mob-card-stack-inner #gc-bar{display:none;}
     #gc-bar-mob{display:block;}
     #mob-sheet-inner #gc-grid,#mob-card-stack-inner #gc-grid{border-top:none;padding-top:0;margin-top:0;}
+    /* 모바일에서는 gc-grid의 border-top이 아니라 gc-bar-mob(색상 바)가 "n명이 좋아해요" 아래 구분선 역할을 함 */
+    #mob-sheet-inner #gc-status-line,#mob-card-stack-inner #gc-status-line{margin-bottom:1px;}
     #mob-sheet-inner #gc-name-row,
     #mob-sheet-inner #gc-en-row,
     #mob-sheet-inner #gc-status-line,
@@ -645,7 +648,7 @@
   }
   .gc-link-icon:hover{color:rgba(200,220,255,0.95);transform:translateY(-1px);}
   .gc-link-icon svg{width:100%;height:100%;}
-  #gc-grid{display:flex;flex-direction:column;gap:1px;margin-top:12px;padding-top:11px;border-top:0.5px solid rgba(255,255,255,0.10);}
+  #gc-grid{display:flex;flex-direction:column;gap:1px;margin-top:6px;padding-top:11px;border-top:0.5px solid rgba(255,255,255,0.10);}
   #gc-grid .row{display:flex;align-items:baseline;}
   #gc-grid .lbl{font-size:11.5px;color:#9abcd8;min-width:56px;flex-shrink:0;letter-spacing:.02em;}
   body.lang-en #gc-grid .lbl{font-size:11px;}
@@ -675,7 +678,7 @@
   }
   #gc-tv{margin-top:12px;}
   /* ── YouTube 채널 영상 섹션 ─────────────────────────── */
-  #gc-ch-vid{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.10);}
+  #gc-ch-vid{margin-top:9px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.10);}
   #gc-ch-vid:empty{display:none;}
   .gc-ch-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
   .gc-ch-refresh{flex:0 0 auto;background:none;border:none;cursor:pointer;color:rgba(155,178,228,0.4);font-size:17px;padding:4px 6px;transition:color .15s;font-family:inherit;}
@@ -849,7 +852,7 @@
     backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
     border-right:0.5px solid rgba(255,255,255,0.10);
     box-shadow:4px 0 24px rgba(0,0,0,0.35);
-    z-index:45;
+    z-index:66;
     transform:translateX(-260px);
     transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
   }
@@ -1106,7 +1109,7 @@
   .fav-empty{font-size:11px;color:rgba(92,112,158,0.42);padding:4px 4px;}
   #mob-fav-btn.fav-mode-on,#dh-fav-btn.fav-mode-on{color:rgba(255,105,135,0.95)!important;text-shadow:0 0 10px rgba(255,100,130,0.45);}
   /* ── Profile panel ───────────────────────────────── */
-  #profile-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:65;display:none;align-items:center;justify-content:center;}
+  #profile-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:69;display:none;align-items:center;justify-content:center;}
   #profile-overlay.open{display:flex;}
   #profile-panel{width:min(312px,calc(100vw - 32px));background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:20px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:22px 22px 24px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
   .pp-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
@@ -1164,7 +1167,7 @@
   #journal-hd{margin-top:16px;display:none;}
   .bday-item{display:flex;align-items:center;gap:7px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
   .bday-item:hover{background:rgba(255,255,255,0.06);}
-  .bday-badge{font-size:9px;font-weight:800;letter-spacing:.03em;padding:2px 6px;border-radius:6px;flex-shrink:0;min-width:34px;text-align:center;}
+  .bday-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.03em;padding:2px 6px;border-radius:6px;flex-shrink:0;min-width:34px;text-align:center;}
   .bday-badge.today{background:rgba(255,205,70,0.16);color:rgba(255,215,100,0.92);}
   .bday-badge.soon{background:rgba(255,110,140,0.13);color:rgba(255,130,155,0.85);}
   .bday-badge.normal{background:rgba(145,175,255,0.08);color:rgba(148,170,225,0.48);}
@@ -1173,7 +1176,7 @@
   .anniv-item{display:flex;align-items:center;gap:7px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
   .anniv-item:hover{background:rgba(255,255,255,0.06);}
   .anniv-name{font-size:12px;color:#b8d0ee;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .anniv-badge{font-size:9px;font-weight:800;letter-spacing:.03em;padding:2px 6px;border-radius:6px;flex-shrink:0;min-width:34px;text-align:center;background:rgba(255,110,140,0.13);color:rgba(255,130,155,0.85);}
+  .anniv-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.03em;padding:2px 6px;border-radius:6px;flex-shrink:0;min-width:34px;text-align:center;background:rgba(255,190,210,0.26);color:rgba(255,198,211,0.95);}
   .anniv-edit{background:none;border:none;cursor:pointer;font-size:10px;color:rgba(120,145,195,0.38);padding:2px 4px;flex-shrink:0;transition:color .13s;}
   .anniv-edit:hover{color:rgba(200,220,255,0.85);}
   .scrap-item{display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
@@ -2177,7 +2180,8 @@ async function buildUniverse(){
         _flyInside=mPos.clone(); // 원래라면 여기 있었을 자리(토글 켜면 여기로 날아들어옴)
         const outDir=new THREE.Vector3(Math.random()-0.5,Math.random()*0.6+0.2,Math.random()-0.5).normalize();
         // 행성 바로 앞(radius+5)이 아니라 우주에 멀찍이 떠다니는 느낌이 나도록 훨씬 멀리 배치
-        _flyOutside=pos.clone().addScaledVector(outDir,radius+26+Math.random()*14);
+        // (저연차 그룹은 행성 자체가 작고 중심부에 몰려있어, 조금만 벗어나도 주변 다른 행성들 사이에서 눈에 띄기 쉬움 — 범위를 크게 늘림)
+        _flyOutside=pos.clone().addScaledVector(outDir,radius+70+Math.random()*50);
         mPos=_flyOutside.clone();
       }
 
@@ -2904,6 +2908,8 @@ function _csScore(name,q){
   if(cs.includes(q))return 2;
   return 99;
 }
+// 영문 활동명에서 -,. 같은 특수문자를 뺀 형태로도 매칭 — "G-Dragon"을 "gd"/"gdragon"으로도 찾을 수 있게 함
+function _normEn(s){return(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');}
 function _mScore(name,q,ql){
   const n=(name||'').toLowerCase();
   if(name===q||n===ql)return 0;
@@ -2997,13 +3003,14 @@ function doSearch(q){
     return;
   }
   const ql=q.toLowerCase();
+  const qln=_normEn(q); // "gd" 같은 특수문자 뺀 약어 검색용 — 최소 2자 이상일 때만 사용(빈 문자열은 모든 항목에 매치되므로 가드)
   const _hasLatin=/[a-zA-Z]/.test(q);
   const hits=[];
   Object.keys(GROUPS).forEach(ko=>{
     const info=GROUPS[ko];
     const enN=info.en||'';
     const csG=_csScore(ko,q);
-    if(ko.includes(q)||enN.toLowerCase().includes(ql)||csG<99){
+    if(ko.includes(q)||enN.toLowerCase().includes(ql)||(qln.length>=2&&_normEn(enN).includes(qln))||csG<99){
       const bm=bubbleMeshes.find(b=>b.ko===ko);
       if(bm){
         const s=Math.min(_mScore(ko,q,ql),_mScore(enN,q,ql),csG);
@@ -3016,7 +3023,7 @@ function doSearch(q){
   ARTISTS.forEach(a=>{
     const koN=a.name.ko,enN=a.name.en||'';
     const csM=_csScore(koN,q);
-    if(koN.includes(q)||enN.toLowerCase().includes(ql)||csM<99){
+    if(koN.includes(q)||enN.toLowerCase().includes(ql)||(qln.length>=2&&_normEn(enN).includes(qln))||csM<99){
       const s=Math.min(_mScore(koN,q,ql),_mScore(enN,q,ql),csM);
       const dispName=(_hasLatin&&enN)?enN:(currentLang==='ko'?koN:(enN||koN));
       // 아이유의 "솔로"처럼 실존하지 않는 가짜 그룹은 검색 결과 우측 태그에도 표시하지 않음
@@ -3097,7 +3104,6 @@ function _filterBannedVideos(list){return(list||[]).filter(v=>!_isBannedVideoTit
 
 let _lbPlaylist=null,_lbIdx=-1,_lbCtx=null;
 let _lbSpeed=1; // 우측 탭존을 꾹 누르는 동안의 배속 (1 또는 2)
-let _lbPlaying=true; // 우측 탭존 짧은 탭으로 토글하는 재생 상태 (postMessage는 상태를 안 알려줘서 로컬에서 추적)
 // 소리 on/off는 세션 넘어 기억 — 한 번 켜두면 다음에 라이트박스 열 때도 계속 소리 켜진 채로 시작
 let _lbMuted=localStorage.getItem('kpu_lb_muted')!=='0';
 function _updateLbMuteBtn(){
@@ -3121,7 +3127,6 @@ function openLightbox(url,shorts,playlist,idx,ctx){
   iframe.src=`https://www.youtube.com/embed/${vid}?autoplay=1&mute=${_lbMuted?1:0}&controls=1&playsinline=1&modestbranding=1&iv_load_policy=3&rel=0&enablejsapi=1`;
   document.getElementById('yt-lb-video-box').className=shorts?'is-shorts':'';
   _lbSpeed=1;
-  _lbPlaying=true;
   document.getElementById('yt-lb-speed-badge').classList.remove('is-on');
   lb.classList.add('open');
   _lbUpdateToolbar();
@@ -3358,7 +3363,6 @@ function closeLightbox(){
   _reactExpandedLevel=0;
   _lbCurVideoUrl='';
   _lbSpeed=1;
-  _lbPlaying=true;
   document.getElementById('yt-lb-speed-badge').classList.remove('is-on');
 }
 document.getElementById('yt-lightbox').addEventListener('pointerdown',e=>e.stopPropagation());
@@ -3451,7 +3455,8 @@ document.getElementById('yt-lb-mute').addEventListener('click',e=>{
     iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:_lbMuted?'mute':'unMute',args:[]}),'*');
   }
 });
-// 영상 우측 탭존: 짧게 누르면 재생/일시정지, 꾹 누르고 있는 동안만 2배속 (손 떼면 원래 배속으로 복귀)
+// 영상 우측 탭존: 꾹 누르고 있는 동안만 2배속(손 떼면 원래 배속으로 복귀). 짧게 탭한 경우는 아무 것도
+// 하지 않음 — 나머지(재생/일시정지 등)는 유튜브 자체 컨트롤(controls=1) 동작을 그대로 둠.
 {
   const LB_HOLD_MS=350;
   const zone=document.getElementById('yt-lb-speed-zone');
@@ -3481,11 +3486,7 @@ document.getElementById('yt-lb-mute').addEventListener('click',e=>{
   zone.addEventListener('pointerup',e=>{
     e.stopPropagation();
     clearTimeout(holdTimer);
-    if(holding){lbEndHold();}
-    else{
-      _lbPlaying=!_lbPlaying;
-      lbSendCmd(_lbPlaying?'playVideo':'pauseVideo');
-    }
+    if(holding)lbEndHold();
   });
   zone.addEventListener('pointercancel',()=>{clearTimeout(holdTimer);lbEndHold();});
   zone.addEventListener('pointerleave',()=>{clearTimeout(holdTimer);lbEndHold();});
@@ -3844,6 +3845,7 @@ function closeSidePanel(){
 function openMobSheet(cardEl){
   clearTimeout(_mobCloseTimer);
   controls.enabled=false;
+  document.getElementById('journal-sidebar').classList.remove('open'); // 마이페이지가 열려있는 채로 그룹/멤버 카드를 열어도 카드가 위로 뜨도록
   cardEl.style.maxWidth='';cardEl.style.width='';cardEl.style.left='';cardEl.style.top='';
 
   const type=cardEl.id==='gc'?'gc':'tt';
@@ -4084,21 +4086,32 @@ function _getSongsFeaturingArtist(a){
 // 합쳐서 보여준다. 세션 중 앵커별로 캐시(_connApiCache)해두고, 카드 열릴 때 비동기로 채운 뒤 재렌더링.
 let _connApiCache=new Map(); // key: "이름|그룹" → {songs:[...], names:Set}
 function _connCacheKey(a){return`${a.name.ko}|${a.group.ko}`;}
+// with_groups로 태깅된 채널의 group_ko를 실제 표시 이름으로 되돌린다 — 그룹이면 그룹명 그대로,
+// 솔로 채널(아이유처럼 group.ko가 GROUPS에 없는 경우)이면 채널 키가 곧 본인 이름이므로 그 아티스트를 찾는다.
+function _channelOwnerName(gko){
+  if(GROUPS[gko])return gko;
+  const solo=ARTISTS.find(a=>a.name.ko===gko&&!GROUPS[a.group.ko]);
+  return solo?solo.name.ko:null;
+}
 async function _fetchApiCollabData(anchor){
   if(!sb)return{songs:[],names:new Set()};
   const memberKo=anchor.name.ko;
   const groupKo=_ytGroupKoFor(anchor); // 솔로면 본인 이름이 곧 채널 동기화 키
   const withKey=`${memberKo}(${anchor.group.ko})`; // 타 채널 콜라보 태깅 표시용 키는 원래 그룹 표기 그대로
   try{
-    const[ownQ,taggedQ,groupTagQ]=await Promise.all([
+    const[ownQ,taggedQ,groupTagQ,reverseGroupTagQ]=await Promise.all([
       sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').eq('group_ko',groupKo).contains('members',[memberKo]),
       sb.from(_YT_TABLE).select('id,title,category,group_ko,members,with_members').contains('with_members',[withKey]),
       // 아이유의 팔레트, 뉴진스편처럼 개별 멤버가 아니라 그룹 전체가 with_groups로 태깅된 내 채널 영상
-      sb.from(_YT_TABLE).select('id,title,category,group_ko,with_groups').eq('group_ko',groupKo).not('with_groups','eq','{}')
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,with_groups').eq('group_ko',groupKo).not('with_groups','eq','{}'),
+      // 반대 방향: 다른 채널(예: 아이유)이 내 그룹 전체를 with_groups로 태깅한 경우 — 이게 없으면
+      // 그룹으로 태깅된 쪽(예: (여자)아이들 개별 멤버)에는 이 콜라보가 전혀 안 보이는 비대칭이 생김.
+      sb.from(_YT_TABLE).select('id,title,category,group_ko,with_groups').contains('with_groups',[anchor.group.ko])
     ]);
     if(ownQ.error)throw new Error(ownQ.error.message);
     if(taggedQ.error)throw new Error(taggedQ.error.message);
     if(groupTagQ.error)throw new Error(groupTagQ.error.message);
+    if(reverseGroupTagQ.error)throw new Error(reverseGroupTagQ.error.message);
     const rows=_filterBannedVideos([...(ownQ.data||[]),...(taggedQ.data||[])]);
     const songs=[],names=new Set();
     rows.forEach(v=>{
@@ -4117,6 +4130,16 @@ async function _fetchApiCollabData(anchor){
       const song={t:v.title,u:v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`,with:withList,_apiId:v.id,_apiGroupKo:v.group_ko};
       if(v.category==='mv')song.type='mv';
       withList.forEach(n=>names.add(n));
+      songs.push(song);
+    });
+    // 반대 방향 처리: 남의 채널에서 내 그룹 전체가 태깅된 영상 → 그 채널 주인을 콜라보로 추가
+    _filterBannedVideos(reverseGroupTagQ.data||[]).forEach(v=>{
+      if(v.group_ko===groupKo)return; // 자기 채널(위 groupTagQ에서 이미 처리)은 중복 방지로 제외
+      const ownerName=_channelOwnerName(v.group_ko);
+      if(!ownerName)return;
+      const song={t:v.title,u:v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`,with:[ownerName],_apiId:v.id,_apiGroupKo:v.group_ko};
+      if(v.category==='mv')song.type='mv';
+      names.add(ownerName);
       songs.push(song);
     });
     return{songs:_dedupSongs(songs),names};
@@ -4207,11 +4230,14 @@ function _updateConnLines3d(){
     const line=new THREE.Line(geo,mat);scene.add(line);_connLines3d.push(line);
   });
 }
+function _openPanelWidth(){
+  if(isMob())return 0;
+  return(sidePanelEl.classList.contains('open')?320:0)
+        +(memberPanelEl.classList.contains('open')?320:0)
+        +(connPanelEl.classList.contains('open')?280:0);
+}
 function _panelOffsetVec(dist){
-  if(isMob())return new THREE.Vector3();
-  const pw=(sidePanelEl.classList.contains('open')?320:0)
-          +(memberPanelEl.classList.contains('open')?320:0)
-          +(connPanelEl.classList.contains('open')?280:0);
+  const pw=_openPanelWidth();
   if(!pw)return new THREE.Vector3();
   const hFov=2*Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect);
   const worldW=2*dist*Math.tan(hFov/2);
@@ -4233,39 +4259,44 @@ function _applyConnFocus(){
   ARTISTS.forEach(a=>{a._focusTarget=brightArtists.has(a)?1:FOCUS_DIM;});
   bubbleMeshes.forEach(({mesh,ko})=>{mesh._focusTarget=brightGroups.has(ko)?1:FOCUS_DIM;});
 }
+// 그룹(행성) 위치가 아니라 실제 멤버 별의 월드 좌표를 기준으로 카메라를 맞춘다 — 탈퇴/비활동 멤버처럼
+// 행성 중심에서 멀리 떨어져 떠 있는 별이 연결에 껴 있으면, 행성 반지름 기준 프레이밍으로는 그 별이
+// 화면 밖(심하면 카메라 뒤)으로 빠져버리는 문제가 있었음(2026-07-16 발견).
 function _flyToConnStars(){
   if(!_connAnchor)return;
-  function _flyToBubbleOffset(bm){
-    const pos=bm.mesh.position,r=bm.radius;
-    const dir=camera.position.clone().sub(pos).normalize();
-    if(dir.lengthSq()<0.001)dir.set(0,0.3,1).normalize();
-    const tilted=new THREE.Vector3(dir.x*0.8,dir.y+0.28,dir.z*0.8).normalize();
-    const dist=r*5.5;
-    const off=_panelOffsetVec(dist);
-    const orb=pos.clone().add(off);
-    _startFly(orb,orb.clone().addScaledVector(tilted,dist),800);
-  }
-  if(!_connSelected.length){
-    const bm=bubbleMeshes.find(b=>b.ko===_connAnchor.group.ko);
-    if(bm)_flyToBubbleOffset(bm);
-    return;
-  }
-  const involvedKos=new Set([_connAnchor.group.ko]);
+  const positions=[];
+  if(_connAnchor._worldPos)positions.push(_connAnchor._worldPos);
   _connSelected.forEach(name=>{
     const other=_findArtistByConnName(name,_connAnchor.group.ko);
-    if(other)involvedKos.add(other.group.ko);
+    if(other&&other._worldPos)positions.push(other._worldPos);
   });
-  const bms=[];
-  involvedKos.forEach(ko=>{const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)bms.push(bm);});
-  if(!bms.length)return;
-  if(bms.length===1){_flyToBubbleOffset(bms[0]);return;}
+  if(!positions.length)return;
+  if(positions.length===1){
+    const p=positions[0];
+    const dir=camera.position.clone().sub(p).normalize();
+    if(dir.lengthSq()<0.001)dir.set(0,0.3,1).normalize();
+    const tilted=new THREE.Vector3(dir.x*0.8,dir.y+0.28,dir.z*0.8).normalize();
+    const dist=18; // 별 하나만 볼 때의 기본 관람 거리 (_flyToMyStar와 동일한 값)
+    const off=_panelOffsetVec(dist);
+    const orb=p.clone().add(off);
+    _startFly(orb,orb.clone().addScaledVector(tilted,dist),800);
+    return;
+  }
   const center=new THREE.Vector3();
-  bms.forEach(bm=>center.add(bm.mesh.position));
-  center.divideScalar(bms.length);
+  positions.forEach(p=>center.add(p));
+  center.divideScalar(positions.length);
   let maxSpread=0;
-  bms.forEach(bm=>{maxSpread=Math.max(maxSpread,bm.mesh.position.distanceTo(center)+bm.radius*2.5);});
-  const halfFov=camera.fov*Math.PI/360;
-  const dist=Math.max(maxSpread/Math.tan(halfFov)*1.5,18);
+  positions.forEach(p=>{maxSpread=Math.max(maxSpread,center.distanceTo(p));});
+  // 세로/가로 방향의 필요 거리를 따로 계산한다. 세로는 패널 영향이 없으니 그대로, 가로는 패널이
+  // 차지한 폭만큼 실제 보이는 영역이 좁아지므로 그만큼(freeW/W) 더 멀리 빠져줘야 _panelOffsetVec의
+  // 좌우 이동 후에도 양쪽 별이 캔버스 밖으로 밀려나지 않는다.
+  const vFov=camera.fov*Math.PI/180;
+  const hFov=2*Math.atan(Math.tan(vFov/2)*camera.aspect);
+  const spreadNeeded=maxSpread+6;
+  const freeW=Math.max(1,window.innerWidth-_openPanelWidth());
+  const distV=spreadNeeded/Math.tan(vFov/2);
+  const distH=spreadNeeded/Math.tan(hFov/2)*(window.innerWidth/freeW);
+  const dist=Math.max(Math.max(distV,distH)*1.5,18);
   const tilt=new THREE.Vector3(
     camera.position.x-center.x,
     Math.abs(camera.position.y-center.y)*0.4+2,
@@ -4408,6 +4439,7 @@ function openConnCard(artist){
   _connAnchor=artist;_connSelected=[];_connExactOnly=false;_updateConnLines3d();
   if(!_connApiCache.has(_connCacheKey(artist)))_enrichConnCardFromApi(artist); // 즉시 표시 후 백그라운드로 API 콜라보 데이터 보강
   if(isMob()){
+    document.getElementById('journal-sidebar').classList.remove('open'); // 마이페이지가 열려있는 채로 연결 카드를 열어도 카드가 위로 뜨도록
     _buildConnContent(connSheetBody);
     connSheetInner.scrollTop=0;
     connSheetEl.style.display='block';
@@ -6169,12 +6201,10 @@ renderer.domElement.addEventListener('touchend',e=>{
   raycaster.setFromCamera(_m2,camera);
   const _bh=raycaster.intersectObjects(bubbleMeshes.map(b=>b.mesh));
   const _hitPlanet=_bh.length?bubbleMeshes.find(b=>b.mesh===_bh[0].object):null;
-  // 행성이 불투명(줌아웃) 상태면 멤버 클릭 비활성화 → 그룹 카드만 열림
-  // 포커스된 그룹이 하나뿐일 때만 "포커스=멤버 우선" 예외를 적용한다 — 다중 그룹(예: 이중 소속 멤버 카드의
-  // 연결선) 상태에서는 카메라가 두 행성을 함께 담기 위해 멀리 빠져 있으므로, 각 행성의 실제 uFillOp(줌 상태)
-  // 그대로 따라야 "멀리서 보이는 행성을 눌렀는데 멤버가 클릭되는" 문제가 안 생긴다.
-  const _soloFocusHit=_extraFocusKos.length===0;
-  const _inPlanetMode=_hitPlanet&&_hitPlanet.mesh.material.uniforms.uFillOp.value>0.12&&!(_soloFocusHit&&_hitPlanet.ko===focusGroupKo);
+  // 행성이 불투명(줌아웃) 상태면 멤버 클릭 비활성화 → 그룹 카드만 열림. 포커스된 그룹이어도 예외 없이
+  // 실제 uFillOp(줌 상태)를 그대로 따른다 — 카드를 열어놨다고 멀리서도 계속 멤버모드로 남으면, "행성이
+  // 투명해 보일 때만 멤버가 눌린다"는 시각 신호와 실제 클릭 판정이 어긋나 혼란스러워지기 때문.
+  const _inPlanetMode=_hitPlanet&&_hitPlanet.mesh.material.uniforms.uFillOp.value>0.12;
   if(!_inPlanetMode){
     // 가까이 줌인된 투명 행성 or 행성 밖 → 멤버 점 체크
     let nearArtist=null,nearPx=Infinity;
@@ -6317,10 +6347,9 @@ window.addEventListener('click',e=>{
   if(bHits.length){
     const found=bubbleMeshes.find(b=>b.mesh===bHits[0].object);
     if(found){
-      // 포커스된 그룹이 하나뿐일 때만 "포커스=멤버 우선" 예외 적용 (이중 소속 멤버 카드처럼
-      // 여러 그룹이 동시에 포커스된 상태에서는 각 행성의 실제 줌 상태를 그대로 따름)
-      const _soloFocusClick=_extraFocusKos.length===0;
-      const planetMode=found.mesh.material.uniforms.uFillOp.value>0.12&&!(_soloFocusClick&&found.ko===focusGroupKo);
+      // 포커스(그룹 카드가 열려있음) 여부와 무관하게 실제 uFillOp(줌 상태)만으로 판단 — 카드를 열어놔도
+      // 멀리서는 여전히 행성 전체가 클릭 타겟이어야, "투명해 보일 때만 멤버가 눌린다"는 시각 신호와 어긋나지 않음
+      const planetMode=found.mesh.material.uniforms.uFillOp.value>0.12;
       if(!planetMode){
         // 투명 버블 → 멤버 우선
         const a=nearestMember();
@@ -6460,9 +6489,9 @@ function renderScrapList(){
     const row=document.createElement('div');row.className='scrap-item';
     const img=document.createElement('img');
     img.className='scrap-thumb'+(shorts?' is-shorts':'');
-    img.src=`https://img.youtube.com/vi/${vid}/mqdefault.jpg`;img.alt=item.t;
+    img.src=`https://img.youtube.com/vi/${vid}/mqdefault.jpg`;img.alt=_cleanTitle(item.t);
     const info=document.createElement('div');info.className='scrap-info';
-    const tEl=document.createElement('div');tEl.className='scrap-title';tEl.textContent=item.t;
+    const tEl=document.createElement('div');tEl.className='scrap-title';tEl.textContent=_cleanTitle(item.t);
     const sub=document.createElement('div');sub.className='scrap-sub';
     sub.textContent=[item.groupKo,item.memberKo].filter(Boolean).join(' · ');
     info.appendChild(tEl);info.appendChild(sub);
@@ -6551,9 +6580,9 @@ function renderBookmarkList(){
       const vid=ytId(item.u);const shorts=isShorts(item.u);
       row=document.createElement('div');row.className='scrap-item';
       const img=document.createElement('img');img.className='scrap-thumb'+(shorts?' is-shorts':'');
-      img.src=`https://img.youtube.com/vi/${vid}/mqdefault.jpg`;img.alt=item.t;
+      img.src=`https://img.youtube.com/vi/${vid}/mqdefault.jpg`;img.alt=_cleanTitle(item.t);
       const info=document.createElement('div');info.className='scrap-info';
-      const tEl=document.createElement('div');tEl.className='scrap-title';tEl.textContent=item.t;
+      const tEl=document.createElement('div');tEl.className='scrap-title';tEl.textContent=_cleanTitle(item.t);
       const sub=document.createElement('div');sub.className='scrap-sub';
       sub.textContent=[item.groupKo,item.memberKo].filter(Boolean).join(' · ');
       info.appendChild(tEl);info.appendChild(sub);
@@ -7968,7 +7997,7 @@ function _appendFeedItem(container,icon,title,sub,onClick){
   const item=document.createElement('div');
   item.className='feed-item';
   item.innerHTML='<div class="feed-item-icon">'+icon+'</div>'
-    +'<div class="feed-item-main"><div class="feed-item-title">'+title+'</div>'
+    +'<div class="feed-item-main"><div class="feed-item-title">'+_cleanTitle(title)+'</div>'
     +(sub?'<div class="feed-item-sub">'+sub+'</div>':'')+'</div>'
     +'<div class="feed-item-chev">›</div>';
   item.addEventListener('click',onClick);
@@ -8250,7 +8279,10 @@ function _makeChVidController(contId){
       tEl.className='tv-sm-title';tEl.textContent=_cleanTitle(v.title);
       addMarquee(tEl);
       item.appendChild(img);item.appendChild(tEl);
-      const vidUrl=`https://www.youtube.com/watch?v=${v.id}`;
+      // 쇼츠는 URL 자체를 /shorts/ 형식으로 만들어야 스크랩/북마크로 저장되거나 라이트박스에서 스와이프로
+      // 넘어갔을 때(isShorts(url) 판별)도 세로 비율이 계속 유지됨 — watch?v= 로 통일해버리면 그 정보가 사라짐.
+      const _vidUrl=vv=>vv.category==='short'?`https://www.youtube.com/shorts/${vv.id}`:`https://www.youtube.com/watch?v=${vv.id}`;
+      const vidUrl=_vidUrl(v);
       const s={t:v.title,u:vidUrl};
       const ctx={groupKo:state.ko};
       item.appendChild(_makeScrapBtn(s,ctx));
@@ -8266,7 +8298,7 @@ function _makeChVidController(contId){
         e.stopPropagation();
         // 지금까지 불러온 전체 영상을 플레이리스트로 넘겨서 라이트박스에서 위아래 스와이프로 넘길 수 있게 하고,
         // 관리자 태깅 대상(_apiId/_apiGroupKo)도 각 항목에 실어 보냄
-        const playlist=state.allVids.map(vv=>({t:vv.title,u:`https://www.youtube.com/watch?v=${vv.id}`,_apiId:vv.id,_apiGroupKo:state.ko}));
+        const playlist=state.allVids.map(vv=>({t:vv.title,u:_vidUrl(vv),_apiId:vv.id,_apiGroupKo:state.ko}));
         let idx=playlist.findIndex(p=>p._apiId===v.id);
         if(idx<0){idx=0;playlist.unshift({t:v.title,u:vidUrl,_apiId:v.id,_apiGroupKo:state.ko});}
         openLightbox(vidUrl,isShort,playlist,idx);
@@ -8580,11 +8612,15 @@ async function _openVidTagModal(v,ko){
   const membersEl=document.getElementById('vid-tag-members');
   membersEl.innerHTML='';
   const groupMembers=ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===ko));
+  // 솔로 아티스트(체크박스가 본인 하나뿐)는 안 눌러도 항상 본인 출연이 자명하므로 기본 체크 — 실수로 안 누르면
+  // members가 비어서 연결 카드용 콜라보 쿼리(ownQ)가 이 영상 자체를 못 찾는 문제가 있었음.
+  const _soloChannel=groupMembers.length===1;
   groupMembers.forEach(a=>{
     const label=document.createElement('label');
     label.className='vid-tag-mem';
     const cb=document.createElement('input');
     cb.type='checkbox';cb.value=a.name.ko;
+    if(_soloChannel)cb.checked=true;
     label.appendChild(cb);
     label.appendChild(document.createTextNode(a.name.ko));
     membersEl.appendChild(label);
@@ -8601,7 +8637,7 @@ async function _openVidTagModal(v,ko){
     if(!_vidTagTarget||_vidTagTarget.id!==v.id)return; // 응답 오는 사이 모달이 닫히거나 다른 영상으로 전환됨
     if(!error&&data){
       const savedMembers=new Set(data.members||[]);
-      membersEl.querySelectorAll('input[type=checkbox]').forEach(cb=>{cb.checked=savedMembers.has(cb.value);});
+      membersEl.querySelectorAll('input[type=checkbox]').forEach(cb=>{cb.checked=_soloChannel||savedMembers.has(cb.value);});
       _vidTagWithSelected=(data.with_members||[]).map(str=>{
         const m=str.match(/^(.*)\((.*)\)$/);
         return m?{ko:m[1],groupKo:m[2]}:null;
