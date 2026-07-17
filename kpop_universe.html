@@ -841,6 +841,10 @@
   }
   #search-input:focus{background:rgba(255,255,255,0.03);}
   #search-input::placeholder{color:rgba(140,160,200,0.32);}
+  /* iOS Safari: font-size < 16px 이면 input 포커스 시 자동 줌인 — 모바일에서 16px로 고정해서 방지 */
+  @media(max-width:768px){
+    #search-input,#tab-sb-input,#idx-search-inp,.pp-input{font-size:16px!important;}
+  }
   #search-results{
     display:none;margin-top:0;
     background:transparent;
@@ -968,7 +972,7 @@
   /* 연결 카드 자체의 닫기(×)는 데스크톱에선 왼쪽 접기 탭(#conn-collapse)이 대신하므로 헤더 버튼은 모바일에서만 노출 */
   @media(min-width:769px){.conn-panel-close{display:none;}}
   .conn-anchor-chip{padding:3px 11px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(255,255,255,0.055);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:0.5px solid rgba(255,255,255,0.14);color:rgba(210,228,255,0.96);letter-spacing:.02em;box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);}
-  .conn-lbl{font-size:8.5px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(110,135,185,0.50);margin-bottom:8px;}
+  .conn-lbl{font-size:8.5px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(148,175,225,0.72);margin-bottom:8px;}
   .conn-lbl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
   .conn-lbl-row .conn-lbl{margin-bottom:0;}
   .conn-only-toggle{background:rgba(255,255,255,0.055);border:0.5px solid rgba(255,255,255,0.14);border-radius:20px;padding:3px 9px;font-size:9.5px;font-weight:700;letter-spacing:.03em;color:rgba(192,214,240,0.55);cursor:pointer;font-family:inherit;box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);transition:background .14s,border-color .14s,color .14s,transform .14s;}
@@ -994,29 +998,49 @@
   .conn-chip-goto:hover{color:rgba(215,235,255,1);}
   @media(hover:hover){
     .conn-chip:hover{color:rgba(220,238,255,1.0);text-shadow:0 0 14px rgba(200,228,255,0.8),0 0 6px rgba(200,228,255,0.5);}
-    /* 화살표 자리를 항상 고정폭으로 미리 확보해서(안 보일 땐 투명), hover 때 폭이 늘어나며 flex-wrap이
-       재계산돼 맨 끝 칩이 다음 줄로 밀려나던 문제를 없앰 — hover 시엔 보이기만 하고 레이아웃은 안 바뀜 */
-    .conn-chip-goto{width:14px;padding-left:0;font-size:13px;}
+    .conn-chip-goto{width:16px;padding-left:0;font-size:15px;}
     .conn-chip-wrap:hover .conn-chip-goto{opacity:1;pointer-events:all;}
   }
   @media(hover:none){
-    .conn-chip-goto{width:0;opacity:0;pointer-events:none;padding-left:0;font-size:13px;}
-    .conn-chip.sel + .conn-chip-goto{width:auto;opacity:0.7;pointer-events:all;padding-left:0;margin-left:-5px;}
+    .conn-chip-goto{width:0;opacity:0;pointer-events:none;padding-left:0;font-size:15px;}
+    .conn-chip.sel + .conn-chip-goto{width:auto;opacity:0.8;pointer-events:all;padding-left:0;margin-left:4px;}
   }
+  /* 타 그룹 묶음 칩 */
+  .conn-group-chip{
+    display:inline-flex;align-items:center;gap:5px;
+    padding:3px 10px 3px 9px;border-radius:10px;
+    background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);
+    font-size:11.5px;font-weight:600;letter-spacing:.02em;
+    color:rgba(145,175,230,0.72);cursor:pointer;font-family:inherit;
+    transition:background .15s,color .15s,border-color .15s;
+    user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  }
+  .conn-group-chip:active{background:rgba(255,255,255,0.09);}
+  .conn-group-chip.open{background:rgba(145,175,255,0.10);border-color:rgba(145,175,255,0.20);color:rgba(190,215,255,0.88);}
+  .conn-group-chevron{font-size:10px;opacity:0.6;transition:transform .2s ease;display:inline-block;}
+  .conn-group-chip.open .conn-group-chevron{transform:rotate(90deg);}
+  .conn-group-cnt{font-size:9.5px;opacity:0.6;font-weight:500;}
+  .conn-group-members{display:none;flex-wrap:wrap;gap:5px;padding:5px 0 3px 4px;}
+  .conn-group-members.open{display:flex;}
   .conn-chip:active,.conn-chip.lp-active{transform:scale(0.93);color:rgba(232,246,255,1.0);text-shadow:0 0 17px rgba(200,228,255,0.94),0 0 8px rgba(200,228,255,0.65),0 0 3px rgba(200,228,255,0.42);}
   .conn-no-video{font-size:11px;color:#5878a0;padding:4px 0;}
   /* ✦ 연결 버튼 */
   #tt-conn-row{margin-top:6px;}
   .tt-conn-btn{
     margin-left:auto;
-    display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;
-    font-size:9.5px;font-weight:600;letter-spacing:.05em;cursor:pointer;font-family:inherit;
-    background:rgba(255,255,255,0.055);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border:0.5px solid rgba(255,255,255,0.14);color:rgba(200,220,255,0.90);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
-    transition:background .14s,border-color .14s,color .14s;
+    display:inline-flex;align-items:center;padding:4px 11px;border-radius:20px;
+    font-size:10px;font-weight:600;letter-spacing:.10em;cursor:pointer;font-family:inherit;
+    background:rgba(165,200,255,0.07);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:0.5px solid rgba(165,200,255,0.20);
+    color:rgba(185,215,255,0.80);
+    opacity:0;transform:translateY(2px);
+    transition:background .18s,border-color .18s,color .18s,
+               opacity .42s ease,transform .42s cubic-bezier(0.22,1,0.36,1);
   }
-  .tt-conn-btn:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.22);color:rgba(220,235,255,1.0);}
+  .tt-conn-btn.conn-btn-visible{opacity:1;transform:translateY(0);}
+  .tt-conn-btn:hover{background:rgba(165,200,255,0.13);border-color:rgba(165,200,255,0.34);color:rgba(215,235,255,0.98);}
+  .tt-conn-btn:active{opacity:0.55;}
   /* ── Tag chips ───────────────────────────────────── */
   .tag-chip{
     display:inline;cursor:pointer;
@@ -1273,6 +1297,30 @@
   .feed-item-title{font-size:12px;font-weight:600;color:rgba(215,228,255,0.88);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
   .feed-item-sub{font-size:10px;color:rgba(120,148,200,0.55);margin-top:2px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
   .feed-item-chev{color:rgba(130,155,200,0.28);font-size:13px;flex-shrink:0;line-height:1;}
+  /* ── Onboarding hint ─────────────────────────────── */
+  #onboard-hint{
+    position:fixed;z-index:39;pointer-events:none;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    opacity:0;transform:translateY(10px);
+    transition:opacity .55s ease,transform .55s cubic-bezier(0.22,1,0.36,1);
+  }
+  #onboard-hint.ob-show{opacity:1;transform:translateY(0);}
+  #onboard-hint.ob-hide{opacity:0;transform:translateY(4px);transition:opacity .3s ease,transform .3s ease;}
+  #ob-pill{
+    background:rgba(14,18,38,0.88);
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    border:0.5px solid rgba(255,255,255,0.11);
+    border-radius:24px;padding:8px 18px;
+    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
+    font-size:12.5px;font-weight:600;letter-spacing:.02em;
+    color:rgba(210,228,255,0.90);white-space:nowrap;
+    box-shadow:0 6px 24px rgba(0,0,0,0.40),inset 0 0.5px 0 rgba(255,255,255,0.06);
+  }
+  #ob-arrow{display:flex;flex-direction:column;align-items:center;gap:2px;animation:ob-bounce 1.5s ease-in-out infinite;}
+  #ob-arrow-line{width:1px;height:9px;background:rgba(160,185,240,0.38);}
+  #ob-arrow-head{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid rgba(160,185,240,0.38);}
+  @keyframes ob-bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(3px);}}
+  .ob-target-glow{color:rgba(215,232,255,0.95)!important;filter:drop-shadow(0 0 7px rgba(140,175,255,0.60));}
 </style>
 <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1/index.js"></script>
 </head>
@@ -1489,6 +1537,10 @@
   <input id="tab-sb-input" type="text" placeholder="그룹 · 멤버 검색…" autocomplete="off" inputmode="search">
   <button id="tab-sb-clear" aria-label="검색 닫기">✕</button>
 </div>
+<div id="onboard-hint" aria-hidden="true">
+  <div id="ob-pill"></div>
+  <div id="ob-arrow"><div id="ob-arrow-line"></div><div id="ob-arrow-head"></div></div>
+</div>
 <div id="mob-sr"></div>
 <div id="member-tooltip"></div>
 <div id="zoom-ctrl">
@@ -1569,6 +1621,17 @@
       <div id="vid-tag-with-results"></div>
       <div id="vid-tag-with-chips"></div>
     </div>
+    <div class="pp-section" style="margin-top:14px">
+      <label class="pp-label" for="vid-tag-cat">영상 분류 (관리자)</label>
+      <select id="vid-tag-cat" class="pp-input" style="cursor:pointer">
+        <option value="">기본 (팬캠)</option>
+        <option value="mv">MV</option>
+        <option value="live">라이브</option>
+        <option value="short">Shorts</option>
+        <option value="기타">기타</option>
+        <option value="외부인">외부인</option>
+      </select>
+    </div>
     <div id="vid-tag-status"></div>
     <div id="vid-tag-btns">
       <button id="vid-tag-cancel" class="uc-btn">취소</button>
@@ -1617,6 +1680,14 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS2DRenderer.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
 <script>
+// 이전에 줌인된 상태로 새로고침했을 때 초기 스케일 1.0으로 강제 복원 (iOS Safari 대응)
+(function(){
+  var vp=document.querySelector('meta[name=viewport]');
+  if(!vp)return;
+  var orig=vp.getAttribute('content');
+  vp.setAttribute('content','width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,viewport-fit=cover');
+  setTimeout(function(){vp.setAttribute('content',orig);},1);
+})();
 const W=window.innerWidth,H=window.innerHeight;
 
 // ── Scene ─────────────────────────────────────────
@@ -2551,6 +2622,7 @@ async function buildUniverse(){
   const _minShow=750; // "Loading universe…" 최소 노출 시간 — 로딩이 너무 빨라서 텍스트가 안 읽히는 문제 방지
   if(_elapsed<_minShow)await new Promise(res=>setTimeout(res,_minShow-_elapsed));
   _revealUniverse();
+  _obTimer=setTimeout(_showOnboardHint,2600);
   // 생일 별똥별: 인트로 연출 끝난 뒤 한 번, 이후 30분마다 오늘 생일인 멤버 확인
   setTimeout(_checkBdayShootingStars,2400);
   setTimeout(_checkDebutAnniversaries,2400);
@@ -2615,6 +2687,42 @@ function _revealUniverse(){
       }
     })();
   }
+}
+
+// ── Onboarding hint ──────────────────────────────
+var _OB_KEY='kpu_onboard_done';
+var _obTimer=null;
+var _obActive=false; // hint가 실제로 화면에 떠 있는 상태
+function _showOnboardHint(){
+  if(_obActive||localStorage.getItem(_OB_KEY))return;
+  if(!isMob())return;
+  // 딥링크나 자동 오픈으로 이미 카드가 열려있으면 힌트 불필요
+  if(document.getElementById('mob-sheet').classList.contains('bs-open'))return;
+  if(document.getElementById('side-panel').classList.contains('open'))return;
+  const el=document.getElementById('onboard-hint');
+  const pill=document.getElementById('ob-pill');
+  if(!el||!pill)return;
+  const isSearch=Math.random()<0.5;
+  pill.textContent=isSearch?'Start with your bias':'Explore now';
+  const btn=document.getElementById(isSearch?'tab-search':'tab-explore');
+  if(btn){
+    const r=btn.getBoundingClientRect();
+    el.style.left=(r.left+r.width/2)+'px';
+    el.style.bottom=(window.innerHeight-r.top+10)+'px';
+    btn.classList.add('ob-target-glow');
+  }
+  _obActive=true;
+  el.classList.remove('ob-hide');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('ob-show')));
+}
+function _dismissOnboardHint(){
+  if(_obTimer){clearTimeout(_obTimer);_obTimer=null;}
+  if(!_obActive)return;
+  _obActive=false;
+  localStorage.setItem(_OB_KEY,'1');
+  const el=document.getElementById('onboard-hint');
+  if(el){el.classList.remove('ob-show');el.classList.add('ob-hide');}
+  document.querySelectorAll('.ob-target-glow').forEach(b=>b.classList.remove('ob-target-glow'));
 }
 
 // ── Animate ───────────────────────────────────────
@@ -4057,7 +4165,8 @@ function _popMobCard(){
 }
 // ── Connection Card ────────────────────────────────
 let _connAnchor=null,_connSelected=[],_connLines3d=[],_connPanelShifted=false;
-let _connExactOnly=false; // "Only" 토글 — 선택된 멤버 조합이 정확히(±더도 덜도 없이) 나온 영상만 보기
+let _connExactOnly=false;
+let _connExpandedGroups=new Set(); // "Only" 토글 — 선택된 멤버 조합이 정확히(±더도 덜도 없이) 나온 영상만 보기
 // 연결 카드 콜라보 칩(꾹 누르기/↗)으로 다른 멤버 카드로 넘어갔을 때 "뒤로" 갈 수 있도록 이전 상태를 쌓아두는 스택
 let _memberNavStack=[];
 const connPanelEl=document.getElementById('conn-panel');
@@ -4234,7 +4343,16 @@ function _updateConnBtn(a){
   const connBtn=document.getElementById('tt-conn-btn');
   if(!connBtn)return;
   const hasCollab=_getCollabMembers(a).length>0;
-  connBtn.style.display=hasCollab?'':'none';
+  if(hasCollab){
+    const alreadyVisible=connBtn.classList.contains('conn-btn-visible');
+    connBtn.style.display='';
+    if(!alreadyVisible){
+      requestAnimationFrame(()=>requestAnimationFrame(()=>connBtn.classList.add('conn-btn-visible')));
+    }
+  }else{
+    connBtn.classList.remove('conn-btn-visible');
+    connBtn.style.display='none';
+  }
   connBtn.onclick=hasCollab?e=>{
     e.stopPropagation();
     if(connPanelEl.classList.contains('open')&&_connAnchor===a){closeConnCard();}
@@ -4427,68 +4545,119 @@ function _buildConnContent(container){
   hd.appendChild(shareBtn);
   container.appendChild(hd);
 
-  // 정렬: 같은 그룹(그룹 표기 없는 바로 이름) 먼저, 그 안에서/타그룹끼리도 각각 이름순(가나다·abc)
-  const collabNames=_getCollabMembers(_connAnchor).sort((a,b)=>{
-    const aSame=!a.includes('('),bSame=!b.includes('(');
-    if(aSame!==bSame)return aSame?-1:1;
-    return a.localeCompare(b,'ko');
+  // 멤버 목록 분류: 같은 그룹(이름만) vs 타 그룹("이름(그룹)")
+  const allCollabNames=_getCollabMembers(_connAnchor);
+  const sameGroupNames=allCollabNames.filter(n=>!n.includes('('));
+  const otherGroupNames=allCollabNames.filter(n=>n.includes('('));
+
+  // 같은 그룹: 콜라보 영상 수 내림차순 정렬
+  sameGroupNames.sort((a,b)=>{
+    const cntA=_getCollabSongs(_connAnchor,[a],false).length;
+    const cntB=_getCollabSongs(_connAnchor,[b],false).length;
+    return cntB-cntA||a.localeCompare(b,'ko');
   });
-  const membersLbl=document.createElement('div');membersLbl.className='conn-lbl';
-  membersLbl.textContent=currentLang==='ko'?'함께한 멤버':'collaborated with';
-  container.appendChild(membersLbl);
-  const chipsDiv=document.createElement('div');chipsDiv.className='conn-chips';
-  collabNames.forEach(name=>{
+
+  // 타 그룹: 그룹별 묶기
+  const otherByGroup=new Map();
+  otherGroupNames.forEach(n=>{
+    const m=n.match(/^(.+)\((.+)\)$/);
+    if(!m)return;
+    const gko=m[2];
+    if(!otherByGroup.has(gko))otherByGroup.set(gko,[]);
+    otherByGroup.get(gko).push(n);
+  });
+  // 그룹 내 멤버도 콜라보 수 내림차순
+  otherByGroup.forEach((names,gko)=>{
+    names.sort((a,b)=>{
+      const cntA=_getCollabSongs(_connAnchor,[a],false).length;
+      const cntB=_getCollabSongs(_connAnchor,[b],false).length;
+      return cntB-cntA||a.localeCompare(b,'ko');
+    });
+  });
+  // 그룹 칩 순서: 그룹 내 최다 콜라보 수 기준 내림차순
+  const otherGroupsSorted=[...otherByGroup.keys()].sort((a,b)=>{
+    const topA=_getCollabSongs(_connAnchor,[otherByGroup.get(a)[0]],false).length;
+    const topB=_getCollabSongs(_connAnchor,[otherByGroup.get(b)[0]],false).length;
+    return topB-topA||a.localeCompare(b,'ko');
+  });
+
+  // 멤버 칩 하나 빌드 (같은 그룹 / 타 그룹 펼침 양쪽 공용)
+  function _makeConnChip(name){
     const wrap=document.createElement('div');wrap.className='conn-chip-wrap';
     const chip=document.createElement('button');
     const isSel=_connSelected.includes(name);
     chip.className='conn-chip'+(isSel?' sel':'');
-    chip.textContent=name;
+    const m=name.match(/^(.+)\((.+)\)$/);
+    chip.textContent=m?m[1]:name; // 타 그룹 멤버는 이름만 표시 (그룹명 칩에서 맥락 제공)
     const _gotoMember=()=>{
       const target=_findArtistByConnName(name,_connAnchor.group.ko);
       if(!target)return;
-      // 돌아갈 수 있도록 현재 연결 카드 상태(누구를, 어떤 선택으로 보고 있었는지)를 스택에 남겨둔다
       _memberNavStack.push({anchor:_connAnchor,selected:[..._connSelected]});
       closeConnCard();
       showT(target,window.innerWidth/2,window.innerHeight*0.4,true);
     };
-    // 터치 기기 꾹 누르기 → 데스크톱의 ↗ 화살표와 동일하게 해당 멤버로 바로 이동.
-    // 탭(짧게 누름)은 그대로 선택 토글 — 마우스는 손대지 않고 기존 hover+화살표 흐름 유지
     let _lpTimer=null,_lpFired=false;
     const LP_MS=480;
     chip.addEventListener('pointerdown',e=>{
       if(e.pointerType==='mouse')return;
-      _lpFired=false;
-      chip.classList.add('lp-active');
-      _lpTimer=setTimeout(()=>{
-        _lpFired=true;
-        chip.classList.remove('lp-active');
-        _gotoMember();
-      },LP_MS);
+      _lpFired=false;chip.classList.add('lp-active');
+      _lpTimer=setTimeout(()=>{_lpFired=true;chip.classList.remove('lp-active');_gotoMember();},LP_MS);
     });
     ['pointerup','pointercancel','pointerleave'].forEach(ev=>chip.addEventListener(ev,()=>{
-      clearTimeout(_lpTimer);
-      chip.classList.remove('lp-active');
+      clearTimeout(_lpTimer);chip.classList.remove('lp-active');
     }));
-    // 꾹 누르기 중 브라우저 기본 텍스트 선택/콜아웃(iOS 돋보기, 안드로이드 복사 팝업)이 함께 뜨는 문제 방지
     chip.addEventListener('contextmenu',e=>e.preventDefault());
     chip.addEventListener('click',e=>{
       e.stopPropagation();
-      if(_lpFired){_lpFired=false;return;} // 꾹 누르기로 이미 처리됨 → 탭 토글 무시
+      if(_lpFired){_lpFired=false;return;}
       if(isSel){_connSelected=_connSelected.filter(n=>n!==name);}
       else{_connSelected.push(name);}
-      _updateConnLines3d();
-      _applyConnFocus();
-      _flyToConnStars();
-      _buildConnContent(container);
+      _updateConnLines3d();_applyConnFocus();_flyToConnStars();_buildConnContent(container);
     });
     const gotoBtn=document.createElement('span');gotoBtn.className='conn-chip-goto';gotoBtn.textContent='↗';
-    gotoBtn.addEventListener('click',e=>{
-      e.stopPropagation();
-      _gotoMember();
-    });
+    gotoBtn.addEventListener('click',e=>{e.stopPropagation();_gotoMember();});
     wrap.appendChild(chip);wrap.appendChild(gotoBtn);
-    chipsDiv.appendChild(wrap);
+    return wrap;
+  }
+
+  const membersLbl=document.createElement('div');membersLbl.className='conn-lbl';
+  membersLbl.textContent=currentLang==='ko'?'함께한 멤버':'collaborated with';
+  container.appendChild(membersLbl);
+
+  const chipsDiv=document.createElement('div');chipsDiv.className='conn-chips';
+
+  // 같은 그룹 멤버 (개별 칩)
+  sameGroupNames.forEach(name=>chipsDiv.appendChild(_makeConnChip(name)));
+
+  // 타 그룹 멤버 (그룹 단위 묶음 칩)
+  otherGroupsSorted.forEach(gko=>{
+    const members=otherByGroup.get(gko);
+    const isOpen=_connExpandedGroups.has(gko);
+
+    const groupWrap=document.createElement('div');groupWrap.style.cssText='width:100%;margin-top:2px;';
+
+    const groupChip=document.createElement('button');
+    groupChip.type='button';
+    groupChip.className='conn-group-chip'+(isOpen?' open':'');
+    groupChip.innerHTML=`${gko}<span class="conn-group-cnt">${members.length}명</span><span class="conn-group-chevron">›</span>`;
+
+    const memberRow=document.createElement('div');
+    memberRow.className='conn-group-members'+(isOpen?' open':'');
+    members.forEach(name=>memberRow.appendChild(_makeConnChip(name)));
+
+    groupChip.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(_connExpandedGroups.has(gko))_connExpandedGroups.delete(gko);
+      else _connExpandedGroups.add(gko);
+      groupChip.classList.toggle('open');
+      memberRow.classList.toggle('open');
+    });
+
+    groupWrap.appendChild(groupChip);
+    groupWrap.appendChild(memberRow);
+    chipsDiv.appendChild(groupWrap);
   });
+
   container.appendChild(chipsDiv);
 
   const vidLblRow=document.createElement('div');vidLblRow.className='conn-lbl-row';
@@ -4524,7 +4693,7 @@ function _buildConnContent(container){
 }
 
 function openConnCard(artist){
-  _connAnchor=artist;_connSelected=[];_connExactOnly=false;_updateConnLines3d();
+  _connAnchor=artist;_connSelected=[];_connExactOnly=false;_connExpandedGroups=new Set();_updateConnLines3d();
   if(!_connApiCache.has(_connCacheKey(artist)))_enrichConnCardFromApi(artist); // 즉시 표시 후 백그라운드로 API 콜라보 데이터 보강
   if(isMob()){
     document.getElementById('journal-sidebar').classList.remove('open'); // 마이페이지가 열려있는 채로 연결 카드를 열어도 카드가 위로 뜨도록
@@ -4612,17 +4781,24 @@ mobCardStackEl.addEventListener('touchend',e=>{
 
 // 스와이프 (3단계: 닫힘 ↔ 반쯤 ↔ 꽉 참)
 let _sheetDragY=0,_sheetDragging=false,_sheetDragFromTop=0,_sheetFull=false;
+let _sheetScrolled=false,_sheetScrollTopAtStart=0;
+// 드래그 중 실제 스크롤이 발생하면 플래그 — touchend에서 시트 조작 억제에 사용
+mobSheetInner.addEventListener('scroll',()=>{if(_sheetDragging)_sheetScrolled=true;},{passive:true});
 mobSheetEl.addEventListener('touchstart',e=>{
   _sheetDragY=e.touches[0].clientY;
   _sheetDragFromTop=e.touches[0].clientY-mobSheetEl.getBoundingClientRect().top;
   _sheetDragging=true;
+  _sheetScrolled=false;
+  _sheetScrollTopAtStart=mobSheetInner.scrollTop;
   e.stopPropagation();
 },{passive:true});
 mobSheetEl.addEventListener('touchmove',e=>{
   if(!_sheetDragging)return;e.stopPropagation();
   const dy=e.touches[0].clientY-_sheetDragY;
-  if(dy<0&&!_sheetFull&&_sheetDragFromTop<60){
-    // 위로 드래그 (반쯤→꽉 참) — 핸들 영역에서만
+  // 콘텐츠 스크롤 중이거나 시작 시점에 이미 스크롤된 상태면 시트 조작 안 함
+  if(_sheetScrolled||_sheetScrollTopAtStart>0)return;
+  if(dy<0&&!_sheetFull&&mobSheetInner.scrollTop<=0){
+    // 위로 드래그 (반쯤→꽉 참) — 콘텐츠 맨 위에서 어디서든 가능
     if(e.cancelable)e.preventDefault();
     mobSheetEl.style.transition='none';
     mobSheetEl.style.transform=`translateY(${dy*0.35}px)`;
@@ -4637,17 +4813,20 @@ mobSheetEl.addEventListener('touchend',e=>{
   if(!_sheetDragging)return;_sheetDragging=false;e.stopPropagation();
   const dy=e.changedTouches[0].clientY-_sheetDragY;
   mobSheetEl.style.transition='';
-  if(dy<-60&&!_sheetFull&&_sheetDragFromTop<60){
-    // 위로 충분히 → 꽉 참
+  // 스크롤이 발생했거나 시작 시 스크롤된 상태였으면 시트 크기 변경 없이 복귀
+  if(_sheetScrolled||_sheetScrollTopAtStart>0){
+    mobSheetEl.style.transform='';
+    return;
+  }
+  if(dy<-60&&!_sheetFull&&mobSheetInner.scrollTop<=0){
+    // 위로 충분히 → 꽉 참 (핸들 영역 제한 제거: 콘텐츠 맨 위에서 어디서든)
     _sheetFull=true;
     mobSheetEl.style.transform='';
     mobSheetEl.classList.add('bs-full');
   }else if(_sheetFull&&dy>0&&mobSheetInner.scrollTop<=0){
     if(dy>150){
-      // 꽉 찬 상태에서 쭉 내리면 → 닫기
       closeMobSheet();
     }else if(dy>60){
-      // 꽉 찬 상태에서 살짝 내리면 → 반쯤
       _sheetFull=false;
       mobSheetEl.classList.remove('bs-full');
       mobSheetEl.style.transform='';
@@ -4655,7 +4834,6 @@ mobSheetEl.addEventListener('touchend',e=>{
       mobSheetEl.style.transform='';
     }
   }else if(!_sheetFull&&dy>80&&mobSheetInner.scrollTop<=0){
-    // 반쯤 상태에서 내리면 → 닫기
     closeMobSheet();
   }else{
     mobSheetEl.style.transform='';
@@ -5060,6 +5238,7 @@ function positionCard(el,cx,cy,cardW,estH){
 }
 
 function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
+  _dismissOnboardHint();
   if(!keepNavStack)_memberNavStack=[];
   _updateTtBackBtn();
   closeConnCard();
@@ -5316,6 +5495,7 @@ document.getElementById('gc-mem-label').addEventListener('click',e=>{
   _renderGcMemberList(_openGCko,window.innerWidth/2,window.innerHeight*0.4);
 });
 function showGC(ko,cx,cy,keepMemberPanel,skipRipple,urlMode,pushMobNav){
+  _dismissOnboardHint();
   const info=GROUPS[ko];if(!info)return;
   setFocus(ko);_openGCko=ko;
   _syncFavBtn('group',ko);
@@ -6238,7 +6418,7 @@ document.getElementById('desktop-header').addEventListener('pointerdown',e=>e.st
 ['settings-panel','search-wrap','tabbar','tt','gc','tab-settings'].forEach(id=>{
   document.getElementById(id)?.addEventListener('pointerdown',e=>e.stopPropagation());
 });
-window.addEventListener('pointerdown',e=>{_mdx=e.clientX;_mdy=e.clientY;closePanels();});
+window.addEventListener('pointerdown',e=>{_mdx=e.clientX;_mdy=e.clientY;closePanels();_dismissOnboardHint();});
 
 // ── Hover tooltip (member name / group name) ──────
 const _tipEl=document.getElementById('member-tooltip');
@@ -8579,8 +8759,8 @@ function _makeChVidController(contId){
     try{
       let q=sb.from(_YT_TABLE).select('id,title,thumb,category',{count:'exact'});
       if(state.memberKo&&state.onlyMe){
-        // Only 토글: 그룹 전체/다른 멤버와 함께 나온 영상 다 빼고, members가 정확히 이 멤버 한 명뿐인 영상만
-        q=q.eq('group_ko',ko).eq('members',[state.memberKo]);
+        // Only 토글: members @> {name} AND members <@ {name} → members = {name} 정확히 일치
+        q=q.eq('group_ko',ko).contains('members',[state.memberKo]).containedBy('members',[state.memberKo]);
       }else if(state.memberKo){
         // 멤버 카드: 태깅 안 된(그룹 전체) 영상 + 이 멤버가 직접 태깅된 영상까지 포함
         q=q.eq('group_ko',ko).or(`members.eq.{},members.cs.{${state.memberKo}}`);
@@ -8604,10 +8784,13 @@ function _makeChVidController(contId){
       // DB 조회는 무한스크롤 페이지네이션이 어긋나지 않도록 published_at desc로 고정하되(offset 기반이라 정렬이
       // 흔들리면 중복/누락 발생), 화면에 보여줄 순서는 페이지 단위로 섞어서 업로드 시기가 몰려 보이지 않게 함
       let vids=_shuffle(_filterBannedVideos(data||[]));
+      // '기타' 영상은 후순위로 — 대표영상 후보 제외 + 정상 영상 뒤로 밀기
+      const _etcVids=vids.filter(v=>v.category==='기타');
+      if(_etcVids.length)vids=[...vids.filter(v=>v.category!=='기타'),..._etcVids];
       // 첫 로드 + 전체 탭: 스크랩(하트) 최다 영상을 맨 앞으로 (쇼츠도 후보에 포함됨)
       let featured=null;
       if(reset&&filter==='all'&&vids.length){
-        const main=_pickMainChVid(vids);
+        const main=_pickMainChVid(vids.filter(v=>v.category!=='기타'));
         if(main){
           vids=vids.filter(v=>v.id!==main.id);
           featured={...main,_featured:true};
@@ -8859,7 +9042,7 @@ async function _openVidTagModal(v,ko){
   // 카드에 넘어온 v에는 members/with_members가 안 실려있는 경우가 많아서(그룹 카드 그리드는 해당 컬럼을
   // 아예 select하지 않음), 모달을 열 때 저장된 값을 DB에서 직접 불러와 체크박스/칩에 반영한다.
   if(sb){
-    const{data,error}=await sb.from(_YT_TABLE).select('members,with_members,with_groups').eq('id',v.id).maybeSingle();
+    const{data,error}=await sb.from(_YT_TABLE).select('members,with_members,with_groups,category').eq('id',v.id).maybeSingle();
     if(!_vidTagTarget||_vidTagTarget.id!==v.id)return; // 응답 오는 사이 모달이 닫히거나 다른 영상으로 전환됨
     if(!error&&data){
       const savedMembers=new Set(data.members||[]);
@@ -8870,6 +9053,8 @@ async function _openVidTagModal(v,ko){
       }).filter(Boolean);
       _vidTagGroupsSelected=data.with_groups||[];
       _renderVidTagChips();
+      const catEl=document.getElementById('vid-tag-cat');
+      if(catEl)catEl.value=data.category||'';
     }
   }
   document.getElementById('vid-tag-status').textContent='';
@@ -8931,8 +9116,12 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
   const withMembers=_vidTagWithSelected.map(m=>`${m.ko}(${m.groupKo})`);
   statusEl.textContent='저장 중…';
   const withGroups=[..._vidTagGroupsSelected];
+  const catEl=document.getElementById('vid-tag-cat');
+  const category=catEl?catEl.value:undefined;
   const{id,ko}=_vidTagTarget;
-  const{error}=await sb.from(_YT_TABLE).update({members,with_members:withMembers,with_groups:withGroups}).eq('id',id);
+  const updatePayload={members,with_members:withMembers,with_groups:withGroups};
+  if(category!==undefined)updatePayload.category=category||null;
+  const{error}=await sb.from(_YT_TABLE).update(updatePayload).eq('id',id);
   if(error){statusEl.textContent='저장 실패: '+error.message;return;}
   statusEl.textContent='저장됨';
   setTimeout(()=>{
@@ -8985,6 +9174,8 @@ function _wireTotop(scrollEl){
 }
 [mobSheetInner,mobCardStackInner,connSheetInner].forEach(_wireTotop);
 _wireTotop(document.getElementById('side-panel'));
+_wireTotop(memberPanelEl);
+_wireTotop(connPanelInner);
 _totopBtn.addEventListener('click',e=>{
   e.stopPropagation();
   _totopScrollTarget?.scrollTo({top:0,behavior:'smooth'});
