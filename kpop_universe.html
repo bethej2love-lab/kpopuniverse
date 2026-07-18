@@ -676,7 +676,6 @@
   #gc-mem-label.toggleable:hover{color:#c8dcff;text-shadow:0 0 6px rgba(160,195,255,0.28),0 0 3px rgba(160,195,255,0.14);}
   #gc-mem-label.toggleable.on{color:rgba(170,205,255,0.95);text-shadow:0 0 6px rgba(140,175,255,0.35);}
   .gc-mem-name.gc-mem-inactive{opacity:0.55;}
-  #tt-inactive-badge{display:none;font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(180,100,100,0.22);color:rgba(225,155,155,0.9);white-space:nowrap;flex-shrink:0;letter-spacing:0.02em;}
   #gc-grid .val{font-size:14px;color:#c0d6f0;font-weight:500;line-height:20px;}
   #gc-grid #gc-fandom,#gc-grid #gc-leader{
     font-size:11px;font-weight:600;letter-spacing:.04em;
@@ -702,6 +701,12 @@
   #gc-ch-vid{margin-top:9px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.10);}
   #gc-ch-vid:empty{display:none;}
   .gc-ch-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
+  .gc-ch-search-wrap{position:relative;margin-bottom:8px;}
+  .gc-ch-search{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.10);border-radius:8px;padding:5px 26px 5px 9px;font-size:11.5px;color:#c8daf0;font-family:inherit;outline:none;transition:border-color .15s,background .15s;}
+  .gc-ch-search::placeholder{color:rgba(150,175,215,0.38);}
+  .gc-ch-search:focus{border-color:rgba(150,185,255,0.28);background:rgba(255,255,255,0.075);}
+  .gc-ch-search-clear{position:absolute;right:5px;top:50%;transform:translateY(-50%);display:none;background:none;border:none;color:rgba(150,175,215,0.45);font-size:14px;padding:2px 4px;cursor:pointer;line-height:1;}
+  .gc-ch-search-clear.visible{display:block;}
   .gc-ch-refresh{flex:0 0 auto;background:none;border:none;cursor:pointer;color:rgba(155,178,228,0.4);font-size:17px;padding:4px 6px;transition:color .15s;font-family:inherit;}
   .gc-ch-refresh:hover{color:#c0d6f0;}
   @keyframes gc-ch-spin{to{transform:rotate(360deg);}}
@@ -784,6 +789,12 @@
   .vid-tag-chip button{background:none;border:none;color:rgba(220,230,250,0.7);cursor:pointer;font-size:12px;padding:0;line-height:1;}
   #vid-tag-status{font-size:11.5px;color:rgba(155,178,228,0.7);margin-top:10px;min-height:14px;}
   #vid-tag-btns{display:flex;gap:8px;margin-top:16px;}
+  #vid-tag-hide{margin-top:8px;width:100%;padding:7px;border-radius:10px;border:0.5px solid rgba(220,90,90,0.30);background:rgba(220,90,90,0.08);color:rgba(240,150,150,0.80);font-size:11.5px;font-family:inherit;cursor:pointer;transition:background .15s,color .15s;}
+  #vid-tag-hide:hover{background:rgba(220,90,90,0.16);color:rgba(255,175,175,0.95);}
+  #vid-tag-hide.restore{border-color:rgba(100,180,120,0.35);background:rgba(100,180,120,0.09);color:rgba(145,220,165,0.85);}
+  #vid-tag-hide.restore:hover{background:rgba(100,180,120,0.18);color:rgba(175,240,190,0.95);}
+  #vid-tag-hidden-badge{display:none;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(220,90,90,0.15);color:rgba(240,150,150,0.85);margin-left:6px;vertical-align:middle;}
+  #vid-tag-hidden-badge.visible{display:inline;}
   /* ── 최애(bias) ─────────────────────────────────── */
   #pp-bias-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
   #pp-bias-chips:empty{margin-bottom:0;}
@@ -983,7 +994,7 @@
   .conn-only-toggle:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.22);color:rgba(220,235,255,0.95);}
   .conn-only-toggle:active{transform:scale(0.93);}
   .conn-only-toggle.active{background:rgba(155,178,228,0.22);color:#c8ddff;border-color:rgba(170,195,255,0.4);box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 0 10px rgba(155,178,228,0.25);}
-  .conn-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+  .conn-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;align-items:flex-start;}
   .conn-chip{
     padding:2px 2px 2px 0;font-size:13px;font-weight:600;cursor:pointer;
     background:none;border:none;
@@ -1023,8 +1034,7 @@
   .conn-group-chip.open{background:rgba(145,175,255,0.10);border-color:rgba(145,175,255,0.20);color:rgba(190,215,255,0.88);}
   .conn-group-chevron{font-size:10px;opacity:0.6;transition:transform .2s ease;display:inline-block;}
   .conn-group-chip.open .conn-group-chevron{transform:rotate(90deg);}
-  .conn-group-cnt{font-size:9.5px;opacity:0.6;font-weight:500;}
-  .conn-group-members{display:none;flex-wrap:wrap;gap:5px;padding:5px 0 3px 4px;}
+  .conn-group-members{display:none;flex-wrap:wrap;gap:5px;padding:4px 0 2px 2px;}
   .conn-group-members.open{display:flex;}
   .conn-chip:active,.conn-chip.lp-active{transform:scale(0.93);color:rgba(232,246,255,1.0);text-shadow:0 0 17px rgba(200,228,255,0.94),0 0 8px rgba(200,228,255,0.65),0 0 3px rgba(200,228,255,0.42);}
   .conn-no-video{font-size:11px;color:#5878a0;padding:4px 0;}
@@ -1401,7 +1411,7 @@
   </div>
 </div>
 <div id="fav-hint-callout">Start with Your Favorite!<span id="fhc-arrow"></span></div>
-<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><span id="tt-inactive-badge">탈퇴</span><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="tt-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버"><span class="nav-arr">‹</span><span id="tt-prev-name" class="nav-name"></span></button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버"><span id="tt-next-name" class="nav-name"></span><span class="nav-arr">›</span></button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="tt-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버"><span class="nav-arr">‹</span><span id="tt-prev-name" class="nav-name"></span></button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버"><span id="tt-next-name" class="nav-name"></span><span class="nav-arr">›</span></button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
@@ -1623,7 +1633,7 @@
 </div>
 <div id="vid-tag-overlay">
   <div id="vid-tag-panel">
-    <div class="pp-title">출연 멤버 지정</div>
+    <div class="pp-title">출연 멤버 지정<span id="vid-tag-hidden-badge">노출 제외됨</span></div>
     <div id="vid-tag-vidtitle"></div>
     <div style="font-size:10px;color:rgba(155,178,228,0.45);margin-bottom:8px">선택 없음 = 그룹 전체 영상 (그룹·멤버 카드 모두 노출)</div>
     <div id="vid-tag-members"></div>
@@ -1655,6 +1665,7 @@
       <button id="vid-tag-cancel" class="uc-btn">취소</button>
       <button id="vid-tag-save" class="uc-btn uc-btn-primary">저장</button>
     </div>
+    <button id="vid-tag-hide">노출 제외</button>
   </div>
 </div>
 <div id="pp-bias-emoji-overlay">
@@ -3273,7 +3284,7 @@ function _cleanTitle(t){return(t||'').replace(_TITLE_BREAK_RE,' ').replace(/ {2,
 // 언급된 영상은 동기화 단계(_ytFetchNewVideos)와 표시 단계(그룹/멤버/연결 카드 영상 목록) 양쪽에서 모두 걸러냄.
 // (그룹 구분 없이 전역 적용 — 특정 채널에만 국한하지 않음)
 function _isBannedVideoTitle(t){return /승리|seungri|태일|taeil/i.test(t||'');}
-function _filterBannedVideos(list){return(list||[]).filter(v=>!_isBannedVideoTitle(v.title));}
+function _filterBannedVideos(list){return(list||[]).filter(v=>!_isBannedVideoTitle(v.title)&&v.content_flag!=='hidden');}
 
 let _lbPlaylist=null,_lbIdx=-1,_lbCtx=null;
 let _lbSpeed=1; // 우측 탭존을 꾹 누르는 동안의 배속 (1 또는 2)
@@ -4674,12 +4685,12 @@ function _buildConnContent(container){
     const members=otherByGroup.get(gko);
     const isOpen=_connExpandedGroups.has(gko);
 
-    const groupWrap=document.createElement('div');groupWrap.style.cssText='width:100%;margin-top:2px;';
+    const groupWrap=document.createElement('div');groupWrap.style.cssText='display:flex;flex-direction:column;align-items:flex-start;';
 
     const groupChip=document.createElement('button');
     groupChip.type='button';
     groupChip.className='conn-group-chip'+(isOpen?' open':'');
-    groupChip.innerHTML=`${gko}<span class="conn-group-cnt">${members.length}명</span><span class="conn-group-chevron">›</span>`;
+    groupChip.innerHTML=`${gko}<span class="conn-group-chevron">›</span>`;
 
     const memberRow=document.createElement('div');
     memberRow.className='conn-group-members'+(isOpen?' open':'');
@@ -5297,7 +5308,6 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
   if(gInfo&&gInfo.color){const[cr,cg,cb]=gInfo.color;ttBar.style.background=`linear-gradient(90deg,rgba(${cr},${cg},${cb},0.50),rgba(${cr},${cg},${cb},0.18))`;}
   else ttBar.style.background='rgba(160,180,220,0.22)';
   document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
-  document.getElementById('tt-inactive-badge').style.display=a.active===false?'inline-block':'none';
   _renderGcLinks(a.links,'tt-links');
   const tgEl=document.getElementById('tg');
   tgEl.innerHTML='';tgEl.onclick=null;
@@ -8678,16 +8688,32 @@ async function _ytReclassifyShorts(){
 // ── 외부 채널 동기화 (M2·음방·직캠) ──
 function _ytApiKeyExt(){return(localStorage.getItem('kpu_ext_yt_key')||'').trim();}
 const _EXT_CHANNELS=[
-  {handle:'MnetM2',        url:'https://www.youtube.com/@MnetM2',          name:'M2'},
-  {handle:'Mnet',          url:'https://www.youtube.com/@Mnet',             name:'엠넷 (엠카운트다운)'},
-  {handle:'KBSKpop',       url:'https://www.youtube.com/@KBSKpop',          name:'뮤직뱅크'},
-  {handle:'MBCkpop',       url:'https://www.youtube.com/@MBCkpop',          name:'쇼음악중심'},
-  {handle:'SBSKPOP',       url:'https://www.youtube.com/@SBSKPOP',          name:'인기가요'},
-  {handle:'SBSKPOP_ZOOM',  url:'https://www.youtube.com/@SBSKPOP_ZOOM',     name:'인기가요 ZOOM'},
-  {handle:'ALLTHEKPOP',    url:'https://www.youtube.com/@ALLTHEKPOP',       name:'쇼챔피언'},
-  {handle:'thekpop',       url:'https://www.youtube.com/@thekpop',          name:'더 쇼'},
-  {handle:'STUDIOCHOOM',   url:'https://www.youtube.com/@STUDIOCHOOM',      name:'스튜디오 춤'},
-  {handle:'itsLiveOfficial',url:'https://www.youtube.com/@itsLiveOfficial', name:'잇츠라이브'},
+  // ── 음악 방송 / 직캠 ──
+  {handle:'MnetM2',           url:'https://www.youtube.com/@MnetM2',           name:'M2'},
+  {handle:'Mnet',             url:'https://www.youtube.com/@Mnet',              name:'엠넷 (엠카운트다운)'},
+  {handle:'KBSKpop',          url:'https://www.youtube.com/@KBSKpop',           name:'뮤직뱅크'},
+  {handle:'MBCkpop',          url:'https://www.youtube.com/@MBCkpop',           name:'쇼음악중심'},
+  {handle:'SBSKPOP',          url:'https://www.youtube.com/@SBSKPOP',           name:'인기가요'},
+  {handle:'SBSKPOP_ZOOM',     url:'https://www.youtube.com/@SBSKPOP_ZOOM',      name:'인기가요 ZOOM'},
+  {handle:'ALLTHEKPOP',       url:'https://www.youtube.com/@ALLTHEKPOP',        name:'쇼챔피언'},
+  {handle:'thekpop',          url:'https://www.youtube.com/@thekpop',           name:'더 쇼'},
+  {handle:'STUDIOCHOOM',      url:'https://www.youtube.com/@STUDIOCHOOM',       name:'스튜디오 춤'},
+  {handle:'itsLiveOfficial',  url:'https://www.youtube.com/@itsLiveOfficial',   name:'잇츠라이브'},
+  {handle:'SoundBOMB360',     url:'https://www.youtube.com/@SoundBOMB360',      name:'사운드밤 360'},
+  // ── 예능 ──
+  {handle:'ch117',            url:'https://www.youtube.com/@ch117',             name:'채널일일칠'},
+  {handle:'mmtg_official',    url:'https://www.youtube.com/@mmtg_official',     name:'MMTG'},
+  {handle:'Diggle',           url:'https://www.youtube.com/@Diggle',            name:'디글'},
+  {handle:'MBC_officialchannel',url:'https://www.youtube.com/@MBC_officialchannel',name:'MBC'},
+  {handle:'JTBCvoyage',       url:'https://www.youtube.com/@JTBCvoyage',        name:'JTBC voyage'},
+  {handle:'Pixid',            url:'https://www.youtube.com/@Pixid',             name:'픽시드'},
+  {handle:'idolhumandocu',    url:'https://www.youtube.com/@idolhumandocu',     name:'아이돌인간다큐'},
+  {handle:'ootbstudio',       url:'https://www.youtube.com/@ootbstudio',        name:'OOTB 스튜디오'},
+  {handle:'ddeunddeun',       url:'https://www.youtube.com/@ddeunddeun',        name:'뜬뜬'},
+  {handle:'15ya_egg',         url:'https://www.youtube.com/@15ya_egg',          name:'채널 십오야'},
+  {handle:'muply',            url:'https://www.youtube.com/@muply',             name:'뮤플리'},
+  {handle:'youngji_boxmedia', url:'https://www.youtube.com/@youngji_boxmedia',  name:'영지 박스미디어'},
+  {handle:'workman',          url:'https://www.youtube.com/@workman',           name:'워크맨'},
 ];
 
 // 제목에서 그룹/멤버 매칭. 토큰 경계 기준으로 GROUPS/ARTISTS 데이터와 대조.
@@ -8709,12 +8735,27 @@ function _m2ParseTitle(title){
     if(seen.has(ko))continue;
     if(tokens.some(t=>hit(t))){matchedGroupKos.push(ko);seen.add(ko);}
   }
+  // "이름(그룹명)" 패턴에서 그룹명이 우리 시스템에 없는 경우 → 타 소속 동명이인 신호
+  const knownGroupTokens=new Set();
+  Object.entries(GROUPS).forEach(([ko,v])=>{
+    knownGroupTokens.add(ko.toUpperCase());
+    if(v.en)knownGroupTokens.add(v.en.toUpperCase());
+  });
+  function hasForeignGroupSuffix(name){
+    const escaped=name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    const m=title.match(new RegExp(escaped+'\\s*\\(([^)]+)\\)','i'));
+    if(!m)return false;
+    const adj=m[1].trim().toUpperCase();
+    for(const tok of knownGroupTokens){if(adj===tok||adj.includes(tok)||tok.includes(adj))return false;}
+    return true;
+  }
   // 그룹 미매칭이면 멤버 이름으로 그룹 역추론
   if(!matchedGroupKos.length){
     const inferred=new Map(); // groupKo -> [memberKo]
     for(const a of ARTISTS){
       if(!GROUPS[a.group.ko])continue;
-      if([a.name.ko,a.name.en].filter(Boolean).some(t=>hit(t))){
+      const names=[a.name.ko,a.name.en].filter(Boolean);
+      if(names.some(t=>hit(t))&&!names.some(t=>hasForeignGroupSuffix(t))){
         if(!inferred.has(a.group.ko))inferred.set(a.group.ko,[]);
         inferred.get(a.group.ko).push(a.name.ko);
       }
@@ -8947,8 +8988,9 @@ function _makeChVidController(contId){
         // 아이유 팔레트처럼 우리 그룹 전체가 with_groups로 태깅된 경우도 같이 노출
         q=q.or(`and(group_ko.eq.${ko},members.eq.{}),with_groups.cs.{${ko}}`);
       }
-      q=q.order('published_at',{ascending:false}).range(offset,offset+_YT_PAGE-1);
+      if(state.searchQ)q=q.ilike('title',`%${state.searchQ}%`);
       if(filter!=='all')q=q.eq('category',filter);
+      q=q.order('published_at',{ascending:false}).range(offset,offset+_YT_PAGE-1);
       const{data,error,count}=await q;
       if(myGen!==state.gen)return; // 대기 중 다른 그룹/새로고침으로 전환됨: 그쪽이 이미 자신의 잠금을 걸어놨으므로 여기선 해제하지 않는다
       if(error)throw new Error(error.message);
@@ -9009,8 +9051,8 @@ function _makeChVidController(contId){
     if(!cont)return;
     cont.innerHTML='';
     if(!sb)return;
-    state={ko,memberKo:memberKo||null,filter:'all',onlyMe:false,offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
-    cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters"></div><button class="gc-ch-refresh" title="새로고침">↻</button></div><div class="gc-ch-grid"></div><div class="gc-ch-more-wrap"></div>`;
+    state={ko,memberKo:memberKo||null,filter:'all',onlyMe:false,searchQ:'',offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
+    cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters"></div><button class="gc-ch-refresh" title="새로고침">↻</button></div><div class="gc-ch-search-wrap"><input class="gc-ch-search" placeholder="영상 검색…" autocomplete="off" spellcheck="false"><button class="gc-ch-search-clear" aria-label="검색어 지우기">\xD7</button></div><div class="gc-ch-grid"></div><div class="gc-ch-more-wrap"></div>`;
     const filEl=cont.querySelector('.gc-ch-filters');
     // 멤버 카드는 MV 탭 제외 — 뮤비는 그룹 단위 콘텐츠라 그룹 카드 MV 탭에서 이미 다뤄지고, 멤버 개인 태깅 영상엔 거의 안 나옴
     const tabs=memberKo?[['all','전체'],['live','라이브'],['short','Shorts']]:[['all','전체'],['mv','MV'],['live','라이브'],['short','Shorts']];
@@ -9048,6 +9090,26 @@ function _makeChVidController(contId){
       refBtn.classList.add('spinning');
       setTimeout(()=>refBtn.classList.remove('spinning'),500);
       load(ko,true,true);
+    });
+    const searchInput=cont.querySelector('.gc-ch-search');
+    const searchClear=cont.querySelector('.gc-ch-search-clear');
+    let _searchTimer=null;
+    searchInput?.addEventListener('input',()=>{
+      clearTimeout(_searchTimer);
+      _searchTimer=setTimeout(()=>{
+        state.searchQ=searchInput.value.trim();
+        state.offset=0;
+        searchClear.classList.toggle('visible',!!state.searchQ);
+        load(ko,true);
+      },350);
+    });
+    searchClear?.addEventListener('click',e=>{
+      e.stopPropagation();
+      searchInput.value='';
+      state.searchQ='';
+      state.offset=0;
+      searchClear.classList.remove('visible');
+      load(ko,true);
     });
     if(observer)observer.disconnect();
     const moreWrap=cont.querySelector('.gc-ch-more-wrap');
@@ -9236,8 +9298,13 @@ async function _openVidTagModal(v,ko){
       const flag=data.content_flag||'';
       const etcEl=document.getElementById('vid-tag-flag-etc');
       const extEl=document.getElementById('vid-tag-flag-ext');
+      const isHidden=flag==='hidden';
       if(etcEl)etcEl.checked=flag==='기타';
       if(extEl)extEl.checked=flag==='외부인';
+      const hideBtn=document.getElementById('vid-tag-hide');
+      const hideBadge=document.getElementById('vid-tag-hidden-badge');
+      if(hideBtn){hideBtn.textContent=isHidden?'노출 복원':'노출 제외';hideBtn.classList.toggle('restore',isHidden);}
+      if(hideBadge)hideBadge.classList.toggle('visible',isHidden);
     }
   }
   document.getElementById('vid-tag-status').textContent='';
@@ -9245,6 +9312,10 @@ async function _openVidTagModal(v,ko){
 function _closeVidTagModal(){
   document.getElementById('vid-tag-overlay').classList.remove('open');
   _vidTagTarget=null;
+  const hideBtn=document.getElementById('vid-tag-hide');
+  const hideBadge=document.getElementById('vid-tag-hidden-badge');
+  if(hideBtn){hideBtn.textContent='노출 제외';hideBtn.classList.remove('restore');}
+  if(hideBadge)hideBadge.classList.remove('visible');
 }
 document.getElementById('vid-tag-cancel').addEventListener('click',e=>{e.stopPropagation();_closeVidTagModal();});
 document.getElementById('vid-tag-overlay').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)_closeVidTagModal();});
@@ -9319,6 +9390,24 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
     withGroups.forEach(gko=>_gcChVidCtl.reloadIfShowing(gko));
     _refreshOpenCardCollab(); // with 태그 추가/변경으로 "연결" 버튼 노출 여부가 바뀌었을 수 있으니 갱신
   },500);
+});
+document.getElementById('vid-tag-hide').addEventListener('click',async e=>{
+  e.stopPropagation();
+  if(!_vidTagTarget||!sb)return;
+  const statusEl=document.getElementById('vid-tag-status');
+  const hideBtn=document.getElementById('vid-tag-hide');
+  const hideBadge=document.getElementById('vid-tag-hidden-badge');
+  const isCurrentlyHidden=hideBtn.classList.contains('restore');
+  const newFlag=isCurrentlyHidden?null:'hidden';
+  statusEl.textContent='저장 중…';
+  const{ko,id}=_vidTagTarget;
+  const{error}=await sb.from(_YT_TABLE).update({content_flag:newFlag}).eq('id',id);
+  if(error){statusEl.textContent='저장 실패: '+error.message;return;}
+  setTimeout(()=>{
+    _closeVidTagModal();
+    _gcChVidCtl.reloadIfShowing(ko);
+    _ttChVidCtl.reloadIfShowing(ko);
+  },300);
 });
 
 
