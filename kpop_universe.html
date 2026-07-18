@@ -1060,6 +1060,7 @@
   /* ── Zoom slider ────────────────────────────────── */
   #zoom-ctrl{position:fixed;left:18px;bottom:24px;display:flex;flex-direction:column;align-items:center;gap:0;z-index:50;user-select:none;width:30px;background:rgba(12,16,36,0.60);border:1px solid rgba(140,165,220,0.16);border-radius:14px;padding:10px 0 0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 2px 14px rgba(0,0,0,0.22);transition:left 0.32s cubic-bezier(0.4,0,0.2,1);}
   #journal-sidebar.open~#zoom-ctrl{left:278px;}
+  #zoom-ctrl.zoom-feed-open{left:318px;}
   @media(max-width:768px){#zoom-ctrl{display:none;}}
   #zoom-track{width:2px;height:96px;background:rgba(140,165,220,0.15);border-radius:1px;position:relative;cursor:pointer;flex-shrink:0;margin-bottom:8px;}
   #zoom-thumb{width:10px;height:10px;background:rgba(150,180,255,0.85);border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);top:0;cursor:grab;box-shadow:0 0 6px rgba(110,150,255,0.55);transition:background .15s,box-shadow .15s;}
@@ -1470,6 +1471,11 @@
     <button class="sp-yt-sync" id="sp-yt-sync">채널 영상 전체 동기화</button>
     <button class="sp-yt-sync" id="sp-yt-reclassify" style="margin-top:4px;opacity:.8;">Shorts 자동 감지 (기존 영상)</button>
     <div class="sp-yt-prog" id="sp-yt-prog"></div>
+    <div style="margin-top:10px;border-top:0.5px solid rgba(155,178,228,0.15);padding-top:10px">
+      <div class="sp-sec-lbl" style="margin-bottom:6px">M2 채널 (엠넷)</div>
+      <button class="sp-yt-sync" id="sp-m2-sync">M2 최신 영상 가져오기</button>
+      <div class="sp-yt-prog" id="sp-m2-prog"></div>
+    </div>
   </div>
 </div>
 <div id="mob-sheet">
@@ -8309,7 +8315,7 @@ buildUniverse().catch(err=>{
 function _openFeedOverlay(){
   const el=document.getElementById('feed-overlay');
   el.classList.add('open');
-  if(!isMob())_bringToFront(el);
+  if(!isMob()){_bringToFront(el);document.getElementById('zoom-ctrl').classList.add('zoom-feed-open');}
   document.body.classList.add('feed-open');
   document.getElementById('tab-feed').classList.add('feed-open');
   _buildFeedAnniversaries();
@@ -8330,6 +8336,7 @@ function _openFeedOverlay(){
 }
 function _closeFeedOverlay(){
   document.getElementById('feed-overlay').classList.remove('open');
+  document.getElementById('zoom-ctrl').classList.remove('zoom-feed-open');
   document.body.classList.remove('feed-open');
   document.getElementById('tab-feed').classList.remove('feed-open');
   document.getElementById('dh-feed-btn')?.classList.remove('active');
@@ -8658,6 +8665,121 @@ async function _ytReclassifyShorts(){
   }catch(e){
     _ytSetProg('오류: '+e.message);
   }finally{
+    if(btn)btn.disabled=false;
+  }
+}
+
+// ── M2 채널 동기화 ──
+const _YT_M2_URL='https://www.youtube.com/@MnetM2';
+const _YT_M2_LAST_KEY='kpu_m2_last_vid';
+
+// 제목에서 그룹/멤버 매칭. 토큰 경계 기준으로 GROUPS/ARTISTS 데이터와 대조.
+function _m2ParseTitle(title){
+  // 특수문자를 공백으로 치환해 토큰 경계 확보, 앞뒤 공백 추가
+  const norm=' '+title.toUpperCase().replace(/[^가-힣a-zA-Z0-9]/g,' ').replace(/\s+/g,' ')+' ';
+  function hit(name){
+    if(!name||name.length<2)return false;
+    const n=name.toUpperCase().replace(/[^가-힣a-zA-Z0-9]/g,' ').replace(/\s+/g,' ');
+    return norm.includes(' '+n+' ');
+  }
+  // 긴 이름 우선 정렬 (부분 매칭 방지)
+  const groupsSorted=Object.entries(GROUPS)
+    .map(([ko,v])=>({ko,tokens:[ko,v.en].filter(Boolean)}))
+    .sort((a,b)=>Math.max(...b.tokens.map(t=>t.length))-Math.max(...a.tokens.map(t=>t.length)));
+  const matchedGroupKos=[];
+  const seen=new Set();
+  for(const{ko,tokens}of groupsSorted){
+    if(seen.has(ko))continue;
+    if(tokens.some(t=>hit(t))){matchedGroupKos.push(ko);seen.add(ko);}
+  }
+  // 그룹 미매칭이면 멤버 이름으로 그룹 역추론
+  if(!matchedGroupKos.length){
+    const inferred=new Map(); // groupKo -> [memberKo]
+    for(const a of ARTISTS){
+      if(!GROUPS[a.group.ko])continue;
+      if([a.name.ko,a.name.en].filter(Boolean).some(t=>hit(t))){
+        if(!inferred.has(a.group.ko))inferred.set(a.group.ko,[]);
+        inferred.get(a.group.ko).push(a.name.ko);
+      }
+    }
+    if(!inferred.size)return null;
+    const result=[];
+    for(const[gko,members]of inferred){result.push({gko,members});}
+    return{primaryGroup:result[0].gko,withGroups:result.slice(1).map(r=>r.gko),
+           membersByGroup:Object.fromEntries(result.map(r=>[r.gko,r.members]))};
+  }
+  // 각 매칭 그룹에서 멤버 추출
+  const membersByGroup={};
+  for(const gko of matchedGroupKos){
+    const matched=ARTISTS.filter(a=>a.group.ko===gko&&[a.name.ko,a.name.en].filter(Boolean).some(t=>hit(t))).map(a=>a.name.ko);
+    membersByGroup[gko]=matched;
+  }
+  return{primaryGroup:matchedGroupKos[0],withGroups:matchedGroupKos.slice(1),membersByGroup};
+}
+
+let _m2Syncing=false;
+async function _ytSyncM2(){
+  if(_m2Syncing)return;
+  const key=_ytApiKey();
+  if(!key){document.getElementById('sp-m2-prog').textContent='API 키를 먼저 입력해주세요';return;}
+  if(!sb){document.getElementById('sp-m2-prog').textContent='Supabase 연결 없음';return;}
+  _m2Syncing=true;
+  const btn=document.getElementById('sp-m2-sync');
+  if(btn)btn.disabled=true;
+  const setProg=msg=>{const el=document.getElementById('sp-m2-prog');if(el)el.textContent=msg;};
+  try{
+    setProg('M2 채널 정보 가져오는 중…');
+    const uploadsId=await _ytGetUploadsId(_YT_M2_URL,key);
+    const sinceId=localStorage.getItem(_YT_M2_LAST_KEY)||null;
+    setProg('영상 목록 가져오는 중…'+(sinceId?'':' (처음 동기화 — 시간이 걸릴 수 있어요)'));
+    const{vids,total}=await _ytFetchNewVideos(uploadsId,key,sinceId,(fetched,tot)=>{
+      setProg(`영상 목록 가져오는 중… ${fetched}${tot?'/'+tot:''}개`);
+    });
+    if(!vids.length){setProg('새 영상 없음');return;}
+    setProg(`${vids.length}개 매칭 중…`);
+    // 각 영상 파싱 → Supabase row 생성
+    const rows=[];
+    let skipped=0;
+    for(const v of vids){
+      const match=_m2ParseTitle(v.title);
+      if(!match){skipped++;continue;}
+      // 주 그룹 멤버 (그냥 이름만 — group_ko로 소속 확인)
+      const members=match.membersByGroup[match.primaryGroup]||[];
+      // 2번째 이상 그룹: 특정 멤버 감지됐으면 "이름(그룹)" 형식의 with_members로,
+      // 그룹 전체만 감지됐으면 with_groups로 — 이 둘을 구분해야 멤버 카드·연결 카드까지 올바르게 노출됨
+      const withGroups=[],withMembers=[];
+      for(const gko of match.withGroups){
+        const secMembers=match.membersByGroup[gko]||[];
+        if(secMembers.length){
+          secMembers.forEach(mko=>withMembers.push(`${mko}(${gko})`));
+        }else{
+          withGroups.push(gko);
+        }
+      }
+      rows.push({
+        id:v.id,title:v.title,thumb:v.thumb,published_at:v.published_at,
+        category:v.category==='other'?'live':v.category,
+        group_ko:match.primaryGroup,
+        members,
+        with_groups:withGroups,
+        with_members:withMembers
+      });
+    }
+    if(!rows.length){setProg(`완료 — 매칭 가능한 영상 없음 (건너뜀: ${skipped}개)`);return;}
+    // Supabase upsert (영상 ID 기준 충돌 시 업데이트)
+    setProg(`${rows.length}개 저장 중…`);
+    for(let i=0;i<rows.length;i+=200){
+      const{error}=await sb.from(_YT_TABLE).upsert(rows.slice(i,i+200),{onConflict:'id',ignoreDuplicates:true});
+      if(error)throw new Error(error.message);
+    }
+    // 마지막으로 처리한 영상 ID 저장 (다음 동기화 기준점)
+    if(vids[0]?.id)localStorage.setItem(_YT_M2_LAST_KEY,vids[0].id);
+    setProg(`완료! ${rows.length}개 추가 (건너뜀: ${skipped}개)`);
+  }catch(e){
+    setProg('오류: '+e.message);
+    console.error('[M2 sync]',e);
+  }finally{
+    _m2Syncing=false;
     if(btn)btn.disabled=false;
   }
 }
@@ -9181,6 +9303,7 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
   keyEl?.addEventListener('blur',e=>localStorage.setItem('kpu_yt_key',e.target.value.trim()));
   document.getElementById('sp-yt-sync')?.addEventListener('click',_ytSyncAll);
   document.getElementById('sp-yt-reclassify')?.addEventListener('click',_ytReclassifyShorts);
+  document.getElementById('sp-m2-sync')?.addEventListener('click',_ytSyncM2);
 })();
 
 // 그룹/멤버/연결 카드 공통 "맨 위로" 버튼 — 스크롤로 아래로 많이 내려간 뒤 카드 맨 위로 쉽게 돌아가기 위함.
