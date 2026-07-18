@@ -676,6 +676,7 @@
   #gc-mem-label.toggleable:hover{color:#c8dcff;text-shadow:0 0 6px rgba(160,195,255,0.28),0 0 3px rgba(160,195,255,0.14);}
   #gc-mem-label.toggleable.on{color:rgba(170,205,255,0.95);text-shadow:0 0 6px rgba(140,175,255,0.35);}
   .gc-mem-name.gc-mem-inactive{opacity:0.55;}
+  #tt-inactive-badge{display:none;font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(180,100,100,0.22);color:rgba(225,155,155,0.9);white-space:nowrap;flex-shrink:0;letter-spacing:0.02em;}
   #gc-grid .val{font-size:14px;color:#c0d6f0;font-weight:500;line-height:20px;}
   #gc-grid #gc-fandom,#gc-grid #gc-leader{
     font-size:11px;font-weight:600;letter-spacing:.04em;
@@ -1400,7 +1401,7 @@
   </div>
 </div>
 <div id="fav-hint-callout">Start with Your Favorite!<span id="fhc-arrow"></span></div>
-<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="tt-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버"><span class="nav-arr">‹</span><span id="tt-prev-name" class="nav-name"></span></button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버"><span id="tt-next-name" class="nav-name"></span><span class="nav-arr">›</span></button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><span id="tt-inactive-badge">탈퇴</span><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="tt-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버"><span class="nav-arr">‹</span><span id="tt-prev-name" class="nav-name"></span></button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버"><span id="tt-next-name" class="nav-name"></span><span class="nav-arr">›</span></button></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
@@ -1472,9 +1473,10 @@
     <button class="sp-yt-sync" id="sp-yt-reclassify" style="margin-top:4px;opacity:.8;">Shorts 자동 감지 (기존 영상)</button>
     <div class="sp-yt-prog" id="sp-yt-prog"></div>
     <div style="margin-top:10px;border-top:0.5px solid rgba(155,178,228,0.15);padding-top:10px">
-      <div class="sp-sec-lbl" style="margin-bottom:6px">M2 채널 (엠넷)</div>
-      <button class="sp-yt-sync" id="sp-m2-sync">M2 최신 영상 가져오기</button>
-      <div class="sp-yt-prog" id="sp-m2-prog"></div>
+      <div class="sp-sec-lbl" style="margin-bottom:6px">외부 채널 (M2·음방·직캠)</div>
+      <input type="text" class="sp-yt-key" id="sp-ext-yt-key" placeholder="외부 채널 API 키 (AIzaSy…)" autocomplete="off" spellcheck="false">
+      <button class="sp-yt-sync" id="sp-ext-sync" style="margin-top:6px">외부 채널 전체 동기화</button>
+      <div class="sp-yt-prog" id="sp-ext-prog"></div>
     </div>
   </div>
 </div>
@@ -1623,6 +1625,7 @@
   <div id="vid-tag-panel">
     <div class="pp-title">출연 멤버 지정</div>
     <div id="vid-tag-vidtitle"></div>
+    <div style="font-size:10px;color:rgba(155,178,228,0.45);margin-bottom:8px">선택 없음 = 그룹 전체 영상 (그룹·멤버 카드 모두 노출)</div>
     <div id="vid-tag-members"></div>
     <div class="pp-section" style="margin-top:14px">
       <label class="pp-label" for="vid-tag-with-search">타 그룹 멤버 (선택)</label>
@@ -1631,15 +1634,21 @@
       <div id="vid-tag-with-chips"></div>
     </div>
     <div class="pp-section" style="margin-top:14px">
-      <label class="pp-label" for="vid-tag-cat">영상 분류 (관리자)</label>
+      <label class="pp-label" for="vid-tag-cat">영상 포맷 (관리자)</label>
       <select id="vid-tag-cat" class="pp-input" style="cursor:pointer">
-        <option value="">기본 (팬캠)</option>
+        <option value="">기본</option>
         <option value="mv">MV</option>
         <option value="live">라이브</option>
         <option value="short">Shorts</option>
-        <option value="기타">기타</option>
-        <option value="외부인">외부인</option>
       </select>
+    </div>
+    <div class="pp-section" style="margin-top:10px;display:flex;gap:18px">
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11.5px;color:rgba(185,205,245,0.75)">
+        <input type="checkbox" id="vid-tag-flag-etc" style="accent-color:rgba(155,178,228,0.9)">기타
+      </label>
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11.5px;color:rgba(185,205,245,0.75)">
+        <input type="checkbox" id="vid-tag-flag-ext" style="accent-color:rgba(155,178,228,0.9)">외부인 포함
+      </label>
     </div>
     <div id="vid-tag-status"></div>
     <div id="vid-tag-btns">
@@ -3586,13 +3595,9 @@ document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropag
       const canNext=_lbPlaylist&&_lbIdx<_lbPlaylist.length-1;
       const thresh=vel>0.45?28:72; // 빠른 플릭은 낮은 임계값
       if(dy<-thresh&&canNext){
-        _lbWrap.style.transition='transform .2s cubic-bezier(0.4,0,1,1),opacity .18s ease';
-        _lbWrap.style.transform='translateY(-108vh)';_lbWrap.style.opacity='0';
-        setTimeout(()=>{_lbGo(1);_lbSlideIn(-1);},195);
+        _lbGo(1);_lbSlideIn(-1);
       }else if(dy>thresh&&canPrev){
-        _lbWrap.style.transition='transform .2s cubic-bezier(0.4,0,1,1),opacity .18s ease';
-        _lbWrap.style.transform='translateY(108vh)';_lbWrap.style.opacity='0';
-        setTimeout(()=>{_lbGo(-1);_lbSlideIn(1);},195);
+        _lbGo(-1);_lbSlideIn(1);
       }else{
         // 스프링으로 복귀
         _lbWrap.style.transition='transform .4s cubic-bezier(0.22,1,0.36,1),opacity .3s ease';
@@ -5292,6 +5297,7 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
   if(gInfo&&gInfo.color){const[cr,cg,cb]=gInfo.color;ttBar.style.background=`linear-gradient(90deg,rgba(${cr},${cg},${cb},0.50),rgba(${cr},${cg},${cb},0.18))`;}
   else ttBar.style.background='rgba(160,180,220,0.22)';
   document.getElementById('tn').textContent=currentLang==='ko'?a.name.ko:(a.name.en||a.name.ko);
+  document.getElementById('tt-inactive-badge').style.display=a.active===false?'inline-block':'none';
   _renderGcLinks(a.links,'tt-links');
   const tgEl=document.getElementById('tg');
   tgEl.innerHTML='';tgEl.onclick=null;
@@ -8669,9 +8675,20 @@ async function _ytReclassifyShorts(){
   }
 }
 
-// ── M2 채널 동기화 ──
-const _YT_M2_URL='https://www.youtube.com/@MnetM2';
-const _YT_M2_LAST_KEY='kpu_m2_last_vid';
+// ── 외부 채널 동기화 (M2·음방·직캠) ──
+function _ytApiKeyExt(){return(localStorage.getItem('kpu_ext_yt_key')||'').trim();}
+const _EXT_CHANNELS=[
+  {handle:'MnetM2',        url:'https://www.youtube.com/@MnetM2',          name:'M2'},
+  {handle:'Mnet',          url:'https://www.youtube.com/@Mnet',             name:'엠넷 (엠카운트다운)'},
+  {handle:'KBSKpop',       url:'https://www.youtube.com/@KBSKpop',          name:'뮤직뱅크'},
+  {handle:'MBCkpop',       url:'https://www.youtube.com/@MBCkpop',          name:'쇼음악중심'},
+  {handle:'SBSKPOP',       url:'https://www.youtube.com/@SBSKPOP',          name:'인기가요'},
+  {handle:'SBSKPOP_ZOOM',  url:'https://www.youtube.com/@SBSKPOP_ZOOM',     name:'인기가요 ZOOM'},
+  {handle:'ALLTHEKPOP',    url:'https://www.youtube.com/@ALLTHEKPOP',       name:'쇼챔피언'},
+  {handle:'thekpop',       url:'https://www.youtube.com/@thekpop',          name:'더 쇼'},
+  {handle:'STUDIOCHOOM',   url:'https://www.youtube.com/@STUDIOCHOOM',      name:'스튜디오 춤'},
+  {handle:'itsLiveOfficial',url:'https://www.youtube.com/@itsLiveOfficial', name:'잇츠라이브'},
+];
 
 // 제목에서 그룹/멤버 매칭. 토큰 경계 기준으로 GROUPS/ARTISTS 데이터와 대조.
 function _m2ParseTitle(title){
@@ -8717,71 +8734,74 @@ function _m2ParseTitle(title){
   return{primaryGroup:matchedGroupKos[0],withGroups:matchedGroupKos.slice(1),membersByGroup};
 }
 
-let _m2Syncing=false;
-async function _ytSyncM2(){
-  if(_m2Syncing)return;
-  const key=_ytApiKey();
-  if(!key){document.getElementById('sp-m2-prog').textContent='API 키를 먼저 입력해주세요';return;}
-  if(!sb){document.getElementById('sp-m2-prog').textContent='Supabase 연결 없음';return;}
-  _m2Syncing=true;
-  const btn=document.getElementById('sp-m2-sync');
-  if(btn)btn.disabled=true;
-  const setProg=msg=>{const el=document.getElementById('sp-m2-prog');if(el)el.textContent=msg;};
-  try{
-    setProg('M2 채널 정보 가져오는 중…');
-    const uploadsId=await _ytGetUploadsId(_YT_M2_URL,key);
-    const sinceId=localStorage.getItem(_YT_M2_LAST_KEY)||null;
-    setProg('영상 목록 가져오는 중…'+(sinceId?'':' (처음 동기화 — 시간이 걸릴 수 있어요)'));
-    const{vids,total}=await _ytFetchNewVideos(uploadsId,key,sinceId,(fetched,tot)=>{
-      setProg(`영상 목록 가져오는 중… ${fetched}${tot?'/'+tot:''}개`);
+// 채널 1개 분량 파싱 → Supabase rows 배열 반환
+function _extBuildRows(vids){
+  const rows=[];let skipped=0;
+  for(const v of vids){
+    const match=_m2ParseTitle(v.title);
+    if(!match){skipped++;continue;}
+    const members=match.membersByGroup[match.primaryGroup]||[];
+    const withGroups=[],withMembers=[];
+    for(const gko of match.withGroups){
+      const sec=match.membersByGroup[gko]||[];
+      if(sec.length){sec.forEach(mko=>withMembers.push(`${mko}(${gko})`));}
+      else{withGroups.push(gko);}
+    }
+    rows.push({
+      id:v.id,title:v.title,thumb:v.thumb,published_at:v.published_at,
+      category:v.category==='other'?'live':v.category,
+      group_ko:match.primaryGroup,members,with_groups:withGroups,with_members:withMembers
     });
-    if(!vids.length){setProg('새 영상 없음');return;}
-    setProg(`${vids.length}개 매칭 중…`);
-    // 각 영상 파싱 → Supabase row 생성
-    const rows=[];
-    let skipped=0;
-    for(const v of vids){
-      const match=_m2ParseTitle(v.title);
-      if(!match){skipped++;continue;}
-      // 주 그룹 멤버 (그냥 이름만 — group_ko로 소속 확인)
-      const members=match.membersByGroup[match.primaryGroup]||[];
-      // 2번째 이상 그룹: 특정 멤버 감지됐으면 "이름(그룹)" 형식의 with_members로,
-      // 그룹 전체만 감지됐으면 with_groups로 — 이 둘을 구분해야 멤버 카드·연결 카드까지 올바르게 노출됨
-      const withGroups=[],withMembers=[];
-      for(const gko of match.withGroups){
-        const secMembers=match.membersByGroup[gko]||[];
-        if(secMembers.length){
-          secMembers.forEach(mko=>withMembers.push(`${mko}(${gko})`));
-        }else{
-          withGroups.push(gko);
-        }
-      }
-      rows.push({
-        id:v.id,title:v.title,thumb:v.thumb,published_at:v.published_at,
-        category:v.category==='other'?'live':v.category,
-        group_ko:match.primaryGroup,
-        members,
-        with_groups:withGroups,
-        with_members:withMembers
-      });
-    }
-    if(!rows.length){setProg(`완료 — 매칭 가능한 영상 없음 (건너뜀: ${skipped}개)`);return;}
-    // Supabase upsert (영상 ID 기준 충돌 시 업데이트)
-    setProg(`${rows.length}개 저장 중…`);
-    for(let i=0;i<rows.length;i+=200){
-      const{error}=await sb.from(_YT_TABLE).upsert(rows.slice(i,i+200),{onConflict:'id',ignoreDuplicates:true});
-      if(error)throw new Error(error.message);
-    }
-    // 마지막으로 처리한 영상 ID 저장 (다음 동기화 기준점)
-    if(vids[0]?.id)localStorage.setItem(_YT_M2_LAST_KEY,vids[0].id);
-    setProg(`완료! ${rows.length}개 추가 (건너뜀: ${skipped}개)`);
-  }catch(e){
-    setProg('오류: '+e.message);
-    console.error('[M2 sync]',e);
-  }finally{
-    _m2Syncing=false;
-    if(btn)btn.disabled=false;
   }
+  return{rows,skipped};
+}
+
+let _extSyncing=false;
+async function _ytSyncExtChannels(){
+  if(_extSyncing)return;
+  const key=_ytApiKeyExt()||_ytApiKey(); // 전용 키 없으면 기존 키로 폴백
+  if(!key){document.getElementById('sp-ext-prog').textContent='API 키를 먼저 입력해주세요';return;}
+  if(!sb){document.getElementById('sp-ext-prog').textContent='Supabase 연결 없음';return;}
+  _extSyncing=true;
+  const btn=document.getElementById('sp-ext-sync');
+  if(btn)btn.disabled=true;
+  const setProg=msg=>{const el=document.getElementById('sp-ext-prog');if(el)el.textContent=msg;};
+  let totalAdded=0,totalSkipped=0,errors=0;
+  for(let ci=0;ci<_EXT_CHANNELS.length;ci++){
+    const ch=_EXT_CHANNELS[ci];
+    const prefix=`[${ci+1}/${_EXT_CHANNELS.length}] ${ch.name}`;
+    try{
+      setProg(`${prefix} 채널 정보 가져오는 중…`);
+      const uploadsId=await _ytGetUploadsId(ch.url,key);
+      const lsKey=`kpu_ext_last_${ch.handle}`;
+      const sinceId=localStorage.getItem(lsKey)||null;
+      setProg(`${prefix} 영상 목록 가져오는 중…`+(sinceId?'':' (첫 동기화)'));
+      const{vids}=await _ytFetchNewVideos(uploadsId,key,sinceId,(fetched,tot)=>{
+        setProg(`${prefix} ${fetched}${tot?'/'+tot:''}개 수집 중…`);
+      });
+      if(!vids.length){setProg(`${prefix} 새 영상 없음`);await new Promise(r=>setTimeout(r,400));continue;}
+      const{rows,skipped}=_extBuildRows(vids);
+      totalSkipped+=skipped;
+      if(rows.length){
+        setProg(`${prefix} ${rows.length}개 저장 중…`);
+        for(let i=0;i<rows.length;i+=200){
+          const{error}=await sb.from(_YT_TABLE).upsert(rows.slice(i,i+200),{onConflict:'id',ignoreDuplicates:true});
+          if(error)throw new Error(error.message);
+        }
+        if(vids[0]?.id)localStorage.setItem(lsKey,vids[0].id);
+        totalAdded+=rows.length;
+      }
+      setProg(`${prefix} 완료 (+${rows.length}개)`);
+    }catch(e){
+      errors++;
+      console.error(`[ext sync] ${ch.name}`,e);
+      setProg(`${prefix} 오류: ${e.message}`);
+      await new Promise(r=>setTimeout(r,800));
+    }
+  }
+  setProg(`전체 완료 — 추가 ${totalAdded}개 / 스킵 ${totalSkipped}개${errors?` / 오류 ${errors}건`:''}`);
+  _extSyncing=false;
+  if(btn)btn.disabled=false;
 }
 
 // ── 그룹 카드 YouTube 영상 섹션 ──
@@ -8915,7 +8935,7 @@ function _makeChVidController(contId){
     const releaseLock=()=>{if(myGen===state.gen)state.appendLock=false;};
     const{filter,offset}=state;
     try{
-      let q=sb.from(_YT_TABLE).select('id,title,thumb,category',{count:'exact'});
+      let q=sb.from(_YT_TABLE).select('id,title,thumb,category,content_flag',{count:'exact'});
       if(state.memberKo&&state.onlyMe){
         // Only 토글: members @> {name} AND members <@ {name} → members = {name} 정확히 일치
         q=q.eq('group_ko',ko).contains('members',[state.memberKo]).containedBy('members',[state.memberKo]);
@@ -8942,13 +8962,13 @@ function _makeChVidController(contId){
       // DB 조회는 무한스크롤 페이지네이션이 어긋나지 않도록 published_at desc로 고정하되(offset 기반이라 정렬이
       // 흔들리면 중복/누락 발생), 화면에 보여줄 순서는 페이지 단위로 섞어서 업로드 시기가 몰려 보이지 않게 함
       let vids=_shuffle(_filterBannedVideos(data||[]));
-      // '기타' 영상은 후순위로 — 대표영상 후보 제외 + 정상 영상 뒤로 밀기
-      const _etcVids=vids.filter(v=>v.category==='기타');
-      if(_etcVids.length)vids=[...vids.filter(v=>v.category!=='기타'),..._etcVids];
+      // '기타' 플래그 영상은 후순위로 — 대표영상 후보 제외 + 정상 영상 뒤로 밀기
+      const _etcVids=vids.filter(v=>v.content_flag==='기타');
+      if(_etcVids.length)vids=[...vids.filter(v=>v.content_flag!=='기타'),..._etcVids];
       // 첫 로드 + 전체 탭: 스크랩(하트) 최다 영상을 맨 앞으로 (쇼츠도 후보에 포함됨)
       let featured=null;
       if(reset&&filter==='all'&&vids.length){
-        const main=_pickMainChVid(vids.filter(v=>v.category!=='기타'));
+        const main=_pickMainChVid(vids.filter(v=>v.content_flag!=='기타'));
         if(main){
           vids=vids.filter(v=>v.id!==main.id);
           featured={...main,_featured:true};
@@ -9200,7 +9220,7 @@ async function _openVidTagModal(v,ko){
   // 카드에 넘어온 v에는 members/with_members가 안 실려있는 경우가 많아서(그룹 카드 그리드는 해당 컬럼을
   // 아예 select하지 않음), 모달을 열 때 저장된 값을 DB에서 직접 불러와 체크박스/칩에 반영한다.
   if(sb){
-    const{data,error}=await sb.from(_YT_TABLE).select('members,with_members,with_groups,category').eq('id',v.id).maybeSingle();
+    const{data,error}=await sb.from(_YT_TABLE).select('members,with_members,with_groups,category,content_flag').eq('id',v.id).maybeSingle();
     if(!_vidTagTarget||_vidTagTarget.id!==v.id)return; // 응답 오는 사이 모달이 닫히거나 다른 영상으로 전환됨
     if(!error&&data){
       const savedMembers=new Set(data.members||[]);
@@ -9213,6 +9233,11 @@ async function _openVidTagModal(v,ko){
       _renderVidTagChips();
       const catEl=document.getElementById('vid-tag-cat');
       if(catEl)catEl.value=data.category||'';
+      const flag=data.content_flag||'';
+      const etcEl=document.getElementById('vid-tag-flag-etc');
+      const extEl=document.getElementById('vid-tag-flag-ext');
+      if(etcEl)etcEl.checked=flag==='기타';
+      if(extEl)extEl.checked=flag==='외부인';
     }
   }
   document.getElementById('vid-tag-status').textContent='';
@@ -9276,8 +9301,11 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
   const withGroups=[..._vidTagGroupsSelected];
   const catEl=document.getElementById('vid-tag-cat');
   const category=catEl?catEl.value:undefined;
+  const etcEl=document.getElementById('vid-tag-flag-etc');
+  const extEl=document.getElementById('vid-tag-flag-ext');
+  const contentFlag=etcEl?.checked?'기타':extEl?.checked?'외부인':null;
   const{id,ko}=_vidTagTarget;
-  const updatePayload={members,with_members:withMembers,with_groups:withGroups};
+  const updatePayload={members,with_members:withMembers,with_groups:withGroups,content_flag:contentFlag};
   if(category!==undefined)updatePayload.category=category||null;
   const{error}=await sb.from(_YT_TABLE).update(updatePayload).eq('id',id);
   if(error){statusEl.textContent='저장 실패: '+error.message;return;}
@@ -9303,7 +9331,12 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
   keyEl?.addEventListener('blur',e=>localStorage.setItem('kpu_yt_key',e.target.value.trim()));
   document.getElementById('sp-yt-sync')?.addEventListener('click',_ytSyncAll);
   document.getElementById('sp-yt-reclassify')?.addEventListener('click',_ytReclassifyShorts);
-  document.getElementById('sp-m2-sync')?.addEventListener('click',_ytSyncM2);
+  document.getElementById('sp-ext-sync')?.addEventListener('click',_ytSyncExtChannels);
+  const extKeyEl=document.getElementById('sp-ext-yt-key');
+  const savedExtKey=localStorage.getItem('kpu_ext_yt_key')||'';
+  if(extKeyEl&&savedExtKey)extKeyEl.value=savedExtKey;
+  extKeyEl?.addEventListener('change',e=>localStorage.setItem('kpu_ext_yt_key',e.target.value.trim()));
+  extKeyEl?.addEventListener('blur',e=>localStorage.setItem('kpu_ext_yt_key',e.target.value.trim()));
 })();
 
 // 그룹/멤버/연결 카드 공통 "맨 위로" 버튼 — 스크롤로 아래로 많이 내려간 뒤 카드 맨 위로 쉽게 돌아가기 위함.
