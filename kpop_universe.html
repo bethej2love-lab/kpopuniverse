@@ -433,7 +433,9 @@
   #yt-lb-iframe{width:100%;height:100%;border:none;border-radius:8px;display:block;}
   /* 우측 중단 영역을 눌러 2배속을 토글하는 탭존 — 위/아래 모서리는 유튜브 자체 버튼(설정·전체화면 등)이
      눌리도록 터치 감지 영역에서 비워둠(정확한 크기는 실기기 테스트로 조정 필요) */
-  #yt-lb-speed-zone{position:absolute;top:52px;right:0;bottom:56px;width:32%;cursor:pointer;z-index:1;touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;}
+  #yt-lb-speed-zone{position:absolute;top:52px;right:0;bottom:80px;width:22%;cursor:pointer;z-index:1;touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;}
+  /* Shorts: 하단 YouTube 컨트롤 영역 완전히 확보 — 상단 30% 구간에만 배속존 적용 */
+  #yt-lightbox.lb-shorts #yt-lb-speed-zone{bottom:auto;height:30%;width:18%;}
   #yt-lb-speed-badge{display:none;position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.65);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:10px;pointer-events:none;z-index:2;letter-spacing:.02em;}
   #yt-lb-speed-badge.is-on{display:block;}
   #yt-lb-close{position:absolute;top:-30px;right:0;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:4px 6px;opacity:.65;line-height:1;}
@@ -480,8 +482,9 @@
     #yt-lb-iframe{border-radius:10px;}
     /* 쇼츠는 세로로 길어서 화면 대부분을 차지해 스와이프 시작 지점(유튜브 iframe 바깥 여백)이 거의 없었음 —
        살짝 줄여서 위아래 여백을 확보 (탭으로 재생/일시정지하는 유튜브 기본 컨트롤은 그대로 유지됨) */
-    #yt-lb-video-box.is-shorts{height:min(72vh,600px);width:auto;aspect-ratio:9/16;margin:0 auto;display:block;}
+    #yt-lb-video-box.is-shorts{height:min(80vh,660px);width:auto;aspect-ratio:9/16;margin:0 auto;display:block;}
     #yt-lb-close{top:auto;bottom:calc(100% + 8px);right:0;font-size:15px;padding:4px 6px;opacity:.7;}
+    #yt-lightbox.lb-shorts #yt-lb-close{display:none;}
     /* 모바일은 상하 스와이프로 영상 넘기므로 좌우 버튼은 오히려 잘못된 방향을 암시함 — 숨김 */
     #yt-lb-prev,#yt-lb-next{display:none;}
     #yt-lb-toolbar{justify-content:center;}
@@ -3281,6 +3284,7 @@ function openLightbox(url,shorts,playlist,idx,ctx){
   // enablejsapi=1: 소리 버튼/배속 탭존에서 postMessage로 이미 재생 중인 영상을 제어하기 위해 필요.
   iframe.src=`https://www.youtube.com/embed/${vid}?autoplay=1&mute=${_lbMuted?1:0}&controls=1&playsinline=1&modestbranding=1&iv_load_policy=3&rel=0&enablejsapi=1`;
   document.getElementById('yt-lb-video-box').className=shorts?'is-shorts':'';
+  lb.classList.toggle('lb-shorts',!!shorts);
   _lbSpeed=1;
   document.getElementById('yt-lb-speed-badge').classList.remove('is-on');
   lb.classList.add('open');
@@ -3522,14 +3526,29 @@ function closeLightbox(){
 }
 document.getElementById('yt-lightbox').addEventListener('pointerdown',e=>e.stopPropagation());
 document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)closeLightbox();});
-// 모바일: 라이트박스 상하 스와이프로 이전/다음 영상 이동 (릴스/쇼츠 방식 — 닫기는 X버튼/배경 클릭/ESC 전용)
+// 모바일: 라이트박스 상하 스와이프로 이전/다음 영상 이동 (릴스/쇼츠 방식)
 {
   const _lbEl=document.getElementById('yt-lightbox');
   const _lbWrap=document.getElementById('yt-lb-wrap');
-  let _lbTY=0,_lbTX=0,_lbDragging=false,_lbAxis=null;
+  let _lbTY=0,_lbTX=0,_lbDragging=false,_lbAxis=null,_lbTStart=0;
+  function _lbSlideIn(fromDir){
+    // 새 영상이 fromDir 방향에서 들어오도록 초기 위치 세팅 후 spring으로 슬라이드인
+    const startY=fromDir>0?70:-70;
+    _lbWrap.style.transition='none';
+    _lbWrap.style.transform=`translateY(${startY}px)`;
+    _lbWrap.style.opacity='0';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      _lbWrap.style.transition='transform .38s cubic-bezier(0.22,1,0.36,1),opacity .28s ease';
+      _lbWrap.style.transform='';
+      _lbWrap.style.opacity='';
+      setTimeout(()=>{_lbWrap.style.transition='';},400);
+    }));
+  }
   _lbEl.addEventListener('touchstart',e=>{
     if(e.touches.length!==1)return;
-    _lbTX=e.touches[0].clientX;_lbTY=e.touches[0].clientY;_lbDragging=true;_lbAxis=null;
+    _lbTX=e.touches[0].clientX;_lbTY=e.touches[0].clientY;
+    _lbDragging=true;_lbAxis=null;_lbTStart=e.timeStamp;
+    _lbWrap.style.transition='none';
   },{passive:true});
   _lbEl.addEventListener('touchmove',e=>{
     if(!_lbDragging||e.touches.length!==1)return;
@@ -3541,31 +3560,41 @@ document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropag
     }
     if(_lbAxis==='y'){
       if(e.cancelable)e.preventDefault();
-      _lbWrap.style.transform=`translateY(${dy}px)`;
-      _lbWrap.style.opacity=`${Math.max(0.3,1-Math.abs(dy)/250)}`;
+      const canPrev=_lbPlaylist&&_lbIdx>0;
+      const canNext=_lbPlaylist&&_lbIdx<_lbPlaylist.length-1;
+      // 끝에서 스와이프 시 rubber-band 저항
+      let eff=dy;
+      if((dy<0&&!canNext)||(dy>0&&!canPrev))eff=dy*0.12;
+      _lbWrap.style.transform=`translateY(${eff}px)`;
+      _lbWrap.style.opacity=`${Math.max(0.25,1-Math.abs(eff)/280)}`;
     }
   },{passive:false});
   _lbEl.addEventListener('touchend',e=>{
     if(!_lbDragging)return;
     _lbDragging=false;
     const dy=e.changedTouches.length?e.changedTouches[0].clientY-_lbTY:0;
+    const dt=Math.max(1,e.timeStamp-_lbTStart);
+    const vel=Math.abs(dy)/dt; // px/ms
     if(_lbAxis==='y'){
       const canPrev=_lbPlaylist&&_lbIdx>0;
       const canNext=_lbPlaylist&&_lbIdx<_lbPlaylist.length-1;
-      if(dy<-60&&canNext){
-        _lbWrap.style.transition='transform .2s ease,opacity .2s';
-        _lbWrap.style.transform='translateY(-100vh)';_lbWrap.style.opacity='0';
-        setTimeout(()=>{_lbGo(1);_lbWrap.style.transition='';_lbWrap.style.transform='';_lbWrap.style.opacity='';},200);
-      }else if(dy>60&&canPrev){
-        _lbWrap.style.transition='transform .2s ease,opacity .2s';
-        _lbWrap.style.transform='translateY(100vh)';_lbWrap.style.opacity='0';
-        setTimeout(()=>{_lbGo(-1);_lbWrap.style.transition='';_lbWrap.style.transform='';_lbWrap.style.opacity='';},200);
+      const thresh=vel>0.45?28:72; // 빠른 플릭은 낮은 임계값
+      if(dy<-thresh&&canNext){
+        _lbWrap.style.transition='transform .2s cubic-bezier(0.4,0,1,1),opacity .18s ease';
+        _lbWrap.style.transform='translateY(-108vh)';_lbWrap.style.opacity='0';
+        setTimeout(()=>{_lbGo(1);_lbSlideIn(-1);},195);
+      }else if(dy>thresh&&canPrev){
+        _lbWrap.style.transition='transform .2s cubic-bezier(0.4,0,1,1),opacity .18s ease';
+        _lbWrap.style.transform='translateY(108vh)';_lbWrap.style.opacity='0';
+        setTimeout(()=>{_lbGo(-1);_lbSlideIn(1);},195);
       }else{
-        _lbWrap.style.transition='transform .22s ease,opacity .22s';
+        // 스프링으로 복귀
+        _lbWrap.style.transition='transform .4s cubic-bezier(0.22,1,0.36,1),opacity .3s ease';
         _lbWrap.style.transform='';_lbWrap.style.opacity='';
-        setTimeout(()=>{_lbWrap.style.transition='';},230);
+        setTimeout(()=>{_lbWrap.style.transition='';},420);
       }
     }else{
+      _lbWrap.style.transition='';
       _lbWrap.style.transform='';_lbWrap.style.opacity='';
     }
   },{passive:true});
@@ -6071,9 +6100,16 @@ function _extendSheets(){
   _sheetPairs.forEach(([outer,inner])=>{
     if(!outer)return;
     outer.style.bottom='0px';
-    outer.style.minHeight=`calc(60vh + ${_tabbarH}px)`;
-    outer.style.maxHeight=`calc(60vh + ${_tabbarH}px)`;
-    if(inner)inner.style.maxHeight=`calc(60vh + ${_tabbarH}px - 24px)`;
+    const isFull=outer.classList.contains('bs-full');
+    if(isFull){
+      outer.style.minHeight='var(--mob-vh,100vh)';
+      outer.style.maxHeight='var(--mob-vh,100vh)';
+      if(inner)inner.style.maxHeight='calc(var(--mob-vh,100vh) - 24px)';
+    }else{
+      outer.style.minHeight=`calc(60vh + ${_tabbarH}px)`;
+      outer.style.maxHeight=`calc(60vh + ${_tabbarH}px)`;
+      if(inner)inner.style.maxHeight=`calc(60vh + ${_tabbarH}px - 24px)`;
+    }
   });
 }
 function _retractSheets(){
@@ -8273,7 +8309,7 @@ buildUniverse().catch(err=>{
 function _openFeedOverlay(){
   const el=document.getElementById('feed-overlay');
   el.classList.add('open');
-  _bringToFront(el);
+  if(!isMob())_bringToFront(el);
   document.body.classList.add('feed-open');
   document.getElementById('tab-feed').classList.add('feed-open');
   _buildFeedAnniversaries();
