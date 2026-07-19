@@ -8352,6 +8352,7 @@ buildUniverse().catch(err=>{
 // ── 탐험 피드 ──────────────────────────────────────────────────────────
 function _openFeedOverlay(){
   const el=document.getElementById('feed-overlay');
+  if(isMob())closeMobSheet(); // 열려있는 카드 먼저 닫고 탐색 오버레이 표시
   el.classList.add('open');
   if(!isMob()){_bringToFront(el);document.getElementById('zoom-ctrl').classList.add('zoom-feed-open');}
   document.body.classList.add('feed-open');
