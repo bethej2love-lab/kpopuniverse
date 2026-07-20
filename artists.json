@@ -802,11 +802,11 @@
     },
     "groups": [
       {
-        "ko": "NCT 127",
+        "ko": "엔시티 127",
         "en": "NCT 127"
       },
       {
-        "ko": "NCT Dream",
+        "ko": "엔시티 드림",
         "en": "NCT Dream"
       }
     ],
@@ -841,11 +841,11 @@
     },
     "groups": [
       {
-        "ko": "NCT 127",
+        "ko": "엔시티 127",
         "en": "NCT 127"
       },
       {
-        "ko": "NCT Dream",
+        "ko": "엔시티 드림",
         "en": "NCT Dream"
       }
     ],
@@ -1219,7 +1219,7 @@
   },
   {
     "name": {
-      "ko": "이노",
+      "ko": "리노",
       "en": "Lee Know"
     },
     "group": {
@@ -2256,6 +2256,35 @@
     "nat": {
       "ko": "한국",
       "en": "KR"
+    },
+    "sparkle": false,
+    "songs": []
+  },
+  {
+    "name": {
+      "ko": "디에잇",
+      "en": "The8"
+    },
+    "group": {
+      "ko": "세븐틴",
+      "en": "SVT"
+    },
+    "co": "HYBE",
+    "planet": "main",
+    "x": 6490,
+    "y": 7478,
+    "sat": 0.85,
+    "op": 0.8,
+    "active": true,
+    "color": [
+      138,
+      195,
+      228
+    ],
+    "bday": "1997.11.07",
+    "nat": {
+      "ko": "중국",
+      "en": "CN"
     },
     "sparkle": false,
     "songs": []

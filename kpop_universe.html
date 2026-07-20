@@ -1058,6 +1058,54 @@
   .conn-group-members.open{display:flex;}
   .conn-chip:active,.conn-chip.lp-active{transform:scale(0.93);color:rgba(232,246,255,1.0);text-shadow:0 0 17px rgba(200,228,255,0.94),0 0 8px rgba(200,228,255,0.65),0 0 3px rgba(200,228,255,0.42);}
   .conn-no-video{font-size:11px;color:#5878a0;padding:4px 0;}
+  /* ── 콘서트/팬미팅 ────────────────────────────── */
+  .concert-row{margin-top:9px;padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.10);}
+  .concert-row:empty{display:none;margin:0;padding:0;border:none;}
+  .concert-teaser{display:flex;align-items:center;gap:6px;width:100%;background:none;border:none;padding:2px 0;cursor:pointer;font-family:inherit;text-align:left;color:rgba(200,220,255,0.92);}
+  .concert-teaser-txt{flex:1;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .concert-chevron{font-size:10px;opacity:0.6;transition:transform .2s ease;flex-shrink:0;}
+  .concert-teaser.open .concert-chevron{transform:rotate(90deg);}
+  .concert-list{display:none;flex-direction:column;gap:8px;margin-top:8px;}
+  .concert-list.open{display:flex;}
+  .concert-item{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:10px;padding:8px 10px;font-size:11.5px;color:rgba(200,220,255,0.85);}
+  .concert-item-title{font-weight:700;font-size:12px;color:rgba(220,235,255,0.95);margin-bottom:3px;}
+  .concert-item-meta{color:rgba(160,182,222,0.72);margin-bottom:6px;}
+  .concert-venue-chip{color:rgba(170,210,255,0.9);cursor:pointer;text-decoration:underline;text-underline-offset:2px;background:none;border:none;font:inherit;padding:0;}
+  .concert-venue-chip:hover{color:rgba(220,238,255,1);}
+  .concert-item-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px;}
+  .concert-ticket-btn{font-size:10.5px;font-weight:700;color:rgba(200,220,255,0.9);background:rgba(155,178,228,0.16);border:0.5px solid rgba(155,178,228,0.3);border-radius:14px;padding:3px 9px;cursor:pointer;text-decoration:none;display:inline-block;}
+  .concert-attend-btn{font-size:10.5px;font-weight:700;border-radius:14px;padding:3px 9px;cursor:pointer;font-family:inherit;background:rgba(255,255,255,0.055);border:0.5px solid rgba(255,255,255,0.14);color:rgba(192,214,240,0.65);}
+  .concert-attend-btn.on{background:rgba(155,178,228,0.24);color:#c8ddff;border-color:rgba(170,195,255,0.42);}
+  .concert-reaction-row{display:none;gap:4px;margin-top:6px;}
+  .concert-reaction-row.open{display:flex;}
+  .concert-reaction-btn{font-size:15px;background:none;border:none;cursor:pointer;padding:2px 3px;border-radius:8px;opacity:0.55;transition:opacity .12s,background .12s;}
+  .concert-reaction-btn:hover{opacity:0.85;}
+  .concert-reaction-btn.sel{opacity:1;background:rgba(155,178,228,0.20);}
+  .concert-note-input{width:100%;box-sizing:border-box;margin-top:6px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.12);border-radius:7px;padding:5px 8px;font-size:11px;color:#c0d6f0;font-family:inherit;outline:none;}
+  .concert-note-input::placeholder{color:rgba(155,178,228,0.35);}
+  #venue-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:80;display:none;align-items:center;justify-content:center;}
+  #venue-overlay.open{display:flex;}
+  #venue-panel{position:relative;width:min(320px,calc(100vw - 40px));max-height:min(480px,calc(100vh - 80px));overflow-y:auto;background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:18px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:20px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
+  #venue-panel-close{position:absolute;top:14px;right:14px;}
+  #venue-panel-list{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
+  .venue-item{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:10px;padding:8px 10px;font-size:11.5px;color:rgba(200,220,255,0.85);}
+  .venue-item-title{font-weight:700;font-size:12px;color:rgba(220,235,255,0.95);margin-bottom:3px;}
+  .concert-log-info{flex:1;min-width:0;}
+  .concert-log-note{font-size:10.5px;color:rgba(160,182,222,0.6);margin-top:2px;font-style:italic;}
+  /* ── 음악방송 1위 트로피 ──────────────────────── */
+  .trophy-btn{background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:2px;font-size:14px;line-height:1;padding:2px 3px;opacity:0.75;transition:opacity .13s,transform .13s;}
+  .trophy-btn:hover{opacity:1;}
+  .trophy-btn:active{transform:scale(0.9);}
+  .trophy-count{font-size:10.5px;font-weight:700;color:rgba(220,200,150,0.9);}
+  #trophy-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:80;display:none;align-items:center;justify-content:center;}
+  #trophy-overlay.open{display:flex;}
+  #trophy-panel{position:relative;width:min(320px,calc(100vw - 40px));max-height:min(480px,calc(100vh - 80px));overflow-y:auto;background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:18px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:20px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
+  #trophy-panel-close{position:absolute;top:14px;right:14px;}
+  #trophy-panel-list{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+  .trophy-item{display:flex;align-items:baseline;gap:8px;padding:5px 2px;border-bottom:0.5px solid rgba(255,255,255,0.06);font-size:11.5px;}
+  .trophy-item-date{color:rgba(160,182,222,0.6);flex-shrink:0;font-variant-numeric:tabular-nums;}
+  .trophy-item-show{color:rgba(220,200,150,0.85);font-weight:700;flex-shrink:0;}
+  .trophy-item-song{color:rgba(210,225,255,0.9);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   /* ✦ 연결 버튼 */
   #tt-conn-row{margin-top:6px;}
   .tt-conn-btn{
@@ -1186,7 +1234,7 @@
   #tt-name-row .tn{margin-bottom:0;padding-left:0;padding-right:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #gc-name-row{display:inline-flex;align-items:center;gap:8px;margin-bottom:6px;max-width:100%;}
   #gc-name-row #gc-name{margin-bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  #fav-section{margin-bottom:14px;padding-top:12px;padding-bottom:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
+  #fav-section{padding-top:12px;padding-bottom:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
   .fav-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
   .fav-hd-lbl{font-size:9.5px;font-weight:700;letter-spacing:.2em;color:rgba(130,150,205,0.5);text-transform:uppercase;}
   .fav-item{display:flex;align-items:center;gap:6px;padding:6px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
@@ -1252,6 +1300,7 @@
   #bookmark-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
   /* ── Anniversaries (birthdays + 즐겨찾기 기념일) ──── */
   #anniv-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
+  #concert-section{margin-top:14px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.07);}
   #journal-hd{margin-top:16px;display:none;}
   .bday-item{display:flex;align-items:center;gap:7px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .13s;}
   .bday-item:hover{background:rgba(255,255,255,0.06);}
@@ -1393,6 +1442,10 @@
       <div class="fav-hd"><span class="fav-hd-lbl">ANNIVERSARIES</span></div>
       <div id="anniv-list"><div class="fav-empty">기록이 없어요</div></div>
     </div>
+    <div id="concert-section">
+      <div class="fav-hd"><span class="fav-hd-lbl">CONCERTS</span></div>
+      <div id="concert-log-list"><div class="fav-empty">다녀온 공연이 없어요</div></div>
+    </div>
     <div id="filter-panel">
       <div id="filter-panel-hd">
         <div>
@@ -1431,14 +1484,14 @@
   </div>
 </div>
 <div id="fav-hint-callout">Start with Your Favorite!<span id="fhc-arrow"></span></div>
-<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="tt-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버"><span class="nav-arr">‹</span><span id="tt-prev-name" class="nav-name"></span></button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버"><span id="tt-next-name" class="nav-name"></span><span class="nav-arr">›</span></button></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="tt-trophy" class="trophy-btn" style="display:none" aria-label="음악방송 1위 기록">🏆<span class="trophy-count"></span></button><button id="tt-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버"><span class="nav-arr">‹</span><span id="tt-prev-name" class="nav-name"></span></button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버"><span id="tt-next-name" class="nav-name"></span><span class="nav-arr">›</span></button></div><div id="tt-concert-row" class="concert-row"></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
     <button id="gc-back" class="conn-back-btn" style="display:none" aria-label="이전으로">‹</button><span id="gcx" role="button" tabindex="0" aria-label="그룹 카드 닫기">×</span>
     <div id="gc-header">
       <div id="gc-header-text">
-        <div id="gc-name-row"><div id="gc-name"></div><button id="gc-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="gc-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="gc-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div>
+        <div id="gc-name-row"><div id="gc-name"></div><button id="gc-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="gc-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="gc-trophy" class="trophy-btn" style="display:none" aria-label="음악방송 1위 기록">🏆<span class="trophy-count"></span></button><button id="gc-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div>
         <div id="gc-en-row"><div id="gc-en"></div><div id="gc-links"></div></div>
         <div id="gc-status-line" class="gc-status-line"></div>
       </div>
@@ -1451,6 +1504,7 @@
       <div class="row" id="gc-leader-row" style="display:none"><span class="lbl" data-i18n="gcLeader">리더</span><span class="val" id="gc-leader"></span></div>
       <div class="row" id="gc-mem-row"><span class="lbl" id="gc-mem-label" data-i18n="gcMember">멤버</span><span class="val" id="gc-mem-list"></span></div>
     </div>
+    <div id="gc-concert-row" class="concert-row"></div>
     <div id="gc-ch-vid"></div>
   </div>
 </div>
@@ -1694,6 +1748,20 @@
     <div id="pp-bias-emoji-target"></div>
     <emoji-picker id="pp-bias-emoji-picker"></emoji-picker>
     <button id="pp-bias-emoji-skip" class="uc-btn">기본(🤍)으로 넘어가기</button>
+  </div>
+</div>
+<div id="venue-overlay">
+  <div id="venue-panel">
+    <div class="pp-title" id="venue-panel-title"></div>
+    <button id="venue-panel-close" class="conn-back-btn" aria-label="닫기">×</button>
+    <div id="venue-panel-list"></div>
+  </div>
+</div>
+<div id="trophy-overlay">
+  <div id="trophy-panel">
+    <div class="pp-title" id="trophy-panel-title">음악방송 1위</div>
+    <button id="trophy-panel-close" class="conn-back-btn" aria-label="닫기">×</button>
+    <div id="trophy-panel-list"></div>
   </div>
 </div>
 <div id="unfav-confirm-overlay">
@@ -2123,6 +2191,7 @@ async function buildUniverse(){
   renderFavList();_buildAnniversaryList();
   renderScrapList();
   renderBookmarkList();
+  renderConcertLogList();
   _renderBiasChips(); // 최애 칩은 스크립트 초기 실행 시점엔 ARTISTS가 비어있어 클릭 대상 매칭이 안 됐으므로, 데이터 로드 후 다시 렌더
   placeMyStarInUniverse();
   _updateIdxEntryCount();
@@ -4488,9 +4557,10 @@ function _getCollabSongs(anchor,sel,exactOnly,selGroups){
     });
     if(!groupsOk)return false;
     if(sel.length){
-      // with는 항상 영상 속 "본인(_owner) 제외 전원"이므로, 그룹 선택이 없을 때 with.length===sel.length면
-      // 영상 출연자가 (앵커+선택 멤버)와 정확히 일치
-      if(exactOnly&&!selGroupsArr.length&&(sg.with||[]).length!==sel.length)return false;
+      // with는 항상 영상 속 "본인(_owner) 제외 전원"이므로, with.length===sel.length면 영상 출연자가
+      // (앵커+선택 멤버)와 정확히 일치 — 그룹이 OR 필터로 같이 선택돼있어도(그룹칩은 멤버를 찾기 위한
+      // 탐색 보조일 뿐) 개별 멤버를 선택한 이상 "Only"는 항상 그 멤버들만 정확히 나온 영상만 걸러야 한다.
+      if(exactOnly&&(sg.with||[]).length!==sel.length)return false;
       const ok=sel.every(selName=>{
         const selA=_findArtistByConnName(selName,anchor.group.ko);
         return selA?hasMember(selA):false;
@@ -5433,6 +5503,8 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
     buildVideoSection(_memberAllSongs,tv,{groupKo:a.group.ko,memberKo:a.name.ko},_memberMainCandidates);
     _enrichMemberVideosFromApi(a,tv,_memberAllSongs,_memberPersonalSongs);
   }
+  _loadConcertRow(a.group.ko,'tt-concert-row');
+  _loadTrophy(a.group.ko,a.name.ko,'tt-trophy');
   // ✦ 연결 버튼 (그룹명 오른쪽) — 정적 소스만으로 우선 판단해 즉시 표시하고, API 콜라보 캐시가 없으면
   // 백그라운드로 받아와서(연결 카드를 아예 안 열어봤어도) 카드 열자마자 정확한 상태로 갱신
   _updateConnBtn(a);
@@ -5630,6 +5702,8 @@ function showGC(ko,cx,cy,keepMemberPanel,skipRipple,urlMode,pushMobNav){
   if(regularPts)regularPts.geometry.attributes.position.needsUpdate=true;
   _renderGcMemberList(ko,cx,cy);
   _buildGcChVid(ko);
+  _loadConcertRow(ko,'gc-concert-row');
+  _loadTrophy(ko,null,'gc-trophy');
   const cardW=info.links?.youtube?264:234;
   el.style.maxWidth=cardW+'px';
   if(isMob()){if(!_navHistoryActive)openMobSheet(el);}else{if(!keepMemberPanel)closeMemberPanel(false);openSidePanel(el);}
@@ -5771,12 +5845,12 @@ function _applyTagFocus(){
 }
 
 function _hideMyPageSections(){
-  ['my-page-header','my-page-bias','fav-section','scrap-section','bookmark-section','anniv-section'].forEach(id=>{
+  ['my-page-header','my-page-bias','fav-section','scrap-section','bookmark-section','anniv-section','concert-section'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.style.display='none';
   });
 }
 function _showMyPageSections(){
-  ['my-page-header','my-page-bias','fav-section','scrap-section','bookmark-section','anniv-section'].forEach(id=>{
+  ['my-page-header','my-page-bias','fav-section','scrap-section','bookmark-section','anniv-section','concert-section'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.style.display='';
   });
 }
@@ -8897,6 +8971,21 @@ function _makeChVidController(contId){
     load(ko,false);
   }
 
+  // members/with_members/with_groups를 buildVideoSection과 같은 song.with 포맷("이름" 또는 "이름(그룹)")으로 변환 —
+  // 그룹/멤버 카드의 자체 영상 그리드에도 연결 카드처럼 "함께한 멤버" 줄이 뜨게 하기 위함.
+  function _buildGridWithList(v,ownGko,selfKo){
+    const withList=[];
+    (v.members||[]).forEach(n=>{if(n!==selfKo)withList.push(n);});
+    (v.with_members||[]).forEach(n=>withList.push(n));
+    (v.with_groups||[]).forEach(gko=>{
+      ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===gko)).forEach(a=>{
+        const tok=a.group.ko===ownGko?a.name.ko:`${a.name.ko}(${gko})`;
+        if(tok!==selfKo)withList.push(tok);
+      });
+    });
+    return withList;
+  }
+
   // vids(그룹핑된 순서)를 grid에 렌더링. DOM 노드 목록과, 백그라운드 재확인이 필요한 가로 항목 참조를 반환.
   function renderItems(vids,grid){
     const nodes=[];
@@ -8925,8 +9014,10 @@ function _makeChVidController(contId){
       // 넘어갔을 때(isShorts(url) 판별)도 세로 비율이 계속 유지됨 — watch?v= 로 통일해버리면 그 정보가 사라짐.
       const _vidUrl=vv=>vv.category==='short'?`https://www.youtube.com/shorts/${vv.id}`:`https://www.youtube.com/watch?v=${vv.id}`;
       const vidUrl=_vidUrl(v);
-      const s={t:v.title,u:vidUrl};
+      const s={t:v.title,u:vidUrl,with:_buildGridWithList(v,state.ko,state.memberKo)};
       const ctx={groupKo:state.ko};
+      const withLine=_makeWithLine(s,ctx);
+      if(withLine)item.appendChild(withLine);
       item.appendChild(_makeScrapBtn(s,ctx));
       item.appendChild(_makeBookmarkBtn(s,ctx));
       if(_isAdmin()){
@@ -9013,7 +9104,7 @@ function _makeChVidController(contId){
     const releaseLock=()=>{if(myGen===state.gen)state.appendLock=false;};
     const{filter,offset}=state;
     try{
-      let q=sb.from(_YT_TABLE).select('id,title,thumb,category,content_flag',{count:'exact'});
+      let q=sb.from(_YT_TABLE).select('id,title,thumb,category,content_flag,members,with_members,with_groups',{count:'exact'});
       if(state.memberKo&&state.onlyMe){
         // Only 토글: members = {name} 정확히 일치 + 외부인 포함 영상 제외
         q=q.eq('group_ko',ko).contains('members',[state.memberKo]).containedBy('members',[state.memberKo])
@@ -9199,6 +9290,223 @@ async function _buildGcChVid(ko){
   if(!info?.links?.youtube||!sb){const cont=document.getElementById('gc-ch-vid');if(cont)cont.innerHTML='';return;}
   _gcChVidCtl.build(ko);
 }
+
+// ── 콘서트/팬미팅 아카이브 (왓챠피디아처럼 "다녀왔어요" 기록) ─────────────
+const CONCERT_LOG_KEY='kpu_concert_log';
+let concertLog=JSON.parse(localStorage.getItem(CONCERT_LOG_KEY)||'[]'); // [{id,reaction,note,at}]
+function _concertLogEntry(eventId){return concertLog.find(x=>x.id===eventId);}
+function _saveConcertLog(){localStorage.setItem(CONCERT_LOG_KEY,JSON.stringify(concertLog));_sbPushColumn('concert_log',concertLog);}
+const CONCERT_REACTIONS=['🥹','🔥','😭','💜','😴'];
+
+// 마이페이지 CONCERTS 섹션 — 다녀왔어요 표시한 공연들을 최신순으로 보여줌
+async function renderConcertLogList(){
+  const el=document.getElementById('concert-log-list');
+  if(!el)return;
+  if(!concertLog.length){el.innerHTML='<div class="fav-empty">다녀온 공연이 없어요</div>';return;}
+  if(!sb){el.innerHTML='<div class="fav-empty">다녀온 공연이 없어요</div>';return;}
+  const ids=concertLog.map(x=>x.id);
+  const{data,error}=await sb.from('kpop_events').select('*').in('id',ids);
+  if(error||!data)return;
+  const byId=new Map(data.map(e=>[e.id,e]));
+  el.innerHTML='';
+  [...concertLog].sort((a,b)=>b.at.localeCompare(a.at)).forEach(entry=>{
+    const ev=byId.get(entry.id);
+    if(!ev)return;
+    const row=document.createElement('div');row.className='fav-item concert-log-item';
+    const info=document.createElement('div');info.className='concert-log-info';
+    const title=document.createElement('div');title.className='fav-iname';
+    title.textContent=(entry.reaction?entry.reaction+' ':'')+ev.title;
+    const sub=document.createElement('div');sub.className='fav-isub';
+    sub.textContent=`${ev.date_start} · ${ev.venue}`;
+    info.appendChild(title);info.appendChild(sub);
+    if(entry.note){const note=document.createElement('div');note.className='concert-log-note';note.textContent=entry.note;info.appendChild(note);}
+    const del=document.createElement('button');del.className='scrap-del';del.textContent='×';del.title='삭제';
+    del.addEventListener('click',e=>{
+      e.stopPropagation();
+      const i=concertLog.findIndex(x=>x.id===entry.id);
+      if(i>=0)concertLog.splice(i,1);
+      _saveConcertLog();
+      renderConcertLogList();
+    });
+    row.appendChild(info);row.appendChild(del);
+    el.appendChild(row);
+  });
+}
+
+function _fmtConcertDate(ev){
+  const s=ev.date_start,e=ev.date_end;
+  if(!e||e===s)return s;
+  return `${s} ~ ${e.slice(5)}`;
+}
+function _dDay(dateStr){
+  const today=new Date();today.setHours(0,0,0,0);
+  const target=new Date(dateStr+'T00:00:00');
+  return Math.round((target-today)/86400000);
+}
+
+function _makeConcertItem(ev){
+  const item=document.createElement('div');item.className='concert-item';
+  const title=document.createElement('div');title.className='concert-item-title';title.textContent=ev.title;
+  const meta=document.createElement('div');meta.className='concert-item-meta';
+  meta.textContent=`${_fmtConcertDate(ev)} · `;
+  const venueBtn=document.createElement('button');venueBtn.type='button';venueBtn.className='concert-venue-chip';
+  venueBtn.textContent=`${ev.venue}${ev.city?' ('+ev.city+')':''}`;
+  venueBtn.addEventListener('click',e=>{e.stopPropagation();_openVenueEvents(ev.venue);});
+  meta.appendChild(venueBtn);
+  item.appendChild(title);item.appendChild(meta);
+
+  const actions=document.createElement('div');actions.className='concert-item-actions';
+  if(ev.official_url){
+    const linkBtn=document.createElement('a');linkBtn.className='concert-ticket-btn';linkBtn.textContent='예매 정보 ↗';
+    linkBtn.href=ev.official_url;linkBtn.target='_blank';linkBtn.rel='noopener noreferrer';
+    linkBtn.addEventListener('click',e=>e.stopPropagation());
+    actions.appendChild(linkBtn);
+  }
+  const entry=_concertLogEntry(ev.id);
+  const attendBtn=document.createElement('button');attendBtn.type='button';
+  attendBtn.className='concert-attend-btn'+(entry?' on':'');
+  attendBtn.textContent=entry?'다녀왔어요 ✓':'다녀왔어요';
+  const reactionRow=document.createElement('div');reactionRow.className='concert-reaction-row'+(entry?' open':'');
+  CONCERT_REACTIONS.forEach(emo=>{
+    const rb=document.createElement('button');rb.type='button';rb.className='concert-reaction-btn'+(entry&&entry.reaction===emo?' sel':'');
+    rb.textContent=emo;
+    rb.addEventListener('click',e=>{
+      e.stopPropagation();
+      const cur=_concertLogEntry(ev.id);
+      if(!cur)return;
+      cur.reaction=cur.reaction===emo?null:emo;
+      _saveConcertLog();renderConcertLogList();
+      reactionRow.querySelectorAll('.concert-reaction-btn').forEach(b=>b.classList.toggle('sel',b.textContent===cur.reaction));
+    });
+    reactionRow.appendChild(rb);
+  });
+  const noteInput=document.createElement('input');noteInput.type='text';noteInput.className='concert-note-input';
+  noteInput.placeholder='한줄 후기(선택)';noteInput.value=entry?.note||'';
+  noteInput.style.display=entry?'':'none';
+  noteInput.addEventListener('click',e=>e.stopPropagation());
+  noteInput.addEventListener('change',()=>{
+    const cur=_concertLogEntry(ev.id);
+    if(!cur)return;
+    cur.note=noteInput.value.trim();
+    _saveConcertLog();renderConcertLogList();
+  });
+  attendBtn.addEventListener('click',e=>{
+    e.stopPropagation();
+    const i=concertLog.findIndex(x=>x.id===ev.id);
+    if(i>=0){
+      concertLog.splice(i,1);
+      attendBtn.classList.remove('on');attendBtn.textContent='다녀왔어요';
+      reactionRow.classList.remove('open');noteInput.style.display='none';
+    }else{
+      concertLog.unshift({id:ev.id,reaction:null,note:'',at:new Date().toISOString()});
+      attendBtn.classList.add('on');attendBtn.textContent='다녀왔어요 ✓';
+      reactionRow.classList.add('open');noteInput.style.display='';
+    }
+    _saveConcertLog();renderConcertLogList();
+  });
+  actions.appendChild(attendBtn);
+  item.appendChild(actions);
+  item.appendChild(reactionRow);
+  item.appendChild(noteInput);
+  return item;
+}
+
+function _renderConcertRow(containerId,events){
+  const row=document.getElementById(containerId);
+  if(!row)return;
+  row.innerHTML='';
+  if(!events.length)return;
+  const todayStr=new Date().toISOString().slice(0,10);
+  const sorted=[...events].sort((a,b)=>a.date_start.localeCompare(b.date_start));
+  const upcoming=sorted.filter(e=>(e.date_end||e.date_start)>=todayStr);
+  const past=sorted.filter(e=>(e.date_end||e.date_start)<todayStr).reverse();
+  const featured=upcoming[0]||past[0];
+  const teaser=document.createElement('button');teaser.type='button';teaser.className='concert-teaser';
+  const txt=document.createElement('span');txt.className='concert-teaser-txt';
+  if(featured===upcoming[0]){
+    const d=_dDay(featured.date_start);
+    txt.textContent=`🎤 ${d<=0?'오늘':'D-'+d} · ${featured.title}`;
+  }else{
+    txt.textContent=`🎤 ${featured.date_start} · ${featured.title}`;
+  }
+  const chevron=document.createElement('span');chevron.className='concert-chevron';chevron.textContent='›';
+  teaser.appendChild(txt);teaser.appendChild(chevron);
+
+  const list=document.createElement('div');list.className='concert-list';
+  [...upcoming,...past].forEach(ev=>list.appendChild(_makeConcertItem(ev)));
+
+  teaser.addEventListener('click',e=>{
+    e.stopPropagation();
+    teaser.classList.toggle('open');
+    list.classList.toggle('open');
+  });
+  row.appendChild(teaser);row.appendChild(list);
+}
+
+async function _loadConcertRow(gko,containerId){
+  const row=document.getElementById(containerId);
+  if(row)row.innerHTML='';
+  if(!sb||!GROUPS[gko])return;
+  const{data,error}=await sb.from('kpop_events').select('*').contains('groups',[gko]).order('date_start',{ascending:false});
+  if(error||!data)return;
+  _renderConcertRow(containerId,data);
+}
+
+async function _openVenueEvents(venue){
+  const overlay=document.getElementById('venue-overlay');
+  const titleEl=document.getElementById('venue-panel-title');
+  const listEl=document.getElementById('venue-panel-list');
+  titleEl.textContent=venue;
+  listEl.innerHTML='<div class="gc-ch-msg">불러오는 중…</div>';
+  overlay.classList.add('open');
+  if(!sb)return;
+  const{data,error}=await sb.from('kpop_events').select('*').eq('venue',venue).order('date_start',{ascending:false});
+  listEl.innerHTML='';
+  if(error||!data||!data.length){listEl.innerHTML='<div class="gc-ch-msg">이 장소의 다른 공연 정보가 없어요</div>';return;}
+  data.forEach(ev=>{
+    const it=document.createElement('div');it.className='venue-item';
+    const t=document.createElement('div');t.className='venue-item-title';t.textContent=ev.title;
+    const meta=document.createElement('div');meta.className='concert-item-meta';
+    meta.textContent=`${_fmtConcertDate(ev)} · ${ev.groups.join(', ')}`;
+    it.appendChild(t);it.appendChild(meta);
+    listEl.appendChild(it);
+  });
+}
+document.getElementById('venue-panel-close').addEventListener('click',e=>{e.stopPropagation();document.getElementById('venue-overlay').classList.remove('open');});
+document.getElementById('venue-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open');});
+
+// ── 음악방송 1위 트로피 (객관적 성취 기록 — 콘서트와 달리 개인화 없이 단순 카운트+리스트만) ──
+async function _loadTrophy(gko,memberKo,btnId){
+  const btn=document.getElementById(btnId);
+  if(!btn)return;
+  btn.style.display='none';btn.onclick=null;
+  if(!sb||!GROUPS[gko])return;
+  const{data,error}=await sb.from('music_show_wins').select('*').eq('group_ko',gko).order('win_date',{ascending:false});
+  if(error||!data)return;
+  // 멤버 카드에선 그룹 전체 수상 + 본인 솔로/유닛 수상만, 다른 멤버 개인 수상은 제외
+  const rows=memberKo?data.filter(r=>!r.member_ko||r.member_ko===memberKo):data;
+  if(!rows.length)return;
+  btn.style.display='';
+  btn.querySelector('.trophy-count').textContent=rows.length;
+  btn.onclick=e=>{e.stopPropagation();_openTrophyList(rows);};
+}
+function _openTrophyList(rows){
+  const overlay=document.getElementById('trophy-overlay');
+  const listEl=document.getElementById('trophy-panel-list');
+  listEl.innerHTML='';
+  rows.forEach(r=>{
+    const it=document.createElement('div');it.className='trophy-item';
+    const d=document.createElement('span');d.className='trophy-item-date';d.textContent=r.win_date;
+    const s=document.createElement('span');s.className='trophy-item-show';s.textContent=r.show;
+    const song=document.createElement('span');song.className='trophy-item-song';
+    song.textContent=r.song_title+(r.member_ko?` · ${r.member_ko}`:'');
+    it.appendChild(d);it.appendChild(s);it.appendChild(song);
+    listEl.appendChild(it);
+  });
+  overlay.classList.add('open');
+}
+document.getElementById('trophy-panel-close').addEventListener('click',e=>{e.stopPropagation();document.getElementById('trophy-overlay').classList.remove('open');});
+document.getElementById('trophy-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open');});
 
 // DB category가 부정확한(가로로 저장됐지만 실제론 쇼츠인) 영상을 화면 표시 후 백그라운드에서 확인.
 // 네트워크가 느릴 때 프로브 요청이 동시에 몰리면 개별 요청이 크게 지연되므로 동시 개수를 제한한다.
