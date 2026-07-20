@@ -842,6 +842,11 @@
   .mp-bias-chip:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.22);}
   .gc-ch-more-wrap{min-height:1px;font-size:11px;color:rgba(155,178,228,0.45);text-align:center;padding:8px 0 2px;}
   .gc-ch-msg{font-size:12px;color:rgba(155,178,228,0.45);text-align:center;padding:10px 0;line-height:1.6;}
+  @keyframes gc-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  .gc-ch-skeleton{border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.04);}
+  .gc-ch-skeleton-thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0.04) 75%);background-size:200% 100%;animation:gc-shimmer 1.4s ease infinite;}
+  .gc-ch-skeleton-title{height:9px;margin:7px 8px 4px;border-radius:4px;background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0.04) 75%);background-size:200% 100%;animation:gc-shimmer 1.4s ease infinite;}
+  .gc-ch-skeleton-title.short{width:55%;margin-bottom:8px;}
   .gc-ch-err{font-size:11.5px;color:rgba(228,155,155,0.65);text-align:center;padding:6px 0;}
   .sp-yt-key{width:100%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:7px;padding:6px 9px;font-size:11px;color:#c0d6f0;font-family:inherit;outline:none;box-sizing:border-box;margin-top:5px;}
   .sp-yt-key::placeholder{color:rgba(155,178,228,0.35);}
@@ -910,13 +915,13 @@
   }
   /* ── Journal sidebar ─────────────────────────────── */
   #journal-sidebar{
-    position:fixed;top:0;left:0;height:100%;width:260px;
+    position:fixed;top:0;left:0;height:100%;width:300px;
     background:rgba(14,18,34,0.82);
     backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
     border-right:0.5px solid rgba(255,255,255,0.10);
     box-shadow:4px 0 24px rgba(0,0,0,0.35);
     z-index:66;
-    transform:translateX(-260px);
+    transform:translateX(-300px);
     transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
   }
   #journal-sidebar.open{transform:translateX(0);}
@@ -1138,7 +1143,7 @@
   #filter-panel{display:none;}
   /* ── Zoom slider ────────────────────────────────── */
   #zoom-ctrl{position:fixed;left:18px;bottom:24px;display:flex;flex-direction:column;align-items:center;gap:0;z-index:50;user-select:none;width:30px;background:rgba(12,16,36,0.60);border:1px solid rgba(140,165,220,0.16);border-radius:14px;padding:10px 0 0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 2px 14px rgba(0,0,0,0.22);transition:left 0.32s cubic-bezier(0.4,0,0.2,1);}
-  #journal-sidebar.open~#zoom-ctrl{left:278px;}
+  #journal-sidebar.open~#zoom-ctrl{left:318px;}
   #zoom-ctrl.zoom-feed-open{left:318px;}
   @media(max-width:768px){#zoom-ctrl{display:none;}}
   #zoom-track{width:2px;height:96px;background:rgba(140,165,220,0.15);border-radius:1px;position:relative;cursor:pointer;flex-shrink:0;margin-bottom:8px;}
@@ -1553,15 +1558,9 @@
   <div class="sp-sec" id="sp-yt-sec" style="display:none">
     <div class="sp-sec-lbl">YouTube 채널 영상</div>
     <input type="text" class="sp-yt-key" id="sp-yt-key" placeholder="API 키 (AIzaSy...)" autocomplete="off" spellcheck="false">
-    <button class="sp-yt-sync" id="sp-yt-sync">채널 영상 전체 동기화</button>
+    <button class="sp-yt-sync" id="sp-yt-sync">전체 동기화 (공식 + 외부 채널)</button>
     <button class="sp-yt-sync" id="sp-yt-reclassify" style="margin-top:4px;opacity:.8;">Shorts 자동 감지 (기존 영상)</button>
     <div class="sp-yt-prog" id="sp-yt-prog"></div>
-    <div style="margin-top:10px;border-top:0.5px solid rgba(155,178,228,0.15);padding-top:10px">
-      <div class="sp-sec-lbl" style="margin-bottom:6px">외부 채널 (M2·음방·직캠)</div>
-      <input type="text" class="sp-yt-key" id="sp-ext-yt-key" placeholder="외부 채널 API 키 (AIzaSy…)" autocomplete="off" spellcheck="false">
-      <button class="sp-yt-sync" id="sp-ext-sync" style="margin-top:6px">외부 채널 전체 동기화</button>
-      <div class="sp-yt-prog" id="sp-ext-prog"></div>
-    </div>
   </div>
 </div>
 <div id="mob-sheet">
@@ -8722,8 +8721,6 @@ async function _ytSyncAll(){
   if(!key){_ytSetProg('API 키를 먼저 입력해주세요');return;}
   if(!sb){_ytSetProg('Supabase 연결 없음');return;}
   _ytSyncing=true;
-  const btn=document.getElementById('sp-yt-sync');
-  if(btn)btn.disabled=true;
   const groups=Object.entries(GROUPS).filter(([,v])=>v?.links?.youtube).map(([ko,v])=>({ko,url:v.links.youtube}));
   // 아이유처럼 소속 그룹이 없는(GROUPS에 없는) 솔로 아티스트도, 본인 링크에 유튜브가 있으면 본인 이름을 키로 같이 동기화
   const seenSolo=new Set();
@@ -8749,9 +8746,8 @@ async function _ytSyncAll(){
     }
     done++;
   }
-  _ytSetProg(`완료! ${targets.length}개 채널 동기화됨`);
+  _ytSetProg(`공식 채널 완료 — ${targets.length}개`);
   _ytSyncing=false;
-  if(btn)btn.disabled=false;
 }
 
 function _ytSetProg(msg){const el=document.getElementById('sp-yt-prog');if(el)el.textContent=msg;}
@@ -8825,6 +8821,19 @@ const _EXT_CHANNELS=[
   {handle:'muply',            url:'https://www.youtube.com/@muply',             name:'뮤플리'},
   {handle:'youngji_boxmedia', url:'https://www.youtube.com/@youngji_boxmedia',  name:'영지 박스미디어'},
   {handle:'workman',          url:'https://www.youtube.com/@workman',           name:'워크맨'},
+  // ── 잡지 ──
+  {handle:'wkorea',           url:'https://www.youtube.com/@wkorea',            name:'W Korea'},
+  {handle:'VogueKorea',       url:'https://www.youtube.com/@VogueKorea',        name:'Vogue Korea'},
+  {handle:'ellemagazinekr',   url:'https://www.youtube.com/@ellemagazinekr',    name:'ELLE Korea'},
+  {handle:'HarpersBAZAARKorea',url:'https://www.youtube.com/@HarpersBAZAARKorea',name:"Harper's BAZAAR Korea"},
+  {handle:'marieclairekr',    url:'https://www.youtube.com/@marieclairekr',     name:'Marie Claire Korea'},
+  {handle:'cosmokorea',       url:'https://www.youtube.com/@cosmokorea',        name:'Cosmopolitan Korea'},
+  {handle:'GQKOREA',          url:'https://www.youtube.com/@GQKOREA',           name:'GQ Korea'},
+  {handle:'allurekorea',      url:'https://www.youtube.com/@allurekorea',       name:'Allure Korea'},
+  {handle:'DAZEDKOREA',       url:'https://www.youtube.com/@DAZEDKOREA',        name:'Dazed Korea'},
+  {handle:'ARENAKOREATV',     url:'https://www.youtube.com/@ARENAKOREATV',      name:'Arena Homme+ Korea'},
+  {handle:'singlesmania',     url:'https://www.youtube.com/@singlesmania',      name:'Singles'},
+  {handle:'ESQUIREKorea',     url:'https://www.youtube.com/@ESQUIREKorea',      name:'Esquire Korea'},
 ];
 
 // 제목에서 그룹/멤버 매칭. 토큰 경계 기준으로 GROUPS/ARTISTS 데이터와 대조.
@@ -8911,13 +8920,11 @@ function _extBuildRows(vids){
 let _extSyncing=false;
 async function _ytSyncExtChannels(){
   if(_extSyncing)return;
-  const key=_ytApiKeyExt()||_ytApiKey(); // 전용 키 없으면 기존 키로 폴백
-  if(!key){document.getElementById('sp-ext-prog').textContent='API 키를 먼저 입력해주세요';return;}
-  if(!sb){document.getElementById('sp-ext-prog').textContent='Supabase 연결 없음';return;}
+  const key=_ytApiKey();
+  if(!key){_ytSetProg('API 키를 먼저 입력해주세요');return;}
+  if(!sb){_ytSetProg('Supabase 연결 없음');return;}
   _extSyncing=true;
-  const btn=document.getElementById('sp-ext-sync');
-  if(btn)btn.disabled=true;
-  const setProg=msg=>{const el=document.getElementById('sp-ext-prog');if(el)el.textContent=msg;};
+  const setProg=msg=>{_ytSetProg(msg);};
   let totalAdded=0,totalSkipped=0,errors=0;
   for(let ci=0;ci<_EXT_CHANNELS.length;ci++){
     const ch=_EXT_CHANNELS[ci];
@@ -8951,9 +8958,8 @@ async function _ytSyncExtChannels(){
       await new Promise(r=>setTimeout(r,800));
     }
   }
-  setProg(`전체 완료 — 추가 ${totalAdded}개 / 스킵 ${totalSkipped}개${errors?` / 오류 ${errors}건`:''}`);
+  setProg(`전체 완료 — 공식·외부 채널 합산 추가 ${totalAdded}개 / 스킵 ${totalSkipped}개${errors?` / 오류 ${errors}건`:''}`);
   _extSyncing=false;
-  if(btn)btn.disabled=false;
 }
 
 // ── 그룹 카드 YouTube 영상 섹션 ──
@@ -9089,7 +9095,7 @@ function _makeChVidController(contId){
     if(!reset&&moreWrap)moreWrap.textContent='불러오는 중…'; // 무한 스크롤로 다음 페이지 가져오는 동안 표시
     if(reset){
       state.gen++;
-      grid.innerHTML='<div class="gc-ch-msg">불러오는 중…</div>';
+      grid.innerHTML=Array(6).fill('<div class="gc-ch-skeleton"><div class="gc-ch-skeleton-thumb"></div><div class="gc-ch-skeleton-title"></div><div class="gc-ch-skeleton-title short"></div></div>').join('');
       if(moreWrap)moreWrap.innerHTML='';
       if(randomize&&state.total>_YT_PAGE){
         state.offset=Math.floor(Math.random()*(state.total-_YT_PAGE));
@@ -9811,14 +9817,14 @@ document.getElementById('vid-tag-hide').addEventListener('click',async e=>{
   if(keyEl&&saved)keyEl.value=saved;
   keyEl?.addEventListener('change',e=>localStorage.setItem('kpu_yt_key',e.target.value.trim()));
   keyEl?.addEventListener('blur',e=>localStorage.setItem('kpu_yt_key',e.target.value.trim()));
-  document.getElementById('sp-yt-sync')?.addEventListener('click',_ytSyncAll);
+  document.getElementById('sp-yt-sync')?.addEventListener('click',async()=>{
+    const btn=document.getElementById('sp-yt-sync');
+    if(btn)btn.disabled=true;
+    await _ytSyncAll();
+    await _ytSyncExtChannels();
+    if(btn)btn.disabled=false;
+  });
   document.getElementById('sp-yt-reclassify')?.addEventListener('click',_ytReclassifyShorts);
-  document.getElementById('sp-ext-sync')?.addEventListener('click',_ytSyncExtChannels);
-  const extKeyEl=document.getElementById('sp-ext-yt-key');
-  const savedExtKey=localStorage.getItem('kpu_ext_yt_key')||'';
-  if(extKeyEl&&savedExtKey)extKeyEl.value=savedExtKey;
-  extKeyEl?.addEventListener('change',e=>localStorage.setItem('kpu_ext_yt_key',e.target.value.trim()));
-  extKeyEl?.addEventListener('blur',e=>localStorage.setItem('kpu_ext_yt_key',e.target.value.trim()));
 })();
 
 // 그룹/멤버/연결 카드 공통 "맨 위로" 버튼 — 스크롤로 아래로 많이 내려간 뒤 카드 맨 위로 쉽게 돌아가기 위함.
