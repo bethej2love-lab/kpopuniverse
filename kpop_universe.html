@@ -4238,8 +4238,8 @@ function _popMobCard(){
 }
 // ── Connection Card ────────────────────────────────
 let _connAnchor=null,_connSelected=[],_connLines3d=[],_connPanelShifted=false;
-let _connExactOnly=false;
-let _connExpandedGroups=new Set(); // "Only" 토글 — 선택된 멤버 조합이 정확히(±더도 덜도 없이) 나온 영상만 보기
+let _connExactOnly=false; // "Only" 토글 — 선택된 조합이 정확히(±더도 덜도 없이) 나온 영상만 보기
+let _connSelectedGroups=new Set(); // 타 그룹 묶음 칩에서 "그룹 단위"로 선택된 그룹(펼침 상태도 겸함)
 // 연결 카드 콜라보 칩(꾹 누르기/↗)으로 다른 멤버 카드로 넘어갔을 때 "뒤로" 갈 수 있도록 이전 상태를 쌓아두는 스택
 let _memberNavStack=[];
 const connPanelEl=document.getElementById('conn-panel');
@@ -4349,13 +4349,6 @@ function _getSongsFeaturingArtist(a){
 // 합쳐서 보여준다. 세션 중 앵커별로 캐시(_connApiCache)해두고, 카드 열릴 때 비동기로 채운 뒤 재렌더링.
 let _connApiCache=new Map(); // key: "이름|그룹" → {songs:[...], names:Set}
 function _connCacheKey(a){return`${a.name.ko}|${a.group.ko}`;}
-// with_groups로 태깅된 채널의 group_ko를 실제 표시 이름으로 되돌린다 — 그룹이면 그룹명 그대로,
-// 솔로 채널(아이유처럼 group.ko가 GROUPS에 없는 경우)이면 채널 키가 곧 본인 이름이므로 그 아티스트를 찾는다.
-function _channelOwnerName(gko){
-  if(GROUPS[gko])return gko;
-  const solo=ARTISTS.find(a=>a.name.ko===gko&&!GROUPS[a.group.ko]);
-  return solo?solo.name.ko:null;
-}
 async function _fetchApiCollabData(anchor){
   if(!sb)return{songs:[],names:new Set()};
   const memberKo=anchor.name.ko;
@@ -4395,14 +4388,22 @@ async function _fetchApiCollabData(anchor){
       withList.forEach(n=>names.add(n));
       songs.push(song);
     });
-    // 반대 방향 처리: 남의 채널에서 내 그룹 전체가 태깅된 영상 → 그 채널 주인을 콜라보로 추가
+    // 반대 방향 처리: 남의 채널에서 내 그룹 전체가 태깅된 영상 → forward 케이스(groupTagQ)와 동일하게
+    // 그 채널 소속 멤버 전원을 "이름(그룹)" 포맷으로 펼쳐서 추가한다. 예전엔 그룹명 하나("르세라핌")를
+    // 그대로 넣었는데, 괄호가 없다보니 _buildConnContent의 분류 로직에서 "같은 그룹 멤버"로 오분류되고
+    // _findArtistByConnName도 그 이름의 멤버를 못 찾아 클릭 시 이동/영상 매칭이 전부 실패하던 버그가 있었음.
     _filterBannedVideos(reverseGroupTagQ.data||[]).forEach(v=>{
       if(v.group_ko===groupKo)return; // 자기 채널(위 groupTagQ에서 이미 처리)은 중복 방지로 제외
-      const ownerName=_channelOwnerName(v.group_ko);
-      if(!ownerName)return;
-      const song={t:v.title,u:v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`,with:[ownerName],_apiId:v.id,_apiGroupKo:v.group_ko};
+      let withList=ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===v.group_ko)).map(a=>`${a.name.ko}(${v.group_ko})`);
+      if(!withList.length){
+        // 그룹이 아니라 솔로 채널(아이유처럼 group.ko가 GROUPS에 없는 경우)이면 본인 하나만 추가
+        const solo=ARTISTS.find(a=>a.name.ko===v.group_ko&&!GROUPS[a.group.ko]);
+        if(!solo)return;
+        withList=[`${solo.name.ko}(${solo.group.ko})`];
+      }
+      const song={t:v.title,u:v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`,with:withList,_apiId:v.id,_apiGroupKo:v.group_ko};
       if(v.category==='mv')song.type='mv';
-      names.add(ownerName);
+      withList.forEach(n=>names.add(n));
       songs.push(song);
     });
     return{songs:_dedupSongs(songs),names};
@@ -4470,20 +4471,33 @@ function _getCollabMembers(artist){
   if(apiData)apiData.names.forEach(n=>s.add(n));
   return[...s];
 }
-function _getCollabSongs(anchor,sel,exactOnly){
+function _getCollabSongs(anchor,sel,exactOnly,selGroups){
   const allSongs=[...(anchor.songs||[]).map(sg=>({...sg,_owner:anchor})),..._getSongsFeaturingArtist(anchor)];
   const apiData=_connApiCache.get(_connCacheKey(anchor));
   if(apiData)allSongs.push(...apiData.songs.map(sg=>({...sg,_owner:anchor})));
+  const selGroupsArr=selGroups?[...selGroups]:[];
   return _dedupSongs(allSongs.filter(sg=>{
-    if(!sel.length)return(sg.with||[]).length>0;
-    // with는 항상 영상 속 "본인(_owner) 제외 전원"이므로, with.length===sel.length면 영상 출연자가 (앵커+선택 멤버)와 정확히 일치
-    if(exactOnly&&(sg.with||[]).length!==sel.length)return false;
-    return sel.every(selName=>{
-      const selA=_findArtistByConnName(selName,anchor.group.ko);
-      if(!selA)return false;
-      if(sg._owner===selA)return true;
-      return(sg.with||[]).some(w=>_findArtistByConnName(w,anchor.group.ko)===selA);
+    if(!sel.length&&!selGroupsArr.length)return(sg.with||[]).length>0;
+    const hasMember=m=>sg._owner===m||(sg.with||[]).some(w=>_findArtistByConnName(w,anchor.group.ko)===m);
+    // 그룹 단위로 선택된 각 그룹은 기본적으로 "멤버 1명 이상 출연"이면 통과(OR). 단, 개별 멤버를 추가로
+    // 선택하지 않은 채 "Only"를 켜면 그 그룹은 "멤버 전원이 다 같이 출연"해야 통과하도록 의미가 바뀐다.
+    const groupsOk=selGroupsArr.every(gko=>{
+      const roster=ARTISTS.filter(a=>_artistGroups(a).some(g=>g.ko===gko));
+      if(exactOnly&&!sel.length)return roster.length>0&&roster.every(hasMember);
+      return roster.some(hasMember);
     });
+    if(!groupsOk)return false;
+    if(sel.length){
+      // with는 항상 영상 속 "본인(_owner) 제외 전원"이므로, 그룹 선택이 없을 때 with.length===sel.length면
+      // 영상 출연자가 (앵커+선택 멤버)와 정확히 일치
+      if(exactOnly&&!selGroupsArr.length&&(sg.with||[]).length!==sel.length)return false;
+      const ok=sel.every(selName=>{
+        const selA=_findArtistByConnName(selName,anchor.group.ko);
+        return selA?hasMember(selA):false;
+      });
+      if(!ok)return false;
+    }
+    return true;
   }));
 }
 function _clearConnLines3d(){
@@ -4702,28 +4716,28 @@ function _buildConnContent(container){
   // 같은 그룹 멤버 (개별 칩)
   sameGroupNames.forEach(name=>chipsDiv.appendChild(_makeConnChip(name)));
 
-  // 타 그룹 멤버 (그룹 단위 묶음 칩)
+  // 타 그룹 멤버 (그룹 단위 묶음 칩) — 칩을 클릭하면 "그룹 선택"(펼침 겸용)이 되어, 그 그룹 멤버 중
+  // 1명 이상 출연한 영상 전체가 먼저 뜨고, 펼쳐진 멤버 칩을 추가로 클릭하면 그 멤버 필수 출연으로 더 좁혀진다.
   otherGroupsSorted.forEach(gko=>{
     const members=otherByGroup.get(gko);
-    const isOpen=_connExpandedGroups.has(gko);
+    const isSelGroup=_connSelectedGroups.has(gko);
 
     const groupWrap=document.createElement('div');groupWrap.style.cssText='display:flex;flex-direction:column;align-items:flex-start;';
 
     const groupChip=document.createElement('button');
     groupChip.type='button';
-    groupChip.className='conn-group-chip'+(isOpen?' open':'');
+    groupChip.className='conn-group-chip'+(isSelGroup?' open':'');
     groupChip.innerHTML=`${gko}<span class="conn-group-chevron">›</span>`;
 
     const memberRow=document.createElement('div');
-    memberRow.className='conn-group-members'+(isOpen?' open':'');
+    memberRow.className='conn-group-members'+(isSelGroup?' open':'');
     members.forEach(name=>memberRow.appendChild(_makeConnChip(name)));
 
     groupChip.addEventListener('click',e=>{
       e.stopPropagation();
-      if(_connExpandedGroups.has(gko))_connExpandedGroups.delete(gko);
-      else _connExpandedGroups.add(gko);
-      groupChip.classList.toggle('open');
-      memberRow.classList.toggle('open');
+      if(_connSelectedGroups.has(gko))_connSelectedGroups.delete(gko);
+      else _connSelectedGroups.add(gko);
+      _buildConnContent(container);
     });
 
     groupWrap.appendChild(groupChip);
@@ -4737,7 +4751,7 @@ function _buildConnContent(container){
   const vidLbl=document.createElement('span');vidLbl.className='conn-lbl';
   vidLbl.textContent=currentLang==='ko'?'함께한 영상':'together';
   vidLblRow.appendChild(vidLbl);
-  if(_connSelected.length){
+  if(_connSelected.length||_connSelectedGroups.size){
     const onlyBtn=document.createElement('button');
     onlyBtn.type='button';
     onlyBtn.className='conn-only-toggle'+(_connExactOnly?' active':'');
@@ -4752,7 +4766,7 @@ function _buildConnContent(container){
   }
   container.appendChild(vidLblRow);
   const vidDiv=document.createElement('div');
-  const songs=_getCollabSongs(_connAnchor,_connSelected,_connExactOnly);
+  const songs=_getCollabSongs(_connAnchor,_connSelected,_connExactOnly,_connSelectedGroups);
   const _connCtx=_connAnchor?{groupKo:_connAnchor.group.ko,memberKo:_connAnchor.name.ko}:undefined;
   if(songs.length)buildVideoSection(songs,vidDiv,_connCtx);
   else{
@@ -4766,7 +4780,7 @@ function _buildConnContent(container){
 }
 
 function openConnCard(artist){
-  _connAnchor=artist;_connSelected=[];_connExactOnly=false;_connExpandedGroups=new Set();_updateConnLines3d();
+  _connAnchor=artist;_connSelected=[];_connExactOnly=false;_connSelectedGroups=new Set();_updateConnLines3d();
   if(!_connApiCache.has(_connCacheKey(artist)))_enrichConnCardFromApi(artist); // 즉시 표시 후 백그라운드로 API 콜라보 데이터 보강
   if(isMob()){
     document.getElementById('journal-sidebar').classList.remove('open'); // 마이페이지가 열려있는 채로 연결 카드를 열어도 카드가 위로 뜨도록
@@ -9377,9 +9391,11 @@ document.getElementById('vid-tag-with-search').addEventListener('input',e=>{
   resultsEl.innerHTML='';
   if(!q||!_vidTagTarget)return;
   const already=new Set(_vidTagWithSelected.map(m=>m.ko+'|'+m.groupKo));
+  const qLower=q.toLowerCase();
   // 아이유의 팔레트, 뉴진스편처럼 멤버 개개인이 아니라 그룹 전체가 출연하는 경우 — 그룹 이름째로 검색/선택
+  // (한글 이름뿐 아니라 영문 이름으로도 검색 가능해야 함 — 관리자가 영문으로 검색해도 매칭 안 되던 버그 수정)
   const groupMatches=Object.keys(GROUPS).filter(gko=>
-    gko.includes(q)&&gko!==_vidTagTarget.ko&&!_vidTagGroupsSelected.includes(gko)
+    (gko.includes(q)||(GROUPS[gko].en||'').toLowerCase().includes(qLower))&&gko!==_vidTagTarget.ko&&!_vidTagGroupsSelected.includes(gko)
   ).slice(0,4);
   groupMatches.forEach(gko=>{
     const opt=document.createElement('div');
@@ -9395,7 +9411,7 @@ document.getElementById('vid-tag-with-search').addEventListener('input',e=>{
     resultsEl.appendChild(opt);
   });
   const matches=ARTISTS.filter(a=>
-    a.name.ko.includes(q)&&
+    (a.name.ko.includes(q)||(a.name.en||'').toLowerCase().includes(qLower))&&
     !_artistGroups(a).some(g=>g.ko===_vidTagTarget.ko)&&
     !already.has(a.name.ko+'|'+a.group.ko)
   ).slice(0,8);
