@@ -1131,7 +1131,6 @@
   .trophy-btn{background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:2px;font-size:14px;line-height:1;padding:2px 3px;opacity:0.75;transition:opacity .13s,transform .13s;}
   .trophy-btn:hover{opacity:1;}
   .trophy-btn:active{transform:scale(0.9);}
-  .trophy-count{font-size:10.5px;font-weight:700;color:rgba(220,200,150,0.9);}
   #trophy-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:80;display:none;align-items:center;justify-content:center;}
   #trophy-overlay.open{display:flex;}
   #trophy-panel{position:relative;width:min(320px,calc(100vw - 40px));max-height:min(480px,calc(100vh - 80px));overflow-y:auto;background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:18px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:20px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
@@ -1519,14 +1518,14 @@
   </div>
 </div>
 <div id="fav-hint-callout">Start with Your Favorite!<span id="fhc-arrow"></span></div>
-<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="tt-trophy" class="trophy-btn" style="display:none" aria-label="음악방송 1위 기록">🏆<span class="trophy-count"></span></button><button id="tt-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버"><span class="nav-arr">‹</span><span id="tt-prev-name" class="nav-name"></span></button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버"><span id="tt-next-name" class="nav-name"></span><span class="nav-arr">›</span></button></div><div id="tt-concert-row" class="concert-row"></div><div id="tv"></div></div>
+<div id="tt"><div id="tt-bar"></div><button id="tt-back" class="conn-back-btn" style="display:none" aria-label="이전 멤버로 돌아가기">‹</button><span id="ttx" role="button" tabindex="0" aria-label="멤버 카드 닫기">×</span><div id="tt-name-row"><div class="tn" id="tn"></div><button id="tt-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="tt-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="tt-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div><div id="tg-row"><div id="tt-links"></div><div class="tg" id="tg"></div><button id="tt-conn-btn" class="tt-conn-btn" style="display:none">연결</button></div><div class="tco" id="tco"></div><div id="tt-status-line" class="gc-status-line"></div><div class="tm" id="tm"></div><div id="tt-nav"><button class="tt-nav-btn" id="tt-prev" aria-label="이전 멤버"><span class="nav-arr">‹</span><span id="tt-prev-name" class="nav-name"></span></button><span id="tt-counter"></span><button class="tt-nav-btn" id="tt-next" aria-label="다음 멤버"><span id="tt-next-name" class="nav-name"></span><span class="nav-arr">›</span></button></div><div id="tt-concert-row" class="concert-row"></div><div id="tv"></div></div>
 <div id="gc">
   <div id="gc-bar"></div>
   <div id="gc-inner">
     <button id="gc-back" class="conn-back-btn" style="display:none" aria-label="이전으로">‹</button><span id="gcx" role="button" tabindex="0" aria-label="그룹 카드 닫기">×</span>
     <div id="gc-header">
       <div id="gc-header-text">
-        <div id="gc-name-row"><div id="gc-name"></div><button id="gc-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="gc-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="gc-trophy" class="trophy-btn" style="display:none" aria-label="음악방송 1위 기록">🏆<span class="trophy-count"></span></button><button id="gc-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div>
+        <div id="gc-name-row"><div id="gc-name"></div><button id="gc-fav" class="fav-btn" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg></button><button id="gc-bookmark" class="bookmark-btn" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6 3h11a1 1 0 0 1 1 1v16.2l-6.5-4.6-6.5 4.6V4a1 1 0 0 1 1-1z"/></svg></button><button id="gc-trophy" class="trophy-btn" style="display:none" aria-label="음악방송 1위 기록">🏆</button><button id="gc-share" class="share-btn" aria-label="공유"><svg viewBox="0 0 24 24"><path d="M12 15V4M12 4l-3.5 3.5M12 4l3.5 3.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div>
         <div id="gc-en-row"><div id="gc-en"></div><div id="gc-links"></div></div>
         <div id="gc-status-line" class="gc-status-line"></div>
       </div>
@@ -3682,6 +3681,14 @@ function closeLightbox(){
 }
 document.getElementById('yt-lightbox').addEventListener('pointerdown',e=>e.stopPropagation());
 document.getElementById('yt-lightbox').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)closeLightbox();});
+// 쇼츠 모드에서 리액션·툴바 줄 옆의 빈 여백도 버튼이 아닌 컨테이너 자체를 눌렀을 때는 닫히도록 허용
+// (그 줄들이 wrap 전체 너비를 차지해 배경 오버레이 클릭으로 인식되지 않던 문제 보완)
+['yt-lb-reactions','yt-lb-toolbar'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',e=>{
+    if(e.target!==e.currentTarget)return;
+    e.stopPropagation();closeLightbox();
+  });
+});
 // 모바일: 라이트박스 상하 스와이프로 이전/다음 영상 이동 (릴스/쇼츠 방식)
 {
   const _lbEl=document.getElementById('yt-lightbox');
@@ -5543,7 +5550,6 @@ function showT(a,cx,cy,keepNavStack,urlMode,pushMobNav,noFly){
     _enrichMemberVideosFromApi(a,tv,_memberAllSongs,_memberPersonalSongs);
   }
   _loadConcertRow(a.group.ko,'tt-concert-row');
-  _loadTrophy(a.group.ko,a.name.ko,'tt-trophy');
   // ✦ 연결 버튼 (그룹명 오른쪽) — 정적 소스만으로 우선 판단해 즉시 표시하고, API 콜라보 캐시가 없으면
   // 백그라운드로 받아와서(연결 카드를 아예 안 열어봤어도) 카드 열자마자 정확한 상태로 갱신
   _updateConnBtn(a);
@@ -5742,7 +5748,7 @@ function showGC(ko,cx,cy,keepMemberPanel,skipRipple,urlMode,pushMobNav){
   _renderGcMemberList(ko,cx,cy);
   _buildGcChVid(ko);
   _loadConcertRow(ko,'gc-concert-row');
-  _loadTrophy(ko,null,'gc-trophy');
+  _loadTrophy(ko,'gc-trophy');
   const cardW=info.links?.youtube?264:234;
   el.style.maxWidth=cardW+'px';
   if(isMob()){if(!_navHistoryActive)openMobSheet(el);}else{if(!keepMemberPanel)closeMemberPanel(false);openSidePanel(el);}
@@ -9557,23 +9563,20 @@ document.getElementById('venue-panel-close').addEventListener('click',e=>{e.stop
 document.getElementById('venue-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open');});
 
 // ── 음악방송 1위 트로피 (객관적 성취 기록 — 콘서트와 달리 개인화 없이 단순 카운트+리스트만) ──
-async function _loadTrophy(gko,memberKo,btnId){
+async function _loadTrophy(gko,btnId){
   const btn=document.getElementById(btnId);
   if(!btn)return;
   btn.style.display='none';btn.onclick=null;
   if(!sb||!GROUPS[gko])return;
   const{data,error}=await sb.from('music_show_wins').select('*').eq('group_ko',gko).order('win_date',{ascending:false});
-  if(error||!data)return;
-  // 멤버 카드에선 그룹 전체 수상 + 본인 솔로/유닛 수상만, 다른 멤버 개인 수상은 제외
-  const rows=memberKo?data.filter(r=>!r.member_ko||r.member_ko===memberKo):data;
-  if(!rows.length)return;
+  if(error||!data||!data.length)return;
   btn.style.display='';
-  btn.querySelector('.trophy-count').textContent=rows.length;
-  btn.onclick=e=>{e.stopPropagation();_openTrophyList(rows);};
+  btn.onclick=e=>{e.stopPropagation();_openTrophyList(data);};
 }
 function _openTrophyList(rows){
   const overlay=document.getElementById('trophy-overlay');
   const listEl=document.getElementById('trophy-panel-list');
+  document.getElementById('trophy-panel-title').textContent=`음악방송 1위 ${rows.length}회`;
   listEl.innerHTML='';
   rows.forEach(r=>{
     const it=document.createElement('div');it.className='trophy-item';
