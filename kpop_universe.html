@@ -717,6 +717,10 @@
   /* ── YouTube 채널 영상 섹션 ─────────────────────────── */
   #gc-ch-vid{margin-top:9px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.10);}
   #gc-ch-vid:empty{display:none;}
+  /* 멤버 카드 영상 섹션(#tv) — 그룹카드(#gc-ch-vid)와 동일하게 자체 여백+구분선을 둬서, 바로 위 공연 정보
+     (tt-concert-row)가 있든 없든 라이브/Shorts 필터 줄까지의 간격이 항상 일정하게 유지되도록 함. */
+  #tv{margin-top:9px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.10);}
+  #tv:empty{display:none;}
   .gc-ch-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
   .gc-ch-search-wrap{position:relative;margin-bottom:8px;}
   .gc-ch-search{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.10);border-radius:8px;padding:5px 26px 5px 9px;font-size:11.5px;color:#c8daf0;font-family:inherit;outline:none;transition:border-color .15s,background .15s;}
