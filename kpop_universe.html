@@ -713,6 +713,11 @@
     color:rgba(220,238,255,1.0);
     text-shadow:0 0 14px rgba(200,228,255,0.8),0 0 6px rgba(200,228,255,0.5);
   }
+  @media(min-width:769px){
+    /* 모바일은 그대로 두고, 웹에서만 멤버 이름 글로우를 살짝 줄임 */
+    .gc-mem-name{text-shadow:0 0 8px rgba(170,210,255,0.53),0 0 3px rgba(170,210,255,0.26);}
+    .gc-mem-name:hover{text-shadow:0 0 11px rgba(200,228,255,0.7),0 0 4.5px rgba(200,228,255,0.43);}
+  }
   #gc-tv{margin-top:12px;}
   /* ── YouTube 채널 영상 섹션 ─────────────────────────── */
   #gc-ch-vid{margin-top:9px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.10);}
@@ -766,6 +771,12 @@
     .gc-ch-filter{font-size:9px;}
     .gc-ch-refresh{font-size:15px;}
     .gc-ch-sort-btn{font-size:13px;}
+    /* 데스크톱 사이드 카드 폭이 좁아 필터 알약(전체/MV/라이브/Shorts)이 두 줄로 밀리기 쉬움 —
+       돋보기/정렬/새로고침 아이콘 사이 여백을 줄여 필터 쪽에 가로 공간을 더 확보 */
+    .gc-ch-hd{gap:6px;}
+    .gc-ch-search-toggle{padding:3px 5px;}
+    .gc-ch-sort-btn{padding:4px 4px;}
+    .gc-ch-refresh{padding:4px 4px;}
   }
   /* 멤버 카드 전용 Only 토글 — 전체/라이브/Shorts는 서로 배타적인 "모드"라 알약 버튼이지만, Only는 그 위에
      얹는 부가 조건이라 같은 버튼 모양이면 넷 다 같은 종류의 선택지처럼 보여 헷갈림. 텍스트만 둬서 구분. */
@@ -878,6 +889,7 @@
   .gc-ch-msg{font-size:12px;color:rgba(155,178,228,0.45);text-align:center;padding:10px 0;line-height:1.6;}
   @keyframes gc-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
   .gc-ch-skeleton{border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.04);}
+  .gc-ch-skeleton.featured{grid-column:span 2;}
   .gc-ch-skeleton-thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0.04) 75%);background-size:200% 100%;animation:gc-shimmer 1.4s ease infinite;}
   .gc-ch-skeleton-title{height:9px;margin:7px 8px 4px;border-radius:4px;background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0.04) 75%);background-size:200% 100%;animation:gc-shimmer 1.4s ease infinite;}
   .gc-ch-skeleton-title.short{width:55%;margin-bottom:8px;}
@@ -1100,15 +1112,15 @@
   /* ── 콘서트/팬미팅 ────────────────────────────── */
   .concert-row{margin-top:9px;padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.10);}
   .concert-row:empty{display:none;margin:0;padding:0;border:none;}
-  .concert-teaser{display:flex;align-items:center;gap:6px;width:100%;background:none;border:none;padding:2px 0;cursor:pointer;font-family:inherit;text-align:left;color:rgba(200,220,255,0.92);}
-  .concert-teaser-txt{flex:1;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .concert-teaser{display:flex;align-items:center;gap:6px;width:100%;background:none;border:none;padding:2px 0;cursor:pointer;font-family:inherit;text-align:left;color:rgba(200,220,255,0.76);}
+  .concert-teaser-txt{flex:1;font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .concert-chevron{font-size:10px;opacity:0.6;transition:transform .2s ease;flex-shrink:0;}
   .concert-teaser.open .concert-chevron{transform:rotate(90deg);}
   .concert-list{display:none;flex-direction:column;gap:8px;margin-top:8px;}
   .concert-list.open{display:flex;}
-  .concert-item{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:10px;padding:8px 10px;font-size:11.5px;color:rgba(200,220,255,0.85);}
-  .concert-item-title{font-weight:700;font-size:12px;color:rgba(220,235,255,0.95);margin-bottom:3px;}
-  .concert-item-meta{color:rgba(160,182,222,0.72);margin-bottom:6px;}
+  .concert-item{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:10px;padding:8px 10px;font-size:10.5px;color:rgba(200,220,255,0.7);}
+  .concert-item-title{font-weight:700;font-size:11px;color:rgba(220,235,255,0.82);margin-bottom:3px;}
+  .concert-item-meta{color:rgba(160,182,222,0.6);margin-bottom:6px;}
   .concert-venue-chip{color:rgba(170,210,255,0.9);cursor:pointer;text-decoration:underline;text-underline-offset:2px;background:none;border:none;font:inherit;padding:0;}
   .concert-venue-chip:hover{color:rgba(220,238,255,1);}
   .concert-item-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px;}
@@ -1261,14 +1273,23 @@
   .bookmark-btn.bm-disabled,.fav-btn.bm-disabled{opacity:.25;pointer-events:none;}
   .fav-btn+.bookmark-btn{margin-left:-6px;position:relative;top:-0.25px;}
   @media(max-width:768px){.fav-btn+.bookmark-btn{top:0.5px;}}
+  .bookmark-btn+.trophy-btn{margin-left:-6px;position:relative;top:-0.25px;}
+  @media(max-width:768px){.bookmark-btn+.trophy-btn{top:0.5px;}}
   .share-btn{background:none;border:none;outline:none;cursor:pointer;padding:2px 3px;border-radius:6px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;color:rgba(190,205,240,0.48);transition:color .15s,transform .12s;}
   .share-btn svg{width:13px;height:13px;display:block;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
   .share-btn:hover{color:rgba(210,222,255,0.95);transform:scale(1.18);}
   .share-btn:active{transform:scale(0.9);}
   .bookmark-btn+.share-btn{margin-left:-6px;position:relative;top:-0.25px;}
   @media(max-width:768px){.bookmark-btn+.share-btn{top:0.5px;}}
+  .trophy-btn+.share-btn{margin-left:-6px;position:relative;top:-0.25px;}
+  @media(max-width:768px){.trophy-btn+.share-btn{top:0.5px;}}
   #share-toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(12px);background:rgba(20,24,40,0.94);color:rgba(230,238,255,0.95);font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:20px;box-shadow:0 6px 24px rgba(0,0,0,0.35);z-index:200;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;white-space:nowrap;}
   #share-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  #discover-toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(12px);display:flex;align-items:center;gap:9px;background:rgba(20,24,40,0.94);color:rgba(230,238,255,0.95);font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:12px;font-weight:600;padding:6px 16px 6px 6px;border-radius:24px;box-shadow:0 6px 24px rgba(0,0,0,0.35);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;white-space:nowrap;cursor:pointer;}
+  #discover-toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+  #discover-toast-thumb{width:44px;height:28px;border-radius:6px;object-fit:cover;flex-shrink:0;display:none;background:rgba(255,255,255,0.08);}
+  #discover-toast-thumb.has-img{display:block;}
+  #discover-toast-text b{color:#fff;}
   #tt-name-row{display:inline-flex;align-items:center;gap:8px;margin-bottom:3px;padding-left:4px;max-width:calc(100% - 22px);}
   #tt-name-row .tn{margin-bottom:0;padding-left:0;padding-right:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #gc-name-row{display:inline-flex;align-items:center;gap:8px;margin-bottom:6px;max-width:100%;}
@@ -1315,7 +1336,7 @@
   #unfav-confirm-panel,#date-edit-panel,#link-confirm-panel{width:min(280px,calc(100vw - 40px));background:rgba(13,17,34,0.97);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:18px;box-shadow:0 16px 56px rgba(0,0,0,0.72);border:0.5px solid rgba(255,255,255,0.10);padding:20px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
   #unfav-confirm-msg,#link-confirm-msg{font-size:12px;color:rgba(160,182,222,0.72);line-height:1.5;margin-top:8px;}
   #unfav-confirm-btns,#link-confirm-btns{display:flex;gap:8px;margin-top:18px;}
-  #pp-google-link{margin-top:18px;}
+  #pp-x-link{margin-top:18px;}
   #pp-linked-state{font-size:11px;color:rgba(130,200,160,0.85);margin-top:10px;letter-spacing:.02em;}
   .uc-btn{flex:1;padding:10px;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.03em;cursor:pointer;position:relative;overflow:hidden;transition:background .15s,border-color .15s,color .15s,transform .2s ease-out;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);color:rgba(180,200,238,0.72);}
   .uc-btn:hover{background:rgba(255,255,255,0.09);color:#fff;}
@@ -1618,6 +1639,7 @@
 <div id="side-panel"><button id="sp-wide-btn" title="카드 넓게 보기">⇤</button></div>
 <div id="member-panel"></div>
 <div id="share-toast"></div>
+<div id="discover-toast"><img id="discover-toast-thumb" alt=""><div id="discover-toast-text"></div></div>
 <button id="tt-collapse" aria-label="멤버 카드 접기">›</button>
 <div id="yt-lightbox">
   <div id="yt-lb-wrap">
@@ -1732,16 +1754,17 @@
           <div class="pp-fav-sub" data-i18n="ppSyncSub">다른 기기에서도 즐겨찾기가 유지돼요</div>
         </div>
       </div>
+      <button id="pp-x-link" class="pp-save-btn" data-i18n="ppXBtn">X로 연결하기</button>
       <button id="pp-google-link" class="pp-save-btn" data-i18n="ppGoogleBtn">구글로 연결하기</button>
-      <div id="pp-linked-state" style="display:none" data-i18n="ppLinked">구글 계정에 연결됨 ✓</div>
+      <div id="pp-linked-state" style="display:none" data-i18n="ppLinked">계정에 연결됨 ✓</div>
     </div>
     <button id="pp-save" class="pp-save-btn" data-i18n="ppSave">저장</button>
   </div>
 </div>
 <div id="link-confirm-overlay">
   <div id="link-confirm-panel">
-    <div class="pp-title">구글로 연결할까요?</div>
-    <div id="link-confirm-msg">연결하려는 구글 계정에 이미 다른 기기 데이터가 있다면, 지금 이 브라우저의 즐겨찾기·프로필은 그 데이터로 대체돼요.</div>
+    <div class="pp-title">연결할까요?</div>
+    <div id="link-confirm-msg">연결하려는 계정에 이미 다른 기기 데이터가 있다면, 지금 이 브라우저의 즐겨찾기·프로필은 그 데이터로 대체돼요.</div>
     <div id="link-confirm-btns">
       <button id="link-confirm-cancel" class="uc-btn">취소</button>
       <button id="link-confirm-ok" class="uc-btn uc-btn-primary">계속할게요</button>
@@ -2052,14 +2075,14 @@ const T={
       preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcFandom:'팬덤',gcLeader:'리더',gcMember:'멤버',gcSNS:'공식',
       idxTitle:'인덱스',idxGroupTab:'그룹',idxMemberTab:'멤버',idxSearchPH:'그룹명 검색…',idxSearchPHMember:'멤버명 검색…',
       idxSortName:'이름 (가나다순)',idxSortDebut:'데뷔연도',idxSortAgency:'소속사',idxSortMembers:'멤버 수',
-      idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적',ppTitle:'내 프로필',ppNick:'닉네임',ppNickPH:'닉네임을 입력하세요',ppNickErr:'닉네임을 입력해주세요',ppBio:'한 줄 소개',ppBioPH:'선택사항',ppColor:'내 별 색상',ppFavLabel:'즐겨찾기 공개',ppFavSub:'다른 사람들이 볼 수 있어요',ppSyncLabel:'다른 기기와 동기화',ppSyncSub:'다른 기기에서도 즐겨찾기가 유지돼요',ppGoogleBtn:'구글로 연결하기',ppLinked:'구글 계정에 연결됨 ✓',ppSave:'저장'},
+      idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적',ppTitle:'내 프로필',ppNick:'닉네임',ppNickPH:'닉네임을 입력하세요',ppNickErr:'닉네임을 입력해주세요',ppBio:'한 줄 소개',ppBioPH:'선택사항',ppColor:'내 별 색상',ppFavLabel:'즐겨찾기 공개',ppFavSub:'다른 사람들이 볼 수 있어요',ppSyncLabel:'다른 기기와 동기화',ppSyncSub:'다른 기기에서도 즐겨찾기가 유지돼요',ppGoogleBtn:'구글로 연결하기',ppXBtn:'X로 연결하기',ppLinked:'계정에 연결됨 ✓',ppSave:'저장'},
   en:{sp_title:'Settings',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
       all:'All',girl:'Girl Groups',boy:'Boy Groups',inactive:'Inactive / Left',reset:'↺ Reset',
       searchPH:'Search groups · members…',mobileTitle:'K-pop Idol Map',srGroup:'Group',
       preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcFandom:'Fandom',gcLeader:'Leader',gcMember:'Members',gcSNS:'Official',
       idxTitle:'Index',idxGroupTab:'Groups',idxMemberTab:'Members',idxSearchPH:'Search group name…',idxSearchPHMember:'Search member name…',
       idxSortName:'Name (A–Z)',idxSortDebut:'Debut Year',idxSortAgency:'Agency',idxSortMembers:'Member Count',
-      idxSortBirth:'Birth Year',idxSortGroup:'Group',idxSortNation:'Nationality',ppTitle:'My Profile',ppNick:'Nickname',ppNickPH:'Enter nickname',ppNickErr:'Nickname is required',ppBio:'Bio',ppBioPH:'Optional',ppColor:'Star Color',ppFavLabel:'Public Favorites',ppFavSub:'Others can see your favorites',ppSyncLabel:'Sync Across Devices',ppSyncSub:'Favorites stay synced across your devices',ppGoogleBtn:'Connect with Google',ppLinked:'Connected to Google ✓',ppSave:'Save'}
+      idxSortBirth:'Birth Year',idxSortGroup:'Group',idxSortNation:'Nationality',ppTitle:'My Profile',ppNick:'Nickname',ppNickPH:'Enter nickname',ppNickErr:'Nickname is required',ppBio:'Bio',ppBioPH:'Optional',ppColor:'Star Color',ppFavLabel:'Public Favorites',ppFavSub:'Others can see your favorites',ppSyncLabel:'Sync Across Devices',ppSyncSub:'Favorites stay synced across your devices',ppGoogleBtn:'Connect with Google',ppXBtn:'Connect with X',ppLinked:'Account Connected ✓',ppSave:'Save'}
 };
 function applyLang(){
   document.body.classList.toggle('lang-en',currentLang==='en');
@@ -2434,20 +2457,27 @@ async function buildUniverse(){
     // ── Collect member positions ───────────────────
     const _placedMPos=[];
     const _minSep=radius*0.34; // 최소 간격: 행성 반지름의 34% (멤버 많은 행성에서 점들이 너무 붙어 보이던 문제 완화)
-    members.forEach(m=>{
+    // 방향은 골든 앵글 나선(피보나치 스피어)으로 인원수와 무관하게 구 전체에 고르게 뿌려서
+    // 순수 랜덤 샘플링이 소수 인원 그룹에서 종종 한쪽으로 몰리던 문제를 근본적으로 막는다.
+    // 완전히 기계적인 격자로 보이지 않도록 각 멤버 방향에 작은 랜덤 흔들림(jitter)을 더한다.
+    const _mTotal=members.length;
+    const _goldenAngle=Math.PI*(3-Math.sqrt(5));
+    const _ySpacing=_mTotal>1?2/(_mTotal-1):2;
+    members.forEach((m,mi)=>{
       const [mr,mg,mb]=m.color||[r,g,b];
       const mColor=duneColor(mr,mg,mb);
 
+      const yBase=_mTotal>1?1-(mi/(_mTotal-1))*2:0;
+      const y=Math.max(-1,Math.min(1,yBase+(Math.random()-0.5)*_ySpacing*0.7));
+      const radAtY=Math.sqrt(Math.max(0,1-y*y));
+      const mTheta=_goldenAngle*mi+(Math.random()-0.5)*0.7;
+      const mDir=new THREE.Vector3(Math.cos(mTheta)*radAtY,y,Math.sin(mTheta)*radAtY);
+
+      // 중심으로부터의 거리(rr)는 기존처럼 랜덤하게 둬서 별들이 표면에 딱 붙지 않고 입체적으로 보이게 유지
       let mPos,tries=0;
       do{
-        const phi2=Math.acos(2*Math.random()-1);
-        const theta=Math.random()*Math.PI*2;
         const rr=Math.cbrt(Math.random())*radius*0.82;
-        mPos=pos.clone().add(new THREE.Vector3(
-          rr*Math.sin(phi2)*Math.cos(theta),
-          rr*Math.sin(phi2)*Math.sin(theta),
-          rr*Math.cos(phi2)
-        ));
+        mPos=pos.clone().add(mDir.clone().multiplyScalar(rr));
         tries++;
       }while(tries<60&&_placedMPos.some(p=>p.distanceTo(mPos)<_minSep));
       _placedMPos.push(mPos.clone());
@@ -3658,7 +3688,7 @@ function _lbRipple(btn,e){
   el.addEventListener('mousedown',e=>{const b=e.target.closest(sel);if(b)_lbRipple(b,e);});
 });
 // 프로필 패널 버튼 리플
-['pp-save','pp-close','pp-google-link'].forEach(id=>{
+['pp-save','pp-close','pp-google-link','pp-x-link'].forEach(id=>{
   const el=document.getElementById(id);
   if(!el)return;
   el.addEventListener('touchstart',e=>_lbRipple(el,e),{passive:true});
@@ -5135,6 +5165,84 @@ function _showShareToast(msg){
   clearTimeout(_showShareToast._t);
   _showShareToast._t=setTimeout(()=>el.classList.remove('show'),1800);
 }
+
+// ── "이 멤버도 둘러보실래요?" 발견 유도 토스트 (카드를 진짜로 닫을 때만) ──────
+// 대상 선정: 방금 닫은 멤버와 connections.json(콜라보/같은 그룹 등)으로 이어진 멤버 중 랜덤 →
+// 없으면(고립된 멤버) 같은 그룹 다른 멤버로 폴백. 그룹 카드를 닫은 거면 그 그룹의 랜덤 멤버.
+// 유저 최애 데이터가 쌓이면 그쪽 비중을 늘릴 예정 — 지금은 콜라보 데이터 기반 1단계.
+function _pickDiscoverTarget(closedArtist,closedGko){
+  if(closedArtist){
+    const name=closedArtist.name.ko;
+    const myGroups=_artistGroups(closedArtist).map(g=>g.ko);
+    const conns=_rawConnData.filter(c=>c.type==='member'&&(c.a===name||c.b===name));
+    const candidates=[];
+    conns.forEach(c=>{
+      const otherName=c.a===name?c.b:c.a;
+      const others=(ARTISTS||[]).filter(a=>a.name.ko===otherName);
+      let match;
+      if(c.group){
+        match=myGroups.includes(c.group)?others.find(o=>_artistGroups(o).some(g=>g.ko===c.group)):null;
+      }else{
+        match=others.find(o=>_artistGroups(o).some(g=>myGroups.includes(g.ko)));
+      }
+      if(match&&!candidates.some(x=>x.name.ko===match.name.ko&&x.group.ko===match.group.ko))candidates.push(match);
+    });
+    if(candidates.length)return candidates[Math.floor(Math.random()*candidates.length)];
+    const sameGroup=(ARTISTS||[]).filter(a=>a.group.ko===closedArtist.group.ko&&a.name.ko!==name&&a.active!==false);
+    if(sameGroup.length)return sameGroup[Math.floor(Math.random()*sameGroup.length)];
+    return null;
+  }
+  if(closedGko){
+    const members=(ARTISTS||[]).filter(a=>a.group.ko===closedGko&&a.active!==false);
+    if(members.length)return members[Math.floor(Math.random()*members.length)];
+  }
+  return null;
+}
+async function _fetchDiscoverThumb(artist){
+  if(!sb)return null;
+  try{
+    const gko=_ytGroupKoFor(artist);
+    const{data,error}=await sb.from(_YT_TABLE).select('id,thumb,category')
+      .eq('group_ko',gko).or(`members.eq.{},members.cs.{${artist.name.ko}}`)
+      .order('published_at',{ascending:false}).limit(12);
+    if(error||!data?.length)return null;
+    const vidUrl=v=>v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`;
+    const maxC=Math.max(0,...data.map(v=>_scrapCounts.get(vidUrl(v))||0));
+    const top=maxC>0?data.filter(v=>(_scrapCounts.get(vidUrl(v))||0)===maxC):data;
+    return top[Math.floor(Math.random()*top.length)]?.thumb||null;
+  }catch(e){return null;}
+}
+async function _showDiscoverToast(artist){
+  const el=document.getElementById('discover-toast');
+  if(!el)return;
+  const textEl=document.getElementById('discover-toast-text');
+  const imgEl=document.getElementById('discover-toast-thumb');
+  const isKo=currentLang==='ko';
+  const name=isKo?artist.name.ko:(artist.name.en||artist.name.ko);
+  textEl.innerHTML=isKo?`<b>${name}</b> 카드도 둘러보실래요?♥`:`Check out <b>${name}</b> too?♥`;
+  imgEl.classList.remove('has-img');imgEl.src='';
+  el.classList.add('show');
+  clearTimeout(_showDiscoverToast._t);
+  _showDiscoverToast._t=setTimeout(()=>el.classList.remove('show'),5000);
+  el.onclick=()=>{
+    el.classList.remove('show');
+    if(isMob()){showT(artist,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
+    else showT(artist,window.innerWidth/2,window.innerHeight/2);
+  };
+  const thumb=await _fetchDiscoverThumb(artist);
+  if(thumb&&el.classList.contains('show')){imgEl.src=thumb;imgEl.classList.add('has-img');}
+}
+function _maybeSuggestNext(){
+  const artist=_openTArtist,gko=_openGCko;
+  if(!artist&&!gko)return;
+  setTimeout(()=>{
+    // 그 사이 다른 카드가 열렸으면(순수 종료가 아니라 다음 카드로 넘어간 것) 넛지 스킵
+    if(_openTArtist||_openGCko)return;
+    const target=_pickDiscoverTarget(artist,gko);
+    if(target)_showDiscoverToast(target);
+  },500);
+}
+
 function _fallbackCopy(url){
   const ta=document.createElement('textarea');
   ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
@@ -5372,6 +5480,7 @@ function _checkDebutAnniversaries(){
 
 document.getElementById('ttx').addEventListener('click',e=>{
   e.stopPropagation();
+  _maybeSuggestNext();
   if(isMob())closeMobSheet();
   else closeCards();
 });
@@ -5391,7 +5500,7 @@ window.addEventListener('keydown',e=>{
   else if(e.key==='ArrowRight'){e.preventDefault();navigateMember(1);}
   else if(e.key==='Escape'){
     if(document.getElementById('yt-lightbox').classList.contains('open'))closeLightbox();
-    else closeCards();
+    else{_maybeSuggestNext();closeCards();}
   }
 });
 document.getElementById('tt-prev').addEventListener('click',e=>{e.stopPropagation();navigateMember(-1);});
@@ -5405,7 +5514,7 @@ document.getElementById('tt').addEventListener('pointerup',e=>{
   const dx=e.clientX-_ttSX,dy=e.clientY-_ttSY;
   if(Math.abs(dx)>44&&Math.abs(dx)>Math.abs(dy)*1.5)navigateMember(dx<0?1:-1);
 },{passive:true});
-document.getElementById('gcx').addEventListener('click',e=>{e.stopPropagation();closeCards();});
+document.getElementById('gcx').addEventListener('click',e=>{e.stopPropagation();_maybeSuggestNext();closeCards();});
 // ttx/gcx는 <span role="button">이라 span 자체엔 키보드 활성화가 기본 제공되지 않음 — Enter/Space를 클릭으로 연결
 [document.getElementById('ttx'),document.getElementById('gcx')].forEach(el=>{
   el.addEventListener('keydown',e=>{
@@ -7839,6 +7948,7 @@ function openProfilePanel(){
   _buildColorSwatches();
   const _isLinked=window._sbSession&&window._sbSession.user.is_anonymous===false;
   document.getElementById('pp-google-link').style.display=_isLinked?'none':'';
+  document.getElementById('pp-x-link').style.display=_isLinked?'none':'';
   document.getElementById('pp-linked-state').style.display=_isLinked?'':'none';
   _closeBiasSearch();
   _renderBiasChips();
@@ -8214,6 +8324,12 @@ function _authAlert(msg){
   try{alert('[Auth Debug] '+msg);}catch(e){}
 }
 
+// linkIdentity 리디렉트 왕복 중엔 어떤 provider(google/twitter)로 연결을 시도했는지 컨텍스트가
+// 사라지므로, 시도 직전 sessionStorage에 남겨뒀다가 돌아온 뒤(already-linked 자동 재로그인 등) 다시 읽음
+const _LINK_PROVIDER_KEY='kpu_link_provider';
+function _rememberLinkProvider(provider){try{sessionStorage.setItem(_LINK_PROVIDER_KEY,provider);}catch(e){}}
+function _lastLinkProvider(){try{return sessionStorage.getItem(_LINK_PROVIDER_KEY)||'google';}catch(e){return'google';}}
+
 // ── 영상 스크랩 공개 집계 (메인 직캠 선정용) ──────
 // 개인 플레이리스트(scraps, 위 user_data)와는 별개로, "이 영상을 몇 명이 스크랩했는지"를
 // video_scraps 테이블(영상×유저 1행)로 공개 집계해서, 그룹/멤버 카드의 메인 직캠을
@@ -8285,11 +8401,12 @@ async function initSupabaseSync(){
     const hadOAuthCode=urlParams.has('code');
     if(oauthErr){
       if(/already.*(linked|exists)/i.test(oauthErr)){
-        // "계정 연결(link)" 시도였는데, 이 구글 계정이 이미 다른 유저에 연결돼 있다는 사실이
-        // 구글 인증을 마치고 돌아온 뒤에야 확인됨 — 연결 대신 로그인으로 전환해 자동 재시도.
+        // "계정 연결(link)" 시도였는데, 이 계정이 이미 다른 유저에 연결돼 있다는 사실이
+        // 인증을 마치고 돌아온 뒤에야 확인됨 — 연결 대신 로그인으로 전환해 자동 재시도.
         // 성공하면 다시 리디렉트되므로 이후 코드는 실행되지 않음.
-        const{error:loginErr}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});
-        if(loginErr)_authAlert('구글 로그인 자동 재시도 실패: '+loginErr.message);
+        const provider=_lastLinkProvider();
+        const{error:loginErr}=await sb.auth.signInWithOAuth({provider,options:{redirectTo:location.origin+location.pathname}});
+        if(loginErr)_authAlert(`${provider} 로그인 자동 재시도 실패: `+loginErr.message);
         return;
       }
       _authAlert('OAuth 리디렉트 에러: '+oauthErr);
@@ -8353,8 +8470,7 @@ document.getElementById('link-confirm-cancel').addEventListener('click',e=>{e.st
 document.getElementById('link-confirm-overlay').addEventListener('click',e=>{e.stopPropagation();if(e.target===e.currentTarget)_closeLinkConfirm(false);});
 document.getElementById('link-confirm-overlay').addEventListener('pointerdown',e=>e.stopPropagation());
 
-document.getElementById('pp-google-link').addEventListener('click',async e=>{
-  e.stopPropagation();
+async function _handleAccountLink(provider){
   if(!sb){console.error('Supabase client not initialized');return;}
   const hasLocalData=favGroups.size>0||favMembers.size>0||bookmarks.length>0||scraps.length>0;
   if(hasLocalData){
@@ -8362,18 +8478,21 @@ document.getElementById('pp-google-link').addEventListener('click',async e=>{
     if(!ok)return;
   }
   const redirectTo=location.origin+location.pathname;
-  const{error}=await sb.auth.linkIdentity({provider:'google',options:{redirectTo}});
+  _rememberLinkProvider(provider);
+  const{error}=await sb.auth.linkIdentity({provider,options:{redirectTo}});
   if(error){
     if(error.code==='identity_already_exists'||/already.*(linked|exists)/i.test(error.message||'')){
-      // 이 구글 계정은 이미 다른 브라우저/UID에 연결돼 있음 → "연결"이 아니라 그 계정으로 "로그인"으로 전환
-      const{error:loginErr}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo}});
-      if(loginErr)_authAlert('signInWithOAuth 실패: '+loginErr.message);
+      // 이 계정은 이미 다른 브라우저/UID에 연결돼 있음 → "연결"이 아니라 그 계정으로 "로그인"으로 전환
+      const{error:loginErr}=await sb.auth.signInWithOAuth({provider,options:{redirectTo}});
+      if(loginErr)_authAlert(`signInWithOAuth(${provider}) 실패: `+loginErr.message);
     }else{
-      _authAlert('linkIdentity 실패: '+error.message);
+      _authAlert(`linkIdentity(${provider}) 실패: `+error.message);
     }
   }
-  // 성공하면 브라우저가 구글 동의 화면으로 이동하므로 이후 코드는 실행되지 않음
-});
+  // 성공하면 브라우저가 provider 동의 화면으로 이동하므로 이후 코드는 실행되지 않음
+}
+document.getElementById('pp-google-link').addEventListener('click',e=>{e.stopPropagation();_handleAccountLink('google');});
+document.getElementById('pp-x-link').addEventListener('click',e=>{e.stopPropagation();_handleAccountLink('twitter');});
 
 // ── 그룹/멤버 카드 상태 한 줄: 실시간 시청자 수 + 즐겨찾기 인기 지표를 한 자리에서 번갈아 표시 ──
 const _gcStatusState={group:{presence:'',favcount:''},member:{presence:'',favcount:''}};
@@ -8605,29 +8724,40 @@ function _buildFeedDiscovery(){
   }
 
   // 3. 랜덤 연결
+  // connections.json 로드 시 3D 연결선을 그릴 때 쓰는 것과 동일한 해석 로직(이중소속 c.group
+  // disambiguation 포함)으로 artA/artB를 정확히 찾는다 — 이름만으로 찾으면 동명이인 있을 때 틀릴 수 있음
+  function _resolveConnPair(c){
+    const candA=(ARTISTS||[]).filter(a=>a.name.ko===c.a);
+    const candB=(ARTISTS||[]).filter(a=>a.name.ko===c.b);
+    let artA,artB,shareKo;
+    if(c.group){
+      outer: for(const ca of candA){
+        if(!_artistGroups(ca).some(g=>g.ko===c.group))continue;
+        for(const cb of candB){
+          if(_artistGroups(cb).some(g=>g.ko===c.group)){artA=ca;artB=cb;shareKo=c.group;break outer;}
+        }
+      }
+    }else{
+      for(const ca of candA){const cb=candB.find(b=>b.group.ko===ca.group.ko);if(cb){artA=ca;artB=cb;shareKo=ca.group.ko;break;}}
+    }
+    if(!artA||!artB)return null;
+    const bName=shareKo===artA.group.ko?artB.name.ko:`${artB.name.ko}(${shareKo})`;
+    return{artA,artB,bName};
+  }
   const mConns=_rawConnData.filter(c=>c.type==='member');
-  if(mConns.length){
-    const c=mConns[Math.floor(Math.random()*mConns.length)];
+  // 연결은 있어도(같은 그룹 등) 실제 콜라보 영상 증거(with 태그된 곡)가 없는 경우가 많아서
+  // "연결 보기"를 눌렀을 때 빈 화면으로 이어지는 걸 막기 위해, 실제 영상이 있는 연결만 후보로 씀
+  // (셔플 후 앞에서부터 확인, 못 찾으면 이 피드 항목 자체를 건너뜀)
+  let connPick=null;
+  for(const c of _shuffle([...mConns]).slice(0,30)){
+    const resolved=_resolveConnPair(c);
+    if(resolved&&_getCollabSongs(resolved.artA,[resolved.bName]).length){connPick={c,...resolved};break;}
+  }
+  if(connPick){
+    const{c,artA,bName}=connPick;
     const connLabel=c.a+' ↔ '+c.b;
     const connSub=isKo?'연결 보기':'View connection';
     _appendFeedItem(list,'🔗',connLabel,connSub,()=>_feedNav(()=>{
-      // connections.json 로드 시 3D 연결선을 그릴 때 쓰는 것과 동일한 해석 로직(이중소속 c.group
-      // disambiguation 포함)으로 artA/artB를 정확히 찾는다 — 이름만으로 찾으면 동명이인 있을 때 틀릴 수 있음
-      const candA=(ARTISTS||[]).filter(a=>a.name.ko===c.a);
-      const candB=(ARTISTS||[]).filter(a=>a.name.ko===c.b);
-      let artA,artB,shareKo;
-      if(c.group){
-        outer: for(const ca of candA){
-          if(!_artistGroups(ca).some(g=>g.ko===c.group))continue;
-          for(const cb of candB){
-            if(_artistGroups(cb).some(g=>g.ko===c.group)){artA=ca;artB=cb;shareKo=c.group;break outer;}
-          }
-        }
-      }else{
-        for(const ca of candA){const cb=candB.find(b=>b.group.ko===ca.group.ko);if(cb){artA=ca;artB=cb;shareKo=ca.group.ko;break;}}
-      }
-      if(!artA||!artB)return;
-      const bName=shareKo===artA.group.ko?artB.name.ko:`${artB.name.ko}(${shareKo})`;
       if(isMob()){showT(artA,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
       else showT(artA,window.innerWidth/2,window.innerHeight/2);
       openConnCard(artA);
@@ -9157,7 +9287,8 @@ function _makeChVidController(contId){
     if(!reset&&moreWrap)moreWrap.textContent='불러오는 중…'; // 무한 스크롤로 다음 페이지 가져오는 동안 표시
     if(reset){
       state.gen++;
-      grid.innerHTML=Array(6).fill('<div class="gc-ch-skeleton"><div class="gc-ch-skeleton-thumb"></div><div class="gc-ch-skeleton-title"></div><div class="gc-ch-skeleton-title short"></div></div>').join('');
+      grid.innerHTML='<div class="gc-ch-skeleton featured"><div class="gc-ch-skeleton-thumb"></div><div class="gc-ch-skeleton-title"></div><div class="gc-ch-skeleton-title short"></div></div>'
+        +Array(6).fill('<div class="gc-ch-skeleton"><div class="gc-ch-skeleton-thumb"></div><div class="gc-ch-skeleton-title"></div><div class="gc-ch-skeleton-title short"></div></div>').join('');
       if(moreWrap)moreWrap.innerHTML='';
       if(randomize&&state.total>_YT_PAGE){
         state.offset=Math.floor(Math.random()*(state.total-_YT_PAGE));
@@ -9202,6 +9333,8 @@ function _makeChVidController(contId){
       // 흔들리면 중복/누락 발생), '추천순'일 땐 화면에 보여줄 순서만 페이지 단위로 섞어서 업로드 시기가 몰려
       // 보이지 않게 함. '업로드순'은 이 DB 정렬을 그대로 보여줘야 하므로 셔플하지 않음.
       let vids=_filterBannedVideos(data||[]);
+      // 멤버 카드에서는 '기타' 플래그 영상을 아예 노출하지 않음(그룹 카드에서는 후순위로만 밀림)
+      if(state.memberKo)vids=vids.filter(v=>v.content_flag!=='기타');
       if(state.sortMode!=='latest')vids=_shuffle(vids);
       // '기타' 플래그 영상은 후순위로 — 대표영상 후보 제외 + 정상 영상 뒤로 밀기
       const _etcVids=vids.filter(v=>v.content_flag==='기타');
