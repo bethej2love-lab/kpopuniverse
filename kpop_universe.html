@@ -443,6 +443,14 @@
   #yt-lb-speed-badge.is-on{display:block;}
   #yt-lb-close{position:absolute;top:-30px;right:0;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:4px 6px;opacity:.65;line-height:1;}
   #yt-lb-close:hover{opacity:1;}
+  /* UI 오버레이 표시/숨김 */
+  #yt-lb-close,#yt-lb-reactions,#yt-lb-toolbar{transition:opacity .22s ease;}
+  #yt-lb-wrap.lb-ui-hidden #yt-lb-close,
+  #yt-lb-wrap.lb-ui-hidden #yt-lb-reactions,
+  #yt-lb-wrap.lb-ui-hidden #yt-lb-toolbar{opacity:0;pointer-events:none;}
+  /* 영상 위 탭 캡처 레이어 — UI 숨겨진 상태에서만 활성, 탭하면 UI 토글 */
+  #yt-lb-tap-cap{display:none;position:absolute;inset:0;z-index:2;-webkit-tap-highlight-color:transparent;cursor:pointer;}
+  #yt-lb-wrap.lb-ui-hidden #yt-lb-tap-cap{display:block;}
   /* 모바일 첫 진입 시 1회: 상하로 스와이프해서 영상 넘길 수 있다는 걸 살짝 들썩임으로 암시 */
   @keyframes lb-swipe-hint{0%,100%{transform:translateY(0);}25%{transform:translateY(-16px);}60%{transform:translateY(0);}80%{transform:translateY(10px);}}
   #yt-lb-wrap.swipe-hint{animation:lb-swipe-hint 1s ease-in-out 2;}
@@ -451,7 +459,8 @@
   #yt-lb-prev:hover,#yt-lb-next:hover{color:rgba(255,255,255,0.9);}
   #yt-lb-prev:disabled,#yt-lb-next:disabled{color:rgba(255,255,255,0.12);cursor:default;}
   #yt-lb-actions{display:flex;gap:10px;}
-  #yt-lb-scrap,#yt-lb-bm,#yt-lb-edit,#yt-lb-mute{background:rgba(255,255,255,0.08);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(200,215,255,0.7);transition:color .15s,background .15s;font-size:15px;}
+  #yt-lb-scrap,#yt-lb-bm,#yt-lb-edit,#yt-lb-mute,#yt-lb-rotate{background:rgba(255,255,255,0.08);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(200,215,255,0.7);transition:color .15s,background .15s;font-size:15px;}
+  #yt-lb-rotate.is-portrait{background:rgba(155,178,228,0.22);color:#c8ddff;}
   #yt-lb-edit:hover{background:rgba(255,255,255,0.16);color:#fff;}
   #yt-lb-mute:hover{background:rgba(255,255,255,0.16);color:#fff;}
   #yt-lb-mute.is-on{color:rgba(255,255,255,0.95);}
@@ -823,6 +832,16 @@
   }
   .vid-edit-btn:hover{background:rgba(30,40,70,0.85);}
   .gc-ch-item .vid-edit-btn{position:absolute;top:4px;left:4px;z-index:2;}
+  /* ── 어드민 일괄 선택 모드 ── */
+  .gc-ch-item.admin-selected{outline:2px solid rgba(100,180,255,0.9);outline-offset:-2px;}
+  .gc-ch-item.admin-selected::after{content:'✓';position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(60,140,255,0.92);color:#fff;font-size:12px;font-weight:700;line-height:20px;text-align:center;z-index:5;pointer-events:none;}
+  .gc-ch-sel-btn{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:14px;color:rgba(180,200,230,0.75);font-size:10.5px;padding:3px 9px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+  .gc-ch-sel-btn.active{background:rgba(100,160,255,0.18);border-color:rgba(100,160,255,0.4);color:#a8d0ff;}
+  #admin-bulk-bar{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:rgba(14,20,40,0.96);border:1px solid rgba(100,160,255,0.28);border-radius:22px;padding:9px 16px;display:flex;align-items:center;gap:10px;z-index:9990;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 4px 28px rgba(0,0,0,0.55);font-size:12.5px;color:#9ab8e0;white-space:nowrap;transition:opacity .18s;}
+  #admin-bulk-bar.hidden{display:none;}
+  #admin-bulk-hide-btn{background:rgba(255,65,65,0.16);border:1px solid rgba(255,100,100,0.32);border-radius:13px;color:#ff9898;font-size:12px;padding:5px 14px;cursor:pointer;font-family:inherit;}
+  #admin-bulk-hide-btn:active{opacity:.7;}
+  #admin-bulk-cancel-btn{background:none;border:none;color:rgba(140,165,210,0.55);font-size:12px;cursor:pointer;padding:4px 2px;font-family:inherit;}
   /* tv-sm/tv-big-wrap은 스크랩(오른쪽4px)/북마크(오른쪽34px) 버튼이 이미 오른쪽을 쓰므로 왼쪽에 배치 */
   .tv-sm .vid-edit-btn,#tv-big-wrap .vid-edit-btn{position:absolute;top:4px;left:4px;z-index:3;}
   #vid-tag-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:80;display:none;align-items:center;justify-content:center;}
@@ -1680,6 +1699,11 @@
     <div id="ext-channels-list"></div>
   </div>
 </div>
+<div id="admin-bulk-bar" class="hidden">
+  <span id="admin-bulk-count">0개 선택됨</span>
+  <button id="admin-bulk-hide-btn">노출 제외</button>
+  <button id="admin-bulk-cancel-btn">취소</button>
+</div>
 <div id="hidden-vids-overlay">
   <div id="hidden-vids-panel">
     <div id="hidden-vids-hd">
@@ -1710,6 +1734,7 @@
       <iframe id="yt-lb-iframe" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
       <div id="yt-lb-speed-zone" aria-hidden="true"></div>
       <div id="yt-lb-speed-badge">2×</div>
+      <div id="yt-lb-tap-cap" aria-hidden="true"></div>
     </div>
     <div id="yt-lb-reactions">
       <button class="lb-react-btn" data-emoji="❤️‍🔥">❤️‍🔥<span class="lb-react-cnt"></span></button>
@@ -1731,6 +1756,7 @@
     <div id="yt-lb-toolbar">
       <button id="yt-lb-prev" aria-label="이전 영상">‹</button>
       <div id="yt-lb-actions">
+        <button id="yt-lb-rotate" aria-label="세로/가로 전환"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="16" rx="1.5"/><path d="M4 20h7M7.5 17l-3 3 3 3" transform="translate(0,-2)"/></svg></button>
         <button id="yt-lb-mute" aria-label="소리 켜기">🔇</button>
         <button id="yt-lb-scrap" aria-label="플레이리스트 추가"><svg viewBox="0 0 24 24"><path d="M12 21L10.55 19.7C5.4 15.1 2 12.1 2 8.5 2 5.4 4.4 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.6-3.4 6.6-8.55 11.2L12 21z"/></svg><span id="yt-lb-scrap-cnt" class="lb-action-cnt"></span></button>
         <button id="yt-lb-bm" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></button>
@@ -3524,8 +3550,9 @@ function _filterBannedVideos(list){return(list||[]).filter(v=>!_isBannedVideoTit
 let _lbPlaylist=null,_lbIdx=-1,_lbCtx=null;
 let _lbSpeed=1; // 우측 탭존을 꾹 누르는 동안의 배속 (1 또는 2)
 // 소리 on/off는 세션 넘어 기억 — 한 번 켜두면 다음에 라이트박스 열 때도 계속 소리 켜진 채로 시작
-let _lbMuted=localStorage.getItem('kpu_lb_muted')!=='0';
+let _lbMuted=localStorage.getItem('kpu_lb_muted')!=='0'; // 기본 무음
 let _lbAutoUnmuteT=null; // 다음/이전(스와이프·버튼) 전환 시 무음→소리 복구 타이머
+let _lbNeedUnmute=false; // 소리 모드에서 isAdvance 전환 시 재생 시작 후 unMute 필요 여부
 function _updateLbMuteBtn(){
   const btn=document.getElementById('yt-lb-mute');
   if(!btn)return;
@@ -3540,13 +3567,17 @@ function openLightbox(url,shorts,playlist,idx,ctx,isAdvance){
   _lbCtx=(ctx!=null)?ctx:_lbCtx;
   const lb=document.getElementById('yt-lightbox');
   const iframe=document.getElementById('yt-lb-iframe');
-  document.getElementById('yt-lb-video-box').className=shorts?'is-shorts':'';
-  lb.classList.toggle('lb-shorts',!!shorts);
+  const forcePortrait=!shorts&&_lbPortraitVids.has(vid); // 이전에 세로로 저장된 영상
+  const isPortrait=!!shorts||forcePortrait;
+  document.getElementById('yt-lb-video-box').className=isPortrait?'is-shorts':'';
+  lb.classList.toggle('lb-shorts',isPortrait);
+  document.getElementById('yt-lb-rotate').classList.toggle('is-portrait',isPortrait);
   _lbSpeed=1;
   document.getElementById('yt-lb-speed-badge').classList.remove('is-on');
   // iOS Safari: display:none 상태의 iframe에서 src를 바꾸면 사용자 제스처 체인이 끊겨 autoplay가 차단됨.
   // 라이트박스를 먼저 열어 iframe이 visible한 상태로 만든 뒤 src를 설정해야 autoplay가 허용됨.
   lb.classList.add('open');
+  document.getElementById('yt-lb-wrap').classList.add('lb-ui-hidden'); // UI 기본 숨김 — 영상 탭하면 토글
   // controls=1: 진행바/재생시간/탐색은 노출하되, modestbranding+rel=0+iv_load_policy=3으로 로고·추천영상 등은 최대한 억제.
   // mute: 브라우저 자동재생 정책상 소리 있는 자동재생은 대부분 차단돼서, 무음일 때만 자동재생이 안정적으로
   // 됨 — 그래서 기본은 무음 자동재생, 사용자가 소리 버튼으로 직접 켜면 그 상태를 다음 영상에도 유지.
@@ -3554,12 +3585,20 @@ function openLightbox(url,shorts,playlist,idx,ctx,isAdvance){
   // 브라우저가 "제스처 없이 소리 자동재생"으로 보고 다시 차단하는 경우가 많음 — 그럴 땐 일단 무음으로
   // 안전하게 자동재생시키고, 재생 시작 직후 unMute 커맨드로 소리를 복구(유저가 버튼으로 켜는 것과 동일 동작).
   const startMuted=_lbMuted?1:(isAdvance?1:0);
-  iframe.src=`https://www.youtube.com/embed/${vid}?autoplay=1&mute=${startMuted}&controls=1&playsinline=1&modestbranding=1&iv_load_policy=3&rel=0&enablejsapi=1`;
+  iframe.src=`https://www.youtube.com/embed/${vid}?autoplay=1&mute=${startMuted}&controls=1&playsinline=1&modestbranding=1&iv_load_policy=3&rel=0&enablejsapi=1&vq=hd1080`;
   clearTimeout(_lbAutoUnmuteT);
-  if(!_lbMuted&&isAdvance){
+  // 소리 모드에서 isAdvance(스와이프·버튼) 전환: mute=1로 시작해서 자동재생 확보 후
+  // YouTube onStateChange(재생 시작) 이벤트 수신 시 즉시 unMute — 타이머보다 신뢰성 높음.
+  // 폴백으로 1200ms 타이머도 병행(이벤트가 안 오는 경우 대비).
+  _lbNeedUnmute=!_lbMuted&&!!isAdvance;
+  if(_lbNeedUnmute){
     _lbAutoUnmuteT=setTimeout(()=>{
-      if(iframe.contentWindow)iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:'unMute',args:[]}),'*');
-    },600);
+      if(_lbNeedUnmute&&iframe.contentWindow){
+        iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:'unMute',args:[]}),'*');
+        iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:'setVolume',args:[100]}),'*');
+        _lbNeedUnmute=false;
+      }
+    },1200);
   }
   _lbUpdateToolbar();
   _updateLbMuteBtn();
@@ -3785,6 +3824,45 @@ function _lbGo(delta){
   const s=_lbPlaylist[ni];
   openLightbox(s.u,isShorts(s.u),_lbPlaylist,ni,_lbCtx,true);
 }
+// YouTube IFrame API 이벤트 수신 — onStateChange 1(재생 시작) 즉시 unMute
+// 고정 타이머보다 신뢰성 높음: 플레이어가 실제로 재생을 시작한 순간에만 실행
+window.addEventListener('message',e=>{
+  if(!_lbNeedUnmute)return;
+  try{
+    const d=JSON.parse(e.data);
+    // YouTube sends {event:'infoDelivery', info:{playerState:1}} when playback starts
+    if(d.event==='infoDelivery'&&d.info?.playerState===1){
+      _lbNeedUnmute=false;
+      clearTimeout(_lbAutoUnmuteT);
+      const iframe=document.getElementById('yt-lb-iframe');
+      if(iframe.contentWindow){
+        iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:'unMute',args:[]}),'*');
+        iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:'setVolume',args:[100]}),'*');
+      }
+    }
+  }catch(_){}
+});
+function _lbToggleUi(){
+  document.getElementById('yt-lb-wrap').classList.toggle('lb-ui-hidden');
+}
+document.getElementById('yt-lb-tap-cap').addEventListener('click',_lbToggleUi);
+// 세로 영상으로 수동 전환된 video ID 기억 — 다음 열 때 자동 적용
+const _LB_PORTRAIT_KEY='kpu_lb_portrait_vids';
+let _lbPortraitVids=new Set(JSON.parse(localStorage.getItem(_LB_PORTRAIT_KEY)||'[]'));
+function _lbSavePortrait(){
+  try{localStorage.setItem(_LB_PORTRAIT_KEY,JSON.stringify([..._lbPortraitVids]));}catch(_){}
+}
+document.getElementById('yt-lb-rotate').addEventListener('click',e=>{
+  e.stopPropagation();
+  const box=document.getElementById('yt-lb-video-box');
+  const lb=document.getElementById('yt-lightbox');
+  const isPortrait=box.classList.toggle('is-shorts');
+  lb.classList.toggle('lb-shorts',isPortrait);
+  document.getElementById('yt-lb-rotate').classList.toggle('is-portrait',isPortrait);
+  // 세로 전환 시 이 영상 ID 저장, 다시 가로로 되돌리면 삭제
+  const vid=ytId(document.getElementById('yt-lb-iframe').src||'');
+  if(vid){isPortrait?_lbPortraitVids.add(vid):_lbPortraitVids.delete(vid);_lbSavePortrait();}
+});
 function closeLightbox(){
   clearTimeout(_lbAutoUnmuteT);
   const lb=document.getElementById('yt-lightbox');
@@ -8889,15 +8967,19 @@ async function _fetchTopVideoThumb(gko,memberKo){
 
 // 페이지네이션과 무관하게 이 그룹/멤버의 전체 영상 중 스크랩(하트) 최다 영상을 반환.
 // _warmScrapCounts 완료를 기다린 뒤 결정론적으로 선택 → 새로고침해도 같은 영상 유지.
-async function _pickFeaturedVidFromDB(ko,memberKo,onlyMe){
+async function _pickFeaturedVidFromDB(ko,memberKo,onlyMe,filter,viewMode,formatFilter){
   if(!sb||!window._sbSession)return null;
   try{
     if(_scrapCountsP)await _scrapCountsP;
     if(!_scrapCounts.size)return null;
     let q=sb.from(_YT_TABLE)
       .select('id,title,thumb,category,content_flag,members,with_members,with_groups')
-      .neq('category','mv')
       .or('content_flag.is.null,content_flag.neq.기타');
+    if(viewMode==='format'&&formatFilter){
+      q=q.contains('content_formats',[formatFilter]);
+    }else if(filter&&filter!=='all'){
+      q=q.eq('category',filter);
+    }
     if(memberKo&&onlyMe){
       q=q.eq('group_ko',ko).contains('members',[memberKo]).containedBy('members',[memberKo])
          .or('content_flag.is.null,content_flag.neq.외부인');
@@ -9495,6 +9577,27 @@ const _CONTENT_FORMAT_ORDER=['릴레이댄스',"It's Live",'리무진서비스',
 function _makeChVidController(contId){
   let state={ko:null,memberKo:null,filter:'all',sortMode:'recommend',viewMode:'category',formatFilter:null,formats:[],offset:0,total:0,pos:0,cat:null,gen:0,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
   let observer=null;
+  let _selMode=false;
+  let _selIds=new Set();
+  function _updateBulkBar(){
+    const bar=document.getElementById('admin-bulk-bar');
+    if(!bar)return;
+    if(_selIds.size>0){
+      bar.classList.remove('hidden');
+      document.getElementById('admin-bulk-count').textContent=`${_selIds.size}개 선택됨`;
+      window._adminBulkExitFn=_exitSelMode; // 전역 핸들러에서 이 컨트롤러의 종료 함수 호출 가능하게 노출
+    }else{
+      bar.classList.add('hidden');
+    }
+  }
+  function _exitSelMode(){
+    _selMode=false;_selIds.clear();
+    const cont=document.getElementById(contId);
+    cont?.querySelectorAll('.gc-ch-item.admin-selected').forEach(el=>el.classList.remove('admin-selected'));
+    cont?.querySelectorAll('.gc-ch-sel-btn').forEach(b=>{b.classList.remove('active');b.textContent='선택';});
+    document.getElementById('admin-bulk-bar')?.classList.add('hidden');
+    if(window._adminBulkExitFn===_exitSelMode)window._adminBulkExitFn=null;
+  }
   // 정렬 팝오버 바깥을 클릭하면 닫음 — build()가 카드 열 때마다 다시 실행되므로 리스너는 컨트롤러당 한 번만
   // 등록하고(중복 누적 방지), 매번 contId로 현재 DOM을 새로 찾아서 닫는다(cont가 build()마다 새로 그려지므로).
   function closeSortMenu(){
@@ -9547,6 +9650,7 @@ function _makeChVidController(contId){
       const isShort=v.category==='short';
       const item=document.createElement('div');
       item.className='gc-ch-item'+(isShort?' is-short':'')+(v._featured?' featured':'')+(v._wide?' gc-ch-wide':'');
+      item.dataset.vidId=v.id;
       const img=document.createElement('img');
       img.className='gc-ch-thumb';
       const baseThumb=v.thumb||`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
@@ -9582,6 +9686,12 @@ function _makeChVidController(contId){
       }
       item.addEventListener('click',e=>{
         e.stopPropagation();
+        if(_selMode){
+          if(_selIds.has(v.id)){_selIds.delete(v.id);item.classList.remove('admin-selected');}
+          else{_selIds.add(v.id);item.classList.add('admin-selected');}
+          _updateBulkBar();
+          return;
+        }
         // 지금까지 불러온 전체 영상을 플레이리스트로 넘겨서 라이트박스에서 위아래 스와이프로 넘길 수 있게 하고,
         // 관리자 태깅 대상(_apiId/_apiGroupKo)도 각 항목에 실어 보냄
         const playlist=state.allVids.map(vv=>({t:vv.title,u:_vidUrl(vv),_apiId:vv.id,_apiGroupKo:state.ko}));
@@ -9659,8 +9769,8 @@ function _makeChVidController(contId){
     const{filter,offset}=state;
     try{
       // featured 선택을 메인 쿼리와 병렬 실행 — 전체 영상 중 하트 최다 영상을 페이지네이션 무관하게 찾음
-      const featuredP=(reset&&filter==='all'&&state.sortMode!=='latest')
-        ?_pickFeaturedVidFromDB(ko,state.memberKo,state.onlyMe):Promise.resolve(null);
+      const featuredP=(reset&&state.sortMode!=='latest')
+        ?_pickFeaturedVidFromDB(ko,state.memberKo,state.onlyMe,filter,state.viewMode,state.formatFilter):Promise.resolve(null);
       let q=sb.from(_YT_TABLE).select('id,title,thumb,category,content_flag,members,with_members,with_groups',{count:'exact'});
       if(state.memberKo&&state.onlyMe){
         // Only 토글: members = {name} 정확히 일치 + 외부인 포함 영상 제외
@@ -9702,10 +9812,10 @@ function _makeChVidController(contId){
       const _etcVids=vids.filter(v=>v.content_flag==='기타');
       if(_etcVids.length)vids=[...vids.filter(v=>v.content_flag!=='기타'),..._etcVids];
       // 첫 로드 + 전체 탭: 스크랩(하트) 최다 영상을 맨 앞으로.
-      // _featuredFromDB = 전체 영상 대상 DB 쿼리 결과(하트 있을 때만 반환).
+      // _featuredFromDB = 현재 필터 내 하트 최다 영상(하트 없으면 null).
       // 하트 없으면 페이지 내 첫 셔플 영상으로 폴백. 업로드순은 건너뜀.
       let featured=null;
-      if(state.sortMode!=='latest'&&reset&&filter==='all'){
+      if(state.sortMode!=='latest'&&reset){
         const main=_featuredFromDB||_pickMainChVid(vids.filter(v=>v.content_flag!=='기타'));
         if(main){
           vids=vids.filter(v=>v.id!==main.id);
@@ -9757,7 +9867,18 @@ function _makeChVidController(contId){
     if(!sb)return;
     state={ko,memberKo:memberKo||null,filter:'all',onlyMe:false,searchQ:'',sortMode:'recommend',viewMode:'category',formatFilter:null,formats:[],offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
     cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters"></div><div class="gc-ch-sort-wrap"><button class="gc-ch-sort-btn" title="정렬" aria-haspopup="true" aria-expanded="false">⋮</button><div class="gc-ch-sort-menu"><button class="gc-ch-sort-item" data-sort="recommend"><span class="chk">✓</span>추천순</button><button class="gc-ch-sort-item" data-sort="latest"><span class="chk">✓</span>업로드순</button><div class="gc-ch-sort-divider" style="display:none"></div><button class="gc-ch-view-toggle" style="display:none"><span class="chk">✓</span>콘텐츠별 보기</button></div></div><button class="gc-ch-refresh" title="새로고침">↻</button></div><div class="gc-ch-search-wrap" style="display:none"><input class="gc-ch-search" placeholder="영상 검색…" autocomplete="off" spellcheck="false"><button class="gc-ch-search-clear" aria-label="검색어 지우기">\xD7</button></div><div class="gc-ch-grid"></div><div class="gc-ch-more-wrap"></div>`;
+    _exitSelMode();
     const filEl=cont.querySelector('.gc-ch-filters');
+    if(_isAdmin()){
+      const selBtn=document.createElement('button');
+      selBtn.className='gc-ch-sel-btn';selBtn.type='button';selBtn.textContent='선택';selBtn.title='영상 일괄 선택 (어드민)';
+      selBtn.addEventListener('click',()=>{
+        _selMode=!_selMode;
+        if(!_selMode)_exitSelMode();
+        else{selBtn.classList.add('active');selBtn.textContent='취소';}
+      });
+      cont.querySelector('.gc-ch-hd').appendChild(selBtn);
+    }
     // 웹은 마우스 휠이 세로 스크롤 값만 보내서 가로 전용 스크롤 영역이 그냥 무시해버림 —
     // 세로 휠 델타를 가로 스크롤로 그대로 옮겨줘서 알약이 넘칠 때 휠로 넘길 수 있게 함
     filEl.addEventListener('wheel',e=>{
@@ -10584,6 +10705,24 @@ document.getElementById('hidden-vids-search')?.addEventListener('input',e=>{
 });
 document.getElementById('hidden-vids-overlay')?.addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open');});
 document.getElementById('hidden-vids-close')?.addEventListener('click',()=>document.getElementById('hidden-vids-overlay').classList.remove('open'));
+// ── 어드민 일괄 선택 플로팅 바 ──
+document.getElementById('admin-bulk-cancel-btn')?.addEventListener('click',()=>{
+  window._adminBulkExitFn?.();
+});
+document.getElementById('admin-bulk-hide-btn')?.addEventListener('click',async()=>{
+  if(!sb||!_isAdmin())return;
+  const btn=document.getElementById('admin-bulk-hide-btn');
+  const selectedItems=[...document.querySelectorAll('.gc-ch-item.admin-selected')];
+  if(!selectedItems.length)return;
+  const ids=selectedItems.map(el=>el.dataset.vidId).filter(Boolean);
+  if(!ids.length)return;
+  btn.disabled=true;btn.textContent='처리 중…';
+  const{error}=await sb.from('yt_videos').update({content_flag:'hidden'}).in('id',ids);
+  if(error){btn.disabled=false;btn.textContent='노출 제외';alert('오류: '+error.message);return;}
+  selectedItems.forEach(el=>el.remove());
+  window._adminBulkExitFn?.();
+  btn.disabled=false;btn.textContent='노출 제외';
+});
 
 // 그룹/멤버/연결 카드 공통 "맨 위로" 버튼 — 스크롤로 아래로 많이 내려간 뒤 카드 맨 위로 쉽게 돌아가기 위함.
 // 카드마다 헤더 높이가 달라 IntersectionObserver 대신 "각 스크롤 컨테이너의 scrollTop이 임계값을 넘었는가"로
