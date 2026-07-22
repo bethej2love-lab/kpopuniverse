@@ -648,7 +648,7 @@
     #gc-bar-mob{display:block;}
     #mob-sheet-inner #gc-grid,#mob-card-stack-inner #gc-grid{border-top:none;padding-top:0;margin-top:0;}
     /* 모바일에서는 gc-grid의 border-top이 아니라 gc-bar-mob(색상 바)가 "n명이 좋아해요" 아래 구분선 역할을 함 */
-    #mob-sheet-inner #gc-status-line,#mob-card-stack-inner #gc-status-line{margin-bottom:1px;}
+    #mob-sheet-inner #gc-status-line,#mob-card-stack-inner #gc-status-line{margin-bottom:3px;}
     #mob-sheet-inner #gc-name-row,
     #mob-sheet-inner #gc-en-row,
     #mob-sheet-inner #gc-status-line,
@@ -1464,6 +1464,7 @@
   .feed-item{display:flex;align-items:center;gap:10px;padding:11px 20px;border-bottom:0.5px solid rgba(255,255,255,0.05);cursor:pointer;position:relative;overflow:hidden;transition:background .13s;-webkit-tap-highlight-color:transparent;}
   .feed-item:active{background:rgba(255,255,255,0.04);}
   .feed-item-icon{font-size:15px;flex-shrink:0;width:24px;text-align:center;}
+  .feed-item-thumb{width:44px;height:28px;border-radius:5px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,0.06);}
   .feed-item-main{flex:1;min-width:0;}
   .feed-item-title{font-size:12px;font-weight:600;color:rgba(215,228,255,0.88);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
   .feed-item-sub{font-size:10px;color:rgba(120,148,200,0.55);margin-top:2px;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;}
@@ -1785,7 +1786,7 @@
     <div class="pp-section" style="margin-bottom:20px">
       <div class="pp-fav-row">
         <div class="pp-fav-info">
-          <div class="pp-fav-label" data-i18n="ppFavLabel">즐겨찾기 공개</div>
+          <div class="pp-fav-label" data-i18n="ppFavLabel">좋아요 공개</div>
           <div class="pp-fav-sub" data-i18n="ppFavSub">다른 사람들이 볼 수 있어요</div>
         </div>
         <label class="sw"><input type="checkbox" id="pp-fav-pub" checked><span class="sw-track"><span class="sw-thumb"></span></span></label>
@@ -1795,7 +1796,7 @@
       <div class="pp-fav-row">
         <div class="pp-fav-info">
           <div class="pp-fav-label" data-i18n="ppSyncLabel">기기 간 동기화</div>
-          <div class="pp-fav-sub" data-i18n="ppSyncSub">다른 기기에서도 즐겨찾기가 유지돼요</div>
+          <div class="pp-fav-sub" data-i18n="ppSyncSub">다른 기기에서도 좋아요가 유지돼요</div>
         </div>
       </div>
       <button id="pp-x-link" class="pp-save-btn" data-i18n="ppXBtn">X로 연결하기</button>
@@ -1808,7 +1809,7 @@
 <div id="link-confirm-overlay">
   <div id="link-confirm-panel">
     <div class="pp-title">연결할까요?</div>
-    <div id="link-confirm-msg">연결하려는 계정에 이미 다른 기기 데이터가 있다면, 지금 이 브라우저의 즐겨찾기·프로필은 그 데이터로 대체돼요.</div>
+    <div id="link-confirm-msg">연결하려는 계정에 이미 다른 기기 데이터가 있다면, 지금 이 브라우저의 좋아요·프로필은 그 데이터로 대체돼요.</div>
     <div id="link-confirm-btns">
       <button id="link-confirm-cancel" class="uc-btn">취소</button>
       <button id="link-confirm-ok" class="uc-btn uc-btn-primary">계속할게요</button>
@@ -2119,14 +2120,14 @@ const T={
       preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcFandom:'팬덤',gcLeader:'리더',gcMember:'멤버',gcSNS:'공식',
       idxTitle:'인덱스',idxGroupTab:'그룹',idxMemberTab:'멤버',idxSearchPH:'그룹명 검색…',idxSearchPHMember:'멤버명 검색…',
       idxSortName:'이름 (가나다순)',idxSortDebut:'데뷔연도',idxSortAgency:'소속사',idxSortMembers:'멤버 수',
-      idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적',ppTitle:'내 프로필',ppNick:'닉네임',ppNickPH:'닉네임을 입력하세요',ppNickErr:'닉네임을 입력해주세요',ppBio:'한 줄 소개',ppBioPH:'선택사항',ppColor:'내 별 색상',ppFavLabel:'즐겨찾기 공개',ppFavSub:'다른 사람들이 볼 수 있어요',ppSyncLabel:'다른 기기와 동기화',ppSyncSub:'다른 기기에서도 즐겨찾기가 유지돼요',ppGoogleBtn:'구글로 연결하기',ppXBtn:'X로 연결하기',ppLinked:'계정에 연결됨 ✓',ppSave:'저장'},
+      idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적',ppTitle:'내 프로필',ppNick:'닉네임',ppNickPH:'닉네임을 입력하세요',ppNickErr:'닉네임을 입력해주세요',ppBio:'한 줄 소개',ppBioPH:'선택사항',ppColor:'내 별 색상',ppFavLabel:'좋아요 공개',ppFavSub:'다른 사람들이 볼 수 있어요',ppSyncLabel:'다른 기기와 동기화',ppSyncSub:'다른 기기에서도 좋아요가 유지돼요',ppGoogleBtn:'구글로 연결하기',ppXBtn:'X로 연결하기',ppLinked:'계정에 연결됨 ✓',ppSave:'저장'},
   en:{sp_title:'Settings',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
       all:'All',girl:'Girl Groups',boy:'Boy Groups',inactive:'Inactive / Left',reset:'↺ Reset',
       searchPH:'Search groups · members…',mobileTitle:'K-pop Idol Map',srGroup:'Group',
       preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcFandom:'Fandom',gcLeader:'Leader',gcMember:'Members',gcSNS:'Official',
       idxTitle:'Index',idxGroupTab:'Groups',idxMemberTab:'Members',idxSearchPH:'Search group name…',idxSearchPHMember:'Search member name…',
       idxSortName:'Name (A–Z)',idxSortDebut:'Debut Year',idxSortAgency:'Agency',idxSortMembers:'Member Count',
-      idxSortBirth:'Birth Year',idxSortGroup:'Group',idxSortNation:'Nationality',ppTitle:'My Profile',ppNick:'Nickname',ppNickPH:'Enter nickname',ppNickErr:'Nickname is required',ppBio:'Bio',ppBioPH:'Optional',ppColor:'Star Color',ppFavLabel:'Public Favorites',ppFavSub:'Others can see your favorites',ppSyncLabel:'Sync Across Devices',ppSyncSub:'Favorites stay synced across your devices',ppGoogleBtn:'Connect with Google',ppXBtn:'Connect with X',ppLinked:'Account Connected ✓',ppSave:'Save'}
+      idxSortBirth:'Birth Year',idxSortGroup:'Group',idxSortNation:'Nationality',ppTitle:'My Profile',ppNick:'Nickname',ppNickPH:'Enter nickname',ppNickErr:'Nickname is required',ppBio:'Bio',ppBioPH:'Optional',ppColor:'Star Color',ppFavLabel:'Public Likes',ppFavSub:'Others can see your likes',ppSyncLabel:'Sync Across Devices',ppSyncSub:'Likes stay synced across your devices',ppGoogleBtn:'Connect with Google',ppXBtn:'Connect with X',ppLinked:'Account Connected ✓',ppSave:'Save'}
 };
 function applyLang(){
   document.body.classList.toggle('lang-en',currentLang==='en');
@@ -5254,18 +5255,7 @@ function _pickDiscoverTarget(closedArtist,closedGko){
   return null;
 }
 async function _fetchDiscoverThumb(artist){
-  if(!sb)return null;
-  try{
-    const gko=_ytGroupKoFor(artist);
-    const{data,error}=await sb.from(_YT_TABLE).select('id,thumb,category')
-      .eq('group_ko',gko).or(`members.eq.{},members.cs.{${artist.name.ko}}`)
-      .order('published_at',{ascending:false}).limit(12);
-    if(error||!data?.length)return null;
-    const vidUrl=v=>v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`;
-    const maxC=Math.max(0,...data.map(v=>_scrapCounts.get(vidUrl(v))||0));
-    const top=maxC>0?data.filter(v=>(_scrapCounts.get(vidUrl(v))||0)===maxC):data;
-    return top[Math.floor(Math.random()*top.length)]?.thumb||null;
-  }catch(e){return null;}
+  return _fetchTopVideoThumb(_ytGroupKoFor(artist),artist.name.ko);
 }
 async function _showDiscoverToast(artist){
   const el=document.getElementById('discover-toast');
@@ -7626,20 +7616,24 @@ function renderFavList(){
 
 const FAV_DIM=0.03; // 즐겨찾기 하이라이트 모드 전용 — 검색/필터의 FOCUS_DIM보다 다른 행성/별을 더 투명하게
 function applyFavHighlight(){
+  // 최애(bias)는 좋아요보다 상위 개념이라, 별도로 하트를 안 눌렀어도 "내 별" 하이라이트엔 항상 포함시킴
+  const biasList=myProfile?.bias||[];
+  const biasGroups=new Set(biasList.filter(b=>b.type==='group').map(b=>b.ko));
+  const biasMemberKeys=new Set(biasList.filter(b=>b.type==='member').map(b=>b.groupKo+':'+b.ko));
   bubbleMeshes.forEach(({mesh,ko})=>{
-    if(favGroups.has(ko)){mesh._focusTarget=1;}
+    if(favGroups.has(ko)||biasGroups.has(ko)){mesh._focusTarget=1;}
     else{
-      const hasFavMember=ARTISTS.some(a=>favMembers.has(_mFavKey(a))&&_artistGroups(a).some(g=>g.ko===ko));
+      const hasFavMember=ARTISTS.some(a=>(favMembers.has(_mFavKey(a))||biasMemberKeys.has(_mFavKey(a)))&&_artistGroups(a).some(g=>g.ko===ko));
       mesh._focusTarget=hasFavMember?FAV_DIM*3.5:FAV_DIM;
     }
   });
   ARTISTS.forEach(a=>{
-    const on=favMembers.has(_mFavKey(a))||favGroups.has(a.group.ko);
+    const on=favMembers.has(_mFavKey(a))||favGroups.has(a.group.ko)||biasMemberKeys.has(_mFavKey(a))||biasGroups.has(a.group.ko);
     a._focusTarget=on?1:FAV_DIM;
   });
   // NCT rings: dim unless that NCT planet is favorited
   _nctRingGroups.forEach(({g,ko,baseOps})=>{
-    const bright=favGroups.has(ko)||ARTISTS.some(a=>favMembers.has(_mFavKey(a))&&_artistGroups(a).some(gr=>gr.ko===ko));
+    const bright=favGroups.has(ko)||biasGroups.has(ko)||ARTISTS.some(a=>(favMembers.has(_mFavKey(a))||biasMemberKeys.has(_mFavKey(a)))&&_artistGroups(a).some(gr=>gr.ko===ko));
     g.children.forEach((c,i)=>{if(c.material)c.material.opacity=baseOps[i]*(bright?1:FAV_DIM);});
   });
   // 별자리 선(_updateMyStarLines)은 "내 우주" 모드 도입 후 당분간 비활성화 — 필요해지면 다시 호출 추가
@@ -8020,6 +8014,7 @@ function _saveBias(){
   if(!myProfile)return;
   localStorage.setItem(PROFILE_KEY,JSON.stringify(myProfile));
   _sbPushColumn('profile',myProfile);
+  if(favMode)applyFavHighlight(); // 최애 추가/제거가 "내 별" 하이라이트에도 바로 반영되도록
 }
 function _updateBiasAddBtn(){
   const btn=document.getElementById('pp-bias-add-btn');
@@ -8547,7 +8542,7 @@ async function _handleAccountLink(provider){
   // 성공하면 브라우저가 provider 동의 화면으로 이동하므로 이후 코드는 실행되지 않음
 }
 document.getElementById('pp-google-link').addEventListener('click',e=>{e.stopPropagation();_handleAccountLink('google');});
-document.getElementById('pp-x-link').addEventListener('click',e=>{e.stopPropagation();_handleAccountLink('twitter');});
+document.getElementById('pp-x-link').addEventListener('click',e=>{e.stopPropagation();_handleAccountLink('x');});
 
 // ── 그룹/멤버 카드 상태 한 줄: 실시간 시청자 수 + 즐겨찾기 인기 지표를 한 자리에서 번갈아 표시 ──
 const _gcStatusState={group:{presence:'',favcount:''},member:{presence:'',favcount:''}};
@@ -8693,7 +8688,7 @@ function _closeFeedOverlay(){
   document.getElementById('dh-feed-btn')?.classList.remove('active');
 }
 
-function _appendFeedItem(container,icon,title,sub,onClick){
+function _appendFeedItem(container,icon,title,sub,onClick,thumbUrl){
   const item=document.createElement('div');
   item.className='feed-item';
   item.innerHTML='<div class="feed-item-icon">'+icon+'</div>'
@@ -8704,6 +8699,34 @@ function _appendFeedItem(container,icon,title,sub,onClick){
   item.addEventListener('touchstart',e=>_lbRipple(item,e),{passive:true});
   item.addEventListener('mousedown',e=>_lbRipple(item,e));
   container.appendChild(item);
+  if(thumbUrl)_setFeedItemThumb(item,thumbUrl);
+  return item;
+}
+// 이모지 아이콘 자리를 실제 영상 썸네일로 교체(구할 수 있을 때만) — 못 구하면 이모지 그대로 유지
+function _setFeedItemThumb(item,thumbUrl){
+  if(!thumbUrl)return;
+  const iconEl=item.querySelector('.feed-item-icon');
+  if(!iconEl)return;
+  const img=document.createElement('img');
+  img.className='feed-item-thumb';img.loading='lazy';img.alt='';
+  img.src=thumbUrl;
+  iconEl.replaceWith(img);
+}
+// 그룹/멤버를 대표하는 영상 썸네일 하나(스크랩 최다, 없으면 랜덤)를 비동기로 가져온다 —
+// _fetchDiscoverThumb·그룹/멤버 카드 대표영상 선정과 동일한 규칙 재사용.
+async function _fetchTopVideoThumb(gko,memberKo){
+  if(!sb||!gko)return null;
+  try{
+    let q=sb.from(_YT_TABLE).select('id,thumb,category');
+    q=memberKo?q.eq('group_ko',gko).or(`members.eq.{},members.cs.{${memberKo}}`)
+              :q.or(`and(group_ko.eq.${gko},members.eq.{}),with_groups.cs.{${gko}}`);
+    const{data,error}=await q.order('published_at',{ascending:false}).limit(12);
+    if(error||!data?.length)return null;
+    const vidUrl=v=>v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`;
+    const maxC=Math.max(0,...data.map(v=>_scrapCounts.get(vidUrl(v))||0));
+    const top=maxC>0?data.filter(v=>(_scrapCounts.get(vidUrl(v))||0)===maxC):data;
+    return top[Math.floor(Math.random()*top.length)]?.thumb||null;
+  }catch(e){return null;}
 }
 
 function _feedNav(cb){
@@ -8731,19 +8754,21 @@ function _buildFeedAnniversaries(){
     const gName=isKo?a.group.ko:(a.group.en||a.group.ko);
     const age=now.getFullYear()-parseInt(a.bday.split('.')[0]);
     const sub=gName+(age>0?`  ·  ${age}${isKo?'세':' y.o.'}`:'');
-    _appendFeedItem(list,'🎂',mName,sub,()=>_feedNav(()=>{
+    const item=_appendFeedItem(list,'🎂',mName,sub,()=>_feedNav(()=>{
       if(isMob()){showT(a,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
       else showT(a,window.innerWidth/2,window.innerHeight/2);
     }));
+    _fetchTopVideoThumb(_ytGroupKoFor(a),a.name.ko).then(t=>_setFeedItemThumb(item,t));
   });
   debutHits.forEach(([ko,info])=>{
     const name=isKo?ko:(info.en||ko);
     const n=now.getFullYear()-parseInt(String(info.debut).split('.')[0]);
     const sub=isKo?`데뷔 ${n}주년`:`${n}th debut anniversary`;
-    _appendFeedItem(list,'🎉',name,sub,()=>_feedNav(()=>{
+    const item=_appendFeedItem(list,'🎉',name,sub,()=>_feedNav(()=>{
       if(isMob()){showGC(ko,window.innerWidth/2,window.innerHeight*0.4,false,false,null,false);openMobSheet(document.getElementById('gc'));}
       else showGC(ko,window.innerWidth/2,window.innerHeight/2);
     }));
+    _fetchTopVideoThumb(ko,null).then(t=>_setFeedItemThumb(item,t));
   });
 }
 
@@ -8760,10 +8785,11 @@ function _buildFeedDiscovery(){
     const name=isKo?ko:(info.en||ko);
     const sub=(info.debut?info.debut.slice(0,4)+(isKo?'년 데뷔':' debut'):'')
               +(info.co?'  ·  '+info.co:'');
-    _appendFeedItem(list,'🎵',name,sub,()=>_feedNav(()=>{
+    const item=_appendFeedItem(list,'🎵',name,sub,()=>_feedNav(()=>{
       if(isMob()){showGC(ko,window.innerWidth/2,window.innerHeight*0.4,false,false,null,false);openMobSheet(document.getElementById('gc'));}
       else showGC(ko,window.innerWidth/2,window.innerHeight/2);
     }));
+    _fetchTopVideoThumb(ko,null).then(t=>_setFeedItemThumb(item,t));
   }
 
   // 2. 랜덤 멤버
@@ -8772,10 +8798,11 @@ function _buildFeedDiscovery(){
     const a=actArtists[Math.floor(Math.random()*actArtists.length)];
     const mName=isKo?a.name.ko:(a.name.en||a.name.ko);
     const mGrps=_artistGroups(a).map(g=>isKo?g.ko:(g.en||g.ko)).join(' · ');
-    _appendFeedItem(list,'👤',mName,mGrps,()=>_feedNav(()=>{
+    const item=_appendFeedItem(list,'👤',mName,mGrps,()=>_feedNav(()=>{
       if(isMob()){showT(a,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
       else showT(a,window.innerWidth/2,window.innerHeight/2);
     }));
+    _fetchTopVideoThumb(_ytGroupKoFor(a),a.name.ko).then(t=>_setFeedItemThumb(item,t));
   }
 
   // 3. 랜덤 연결
@@ -8803,15 +8830,20 @@ function _buildFeedDiscovery(){
   // 연결은 있어도(같은 그룹 등) 실제 콜라보 영상 증거(with 태그된 곡)가 없는 경우가 많아서
   // "연결 보기"를 눌렀을 때 빈 화면으로 이어지는 걸 막기 위해, 실제 영상이 있는 연결만 후보로 씀.
   // 이 항목이 있다 없다 하지 않도록, 유효한 연결이 하나라도 있으면 반드시 찾아낼 때까지 전체를 훑는다.
-  let connPick=null;
+  let connPick=null,connSong=null;
   for(const c of _shuffle([...mConns])){
     const resolved=_resolveConnPair(c);
-    if(resolved&&_getCollabSongs(resolved.artA,[resolved.bName]).length){connPick={c,...resolved};break;}
+    if(resolved){
+      const songs=_getCollabSongs(resolved.artA,[resolved.bName]);
+      if(songs.length){connPick={c,...resolved};connSong=songs[0];break;}
+    }
   }
   if(connPick){
     const{c,artA,bName}=connPick;
     const connLabel=c.a+' ↔ '+c.b;
     const connSub=isKo?'연결 보기':'View connection';
+    const connVid=connSong?.u?ytId(connSong.u):null;
+    const connThumb=connVid?`https://img.youtube.com/vi/${connVid}/mqdefault.jpg`:null;
     _appendFeedItem(list,'🔗',connLabel,connSub,()=>_feedNav(()=>{
       if(isMob()){showT(artA,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
       else showT(artA,window.innerWidth/2,window.innerHeight/2);
@@ -8820,7 +8852,7 @@ function _buildFeedDiscovery(){
       _updateConnLines3d();
       _applyConnFocus();
       _buildConnContent(isMob()?connSheetBody:connPanelInner);
-    }));
+    }),connThumb);
   }
 
   // 4. 랜덤 영상 — 그룹 영상 + 멤버 영상을 한 풀에 섞어서 뽑는다
@@ -8838,6 +8870,8 @@ function _buildFeedDiscovery(){
     const vSub=pick.type==='group'
       ?(isKo?pick.gko:(pick.ginfo.en||pick.gko))
       :(isKo?pick.artist.name.ko:(pick.artist.name.en||pick.artist.name.ko));
+    const vVid=song.u?ytId(song.u):null;
+    const vThumb=vVid?`https://img.youtube.com/vi/${vVid}/mqdefault.jpg`:null;
     _appendFeedItem(list,'🎬',song.t,vSub,()=>_feedNav(()=>{
       if(pick.type==='group'){
         openLightbox(song.u,isShorts(song.u),list_,list_.indexOf(song),{groupKo:pick.gko});
@@ -8855,7 +8889,7 @@ function _buildFeedDiscovery(){
           openMemberPanel(document.getElementById('tt'));
         }
       }
-    }));
+    }),vThumb);
   }
 }
 
