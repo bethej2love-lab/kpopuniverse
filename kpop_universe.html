@@ -8401,6 +8401,8 @@ document.getElementById('journal-sidebar').addEventListener('pointerdown',e=>e.s
 const SUPABASE_URL='https://dukgguehegnembimqvkm.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_SjNC-N_9TUqaQcCxhVinGA_ULyX6tA0';
 const SB_LAST_UID_KEY='kpu_sb_last_uid'; // 이 브라우저가 마지막으로 동기화한 Supabase user_id — 다른 계정 로그인 감지용
+// X OAuth 2.0 클라이언트 ID (공개값 — X Developer Portal > App > Keys and tokens > OAuth 2.0)
+const _X_CLIENT_ID='ZmF6MmJyNGJKZ2thZld2QkdycUk6MTpjaQ';
 let sb=null;
 try{
   sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
@@ -8419,6 +8421,109 @@ function _authAlert(msg){
 const _LINK_PROVIDER_KEY='kpu_link_provider';
 function _rememberLinkProvider(provider){try{sessionStorage.setItem(_LINK_PROVIDER_KEY,provider);}catch(e){}}
 function _lastLinkProvider(){try{return sessionStorage.getItem(_LINK_PROVIDER_KEY)||'google';}catch(e){return'google';}}
+
+// ── X (Twitter) OAuth 2.0 PKCE — 이메일 없는 X 계정 로그인 지원 ──────────────────────
+const _X_VERIFIER_KEY='kpu_x_verifier';
+const _X_STATE_KEY='kpu_x_state';
+const _X_MODE_KEY='kpu_x_mode';
+const _X_LINK_TOKEN_KEY='kpu_x_link_token';
+
+async function _xGenVerifier(){
+  const arr=new Uint8Array(32);
+  crypto.getRandomValues(arr);
+  return btoa(String.fromCharCode(...arr)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+}
+async function _xGenChallenge(verifier){
+  const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(verifier));
+  return btoa(String.fromCharCode(...new Uint8Array(digest))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+}
+
+// X OAuth 인증 페이지로 리디렉트 (mode: 'login' | 'link')
+async function _xStartLogin(mode='login'){
+  if(!_X_CLIENT_ID||_X_CLIENT_ID==='YOUR_X_CLIENT_ID_HERE'){
+    _authAlert('X Client ID가 설정되지 않았습니다. kpop_universe.html 내 _X_CLIENT_ID를 입력하세요.');
+    return;
+  }
+  const verifier=await _xGenVerifier();
+  const challenge=await _xGenChallenge(verifier);
+  const state=crypto.randomUUID?crypto.randomUUID():(Math.random().toString(36).slice(2));
+  try{
+    localStorage.setItem(_X_VERIFIER_KEY,verifier);
+    localStorage.setItem(_X_STATE_KEY,state);
+    localStorage.setItem(_X_MODE_KEY,mode);
+    if(mode==='link'&&window._sbSession){
+      localStorage.setItem(_X_LINK_TOKEN_KEY,window._sbSession.access_token);
+    }
+  }catch(e){console.error('X OAuth localStorage 쓰기 실패',e);}
+  const redirectUri=location.origin+location.pathname;
+  const params=new URLSearchParams({
+    response_type:'code',
+    client_id:_X_CLIENT_ID,
+    redirect_uri:redirectUri,
+    scope:'users.read tweet.read',
+    state,
+    code_challenge:challenge,
+    code_challenge_method:'S256',
+  });
+  location.href='https://twitter.com/i/oauth2/authorize?'+params.toString();
+}
+
+// 페이지 로드 시 X OAuth 콜백 감지 및 처리
+async function _handleXCallback(){
+  let verifier,state,mode,linkToken;
+  try{
+    verifier=localStorage.getItem(_X_VERIFIER_KEY);
+    state=localStorage.getItem(_X_STATE_KEY);
+    mode=localStorage.getItem(_X_MODE_KEY)||'login';
+    linkToken=localStorage.getItem(_X_LINK_TOKEN_KEY);
+  }catch(e){return false;}
+  if(!verifier||!state)return false;
+  const urlParams=new URLSearchParams(location.search);
+  const code=urlParams.get('code');
+  const returnedState=urlParams.get('state');
+  if(!code||returnedState!==state)return false;
+  // X 콜백 맞음 — localStorage 정리 후 URL 클린업
+  try{
+    localStorage.removeItem(_X_VERIFIER_KEY);
+    localStorage.removeItem(_X_STATE_KEY);
+    localStorage.removeItem(_X_MODE_KEY);
+    localStorage.removeItem(_X_LINK_TOKEN_KEY);
+  }catch(e){}
+  history.replaceState({},'',location.pathname);
+  const redirectUri=location.origin+location.pathname;
+  try{
+    // LINK 모드: 현재 세션 토큰 사용 (저장된 토큰보다 최신일 수 있음)
+    let accessToken=linkToken;
+    if(mode==='link'&&sb){
+      const{data:{session:cur}}=await sb.auth.getSession();
+      if(cur?.access_token)accessToken=cur.access_token;
+    }
+    const res=await fetch(`${SUPABASE_URL}/functions/v1/x-signin`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${SUPABASE_ANON_KEY}`},
+      body:JSON.stringify({code,code_verifier:verifier,redirect_uri:redirectUri,mode,existing_access_token:accessToken||undefined}),
+    });
+    const data=await res.json();
+    if(!res.ok){
+      _authAlert('X 로그인 실패: '+(data.error||'')+(data.detail?' — '+data.detail:''));
+      return false;
+    }
+    if(mode==='link'&&data.linked){
+      // 기존 계정에 X 연결 완료 — 메타데이터 갱신 후 UI 업데이트
+      if(sb)await sb.auth.refreshSession();
+      alert(`X 계정 @${data.x_username} 연결 완료!`);
+      return true;
+    }
+    if(data.session&&sb){
+      const{error:setErr}=await sb.auth.setSession(data.session);
+      if(setErr){_authAlert('X 세션 설정 실패: '+setErr.message);return false;}
+      return true;
+    }
+  }catch(e){
+    _authAlert('X 콜백 처리 예외: '+(e&&e.message||e));
+  }
+  return false;
+}
 
 // ── 영상 스크랩 공개 집계 (메인 직캠 선정용) ──────
 // 개인 플레이리스트(scraps, 위 user_data)와는 별개로, "이 영상을 몇 명이 스크랩했는지"를
@@ -8486,9 +8591,11 @@ async function _pullServerToLocal(userId){
 async function initSupabaseSync(){
   if(!sb)return;
   try{
+    // X OAuth 콜백을 Supabase OAuth보다 먼저 처리 (URL의 code가 X 코드인 경우)
+    const _xDone=await _handleXCallback();
     const urlParams=new URLSearchParams(location.search);
-    const oauthErr=urlParams.get('error_description')||urlParams.get('error');
-    const hadOAuthCode=urlParams.has('code');
+    const oauthErr=!_xDone&&(urlParams.get('error_description')||urlParams.get('error'));
+    const hadOAuthCode=!_xDone&&urlParams.has('code');
     if(oauthErr){
       if(/already.*(linked|exists)/i.test(oauthErr)){
         // "계정 연결(link)" 시도였는데, 이 계정이 이미 다른 유저에 연결돼 있다는 사실이
@@ -8567,6 +8674,8 @@ async function _handleAccountLink(provider){
     const ok=await _confirmLinkOverwrite();
     if(!ok)return;
   }
+  // X는 이메일 없는 계정을 위해 커스텀 PKCE 흐름 사용
+  if(provider==='x'){await _xStartLogin('link');return;}
   const redirectTo=location.origin+location.pathname;
   _rememberLinkProvider(provider);
   const{error}=await sb.auth.linkIdentity({provider,options:{redirectTo}});
