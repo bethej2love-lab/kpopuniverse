@@ -747,13 +747,15 @@
     background:rgba(20,24,44,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
     border:0.5px solid rgba(255,255,255,0.10);box-shadow:0 8px 24px rgba(0,0,0,0.45);z-index:5;overflow:hidden;padding:4px;}
   .gc-ch-sort-menu.open{display:block;}
-  .gc-ch-sort-item{display:flex;align-items:center;gap:6px;width:100%;background:none;border:none;text-align:left;
+  .gc-ch-sort-item,.gc-ch-view-toggle{display:flex;align-items:center;gap:6px;width:100%;background:none;border:none;text-align:left;
     color:rgba(200,218,240,0.72);font-size:11.5px;font-family:inherit;padding:7px 8px;border-radius:6px;cursor:pointer;transition:background .12s,color .12s;}
-  .gc-ch-sort-item:hover{background:rgba(255,255,255,0.07);color:rgba(220,235,255,0.95);}
-  .gc-ch-sort-item.active{color:#c8ddff;}
-  .gc-ch-sort-item .chk{width:11px;flex:0 0 auto;font-size:10px;opacity:0;}
-  .gc-ch-sort-item.active .chk{opacity:1;}
-  .gc-ch-filters{display:flex;gap:4px;flex-wrap:nowrap;flex:1;overflow:hidden;}
+  .gc-ch-sort-item:hover,.gc-ch-view-toggle:hover{background:rgba(255,255,255,0.07);color:rgba(220,235,255,0.95);}
+  .gc-ch-sort-item.active,.gc-ch-view-toggle.active{color:#c8ddff;}
+  .gc-ch-sort-item .chk,.gc-ch-view-toggle .chk{width:11px;flex:0 0 auto;font-size:10px;opacity:0;}
+  .gc-ch-sort-item.active .chk,.gc-ch-view-toggle.active .chk{opacity:1;}
+  .gc-ch-sort-divider{height:0.5px;background:rgba(255,255,255,0.10);margin:4px 2px;}
+  .gc-ch-filters{display:flex;gap:4px;flex-wrap:nowrap;flex:1;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .gc-ch-filters::-webkit-scrollbar{display:none;}
   .gc-ch-filter{
     background:rgba(255,255,255,0.055);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border:0.5px solid rgba(255,255,255,0.14);border-radius:20px;padding:4px 11px;
@@ -846,7 +848,11 @@
   #ext-channels-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 14px;border-bottom:0.5px solid rgba(255,255,255,0.08);flex-shrink:0;}
   #ext-channels-hd-title{font-size:13.5px;font-weight:600;color:rgba(220,230,255,0.9);}
   #ext-channels-close{background:none;border:none;color:rgba(180,195,230,0.6);font-size:18px;cursor:pointer;padding:0;line-height:1;}
-  #ext-channels-search{margin:12px 16px 0;padding:7px 10px;border-radius:8px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.10);color:#c8daf0;font-size:11.5px;font-family:inherit;outline:none;flex-shrink:0;transition:border-color .15s,background .15s;}
+  #ext-channels-tabs{display:flex;gap:6px;padding:12px 16px 0;flex-shrink:0;}
+  .ec-tab{flex:1;padding:7px 0;border-radius:8px;border:0.5px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);color:rgba(170,190,225,0.6);font-size:11.5px;font-weight:600;font-family:inherit;cursor:pointer;transition:background .13s,color .13s,border-color .13s;}
+  .ec-tab:hover{color:rgba(210,225,255,0.85);}
+  .ec-tab.active{background:rgba(155,178,228,0.18);border-color:rgba(170,195,255,0.35);color:#c8ddff;}
+  #ext-channels-search{margin:10px 16px 0;padding:7px 10px;border-radius:8px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.10);color:#c8daf0;font-size:11.5px;font-family:inherit;outline:none;flex-shrink:0;transition:border-color .15s,background .15s;}
   #ext-channels-search::placeholder{color:rgba(150,175,215,0.38);}
   #ext-channels-search:focus{border-color:rgba(150,185,255,0.28);background:rgba(255,255,255,0.075);}
   #ext-channels-list{overflow-y:auto;padding:8px 0;}
@@ -1646,6 +1652,10 @@
     <div id="ext-channels-hd">
       <span id="ext-channels-hd-title">동기화 채널 목록</span>
       <button id="ext-channels-close">✕</button>
+    </div>
+    <div id="ext-channels-tabs">
+      <button class="ec-tab active" id="ec-tab-official" data-tab="official">그룹/멤버 공식</button>
+      <button class="ec-tab" id="ec-tab-ext" data-tab="ext">그외</button>
     </div>
     <input type="text" id="ext-channels-search" placeholder="채널명 검색…" autocomplete="off" spellcheck="false">
     <div id="ext-channels-count"></div>
@@ -9195,13 +9205,17 @@ async function _ytSyncExtChannels(){
   _extSyncing=false;
 }
 
+// 콘텐츠 포맷(⋮ 메뉴 "콘텐츠별 보기") 대표 순서 — 전체 DB 건수 기준 내림차순으로 고정,
+// 멤버마다 다시 정렬하지 않고 이 순서에서 해당 멤버가 가진 것만 걸러 보여준다.
+const _CONTENT_FORMAT_ORDER=['릴레이댄스',"It's Live",'리무진서비스','문명특급','킬링보이스','아이돌등판','안방1열/단독샷/페이스캠','MPD/입덕직캠','음중/최애직캠','원테이크/얼빡직캠','쇼챔직캠','UNFILTERED CAM'];
+
 // ── 그룹 카드 YouTube 영상 섹션 ──
 // 그룹 카드의 "채널 영상" 섹션(필터 탭 + 무한스크롤 그리드)을 컨테이너 하나당 독립된 상태로 만들어주는 팩토리.
 // 그룹 카드(#gc-ch-vid)와, 아이유처럼 소속 그룹이 없는 솔로 아티스트의 멤버 카드(#tv)가 각자 별도 인스턴스를
 // 써야 함 — 데스크톱에서는 그룹 카드+멤버 카드가 동시에 도킹돼 화면에 같이 떠 있을 수 있어서, 상태를
 // 전역 변수 하나로 공유하면 한쪽을 열 때 다른 쪽의 페이지네이션/옵저버가 깨짐.
 function _makeChVidController(contId){
-  let state={ko:null,memberKo:null,filter:'all',sortMode:'recommend',offset:0,total:0,pos:0,cat:null,gen:0,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
+  let state={ko:null,memberKo:null,filter:'all',sortMode:'recommend',viewMode:'category',formatFilter:null,formats:[],offset:0,total:0,pos:0,cat:null,gen:0,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
   let observer=null;
   // 정렬 팝오버 바깥을 클릭하면 닫음 — build()가 카드 열 때마다 다시 실행되므로 리스너는 컨트롤러당 한 번만
   // 등록하고(중복 누적 방지), 매번 contId로 현재 DOM을 새로 찾아서 닫는다(cont가 build()마다 새로 그려지므로).
@@ -9219,6 +9233,21 @@ function _makeChVidController(contId){
   function tryLoadMore(ko){
     if(state.ko!==ko||!state.hasMore||state.appendLock)return;
     load(ko,false);
+  }
+
+  // 이 그룹/멤버가 실제로 태그된 콘텐츠 포맷 목록을 가져온다 — ⋮ 메뉴에 "콘텐츠별 보기"를 보여줄지
+  // 판단하고, 포맷 알약을 렌더링하는 데 씀. 없으면 빈 배열(메뉴 옵션 자체를 숨김).
+  async function _loadAvailableFormats(ko,memberKo){
+    if(!sb)return[];
+    let q=sb.from(_YT_TABLE).select('content_formats');
+    if(memberKo)q=q.eq('group_ko',ko).or(`members.eq.{},members.cs.{${memberKo}}`);
+    else q=q.or(`and(group_ko.eq.${ko},members.eq.{}),with_groups.cs.{${ko}}`);
+    q=q.limit(1000);
+    const{data,error}=await q;
+    if(error||!data)return[];
+    const set=new Set();
+    data.forEach(r=>(r.content_formats||[]).forEach(f=>{if(f)set.add(f);}));
+    return[...set];
   }
 
   // members/with_members/with_groups를 buildVideoSection과 같은 song.with 포맷("이름" 또는 "이름(그룹)")으로 변환 —
@@ -9369,7 +9398,11 @@ function _makeChVidController(contId){
         q=q.or(`and(group_ko.eq.${ko},members.eq.{}),with_groups.cs.{${ko}}`);
       }
       if(state.searchQ)q=q.ilike('title',`%${state.searchQ}%`);
-      if(filter!=='all')q=q.eq('category',filter);
+      if(state.viewMode==='format'){
+        if(state.formatFilter)q=q.contains('content_formats',[state.formatFilter]);
+      }else if(filter!=='all'){
+        q=q.eq('category',filter);
+      }
       q=q.order('published_at',{ascending:false}).range(offset,offset+_YT_PAGE-1);
       const{data,error,count}=await q;
       if(myGen!==state.gen)return; // 대기 중 다른 그룹/새로고침으로 전환됨: 그쪽이 이미 자신의 잠금을 걸어놨으므로 여기선 해제하지 않는다
@@ -9444,23 +9477,35 @@ function _makeChVidController(contId){
     if(!cont)return;
     cont.innerHTML='';
     if(!sb)return;
-    state={ko,memberKo:memberKo||null,filter:'all',onlyMe:false,searchQ:'',sortMode:'recommend',offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
-    cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters"></div><div class="gc-ch-sort-wrap"><button class="gc-ch-sort-btn" title="정렬" aria-haspopup="true" aria-expanded="false">⋮</button><div class="gc-ch-sort-menu"><button class="gc-ch-sort-item" data-sort="recommend"><span class="chk">✓</span>추천순</button><button class="gc-ch-sort-item" data-sort="latest"><span class="chk">✓</span>업로드순</button></div></div><button class="gc-ch-refresh" title="새로고침">↻</button></div><div class="gc-ch-search-wrap" style="display:none"><input class="gc-ch-search" placeholder="영상 검색…" autocomplete="off" spellcheck="false"><button class="gc-ch-search-clear" aria-label="검색어 지우기">\xD7</button></div><div class="gc-ch-grid"></div><div class="gc-ch-more-wrap"></div>`;
+    state={ko,memberKo:memberKo||null,filter:'all',onlyMe:false,searchQ:'',sortMode:'recommend',viewMode:'category',formatFilter:null,formats:[],offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
+    cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters"></div><div class="gc-ch-sort-wrap"><button class="gc-ch-sort-btn" title="정렬" aria-haspopup="true" aria-expanded="false">⋮</button><div class="gc-ch-sort-menu"><button class="gc-ch-sort-item" data-sort="recommend"><span class="chk">✓</span>추천순</button><button class="gc-ch-sort-item" data-sort="latest"><span class="chk">✓</span>업로드순</button><div class="gc-ch-sort-divider" style="display:none"></div><button class="gc-ch-view-toggle" style="display:none"><span class="chk">✓</span>콘텐츠별 보기</button></div></div><button class="gc-ch-refresh" title="새로고침">↻</button></div><div class="gc-ch-search-wrap" style="display:none"><input class="gc-ch-search" placeholder="영상 검색…" autocomplete="off" spellcheck="false"><button class="gc-ch-search-clear" aria-label="검색어 지우기">\xD7</button></div><div class="gc-ch-grid"></div><div class="gc-ch-more-wrap"></div>`;
     const filEl=cont.querySelector('.gc-ch-filters');
     // 멤버 카드는 MV 탭 제외 — 뮤비는 그룹 단위 콘텐츠라 그룹 카드 MV 탭에서 이미 다뤄지고, 멤버 개인 태깅 영상엔 거의 안 나옴
-    const tabs=memberKo?[['all','전체'],['live','라이브'],['short','Shorts']]:[['all','전체'],['mv','MV'],['live','라이브'],['short','Shorts']];
-    tabs.forEach(([val,lbl])=>{
-      const b=document.createElement('button');
-      b.className='gc-ch-filter'+(val==='all'?' active':'');
-      b.textContent=lbl;
-      b.addEventListener('click',()=>{
-        state.filter=val;state.offset=0;
-        cont.querySelectorAll('.gc-ch-filter').forEach(x=>x.classList.remove('active'));
-        b.classList.add('active');
-        load(ko,true);
+    const catTabs=memberKo?[['all','전체'],['live','라이브'],['short','Shorts']]:[['all','전체'],['mv','MV'],['live','라이브'],['short','Shorts']];
+    const onlyBtnRef={el:null};
+    // 카테고리(전체/MV/라이브/Shorts) ↔ 콘텐츠 포맷(킬링보이스 등) 알약을 같은 자리에 그린다.
+    // viewMode가 바뀌면(⋮ 메뉴 토글) 이 함수를 다시 불러 알약만 교체하고 나머지 툴바는 그대로 둔다.
+    function renderFilterTabs(){
+      filEl.querySelectorAll('.gc-ch-filter').forEach(el=>el.remove());
+      const isFormat=state.viewMode==='format';
+      const tabs=isFormat?_CONTENT_FORMAT_ORDER.filter(f=>state.formats.includes(f)).map(f=>[f,f]):catTabs;
+      const activeVal=isFormat?state.formatFilter:state.filter;
+      tabs.forEach(([val,lbl],i)=>{
+        const b=document.createElement('button');
+        b.className='gc-ch-filter'+(val===activeVal||(isFormat&&!activeVal&&i===0)?' active':'');
+        b.textContent=lbl;
+        b.addEventListener('click',()=>{
+          if(isFormat)state.formatFilter=val;else state.filter=val;
+          state.offset=0;
+          filEl.querySelectorAll('.gc-ch-filter').forEach(x=>x.classList.remove('active'));
+          b.classList.add('active');
+          load(ko,true);
+        });
+        if(onlyBtnRef.el)filEl.insertBefore(b,onlyBtnRef.el);else filEl.appendChild(b);
       });
-      filEl.appendChild(b);
-    });
+      if(isFormat&&!state.formatFilter&&tabs.length)state.formatFilter=tabs[0][0];
+    }
+    renderFilterTabs();
     // 멤버 카드 전용: "이 멤버만 단독 출연"한 영상만 걸러보는 토글(다른 필터 탭과 독립적으로 같이 켤 수 있음,
     // 예: Shorts+Only = 이 멤버 단독 쇼츠만). 전체/라이브/Shorts는 배타적 "모드"라 알약 버튼이지만 Only는
     // 부가 조건이라 텍스트만(.gc-ch-only)으로 구분되게 함.
@@ -9477,7 +9522,19 @@ function _makeChVidController(contId){
         load(ko,true);
       });
       filEl.appendChild(onlyBtn);
+      onlyBtnRef.el=onlyBtn;
     }
+    // 이 그룹/멤버가 태그된 콘텐츠 포맷이 있으면 ⋮ 메뉴에 "콘텐츠별 보기" 노출
+    _loadAvailableFormats(ko,memberKo).then(formats=>{
+      if(state.ko!==ko||state.memberKo!==(memberKo||null))return; // 그 사이 다른 카드로 전환됨
+      state.formats=formats;
+      const viewToggleBtn=cont.querySelector('.gc-ch-view-toggle');
+      const divider=cont.querySelector('.gc-ch-sort-divider');
+      if(formats.length){
+        if(viewToggleBtn)viewToggleBtn.style.display='';
+        if(divider)divider.style.display='';
+      }
+    });
     const refBtn=cont.querySelector('.gc-ch-refresh');
     refBtn?.addEventListener('click',()=>{
       refBtn.classList.add('spinning');
@@ -9504,6 +9561,17 @@ function _makeChVidController(contId){
         closeSortMenu();
         load(ko,true);
       });
+    });
+    // "콘텐츠별 보기" 토글: 카테고리 탭 ↔ 콘텐츠 포맷 알약 전환. 태그된 포맷이 있을 때만 노출(위에서 처리).
+    const viewToggleBtn=cont.querySelector('.gc-ch-view-toggle');
+    viewToggleBtn?.addEventListener('click',e=>{
+      e.stopPropagation();
+      state.viewMode=state.viewMode==='format'?'category':'format';
+      viewToggleBtn.classList.toggle('active',state.viewMode==='format');
+      state.offset=0;
+      closeSortMenu();
+      renderFilterTabs();
+      load(ko,true);
     });
     // 돋보기 토글 버튼
     const searchToggleBtn=document.createElement('button');
@@ -10118,12 +10186,27 @@ document.getElementById('vid-tag-hide').addEventListener('click',async e=>{
   document.getElementById('sp-ext-channels-btn')?.addEventListener('click',_openExtChannels);
 })();
 
-// ── 동기화 채널 목록 (외부 채널, _EXT_CHANNELS 그대로 보여줌 — 별도 DB 조회 없이 로컬 데이터) ──
+// ── 동기화 채널 목록 (그룹/멤버 공식 + 그외 외부 채널 두 탭 — 전부 로컬 데이터, DB 조회 없음) ──
+// 공식 채널은 _ytSyncAll()과 동일한 방식으로 GROUPS/ARTISTS에서 그때그때 추출(별도 목록 유지 불필요)
+function _officialChannels(){
+  const groups=Object.entries(GROUPS||{}).filter(([,v])=>v?.links?.youtube).map(([ko,v])=>({name:ko,url:v.links.youtube}));
+  const seenSolo=new Set();
+  const solos=[];
+  (ARTISTS||[]).forEach(a=>{
+    if(GROUPS[a.group.ko]||!a.links?.youtube||seenSolo.has(a.name.ko))return;
+    seenSolo.add(a.name.ko);
+    solos.push({name:a.name.ko,url:a.links.youtube});
+  });
+  return[...groups,...solos];
+}
+let _extChannelsTab='official';
 function _renderExtChannels(term){
   const list=document.getElementById('ext-channels-list');
   const q=(term||'').trim().toLowerCase();
-  const rows=q?_EXT_CHANNELS.filter(ch=>ch.name.toLowerCase().includes(q)||ch.handle.toLowerCase().includes(q)):_EXT_CHANNELS;
-  document.getElementById('ext-channels-count').textContent=`총 ${_EXT_CHANNELS.length}개 중 ${rows.length}개 표시`;
+  const isOfficial=_extChannelsTab==='official';
+  const all=isOfficial?_officialChannels():_EXT_CHANNELS;
+  const rows=q?all.filter(ch=>ch.name.toLowerCase().includes(q)||(ch.handle||'').toLowerCase().includes(q)):all;
+  document.getElementById('ext-channels-count').textContent=`총 ${all.length}개 중 ${rows.length}개 표시`;
   if(!rows.length){
     list.innerHTML=`<div id="ext-channels-empty">${q?'검색 결과가 없어요':'등록된 채널이 없어요'}</div>`;
     return;
@@ -10133,18 +10216,31 @@ function _renderExtChannels(term){
     const item=document.createElement('div');item.className='ec-item';
     const info=document.createElement('div');
     const name=document.createElement('div');name.className='ec-name';name.textContent=ch.name;
-    const handle=document.createElement('div');handle.className='ec-handle';handle.textContent='@'+ch.handle;
-    info.appendChild(name);info.appendChild(handle);
+    info.appendChild(name);
+    if(ch.handle){
+      const handle=document.createElement('div');handle.className='ec-handle';handle.textContent='@'+ch.handle;
+      info.appendChild(handle);
+    }
     const link=document.createElement('a');link.className='ec-link';link.href=ch.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='열기';
     item.appendChild(info);item.appendChild(link);
     list.appendChild(item);
   });
 }
 function _openExtChannels(){
+  _extChannelsTab='official';
+  document.querySelectorAll('.ec-tab').forEach(t=>t.classList.toggle('active',t.dataset.tab==='official'));
   document.getElementById('ext-channels-search').value='';
   document.getElementById('ext-channels-overlay').classList.add('open');
   _renderExtChannels('');
 }
+document.querySelectorAll('.ec-tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    _extChannelsTab=btn.dataset.tab;
+    document.querySelectorAll('.ec-tab').forEach(t=>t.classList.toggle('active',t===btn));
+    document.getElementById('ext-channels-search').value='';
+    _renderExtChannels('');
+  });
+});
 document.getElementById('ext-channels-search')?.addEventListener('input',e=>_renderExtChannels(e.target.value));
 document.getElementById('ext-channels-overlay')?.addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open');});
 document.getElementById('ext-channels-close')?.addEventListener('click',()=>document.getElementById('ext-channels-overlay').classList.remove('open'));
