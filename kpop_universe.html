@@ -219,6 +219,8 @@
   .dh-btn:hover{background:rgba(255,255,255,0.08);color:rgba(210,225,255,0.85);}
   .dh-btn.active{background:rgba(255,255,255,0.10);color:rgba(225,238,255,0.95);}
   #dh-lang-btn{font-size:10px;font-weight:700;letter-spacing:.1em;padding:6px 11px;}
+  /* 핵심 내비(홈/탐색/피드/검색/프로필)와 부가 유틸(언어/하이라이트/설정)을 담백하게 구분하는 얇은 선 */
+  .dh-divider{width:0.5px;align-self:stretch;margin:6px 3px;background:rgba(255,255,255,0.12);}
   /* ── Settings panel ─────────────────────────────── */
   #settings-panel{
     position:fixed;bottom:78px;right:16px;width:252px;
@@ -269,6 +271,7 @@
     font-family:inherit;transition:all .15s;
   }
   .sp-type.active{background:rgba(140,162,255,0.18);color:rgba(195,210,255,0.95);}
+  .sp-gen-note{font-size:9px;line-height:1.5;color:rgba(120,140,188,0.42);margin-top:7px;}
   .sp-reset{
     background:none;border:none;cursor:pointer;padding:1px 0;
     font-size:10px;letter-spacing:.10em;font-family:inherit;
@@ -743,7 +746,7 @@
   .gc-ch-sort-wrap{position:relative;flex:0 0 auto;}
   .gc-ch-sort-btn{background:none;border:none;cursor:pointer;color:rgba(155,178,228,0.4);font-size:15px;padding:4px 5px;transition:color .15s;font-family:inherit;line-height:1;}
   .gc-ch-sort-btn:hover,.gc-ch-sort-btn.active{color:#c0d6f0;}
-  .gc-ch-sort-menu{display:none;position:absolute;right:0;top:calc(100% + 4px);min-width:96px;border-radius:10px;
+  .gc-ch-sort-menu{display:none;position:absolute;right:0;top:calc(100% + 4px);min-width:130px;border-radius:10px;
     background:rgba(20,24,44,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
     border:0.5px solid rgba(255,255,255,0.10);box-shadow:0 8px 24px rgba(0,0,0,0.45);z-index:5;overflow:hidden;padding:4px;}
   .gc-ch-sort-menu.open{display:block;}
@@ -762,6 +765,7 @@
     font-size:11px;color:rgba(192,214,240,0.65);cursor:pointer;font-family:inherit;
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
     transition:background .14s,border-color .14s,color .14s,transform .14s;
+    white-space:nowrap;flex-shrink:0;
   }
   .gc-ch-filter:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.22);color:rgba(220,235,255,0.95);}
   .gc-ch-filter:active{transform:scale(0.93);}
@@ -783,7 +787,7 @@
   /* 멤버 카드 전용 Only 토글 — 전체/라이브/Shorts는 서로 배타적인 "모드"라 알약 버튼이지만, Only는 그 위에
      얹는 부가 조건이라 같은 버튼 모양이면 넷 다 같은 종류의 선택지처럼 보여 헷갈림. 텍스트만 둬서 구분. */
   .gc-ch-only{background:none;border:none;padding:4px 2px;margin-left:5px;font-size:11px;font-family:inherit;
-    color:rgba(192,214,240,0.45);cursor:pointer;transition:color .14s;}
+    color:rgba(192,214,240,0.45);cursor:pointer;transition:color .14s;flex-shrink:0;white-space:nowrap;}
   .gc-ch-only:hover{color:rgba(220,235,255,0.8);}
   .gc-ch-only.active{color:#c8ddff;text-decoration:underline;text-underline-offset:2px;}
   @media(min-width:769px){.gc-ch-only{font-size:9px;}}
@@ -1562,12 +1566,14 @@
   <div id="dh-title">K-POP UNIVERSE</div>
   <div id="dh-right">
     <button class="dh-btn" id="dh-home-btn" aria-label="홈으로 이동"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="display:block"><path d="M3 11L12 3l9 8v9a1 1 0 0 1-1 1h-4v-5h-4v5H4a1 1 0 0 1-1-1v-9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
-    <button class="dh-btn" id="dh-lang-btn" aria-label="언어 전환">KO</button>
+    <button class="dh-btn" id="dh-search-btn" aria-label="검색 열기"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="display:block"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
     <button class="dh-btn" id="dh-explore-btn" aria-label="무작위로 둘러보기"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:block"><path d="M12 2L13.4 10.6L22 12L13.4 13.4L12 22L10.6 13.4L2 12L10.6 10.6L12 2Z"/></svg></button>
     <button class="dh-btn" id="dh-feed-btn" aria-label="탐험 피드"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:block"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M16.24 7.76L14.12 14.12L7.76 16.24L9.88 9.88Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></button>
-    <button class="dh-btn" id="dh-fav-btn" aria-label="즐겨찾기 하이라이트"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="display:block"><path d="M12 21C12 21 4 15.5 4 9.5a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9.5C20 15.5 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
-    <button class="dh-btn" id="dh-search-btn" aria-label="검색 열기"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="display:block"><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="1.5"/><line x1="9.2" y1="9.2" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
     <button class="dh-btn" id="dh-profile-btn" aria-label="내 프로필"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:block"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <div class="dh-divider"></div>
+    <button class="dh-btn" id="dh-fav-btn" aria-label="즐겨찾기 하이라이트"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="display:block"><path d="M12 21C12 21 4 15.5 4 9.5a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9.5C20 15.5 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+    <button class="dh-btn" id="dh-overview-btn" aria-label="전체 보기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:block"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="dh-btn" id="dh-lang-btn" aria-label="언어 전환">KO</button>
     <button class="dh-btn" id="dh-settings-btn" aria-label="설정 열기">⚙︎</button>
   </div>
 </div>
@@ -1630,6 +1636,17 @@
       <button class="sp-type" data-gender="f" data-i18n="girl">걸그룹</button>
       <button class="sp-type" data-gender="m" data-i18n="boy">보이그룹</button>
     </div>
+  </div>
+  <div class="sp-sec">
+    <div class="sp-sec-lbl" data-i18n="genLabel">세대</div>
+    <div class="sp-types" id="sp-gens">
+      <button class="sp-type active" data-gen="1">1세대</button>
+      <button class="sp-type active" data-gen="2">2세대</button>
+      <button class="sp-type active" data-gen="3">3세대</button>
+      <button class="sp-type active" data-gen="4">4세대</button>
+      <button class="sp-type active" data-gen="5">5세대</button>
+    </div>
+    <div class="sp-gen-note" data-i18n="genNote">세대 구분은 그룹의 국내 공식 데뷔 연도를 기준으로 한 K-pop Universe 자체 분류입니다. 업계 및 팬덤에서 공식적으로 합의된 단일 기준은 아닙니다.</div>
   </div>
   <div class="sp-row">
     <span class="sp-lbl" data-i18n="inactive">비활동/탈퇴 멤버</span>
@@ -2115,6 +2132,7 @@ let regColorAttr=null,spkColorAttr=null;
 let currentLang=localStorage.getItem('kpu_lang')||'ko';
 const T={
   ko:{sp_title:'설정',debutYr:'데뷔 연도',birthYr:'멤버 생년',grpType:'그룹 유형',
+      genLabel:'세대',genNote:'세대 구분은 그룹의 국내 공식 데뷔 연도를 기준으로 한 K-pop Universe 자체 분류입니다. 업계 및 팬덤에서 공식적으로 합의된 단일 기준은 아닙니다.',
       all:'전체',girl:'걸그룹',boy:'보이그룹',inactive:'비활동/탈퇴 멤버',reset:'↺ 초기화',
       searchPH:'그룹 · 멤버 검색…',mobileTitle:'케이팝 아이돌 지형도',srGroup:'그룹',
       preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcFandom:'팬덤',gcLeader:'리더',gcMember:'멤버',gcSNS:'공식',
@@ -2122,6 +2140,7 @@ const T={
       idxSortName:'이름 (가나다순)',idxSortDebut:'데뷔연도',idxSortAgency:'소속사',idxSortMembers:'멤버 수',
       idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적',ppTitle:'내 프로필',ppNick:'닉네임',ppNickPH:'닉네임을 입력하세요',ppNickErr:'닉네임을 입력해주세요',ppBio:'한 줄 소개',ppBioPH:'선택사항',ppColor:'내 별 색상',ppFavLabel:'좋아요 공개',ppFavSub:'다른 사람들이 볼 수 있어요',ppSyncLabel:'다른 기기와 동기화',ppSyncSub:'다른 기기에서도 좋아요가 유지돼요',ppGoogleBtn:'구글로 연결하기',ppXBtn:'X로 연결하기',ppLinked:'계정에 연결됨 ✓',ppSave:'저장'},
   en:{sp_title:'Settings',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
+      genLabel:'Generation',genNote:'Generation classification is K-pop Universe’s own grouping based on each group’s official domestic debut year. It is not an officially agreed-upon industry or fandom standard.',
       all:'All',girl:'Girl Groups',boy:'Boy Groups',inactive:'Inactive / Left',reset:'↺ Reset',
       searchPH:'Search groups · members…',mobileTitle:'K-pop Idol Map',srGroup:'Group',
       preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcFandom:'Fandom',gcLeader:'Leader',gcMember:'Members',gcSNS:'Official',
@@ -2219,7 +2238,16 @@ function _refreshOpenCardText(){
     else if(!isMob()&&connPanelEl.classList.contains('open'))_buildConnContent(connPanelInner);
   }
 }
-const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',showInactive:true};
+const filterCfg={debutLo:2000,debutHi:2026,bdayLo:1985,bdayHi:2012,gender:'all',showInactive:true,generations:new Set([1,2,3,4,5])};
+// 그룹 세대 구분 — 데뷔 연도 기준 K-pop Universe 자체 분류(업계·팬덤 공식 기준 아님)
+function _groupGeneration(debut){
+  const y=parseInt(String(debut))||2020;
+  if(y<=2003)return 1;
+  if(y<=2011)return 2;
+  if(y<=2017)return 3;
+  if(y<=2022)return 4;
+  return 5;
+}
 const FOCUS_DIM=0.06;
 let focusGroupKo=null;
 let _extraFocusKos=[];
@@ -5932,11 +5960,11 @@ document.getElementById('settings-panel').addEventListener('click',e=>e.stopProp
 
 // ── Filter ────────────────────────────────────────
 function applyFilter(){
-  const{debutLo,debutHi,bdayLo,bdayHi,gender,showInactive}=filterCfg;
-  // 1단계: 그룹 레벨 필터 (데뷔연도·성별)
+  const{debutLo,debutHi,bdayLo,bdayHi,gender,showInactive,generations}=filterCfg;
+  // 1단계: 그룹 레벨 필터 (데뷔연도·성별·세대)
   bubbleMeshes.forEach(({mesh,ko,info})=>{
     const yr=parseInt(info.debut)||2020;
-    const ok=(gender==='all'||info.gender===gender)&&yr>=debutLo&&yr<=debutHi;
+    const ok=(gender==='all'||info.gender===gender)&&yr>=debutLo&&yr<=debutHi&&generations.has(_groupGeneration(info.debut));
     mesh._filterTarget=ok?1:0;
   });
   // 2단계: 멤버 레벨 필터 (생년·비활동)
@@ -6617,11 +6645,21 @@ function syncDualZ(loId,hiId,activeId){
     filterCfg.bdayLo=lo;filterCfg.bdayHi=hi;applyFilter();
   });
 });
-document.querySelectorAll('.sp-type').forEach(btn=>{
+document.querySelectorAll('.sp-type[data-gender]').forEach(btn=>{
   btn.addEventListener('click',e=>{
     e.stopPropagation();
-    document.querySelectorAll('.sp-type').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.sp-type[data-gender]').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');filterCfg.gender=btn.dataset.gender;applyFilter();
+  });
+});
+// 세대는 성별 필터와 달리 배타적 단일 선택이 아니라 여러 세대를 동시에 켜둘 수 있는 다중 토글
+document.querySelectorAll('.sp-type[data-gen]').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    const g=+btn.dataset.gen;
+    if(filterCfg.generations.has(g))filterCfg.generations.delete(g);else filterCfg.generations.add(g);
+    btn.classList.toggle('active',filterCfg.generations.has(g));
+    applyFilter();
   });
 });
 document.getElementById('sp-inactive-chk').addEventListener('change',e=>{
@@ -6631,7 +6669,7 @@ document.getElementById('sp-reset').addEventListener('click',e=>{
   e.stopPropagation();
   filterCfg.debutLo=2000;filterCfg.debutHi=2026;
   filterCfg.bdayLo=1985;filterCfg.bdayHi=2012;
-  filterCfg.gender='all';filterCfg.showInactive=true;
+  filterCfg.gender='all';filterCfg.showInactive=true;filterCfg.generations=new Set([1,2,3,4,5]);
   ['sp-dlo','sp-dhi','sp-blo','sp-bhi'].forEach(id=>{
     const el=document.getElementById(id);
     el.value=id==='sp-dlo'?2000:id==='sp-dhi'?2026:id==='sp-blo'?1985:2012;
@@ -6639,7 +6677,8 @@ document.getElementById('sp-reset').addEventListener('click',e=>{
   document.getElementById('sp-dlo-v').textContent='2000';document.getElementById('sp-dhi-v').textContent='2026';
   document.getElementById('sp-blo-v').textContent='1985';document.getElementById('sp-bhi-v').textContent='2012';
   syncDualZ('sp-dlo','sp-dhi','sp-dhi');syncDualZ('sp-blo','sp-bhi','sp-bhi');
-  document.querySelectorAll('.sp-type').forEach((b,i)=>b.classList.toggle('active',i===0));
+  document.querySelectorAll('.sp-type[data-gender]').forEach((b,i)=>b.classList.toggle('active',i===0));
+  document.querySelectorAll('.sp-type[data-gen]').forEach(b=>b.classList.add('active'));
   document.getElementById('sp-inactive-chk').checked=true;
   applyFilter();
 });
@@ -6718,8 +6757,7 @@ function flyHome(){
     flyState.onComplete=()=>{controls.autoRotate=true;};
   });
 })();
-document.getElementById('mob-overview-btn').addEventListener('click',e=>{
-  e.stopPropagation();
+function _flyToOverview(){
   const tgt=controls.target.clone();
   const dir=camera.position.clone().sub(tgt);
   if(dir.lengthSq()<0.001)dir.set(0,0,1);
@@ -6727,7 +6765,9 @@ document.getElementById('mob-overview-btn').addEventListener('click',e=>{
   closeCards();
   _startFly(tgt,maxPos,800);
   flyState.onComplete=()=>{controls.autoRotate=true;};
-});
+}
+document.getElementById('mob-overview-btn').addEventListener('click',e=>{e.stopPropagation();_flyToOverview();});
+document.getElementById('dh-overview-btn').addEventListener('click',e=>{e.stopPropagation();_flyToOverview();});
 document.getElementById('dh-home-btn').addEventListener('click',e=>{e.stopPropagation();flyHome();});
 document.getElementById('tab-home').addEventListener('click',e=>{e.stopPropagation();_closeFeedOverlay();flyHome();});
 document.getElementById('dh-explore-btn').addEventListener('click',e=>{
@@ -8666,6 +8706,7 @@ function _openFeedOverlay(){
   document.getElementById('tab-feed').classList.add('feed-open');
   _buildFeedAnniversaries();
   _buildFeedDiscovery();
+  _buildFeedConnections();
   if(!el._bound){el._bound=true;
     // 데스크톱에서 왼쪽 슬라이드 패널로 뜰 때, 패널 안을 클릭해도 3D 씬 클릭(window의 pointerdown/click
     // 리스너, closePanels 포함)으로 새지 않도록 막음 — #feed-overlay는 본문 스크립트보다 나중에 파싱되는
@@ -8891,6 +8932,64 @@ function _buildFeedDiscovery(){
       }
     }),vThumb);
   }
+}
+
+// 콜라보 영상 증거가 있는 연결 하나를 뽑아 "Constellations" 섹션에 보여줌(_buildFeedDiscovery의
+// 랜덤 항목들과 분리된 전용 카테고리) — 기념일 섹션처럼 후보가 없으면 섹션 자체를 숨김.
+function _buildFeedConnections(){
+  const section=document.getElementById('feed-connections-section');
+  const list=document.getElementById('feed-connections');
+  if(!section||!list)return;
+  const isKo=currentLang==='ko';
+  list.innerHTML='';
+  // connections.json 로드 시 3D 연결선을 그릴 때 쓰는 것과 동일한 해석 로직(이중소속 c.group
+  // disambiguation 포함)으로 artA/artB를 정확히 찾는다 — 이름만으로 찾으면 동명이인 있을 때 틀릴 수 있음
+  function _resolveConnPair(c){
+    const candA=(ARTISTS||[]).filter(a=>a.name.ko===c.a);
+    const candB=(ARTISTS||[]).filter(a=>a.name.ko===c.b);
+    let artA,artB,shareKo;
+    if(c.group){
+      outer: for(const ca of candA){
+        if(!_artistGroups(ca).some(g=>g.ko===c.group))continue;
+        for(const cb of candB){
+          if(_artistGroups(cb).some(g=>g.ko===c.group)){artA=ca;artB=cb;shareKo=c.group;break outer;}
+        }
+      }
+    }else{
+      for(const ca of candA){const cb=candB.find(b=>b.group.ko===ca.group.ko);if(cb){artA=ca;artB=cb;shareKo=ca.group.ko;break;}}
+    }
+    if(!artA||!artB)return null;
+    const bName=shareKo===artA.group.ko?artB.name.ko:`${artB.name.ko}(${shareKo})`;
+    return{artA,artB,bName};
+  }
+  const mConns=_rawConnData.filter(c=>c.type==='member');
+  // 연결은 있어도(같은 그룹 등) 실제 콜라보 영상 증거(with 태그된 곡)가 없는 경우가 많아서
+  // "연결 보기"를 눌렀을 때 빈 화면으로 이어지는 걸 막기 위해, 실제 영상이 있는 연결만 후보로 씀.
+  // 이 항목이 있다 없다 하지 않도록, 유효한 연결이 하나라도 있으면 반드시 찾아낼 때까지 전체를 훑는다.
+  let connPick=null,connSong=null;
+  for(const c of _shuffle([...mConns])){
+    const resolved=_resolveConnPair(c);
+    if(resolved){
+      const songs=_getCollabSongs(resolved.artA,[resolved.bName]);
+      if(songs.length){connPick={c,...resolved};connSong=songs[0];break;}
+    }
+  }
+  if(!connPick){section.style.display='none';return;}
+  section.style.display='';
+  const{c,artA,bName}=connPick;
+  const connLabel=c.a+' ↔ '+c.b;
+  const connSub=isKo?'연결 보기':'View connection';
+  const connVid=connSong?.u?ytId(connSong.u):null;
+  const connThumb=connVid?`https://img.youtube.com/vi/${connVid}/mqdefault.jpg`:null;
+  _appendFeedItem(list,'🔗',connLabel,connSub,()=>_feedNav(()=>{
+    if(isMob()){showT(artA,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
+    else showT(artA,window.innerWidth/2,window.innerHeight/2);
+    openConnCard(artA);
+    _connSelected=[bName];
+    _updateConnLines3d();
+    _applyConnFocus();
+    _buildConnContent(isMob()?connSheetBody:connPanelInner);
+  }),connThumb);
 }
 
 // ── YouTube 채널 영상 (Supabase 연동) ─────────────────────────────
@@ -9273,15 +9372,11 @@ function _makeChVidController(contId){
   // 판단하고, 포맷 알약을 렌더링하는 데 씀. 없으면 빈 배열(메뉴 옵션 자체를 숨김).
   async function _loadAvailableFormats(ko,memberKo){
     if(!sb)return[];
-    let q=sb.from(_YT_TABLE).select('content_formats');
-    if(memberKo)q=q.eq('group_ko',ko).or(`members.eq.{},members.cs.{${memberKo}}`);
-    else q=q.or(`and(group_ko.eq.${ko},members.eq.{}),with_groups.cs.{${ko}}`);
-    q=q.limit(1000);
-    const{data,error}=await q;
+    // DB에서 DISTINCT로 정확히 집계(get_content_formats RPC) — 예전엔 클라이언트에서 최대 1000개
+    // 행만 가져와 추정했는데, 정렬 기준이 없어 영상 많은 그룹/멤버는 일부 포맷이 누락될 수 있었음
+    const{data,error}=await sb.rpc('get_content_formats',{p_group_ko:ko,p_member_ko:memberKo||null});
     if(error||!data)return[];
-    const set=new Set();
-    data.forEach(r=>(r.content_formats||[]).forEach(f=>{if(f)set.add(f);}));
-    return[...set];
+    return data.filter(Boolean);
   }
 
   // members/with_members/with_groups를 buildVideoSection과 같은 song.with 포맷("이름" 또는 "이름(그룹)")으로 변환 —
@@ -9514,9 +9609,15 @@ function _makeChVidController(contId){
     state={ko,memberKo:memberKo||null,filter:'all',onlyMe:false,searchQ:'',sortMode:'recommend',viewMode:'category',formatFilter:null,formats:[],offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
     cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters"></div><div class="gc-ch-sort-wrap"><button class="gc-ch-sort-btn" title="정렬" aria-haspopup="true" aria-expanded="false">⋮</button><div class="gc-ch-sort-menu"><button class="gc-ch-sort-item" data-sort="recommend"><span class="chk">✓</span>추천순</button><button class="gc-ch-sort-item" data-sort="latest"><span class="chk">✓</span>업로드순</button><div class="gc-ch-sort-divider" style="display:none"></div><button class="gc-ch-view-toggle" style="display:none"><span class="chk">✓</span>콘텐츠별 보기</button></div></div><button class="gc-ch-refresh" title="새로고침">↻</button></div><div class="gc-ch-search-wrap" style="display:none"><input class="gc-ch-search" placeholder="영상 검색…" autocomplete="off" spellcheck="false"><button class="gc-ch-search-clear" aria-label="검색어 지우기">\xD7</button></div><div class="gc-ch-grid"></div><div class="gc-ch-more-wrap"></div>`;
     const filEl=cont.querySelector('.gc-ch-filters');
+    // 웹은 마우스 휠이 세로 스크롤 값만 보내서 가로 전용 스크롤 영역이 그냥 무시해버림 —
+    // 세로 휠 델타를 가로 스크롤로 그대로 옮겨줘서 알약이 넘칠 때 휠로 넘길 수 있게 함
+    filEl.addEventListener('wheel',e=>{
+      if(filEl.scrollWidth<=filEl.clientWidth)return; // 넘치지 않으면 평소처럼 페이지 스크롤 허용
+      e.preventDefault();
+      filEl.scrollLeft+=e.deltaY;
+    },{passive:false});
     // 멤버 카드는 MV 탭 제외 — 뮤비는 그룹 단위 콘텐츠라 그룹 카드 MV 탭에서 이미 다뤄지고, 멤버 개인 태깅 영상엔 거의 안 나옴
     const catTabs=memberKo?[['all','전체'],['live','라이브'],['short','Shorts']]:[['all','전체'],['mv','MV'],['live','라이브'],['short','Shorts']];
-    const onlyBtnRef={el:null};
     // 카테고리(전체/MV/라이브/Shorts) ↔ 콘텐츠 포맷(킬링보이스 등) 알약을 같은 자리에 그린다.
     // viewMode가 바뀌면(⋮ 메뉴 토글) 이 함수를 다시 불러 알약만 교체하고 나머지 툴바는 그대로 둔다.
     function renderFilterTabs(){
@@ -9535,7 +9636,7 @@ function _makeChVidController(contId){
           b.classList.add('active');
           load(ko,true);
         });
-        if(onlyBtnRef.el)filEl.insertBefore(b,onlyBtnRef.el);else filEl.appendChild(b);
+        filEl.appendChild(b);
       });
       if(isFormat&&!state.formatFilter&&tabs.length)state.formatFilter=tabs[0][0];
     }
@@ -9555,8 +9656,9 @@ function _makeChVidController(contId){
         onlyBtn.setAttribute('aria-pressed',state.onlyMe?'true':'false');
         load(ko,true);
       });
-      filEl.appendChild(onlyBtn);
-      onlyBtnRef.el=onlyBtn;
+      // 스크롤되는 필터 알약 줄 밖으로 빼서, 돋보기 아이콘 왼쪽에 항상 고정 노출되게 함
+      const sortWrapEl=cont.querySelector('.gc-ch-sort-wrap');
+      sortWrapEl.parentElement.insertBefore(onlyBtn,sortWrapEl);
     }
     // 이 그룹/멤버가 태그된 콘텐츠 포맷이 있으면 ⋮ 메뉴에 "콘텐츠별 보기" 노출
     _loadAvailableFormats(ko,memberKo).then(formats=>{
@@ -10379,12 +10481,16 @@ _totopBtn.addEventListener('click',e=>{
   </div>
   <div id="feed-body">
     <div class="feed-section" id="feed-anniv-section" style="display:none">
-      <div class="feed-section-ttl">🎂 오늘의 기념일</div>
+      <div class="feed-section-ttl">🎂 Today's Anniversary</div>
       <div id="feed-anniv"></div>
     </div>
     <div class="feed-section">
-      <div class="feed-section-ttl">✨ 오늘의 발견</div>
+      <div class="feed-section-ttl">✨ Discovery</div>
       <div id="feed-discovery"></div>
+    </div>
+    <div class="feed-section" id="feed-connections-section" style="display:none">
+      <div class="feed-section-ttl">🌌 Constellations</div>
+      <div id="feed-connections"></div>
     </div>
   </div>
 </div>
