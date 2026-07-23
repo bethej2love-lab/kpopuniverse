@@ -1253,6 +1253,7 @@
     "en": "fromis_9",
     "debut": "2018.01.24",
     "co": "ASND",
+    "projectRing": 0.12,
     "color": [
       222,
       162,
@@ -1421,6 +1422,7 @@
     "debut": "2018.10.29",
     "co": "오프더레코드",
     "survivalShow": true,
+    "projectRing": true,
     "color": [
       216,
       178,
@@ -1451,6 +1453,613 @@
       "x": "https://x.com/official_izone",
       "tiktok": "https://tiktok.com/@officializone_",
       "namu": "https://namu.wiki/w/아이즈원"
+    }
+  },
+  "아이오아이": {
+    "en": "I.O.I",
+    "debut": "2016.05.04",
+    "co": "스윙엔터테인먼트",
+    "projectRing": true,
+    "color": [
+      255,
+      179,
+      138
+    ],
+    "gender": "f",
+    "fandom": {
+      "ko": "앙둥이",
+      "en": "Angdungi"
+    },
+    "links": {
+      "instagram": "https://instagram.com/ioi_official_ig",
+      "x": "https://x.com/ioi_official_",
+      "tiktok": "https://tiktok.com/@ioi_10th",
+      "namu": "https://namu.wiki/w/아이오아이"
+    }
+  },
+  "워너원": {
+    "en": "Wanna One",
+    "debut": "2017.08.07",
+    "co": "YMC엔터테인먼트",
+    "projectRing": true,
+    "color": [
+      214,
+      188,
+      145
+    ],
+    "gender": "m",
+    "fandom": {
+      "ko": "워너블",
+      "en": "Wannable"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@WannaOneofficial",
+      "instagram": "https://www.instagram.com/wannaone.official",
+      "x": "https://x.com/WannaOne_twt",
+      "namu": "https://namu.wiki/w/Wanna%20One"
+    }
+  },
+  "케플러": {
+    "en": "Kep1er",
+    "debut": "2022.01.03",
+    "co": "웨이크원",
+    "projectRing": true,
+    "color": [
+      222,
+      210,
+      240
+    ],
+    "gender": "f",
+    "fandom": {
+      "ko": "케플리안",
+      "en": "Kep1ian"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@Kep1er_Offcl",
+      "instagram": "https://www.instagram.com/official.kep1er",
+      "x": "https://x.com/official_kep1er",
+      "tiktok": "https://www.tiktok.com/@official_kep1er",
+      "weverse": "https://weverse.io/kep1er",
+      "namu": "https://namu.wiki/w/Kep1er"
+    }
+  },
+  "제로베이스원": {
+    "en": "ZEROBASEONE",
+    "debut": "2023.07.10",
+    "co": "웨이크원",
+    "projectRing": true,
+    "color": [
+      120,
+      150,
+      210
+    ],
+    "gender": "m",
+    "fandom": {
+      "ko": "제로즈",
+      "en": "ZEROSE"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UCSAp0Yl9S0Zq5uDqE6im_XQ",
+      "instagram": "https://www.instagram.com/zb1official",
+      "x": "https://x.com/ZB1_official",
+      "tiktok": "https://www.tiktok.com/@zb1_official",
+      "namu": "https://namu.wiki/w/ZEROBASEONE"
+    }
+  },
+  "알파드라이브원": {
+    "en": "ALPHA DRIVE ONE",
+    "debut": "2026.01.12",
+    "co": "웨이크원",
+    "projectRing": true,
+    "color": [
+      235,
+      110,
+      90
+    ],
+    "gender": "m",
+    "fandom": {
+      "ko": "앨리즈",
+      "en": "ALLYZ"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UCC4wzWbk_zdQNZstCwcfFLA",
+      "instagram": "https://www.instagram.com/ald1.official",
+      "x": "https://x.com/ALD1_official",
+      "tiktok": "https://www.tiktok.com/@ald1_official",
+      "namu": "https://namu.wiki/w/ALPHA%20DRIVE%20ONE"
+    }
+  },
+  "이즈나": {
+    "en": "izna",
+    "debut": "2024.11.25",
+    "co": "웨이크원",
+    "projectRing": true,
+    "color": [
+      110,
+      200,
+      190
+    ],
+    "gender": "f",
+    "fandom": {
+      "ko": "나야",
+      "en": "naya"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UCfbYNlxgLuKJXQZEhkMmaCQ",
+      "instagram": "https://www.instagram.com/izna_offcl",
+      "x": "https://x.com/izna_offcl",
+      "tiktok": "https://www.tiktok.com/@izna_offcl",
+      "namu": "https://namu.wiki/w/izna"
+    }
+  },
+  "클로즈유어아이즈": {
+    "en": "CLOSE YOUR EYES",
+    "debut": "2025.04.02",
+    "co": "UNCORE",
+    "projectRing": true,
+    "color": [
+      150,
+      100,
+      160
+    ],
+    "gender": "m",
+    "fandom": {
+      "ko": "클로저",
+      "en": "CLOSER"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UCPo532dDHpbKVhJyJseLVbw",
+      "instagram": "https://www.instagram.com/close.your.eyes.official",
+      "x": "https://x.com/closeyoureyes_7",
+      "tiktok": "https://www.tiktok.com/@closeyoureyes_official",
+      "weverse": "https://weverse.io/closeyoureyes",
+      "namu": "https://namu.wiki/w/CLOSE%20YOUR%20EYES"
+    }
+  },
+  "엑소": {
+    "en": "EXO",
+    "debut": "2012.04.08",
+    "co": "SM엔터테인먼트",
+    "color": [190, 60, 65],
+    "gender": "m",
+    "fandom": {
+      "ko": "엑소엘",
+      "en": "EXO-L"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UCzCedBCSSltI1TFd3bKyN6g",
+      "instagram": "https://www.instagram.com/weareone.exo",
+      "x": "https://x.com/weareoneEXO",
+      "tiktok": "https://www.tiktok.com/@weareone.exo_official",
+      "weverse": "https://weverse.io/exo/feed",
+      "namu": "https://namu.wiki/w/EXO"
+    }
+  },
+  "슈퍼주니어": {
+    "en": "SUPER JUNIOR",
+    "debut": "2005.11.06",
+    "co": "SM엔터테인먼트",
+    "color": [70, 110, 190],
+    "gender": "m",
+    "fandom": {
+      "ko": "엘프",
+      "en": "E.L.F."
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@SUPERJUNIOR",
+      "instagram": "https://www.instagram.com/superjunior",
+      "x": "https://x.com/SJofficial",
+      "tiktok": "https://www.tiktok.com/@superjunior_smtown",
+      "weverse": "https://weverse.io/superjunior/feed",
+      "namu": "https://namu.wiki/w/SUPER%20JUNIOR"
+    }
+  },
+  "아스트로": {
+    "en": "ASTRO",
+    "debut": "2016.02.23",
+    "co": "판타지오",
+    "color": [150, 90, 160],
+    "gender": "m",
+    "fandom": {
+      "ko": "아로하",
+      "en": "AROHA"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@offclASTRO",
+      "instagram": "https://www.instagram.com/officialastro",
+      "x": "https://x.com/offclASTRO",
+      "tiktok": "https://www.tiktok.com/@astro_official",
+      "namu": "https://namu.wiki/w/ASTRO"
+    }
+  },
+  "몬스타엑스": {
+    "en": "MONSTA X",
+    "debut": "2015.05.14",
+    "co": "스타쉽엔터테인먼트",
+    "color": [40, 139, 160],
+    "gender": "m",
+    "fandom": {
+      "ko": "몬베베",
+      "en": "Monbebe"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@MONSTAX",
+      "instagram": "https://www.instagram.com/official_monsta_x",
+      "x": "https://x.com/OfficialMonstaX",
+      "tiktok": "https://www.tiktok.com/@monsta_x_514",
+      "namu": "https://namu.wiki/w/몬스타엑스"
+    }
+  },
+  "에스에프나인": {
+    "en": "SF9",
+    "debut": "2016.10.05",
+    "co": "FNC엔터테인먼트",
+    "color": [190, 190, 220],
+    "gender": "m",
+    "fandom": {
+      "ko": "판타지",
+      "en": "FANTASY"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@SF9official",
+      "instagram": "https://www.instagram.com/sf9official",
+      "x": "https://x.com/SF9official",
+      "tiktok": "https://www.tiktok.com/@sf9official",
+      "namu": "https://namu.wiki/w/SF9"
+    }
+  },
+  "킥플립": {
+    "en": "KickFlip",
+    "debut": "2025.01.20",
+    "co": "JYP엔터테인먼트",
+    "color": [230, 150, 60],
+    "gender": "m",
+    "fandom": {
+      "ko": "위플립",
+      "en": "WeFlip"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UCmq9jjpHA69PwAwlA0DwOsg",
+      "instagram": "https://www.instagram.com/kickflip_jype",
+      "x": "https://x.com/kickflip_jype",
+      "tiktok": "https://www.tiktok.com/@kickflip_jype",
+      "namu": "https://namu.wiki/w/KickFlip"
+    }
+  },
+  "이펙스": {
+    "en": "EPEX",
+    "debut": "2021.06.08",
+    "co": "C9엔터테인먼트",
+    "color": [80, 190, 200],
+    "gender": "m",
+    "fandom": {
+      "ko": "제니스",
+      "en": "ZENITH"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@EPEXofficial",
+      "instagram": "https://www.instagram.com/epex.official",
+      "x": "https://x.com/the_epex",
+      "tiktok": "https://www.tiktok.com/@epex.official",
+      "namu": "https://namu.wiki/w/EPEX"
+    }
+  },
+  "원어스": {
+    "en": "ONEUS",
+    "debut": "2019.01.09",
+    "co": "B.WAVE 엔터테인먼트",
+    "color": [190, 175, 140],
+    "gender": "m",
+    "fandom": {
+      "ko": "투문",
+      "en": "TOMOON"
+    },
+    "links": {
+      "youtube": "https://youtube.com/@ONEUS",
+      "instagram": "https://www.instagram.com/official_oneus/",
+      "x": "https://x.com/official_ONEUS",
+      "tiktok": "https://www.tiktok.com/@bwave_oneus",
+      "namu": "https://namu.wiki/w/원어스"
+    }
+  },
+  "오마이걸": {
+    "en": "OH MY GIRL",
+    "debut": "2015.04.21",
+    "co": "WM엔터테인먼트",
+    "color": [235, 150, 180],
+    "gender": "f",
+    "fandom": {
+      "ko": "미라클",
+      "en": "Miracle"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@OHMYGIRL",
+      "instagram": "https://www.instagram.com/WM_OHMYGIRL",
+      "x": "https://x.com/WM_OHMYGIRL",
+      "tiktok": "https://www.tiktok.com/@wm_ohmygirl",
+      "namu": "https://namu.wiki/w/오마이걸"
+    }
+  },
+  "미래소년": {
+    "en": "MIRAE",
+    "debut": "2021.03.17",
+    "co": "DSP미디어",
+    "survivalShow": true,
+    "color": [220, 170, 90],
+    "gender": "m",
+    "fandom": {
+      "ko": "나우",
+      "en": "NOW"
+    },
+    "links": {
+      "namu": "https://namu.wiki/w/미래소년"
+    }
+  },
+  "피원하모니": {
+    "en": "P1Harmony",
+    "debut": "2020.10.28",
+    "co": "FNC엔터테인먼트",
+    "color": [90, 120, 220],
+    "gender": "m",
+    "fandom": {
+      "ko": "피스",
+      "en": "P1ece"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@P1Harmonyofficial",
+      "instagram": "https://www.instagram.com/p1h_official",
+      "x": "https://x.com/P1H_official",
+      "tiktok": "https://www.tiktok.com/@p1harmony",
+      "namu": "https://namu.wiki/w/P1Harmony"
+    }
+  },
+  "베리베리": {
+    "en": "VERIVERY",
+    "debut": "2019.01.09",
+    "co": "젤리피쉬엔터테인먼트",
+    "color": [150, 140, 190],
+    "gender": "m",
+    "fandom": {
+      "ko": "베러",
+      "en": "VERRER"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@VERIVERY",
+      "instagram": "https://www.instagram.com/the_verivery",
+      "x": "https://x.com/the_verivery",
+      "tiktok": "https://www.tiktok.com/@the_verivery",
+      "namu": "https://namu.wiki/w/VERIVERY"
+    }
+  },
+  "위아이": {
+    "en": "WEi",
+    "debut": "2020.10.05",
+    "co": "위엔터테인먼트",
+    "color": [118, 203, 240],
+    "gender": "m",
+    "fandom": {
+      "ko": "루아이",
+      "en": "RUi"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UCJvJ30IUuwikg704o0Y9pxQ",
+      "instagram": "https://www.instagram.com/wei__official",
+      "x": "https://x.com/WEi__Official",
+      "tiktok": "https://www.tiktok.com/@wei__official",
+      "namu": "https://namu.wiki/w/위아이"
+    }
+  },
+  "공원소녀": {
+    "en": "GWSN",
+    "debut": "2018.09.05",
+    "co": "아센디오",
+    "survivalShow": true,
+    "color": [110, 160, 110],
+    "gender": "f",
+    "fandom": {
+      "ko": "그루",
+      "en": "Groo"
+    },
+    "links": {
+      "namu": "https://namu.wiki/w/공원소녀"
+    }
+  },
+  "위키미키": {
+    "en": "Weki Meki",
+    "debut": "2017.08.08",
+    "co": "판타지오",
+    "survivalShow": true,
+    "color": [228, 25, 19],
+    "gender": "f",
+    "fandom": {
+      "ko": "키링",
+      "en": "Ki-Ling"
+    },
+    "links": {
+      "namu": "https://namu.wiki/w/위키미키"
+    }
+  },
+  "인피니트": {
+    "en": "INFINITE",
+    "debut": "2010.06.09",
+    "co": "인피니트컴퍼니",
+    "color": [200, 170, 100],
+    "gender": "m",
+    "fandom": {
+      "ko": "인스피릿",
+      "en": "Inspirit"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@IFNT.Official",
+      "instagram": "https://www.instagram.com/infinitecompany_official",
+      "x": "https://x.com/IFNT_Official_",
+      "tiktok": "https://www.tiktok.com/@infinitecompany_official",
+      "namu": "https://namu.wiki/w/인피니트(아이돌)"
+    }
+  },
+  "씨아이엑스": {
+    "en": "CIX",
+    "debut": "2019.07.23",
+    "co": "C9엔터테인먼트",
+    "survivalShow": true,
+    "color": [70, 130, 170],
+    "gender": "m",
+    "fandom": {
+      "ko": "픽스",
+      "en": "FIX"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UCuaslC77K-NmCy8Xwk7x0hA",
+      "instagram": "https://www.instagram.com/cix.official",
+      "x": "https://x.com/CIX_official",
+      "tiktok": "https://www.tiktok.com/@cix_official",
+      "namu": "https://namu.wiki/w/CIX"
+    }
+  },
+  "빌리": {
+    "en": "Billlie",
+    "debut": "2021.11.10",
+    "co": "미스틱스토리",
+    "color": [90, 110, 200],
+    "gender": "f",
+    "fandom": {
+      "ko": "빌리브",
+      "en": "Belllie've"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@Billlie",
+      "instagram": "https://www.instagram.com/billlie.official",
+      "x": "https://x.com/Billlieofficial",
+      "tiktok": "https://www.tiktok.com/@billlie.official",
+      "namu": "https://namu.wiki/w/Billlie"
+    }
+  },
+  "에이비식스": {
+    "en": "AB6IX",
+    "debut": "2019.05.22",
+    "co": "브랜뉴뮤직",
+    "color": [60, 90, 160],
+    "gender": "m",
+    "fandom": {
+      "ko": "에비뉴",
+      "en": "ABNEW"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UChjv1bId57wL93t6BDAqS3w",
+      "instagram": "https://instagram.com/ab6ix_official/",
+      "x": "https://x.com/AB6IX",
+      "namu": "https://namu.wiki/w/AB6IX"
+    }
+  },
+  "브브걸(브레이브걸스)": {
+    "en": "BBGIRLS (Brave Girls)",
+    "debut": "2011.04.08",
+    "co": "브브걸컴퍼니",
+    "color": [220, 70, 90],
+    "gender": "f",
+    "fandom": {
+      "ko": "쁘이",
+      "en": "BBee"
+    },
+    "links": {
+      "instagram": "https://www.instagram.com/bravegirls.official/",
+      "x": "https://x.com/BraveGirls",
+      "youtube": "https://www.youtube.com/channel/UCx_kYu6Wp1yxZP_KtrW52EQ",
+      "namu": "https://namu.wiki/w/브브걸"
+    }
+  },
+  "하이라이트": {
+    "en": "Highlight",
+    "debut": "2017.03.20",
+    "co": "어라운드어스엔터테인먼트",
+    "color": [70, 70, 75],
+    "gender": "m",
+    "fandom": {
+      "ko": "라이트",
+      "en": "Light"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@OFFICIALHIGHLIGHT",
+      "instagram": "https://www.instagram.com/highlight_auent",
+      "x": "https://x.com/Highlight_AUent",
+      "namu": "https://namu.wiki/w/하이라이트(아이돌)"
+    }
+  },
+  "카라": {
+    "en": "KARA",
+    "debut": "2007.03.29",
+    "co": "DSP미디어",
+    "color": [235, 185, 175],
+    "gender": "f",
+    "fandom": {
+      "ko": "카밀리아",
+      "en": "Camellia"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@KARAOfficial329",
+      "x": "https://x.com/KARAOFFICIAL329",
+      "tiktok": "https://www.tiktok.com/@karaofficial329",
+      "namu": "https://namu.wiki/w/카라"
+    }
+  },
+  "원더걸스": {
+    "en": "Wonder Girls",
+    "debut": "2007.02.10",
+    "co": "JYP엔터테인먼트",
+    "survivalShow": true,
+    "color": [130, 45, 55],
+    "gender": "f",
+    "fandom": {
+      "ko": "원더풀",
+      "en": "WonderFul"
+    },
+    "links": {
+      "namu": "https://namu.wiki/w/원더걸스"
+    }
+  },
+  "포미닛": {
+    "en": "4minute",
+    "debut": "2009.06.18",
+    "co": "큐브엔터테인먼트",
+    "survivalShow": true,
+    "color": [170, 140, 200],
+    "gender": "f",
+    "fandom": {
+      "ko": "포니아",
+      "en": "4NIA"
+    },
+    "links": {
+      "namu": "https://namu.wiki/w/4minute"
+    }
+  },
+  "투애니원": {
+    "en": "2NE1",
+    "debut": "2009.05.17",
+    "co": "YG엔터테인먼트",
+    "color": [230, 60, 140],
+    "gender": "f",
+    "fandom": {
+      "ko": "블랙잭",
+      "en": "BLACKJACK"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@2NE1",
+      "instagram": "https://www.instagram.com/2ne1xxi",
+      "namu": "https://namu.wiki/w/2NE1"
+    }
+  },
+  "티아라": {
+    "en": "T-ara",
+    "debut": "2009.07.29",
+    "co": "MBK엔터테인먼트",
+    "color": [235, 225, 205],
+    "gender": "f",
+    "fandom": {
+      "ko": "퀸즈",
+      "en": "QUEEN'S"
+    },
+    "links": {
+      "namu": "https://namu.wiki/w/티아라(아이돌)"
     }
   }
 }

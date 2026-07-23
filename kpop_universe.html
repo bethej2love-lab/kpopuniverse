@@ -2852,7 +2852,12 @@ async function buildUniverse(){
   // NCT 링과 같은 방식으로, 이 패턴을 반지름 방향으로 얇은 스트로크 여러 겹을 쌓아
   // 중심은 진하고 가장자리는 옅어지는 부드러운 그라데이션 밴드처럼 보이게 한다(개별 스트로크는 얇게 유지).
   // _nctRingGroups에 그대로 얹혀서 기존 회전/줌 페이드/즐겨찾기 dim 로직을 그대로 재사용한다.
-  bubbleMeshes.filter(b=>b.info.survivalShow).forEach(({mesh,radius:R,ko:_rko,info})=>{
+  // projectRing: "서바이벌/프로젝트 그룹 출신"이라는 출신을 나타내는 링 전용 필드(true=기본 세기,
+  // 숫자=세기 배율) — survivalShow(행성 dim, "활동 종료/과거형" 표시)와는 완전히 독립적인 축이다.
+  // 활동 중인 프로젝트 그룹(아이오아이 등)은 projectRing만, 진짜 해체됐지만 프로젝트 그룹은 아니었던
+  // 그룹(미래소년 등)은 survivalShow만, 아이즈원처럼 프로젝트 출신이면서 해체까지 됐으면 둘 다 켠다.
+  bubbleMeshes.filter(b=>b.info.projectRing).forEach(({mesh,radius:R,ko:_rko,info})=>{
+    const _ringIntensity=typeof info.projectRing==='number'?info.projectRing:1;
     const ringGroup=new THREE.Group();
     ringGroup.position.copy(mesh.position);
     ringGroup.quaternion.setFromEuler(new THREE.Euler(Math.PI*0.15,-Math.PI*0.12,0));
@@ -2883,7 +2888,7 @@ async function buildUniverse(){
     for(let i=0;i<_RING_STROKE_N;i++){
       const off=-halfSpan+gap*i;
       const d=Math.abs(off)/halfSpan;
-      const op=0.18*Math.pow(1-d,2.4); // NCT 링과 같은 감쇠 곡선, 다만 기준 세기는 NCT(0.8)보다 낮게
+      const op=0.18*Math.pow(1-d,2.4)*_ringIntensity; // NCT 링과 같은 감쇠 곡선, 다만 기준 세기는 NCT(0.8)보다 낮게
       const radius=centerR+off;
       const halfThick=gap/2;
       const ribbonPos=[];
