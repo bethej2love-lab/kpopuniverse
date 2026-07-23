@@ -1680,6 +1680,7 @@
     <input type="text" class="sp-yt-key" id="sp-yt-key" placeholder="API 키 (AIzaSy...)" autocomplete="off" spellcheck="false">
     <button class="sp-yt-sync" id="sp-yt-sync">전체 동기화 (공식 + 외부 채널)</button>
     <button class="sp-yt-sync" id="sp-yt-reclassify" style="margin-top:4px;opacity:.8;">Shorts 자동 감지 (기존 영상)</button>
+    <button class="sp-yt-sync" id="sp-yt-autotag" style="margin-top:4px;opacity:.8;">멤버 자동 태깅 (같은 그룹, 미태깅분)</button>
     <button class="sp-yt-sync" id="sp-hidden-vids-btn" style="margin-top:4px;opacity:.8;">노출 제외 영상 목록</button>
     <button class="sp-yt-sync" id="sp-ext-channels-btn" style="margin-top:4px;opacity:.8;">동기화 채널 목록</button>
     <div class="sp-yt-prog" id="sp-yt-prog"></div>
@@ -1874,12 +1875,15 @@
     </div>
     <div class="pp-section" style="margin-top:14px">
       <label class="pp-label" for="vid-tag-cat">영상 포맷 (관리자)</label>
-      <select id="vid-tag-cat" class="pp-input" style="cursor:pointer">
-        <option value="">기본</option>
-        <option value="mv">MV</option>
-        <option value="live">라이브</option>
-        <option value="short">Shorts</option>
-      </select>
+      <div style="display:flex;gap:8px;align-items:center">
+        <select id="vid-tag-cat" class="pp-input" style="cursor:pointer;flex:1">
+          <option value="">기본</option>
+          <option value="mv">MV</option>
+          <option value="live">라이브</option>
+          <option value="short">Shorts</option>
+        </select>
+        <button id="vid-tag-thumb-refresh" class="uc-btn" type="button" style="white-space:nowrap;padding:0 12px">썸네일 새로고침</button>
+      </div>
     </div>
     <div class="pp-section" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:10px 18px">
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11.5px;color:rgba(185,205,245,0.75)">
@@ -9453,6 +9457,84 @@ async function _ytReclassifyShorts(){
   }
 }
 
+// ── 멤버 자동 태깅(같은 그룹 미태깅분) — 2026-07-21에 스크래치패드 스크립트로 1회성으로 돌렸던
+// 매칭 로직(성+이름 실명표기/조사/해시태그/영문 토큰) 그대로 앱에 내장. with_members(콜라보,
+// 타 그룹 멤버 언급)는 "원곡"/"커버" 오탐 판별이 더 까다로워서 이 버튼 범위에서는 제외.
+const _ATM_KOREAN_SURNAMES=new Set(['김','이','박','최','정','강','조','윤','장','임','한','오','서','신','권','황','안','송','전','홍',
+  '유','고','문','양','손','배','백','허','남','심','노','하','곽','성','차','주','우','구','민','류','나',
+  '진','지','엄','채','원','천','방','공','현','함','변','염','여','추','도','소','석','선','설','마','길','연','위','표','명','기',
+  '반','왕','금','옥','육','인','맹','제','모','피','두','예','경','봉','사','부','편','가','복','간','승','팽','상',
+  '황보','제갈','남궁','선우']);
+function _atmEscRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function _atmTokenize(title){return(title||'').toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);}
+function _atmMatchesMember(m,title,tokens){
+  const name=m.ko;
+  if(!name)return false;
+  const multiChar=[...name].length>1;
+  if(multiChar){
+    if(new RegExp(`(?<![가-힣])${_atmEscRe(name)}(?![가-힣])`).test(title))return true; // 이름 단독
+    const particles=['이','가','은','는','을','를','과','와','도','만','의','에','께','님','씨','아','야','랑','한테','에게'].map(_atmEscRe).join('|');
+    if(new RegExp(`(?<![가-힣])${_atmEscRe(name)}(?:${particles})?(?![가-힣])`).test(title))return true; // 이름+조사
+    const surRe=new RegExp(`([가-힣])${_atmEscRe(name)}(?:${particles})?(?![가-힣])`,'g');
+    let sm;while((sm=surRe.exec(title))){if(_ATM_KOREAN_SURNAMES.has(sm[1]))return true;} // 성+이름(+조사)
+  }
+  if(new RegExp(`#${_atmEscRe(name)}(?![가-힣])`).test(title))return true; // #이름(단일음절도 해시태그는 허용)
+  if(m.en){
+    const parts=m.en.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+    if(parts.length===1&&tokens.includes(parts[0]))return true;
+    if(parts.length>1){
+      for(let i=0;i<=tokens.length-parts.length;i++){if(parts.every((p,j)=>tokens[i+j]===p))return true;}
+    }
+  }
+  return false;
+}
+async function _ytAutoTagMembers(){
+  if(!sb){_ytSetProg('Supabase 연결 없음');return;}
+  const btn=document.getElementById('sp-yt-autotag');
+  if(btn)btn.disabled=true;
+  try{
+    const groupKos=Object.keys(GROUPS);
+    let grandMatched=0,grandChecked=0;
+    for(let gi=0;gi<groupKos.length;gi++){
+      const gko=groupKos[gi];
+      const members=ARTISTS.filter(a=>a.group.ko===gko).map(a=>({ko:a.name.ko,en:a.name.en}));
+      if(!members.length)continue;
+      _ytSetProg(`[${gi+1}/${groupKos.length}] ${gko}: 미태깅 영상 조회 중…`);
+      const{data:rows,error}=await sb.from(_YT_TABLE)
+        .select('id,title,members,with_members')
+        .eq('group_ko',gko)
+        .or('members.eq.{},members.is.null')
+        .or('with_members.eq.{},with_members.is.null');
+      if(error){console.error(`[자동 태깅] ${gko} 조회 실패:`,error.message);continue;}
+      if(!rows?.length)continue;
+      const updates=[];
+      rows.forEach(v=>{
+        const title=v.title||'';
+        const tokens=_atmTokenize(title);
+        const hit=members.filter(m=>_atmMatchesMember(m,title,tokens)).map(m=>m.ko);
+        if(hit.length)updates.push({id:v.id,members:[...new Set(hit)]});
+      });
+      grandChecked+=rows.length;
+      if(updates.length){
+        for(let i=0;i<updates.length;i+=200){
+          const chunk=updates.slice(i,i+200);
+          for(const u of chunk){
+            const{error:ue}=await sb.from(_YT_TABLE).update({members:u.members}).eq('id',u.id);
+            if(ue)console.error(`[자동 태깅] ${gko} id=${u.id} 업데이트 실패:`,ue.message);
+          }
+        }
+        grandMatched+=updates.length;
+      }
+      _ytSetProg(`[${gi+1}/${groupKos.length}] ${gko}: ${updates.length}/${rows.length}개 매칭 (누적 ${grandMatched}개)`);
+    }
+    _ytSetProg(`완료! 미태깅 ${grandChecked}개 중 ${grandMatched}개 새로 태깅됨`);
+  }catch(e){
+    _ytSetProg('오류: '+e.message);
+  }finally{
+    if(btn)btn.disabled=false;
+  }
+}
+
 // ── 외부 채널 동기화 (M2·음방·직캠) ──
 function _ytApiKeyExt(){return(localStorage.getItem('kpu_ext_yt_key')||'').trim();}
 const _EXT_CHANNELS=[
@@ -10620,6 +10702,37 @@ document.getElementById('vid-tag-hide').addEventListener('click',async e=>{
     _ttChVidCtl.reloadIfShowing(ko);
   },300);
 });
+// 썸네일이 아예 안 뜨는 개별 영상 하나만 유튜브에서 다시 조회해서 고치는 용도 —
+// "쇼츠 자동 감지"처럼 전체 영상을 다 훑지 않고 지금 열려있는 이 영상 하나만 갱신한다.
+document.getElementById('vid-tag-thumb-refresh').addEventListener('click',async e=>{
+  e.stopPropagation();
+  if(!_vidTagTarget||!sb)return;
+  const key=_ytApiKey();
+  const statusEl=document.getElementById('vid-tag-status');
+  if(!key){statusEl.textContent='설정에서 유튜브 API 키를 먼저 입력해주세요';return;}
+  const{ko,id}=_vidTagTarget;
+  statusEl.textContent='썸네일 조회 중…';
+  try{
+    const r=await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&key=${key}`);
+    if(!r.ok)throw new Error('YouTube API 오류 '+r.status);
+    const d=await r.json();
+    if(d.error)throw new Error(d.error.message);
+    const item=d.items?.[0];
+    if(!item)throw new Error('유튜브에서 영상을 찾을 수 없음(삭제/비공개 가능성)');
+    const th=item.snippet?.thumbnails||{};
+    const hiTh=th.maxres||th.standard||th.high;
+    const isShortThumb=!!(hiTh&&hiTh.height>hiTh.width);
+    const thumb=isShortThumb?(hiTh.url||th.medium?.url||''):(th.medium?.url||th.high?.url||th.default?.url||'');
+    if(!thumb)throw new Error('유튜브 응답에 썸네일이 없음');
+    const{error}=await sb.from(_YT_TABLE).update({thumb}).eq('id',id);
+    if(error)throw new Error(error.message);
+    statusEl.textContent='썸네일 갱신됨';
+    _gcChVidCtl.reloadIfShowing(ko);
+    _ttChVidCtl.reloadIfShowing(ko);
+  }catch(err){
+    statusEl.textContent='오류: '+err.message;
+  }
+});
 
 
 // 카드 넓게 보기 토글
@@ -10658,6 +10771,7 @@ document.getElementById('vid-tag-hide').addEventListener('click',async e=>{
     if(btn)btn.disabled=false;
   });
   document.getElementById('sp-yt-reclassify')?.addEventListener('click',_ytReclassifyShorts);
+  document.getElementById('sp-yt-autotag')?.addEventListener('click',_ytAutoTagMembers);
   document.getElementById('sp-hidden-vids-btn')?.addEventListener('click',_openHiddenVids);
   document.getElementById('sp-ext-channels-btn')?.addEventListener('click',_openExtChannels);
 })();
