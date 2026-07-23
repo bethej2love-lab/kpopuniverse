@@ -1654,6 +1654,7 @@
       <button class="sp-type active" data-gender="all" data-i18n="all">전체</button>
       <button class="sp-type" data-gender="f" data-i18n="girl">걸그룹</button>
       <button class="sp-type" data-gender="m" data-i18n="boy">보이그룹</button>
+      <button class="sp-type" data-gender="coed" data-i18n="coed">혼성그룹</button>
     </div>
   </div>
   <div class="sp-sec">
@@ -2162,7 +2163,7 @@ let currentLang=localStorage.getItem('kpu_lang')||'ko';
 const T={
   ko:{sp_title:'설정',debutYr:'데뷔 연도',birthYr:'멤버 생년',grpType:'그룹 유형',
       genLabel:'세대',genNote:'세대 구분은 그룹의 국내 공식 데뷔 연도를 기준으로 한 K-pop Universe 자체 분류입니다. 업계 및 팬덤에서 공식적으로 합의된 단일 기준은 아닙니다.',
-      all:'전체',girl:'걸그룹',boy:'보이그룹',inactive:'비활동/탈퇴 멤버',reset:'↺ 초기화',
+      all:'전체',girl:'걸그룹',boy:'보이그룹',coed:'혼성그룹',inactive:'비활동/탈퇴 멤버',reset:'↺ 초기화',
       searchPH:'그룹 · 멤버 검색…',mobileTitle:'케이팝 아이돌 지형도',srGroup:'그룹',
       preparing:'준비 중',gcAgency:'소속',gcDebut:'데뷔',gcFandom:'팬덤',gcLeader:'리더',gcMember:'멤버',gcSNS:'공식',
       idxTitle:'인덱스',idxGroupTab:'그룹',idxMemberTab:'멤버',idxSearchPH:'그룹명 검색…',idxSearchPHMember:'멤버명 검색…',
@@ -2170,7 +2171,7 @@ const T={
       idxSortBirth:'생년',idxSortGroup:'그룹명',idxSortNation:'국적',ppTitle:'내 프로필',ppNick:'닉네임',ppNickPH:'닉네임을 입력하세요',ppNickErr:'닉네임을 입력해주세요',ppBio:'한 줄 소개',ppBioPH:'선택사항',ppColor:'내 별 색상',ppFavLabel:'좋아요 공개',ppFavSub:'다른 사람들이 볼 수 있어요',ppSyncLabel:'다른 기기와 동기화',ppSyncSub:'다른 기기에서도 좋아요가 유지돼요',ppGoogleBtn:'구글로 연결하기',ppXBtn:'X로 연결하기',ppLinked:'계정에 연결됨 ✓',ppSave:'저장'},
   en:{sp_title:'Settings',debutYr:'Debut Year',birthYr:'Birth Year',grpType:'Group Type',
       genLabel:'Generation',genNote:'Generation classification is K-pop Universe’s own grouping based on each group’s official domestic debut year. It is not an officially agreed-upon industry or fandom standard.',
-      all:'All',girl:'Girl Groups',boy:'Boy Groups',inactive:'Inactive / Left',reset:'↺ Reset',
+      all:'All',girl:'Girl Groups',boy:'Boy Groups',coed:'Coed Groups',inactive:'Inactive / Left',reset:'↺ Reset',
       searchPH:'Search groups · members…',mobileTitle:'K-pop Idol Map',srGroup:'Group',
       preparing:'Coming soon',gcAgency:'Agency',gcDebut:'Debut',gcFandom:'Fandom',gcLeader:'Leader',gcMember:'Members',gcSNS:'Official',
       idxTitle:'Index',idxGroupTab:'Groups',idxMemberTab:'Members',idxSearchPH:'Search group name…',idxSearchPHMember:'Search member name…',

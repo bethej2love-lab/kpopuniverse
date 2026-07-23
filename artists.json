@@ -8750,6 +8750,10 @@
       "ko": "비비지",
       "en": "VIVIZ"
     },
+    "groups": [
+      { "ko": "비비지", "en": "VIVIZ" },
+      { "ko": "여자친구", "en": "GFRIEND" }
+    ],
     "co": "BPM Entertainment",
     "active": true,
     "color": [
@@ -8782,6 +8786,10 @@
       "ko": "비비지",
       "en": "VIVIZ"
     },
+    "groups": [
+      { "ko": "비비지", "en": "VIVIZ" },
+      { "ko": "여자친구", "en": "GFRIEND" }
+    ],
     "co": "BPM Entertainment",
     "active": true,
     "color": [
@@ -8814,6 +8822,10 @@
       "ko": "비비지",
       "en": "VIVIZ"
     },
+    "groups": [
+      { "ko": "비비지", "en": "VIVIZ" },
+      { "ko": "여자친구", "en": "GFRIEND" }
+    ],
     "co": "BPM Entertainment",
     "active": true,
     "color": [
@@ -9570,6 +9582,10 @@
   {
     "name": { "ko": "유연정", "en": "Yeonjung" },
     "group": { "ko": "아이오아이", "en": "I.O.I" },
+    "groups": [
+      { "ko": "아이오아이", "en": "I.O.I" },
+      { "ko": "우주소녀", "en": "WJSN" }
+    ],
     "co": "스타쉽엔터테인먼트",
     "active": true,
     "color": [255, 179, 138],
@@ -9734,6 +9750,10 @@
   {
     "name": { "ko": "최유진", "en": "Yujin" },
     "group": { "ko": "케플러", "en": "Kep1er" },
+    "groups": [
+      { "ko": "케플러", "en": "Kep1er" },
+      { "ko": "씨엘씨", "en": "CLC" }
+    ],
     "co": "LS",
     "active": true,
     "color": [222, 210, 240],
@@ -10807,15 +10827,6 @@
     "nat": { "ko": "한국", "en": "KR" }
   },
   {
-    "name": { "ko": "손동표", "en": "Son Dongpyo" },
-    "group": { "ko": "미래소년", "en": "MIRAE" },
-    "co": "DSP미디어",
-    "active": false,
-    "color": [220, 170, 90],
-    "bday": "2002.09.09",
-    "nat": { "ko": "한국", "en": "KR" }
-  },
-  {
     "name": { "ko": "박시영", "en": "Park Siyoung" },
     "group": { "ko": "미래소년", "en": "MIRAE" },
     "co": "무소속",
@@ -10975,15 +10986,6 @@
     "active": true,
     "color": [118, 203, 240],
     "bday": "1999.01.11",
-    "nat": { "ko": "한국", "en": "KR" }
-  },
-  {
-    "name": { "ko": "김요한", "en": "Kim Yohan" },
-    "group": { "ko": "위아이", "en": "WEi" },
-    "co": "위엔터테인먼트",
-    "active": true,
-    "color": [118, 203, 240],
-    "bday": "1999.09.22",
     "nat": { "ko": "한국", "en": "KR" }
   },
   {
@@ -11627,6 +11629,1312 @@
     "active": false,
     "color": [235, 225, 205],
     "bday": "1987.10.05",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "솔지", "en": "Solji" },
+    "group": { "ko": "이엑스아이디", "en": "EXID" },
+    "co": "바나나컬쳐엔터테인먼트",
+    "active": true,
+    "color": [50, 45, 70],
+    "bday": "1989.01.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "ELLY", "en": "ELLY" },
+    "group": { "ko": "이엑스아이디", "en": "EXID" },
+    "co": "바나나컬쳐엔터테인먼트",
+    "active": true,
+    "color": [50, 45, 70],
+    "bday": "1991.12.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "하니", "en": "Hani" },
+    "group": { "ko": "이엑스아이디", "en": "EXID" },
+    "co": "바나나컬쳐엔터테인먼트",
+    "active": true,
+    "color": [50, 45, 70],
+    "bday": "1992.05.01",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "혜린", "en": "Hyerin" },
+    "group": { "ko": "이엑스아이디", "en": "EXID" },
+    "co": "바나나컬쳐엔터테인먼트",
+    "active": true,
+    "color": [50, 45, 70],
+    "bday": "1993.08.23",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "정화", "en": "Jeonghwa" },
+    "group": { "ko": "이엑스아이디", "en": "EXID" },
+    "co": "바나나컬쳐엔터테인먼트",
+    "active": true,
+    "color": [50, 45, 70],
+    "bday": "1995.05.08",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김재경", "en": "Kim Jaekyung" },
+    "group": { "ko": "레인보우", "en": "RAINBOW" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 150, 190],
+    "bday": "1988.12.24",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "고우리", "en": "Go Woori" },
+    "group": { "ko": "레인보우", "en": "RAINBOW" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 150, 190],
+    "bday": "1988.02.22",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "조현영", "en": "Jo Hyunyoung" },
+    "group": { "ko": "레인보우", "en": "RAINBOW" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 150, 190],
+    "bday": "1991.08.11",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김지숙", "en": "Kim Jisook" },
+    "group": { "ko": "레인보우", "en": "RAINBOW" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 150, 190],
+    "bday": "1990.07.18",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "노을", "en": "Noeul" },
+    "group": { "ko": "레인보우", "en": "RAINBOW" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 150, 190],
+    "bday": "1989.05.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "오승아", "en": "Oh Seungah" },
+    "group": { "ko": "레인보우", "en": "RAINBOW" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 150, 190],
+    "bday": "1988.09.13",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "정윤혜", "en": "Jung Yoonhye" },
+    "group": { "ko": "레인보우", "en": "RAINBOW" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 150, 190],
+    "bday": "1990.04.14",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "희진", "en": "Heejin" },
+    "group": { "ko": "아르테미스", "en": "ARTMS" },
+    "groups": [
+      { "ko": "아르테미스", "en": "ARTMS" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "모드하우스",
+    "active": true,
+    "color": [110, 110, 210],
+    "bday": "2000.10.19",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "하슬", "en": "Haseul" },
+    "group": { "ko": "아르테미스", "en": "ARTMS" },
+    "groups": [
+      { "ko": "아르테미스", "en": "ARTMS" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "모드하우스",
+    "active": true,
+    "color": [110, 110, 210],
+    "bday": "1997.08.18",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김립", "en": "Kim Lip" },
+    "group": { "ko": "아르테미스", "en": "ARTMS" },
+    "groups": [
+      { "ko": "아르테미스", "en": "ARTMS" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "모드하우스",
+    "active": true,
+    "color": [110, 110, 210],
+    "bday": "1999.02.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "진솔", "en": "JinSoul" },
+    "group": { "ko": "아르테미스", "en": "ARTMS" },
+    "groups": [
+      { "ko": "아르테미스", "en": "ARTMS" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "모드하우스",
+    "active": true,
+    "color": [110, 110, 210],
+    "bday": "1997.06.13",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "최리", "en": "Choerry" },
+    "group": { "ko": "아르테미스", "en": "ARTMS" },
+    "groups": [
+      { "ko": "아르테미스", "en": "ARTMS" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "모드하우스",
+    "active": true,
+    "color": [110, 110, 210],
+    "bday": "2001.06.04",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "현진", "en": "Hyunjin" },
+    "group": { "ko": "루셈블", "en": "Loossemble" },
+    "groups": [
+      { "ko": "루셈블", "en": "Loossemble" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "무소속",
+    "active": false,
+    "color": [210, 190, 160],
+    "bday": "2000.11.15",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "여진", "en": "Yeojin" },
+    "group": { "ko": "루셈블", "en": "Loossemble" },
+    "groups": [
+      { "ko": "루셈블", "en": "Loossemble" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "무소속",
+    "active": false,
+    "color": [210, 190, 160],
+    "bday": "2002.11.11",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "비비", "en": "ViVi" },
+    "group": { "ko": "루셈블", "en": "Loossemble" },
+    "groups": [
+      { "ko": "루셈블", "en": "Loossemble" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "무소속",
+    "active": false,
+    "color": [210, 190, 160],
+    "bday": "1993.12.09",
+    "nat": { "ko": "홍콩", "en": "HK" }
+  },
+  {
+    "name": { "ko": "고원", "en": "Go Won" },
+    "group": { "ko": "루셈블", "en": "Loossemble" },
+    "groups": [
+      { "ko": "루셈블", "en": "Loossemble" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "무소속",
+    "active": false,
+    "color": [210, 190, 160],
+    "bday": "2000.11.19",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "올리비아 혜", "en": "Olivia Hye" },
+    "group": { "ko": "루셈블", "en": "Loossemble" },
+    "groups": [
+      { "ko": "루셈블", "en": "Loossemble" },
+      { "ko": "이달의소녀", "en": "LOONA" }
+    ],
+    "co": "무소속",
+    "active": false,
+    "color": [210, 190, 160],
+    "bday": "2001.11.13",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "이브", "en": "Yves" },
+    "group": { "ko": "이달의소녀", "en": "LOONA" },
+    "co": "무소속",
+    "active": false,
+    "color": [180, 180, 220],
+    "bday": "1997.05.24",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "츄", "en": "Chuu" },
+    "group": { "ko": "이달의소녀", "en": "LOONA" },
+    "co": "무소속",
+    "active": false,
+    "color": [180, 180, 220],
+    "bday": "1999.10.20",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "명형서", "en": "Myeong Hyeongseo" },
+    "group": { "ko": "클라씨", "en": "CLASSy" },
+    "co": "K타이거즈엔터테인먼트",
+    "active": true,
+    "color": [140, 190, 200],
+    "bday": "2001.06.25",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "윤채원", "en": "Yoon Chaewon" },
+    "group": { "ko": "클라씨", "en": "CLASSy" },
+    "co": "K타이거즈엔터테인먼트",
+    "active": true,
+    "color": [140, 190, 200],
+    "bday": "2003.06.04",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "홍혜주", "en": "Hong Hyeju" },
+    "group": { "ko": "클라씨", "en": "CLASSy" },
+    "co": "K타이거즈엔터테인먼트",
+    "active": true,
+    "color": [140, 190, 200],
+    "bday": "2003.12.09",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김리원", "en": "Kim Riwon" },
+    "group": { "ko": "클라씨", "en": "CLASSy" },
+    "co": "K타이거즈엔터테인먼트",
+    "active": true,
+    "color": [140, 190, 200],
+    "bday": "2007.01.11",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "원지민", "en": "Won Jimin" },
+    "group": { "ko": "클라씨", "en": "CLASSy" },
+    "co": "K타이거즈엔터테인먼트",
+    "active": true,
+    "color": [140, 190, 200],
+    "bday": "2007.11.25",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "박보은", "en": "Park Boeun" },
+    "group": { "ko": "클라씨", "en": "CLASSy" },
+    "co": "K타이거즈엔터테인먼트",
+    "active": true,
+    "color": [140, 190, 200],
+    "bday": "2008.02.11",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김선유", "en": "Kim Sunyoo" },
+    "group": { "ko": "클라씨", "en": "CLASSy" },
+    "co": "K타이거즈엔터테인먼트",
+    "active": true,
+    "color": [140, 190, 200],
+    "bday": "2008.03.20",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "오승희", "en": "Oh Seunghee" },
+    "group": { "ko": "씨엘씨", "en": "CLC" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 190, 60],
+    "bday": "1995.10.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "장승연", "en": "Jang Seungyeon" },
+    "group": { "ko": "씨엘씨", "en": "CLC" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 190, 60],
+    "bday": "1996.11.06",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "SORN", "en": "SORN" },
+    "group": { "ko": "씨엘씨", "en": "CLC" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 190, 60],
+    "bday": "1996.11.18",
+    "nat": { "ko": "태국", "en": "TH" }
+  },
+  {
+    "name": { "ko": "장예은", "en": "Jang Yeeun" },
+    "group": { "ko": "씨엘씨", "en": "CLC" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 190, 60],
+    "bday": "1998.08.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "엘키", "en": "Elkie" },
+    "group": { "ko": "씨엘씨", "en": "CLC" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 190, 60],
+    "bday": "1998.11.02",
+    "nat": { "ko": "홍콩", "en": "HK" }
+  },
+  {
+    "name": { "ko": "권은빈", "en": "Kwon Eunbin" },
+    "group": { "ko": "씨엘씨", "en": "CLC" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 190, 60],
+    "bday": "2000.01.06",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "마코", "en": "Mako" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2001.04.04",
+    "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "리오", "en": "Riho" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2002.02.04",
+    "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "마야", "en": "Maya" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2002.04.08",
+    "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "리쿠", "en": "Riku" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2002.10.26",
+    "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "아야카", "en": "Ayaka" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2003.06.20",
+    "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "마유카", "en": "Mayuka" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2003.11.13",
+    "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "리마", "en": "Rima" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2004.03.26",
+    "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "미이히", "en": "Miihi" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2004.08.12",
+    "nat": { "ko": "일본", "en": "JP" }
+  },
+  {
+    "name": { "ko": "니나", "en": "Nina" },
+    "group": { "ko": "니쥬", "en": "NiziU" },
+    "co": "JYP엔터테인먼트",
+    "active": true,
+    "color": [255, 140, 160],
+    "bday": "2005.02.27",
+    "nat": { "ko": "미국", "en": "US" }
+  },
+  {
+    "name": { "ko": "J.seph", "en": "J.seph" },
+    "group": { "ko": "카드", "en": "KARD" },
+    "co": "무소속",
+    "active": false,
+    "color": [180, 60, 60],
+    "bday": "1992.06.21",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "BM", "en": "BM" },
+    "group": { "ko": "카드", "en": "KARD" },
+    "co": "무소속",
+    "active": false,
+    "color": [180, 60, 60],
+    "bday": "1992.10.20",
+    "nat": { "ko": "미국", "en": "US" }
+  },
+  {
+    "name": { "ko": "전소민", "en": "Jeon Somin" },
+    "group": { "ko": "카드", "en": "KARD" },
+    "co": "무소속",
+    "active": false,
+    "color": [180, 60, 60],
+    "bday": "1996.08.22",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "전지우", "en": "Jeon Jiwoo" },
+    "group": { "ko": "카드", "en": "KARD" },
+    "co": "무소속",
+    "active": false,
+    "color": [180, 60, 60],
+    "bday": "1996.10.04",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "애니", "en": "Annie" },
+    "group": { "ko": "올데이프로젝트", "en": "ALLDAY PROJECT" },
+    "co": "THEBLACKLABEL",
+    "active": true,
+    "color": [235, 90, 50],
+    "bday": "2002.01.23",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "타잔", "en": "Tarzan" },
+    "group": { "ko": "올데이프로젝트", "en": "ALLDAY PROJECT" },
+    "co": "THEBLACKLABEL",
+    "active": true,
+    "color": [235, 90, 50],
+    "bday": "2002.09.27",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "베일리", "en": "Bailey" },
+    "group": { "ko": "올데이프로젝트", "en": "ALLDAY PROJECT" },
+    "co": "THEBLACKLABEL",
+    "active": true,
+    "color": [235, 90, 50],
+    "bday": "2004.02.24",
+    "nat": { "ko": "미국", "en": "US" }
+  },
+  {
+    "name": { "ko": "우찬", "en": "Woochan" },
+    "group": { "ko": "올데이프로젝트", "en": "ALLDAY PROJECT" },
+    "co": "THEBLACKLABEL",
+    "active": true,
+    "color": [235, 90, 50],
+    "bday": "2005.01.20",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "영서", "en": "Youngseo" },
+    "group": { "ko": "올데이프로젝트", "en": "ALLDAY PROJECT" },
+    "co": "THEBLACKLABEL",
+    "active": true,
+    "color": [235, 90, 50],
+    "bday": "2005.11.13",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "유노윤호", "en": "U-Know Yunho" },
+    "group": { "ko": "동방신기", "en": "TVXQ" },
+    "co": "SM엔터테인먼트",
+    "active": true,
+    "color": [228, 0, 43],
+    "bday": "1986.02.06",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "최강창민", "en": "Max Changmin" },
+    "group": { "ko": "동방신기", "en": "TVXQ" },
+    "co": "SM엔터테인먼트",
+    "active": true,
+    "color": [228, 0, 43],
+    "bday": "1988.02.18",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김재중", "en": "Kim Jaejoong" },
+    "group": { "ko": "JX(JYJ)", "en": "JX (JYJ)" },
+    "groups": [
+      { "ko": "JX(JYJ)", "en": "JX (JYJ)" },
+      { "ko": "동방신기", "en": "TVXQ" }
+    ],
+    "co": "무소속",
+    "active": true,
+    "color": [55, 55, 90],
+    "bday": "1986.01.26",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "박유천", "en": "Park Yoochun" },
+    "group": { "ko": "JX(JYJ)", "en": "JX (JYJ)" },
+    "groups": [
+      { "ko": "JX(JYJ)", "en": "JX (JYJ)" },
+      { "ko": "동방신기", "en": "TVXQ" }
+    ],
+    "co": "무소속",
+    "active": false,
+    "color": [55, 55, 90],
+    "bday": "1986.06.04",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김준수", "en": "Kim Junsu" },
+    "group": { "ko": "JX(JYJ)", "en": "JX (JYJ)" },
+    "groups": [
+      { "ko": "JX(JYJ)", "en": "JX (JYJ)" },
+      { "ko": "동방신기", "en": "TVXQ" }
+    ],
+    "co": "무소속",
+    "active": true,
+    "color": [55, 55, 90],
+    "bday": "1986.12.15",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "JAY B", "en": "JAY B" },
+    "group": { "ko": "갓세븐", "en": "GOT7" },
+    "co": "무소속",
+    "active": true,
+    "color": [50, 150, 110],
+    "bday": "1994.01.06",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "마크", "en": "Mark" },
+    "group": { "ko": "갓세븐", "en": "GOT7" },
+    "co": "무소속",
+    "active": true,
+    "color": [50, 150, 110],
+    "bday": "1993.09.04",
+    "nat": { "ko": "미국", "en": "US" }
+  },
+  {
+    "name": { "ko": "잭슨", "en": "Jackson" },
+    "group": { "ko": "갓세븐", "en": "GOT7" },
+    "co": "무소속",
+    "active": true,
+    "color": [50, 150, 110],
+    "bday": "1994.03.28",
+    "nat": { "ko": "홍콩", "en": "HK" }
+  },
+  {
+    "name": { "ko": "진영", "en": "Jinyoung" },
+    "group": { "ko": "갓세븐", "en": "GOT7" },
+    "co": "무소속",
+    "active": true,
+    "color": [50, 150, 110],
+    "bday": "1994.09.22",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "영재", "en": "Youngjae" },
+    "group": { "ko": "갓세븐", "en": "GOT7" },
+    "co": "무소속",
+    "active": true,
+    "color": [50, 150, 110],
+    "bday": "1996.09.17",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "뱀뱀", "en": "BamBam" },
+    "group": { "ko": "갓세븐", "en": "GOT7" },
+    "co": "무소속",
+    "active": true,
+    "color": [50, 150, 110],
+    "bday": "1997.05.02",
+    "nat": { "ko": "태국", "en": "TH" }
+  },
+  {
+    "name": { "ko": "유겸", "en": "Yugyeom" },
+    "group": { "ko": "갓세븐", "en": "GOT7" },
+    "co": "무소속",
+    "active": true,
+    "color": [50, 150, 110],
+    "bday": "1997.11.17",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "소원", "en": "Sowon" },
+    "group": { "ko": "여자친구", "en": "GFRIEND" },
+    "co": "무소속",
+    "active": false,
+    "color": [70, 140, 180],
+    "bday": "1995.12.07",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "예린", "en": "Yerin" },
+    "group": { "ko": "여자친구", "en": "GFRIEND" },
+    "co": "무소속",
+    "active": false,
+    "color": [70, 140, 180],
+    "bday": "1996.08.19",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "유주", "en": "Yuju" },
+    "group": { "ko": "여자친구", "en": "GFRIEND" },
+    "co": "무소속",
+    "active": false,
+    "color": [70, 140, 180],
+    "bday": "1997.10.04",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "한승우", "en": "Han Seungwoo" },
+    "group": { "ko": "엑스원", "en": "X1" },
+    "co": "플랜에이엔터테인먼트",
+    "active": false,
+    "color": [70, 100, 180],
+    "bday": "1994.12.24",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "조승연", "en": "Cho Seungyoun" },
+    "group": { "ko": "엑스원", "en": "X1" },
+    "co": "위에화엔터테인먼트",
+    "active": false,
+    "color": [70, 100, 180],
+    "bday": "1996.08.05",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김우석", "en": "Kim Wooseok" },
+    "group": { "ko": "엑스원", "en": "X1" },
+    "co": "티오피미디어",
+    "active": false,
+    "color": [70, 100, 180],
+    "bday": "1996.10.27",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김요한", "en": "Kim Yohan" },
+    "group": { "ko": "위아이", "en": "WEi" },
+    "groups": [
+      { "ko": "위아이", "en": "WEi" },
+      { "ko": "엑스원", "en": "X1" }
+    ],
+    "co": "위엔터테인먼트",
+    "active": true,
+    "color": [118, 203, 240],
+    "bday": "1999.09.22",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "이한결", "en": "Lee Hangyul" },
+    "group": { "ko": "엑스원", "en": "X1" },
+    "co": "MBK엔터테인먼트",
+    "active": false,
+    "color": [70, 100, 180],
+    "bday": "1999.12.07",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "차준호", "en": "Cha Junho" },
+    "group": { "ko": "드리핀", "en": "DRIPPIN" },
+    "groups": [
+      { "ko": "드리핀", "en": "DRIPPIN" },
+      { "ko": "엑스원", "en": "X1" }
+    ],
+    "co": "울림엔터테인먼트",
+    "active": true,
+    "color": [80, 80, 160],
+    "bday": "2002.07.09",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "손동표", "en": "Son Dongpyo" },
+    "group": { "ko": "미래소년", "en": "MIRAE" },
+    "groups": [
+      { "ko": "미래소년", "en": "MIRAE" },
+      { "ko": "엑스원", "en": "X1" }
+    ],
+    "co": "DSP미디어",
+    "active": false,
+    "color": [220, 170, 90],
+    "bday": "2002.09.09",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "강민희", "en": "Kang Minhee" },
+    "group": { "ko": "엑스원", "en": "X1" },
+    "co": "무소속",
+    "active": false,
+    "color": [70, 100, 180],
+    "bday": "2002.09.17",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "이은상", "en": "Lee Eunsang" },
+    "group": { "ko": "엑스원", "en": "X1" },
+    "co": "무소속",
+    "active": false,
+    "color": [70, 100, 180],
+    "bday": "2002.10.26",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "송형준", "en": "Song Hyeongjun" },
+    "group": { "ko": "엑스원", "en": "X1" },
+    "co": "스타쉽엔터테인먼트",
+    "active": false,
+    "color": [70, 100, 180],
+    "bday": "2002.11.30",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "남도현", "en": "Nam Dohyon" },
+    "group": { "ko": "엑스원", "en": "X1" },
+    "co": "무소속",
+    "active": false,
+    "color": [70, 100, 180],
+    "bday": "2004.11.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "이협", "en": "Lee Hyeop" },
+    "group": { "ko": "드리핀", "en": "DRIPPIN" },
+    "co": "울림엔터테인먼트",
+    "active": true,
+    "color": [80, 80, 160],
+    "bday": "1999.08.13",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "황윤성", "en": "Hwang Yunseong" },
+    "group": { "ko": "드리핀", "en": "DRIPPIN" },
+    "co": "울림엔터테인먼트",
+    "active": true,
+    "color": [80, 80, 160],
+    "bday": "2000.10.30",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "주창욱", "en": "Ju Changwook" },
+    "group": { "ko": "드리핀", "en": "DRIPPIN" },
+    "co": "울림엔터테인먼트",
+    "active": true,
+    "color": [80, 80, 160],
+    "bday": "2001.07.25",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김동윤", "en": "Kim Dongyun" },
+    "group": { "ko": "드리핀", "en": "DRIPPIN" },
+    "co": "울림엔터테인먼트",
+    "active": true,
+    "color": [80, 80, 160],
+    "bday": "2002.02.18",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김민서", "en": "Kim Minseo" },
+    "group": { "ko": "드리핀", "en": "DRIPPIN" },
+    "co": "울림엔터테인먼트",
+    "active": true,
+    "color": [80, 80, 160],
+    "bday": "2002.05.13",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "Kevin", "en": "Kevin" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1988.02.23",
+    "nat": { "ko": "호주", "en": "AU" }
+  },
+  {
+    "name": { "ko": "황광희", "en": "Hwang Kwanghee" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1988.08.25",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "임시완", "en": "Im Siwan" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1988.12.01",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "문준영", "en": "Moon Junyoung" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1989.02.09",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김태헌", "en": "Kim Taeheon" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1989.06.18",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "정희철", "en": "Jung Heechul" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1989.12.09",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "하민우", "en": "Ha Minwoo" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1990.09.06",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "박형식", "en": "Park Hyungsik" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1991.11.16",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김동준", "en": "Kim Dongjun" },
+    "group": { "ko": "제국의아이들", "en": "ZE:A" },
+    "co": "무소속",
+    "active": false,
+    "color": [220, 90, 80],
+    "bday": "1992.02.11",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "천지", "en": "Chunji" },
+    "group": { "ko": "틴탑", "en": "TEEN TOP" },
+    "co": "티오피미디어",
+    "active": true,
+    "color": [200, 190, 220],
+    "bday": "1993.10.05",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "니엘", "en": "Niel" },
+    "group": { "ko": "틴탑", "en": "TEEN TOP" },
+    "co": "티오피미디어",
+    "active": true,
+    "color": [200, 190, 220],
+    "bday": "1994.08.16",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "리키", "en": "Ricky" },
+    "group": { "ko": "틴탑", "en": "TEEN TOP" },
+    "co": "티오피미디어",
+    "active": true,
+    "color": [200, 190, 220],
+    "bday": "1995.02.27",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "창조", "en": "Changjo" },
+    "group": { "ko": "틴탑", "en": "TEEN TOP" },
+    "co": "티오피미디어",
+    "active": true,
+    "color": [200, 190, 220],
+    "bday": "1995.11.16",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "엘조", "en": "L.Joe" },
+    "group": { "ko": "틴탑", "en": "TEEN TOP" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 190, 220],
+    "bday": "1993.11.23",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "C.A.P", "en": "C.A.P" },
+    "group": { "ko": "틴탑", "en": "TEEN TOP" },
+    "co": "무소속",
+    "active": false,
+    "color": [200, 190, 220],
+    "bday": "1992.11.04",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "이홍기", "en": "Lee Honggi" },
+    "group": { "ko": "에프티아일랜드", "en": "FTISLAND" },
+    "co": "FNC엔터테인먼트",
+    "active": true,
+    "color": [230, 200, 60],
+    "bday": "1990.03.02",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "이재진", "en": "Lee Jaejin" },
+    "group": { "ko": "에프티아일랜드", "en": "FTISLAND" },
+    "co": "FNC엔터테인먼트",
+    "active": true,
+    "color": [230, 200, 60],
+    "bday": "1991.12.17",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "최민환", "en": "Choi Minhwan" },
+    "group": { "ko": "에프티아일랜드", "en": "FTISLAND" },
+    "co": "FNC엔터테인먼트",
+    "active": true,
+    "color": [230, 200, 60],
+    "bday": "1992.11.11",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "오원빈", "en": "Oh Wonbin" },
+    "group": { "ko": "에프티아일랜드", "en": "FTISLAND" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 200, 60],
+    "bday": "1990.03.26",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "최종훈", "en": "Choi Jonghun" },
+    "group": { "ko": "에프티아일랜드", "en": "FTISLAND" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 200, 60],
+    "bday": "1990.03.07",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "송승현", "en": "Song Seunghyun" },
+    "group": { "ko": "에프티아일랜드", "en": "FTISLAND" },
+    "co": "무소속",
+    "active": false,
+    "color": [230, 200, 60],
+    "bday": "1992.08.21",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김진우", "en": "Kim Jinwoo" },
+    "group": { "ko": "위너", "en": "WINNER" },
+    "co": "YG엔터테인먼트",
+    "active": true,
+    "color": [140, 150, 170],
+    "bday": "1991.09.26",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "이승훈", "en": "Lee Seunghoon" },
+    "group": { "ko": "위너", "en": "WINNER" },
+    "co": "YG엔터테인먼트",
+    "active": true,
+    "color": [140, 150, 170],
+    "bday": "1992.01.11",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "송민호", "en": "Song Mino" },
+    "group": { "ko": "위너", "en": "WINNER" },
+    "co": "YG엔터테인먼트",
+    "active": true,
+    "color": [140, 150, 170],
+    "bday": "1993.03.30",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "강승윤", "en": "Kang Seungyoon" },
+    "group": { "ko": "위너", "en": "WINNER" },
+    "co": "YG엔터테인먼트",
+    "active": true,
+    "color": [140, 150, 170],
+    "bday": "1994.01.21",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "남태현", "en": "Nam Taehyun" },
+    "group": { "ko": "위너", "en": "WINNER" },
+    "co": "무소속",
+    "active": false,
+    "color": [140, 150, 170],
+    "bday": "1994.05.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김진환", "en": "Kim Jinhwan" },
+    "group": { "ko": "아이콘", "en": "iKON" },
+    "co": "143엔터테인먼트",
+    "active": true,
+    "color": [160, 140, 120],
+    "bday": "1994.02.07",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "송윤형", "en": "Song Yunhyeong" },
+    "group": { "ko": "아이콘", "en": "iKON" },
+    "co": "143엔터테인먼트",
+    "active": true,
+    "color": [160, 140, 120],
+    "bday": "1995.02.08",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "BOBBY", "en": "BOBBY" },
+    "group": { "ko": "아이콘", "en": "iKON" },
+    "co": "143엔터테인먼트",
+    "active": true,
+    "color": [160, 140, 120],
+    "bday": "1995.12.21",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김동혁", "en": "Kim Donghyuk" },
+    "group": { "ko": "아이콘", "en": "iKON" },
+    "co": "143엔터테인먼트",
+    "active": true,
+    "color": [160, 140, 120],
+    "bday": "1997.01.03",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "구준회", "en": "Koo Junhoe" },
+    "group": { "ko": "아이콘", "en": "iKON" },
+    "co": "143엔터테인먼트",
+    "active": true,
+    "color": [160, 140, 120],
+    "bday": "1997.03.31",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "정찬우", "en": "Jung Chanwoo" },
+    "group": { "ko": "아이콘", "en": "iKON" },
+    "co": "143엔터테인먼트",
+    "active": true,
+    "color": [160, 140, 120],
+    "bday": "1998.01.26",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "B.I", "en": "B.I" },
+    "group": { "ko": "아이콘", "en": "iKON" },
+    "co": "무소속",
+    "active": false,
+    "color": [160, 140, 120],
+    "bday": "1996.10.22",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "설아", "en": "Seola" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [255, 163, 139],
+    "bday": "1994.12.26",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "보나", "en": "Bona" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [255, 163, 139],
+    "bday": "1995.08.19",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "엑시", "en": "Exy" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [255, 163, 139],
+    "bday": "1995.11.06",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "수빈", "en": "Soobin" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [255, 163, 139],
+    "bday": "1996.07.14",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "은서", "en": "Eunseo" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [255, 163, 139],
+    "bday": "1998.05.27",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "여름", "en": "Yeoreum" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [255, 163, 139],
+    "bday": "1999.01.10",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "다영", "en": "Dayoung" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [255, 163, 139],
+    "bday": "1999.05.14",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "루다", "en": "Luda" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "무소속",
+    "active": false,
+    "color": [255, 163, 139],
+    "bday": "1997.02.06",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "다원", "en": "Dawon" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "무소속",
+    "active": false,
+    "color": [255, 163, 139],
+    "bday": "1997.05.27",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "선의", "en": "Sunny" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "무소속",
+    "active": false,
+    "color": [255, 163, 139],
+    "bday": "1995.08.08",
+    "nat": { "ko": "중국", "en": "CN" }
+  },
+  {
+    "name": { "ko": "성소", "en": "Cheng Xiao" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "무소속",
+    "active": false,
+    "color": [255, 163, 139],
+    "bday": "1998.07.15",
+    "nat": { "ko": "중국", "en": "CN" }
+  },
+  {
+    "name": { "ko": "미기", "en": "Meiqi" },
+    "group": { "ko": "우주소녀", "en": "WJSN" },
+    "co": "무소속",
+    "active": false,
+    "color": [255, 163, 139],
+    "bday": "1998.10.15",
+    "nat": { "ko": "중국", "en": "CN" }
+  },
+  {
+    "name": { "ko": "장용훈", "en": "Jang Yonghun" },
+    "group": { "ko": "아이딧", "en": "IDID" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [100, 190, 230],
+    "bday": "2005.04.20",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "김민재", "en": "Kim Minjae" },
+    "group": { "ko": "아이딧", "en": "IDID" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [100, 190, 230],
+    "bday": "2005.08.17",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "박원빈", "en": "Park Wonbin" },
+    "group": { "ko": "아이딧", "en": "IDID" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [100, 190, 230],
+    "bday": "2006.04.19",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "추유찬", "en": "Choo Yuchan" },
+    "group": { "ko": "아이딧", "en": "IDID" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [100, 190, 230],
+    "bday": "2006.10.03",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "박성현", "en": "Park Seonghyun" },
+    "group": { "ko": "아이딧", "en": "IDID" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [100, 190, 230],
+    "bday": "2007.10.05",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "백준혁", "en": "Baek Junhyuk" },
+    "group": { "ko": "아이딧", "en": "IDID" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [100, 190, 230],
+    "bday": "2008.06.07",
+    "nat": { "ko": "한국", "en": "KR" }
+  },
+  {
+    "name": { "ko": "정세민", "en": "Jung Semin" },
+    "group": { "ko": "아이딧", "en": "IDID" },
+    "co": "스타쉽엔터테인먼트",
+    "active": true,
+    "color": [100, 190, 230],
+    "bday": "2008.10.10",
     "nat": { "ko": "한국", "en": "KR" }
   }
 ]

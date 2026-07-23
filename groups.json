@@ -2061,5 +2061,405 @@
     "links": {
       "namu": "https://namu.wiki/w/티아라(아이돌)"
     }
+  },
+  "이엑스아이디": {
+    "en": "EXID",
+    "debut": "2012.08.13",
+    "co": "바나나컬쳐엔터테인먼트",
+    "color": [50, 45, 70],
+    "gender": "f",
+    "fandom": {
+      "ko": "레고",
+      "en": "LEGGO"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@OfficialEXID",
+      "instagram": "https://www.instagram.com/exidofficial",
+      "x": "https://x.com/EXIDofficial",
+      "namu": "https://namu.wiki/w/EXID"
+    }
+  },
+  "레인보우": {
+    "en": "RAINBOW",
+    "debut": "2009.11.14",
+    "co": "DSP미디어",
+    "survivalShow": true,
+    "color": [200, 150, 190],
+    "gender": "f",
+    "fandom": {
+      "ko": "레인너스",
+      "en": "Rainerus"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@OfficialTheRainbow",
+      "x": "https://x.com/RAINBOW_1114",
+      "namu": "https://namu.wiki/w/레인보우(아이돌)"
+    }
+  },
+  "이달의소녀": {
+    "en": "LOONA",
+    "debut": "2018.08.19",
+    "co": "블록베리크리에이티브",
+    "survivalShow": true,
+    "color": [180, 180, 220],
+    "gender": "f",
+    "fandom": {
+      "ko": "오빛",
+      "en": "Orbit"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@loonatheworld",
+      "instagram": "https://www.instagram.com/loonatheworld",
+      "x": "https://x.com/loonatheworld",
+      "tiktok": "https://www.tiktok.com/@loonatheworld_official",
+      "namu": "https://namu.wiki/w/이달의%20소녀"
+    }
+  },
+  "아르테미스": {
+    "en": "ARTMS",
+    "debut": "2024.05.31",
+    "co": "모드하우스",
+    "color": [110, 110, 210],
+    "gender": "f",
+    "fandom": {
+      "ko": "우리",
+      "en": "OURII"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@official_artms",
+      "instagram": "https://www.instagram.com/official_artms",
+      "x": "https://x.com/official_artms",
+      "tiktok": "https://www.tiktok.com/@official_artms",
+      "namu": "https://namu.wiki/w/ARTMS"
+    }
+  },
+  "루셈블": {
+    "en": "Loossemble",
+    "debut": "2023.09.15",
+    "co": "CTDENM",
+    "survivalShow": true,
+    "color": [210, 190, 160],
+    "gender": "f",
+    "fandom": {
+      "ko": "크루",
+      "en": "C.Loo"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@Loossemble_official",
+      "instagram": "https://www.instagram.com/loossemble.official",
+      "x": "https://x.com/Loossemble_twt",
+      "tiktok": "https://www.tiktok.com/@loossemble_official",
+      "namu": "https://namu.wiki/w/Loossemble"
+    }
+  },
+  "클라씨": {
+    "en": "CLASSy",
+    "debut": "2022.05.05",
+    "co": "K타이거즈엔터테인먼트",
+    "color": [140, 190, 200],
+    "gender": "f",
+    "fandom": {
+      "ko": "클리키",
+      "en": "CLIKEy"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@OFFICIAL_CLASSy",
+      "x": "https://x.com/CLASSy_twt_",
+      "namu": "https://namu.wiki/w/CLASSy(아이돌)"
+    }
+  },
+  "씨엘씨": {
+    "en": "CLC",
+    "debut": "2015.03.19",
+    "co": "큐브엔터테인먼트",
+    "survivalShow": true,
+    "color": [230, 190, 60],
+    "gender": "f",
+    "fandom": {
+      "ko": "체셔",
+      "en": "Cheshire"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@officialclc",
+      "instagram": "https://www.instagram.com/cube_clc_official",
+      "x": "https://x.com/CUBECLC",
+      "tiktok": "https://www.tiktok.com/@cube_clc_official",
+      "namu": "https://namu.wiki/w/CLC"
+    }
+  },
+  "니쥬": {
+    "en": "NiziU",
+    "debut": "2020.12.02",
+    "co": "JYP엔터테인먼트",
+    "color": [255, 140, 160],
+    "gender": "f",
+    "fandom": {
+      "ko": "위쥬",
+      "en": "WithU"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@NiziUOfficial",
+      "instagram": "https://www.instagram.com/niziu_artist_official",
+      "x": "https://x.com/NiziU__official",
+      "tiktok": "https://www.tiktok.com/@niziu_official",
+      "namu": "https://namu.wiki/w/NiziU"
+    }
+  },
+  "카드": {
+    "en": "KARD",
+    "debut": "2017.07.19",
+    "co": "DSP미디어",
+    "survivalShow": true,
+    "color": [180, 60, 60],
+    "gender": "coed",
+    "fandom": {
+      "ko": "히든카드",
+      "en": "HIDDEN KARD"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@KARD",
+      "instagram": "https://www.instagram.com/official_kard",
+      "x": "https://x.com/KARD_Official",
+      "namu": "https://namu.wiki/w/KARD"
+    }
+  },
+  "올데이프로젝트": {
+    "en": "ALLDAY PROJECT",
+    "debut": "2025.06.23",
+    "co": "THEBLACKLABEL",
+    "color": [235, 90, 50],
+    "gender": "coed",
+    "fandom": {
+      "ko": "데이원",
+      "en": "DAY ONE"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@ALLDAY_PROJECT",
+      "instagram": "https://www.instagram.com/allday_project",
+      "x": "https://x.com/ALLDAY_PROJECT",
+      "tiktok": "https://www.tiktok.com/@allday_project",
+      "namu": "https://namu.wiki/w/ALLDAY%20PROJECT"
+    }
+  },
+  "동방신기": {
+    "en": "TVXQ",
+    "debut": "2003.12.26",
+    "co": "SM엔터테인먼트",
+    "color": [228, 0, 43],
+    "gender": "m",
+    "fandom": {
+      "ko": "카시오페아",
+      "en": "Cassiopeia"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@TVXQ",
+      "instagram": "https://www.instagram.com/tvxq.official",
+      "x": "https://x.com/TVXQ",
+      "tiktok": "https://www.tiktok.com/@tvxq_official",
+      "namu": "https://namu.wiki/w/동방신기"
+    }
+  },
+  "JX(JYJ)": {
+    "en": "JX (JYJ)",
+    "debut": "2010.10.14",
+    "co": "무소속",
+    "color": [55, 55, 90],
+    "gender": "m",
+    "links": {
+      "youtube": "https://youtube.com/@JYJlibrary",
+      "namu": "https://namu.wiki/w/JYJ"
+    }
+  },
+  "갓세븐": {
+    "en": "GOT7",
+    "debut": "2014.01.16",
+    "co": "무소속",
+    "color": [50, 150, 110],
+    "gender": "m",
+    "fandom": {
+      "ko": "아이갓세븐",
+      "en": "I GOT7"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/channel/UC8HEl74jL3bLLwfDP1OALxw",
+      "instagram": "https://www.instagram.com/got7_isourname",
+      "x": "https://x.com/GOT7Official",
+      "tiktok": "https://www.tiktok.com/@got7_isourname",
+      "namu": "https://namu.wiki/w/GOT7"
+    }
+  },
+  "여자친구": {
+    "en": "GFRIEND",
+    "debut": "2015.01.16",
+    "co": "쏘스뮤직",
+    "survivalShow": true,
+    "color": [70, 140, 180],
+    "gender": "f",
+    "fandom": {
+      "ko": "버디",
+      "en": "BUDDY"
+    },
+    "links": {
+      "instagram": "https://www.instagram.com/gfriendofficial",
+      "tiktok": "https://www.tiktok.com/@official_gfriend",
+      "namu": "https://namu.wiki/w/여자친구(아이돌)"
+    }
+  },
+  "엑스원": {
+    "en": "X1",
+    "debut": "2019.08.27",
+    "co": "스톤뮤직엔터테인먼트",
+    "survivalShow": true,
+    "projectRing": true,
+    "color": [70, 100, 180],
+    "gender": "m",
+    "fandom": {
+      "ko": "원잇",
+      "en": "ONE IT"
+    },
+    "links": {
+      "instagram": "https://www.instagram.com/x1official101",
+      "x": "https://x.com/x1official101",
+      "namu": "https://namu.wiki/w/X1"
+    }
+  },
+  "드리핀": {
+    "en": "DRIPPIN",
+    "debut": "2020.10.28",
+    "co": "울림엔터테인먼트",
+    "color": [80, 80, 160],
+    "gender": "m",
+    "fandom": {
+      "ko": "드리밍",
+      "en": "DREAMIN"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@DRIPPIN",
+      "instagram": "https://www.instagram.com/wearedrippin",
+      "x": "https://x.com/wearedrippin",
+      "tiktok": "https://www.tiktok.com/@wearedrippin",
+      "namu": "https://namu.wiki/w/DRIPPIN"
+    }
+  },
+  "제국의아이들": {
+    "en": "ZE:A",
+    "debut": "2010.01.15",
+    "co": "스타제국",
+    "survivalShow": true,
+    "color": [220, 90, 80],
+    "gender": "m",
+    "fandom": {
+      "ko": "ZE:A's",
+      "en": "ZE:A's"
+    },
+    "links": {
+      "x": "https://x.com/zea_9",
+      "namu": "https://namu.wiki/w/제국의아이들"
+    }
+  },
+  "틴탑": {
+    "en": "TEEN TOP",
+    "debut": "2010.07.10",
+    "co": "티오피미디어",
+    "color": [200, 190, 220],
+    "gender": "m",
+    "fandom": {
+      "ko": "엔젤",
+      "en": "ANGEL"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@teentopofficial",
+      "instagram": "https://www.instagram.com/official_teentop",
+      "x": "https://x.com/TEEN_TOP",
+      "tiktok": "https://www.tiktok.com/@official_teentop",
+      "namu": "https://namu.wiki/w/틴탑"
+    }
+  },
+  "에프티아일랜드": {
+    "en": "FTISLAND",
+    "debut": "2007.06.07",
+    "co": "FNC엔터테인먼트",
+    "color": [230, 200, 60],
+    "gender": "m",
+    "fandom": {
+      "ko": "프리마돈나",
+      "en": "Primadonna"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@ftisland",
+      "instagram": "https://www.instagram.com/ftisland",
+      "namu": "https://namu.wiki/w/FTISLAND"
+    }
+  },
+  "위너": {
+    "en": "WINNER",
+    "debut": "2014.08.17",
+    "co": "YG엔터테인먼트",
+    "color": [140, 150, 170],
+    "gender": "m",
+    "fandom": {
+      "ko": "이너써클",
+      "en": "INNER CIRCLE"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@OfficialYGWINNER",
+      "instagram": "https://www.instagram.com/winnercity",
+      "x": "https://x.com/yg_winnercity",
+      "namu": "https://namu.wiki/w/WINNER"
+    }
+  },
+  "아이콘": {
+    "en": "iKON",
+    "debut": "2015.09.15",
+    "co": "143엔터테인먼트",
+    "color": [160, 140, 120],
+    "gender": "m",
+    "fandom": {
+      "ko": "아이코닉",
+      "en": "iKONIC"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@iKON",
+      "instagram": "https://www.instagram.com/withikonic",
+      "x": "https://x.com/iKONIC_143",
+      "tiktok": "https://www.tiktok.com/@ikon_tiktok",
+      "namu": "https://namu.wiki/w/iKON"
+    }
+  },
+  "우주소녀": {
+    "en": "WJSN",
+    "debut": "2016.02.25",
+    "co": "스타쉽엔터테인먼트",
+    "color": [255, 163, 139],
+    "gender": "f",
+    "fandom": {
+      "ko": "우정",
+      "en": "UJUNG"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@WJSNofficial",
+      "instagram": "https://www.instagram.com/wjsn_cosmic",
+      "x": "https://x.com/WJSN_Cosmic",
+      "tiktok": "https://www.tiktok.com/@official_wjsn",
+      "namu": "https://namu.wiki/w/우주소녀"
+    }
+  },
+  "아이딧": {
+    "en": "IDID",
+    "debut": "2025.09.15",
+    "co": "스타쉽엔터테인먼트",
+    "color": [100, 190, 230],
+    "gender": "m",
+    "fandom": {
+      "ko": "위딧",
+      "en": "WITHID"
+    },
+    "links": {
+      "youtube": "https://www.youtube.com/@IDID_starship",
+      "instagram": "https://www.instagram.com/idid.did.idid",
+      "x": "https://x.com/IDID_starship",
+      "tiktok": "https://www.tiktok.com/@idid_starship",
+      "namu": "https://namu.wiki/w/IDID"
+    }
   }
 }
