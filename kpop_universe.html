@@ -1880,12 +1880,15 @@
         <option value="short">Shorts</option>
       </select>
     </div>
-    <div class="pp-section" style="margin-top:10px;display:flex;gap:18px">
+    <div class="pp-section" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:10px 18px">
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11.5px;color:rgba(185,205,245,0.75)">
         <input type="checkbox" id="vid-tag-flag-etc" style="accent-color:rgba(155,178,228,0.9)">기타
       </label>
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11.5px;color:rgba(185,205,245,0.75)">
         <input type="checkbox" id="vid-tag-flag-ext" style="accent-color:rgba(155,178,228,0.9)">외부인 포함
+      </label>
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11.5px;color:rgba(185,205,245,0.75)">
+        <input type="checkbox" id="vid-tag-flag-nomem" style="accent-color:rgba(155,178,228,0.9)">그룹 멤버 안 나옴(제외)
       </label>
     </div>
     <div id="vid-tag-status"></div>
@@ -3411,16 +3414,22 @@ function _renderSearchHits(hits,res,mobSearch,isRecent){
       _closeFeedOverlay();
       closeCards();
       flyTo(h.pos);
+      const cx=window.innerWidth/2,cy=window.innerHeight*0.38;
+      const _openCard=()=>{
+        if(h.type==='group'){showGC(h.data,cx,cy);pulseGroup(h.data);}
+        else{showT(h.data,cx,cy);pulseMember(h.data);pulseGroup(h.data.group.ko);}
+      };
       if(mobSearch){
         exitMobSearch();
+        // 모바일은 카드(바텀시트)가 화면 하단 대부분을 덮어서, 카메라 이동이 끝나기 전에 카드부터
+        // 열리면 이동하는 모습이 거의 안 보임 — 탐색(✦) 버튼과 동일하게 도착 후에 카드를 연다.
+        flyState.onComplete=()=>setTimeout(_openCard,150);
       }else{
         document.getElementById('search-input').value='';
         res.style.display='none';
         closePanels();
+        _openCard();
       }
-      const cx=window.innerWidth/2,cy=window.innerHeight*0.38;
-      if(h.type==='group'){showGC(h.data,cx,cy);pulseGroup(h.data);}
-      else{showT(h.data,cx,cy);pulseMember(h.data);pulseGroup(h.data.group.ko);}
     });
     res.appendChild(div);
   });
@@ -8892,6 +8901,10 @@ buildUniverse().catch(err=>{
 });
 
 // ── 탐험 피드 ──────────────────────────────────────────────────────────
+// Discovery/Constellations는 랜덤 추천이라 열 때마다 다시 뽑으면 방금 본 내용이 계속 바뀌어 정신없고
+// 다시 보고 싶어도 못 찾음 — 마지막 생성 후 3분 안에는 같은 내용을 유지하고, 3분 지나야 새로 뽑는다.
+let _feedDiscoveryBuiltAt=0;
+const _FEED_DISCOVERY_TTL=3*60*1000;
 function _openFeedOverlay(){
   const el=document.getElementById('feed-overlay');
   if(isMob())closeMobSheet(); // 열려있는 카드 먼저 닫고 탐색 오버레이 표시
@@ -8900,8 +8913,12 @@ function _openFeedOverlay(){
   document.body.classList.add('feed-open');
   document.getElementById('tab-feed').classList.add('feed-open');
   _buildFeedAnniversaries();
-  _buildFeedDiscovery();
-  _buildFeedConnections();
+  const now=Date.now();
+  if(now-_feedDiscoveryBuiltAt>_FEED_DISCOVERY_TTL){
+    _buildFeedDiscovery();
+    _buildFeedConnections();
+    _feedDiscoveryBuiltAt=now;
+  }
   if(!el._bound){el._bound=true;
     // 데스크톱에서 왼쪽 슬라이드 패널로 뜰 때, 패널 안을 클릭해도 3D 씬 클릭(window의 pointerdown/click
     // 리스너, closePanels 포함)으로 새지 않도록 막음 — #feed-overlay는 본문 스크립트보다 나중에 파싱되는
@@ -8956,6 +8973,7 @@ async function _fetchTopVideoThumb(gko,memberKo){
     let q=sb.from(_YT_TABLE).select('id,thumb,category');
     q=memberKo?q.eq('group_ko',gko).or(`members.eq.{},members.cs.{${memberKo}}`)
               :q.or(`and(group_ko.eq.${gko},members.eq.{}),with_groups.cs.{${gko}}`);
+    q=q.or('content_flag.is.null,content_flag.neq.무관');
     const{data,error}=await q.order('published_at',{ascending:false}).limit(12);
     if(error||!data?.length)return null;
     const vidUrl=v=>v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`;
@@ -8974,7 +8992,8 @@ async function _pickFeaturedVidFromDB(ko,memberKo,onlyMe,filter,viewMode,formatF
     if(!_scrapCounts.size)return null;
     let q=sb.from(_YT_TABLE)
       .select('id,title,thumb,category,content_flag,members,with_members,with_groups')
-      .or('content_flag.is.null,content_flag.neq.기타');
+      .or('content_flag.is.null,content_flag.neq.기타')
+      .or('content_flag.is.null,content_flag.neq.무관');
     if(viewMode==='format'&&formatFilter){
       q=q.contains('content_formats',[formatFilter]);
     }else if(filter&&filter!=='all'){
@@ -9023,6 +9042,7 @@ function _buildFeedAnniversaries(){
     const age=now.getFullYear()-parseInt(a.bday.split('.')[0]);
     const sub=gName+(age>0?`  ·  ${age}${isKo?'세':' y.o.'}`:'');
     const item=_appendFeedItem(list,'🎂',mName,sub,()=>_feedNav(()=>{
+      if(a._worldPos)flyTo(a._worldPos);
       if(isMob()){showT(a,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
       else showT(a,window.innerWidth/2,window.innerHeight/2);
     }));
@@ -9033,6 +9053,7 @@ function _buildFeedAnniversaries(){
     const n=now.getFullYear()-parseInt(String(info.debut).split('.')[0]);
     const sub=isKo?`데뷔 ${n}주년`:`${n}th debut anniversary`;
     const item=_appendFeedItem(list,'🎉',name,sub,()=>_feedNav(()=>{
+      const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)flyToBubble(bm.mesh.position,bm.radius);
       if(isMob()){showGC(ko,window.innerWidth/2,window.innerHeight*0.4,false,false,null,false);openMobSheet(document.getElementById('gc'));}
       else showGC(ko,window.innerWidth/2,window.innerHeight/2);
     }));
@@ -9040,10 +9061,42 @@ function _buildFeedAnniversaries(){
   });
 }
 
+// 포맷 모아보기(리무진서비스/잇츠라이브 등) — 그룹 무관하게 같은 코너 영상을 모아서 보여줌.
+// _CONTENT_FORMAT_ORDER를 시간대(1시간 단위) 기준으로 순환 노출해서 매번 열 때마다 바뀌지 않게 함.
+// 해당 시간대 포맷에 영상이 없으면(그룹별로 편차 큼) 다음 포맷으로 넘어가며 찾는다.
+async function _buildFeedFormatPick(list){
+  if(!sb)return;
+  const vidUrl=v=>v.category==='short'?`https://youtube.com/shorts/${v.id}`:`https://www.youtube.com/watch?v=${v.id}`;
+  const hourIdx=Math.floor(Date.now()/3600000);
+  for(let i=0;i<_CONTENT_FORMAT_ORDER.length;i++){
+    const fmt=_CONTENT_FORMAT_ORDER[(hourIdx+i)%_CONTENT_FORMAT_ORDER.length];
+    try{
+      const{data,error}=await sb.from(_YT_TABLE)
+        .select('id,title,thumb,category,content_flag')
+        .contains('content_formats',[fmt])
+        .or('content_flag.is.null,content_flag.neq.기타')
+        .or('content_flag.is.null,content_flag.neq.무관')
+        .order('published_at',{ascending:false})
+        .limit(500); // 그리드 아니라 라이트박스 스와이프 목록이라 페이지네이션 불필요 — 폭주 방지용 넉넉한 상한만
+      if(error||!data?.length)continue;
+      const vids=_filterBannedVideos(data);
+      if(!vids.length)continue;
+      const songs=vids.map(v=>({t:v.title,u:vidUrl(v)}));
+      const thumb=vids[Math.floor(Math.random()*vids.length)].thumb;
+      const item=_appendFeedItem(list,'🎞️',`${fmt} 모아보기`,`여러 그룹 · ${songs.length}개 영상`,()=>_feedNav(()=>{
+        openLightbox(songs[0].u,isShorts(songs[0].u),songs,0,{});
+      }),thumb);
+      list.insertBefore(item,list.firstChild); // 다른 항목보다 앞서 눈에 띄게
+      return;
+    }catch(e){/* 다음 포맷으로 */}
+  }
+}
+
 function _buildFeedDiscovery(){
   const list=document.getElementById('feed-discovery');
   list.innerHTML='';
   const isKo=currentLang==='ko';
+  _buildFeedFormatPick(list);
 
   // 1. 랜덤 그룹
   const gKeys=Object.keys(GROUPS||{});
@@ -9054,6 +9107,7 @@ function _buildFeedDiscovery(){
     const sub=(info.debut?info.debut.slice(0,4)+(isKo?'년 데뷔':' debut'):'')
               +(info.co?'  ·  '+info.co:'');
     const item=_appendFeedItem(list,'🎵',name,sub,()=>_feedNav(()=>{
+      const bm=bubbleMeshes.find(b=>b.ko===ko);if(bm)flyToBubble(bm.mesh.position,bm.radius);
       if(isMob()){showGC(ko,window.innerWidth/2,window.innerHeight*0.4,false,false,null,false);openMobSheet(document.getElementById('gc'));}
       else showGC(ko,window.innerWidth/2,window.innerHeight/2);
     }));
@@ -9067,6 +9121,7 @@ function _buildFeedDiscovery(){
     const mName=isKo?a.name.ko:(a.name.en||a.name.ko);
     const mGrps=_artistGroups(a).map(g=>isKo?g.ko:(g.en||g.ko)).join(' · ');
     const item=_appendFeedItem(list,'👤',mName,mGrps,()=>_feedNav(()=>{
+      if(a._worldPos)flyTo(a._worldPos);
       if(isMob()){showT(a,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
       else showT(a,window.innerWidth/2,window.innerHeight/2);
     }));
@@ -9113,6 +9168,7 @@ function _buildFeedDiscovery(){
     const connVid=connSong?.u?ytId(connSong.u):null;
     const connThumb=connVid?`https://img.youtube.com/vi/${connVid}/mqdefault.jpg`:null;
     _appendFeedItem(list,'🔗',connLabel,connSub,()=>_feedNav(()=>{
+      if(artA._worldPos)flyTo(artA._worldPos);
       if(isMob()){showT(artA,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
       else showT(artA,window.innerWidth/2,window.innerHeight/2);
       openConnCard(artA);
@@ -9142,11 +9198,13 @@ function _buildFeedDiscovery(){
     const vThumb=vVid?`https://img.youtube.com/vi/${vVid}/mqdefault.jpg`:null;
     _appendFeedItem(list,'🎬',song.t,vSub,()=>_feedNav(()=>{
       if(pick.type==='group'){
+        const bm=bubbleMeshes.find(b=>b.ko===pick.gko);if(bm)flyToBubble(bm.mesh.position,bm.radius);
         openLightbox(song.u,isShorts(song.u),list_,list_.indexOf(song),{groupKo:pick.gko});
         if(isMob()){showGC(pick.gko,window.innerWidth/2,window.innerHeight*0.4,false,false,null,false);openMobSheet(document.getElementById('gc'));}
         else showGC(pick.gko,window.innerWidth/2,window.innerHeight/2);
       }else{
         const a=pick.artist;
+        if(a._worldPos)flyTo(a._worldPos);
         openLightbox(song.u,isShorts(song.u),list_,list_.indexOf(song),{groupKo:a.group.ko,memberKo:a.name.ko});
         if(isMob()){showT(a,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
         else{
@@ -9209,6 +9267,7 @@ function _buildFeedConnections(){
   const connVid=connSong?.u?ytId(connSong.u):null;
   const connThumb=connVid?`https://img.youtube.com/vi/${connVid}/mqdefault.jpg`:null;
   _appendFeedItem(list,'🔗',connLabel,connSub,()=>_feedNav(()=>{
+    if(artA._worldPos)flyTo(artA._worldPos);
     if(isMob()){showT(artA,window.innerWidth/2,window.innerHeight*0.4,false,false,false);openMobSheet(document.getElementById('tt'));}
     else showT(artA,window.innerWidth/2,window.innerHeight/2);
     openConnCard(artA);
@@ -9784,6 +9843,8 @@ function _makeChVidController(contId){
         // 아이유 팔레트처럼 우리 그룹 전체가 with_groups로 태깅된 경우도 같이 노출
         q=q.or(`and(group_ko.eq.${ko},members.eq.{}),with_groups.cs.{${ko}}`);
       }
+      // "그룹 멤버 안 나옴" 플래그(무관) 영상은 어느 뷰에서도 이 그룹/멤버 콘텐츠로 노출하지 않음
+      q=q.or('content_flag.is.null,content_flag.neq.무관');
       if(state.searchQ)q=q.ilike('title',`%${state.searchQ}%`);
       if(state.viewMode==='format'){
         if(state.formatFilter)q=q.contains('content_formats',[state.formatFilter]);
@@ -10437,9 +10498,11 @@ async function _openVidTagModal(v,ko){
       const flag=data.content_flag||'';
       const etcEl=document.getElementById('vid-tag-flag-etc');
       const extEl=document.getElementById('vid-tag-flag-ext');
+      const nomemEl=document.getElementById('vid-tag-flag-nomem');
       const isHidden=flag==='hidden';
       if(etcEl)etcEl.checked=flag==='기타';
       if(extEl)extEl.checked=flag==='외부인';
+      if(nomemEl)nomemEl.checked=flag==='무관';
       const hideBtn=document.getElementById('vid-tag-hide');
       const hideBadge=document.getElementById('vid-tag-hidden-badge');
       if(hideBtn){hideBtn.textContent=isHidden?'노출 복원':'노출 제외';hideBtn.classList.toggle('restore',isHidden);}
@@ -10515,7 +10578,8 @@ document.getElementById('vid-tag-save').addEventListener('click',async e=>{
   const category=catEl?catEl.value:undefined;
   const etcEl=document.getElementById('vid-tag-flag-etc');
   const extEl=document.getElementById('vid-tag-flag-ext');
-  const contentFlag=etcEl?.checked?'기타':extEl?.checked?'외부인':null;
+  const nomemEl=document.getElementById('vid-tag-flag-nomem');
+  const contentFlag=etcEl?.checked?'기타':extEl?.checked?'외부인':nomemEl?.checked?'무관':null;
   const{id,ko}=_vidTagTarget;
   const updatePayload={members,with_members:withMembers,with_groups:withGroups,content_flag:contentFlag};
   if(category!==undefined)updatePayload.category=category||null;
@@ -10717,7 +10781,7 @@ document.getElementById('admin-bulk-hide-btn')?.addEventListener('click',async()
   const ids=selectedItems.map(el=>el.dataset.vidId).filter(Boolean);
   if(!ids.length)return;
   btn.disabled=true;btn.textContent='처리 중…';
-  const{error}=await sb.from('yt_videos').update({content_flag:'hidden'}).in('id',ids);
+  const{error}=await sb.from(_YT_TABLE).update({content_flag:'hidden'}).in('id',ids);
   if(error){btn.disabled=false;btn.textContent='노출 제외';alert('오류: '+error.message);return;}
   selectedItems.forEach(el=>el.remove());
   window._adminBulkExitFn?.();
