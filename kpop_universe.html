@@ -1974,7 +1974,7 @@ const scene=new THREE.Scene();
 scene.background=null;
 
 const camera=new THREE.PerspectiveCamera(60,W/H,0.1,1000);
-camera.position.set(0,-4,120);
+camera.position.set(0,-4,155);
 
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
 renderer.setSize(W,H);
@@ -6806,7 +6806,7 @@ document.getElementById('dh-lang-btn').addEventListener('click',e=>{
 });
 function flyHome(){
   closeCards();closePanels();
-  _startFly(new THREE.Vector3(0,0,0),new THREE.Vector3(0,8,120),1000);
+  _startFly(new THREE.Vector3(0,0,0),new THREE.Vector3(0,8,155),1000);
   flyState.onComplete=()=>{controls.autoRotate=true;};
 }
 
