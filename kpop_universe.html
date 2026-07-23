@@ -2324,7 +2324,10 @@ function randomInCone(dir,halfAngle){
 }
 
 function debutToRadius(debutYear){
-  return (2026 - debutYear) * 9.2 + 6;
+  // 기본 반지름(마지막 +항)을 올려서 최근 데뷔 그룹들이 몰리는 중심부 안쪽에 여유를 줌 —
+  // 이 값이 커질수록 겹침 방지 랜덤 편차(distBase*0.32) 폭도 같이 커져서 같은 연차 그룹끼리도 더 퍼짐.
+  // 세대 간 간격(9.2/년)은 그대로 둬서 오래된 그룹들이 더 멀어지진 않음.
+  return (2026 - debutYear) * 9.2 + 22;
 }
 
 // 데뷔일 기준 정확한 연차 계산 (달력연도 뺄셈 대신 실제 경과일 사용 — NCT 127 같은 '10주년 임박' 그룹 오조기 판정 방지)
@@ -3171,7 +3174,11 @@ function animate(){
     const prevFav=a._favAlpha;
     a._favAlpha+=(favTarget-prevFav)*0.12;
     if(Math.abs(a._filterAlpha-prev)<0.0005&&Math.abs(a._focusAlpha-prevF)<0.0005&&Math.abs(a._favAlpha-prevFav)<0.0005&&!a._flashPulse)return;
-    const fa=Math.min(1,a._filterAlpha*a._focusAlpha+(a._flashPulse||0));
+    // 비활동/탈퇴 멤버는 별 자체를 옅게 — a.active는 데이터 입력 시 "지금 어디서든 활동 중인지" 기준으로
+    // 넣으므로(예: 한 그룹은 탈퇴해도 다른 그룹/솔로로 활동 중이면 true), 따로 그룹별 교차 판정 없이
+    // 이 값 하나만 보면 됨.
+    const inactiveDim=a.active===false?0.35:1;
+    const fa=Math.min(1,a._filterAlpha*a._focusAlpha*inactiveDim+(a._flashPulse||0));
     const favBoost=a._favAlpha*0.4;
     (a._worldPositions||[]).forEach(wp=>{
       const attr=wp.ptsType==='sparkle'?spkColorAttr:regColorAttr;
