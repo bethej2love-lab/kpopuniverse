@@ -1591,7 +1591,6 @@
     <button class="dh-btn" id="dh-profile-btn" aria-label="내 프로필"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:block"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
     <div class="dh-divider"></div>
     <button class="dh-btn" id="dh-fav-btn" aria-label="즐겨찾기 하이라이트"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="display:block"><path d="M12 21C12 21 4 15.5 4 9.5a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9.5C20 15.5 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
-    <button class="dh-btn" id="dh-overview-btn" aria-label="전체 보기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:block"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="dh-btn" id="dh-lang-btn" aria-label="언어 전환">KO</button>
     <button class="dh-btn" id="dh-settings-btn" aria-label="설정 열기">⚙︎</button>
   </div>
@@ -1772,7 +1771,6 @@
   <span id="mob-top-title">K-POP UNIVERSE</span>
   <div id="mob-top-right">
     <button class="mob-top-btn" id="mob-fav-btn" aria-label="즐겨찾기 하이라이트"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 4 15.5 4 9.5a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9.5C20 15.5 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
-    <button class="mob-top-btn" id="mob-overview-btn" aria-label="전체 보기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:block"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="mob-top-btn" id="tab-lang" aria-label="언어 전환">KO</button>
     <button class="mob-top-btn" id="tab-settings" aria-label="설정 열기">⚙︎</button>
   </div>
@@ -2296,19 +2294,34 @@ const flyState={
 function easeInOut(t){return -(Math.cos(Math.PI*t)-1)/2;}
 
 // ── Agency direction ──────────────────────────────
+// 나머지(중소 레이블)를 전부 +Z 한 원뿔에 몰아넣으면 그룹 수가 늘수록 그 구역만 밀도가
+// 몇 배로 높아져 충돌 재시도 실패율이 급증함 — 소속사명을 해시해서 균등 분산된
+// 10개 방향(피보나치 격자) 중 하나에 배정, 같은 소속사는 항상 같은 방향으로 묶임.
+const _FIB_DIRS=(()=>{
+  const n=10,dirs=[],golden=Math.PI*(3-Math.sqrt(5));
+  for(let i=0;i<n;i++){
+    const y=1-(i/(n-1))*2,r=Math.sqrt(Math.max(0,1-y*y)),theta=golden*i;
+    dirs.push(new THREE.Vector3(Math.cos(theta)*r,y,Math.sin(theta)*r));
+  }
+  return dirs;
+})();
+function _hashStr(s){let h=0;for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0;}return Math.abs(h);}
 function agencyDir(co){
   const c=(co||'').toUpperCase();
   if(c.includes('SM'))  return new THREE.Vector3(1,0,0);
   if(c.includes('JYP')) return new THREE.Vector3(-1,0,0);
   if(c.includes('HYBE'))return new THREE.Vector3(0,-1,0);
-  return new THREE.Vector3(0,0,1);
+  if(c.includes('YG'))  return new THREE.Vector3(0,1,0);
+  return _FIB_DIRS[_hashStr((co||'').trim())%_FIB_DIRS.length].clone();
 }
 
 function coneSpread(co){
   const c=(co||'').toUpperCase();
-  if(c.includes('SM')||c.includes('JYP'))return Math.PI*0.4;
+  if(c.includes('SM')||c.includes('JYP')||c.includes('YG'))return Math.PI*0.4;
   if(c.includes('HYBE'))return Math.PI*0.42;
-  return Math.PI*0.52;
+  // 기타 레이블은 원뿔 자체는 좁히되(0.52→0.32) 10개 방향으로 나눠 배정되므로
+  // 전체적으로 덮는 면적은 오히려 훨씬 넓어짐(밀도 분산이 목적).
+  return Math.PI*0.32;
 }
 
 function randomInCone(dir,halfAngle){
@@ -2440,15 +2453,21 @@ async function buildUniverse(){
     const radius=members.length<=4?_radiusBase*0.75:_radiusBase;
 
     // 겹침 방지: 최대 400번 시도, 기존 행성과 표면 간격 4 이상 확보.
-    // 같은 데뷔연도 그룹끼리 얇은 구 껍질에 몰리지 않도록 반경에 랜덤 변주를 줌
+    // 같은 데뷔연도 + 같은 방향에 그룹이 몰려 400번으로도 빈 자리를 못 찾으면,
+    // distBase를 조금씩 바깥으로 밀어내며 최대 5라운드(총 2000번)까지 재시도 —
+    // 그래도 실패하면(사실상 발생 안 함) 마지막 라운드 반경에 겹침 허용하고 배치.
     let pos;
-    for(let _t=0;_t<400;_t++){
-      const dist=distBase*(0.84+Math.random()*0.32);
-      const c=randomInCone(dir,coneSpread(info.co)).multiplyScalar(dist);
-      c.x*=_xSpread;
-      if(_placedBubbles.every(pb=>c.distanceTo(pb.pos)>=radius+pb.r+4)){pos=c;break;}
+    outer:
+    for(let ring=0;ring<5;ring++){
+      const ringDistBase=distBase*(1+ring*0.15);
+      for(let _t=0;_t<400;_t++){
+        const dist=ringDistBase*(0.84+Math.random()*0.32);
+        const c=randomInCone(dir,coneSpread(info.co)).multiplyScalar(dist);
+        c.x*=_xSpread;
+        if(_placedBubbles.every(pb=>c.distanceTo(pb.pos)>=radius+pb.r+4)){pos=c;break outer;}
+      }
     }
-    if(!pos){pos=randomInCone(dir,coneSpread(info.co)).multiplyScalar(distBase);pos.x*=_xSpread;}
+    if(!pos){pos=randomInCone(dir,coneSpread(info.co)).multiplyScalar(distBase*1.6);pos.x*=_xSpread;}
     _placedBubbles.push({pos,r:radius});
 
     // ── Bubble fill — Fresnel ShaderMaterial ──────
@@ -2612,9 +2631,9 @@ async function buildUniverse(){
       pArr.push(mPos.x,mPos.y,mPos.z);
       cArr.push(spColor.r,spColor.g,spColor.b);
       aArr.push(m);
-      // 우주에 홀로 멀찍이 떠 있는 탈퇴/비활동 멤버는 별 자체(코어 크기·밝기)는 그대로 두되,
-      // halo(번짐)만 줄여서 텅 빈 배경에서 유난히 도드라져 보이는 것만 완화 — "덜 중요해 보임" 방지
-      hArr.push(_flyOutside?0.15:1);
+      // 우주에 홀로 멀찍이 떠 있는 탈퇴/비활동 멤버는 텅 빈 배경 대비로 유난히 도드라지므로
+      // halo(번짐)를 크게 줄임 — 코어 밝기 자체도 inactiveDim(애니메이션 루프)에서 같이 낮춤
+      hArr.push(_flyOutside?0.07:1);
       const _pType=m.sparkle?'sparkle':'regular';
       const _pIdx=m.sparkle?sparkleIdx++:regularIdx++;
       const _origCol=[spColor.r,spColor.g,spColor.b];
@@ -3168,8 +3187,9 @@ function animate(){
     const prevF=a._focusAlpha;
     a._focusAlpha+=(a._focusTarget-prevF)*0.10;
     if(a._flashPulse>0.005){a._flashPulse*=0.84;colorsDirty=true;}else{a._flashPulse=0;}
-    // 즐겨찾기한 멤버는 흰색 쪽으로 살짝 lerp해서 더 밝게
-    const favTarget=favMembers.has(_mFavKey(a))?1:0;
+    // 즐겨찾기한 멤버는 흰색 쪽으로 살짝 lerp해서 더 밝게 — 최애(bias)는 좋아요보다 상위 개념이라 하트를 안 눌렀어도 동일하게 적용
+    const _favKey=_mFavKey(a);
+    const favTarget=(favMembers.has(_favKey)||(myProfile?.bias||[]).some(b=>b.type==='member'&&b.groupKo+':'+b.ko===_favKey))?1:0;
     a._favAlpha=a._favAlpha??favTarget;
     const prevFav=a._favAlpha;
     a._favAlpha+=(favTarget-prevFav)*0.12;
@@ -3177,7 +3197,7 @@ function animate(){
     // 비활동/탈퇴 멤버는 별 자체를 옅게 — a.active는 데이터 입력 시 "지금 어디서든 활동 중인지" 기준으로
     // 넣으므로(예: 한 그룹은 탈퇴해도 다른 그룹/솔로로 활동 중이면 true), 따로 그룹별 교차 판정 없이
     // 이 값 하나만 보면 됨.
-    const inactiveDim=a.active===false?0.35:1;
+    const inactiveDim=a.active===false?0.22:1;
     const fa=Math.min(1,a._filterAlpha*a._focusAlpha*inactiveDim+(a._flashPulse||0));
     const favBoost=a._favAlpha*0.4;
     (a._worldPositions||[]).forEach(wp=>{
@@ -6806,7 +6826,8 @@ document.getElementById('dh-lang-btn').addEventListener('click',e=>{
 });
 function flyHome(){
   closeCards();closePanels();
-  _startFly(new THREE.Vector3(0,0,0),new THREE.Vector3(0,8,155),1000);
+  const dir=new THREE.Vector3(0,8,155).normalize();
+  _startFly(new THREE.Vector3(0,0,0),dir.multiplyScalar(controls.maxDistance),1000);
   flyState.onComplete=()=>{controls.autoRotate=true;};
 }
 
@@ -6868,17 +6889,6 @@ function flyHome(){
     flyState.onComplete=()=>{controls.autoRotate=true;};
   });
 })();
-function _flyToOverview(){
-  const tgt=controls.target.clone();
-  const dir=camera.position.clone().sub(tgt);
-  if(dir.lengthSq()<0.001)dir.set(0,0,1);
-  const maxPos=tgt.clone().addScaledVector(dir.normalize(),controls.maxDistance);
-  closeCards();
-  _startFly(tgt,maxPos,800);
-  flyState.onComplete=()=>{controls.autoRotate=true;};
-}
-document.getElementById('mob-overview-btn').addEventListener('click',e=>{e.stopPropagation();_flyToOverview();});
-document.getElementById('dh-overview-btn').addEventListener('click',e=>{e.stopPropagation();_flyToOverview();});
 document.getElementById('dh-home-btn').addEventListener('click',e=>{e.stopPropagation();flyHome();});
 document.getElementById('tab-home').addEventListener('click',e=>{e.stopPropagation();_closeFeedOverlay();flyHome();});
 document.getElementById('dh-explore-btn').addEventListener('click',e=>{

@@ -1471,8 +1471,8 @@
       "en": "Angdungi"
     },
     "links": {
-      "instagram": "https://instagram.com/ioi_official_ig",
-      "x": "https://x.com/ioi_official_",
+      "instagram": "https://instagram.com/ioi_10th",
+      "x": "https://x.com/ioi_10th",
       "tiktok": "https://tiktok.com/@ioi_10th",
       "namu": "https://namu.wiki/w/아이오아이"
     }
@@ -1620,7 +1620,11 @@
     "en": "EXO",
     "debut": "2012.04.08",
     "co": "SM엔터테인먼트",
-    "color": [190, 60, 65],
+    "color": [
+      190,
+      60,
+      65
+    ],
     "gender": "m",
     "fandom": {
       "ko": "엑소엘",
@@ -1639,7 +1643,11 @@
     "en": "SUPER JUNIOR",
     "debut": "2005.11.06",
     "co": "SM엔터테인먼트",
-    "color": [70, 110, 190],
+    "color": [
+      70,
+      110,
+      190
+    ],
     "gender": "m",
     "fandom": {
       "ko": "엘프",
@@ -1658,7 +1666,11 @@
     "en": "ASTRO",
     "debut": "2016.02.23",
     "co": "판타지오",
-    "color": [150, 90, 160],
+    "color": [
+      150,
+      90,
+      160
+    ],
     "gender": "m",
     "fandom": {
       "ko": "아로하",
@@ -1676,7 +1688,11 @@
     "en": "MONSTA X",
     "debut": "2015.05.14",
     "co": "스타쉽엔터테인먼트",
-    "color": [40, 139, 160],
+    "color": [
+      40,
+      139,
+      160
+    ],
     "gender": "m",
     "fandom": {
       "ko": "몬베베",
@@ -1694,7 +1710,11 @@
     "en": "SF9",
     "debut": "2016.10.05",
     "co": "FNC엔터테인먼트",
-    "color": [190, 190, 220],
+    "color": [
+      190,
+      190,
+      220
+    ],
     "gender": "m",
     "fandom": {
       "ko": "판타지",
@@ -1712,7 +1732,11 @@
     "en": "KickFlip",
     "debut": "2025.01.20",
     "co": "JYP엔터테인먼트",
-    "color": [230, 150, 60],
+    "color": [
+      230,
+      150,
+      60
+    ],
     "gender": "m",
     "fandom": {
       "ko": "위플립",
@@ -1730,7 +1754,11 @@
     "en": "EPEX",
     "debut": "2021.06.08",
     "co": "C9엔터테인먼트",
-    "color": [80, 190, 200],
+    "color": [
+      80,
+      190,
+      200
+    ],
     "gender": "m",
     "fandom": {
       "ko": "제니스",
@@ -1748,7 +1776,11 @@
     "en": "ONEUS",
     "debut": "2019.01.09",
     "co": "B.WAVE 엔터테인먼트",
-    "color": [190, 175, 140],
+    "color": [
+      190,
+      175,
+      140
+    ],
     "gender": "m",
     "fandom": {
       "ko": "투문",
@@ -1766,7 +1798,11 @@
     "en": "OH MY GIRL",
     "debut": "2015.04.21",
     "co": "WM엔터테인먼트",
-    "color": [235, 150, 180],
+    "color": [
+      235,
+      150,
+      180
+    ],
     "gender": "f",
     "fandom": {
       "ko": "미라클",
@@ -1785,21 +1821,34 @@
     "debut": "2021.03.17",
     "co": "DSP미디어",
     "survivalShow": true,
-    "color": [220, 170, 90],
+    "color": [
+      220,
+      170,
+      90
+    ],
     "gender": "m",
     "fandom": {
       "ko": "나우",
       "en": "NOW"
     },
     "links": {
-      "namu": "https://namu.wiki/w/미래소년"
+      "namu": "https://namu.wiki/w/미래소년",
+      "youtube": "https://www.youtube.com/@official_MIRAE",
+      "instagram": "https://www.instagram.com/official__mirae",
+      "x": "https://x.com/official_MIRAE",
+      "tiktok": "https://www.tiktok.com/@official_mirae",
+      "weverse": "https://weverse.io/mirae/feed"
     }
   },
   "피원하모니": {
     "en": "P1Harmony",
     "debut": "2020.10.28",
     "co": "FNC엔터테인먼트",
-    "color": [90, 120, 220],
+    "color": [
+      90,
+      120,
+      220
+    ],
     "gender": "m",
     "fandom": {
       "ko": "피스",
@@ -1817,7 +1866,11 @@
     "en": "VERIVERY",
     "debut": "2019.01.09",
     "co": "젤리피쉬엔터테인먼트",
-    "color": [150, 140, 190],
+    "color": [
+      150,
+      140,
+      190
+    ],
     "gender": "m",
     "fandom": {
       "ko": "베러",
@@ -1835,7 +1888,11 @@
     "en": "WEi",
     "debut": "2020.10.05",
     "co": "위엔터테인먼트",
-    "color": [118, 203, 240],
+    "color": [
+      118,
+      203,
+      240
+    ],
     "gender": "m",
     "fandom": {
       "ko": "루아이",
@@ -1854,14 +1911,22 @@
     "debut": "2018.09.05",
     "co": "아센디오",
     "survivalShow": true,
-    "color": [110, 160, 110],
+    "color": [
+      110,
+      160,
+      110
+    ],
     "gender": "f",
     "fandom": {
       "ko": "그루",
       "en": "Groo"
     },
     "links": {
-      "namu": "https://namu.wiki/w/공원소녀"
+      "namu": "https://namu.wiki/w/공원소녀",
+      "youtube": "https://www.youtube.com/@GWSNOFFICIAL",
+      "instagram": "https://www.instagram.com/gwsn.official",
+      "x": "https://x.com/official_GWSN",
+      "tiktok": "https://www.tiktok.com/@gwsn.official"
     }
   },
   "위키미키": {
@@ -1869,21 +1934,34 @@
     "debut": "2017.08.08",
     "co": "판타지오",
     "survivalShow": true,
-    "color": [228, 25, 19],
+    "color": [
+      228,
+      25,
+      19
+    ],
     "gender": "f",
     "fandom": {
       "ko": "키링",
       "en": "Ki-Ling"
     },
     "links": {
-      "namu": "https://namu.wiki/w/위키미키"
+      "namu": "https://namu.wiki/w/위키미키",
+      "youtube": "https://www.youtube.com/@WekiMeki",
+      "instagram": "https://www.instagram.com/weki_meki",
+      "x": "https://x.com/WekiMeki",
+      "tiktok": "https://www.tiktok.com/@wm_official",
+      "weverse": "https://weverse.io/wekimeki"
     }
   },
   "인피니트": {
     "en": "INFINITE",
     "debut": "2010.06.09",
     "co": "인피니트컴퍼니",
-    "color": [200, 170, 100],
+    "color": [
+      200,
+      170,
+      100
+    ],
     "gender": "m",
     "fandom": {
       "ko": "인스피릿",
@@ -1902,7 +1980,11 @@
     "debut": "2019.07.23",
     "co": "C9엔터테인먼트",
     "survivalShow": true,
-    "color": [70, 130, 170],
+    "color": [
+      70,
+      130,
+      170
+    ],
     "gender": "m",
     "fandom": {
       "ko": "픽스",
@@ -1920,7 +2002,11 @@
     "en": "Billlie",
     "debut": "2021.11.10",
     "co": "미스틱스토리",
-    "color": [90, 110, 200],
+    "color": [
+      90,
+      110,
+      200
+    ],
     "gender": "f",
     "fandom": {
       "ko": "빌리브",
@@ -1938,7 +2024,11 @@
     "en": "AB6IX",
     "debut": "2019.05.22",
     "co": "브랜뉴뮤직",
-    "color": [60, 90, 160],
+    "color": [
+      60,
+      90,
+      160
+    ],
     "gender": "m",
     "fandom": {
       "ko": "에비뉴",
@@ -1955,7 +2045,11 @@
     "en": "BBGIRLS (Brave Girls)",
     "debut": "2011.04.08",
     "co": "브브걸컴퍼니",
-    "color": [220, 70, 90],
+    "color": [
+      220,
+      70,
+      90
+    ],
     "gender": "f",
     "fandom": {
       "ko": "쁘이",
@@ -1972,7 +2066,11 @@
     "en": "Highlight",
     "debut": "2017.03.20",
     "co": "어라운드어스엔터테인먼트",
-    "color": [70, 70, 75],
+    "color": [
+      70,
+      70,
+      75
+    ],
     "gender": "m",
     "fandom": {
       "ko": "라이트",
@@ -1989,7 +2087,11 @@
     "en": "KARA",
     "debut": "2007.03.29",
     "co": "DSP미디어",
-    "color": [235, 185, 175],
+    "color": [
+      235,
+      185,
+      175
+    ],
     "gender": "f",
     "fandom": {
       "ko": "카밀리아",
@@ -2007,7 +2109,11 @@
     "debut": "2007.02.10",
     "co": "JYP엔터테인먼트",
     "survivalShow": true,
-    "color": [130, 45, 55],
+    "color": [
+      130,
+      45,
+      55
+    ],
     "gender": "f",
     "fandom": {
       "ko": "원더풀",
@@ -2022,21 +2128,30 @@
     "debut": "2009.06.18",
     "co": "큐브엔터테인먼트",
     "survivalShow": true,
-    "color": [170, 140, 200],
+    "color": [
+      170,
+      140,
+      200
+    ],
     "gender": "f",
     "fandom": {
       "ko": "포니아",
       "en": "4NIA"
     },
     "links": {
-      "namu": "https://namu.wiki/w/4minute"
+      "namu": "https://namu.wiki/w/4minute",
+      "youtube": "https://www.youtube.com/4minuteofficial"
     }
   },
   "투애니원": {
     "en": "2NE1",
     "debut": "2009.05.17",
     "co": "YG엔터테인먼트",
-    "color": [230, 60, 140],
+    "color": [
+      230,
+      60,
+      140
+    ],
     "gender": "f",
     "fandom": {
       "ko": "블랙잭",
@@ -2052,7 +2167,11 @@
     "en": "T-ara",
     "debut": "2009.07.29",
     "co": "MBK엔터테인먼트",
-    "color": [235, 225, 205],
+    "color": [
+      235,
+      225,
+      205
+    ],
     "gender": "f",
     "fandom": {
       "ko": "퀸즈",
@@ -2066,7 +2185,11 @@
     "en": "EXID",
     "debut": "2012.08.13",
     "co": "바나나컬쳐엔터테인먼트",
-    "color": [50, 45, 70],
+    "color": [
+      50,
+      45,
+      70
+    ],
     "gender": "f",
     "fandom": {
       "ko": "레고",
@@ -2084,7 +2207,11 @@
     "debut": "2009.11.14",
     "co": "DSP미디어",
     "survivalShow": true,
-    "color": [200, 150, 190],
+    "color": [
+      200,
+      150,
+      190
+    ],
     "gender": "f",
     "fandom": {
       "ko": "레인너스",
@@ -2101,7 +2228,11 @@
     "debut": "2018.08.19",
     "co": "블록베리크리에이티브",
     "survivalShow": true,
-    "color": [180, 180, 220],
+    "color": [
+      180,
+      180,
+      220
+    ],
     "gender": "f",
     "fandom": {
       "ko": "오빛",
@@ -2119,7 +2250,11 @@
     "en": "ARTMS",
     "debut": "2024.05.31",
     "co": "모드하우스",
-    "color": [110, 110, 210],
+    "color": [
+      110,
+      110,
+      210
+    ],
     "gender": "f",
     "fandom": {
       "ko": "우리",
@@ -2138,7 +2273,11 @@
     "debut": "2023.09.15",
     "co": "CTDENM",
     "survivalShow": true,
-    "color": [210, 190, 160],
+    "color": [
+      210,
+      190,
+      160
+    ],
     "gender": "f",
     "fandom": {
       "ko": "크루",
@@ -2156,7 +2295,11 @@
     "en": "CLASSy",
     "debut": "2022.05.05",
     "co": "K타이거즈엔터테인먼트",
-    "color": [140, 190, 200],
+    "color": [
+      140,
+      190,
+      200
+    ],
     "gender": "f",
     "fandom": {
       "ko": "클리키",
@@ -2173,7 +2316,11 @@
     "debut": "2015.03.19",
     "co": "큐브엔터테인먼트",
     "survivalShow": true,
-    "color": [230, 190, 60],
+    "color": [
+      230,
+      190,
+      60
+    ],
     "gender": "f",
     "fandom": {
       "ko": "체셔",
@@ -2191,7 +2338,11 @@
     "en": "NiziU",
     "debut": "2020.12.02",
     "co": "JYP엔터테인먼트",
-    "color": [255, 140, 160],
+    "color": [
+      255,
+      140,
+      160
+    ],
     "gender": "f",
     "fandom": {
       "ko": "위쥬",
@@ -2210,7 +2361,11 @@
     "debut": "2017.07.19",
     "co": "DSP미디어",
     "survivalShow": true,
-    "color": [180, 60, 60],
+    "color": [
+      180,
+      60,
+      60
+    ],
     "gender": "coed",
     "fandom": {
       "ko": "히든카드",
@@ -2227,7 +2382,11 @@
     "en": "ALLDAY PROJECT",
     "debut": "2025.06.23",
     "co": "THEBLACKLABEL",
-    "color": [235, 90, 50],
+    "color": [
+      235,
+      90,
+      50
+    ],
     "gender": "coed",
     "fandom": {
       "ko": "데이원",
@@ -2245,7 +2404,11 @@
     "en": "TVXQ",
     "debut": "2003.12.26",
     "co": "SM엔터테인먼트",
-    "color": [228, 0, 43],
+    "color": [
+      228,
+      0,
+      43
+    ],
     "gender": "m",
     "fandom": {
       "ko": "카시오페아",
@@ -2263,18 +2426,28 @@
     "en": "JX (JYJ)",
     "debut": "2010.10.14",
     "co": "무소속",
-    "color": [55, 55, 90],
+    "color": [
+      55,
+      55,
+      90
+    ],
     "gender": "m",
     "links": {
-      "youtube": "https://youtube.com/@JYJlibrary",
-      "namu": "https://namu.wiki/w/JYJ"
+      "youtube": "https://youtube.com/@JX_identity",
+      "namu": "https://namu.wiki/w/JYJ",
+      "instagram": "https://www.instagram.com/j.xofficial",
+      "x": "https://twitter.com/JX_identity"
     }
   },
   "갓세븐": {
     "en": "GOT7",
     "debut": "2014.01.16",
     "co": "무소속",
-    "color": [50, 150, 110],
+    "color": [
+      50,
+      150,
+      110
+    ],
     "gender": "m",
     "fandom": {
       "ko": "아이갓세븐",
@@ -2293,7 +2466,11 @@
     "debut": "2015.01.16",
     "co": "쏘스뮤직",
     "survivalShow": true,
-    "color": [70, 140, 180],
+    "color": [
+      70,
+      140,
+      180
+    ],
     "gender": "f",
     "fandom": {
       "ko": "버디",
@@ -2302,7 +2479,9 @@
     "links": {
       "instagram": "https://www.instagram.com/gfriendofficial",
       "tiktok": "https://www.tiktok.com/@official_gfriend",
-      "namu": "https://namu.wiki/w/여자친구(아이돌)"
+      "namu": "https://namu.wiki/w/여자친구(아이돌)",
+      "youtube": "https://www.youtube.com/@gfrdofficial",
+      "x": "https://x.com/GFRDofficial"
     }
   },
   "엑스원": {
@@ -2311,7 +2490,11 @@
     "co": "스톤뮤직엔터테인먼트",
     "survivalShow": true,
     "projectRing": true,
-    "color": [70, 100, 180],
+    "color": [
+      70,
+      100,
+      180
+    ],
     "gender": "m",
     "fandom": {
       "ko": "원잇",
@@ -2320,14 +2503,19 @@
     "links": {
       "instagram": "https://www.instagram.com/x1official101",
       "x": "https://x.com/x1official101",
-      "namu": "https://namu.wiki/w/X1"
+      "namu": "https://namu.wiki/w/X1",
+      "youtube": "https://www.youtube.com/channel/UCboVqbN79qGtz45u_7L8hOA"
     }
   },
   "드리핀": {
     "en": "DRIPPIN",
     "debut": "2020.10.28",
     "co": "울림엔터테인먼트",
-    "color": [80, 80, 160],
+    "color": [
+      80,
+      80,
+      160
+    ],
     "gender": "m",
     "fandom": {
       "ko": "드리밍",
@@ -2346,7 +2534,11 @@
     "debut": "2010.01.15",
     "co": "스타제국",
     "survivalShow": true,
-    "color": [220, 90, 80],
+    "color": [
+      220,
+      90,
+      80
+    ],
     "gender": "m",
     "fandom": {
       "ko": "ZE:A's",
@@ -2354,14 +2546,19 @@
     },
     "links": {
       "x": "https://x.com/zea_9",
-      "namu": "https://namu.wiki/w/제국의아이들"
+      "namu": "https://namu.wiki/w/제국의아이들",
+      "youtube": "https://www.youtube.com/@ZEA2011"
     }
   },
   "틴탑": {
     "en": "TEEN TOP",
     "debut": "2010.07.10",
     "co": "티오피미디어",
-    "color": [200, 190, 220],
+    "color": [
+      200,
+      190,
+      220
+    ],
     "gender": "m",
     "fandom": {
       "ko": "엔젤",
@@ -2379,7 +2576,11 @@
     "en": "FTISLAND",
     "debut": "2007.06.07",
     "co": "FNC엔터테인먼트",
-    "color": [230, 200, 60],
+    "color": [
+      230,
+      200,
+      60
+    ],
     "gender": "m",
     "fandom": {
       "ko": "프리마돈나",
@@ -2395,7 +2596,11 @@
     "en": "WINNER",
     "debut": "2014.08.17",
     "co": "YG엔터테인먼트",
-    "color": [140, 150, 170],
+    "color": [
+      140,
+      150,
+      170
+    ],
     "gender": "m",
     "fandom": {
       "ko": "이너써클",
@@ -2412,7 +2617,11 @@
     "en": "iKON",
     "debut": "2015.09.15",
     "co": "143엔터테인먼트",
-    "color": [160, 140, 120],
+    "color": [
+      160,
+      140,
+      120
+    ],
     "gender": "m",
     "fandom": {
       "ko": "아이코닉",
@@ -2430,7 +2639,11 @@
     "en": "WJSN",
     "debut": "2016.02.25",
     "co": "스타쉽엔터테인먼트",
-    "color": [255, 163, 139],
+    "color": [
+      255,
+      163,
+      139
+    ],
     "gender": "f",
     "fandom": {
       "ko": "우정",
@@ -2448,7 +2661,11 @@
     "en": "IDID",
     "debut": "2025.09.15",
     "co": "스타쉽엔터테인먼트",
-    "color": [100, 190, 230],
+    "color": [
+      100,
+      190,
+      230
+    ],
     "gender": "m",
     "fandom": {
       "ko": "위딧",
