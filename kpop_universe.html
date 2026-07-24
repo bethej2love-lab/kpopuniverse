@@ -832,6 +832,8 @@
   }
   .vid-edit-btn:hover{background:rgba(30,40,70,0.85);}
   .gc-ch-item .vid-edit-btn{position:absolute;top:4px;left:4px;z-index:2;}
+  /* 모바일은 손가락 탭 대상이라 22px는 너무 작아서 잘 안 눌림 — 터치 타겟 권장 최소치에 가깝게 키움 */
+  @media(max-width:768px){.vid-edit-btn{width:32px;height:32px;font-size:15px;}}
   /* ── 어드민 일괄 선택 모드 ── */
   .gc-ch-item.admin-selected{outline:2px solid rgba(100,180,255,0.9);outline-offset:-2px;}
   .gc-ch-item.admin-selected::after{content:'✓';position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(60,140,255,0.92);color:#fff;font-size:12px;font-weight:700;line-height:20px;text-align:center;z-index:5;pointer-events:none;}
@@ -1238,16 +1240,14 @@
   /* ── Filter panel (journal-sidebar 내) ───────────── */
   #filter-panel{display:none;}
   /* ── Zoom slider ────────────────────────────────── */
-  #zoom-ctrl{position:fixed;left:18px;bottom:24px;display:flex;flex-direction:column;align-items:center;gap:0;z-index:50;user-select:none;width:30px;background:rgba(12,16,36,0.60);border:1px solid rgba(140,165,220,0.16);border-radius:14px;padding:10px 0 0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 2px 14px rgba(0,0,0,0.22);transition:left 0.32s cubic-bezier(0.4,0,0.2,1);}
+  #zoom-ctrl{position:fixed;left:18px;bottom:24px;display:flex;flex-direction:column;align-items:center;gap:0;z-index:50;user-select:none;width:30px;background:rgba(12,16,36,0.60);border:1px solid rgba(140,165,220,0.16);border-radius:14px;padding:10px 0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 2px 14px rgba(0,0,0,0.22);transition:left 0.32s cubic-bezier(0.4,0,0.2,1);}
   #journal-sidebar.open~#zoom-ctrl{left:318px;}
   #zoom-ctrl.zoom-feed-open{left:318px;}
   @media(max-width:768px){#zoom-ctrl{display:none;}}
-  #zoom-track{width:2px;height:96px;background:rgba(140,165,220,0.15);border-radius:1px;position:relative;cursor:pointer;flex-shrink:0;margin-bottom:8px;}
+  #zoom-track{width:2px;height:96px;background:rgba(140,165,220,0.15);border-radius:1px;position:relative;cursor:pointer;flex-shrink:0;}
   #zoom-thumb{width:10px;height:10px;background:rgba(150,180,255,0.85);border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);top:0;cursor:grab;box-shadow:0 0 6px rgba(110,150,255,0.55);transition:background .15s,box-shadow .15s;}
   #zoom-thumb:hover{background:rgba(185,210,255,1);box-shadow:0 0 10px rgba(130,170,255,0.75);}
   #zoom-thumb:active{cursor:grabbing;}
-  #zoom-overview-btn{width:100%;height:27px;background:transparent;border:none;border-top:1px solid rgba(140,165,220,0.13);border-radius:0 0 13px 13px;color:rgba(155,180,230,0.72);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;transition:background .15s,color .15s;}
-  #zoom-overview-btn:hover{background:rgba(140,165,220,0.09);color:rgba(200,220,255,1);}
   #filter-panel-hd{
     display:flex;align-items:flex-start;justify-content:space-between;
     padding:0 0 10px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:10px;
@@ -1793,7 +1793,6 @@
 <div id="member-tooltip"></div>
 <div id="zoom-ctrl">
   <div id="zoom-track"><div id="zoom-thumb"></div></div>
-  <button id="zoom-overview-btn" title="전체 보기" aria-label="전체 보기">⊙</button>
 </div>
 <div id="conn-panel"><div class="conn-inner" id="conn-panel-inner"></div></div>
 <button id="conn-collapse" aria-label="연결 카드 접기">›</button>
@@ -1971,8 +1970,12 @@ const W=window.innerWidth,H=window.innerHeight;
 const scene=new THREE.Scene();
 scene.background=null;
 
+// 우주 전체 스케일의 기준값 — controls.maxDistance, 홈 카메라 시작 위치, flyHome()이 공유
+const UNIVERSE_MAX_DIST=420;
+
 const camera=new THREE.PerspectiveCamera(60,W/H,0.1,1000);
-camera.position.set(0,-4,155);
+// 홈 화면 = 최대 줌아웃(flyHome()이 날아가는 지점, controls.maxDistance)과 동일한 위치로 시작
+camera.position.copy(new THREE.Vector3(0,8,155).normalize().multiplyScalar(UNIVERSE_MAX_DIST));
 
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
 renderer.setSize(W,H);
@@ -1989,7 +1992,7 @@ const controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true;
 controls.dampingFactor=0.06;
 controls.minDistance=5;
-controls.maxDistance=300;
+controls.maxDistance=UNIVERSE_MAX_DIST;
 controls.autoRotate=true;
 controls.autoRotateSpeed=0.25;
 
@@ -2340,7 +2343,7 @@ function debutToRadius(debutYear){
   // 기본 반지름(마지막 +항)을 올려서 최근 데뷔 그룹들이 몰리는 중심부 안쪽에 여유를 줌 —
   // 이 값이 커질수록 겹침 방지 랜덤 편차(distBase*0.32) 폭도 같이 커져서 같은 연차 그룹끼리도 더 퍼짐.
   // 세대 간 간격(9.2/년)은 그대로 둬서 오래된 그룹들이 더 멀어지진 않음.
-  return (2026 - debutYear) * 9.2 + 22;
+  return (2026 - debutYear) * 11.5 + 28;
 }
 
 // 데뷔일 기준 정확한 연차 계산 (달력연도 뺄셈 대신 실제 경과일 사용 — NCT 127 같은 '10주년 임박' 그룹 오조기 판정 방지)
@@ -2551,7 +2554,7 @@ async function buildUniverse(){
     const div=document.createElement('div');
     div.className='group-label';
     div.textContent=ko;
-    div.style.color=_labelGlowColor(r,g,b);
+    div.style.color='rgba(255,255,255,0.92)';
     div.style.cursor='pointer';
     div.style.position='absolute';
     div.style.left='50%';
@@ -6879,15 +6882,6 @@ function flyHome(){
     thumb.style.top=newTop+'px';
     setFrac(maxTop>0?newTop/maxTop:0);
   });
-  document.getElementById('zoom-overview-btn').addEventListener('click',e=>{
-    e.stopPropagation();
-    const tgt=controls.target.clone();
-    const dir=camera.position.clone().sub(tgt);
-    if(dir.lengthSq()<0.001)dir.set(0,0,1);
-    const maxPos=tgt.clone().addScaledVector(dir.normalize(),controls.maxDistance);
-    _startFly(tgt,maxPos,800);
-    flyState.onComplete=()=>{controls.autoRotate=true;};
-  });
 })();
 document.getElementById('dh-home-btn').addEventListener('click',e=>{e.stopPropagation();flyHome();});
 document.getElementById('tab-home').addEventListener('click',e=>{e.stopPropagation();_closeFeedOverlay();flyHome();});
@@ -9821,6 +9815,11 @@ function _makeChVidController(contId){
       if(isShort){
         img.src=`https://i.ytimg.com/vi/${v.id}/oardefault.jpg`;
         img.onerror=()=>{img.onerror=null;img.src=baseThumb;};
+        // 쇼츠 썸네일이 없으면 유튜브가 진짜 404 대신 120×90 회색 "재생 아이콘" 플레이스홀더를
+        // 정상 이미지로 응답해서 onerror가 안 걸림 — onload에서 그 크기를 직접 감지해 폴백시킨다.
+        img.onload=()=>{
+          if(img.naturalWidth===120&&img.naturalHeight===90){img.onerror=null;img.onload=null;img.src=baseThumb;}
+        };
       }else{
         img.src=baseThumb;
         // DB 분류상 가로지만 실제로는 쇼츠(세로)일 수 있어 백그라운드에서 재확인 (대표 영상은 제외)
@@ -9962,6 +9961,14 @@ function _makeChVidController(contId){
       if(error)throw new Error(error.message);
       if(reset)grid.innerHTML='';
       if(!data?.length&&offset===0){
+        // 멤버 카드 기본 탭(라이브)에 아직 태깅/분류된 영상이 없으면 "전체"로 자동 폴백(한 번만)
+        if(state.memberKo&&state.filter==='live'&&!state._liveFallbackDone){
+          state._liveFallbackDone=true;state.filter='all';state.offset=0;
+          cont.querySelectorAll('.gc-ch-filter').forEach(b=>b.classList.toggle('active',b.textContent==='전체'));
+          releaseLock();
+          load(ko,true);
+          return;
+        }
         grid.innerHTML='<div class="gc-ch-msg">아직 동기화된 영상이 없어요<br><small style="opacity:.7">설정에서 채널 영상 동기화</small></div>';
         releaseLock();
         return;
@@ -10031,7 +10038,9 @@ function _makeChVidController(contId){
     if(!cont)return;
     cont.innerHTML='';
     if(!sb)return;
-    state={ko,memberKo:memberKo||null,filter:'all',onlyMe:false,searchQ:'',sortMode:'recommend',viewMode:'category',formatFilter:null,formats:[],offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[]};
+    // 멤버 카드는 미태깅 그룹 영상(MV·Shorts·토크쇼 등)이 뒤섞여 첫 화면이 지저분해지지 않도록
+    // "라이브"(무대 직캠 위주) 탭에서 시작 — 그룹 카드는 그대로 "전체"
+    state={ko,memberKo:memberKo||null,filter:memberKo?'live':'all',onlyMe:false,searchQ:'',sortMode:'recommend',viewMode:'category',formatFilter:null,formats:[],offset:0,total:0,pos:0,cat:null,gen:state.gen+1,appendLock:false,trailingEl:null,hasMore:false,allVids:[],_liveFallbackDone:false};
     cont.innerHTML=`<div class="gc-ch-hd"><div class="gc-ch-filters"></div><div class="gc-ch-sort-wrap"><button class="gc-ch-sort-btn" title="정렬" aria-haspopup="true" aria-expanded="false">⋮</button><div class="gc-ch-sort-menu"><button class="gc-ch-sort-item" data-sort="recommend"><span class="chk">✓</span>추천순</button><button class="gc-ch-sort-item" data-sort="latest"><span class="chk">✓</span>업로드순</button><div class="gc-ch-sort-divider" style="display:none"></div><button class="gc-ch-view-toggle" style="display:none"><span class="chk">✓</span>콘텐츠별 보기</button></div></div><button class="gc-ch-refresh" title="새로고침">↻</button></div><div class="gc-ch-search-wrap" style="display:none"><input class="gc-ch-search" placeholder="영상 검색…" autocomplete="off" spellcheck="false"><button class="gc-ch-search-clear" aria-label="검색어 지우기">\xD7</button></div><div class="gc-ch-grid"></div><div class="gc-ch-more-wrap"></div>`;
     _exitSelMode();
     const filEl=cont.querySelector('.gc-ch-filters');
